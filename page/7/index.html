@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -93,7 +93,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Pisces',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -266,45 +266,9 @@
       
 
       
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-            搜索
-          </a>
-        </li>
-      
     </ul>
   
 
-  
-    <div class="site-search">
-      
-  
-  <div class="algolia-popup popup search-popup">
-    <div class="algolia-search">
-      <div class="algolia-search-input-icon">
-        <i class="fa fa-search"></i>
-      </div>
-      <div class="algolia-search-input" id="algolia-search-input"></div>
-    </div>
-
-    <div class="algolia-results">
-      <div id="algolia-stats"></div>
-      <div id="algolia-hits"></div>
-      <div id="algolia-pagination" class="algolia-pagination"></div>
-    </div>
-
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-  </div>
-
-
-
-
-    </div>
   
 </nav>
 
@@ -426,19 +390,236 @@
       
         
           
-          要想玩转Linux系统，编写shell脚本是必须要掌握的技能。那什么是shell编程呢？简单来说，shell编程就是对多个Linux命令进行逻辑处理。
-下面，我们从编程的基础开始讲起：
-一、编程基础1.什么是程序？程序是指：指令+数据
-程序编程风格可分为：
-​    过程式：以指令为中心，数据服务于
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/10/shell脚本编程基础（1）/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>要想玩转Linux系统，编写shell脚本是必须要掌握的技能。那什么是shell编程呢？简单来说，shell编程就是对多个Linux命令进行逻辑处理。</p>
+<p>下面，我们从编程的基础开始讲起：</p>
+<h2 id="一、编程基础"><a href="#一、编程基础" class="headerlink" title="一、编程基础"></a><strong>一、编程基础</strong></h2><h3 id="1-什么是程序？"><a href="#1-什么是程序？" class="headerlink" title="1.什么是程序？"></a>1.什么是程序？</h3><p>程序是指：指令+数据</p>
+<p>程序编程风格可分为：</p>
+<p>​    过程式：以指令为中心，数据服务于指令（关注过程，小软件开发）</p>
+<p>​    对象式：以数据为中心，指令服务于数据（关注结果，适合开发大型软件）</p>
+<h3 id="2-程序的执行方式"><a href="#2-程序的执行方式" class="headerlink" title="2.程序的执行方式"></a>2.程序的执行方式</h3><p>计算机：运行二进制命令</p>
+<p>编程语言：</p>
+<p>低级：汇编</p>
+<p>高级：</p>
+<p>编译：高级语言–&gt;编译器–&gt;目标代码 (由程序员完成编译器翻译过程，安全性相对好)</p>
+<p>java，C#</p>
+<p>解释：高级语言–&gt;解释器–&gt;机器代码 （由电脑完成解释器翻译过程，安全性不如编译型）</p>
+<p>shell，perl，python</p>
+<p>shell程序：提供了编程能力，解释执行</p>
+<h3 id="3-编程基本概念"><a href="#3-编程基本概念" class="headerlink" title="3.编程基本概念"></a>3.编程基本概念</h3><p>编程逻辑处理方式：</p>
+<p>​    顺序执行</p>
+<p>​    循环执行</p>
+<p>​    选择执行</p>
+<p>shell编程：过程式、解释执行</p>
+<p>编程语言的基本结构：</p>
+<p>各种系统命令的组合</p>
+<p>数据存储：变量、数组</p>
+<p>表达式：a+b</p>
+<p>语句：if</p>
+<h2 id="二、脚本基本格式"><a href="#二、脚本基本格式" class="headerlink" title="二、脚本基本格式"></a><strong>二、脚本基本格式</strong></h2><h3 id="格式要求："><a href="#格式要求：" class="headerlink" title="格式要求："></a>格式要求：</h3><p>首行shebang机制（即声明脚本使用哪种编程语言）</p>
+<p>如：         #！/bin/bash</p>
+<p>#！/bin/python</p>
+<h3 id="shell脚本的用途有："><a href="#shell脚本的用途有：" class="headerlink" title="shell脚本的用途有："></a>shell脚本的用途有：</h3><p>自动化常用命令</p>
+<p>执行系统管理和故障排除</p>
+<p>创建简单的应用程序</p>
+<p>处理文本或文件</p>
+<h3 id="运行脚本："><a href="#运行脚本：" class="headerlink" title="运行脚本："></a>运行脚本：</h3><ol>
+<li>给予执行权限，执行</li>
+<li>直接运行解释器，将脚本作为解释器程序的参数运行</li>
+</ol>
+<h3 id="脚本规范："><a href="#脚本规范：" class="headerlink" title="脚本规范："></a>脚本规范：</h3><p>脚本代码开头约定：</p>
+<ol>
+<li>第一行一般为调用使用的语言</li>
+<li>程序名，避免更改文件名为无法找到正确的文件</li>
+<li>版本号</li>
+<li>更改后的时间</li>
+<li>作者相关信息</li>
+<li>该程序的作用，及注意事项</li>
+<li>最后是各版本的更新简要说明</li>
+</ol>
+<h3 id="脚本示例："><a href="#脚本示例：" class="headerlink" title="脚本示例："></a>脚本示例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">\#!/bin/bash</span><br><span class="line">\# ——————————————</span><br><span class="line">\# Filename:    hello.sh # Revision:    1.1</span><br><span class="line">\# Date:        2018/04/01</span><br><span class="line">\# Author:      wangx</span><br><span class="line">\# Email:       wangx@gmail.com</span><br><span class="line">\# Website:     www.donlihuoguo.cn</span><br><span class="line">\# Description: This is the first script</span><br><span class="line">\# ——————————————</span><br><span class="line">\# Copyright:   2018 wang</span><br><span class="line">\# License:     GPL  echo &quot;hello world&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="脚本调试："><a href="#脚本调试：" class="headerlink" title="脚本调试："></a>脚本调试：</h3><ul>
+<li>bash -n script  检查脚本的语法错误</li>
+<li>bash -x script  调试脚本执行</li>
+</ul>
+<h2 id="三、变量"><a href="#三、变量" class="headerlink" title="三、变量"></a><strong>三、变量</strong></h2><p>定义变量时，变量名不加$符号，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my_name=&quot;wangx&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="变量命名规则："><a href="#变量命名规则：" class="headerlink" title="变量命名规则："></a>变量命名规则：</h3><ol>
+<li>数字、字母、下划线，不能以数字开头</li>
+<li>不能使用程序中的保留字：如if，for等</li>
+<li>做到见名知意</li>
+</ol>
+<p><strong>注意：</strong></p>
+<p>​    引用变量一般需加$</p>
+<p>​    赋值变量：</p>
+<p>​    name=” “   要加引号</p>
+<p>​    存放多行字符时”$name”变量外加双引号可保留换行格式</p>
+<h3 id="bash变量的种类"><a href="#bash变量的种类" class="headerlink" title="bash变量的种类"></a>bash变量的种类</h3><p>局部变量、全局变量、本地变量、位置变量、特殊变量</p>
+<p>局部变量：只在当前shell进程生效，对当前shell之外其他shell进程，包括父shell和子shell都无效</p>
+<p>全局变量：生效范围在当前shell进程及其子进程；父进程变量可以传给子进程，子进程变量不可向上传给父进程</p>
+<p>数字变量：$10以上的变量需要加花括号${10}</p>
+<p>特殊变量：$1,$@,$*,$#,$0等、</p>
+<p>$1,$2,…：对应第1、第2参数，shift[n]换位置</p>
+<p>$0：命令本身</p>
+<p>$*：传递给脚本的所有参数，每个参数合为一个字符串</p>
+<p>$@：传递给脚本的所有参数，每个参数为独立字符串</p>
+<p>$#：传递给脚本的参数的个数</p>
+<p>$@$*只在被双引号包起来的时候才会有差异</p>
+<p>set–         清空所有位置变量</p>
+<p><strong>注：</strong>怎么判断变量前加不加$符号？</p>
+<p>如果命令能识别变量就不加$,如果命令不能识别变量加$；</p>
+<p>养成好习惯：编完脚本将变量用unset删掉；</p>
+<p>（）中使用的命令为一次性的，小括号中相当于在子进程中执行命令</p>
+<p><strong>注：</strong>小括号中所说的子进程与常规的子进程不是一回事</p>
+<p>例如：x=1;echo $$;(echo $$)中显示进程号一致</p>
+<p>{ ；}中使用命令时在当前shell环境中执行，不开启子进程影响当前shell环境</p>
+<h3 id="变量运算"><a href="#变量运算" class="headerlink" title="变量运算"></a>变量运算</h3><p>bash中的算术运算：help let</p>
+<p>+，-，*，/，%取余，**乘方</p>
+<p>实现算术运算：</p>
+<ol>
+<li>let var=算术表达式</li>
+<li>var=$[算术表达式]</li>
+<li>var=$((算术表达式))</li>
+</ol>
+<p><strong>注：</strong>算术运算过程中，空格尽量删除</p>
+<p>条件测试过程中，能加空格地方尽量加空格</p>
+<p>正则条件测试时，正则表达式不加引号</p>
+<h2 id="四、条件测试"><a href="#四、条件测试" class="headerlink" title="四、条件测试"></a><strong>四、条件测试</strong></h2><h3 id="测试命令："><a href="#测试命令：" class="headerlink" title="测试命令："></a>测试命令：</h3><ol>
+<li><p>test EXPRESSION</p>
+</li>
+<li><p>[ EXPRESSION ]</p>
+</li>
+<li><p>[[ EXPRESSION ]]    双括号一般用于左侧字符匹配右侧扩展正则表达式</p>
+<p><strong>注：</strong>EXPRESSION前后必须有空白字符</p>
+</li>
+</ol>
+<p>评估布尔声明，以便用在条件性执行中：</p>
+<p>​    若真，则返回0</p>
+<p>​    若假，则返回1</p>
+<p><strong>例如：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a=1;b=2</span><br><span class="line">[ $a -eq $b ]</span><br><span class="line">echo $?</span><br><span class="line">结果：1</span><br><span class="line">a=2;b=2</span><br><span class="line">[ $a -eq $b ]</span><br><span class="line">echo $</span><br><span class="line">结果： 0</span><br></pre></td></tr></table></figure>
+<h3 id="条件性的执行操作符"><a href="#条件性的执行操作符" class="headerlink" title="条件性的执行操作符"></a>条件性的执行操作符</h3><p><strong>&amp;&amp;</strong>代表条件性的AND THEN，前面执行结果$?=0时，继续执行&amp;&amp;后命令</p>
+<p><strong>||</strong>代表条件性的OR ELSE，前面执行结果$?不为0时，执行||后命令</p>
+<p>test  与[  ]效果相同，注意括号里内容两边需加空格</p>
+<p>-v VAR      变量VAR是否设置</p>
+<h3 id="数值测试："><a href="#数值测试：" class="headerlink" title="数值测试："></a>数值测试：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-gt    是否大于（greater-than）</span><br><span class="line">-ge   是否大于等于（greater-than-or-equal）</span><br><span class="line">-eq   是否等于（equal）</span><br><span class="line">-ne   是否不等于（not-equal）</span><br><span class="line">-lt     是否小于（less-than）</span><br><span class="line">-le    是否小于等于（less-than-or-equal）</span><br></pre></td></tr></table></figure>
+<h3 id="字符串测试："><a href="#字符串测试：" class="headerlink" title="字符串测试："></a>字符串测试：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">==    是否等于</span><br><span class="line">&gt;      ascii码是否大于ascii码</span><br><span class="line">&lt;       是否小于</span><br><span class="line">!=     是否不等于</span><br><span class="line">=~    左侧字符串是否能够被右侧的PATTERN所匹配</span><br><span class="line">注：使用PATTERN匹配时，需要加双括号[[ ]]；使用扩展的正则表达式，且正则表达式不能加引号</span><br><span class="line"></span><br><span class="line">-z      字符串是否为空，空为真，不空为假</span><br><span class="line">-n     字符串是否为不空，不空为真，空为假</span><br><span class="line">注：用于字符串比较时的用到的操作应该都使用引号</span><br><span class="line"></span><br><span class="line">字符串是否为空还可用[ &quot;$name&quot; == &quot;&quot; ]来测试。</span><br></pre></td></tr></table></figure>
+<h3 id="文件相关测试："><a href="#文件相关测试：" class="headerlink" title="文件相关测试："></a>文件相关测试：</h3><p><strong>存在性测试：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-a FILE     同-e</span><br><span class="line">-e FILE 文件存在性测试，存在为真，否则为假</span><br></pre></td></tr></table></figure>
+<p><strong>存在性及类别测试：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-b FILE 是否存在且为块设备文件</span><br><span class="line">-c FILE 是否存在且为字符设备文件</span><br><span class="line">-d FILE 是否存在且为目录文件</span><br><span class="line">-f FILE 是否存在且为普通文件</span><br><span class="line">-h FILE 同-L</span><br><span class="line">-L FILE      是否存在且为符号链接文件</span><br><span class="line">-p FILE 是否存在且为管道文件</span><br><span class="line">-S FILE 是否存在且为套接字文件</span><br></pre></td></tr></table></figure>
+<p><strong>文件权限测试：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-r FILE      是否存在且有可读权限</span><br><span class="line">-w FILE 是否存在且有可写权限</span><br><span class="line">-x FILE 是否存在且有可执行权限</span><br></pre></td></tr></table></figure>
+<p><strong>文件特殊权限测试：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-u FILE 是否存在且拥有suid权限</span><br><span class="line">-g FILE 是否存在且拥有sgid权限</span><br><span class="line">-k FILE 是否存在且拥有sticky权限</span><br></pre></td></tr></table></figure>
+<p><strong>文件小测试：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-s FILE 是否存在且非空</span><br></pre></td></tr></table></figure>
+<p><strong>文件是否打开：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-t fd：fd 文件描述符是否在终端已经打开</span><br><span class="line">-N FILE 文件自从上一次被读取之后是否被修改过</span><br><span class="line">-O FILE 当前有效用户是否为文件属主</span><br><span class="line">-G FILE 当前有效用户是否文文件属组</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong>文件测试后跟空字符时，也反馈为True，如果要保证一个文件存在且满足测试条件时，</p>
+<p>应表示为：</p>
+<p>例：[ -n “file” -a -d “file” ]</p>
+<p>file文件是否存在且为目录文件</p>
+<h3 id="双目测试："><a href="#双目测试：" class="headerlink" title="双目测试："></a>双目测试：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FILE1 -ef FILE2                 FILE1是否是FILE2的硬链接</span><br><span class="line">FILE1 -nt FILE2                 FILE1是否新于FILE2（mtime）</span><br><span class="line">FILE1 -ot FILE2                 FILE1是否旧于FILE2</span><br></pre></td></tr></table></figure>
+<h3 id="Bash的组合测试条件："><a href="#Bash的组合测试条件：" class="headerlink" title="Bash的组合测试条件："></a>Bash的组合测试条件：</h3><p><strong>第一种方式：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">COMMAND1 &amp;&amp; COMMAND2      并且</span><br><span class="line">COMMAND1 || COMMAND2        或者</span><br><span class="line">！COMMAND         非</span><br></pre></td></tr></table></figure>
+<p><strong>第二种方式：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[ EXPRESSION -a EXPRESSION ]     并且</span><br><span class="line">[ EXPRESSION -o EXPRESSION ]     或者</span><br><span class="line">[ ！EXPRESSION ]          非</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong>优先级为：”!”最高，”-a”次之，”-o”最低</p>
+<p><strong>短路与&amp;&amp;</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0&amp;&amp;0=0</span><br><span class="line">0&amp;&amp;1=0</span><br><span class="line">1&amp;&amp;0=0</span><br><span class="line">1&amp;&amp;1=1</span><br></pre></td></tr></table></figure>
+<p><strong>cmd1 &amp;&amp; cmd2</strong></p>
+<p>如果cmd1为假，cmd2不需要执行，反之cmd1为真，需要cmd2执行</p>
+<p><strong>短路或||</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0||0=0</span><br><span class="line">0||1=1</span><br><span class="line">1||0=1</span><br><span class="line">1||1=1</span><br></pre></td></tr></table></figure>
+<p><strong>cmd1 || cmd2</strong></p>
+<p>如果cmd1为真，cmd2不需要执行，反之cmd1为假，需要cmd2执行</p>
+<p><strong>异或  ^</strong></p>
+<p>如果相同为假，反则为真</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0 ^ 1 = 1</span><br><span class="line">1 ^ 0 = 1</span><br><span class="line">1 ^ 1 = 0</span><br><span class="line">0 ^ 0 = 0</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong>[  ]和test用变量时，最好加双引号””避免出问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">false || &#123; echo cmd1 ; echo cmd2 ; &#125;</span><br><span class="line"></span><br><span class="line">false || (echo cmd1 ; echo cmd2)</span><br></pre></td></tr></table></figure>
+<h3 id="使用read命令来接受输入"><a href="#使用read命令来接受输入" class="headerlink" title="使用read命令来接受输入"></a>使用read命令来接受输入</h3><p>read         使用read来把输入值分配给一个或多个shell变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-p     指定要显示的提示</span><br><span class="line">-s     静默输出，一般用于密码</span><br><span class="line">-n     N指定输入的字符长度N</span><br><span class="line">-d     ‘字符’输入结束符，类型与输入重定向的&lt;&lt;EOF</span><br><span class="line">-t N  TIMEOUT为N秒，N秒内无输入将自动退出</span><br></pre></td></tr></table></figure>
+<p>read命令从标准输入中读取单词，并给每个单词分配一个变量</p>
+<p>例如：</p>
+<p>​    read -p “Enter a filename:” FILE    标准输入将赋予变量$FILE</p>
+<p>​    read命令从标准输入中读取单词，并给每个单词分配一个变量</p>
+<p>read 给多个变量赋值的方法：</p>
+<ol>
+<li><p>将多个变量输入一个文件中，用空格分开，输出重定向</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">read a b c &lt; f</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用”&gt;&gt;&gt;”分开：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">read a b c &lt;&lt;&lt; &quot;x y z&quot;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="五、配置用户环境"><a href="#五、配置用户环境" class="headerlink" title="五、配置用户环境"></a><strong>五、配置用户环境</strong></h2><h3 id="bash的配置文件"><a href="#bash的配置文件" class="headerlink" title="bash的配置文件"></a>bash的配置文件</h3><p>按生效范围划分，存在两类：</p>
+<p><strong>全局配置：</strong></p>
+<p>​    /etc/profile</p>
+<p>​    /etc/profile.d/*.sh</p>
+<p>​    /etc/bashrc</p>
+<p><strong>个人配置：</strong></p>
+<p>​    ~/.profile</p>
+<p>​    ~/.bashrc</p>
+<p>shell登录的两种方式：</p>
+<p>​    交互式登录：</p>
+<p>​        1. 直接输入账号密码登录</p>
+<p>​        2. su – username 切换的用户</p>
+<p>​        执行顺序：/etc/profile –&gt; /etc/profile.d/*.sh –&gt; ~/.bash_profile –&gt; ~/.bashrc–&gt; /etc/bashrc</p>
+<p>​    非交互式的登录：</p>
+<p>​        1.  su usernme</p>
+<p>​        2. 图形界面打开的终端</p>
+<p>​        3. 执行脚本</p>
+<p>​        4. 任何其他的bash实例</p>
+<p>​        执行顺序：~/.bashrc –&gt; /etc/bashrc –&gt; /etc/profile.d/*.sh</p>
+<p><strong>注：只在交互式登录生效：/etc/profile，~/.bash_profile</strong></p>
+<p>配置执行文件按功能划分，存在两类：</p>
+<p>profile类和bashrc类</p>
+<p><strong>Profile类：</strong>为交互式登录的shell提供配置</p>
+<p>全局生效：/etc/profile ，/etc/profile.d/*.sh</p>
+<p>个人生效：~/.bash_profile</p>
+<p>功用：</p>
+<ol>
+<li><p>用于定义环境变量</p>
+</li>
+<li><p>运行命令或脚本</p>
+</li>
+</ol>
+<p><strong>Bashrc类：</strong>为非交互式和交互式登录的shell提供配置</p>
+<p>全局生效：/etc/bashrc</p>
+<p>个人生效：~/.bashrc</p>
+<p>功用：</p>
+<ol>
+<li>定义命令别名和函数</li>
+<li>定义本地变量</li>
+</ol>
+<p>修改profile和bashrc文件后使生效的两种方法：</p>
+<ol>
+<li><p>重新启动shell进程</p>
+</li>
+<li><p>.或sourc；例：.~/.bashrc</p>
+</li>
+</ol>
+<p><strong>注：</strong> .或source执行脚本表示将在当前进程运行，而不是开启一个子进程运行（配置文件一般用此方式执行）</p>
+<p>​    bash执行脚本则是开启一个进程执行（运行脚本一般用此方式执行）</p>
+<h3 id="Bash退出任务"><a href="#Bash退出任务" class="headerlink" title="Bash退出任务"></a>Bash退出任务</h3><p>保存在~./.bash_logout文件中（用户）</p>
+<p>在退出登录shell时运行</p>
+<p>可用于：</p>
+<p>​    创建自动备份</p>
+<p>​    清除临时文件</p>
+<p>​    清除操作历史等</p>
+<h3 id="特殊的变量"><a href="#特殊的变量" class="headerlink" title="特殊的变量$-"></a>特殊的变量$-</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">\#echo $-</span><br><span class="line">\#hibBH</span><br><span class="line"></span><br><span class="line">h：hash缓存功能；set -h，关闭hash功能；set +h，开启hash功能</span><br><span class="line">i：代表交互式shell</span><br><span class="line">m：打开监控模式</span><br><span class="line">B：大括号扩展</span><br><span class="line">H：history，命令操作历史</span><br></pre></td></tr></table></figure>
+<h3 id="bash展开命令的优先级："><a href="#bash展开命令的优先级：" class="headerlink" title="bash展开命令的优先级："></a>bash展开命令的优先级：</h3><p>把命令行分成单个命令词</p>
+<p>展开别名</p>
+<p>展开大括号{}</p>
+<p>展开波浪符~</p>
+<p>命令替换$()和<code></code></p>
+<p>再次把命令行分成命令词</p>
+<p>展开文件通配（*、？等）</p>
+<p>I/O重定向</p>
+<p>运行命令</p>
+
+          
         
       
     </div>
@@ -578,15 +759,107 @@
       
         
           
-          一、文本编辑器简介： vi:  Visual Interface，文本编辑器文本：ASCII, Unicode文本编辑种类：    行编辑器:  sed    全屏编辑器：nano,  vi    vim  -  Vi   Improved （vi文本编辑器的升级版）其他编辑器：    gedit 
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/08/vim文本编辑器及文本处理常用命令/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h2 id="一、文本编辑器简介："><a href="#一、文本编辑器简介：" class="headerlink" title="一、文本编辑器简介："></a>一、文本编辑器简介：</h2><p> <strong>vi:</strong>  Visual Interface，文本编辑器<br><strong>文本：</strong>ASCII, Unicode<br><strong>文本编辑种类：</strong><br>    行编辑器:  sed<br>    全屏编辑器：nano,  vi<br>    vim  -  Vi   Improved （vi文本编辑器的升级版）<br><strong>其他编辑器：</strong><br>    gedit 一个简单的图形编辑器<br>    gvim 一个Vim编辑器的图形版本</p>
+<h2 id="二、Vim文本编辑器相关命令："><a href="#二、Vim文本编辑器相关命令：" class="headerlink" title="二、Vim文本编辑器相关命令："></a><strong>二、Vim文本编辑器相关命令：</strong></h2><p>Vim是从 vi发展出来的一个文本编辑器。代码补全、编译及错误跳转等方便编程的功能特别丰富，在程序员中被广泛使用。</p>
+<h3 id="1-vim打开文件："><a href="#1-vim打开文件：" class="headerlink" title="1.vim打开文件："></a>1.vim打开文件：</h3><p>vim[option]…FILE…</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+#    打开文件后，让光标处于第#行行首</span><br><span class="line">-o     后跟多个文件可水平显示多个窗口</span><br><span class="line">-O    后跟多个文件可垂直显示多个窗口</span><br><span class="line">-b     以二进制方式打开文件</span><br><span class="line">-d  file1  file2… 比较多个文件</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong>当一个文件不存在时，用vim打开编辑存盘后会自动创建它</p>
+<h3 id="2-vim的三种主要模式："><a href="#2-vim的三种主要模式：" class="headerlink" title="2.vim的三种主要模式："></a>2.vim的三种主要模式：</h3><p><strong>命令（normal）模式：</strong>默认模式，可移动光标，剪切/粘贴文本。左下角显示文本路径，行数，字符数，右下角显示光标位置</p>
+<p><strong>插入（insert）模式：</strong>也叫编辑模式，修改文本。左下角显示 –INSERT–</p>
+<p><strong>扩展命令（extended command）模式：</strong>保存、退出等。左下角显示 “：”</p>
+<h3 id="3-vim模式切换："><a href="#3-vim模式切换：" class="headerlink" title="3.vim模式切换："></a>3.vim模式切换：</h3><p><strong>命令模式—&gt;插入模式</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">i：在光标处输入</span><br><span class="line">I：在光标所在行首输入</span><br><span class="line">a：在光标所在处后输入</span><br><span class="line">A：在光标所在行行尾输入</span><br><span class="line">o：在光标所在行的下方打开一个新行</span><br><span class="line">O：在光标所在行的上方打开一个新行</span><br></pre></td></tr></table></figure>
+<p><strong>插入模式—&gt;命令模式</strong></p>
+<p>ESC</p>
+<p><strong>命令模式—&gt;扩展命令模式</strong></p>
+<p>：</p>
+<p><strong>扩展命令模式—&gt;命令模式</strong></p>
+<p>ESC，Enter</p>
+<h3 id="4-vim的其他一些模式："><a href="#4-vim的其他一些模式：" class="headerlink" title="4. vim的其他一些模式："></a>4. vim的其他一些模式：</h3><p><strong>替换（replace）模式：</strong>        命令模式下R切换，可随意替换字符；右下角显示–REPALCE–</p>
+<p><strong>可视化（visual）模式：</strong></p>
+<p>​    v    切换面向字符的可视化模式;右下角显示–VISUAL–</p>
+<p>​    V  切换面向行的可视化模式</p>
+<p>​    ctrl+v   面试块的可视化模式</p>
+<h3 id="5-vim关闭文件"><a href="#5-vim关闭文件" class="headerlink" title="5.vim关闭文件"></a>5.vim关闭文件</h3><p><strong>扩展模式:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">按”：”从命令模式进入Ex模式</span><br><span class="line">    wq  	 存盘退出</span><br><span class="line">    q       文本未修改，不存盘退出</span><br><span class="line">    q！  	文本已被修改，想不存盘退出</span><br><span class="line">    w file      文件另存为file</span><br><span class="line">    r file 		读取file文件内容到当前文件</span><br><span class="line">    ！command    直接在扩展模式下执行命令</span><br><span class="line">    r！command  读入命令的输入到当前文件光标处</span><br></pre></td></tr></table></figure>
+<p><strong>命令模式下也可关闭文件</strong>（不推荐使用）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ZZ     保存退出</span><br><span class="line">ZQ    不保存退出</span><br></pre></td></tr></table></figure>
+<h3 id="6-命令模式常用命令："><a href="#6-命令模式常用命令：" class="headerlink" title="6.命令模式常用命令："></a>6.命令模式常用命令：</h3><p><strong>字符间跳转</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">h: 左 l: 右 j: 下 k: 上</span><br><span class="line">#COMMAND：跳转由#指定的个数的字符</span><br></pre></td></tr></table></figure>
+<p><strong>单词间跳转：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">w：下一个单词的词首</span><br><span class="line">e：当前或下一单词的词尾</span><br><span class="line">b：当前或前一个单词的词首</span><br><span class="line">#COMMAND ：由#指定一次跳转的单词数</span><br></pre></td></tr></table></figure>
+<p><strong>当前页跳转：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">H：页首 M：页中间行 L:页底</span><br></pre></td></tr></table></figure>
+<p><strong>行首行尾跳转：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">^       跳转至行首第一个非空白字符</span><br><span class="line">0       跳转至行首</span><br><span class="line">$       跳转至行尾</span><br></pre></td></tr></table></figure>
+<p><strong>行间移动：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\#G    调至第#行；扩展模式下可执行 ：G</span><br><span class="line">G      最后一行</span><br><span class="line">1G，gg    第一行</span><br></pre></td></tr></table></figure>
+<p><strong>句间移动</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">)：下一句  (：上一句</span><br></pre></td></tr></table></figure>
+<p><strong>段落间移动：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#125;:下一段  &#123;：上一段</span><br></pre></td></tr></table></figure>
+<p><strong>命令模式下字符操作:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">x：删除光标所在处字符</span><br><span class="line">\#x：删除从光标所在处开始#个字符</span><br><span class="line">xp：交换光标所在处字符和它后面字符的位置（原理是剪切粘贴）</span><br><span class="line">~：波浪符转换大小写</span><br><span class="line">J：删除当前行后的换行符</span><br><span class="line">r：替换光标所在处字符 </span><br><span class="line"></span><br><span class="line">d：删除命令</span><br><span class="line">d$    当前光标删除至行尾</span><br><span class="line">d^    当前光标删除到非空行首</span><br><span class="line">d0    当前光标删除到行首</span><br><span class="line">dw   删除单词</span><br><span class="line">dd    删除光标所在的行</span><br><span class="line">\#dd  多行删除，一下删除#行</span><br><span class="line"></span><br><span class="line">y：复制命令（用法类似d删除）</span><br><span class="line">y$     复制当前光标到行尾</span><br><span class="line">y^     复当前光标位置到非空行首</span><br><span class="line">yw    复制单词</span><br><span class="line">yy     复制光标所在的行</span><br><span class="line"></span><br><span class="line">p：粘贴</span><br><span class="line">p       粘贴至光标所在行下一行</span><br><span class="line">P       粘贴至光标所在行上一行</span><br><span class="line"></span><br><span class="line">u：撤销更改</span><br><span class="line">\#u    撤销之前多次修改</span><br><span class="line">U      撤销光标落在这行后所有此行的修改</span><br><span class="line">Ctrl+r       返回上次撤销</span><br></pre></td></tr></table></figure>
+<h3 id="7-扩展命令模式常用命令："><a href="#7-扩展命令模式常用命令：" class="headerlink" title="7.扩展命令模式常用命令："></a>7.扩展命令模式常用命令：</h3><p><strong>格式：</strong>地址定界+编辑命令</p>
+<p><strong>地址定界</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">：#  跳到第#行</span><br><span class="line">：#，#    第左侧第#行，到右侧第#行；2,5表示第2到第5行</span><br><span class="line">：#，+#  从左侧第#行，加上右侧#的行；2，+3表示第2到5行</span><br><span class="line">：.   当前行</span><br><span class="line">$       最后一行</span><br><span class="line">%      全文，相当于1，$</span><br><span class="line">：/pat1/,/pat2/               从pat1匹配到的行开始，到第一次被pat2匹配到的行</span><br><span class="line">：/pat1/，#   可混用</span><br></pre></td></tr></table></figure>
+<p><strong>使用方式：</strong>后跟一个编辑命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d     删除</span><br><span class="line">y     复制</span><br><span class="line">w  file  将范围内行另存至指定文件中</span><br><span class="line">r  file  在指定位置插入匹配内容</span><br></pre></td></tr></table></figure>
+<p><strong>查找字符</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/PATTERN：从光标所在处向文件尾部查找</span><br><span class="line">？PATTERN：从光标所在处向文件首部查找</span><br><span class="line">n：与命令同方向</span><br><span class="line">N：与命令反方向</span><br></pre></td></tr></table></figure>
+<p><strong>s：查找并替换</strong></p>
+<p>​      <strong>格式：</strong>s/要查找的内容/替换为的内容/修饰符</p>
+<p>​      <strong>修饰符：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">i：忽略大小写</span><br><span class="line">g：全局替换每一行的第一次出现的匹配</span><br><span class="line">gc：全局替换所有匹配，每次替换前询问</span><br><span class="line">查找替换的分隔符/可用其他分隔符代替：如#，@</span><br></pre></td></tr></table></figure>
+<p><strong>命令模式</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">u：		撤销更改</span><br><span class="line">ctrl+r:  恢复上一次撤销</span><br><span class="line">.    重复执行上一次操作</span><br><span class="line">#. 	 重复执行上一次操作n次</span><br></pre></td></tr></table></figure>
+<h3 id="8-vim的剪贴板"><a href="#8-vim的剪贴板" class="headerlink" title="8.vim的剪贴板"></a>8.vim的剪贴板</h3><p>有26个命名剪贴板和一个无命名剪贴板，存放不同的剪切内容，可以不同会话间分享</p>
+<p>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;myy 	表示复制光标所在行到m剪贴板</span><br><span class="line">&quot;mp 	表示将m剪贴板内容粘贴</span><br><span class="line">3&quot;tyy 	表示复制3行内容到t剪贴板</span><br><span class="line">&quot;tp   	表示将t剪贴板内容粘贴</span><br></pre></td></tr></table></figure>
+<h3 id="9-vim多文件模式"><a href="#9-vim多文件模式" class="headerlink" title="9.vim多文件模式"></a>9.vim多文件模式</h3><p><strong>vim FILE1 FILE2 FILE3</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">：next     下一个文件</span><br><span class="line">：prev     上一个文件</span><br><span class="line">：first    第一个文件</span><br><span class="line">：last     最后一个文件</span><br><span class="line">：wall     保存所有文件</span><br><span class="line">：qall     退出所有</span><br><span class="line">：wqall    保存退出</span><br></pre></td></tr></table></figure>
+<p><strong>单文件的窗口分隔：</strong>方便对照文件内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ctrl+w放开后按s      水平分割</span><br><span class="line">ctrl+w放开后按v      垂直分割</span><br><span class="line">ctrl+w放开后按q      取消相邻窗口</span><br><span class="line">ctrl+w放开后按w      取消全部窗口；与：wqall相同</span><br></pre></td></tr></table></figure>
+<p><img src="QQ图片20180408193404.png" alt="QQ图片20180408193404"></p>
+<h2 id="三、定制vim的工作特性"><a href="#三、定制vim的工作特性" class="headerlink" title="三、定制vim的工作特性"></a><strong>三、定制vim的工作特性</strong></h2><h3 id="扩展命令模式下执行："><a href="#扩展命令模式下执行：" class="headerlink" title="扩展命令模式下执行："></a>扩展命令模式下执行：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set number     添加行号</span><br><span class="line">set nonumber   取消行号</span><br></pre></td></tr></table></figure>
+<p>此操作仅临时有效，退出重进vim后，操作失效，要想永久保存vim的工作特性，需写入配置文件中</p>
+<h3 id="配置文件：使vim工作特性永久有效"><a href="#配置文件：使vim工作特性永久有效" class="headerlink" title="配置文件：使vim工作特性永久有效"></a>配置文件：使vim工作特性永久有效</h3><p><strong>全局：</strong>/etc/vimrc</p>
+<p><strong>个人：</strong>~/.vimrc</p>
+<h3 id="其他一些常用vim特性命令："><a href="#其他一些常用vim特性命令：" class="headerlink" title="其他一些常用vim特性命令："></a>其他一些常用vim特性命令：</h3><p><strong>忽略大小写</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set ic    忽略大小写</span><br><span class="line">set noic  取消忽略大小写</span><br></pre></td></tr></table></figure>
+<p><strong>自动缩进</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set ai    自动和上一行对齐</span><br><span class="line">set noai  取消对齐</span><br></pre></td></tr></table></figure>
+<p><strong>文件格式转换</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set fileformat=unix   Windows文件转换Linux文件</span><br><span class="line">set fileformat=dos 	  Linux文件转换Windows文件</span><br></pre></td></tr></table></figure>
+<p><strong>设置光标所在行下划线</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set cursorline      启用</span><br><span class="line">set no cursorline   禁用</span><br></pre></td></tr></table></figure>
+<p><strong>复制时保留格式：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set paste      启用</span><br><span class="line">set nopaste    禁用</span><br></pre></td></tr></table></figure>
+<h3 id="查看全部已配置的vim工作特性"><a href="#查看全部已配置的vim工作特性" class="headerlink" title="查看全部已配置的vim工作特性"></a>查看全部已配置的vim工作特性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">：set      显示全部已配置set</span><br><span class="line">：help     查看帮助</span><br></pre></td></tr></table></figure>
+<h2 id="四、文本处理常用命令"><a href="#四、文本处理常用命令" class="headerlink" title="四、文本处理常用命令"></a><strong>四、文本处理常用命令</strong></h2><ol>
+<li><p><strong>cut :</strong>  按列抽取文本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-b：	仅显示行中指定直接范围的内容；</span><br><span class="line">-c：	仅显示行中指定范围的字符；</span><br><span class="line">-d：	指定字段的分隔符，默认的字段分隔符为“TAB”；</span><br><span class="line">-f：	显示指定字段的内容；</span><br><span class="line">-n：	与“-b”选项连用，不分割多字节字符；</span><br><span class="line">--complement：	补足被选择的字节、字符或字段；</span><br><span class="line">--out-delimiter=&lt;字段分隔符&gt;：	指定输出内容是的字段分割符；</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>diff:</strong>     比较两个文件直接的差别，后跟file1，file2</p>
+</li>
+<li><p><strong>head:</strong>  用于显示文件的开头的内容 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-n&lt;数字&gt;：指定显示头部内容的行数；</span><br><span class="line">-c&lt;字符数&gt;：指定显示头部内容的字符数；</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>tail:</strong>   用于显示文件的结尾的内容 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-n     显示最后n行</span><br><span class="line">-c     显示最后n个字节</span><br><span class="line">-f      跟踪文本的变化（追加内容），可写为tailf</span><br><span class="line">-F     跟踪文件名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>sort:</strong>    将文件进行排序，并将排序结果标准输出 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-t      指定分隔符（类似cut -d）</span><br><span class="line">-k     指定第几列（类似cut -f）</span><br><span class="line">-n     以数字排序</span><br><span class="line">-r      倒序排列</span><br><span class="line">-f      忽略大小写</span><br><span class="line">-u     删除重复的行压缩到一行</span><br><span class="line">-R     随机排序</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>paste</strong>     合并两个文件同行号的列到一行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-s      合并两个文件按一行显示</span><br><span class="line">-d     指定分隔符，类似cut -d的用法</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>grep:</strong>         基于行过滤的文本过滤工具</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">-v     显示不被匹配到的行</span><br><span class="line">-i      忽略字符大小写</span><br><span class="line">-n     添加匹配到的行的行号</span><br><span class="line">-c     统计被匹配到的行数</span><br><span class="line">-o     仅显示匹配到的字符</span><br><span class="line">-q     静默模式</span><br><span class="line">-A#   包含此匹配行和后#行</span><br><span class="line">-B#   包含此匹配行和前#行</span><br><span class="line">-C#   包含此匹配行和前后#行</span><br><span class="line">-e     实现多个匹配字符的或者（or）关系 -e a -e b：a或b</span><br><span class="line">-w    匹配整个单词，数字、字母、下划线都算单词一部分</span><br><span class="line">-r      递归目录</span><br><span class="line">-E     使用ERE，扩展的正则表达式</span><br><span class="line">-F     相当于fgrep</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+          
         
       
     </div>
@@ -726,19 +999,72 @@
       
         
           
-          grep 是一种强大的文本搜索工具，它能使用特定模式匹配（包括正则表达式）搜索文本，并默认输出匹配行。
-一、grep、文本过滤工具格式：
-​    grep [OPTION]… PATTERN [FILE]…
- option：
-1234567891011121314-v     显示不被匹配到的行-
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/07/文本三剑客之grep及正则表达式用法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>grep 是一种强大的文本搜索工具，它能使用特定模式匹配（包括正则表达式）搜索文本，并默认输出匹配行。</p>
+<h1 id="一、grep、文本过滤工具"><a href="#一、grep、文本过滤工具" class="headerlink" title="一、grep、文本过滤工具"></a>一、grep、文本过滤工具</h1><p><strong>格式：</strong></p>
+<p>​    grep [OPTION]… PATTERN [FILE]…</p>
+<p> <strong>option：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">-v     显示不被匹配到的行</span><br><span class="line">-i      忽略字符大小写</span><br><span class="line">-n     添加匹配到的行的行号</span><br><span class="line">-c     统计被匹配到的行数</span><br><span class="line">-o     仅显示匹配到的字符</span><br><span class="line">-q     静默模式</span><br><span class="line">-A#    包含此匹配行和后#行</span><br><span class="line">-B#    包含此匹配行和前#行</span><br><span class="line">-C#    包含此匹配行和前后#行</span><br><span class="line">-e     实现多个匹配字符的或者（or）关系 -e a -e b：a或b</span><br><span class="line">-w     匹配整个单词，数字、字母、下划线都算单词一部分</span><br><span class="line">-r     递归目录</span><br><span class="line">-E     使用ERE，扩展的正则表达式</span><br><span class="line">-F     相当于fgrep</span><br></pre></td></tr></table></figure>
+<p>grep工具之所以功能强大，是因为它支持正则表达式进行匹配，那什么又是正则表达式呢?</p>
+<h1 id="二、正则表达式的相关概念"><a href="#二、正则表达式的相关概念" class="headerlink" title="二、正则表达式的相关概念"></a><strong>二、正则表达式的相关概念</strong></h1><ol>
+<li><p>正则表达式语言由两种基本字符类型组成：原义（正常）文本字符和元字符。元字符使正则表达</p>
+<p>式具有处理能力。所谓元字符就是指那些在正则表达式中具有特殊意义的专用字符，可以用来规</p>
+<p>定其前导字符（即位于元字符前面的字符）在目标对象中的出现模式正则表达式（REGEXP）：</p>
+<p>由一类特殊字符及文本字符所编写的模式，其中有些字符（元字符）不表示字符表面意义，</p>
+<p>而表示控制或通配功能</p>
+</li>
+</ol>
+<ol start="2">
+<li><p>正则表达式与通配符的区别：通配符匹配的是文件名中的字符，不能匹配文件的文本内容的字符串，</p>
+<p>这时候就需要用到正则表达式。</p>
+</li>
+</ol>
+<ol start="3">
+<li><p>正则表达式分两类：</p>
+<p>基本正则表达式：BRE；只承认的元字符有^$.[]*其他字符识别为普通字符：()需要转义</p>
+<p>扩展正则表达式：ERE；则添加了（）{}?+|等</p>
+<p>grep -E  等价于  egrep</p>
+</li>
+</ol>
+<ol start="4">
+<li><p>正则表达式引擎：</p>
+<p>采用不同算法，检查处理正则表达式的软件模块</p>
+<p>基于PCRE语言（逐渐没落）兼容的正则表达式</p>
+</li>
+</ol>
+<ol start="5">
+<li>元字符分类：字符匹配、匹配次数、位置锚定、分组（帮助文档：man 7 regex）</li>
+</ol>
+<h1 id="三、基本正则表达式（BRE）的元字符介绍："><a href="#三、基本正则表达式（BRE）的元字符介绍：" class="headerlink" title="三、基本正则表达式（BRE）的元字符介绍："></a><strong>三、基本正则表达式（BRE）的元字符介绍：</strong></h1><h3 id="1-字符匹配："><a href="#1-字符匹配：" class="headerlink" title="1. 字符匹配："></a>1. 字符匹配：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.        匹配任意单个字符，放在[]中就表示点</span><br><span class="line">[]      匹配括号内任意单个字符</span><br><span class="line">[^]    匹配指定范围外的任意单个字符</span><br><span class="line">[:alnum:] 任意一个字母和数字</span><br><span class="line">[:alpha:]  任意一个字母</span><br><span class="line">[:lower:]  任意一个小写字母</span><br><span class="line">[:upper:]  任意一个大写字母</span><br><span class="line">[:digit:]    任意一个数字</span><br><span class="line">[:space:]  水平或垂直空白字符</span><br><span class="line">[:punct:]  标点符号</span><br></pre></td></tr></table></figure>
+<p>注意：正则表达式使用字符集作为搜索条件时，一定要加双引号，如”[[:digit:]]”；</p>
+<p>​    否则正则表达式会将字符集作为一个个字符进行识别</p>
+<p>​    转义符“\”使正则表达式中具有特殊含义的字符显示其本身，如.只表示小数点</p>
+<h3 id="2-匹配次数（某个字符出现的次数）"><a href="#2-匹配次数（某个字符出现的次数）" class="headerlink" title="2. 匹配次数（某个字符出现的次数）"></a>2. 匹配次数（某个字符出现的次数）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">*- 匹配前面的字符任意次，包括0次（贪婪模式，尽可能长的匹配）</span><br><span class="line">.*     任意长度的任意字符</span><br><span class="line">\？   匹配前面的字符0或1次，可看做 \&#123;0,1\&#125;</span><br><span class="line">\+     匹配前面的字符至少1次，可看做\&#123;1，\&#125;（可实现懒惰模式）</span><br><span class="line">\&#123;m\&#125;        精确匹配前面的字符m次</span><br><span class="line">\&#123;m，\&#125;   至少匹配前面的字符m次</span><br><span class="line">\&#123;,m\&#125;      至多匹配前面的字符m次</span><br><span class="line">\&#123;m，n\&#125;匹配前面的字符m到n次</span><br></pre></td></tr></table></figure>
+<h3 id="3-位置锚定"><a href="#3-位置锚定" class="headerlink" title="3. 位置锚定"></a>3. 位置锚定</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">^       行首锚定，用于模式最左侧</span><br><span class="line">$       行尾锚定，用于模式最右侧</span><br><span class="line">^$    	表示空行</span><br><span class="line">\&lt;或\b  单词的词首锚定</span><br><span class="line">\&gt;或\b  单词的次尾锚定</span><br><span class="line">\&lt;word\&gt;   匹配整个单词，同grep -w</span><br></pre></td></tr></table></figure>
+<h3 id="4-分组"><a href="#4-分组" class="headerlink" title="4. 分组"></a>4. 分组</h3><p>()将一个或多个字符捆绑在一起，当做一个整体进行处理，如：(root)+</p>
+<p>分组括号中匹配到的内容会被正则表达式记录与内部变量中，</p>
+<p>这些变量命名方式为：\1,\2,\3,…</p>
+<p>\1表示从左侧起第一个左括号以及与之匹配右括号之间的模式所匹配到的字符</p>
+<p>后向引用：\1表示的是前面匹配的结果而不是前面匹配的模式</p>
+<p>例：echo rootxxrbbt|grep ‘(r..t).*\1’</p>
+<p>\1代表root，而不是r..t</p>
+<h3 id="5-或者："><a href="#5-或者：" class="headerlink" title="5. 或者：|"></a>5. 或者：|</h3><p>例：a|b：a或b； C|cat：C或cat \（C|c\）at：Cat或cat</p>
+<h1 id="四、扩展正则表达式（ERE）介绍："><a href="#四、扩展正则表达式（ERE）介绍：" class="headerlink" title="四、扩展正则表达式（ERE）介绍："></a>四、扩展正则表达式（ERE）介绍：</h1><h3 id="egrep-同grep-E"><a href="#egrep-同grep-E" class="headerlink" title="egrep      同grep -E"></a>egrep      同grep -E</h3><p>扩展正则表达式（ERE）可理解为将基础正则表达式中的转义符全部去掉，其字符匹配与基础正则表达式（BRE）相同。</p>
+<h3 id="1-字符匹配"><a href="#1-字符匹配" class="headerlink" title="1. 字符匹配"></a>1. 字符匹配</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.   任意单个字符</span><br><span class="line">[]  指定范围的字符</span><br><span class="line">[^]  不在指定范围的字符</span><br></pre></td></tr></table></figure>
+<h3 id="2-次数匹配："><a href="#2-次数匹配：" class="headerlink" title="2.次数匹配："></a>2.次数匹配：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">* ：匹配前面字符任意次</span><br><span class="line">?: 0 或1次 次</span><br><span class="line">+ ：1 次或多次</span><br><span class="line">&#123;m&#125; ：匹配m次 次</span><br><span class="line">&#123;m,n&#125; ：至少m ，至多n次</span><br></pre></td></tr></table></figure>
+<h3 id="3-位置锚定："><a href="#3-位置锚定：" class="headerlink" title="3.位置锚定："></a>3.位置锚定：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">^ : 行首</span><br><span class="line">$ : 行尾</span><br><span class="line">\&lt;, \b : 语首</span><br><span class="line">\&gt;, \b :</span><br></pre></td></tr></table></figure>
+<h3 id="4-分组："><a href="#4-分组：" class="headerlink" title="4.分组："></a>4.分组：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">（）</span><br><span class="line">后向引用：\1,\2,…</span><br></pre></td></tr></table></figure>
+<h3 id="5-或者：-1"><a href="#5-或者：-1" class="headerlink" title="5.或者："></a>5.或者：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a|b  	a或b</span><br><span class="line">C|cat    C或cat</span><br><span class="line">C|c）at  Cat或cat</span><br></pre></td></tr></table></figure>
+<h1 id="五、正则表达式中的元字符与通配符的区别"><a href="#五、正则表达式中的元字符与通配符的区别" class="headerlink" title="五、正则表达式中的元字符与通配符的区别"></a>五、正则表达式中的元字符与通配符的区别</h1><p>作用不同：通配符匹配的是文件名中的字符，而正则表达式匹配的是文件的文本内容的字符串；</p>
+<p>两者之间有很多相同之处，也有不同点，其中：</p>
+<h3 id="1-正则表达式元字符与通配符代表意义不同的有："><a href="#1-正则表达式元字符与通配符代表意义不同的有：" class="headerlink" title="1.正则表达式元字符与通配符代表意义不同的有："></a>1.正则表达式元字符与通配符代表意义不同的有：</h3><p><strong>通配符中：</strong></p>
+<p>​    * 表示任意长度的任意字符</p>
+<p>​    ? 表示任意一个单个字符</p>
+<p><strong>正则表达式：</strong></p>
+<p>​    *表示匹配前面的字符任意次</p>
+<p>​    . 表示匹配任意一个单个字符</p>
+<p>​    .*表示任意长度的任意字符</p>
+<h3 id="2-正则表达式元字符与通配符含义相似的有："><a href="#2-正则表达式元字符与通配符含义相似的有：" class="headerlink" title="2. 正则表达式元字符与通配符含义相似的有："></a>2. 正则表达式元字符与通配符含义相似的有：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[]      匹配括号内任意单个字符</span><br><span class="line">[^]    匹配指定范围外的任意单个字符</span><br><span class="line">[:alnum:] 任意一个字母和数字</span><br><span class="line">[:alpha:]  任意一个字母</span><br><span class="line">[:lower:]  任意一个小写字母</span><br><span class="line">[:upper:]  任意一个大写字母</span><br><span class="line">[:digit:]    任意一个数字</span><br><span class="line">[:space:]  水平或垂直空白字符</span><br><span class="line">[:punct:]  标点符号</span><br></pre></td></tr></table></figure>
+          
         
       
     </div>
@@ -878,21 +1204,60 @@
       
         
           
-          Linux给程序提供了三种I/O设备，即：
+            <p>Linux给程序提供了三种I/O设备，即：</p>
+<ul>
+<li>标准输入（STDIN）  0            默认接受来自键盘的输入</li>
+<li>标准输出（STDOUT） 1      默认输出到终端窗口</li>
+<li>标准错误（STDERR） 2       默认输出到终端窗口</li>
+</ul>
+<p>同时linux中使用“&gt;”和“&gt;&gt;”将标准输出和标准错误重新定向到文件中：</p>
+<p>后跟重定向文件，文件内容会被覆盖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;     把标准输出重定向到文件,文件内容会被覆盖</span><br><span class="line"></span><br><span class="line">2&gt;    把标准错误重定向到文件</span><br><span class="line"></span><br><span class="line">&amp;&gt;    把标准输出和错误都定向到文件</span><br><span class="line"></span><br><span class="line">1&gt;&amp;2  把标准输出定向到标准错误（简单来讲，对的变成错的）</span><br><span class="line"></span><br><span class="line">2&gt;&amp;1  把标准错误定向到标准标准输出（错的变成对的）</span><br><span class="line"></span><br><span class="line">&gt;&gt;    追加标准输出重定向到文件</span><br><span class="line"></span><br><span class="line">2&gt;&gt;  追加标准错误重定向到文件</span><br><span class="line"></span><br><span class="line">&amp;&gt;&gt; 追加标准输出和错误都定向到文件</span><br></pre></td></tr></table></figure>
+<p>那么下面我们来讨论下几种重定向的变形用法：</p>
+<p>首先我们先建file1-6的6个空文件</p>
+<p><img src="创建空文件.png" alt="创建空文件"></p>
+<p>这里我们看到:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ll /data/f1 显示标准输出（f1文件详细信息）；</span><br><span class="line"></span><br><span class="line">ll /erorr显示标准错误（提示无此目录）；</span><br></pre></td></tr></table></figure>
+<p>接下来我们来进行几个小实验:</p>
+<p><img src="正确与错误.png" alt="正确与错误"></p>
+<p><strong>实验1.</strong>    ll /data/f1 /erorr &gt; /data/file1 2&gt;&amp;1</p>
+<p><img src="file1.png" alt="file1"></p>
+<p>结果:屏幕无显示，标准输出和标准错误输入到file1文件中</p>
+<p><strong>实验2.</strong>ll /data/f1 /erorr 2&gt;&amp;1 &gt; /data/file2</p>
+<p><img src="file2.png" alt="file2"></p>
+<p>结果:屏幕显示标准错误，标准输出输入到file2文件中</p>
+<p><strong>实验3.</strong>ll /data/f1 /erorr 2&gt; /data/file3 1&gt;&amp;2</p>
+<p><img src="file3.png" alt="file3"></p>
+<p>结果:屏幕无显示，标准输出和标准错误输入到file3文件中</p>
+<p><strong>实验4.</strong>ll /data/f1 /erorr 1&gt;&amp;2 &gt; /data/file4</p>
+<p><img src="file4.png" alt="file4"></p>
+<p>结果:屏幕显示标准错误，标准输出输入到file4文件中</p>
+<p><strong>实验5.</strong>ll /data/f1 /erorr &gt; /data/file5</p>
+<p><img src="file5.png" alt="file5"></p>
+<p>结果:屏幕显示标准错误，标准输出输入到file5文件中</p>
+<p><strong>实验6.</strong>ll /data/f1 /erorr &gt; /data/file6 1&gt;&amp;2</p>
+<p><img src="file6.png" alt="file6"></p>
+<p>结果:屏幕显示标准输出和标准错误，file6文件为空</p>
+<p>观察6个小实验我们发现:</p>
+<p>实验1,3得出的结果完全相同，屏幕无显示，标准输出和标准错误输入到file文件中。得出此结果也有两种</p>
+<p>执行顺序的可能性：</p>
+<p><strong>可能性1：实验1可看做，标准输出先重定向到file文件中，标准错误然后重定向为标准输出再次重定向</strong></p>
+<p>到file文件中；实验3可看做，标准错误先重定向到file文件中，标准输出然后重定向为标准错误再次重定</p>
+<p>向到file文件中，所以file文件中既有标准输入又有标准输出。</p>
+<p><strong>可能性2：实验1可看做，标准输出和错误都经过2&gt;&amp;1的重定向后，全变为标准输出，再输入进file1件中；</strong></p>
+<p>实验3可看做，标准输出和错误都经过1&gt;&amp;2的重定向后，全变为标准错误，再输入file3文件中。</p>
+<p>于是我们有了实验6，ll /data/f1 /erorr &gt; /data/file6 1&gt;&amp;2，得出结果屏幕显示标准输出和标准错误，file6</p>
+<p>文件为空，由此可认为实验6执行了可能性2的执行过程。</p>
+<p><strong>结论1:当有1&gt;&amp;2或2&gt;&amp;1处于重定向组合命令结尾时，输出结果全部先执行1&gt;&amp;2或2&gt;&amp;1，再执行前面的重定向。</strong></p>
+<p>实验2,4,5得出的结果完全相同，即屏幕显示标准错误，标准输出输入到file5文件中</p>
+<p>三条命令分别为：</p>
+<p>​    ll /data/f1 /erorr 2&gt;&amp;1 &gt; /data/file2</p>
+<p>​    ll /data/f1 /erorr 1&gt;&amp;2 &gt; /data/file4</p>
+<p>​    ll /data/f1 /erorr &gt; /data/file5</p>
+<p>我们是否可以这样认为:</p>
+<p><strong>结论2:当2&gt;&amp;1或1&gt;&amp;2处在重定向组合命令中间位置时，2&gt;&amp;1或1&gt;&amp;2是不起作用的，可以忽略掉（此结论待定）</strong></p>
 
-标准输入（STDIN）  0            默认接受来自键盘的输入
-标准输出（STDOUT） 1      默认输出到终端窗口
-标准错误（STDERR） 2       默认输出到终端窗口
-
-同时linux中使用“&gt;”和“&gt;&gt;”
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/05/浅谈几种IO重定向变形用法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
@@ -1032,19 +1397,171 @@
       
         
           
-          Linux系统中不仅是对用户与组根据UID,GID进行了管理，还对Linux系统中的文件，按照用户与组进行分类，针对不同的群体进行了权限管理，用他来确定谁能通过何种方式对文件和目录进行访问和操作。
-一、文件权限
-文件的权限针对三类对象进行定义
-owner      属主，缩写u
-group     
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/04/Linux文件权限详解/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>Linux系统中不仅是对用户与组根据UID,GID进行了管理，还对Linux系统中的文件，按照用户与组进行分类，针对不同的群体进行了权限管理，用他来确定谁能通过何种方式对文件和目录进行访问和操作。</p>
+<h2 id="一、文件权限"><a href="#一、文件权限" class="headerlink" title="一、文件权限"></a>一、文件权限</h2><ol>
+<li><p>文件的权限针对三类对象进行定义</p>
+<p>owner      属主，缩写u</p>
+<p>group       属组，缩写g</p>
+<p>other        其他人，缩写o</p>
+</li>
+</ol>
+<ol start="2">
+<li><p>每个文件针对每类访问者定义了三种主要权限</p>
+<p>r：Read           读</p>
+<p>w：Write         写</p>
+<p>x：eXecute      执行</p>
+</li>
+</ol>
+<p>另 X：针对目录加执行权限，文件不加执行权限（因文件具备执行权限有安全隐患）</p>
+<p>注意：root账户不受文件权限的读写限制，执行权限受限制</p>
+<ol start="3">
+<li>对于文件和目录来说，r，w，x有着不同的作用和含义：</li>
+</ol>
+<ul>
+<li><p>针对文件：</p>
+<p>r：读取文件内容</p>
+<p>w：修改文件内容</p>
+<p>x：执行权限对除二进制程序以外的文件没什么意义</p>
+</li>
+</ul>
+<ul>
+<li><p>针对目录：目录本质可看做是存放文件列表、节点号等内容的文件</p>
+<pre><code>r：查看目录下的文件列表
+
+w：删除和创建目录下的文件
+
+x：可以cd进入目录，能查看目录中文件的详细属性，能访问目录下文件内容（基础权限）
+</code></pre></li>
+</ul>
+<p><img src="权限.png" alt="权限"></p>
+<ol start="4">
+<li><p>用户获取文件权限的顺序：首先看是否为所有者，如果是，则后面权限不看；再看是否为所属组，</p>
+<p>如果是，则后面权限不看。</p>
+</li>
+</ol>
+<h2 id="二、修改文件访问权限的方法"><a href="#二、修改文件访问权限的方法" class="headerlink" title="二、修改文件访问权限的方法"></a>二、修改文件访问权限的方法</h2><ol>
+<li><p>chmod              修改权限 change mode</p>
+<p>方法1：mode法</p>
+<p>​    格式：chmod who opt per file</p>
+<p>​    who：u g o a（all）</p>
+<p>​    opt：+ – =</p>
+<p>​    per：r w x X</p>
+</li>
+</ol>
+<p>​    方法2：数字法</p>
+<p>​        格式：chmod XXX file</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">rwx</th>
+<th style="text-align:center">rw-</th>
+<th style="text-align:center">r–</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">111</td>
+<td style="text-align:center">110</td>
+<td style="text-align:center">100</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">4</td>
+</tr>
+</tbody>
+</table>
+<p>​            r：4</p>
+<p>​            w：2</p>
+<p>​            x：1</p>
+<p><strong>例：</strong>chmod 764  file        给file文件添加 rwxrw-r– 权限</p>
+<p>​    chmod -R +X dir               给dir目录添加X执行权限，dir目录下文件不添加执行权限</p>
+<p>​    （如果dir目录下有文件已具备执行权限，则添加该文件执行权限）</p>
+<h2 id="三、UMASK值"><a href="#三、UMASK值" class="headerlink" title="三、UMASK值"></a>三、UMASK值</h2><p>umask值的作用：用来设置限制新建文件权限的掩码。当新文件被创建时，其最初的权限由文件创建掩码决定 </p>
+<ul>
+<li><p>对目录：</p>
+<p>umask+default=777（dir）</p>
+</li>
+<li><p>对文件：</p>
+<p>666-umask：观察结果，如果有奇数，奇数位+1，偶数不变</p>
+</li>
+</ul>
+<h2 id="四、三种特殊权限suid、sgid、sticky"><a href="#四、三种特殊权限suid、sgid、sticky" class="headerlink" title="四、三种特殊权限suid、sgid、sticky"></a>四、三种特殊权限suid、sgid、sticky</h2><ol>
+<li><p><strong>suid</strong></p>
+<p><strong>作用：</strong>让本来没有相应权限的用户运行这个程序时，可以访问他没有权限访问的资源。 </p>
+<p>suid权限位 位于所有者的执行权限位上，如果一个文件具有suid权限，则所有者执行位为s，文件表现为红色背景</p>
+<p><strong>例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ll /usr/bin/passwd	#查看/usr/bin/passwd文件的权限</span><br><span class="line">-rwsr-xr-x. 1 root root 30768 Nov 24  2015 /usr/bin/passwd</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>   <img src="./" alt="红色suid"></p>
+<p>   给file文件增加suid权限</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod u+s file		# suid的mode法</span><br><span class="line">chmod 4755 file     # suid数字法表示为4</span><br></pre></td></tr></table></figure>
+<pre><code>注：suid只适合作用在二进制程序上
+</code></pre><ol start="2">
+<li><p><strong>sgid</strong></p>
+<p><strong>作用1</strong>：给一个用户继承二进制程序所有组拥有的权限</p>
+<p><strong>作用2：</strong>作用在目录上时，使一个目录下的新建的文件继承目录的所属组</p>
+<p>sgid权限位 位于所有组的执行权限位，如果一个文件具有suid权限，则所有组的执行位为s，文件表现为黄色背景</p>
+<p><strong>例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ll `which cat`</span><br><span class="line"></span><br><span class="line">-rwxr-sr-x. 1 root root 48568 Mar 23 2017 /bin/cat</span><br></pre></td></tr></table></figure>
+<p><img src="%E9%BB%84%E8%89%B2sgid.png" alt="黄色sgid"></p>
+<p>给file文件增加sgid权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod g+s file		# sgid的mode法</span><br><span class="line">chmod 2755 file      # sgid数字法表示为2</span><br></pre></td></tr></table></figure>
+<p> ​    </p>
+</li>
+</ol>
+<ol start="3">
+<li><p><strong>sticky</strong></p>
+<p>作用：作用于目录上，此目录的文件只能被所有者删除</p>
+<p>sticky权限位位于其他的执行权限位上，如果一个文件具有sticky权限，则其他的执行位为t，目录表现为绿色背景</p>
+<p><strong>如：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ll -d /tmp</span><br><span class="line">drwxrwxrwt. 17 root root 4096 Apr  4 10:02 /tmp</span><br></pre></td></tr></table></figure>
+<p><img src="./" alt="绿色sticky"></p>
+<p>给dir目录添加sticky权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod o+t dir		# sticky的mode法</span><br><span class="line">chmod 1777 dir      #  sticky数字法表示为1</span><br></pre></td></tr></table></figure>
+<p> ​     </p>
+</li>
+</ol>
+<h2 id="五、ACL访问控制列表"><a href="#五、ACL访问控制列表" class="headerlink" title="五、ACL访问控制列表"></a>五、ACL访问控制列表</h2><p>作用：实现更加灵活的权限管理，打破了三类用户的权限管理</p>
+<ol>
+<li><p>添加ACL权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">setfacl -m u:lpx:0 file 	# 使lpx账户对指定file文件无权限</span><br><span class="line"></span><br><span class="line">setfacl -m u:mage:rw file 	# 使mage账户对指定file文件有读写权限</span><br><span class="line"></span><br><span class="line">setfacl -m g:g1:rw file 	# 使g1组对指定file文件有读写权限</span><br><span class="line"></span><br><span class="line">getfacl file 	# 查看指定file文件的ACL权限</span><br></pre></td></tr></table></figure>
+<p>ACL权限执行顺序类似于用户获取文件权限的顺序，getfacl顺序从上到下执行，一旦生效，下面的将不再生效（如果属于多个组，权限累加）</p>
+</li>
+</ol>
+<ol start="2">
+<li><p>删除ACL权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setfacl -x u:lpx file      删除lpx账户对指定file文件的ACL权限</span><br><span class="line"></span><br><span class="line">setfacl -x g:g1 file   删除g1组对指定file文件的ACL权限</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ACL权限下的mask</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">设置用户对指定文件所能拥有的最大权限（限高作用）</span><br><span class="line"></span><br><span class="line">setfacl -m mask::r file             使指定文件file所拥有的最大权限位读r</span><br><span class="line"></span><br><span class="line">setfacl -x mask::r file               取消指定文件file的最大权限限制mask</span><br><span class="line"></span><br><span class="line">setfacl -b f1                      取消f1文件所有的ACL权限</span><br></pre></td></tr></table></figure>
+<pre><code>ACL生效顺序：所有者、自定义用户、自定义组、其他人
+</code></pre></li>
+<li><p>备份和恢复ACL权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">getfacl -R /tmp/dir1&gt;acl.txt           将dir1目录下ACL权限备份</span><br><span class="line"></span><br><span class="line">setfacl -R –set-file=acl.txt /tem/dir      恢复dir1目录下ACL权限</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="六、文件权限操作的常用命令"><a href="#六、文件权限操作的常用命令" class="headerlink" title="六、文件权限操作的常用命令"></a>六、文件权限操作的常用命令</h2><ol>
+<li><p>chown              设置文件所有者（普通用户无法修改文件所有者）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-R     递归</span><br><span class="line">user：group   同时修改所有者，所有组</span><br><span class="line">chgrp         设置文件所属组（普通用户要想该所属组，前提是文件所有者为自己，自己在所属组中）</span><br><span class="line">-R     递归</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>chmod              设置指定文件权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-R     递归</span><br><span class="line">–reference=f1 f2 f3        参考f1文件权限设置f2，f3文件</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>chattr               给指定文件添加保护，避免root账户误操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+i      锁定文件，不能删除，不能改名，不能更改内容</span><br><span class="line">-i      解锁+i</span><br><span class="line">-a      锁定文件，不能删除，不能改名，但可追加内容（追加重定向）</span><br><span class="line">-a      解锁+a</span><br><span class="line">+A      指定文件读时间atime不再更改</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>lsattr                 查看指定文件是否有锁定状态</p>
+</li>
+<li><p>setfacl              设置文件ACL权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-m mask::r file          使指定文件file所拥有的最大权限位读r</span><br><span class="line">-x mask::r file            取消指定文件file的最大权限限制mask</span><br><span class="line">-b f1                   取消f1文件所有的ACL权限</span><br><span class="line">-R –set-file=acl.txt /tem/dir   恢复dir1目录下ACL权限</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>getfacl              查看文件ACL权限</p>
+</li>
+</ol>
+
+          
         
       
     </div>
@@ -1184,19 +1701,82 @@ group
       
         
           
-          Linux哲学思想讲“一切皆是文件”，包括硬件在linux系统中也表现为文件形式。
-学好文件系统将为以后深入研究与学习Linux系统奠定良好的基础。
-一、目录文件管理
-/                         根目录每个文件和目录都从这里开始
-/bin                   
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/04/Linux文件系统简介/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>Linux哲学思想讲“一切皆是文件”，包括硬件在linux系统中也表现为文件形式。</p>
+<p>学好文件系统将为以后深入研究与学习Linux系统奠定良好的基础。</p>
+<p><strong>一、目录文件管理</strong></p>
+<p>/                         根目录每个文件和目录都从这里开始</p>
+<p>/bin                   基本程序，一般为普通用户可执行的程序</p>
+<p>/boot                 静态文件，系统文件</p>
+<p>/dev                  存放硬件设备文件</p>
+<p>/etc                   存放配置文件</p>
+<p>/lib64                库文件</p>
+<p>/media              挂载点</p>
+<p>/mnt                 管理员手动挂载点</p>
+<p>/opt                   第三方软件包</p>
+<p>/sbin                 管理员运行的程序</p>
+<p>/srv                   服务器相关数据</p>
+<p>/tmp                  存放临时文件</p>
+<p>/usr                   第二层目录结构</p>
+<p>/var                   存放变化的文件，如/var/log存放日志</p>
+<p>/home                家目录，存放用户信息</p>
+<p>/root                  管理员的家目录‘</p>
+<p>/lost+found       分区为ext4具有（如centos6）</p>
+<p>/misc                  实现光盘的自动挂载</p>
+<p>/sys                    硬件相关信息</p>
+<p>/proc                  存储内存中的状态信息</p>
+<p>/selinux             安全策略（生产环境中一般禁用）</p>
+<p><strong>二、文件颜色</strong></p>
+<p>Linux系统通过不同的颜色来对文件进行区别，其中：</p>
+<p>​    蓝色                   代表目录</p>
+<p>​    绿色                   可执行程序</p>
+<p>​    红色                   打包文件，压缩文件</p>
+<p>​    浅蓝色               链接文件（快捷方式）</p>
+<p>​    粉色                   套接字文件</p>
+<p>​    浅黄色               管道文件</p>
+<p><strong>三、文件类型</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">–           普通文件</span><br><span class="line"></span><br><span class="line">d           目录文件</span><br><span class="line"></span><br><span class="line">b           块设备</span><br><span class="line"></span><br><span class="line">c           字符设备</span><br><span class="line"></span><br><span class="line">l           符号链接文件</span><br><span class="line"></span><br><span class="line">p           管道文件pipe</span><br><span class="line"></span><br><span class="line">s           套接字文件socket</span><br></pre></td></tr></table></figure>
+<p><strong>四、文件时间戳</strong></p>
+<p>通过stat file 命令查看file文件时间戳：</p>
+<p>​    mtime               文件最后修改时间</p>
+<p>​    atime                 文件最后读取时间</p>
+<p>​    ctime                 文件元数据最后发生变化的时间，如权限，所有组的变化</p>
+<p><strong>五、常用文件通配符：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">\*                         匹配零个或多个字符</span><br><span class="line"></span><br><span class="line">？                       匹配任何单个字符</span><br><span class="line"></span><br><span class="line">~                         当前用户家目录</span><br><span class="line"></span><br><span class="line">[0-9]                  表示数字</span><br><span class="line"></span><br><span class="line">[^0-9]               除数字以外</span><br><span class="line"></span><br><span class="line">[a-z]                   小写字母</span><br><span class="line"></span><br><span class="line">[A-Z]                 大写字母</span><br><span class="line"></span><br><span class="line">[:digit:]              任意数字</span><br><span class="line"></span><br><span class="line">[:lower:]            任意小写字母</span><br><span class="line"></span><br><span class="line">[:upper:]           任意大写字母</span><br><span class="line"></span><br><span class="line">[:alpha:]            任意大小写字母</span><br><span class="line"></span><br><span class="line">[:alnum:]          任意数字或字母</span><br></pre></td></tr></table></figure>
+<p><strong>六、节点编号inode</strong></p>
+<p>Linux系统的文件数据都储存在块（block），此外还需有个地方来储存文件的元信息，比如文件权限、创建者、创建日期等。这种储存文件元信息的区域就叫做inode。</p>
+<p>节点编号也是宝贵的资源，查看指针节点占用情况：df -i</p>
+<p>每个节点编号占4字节</p>
+<p>直接指针：前12个指针为直接指针</p>
+<p>一级指针：可保存4096/4=1024个指针，可存储文件大小1024*4096=4MB</p>
+<p>二级指针：可存储文件大小1024<em>1024</em>4096=4GB</p>
+<p>三级指针：可存储文件大小1024<em>1024</em>1024*4096=4TB</p>
+<p>七、常用文件管理命令：</p>
+<ol>
+<li><p>ls 显示文件信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-a 包含隐藏文件</span><br><span class="line">-l 显示文件详细信息，可写为ll</span><br><span class="line">-s 从大到小排列</span><br><span class="line">-r 倒序排列</span><br><span class="line">-d 只显示目录自身属性</span><br><span class="line">-d */ 只显示当前目录下文件夹</span><br><span class="line">-m MODE: 创建目录时直接指定权限</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="2">
+<li><p>touch 创建文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-a 仅改变atime和ctime</span><br><span class="line">-m 仅改变mtime和ctime</span><br><span class="line">-t[[CC]YY]MMDDhhmm[.ss] 指定atime和mtime的时间戳</span><br><span class="line">-c 如果文件不存在，则不予创建</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="3">
+<li><p>mkdir 创建目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-p 存在于不报错，且可自动创建所需的各目录</span><br><span class="line">-v 显示过程</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>cp 复制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-a 复制全部信息，用于备份；可复制特殊文件如字符文件，块文件</span><br><span class="line">-i 覆盖前提示</span><br><span class="line">-r 递归复制</span><br><span class="line">-v 显示过程</span><br><span class="line">-u 只复制源比目标更新文件或目标不存在的文件</span><br><span class="line">–backup=numbered 目标存在，覆盖前先备份加数字后缀（建议加别名）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>mv 移动或重命名文件（mv只支持单个文件重命名，rename可批量改名）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-i 移动前提示</span><br><span class="line">-r 递归</span><br><span class="line">-v 显示过程</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>rm 删除</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-f 不去询问直接删除</span><br><span class="line">-i 删除前交互提示</span><br><span class="line">-r 递归</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+          
         
       
     </div>
@@ -1336,16 +1916,83 @@ group
       
         
           
-          Linux用户与组的管理命令，对于初学者来说很容易造成混淆，此外，这些命令之间有很多相重合的用法，即：拥有多种命令可实现相同的需求的情况。
-Linux用户与组的管理命令主要有useradd、usermod、userdel、groupadd、groupmod、groupdel、groupmems、gp
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/03/Linux用户与组管理命令的易混淆点和重合点/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>Linux用户与组的管理命令，对于初学者来说很容易造成混淆，此外，这些命令之间有很多相重合的用法，即：拥有多种命令可实现相同的需求的情况。</p>
+<p>Linux用户与组的管理命令主要有useradd、usermod、userdel、groupadd、groupmod、groupdel、groupmems、gpasswd、passwd、newgrp等等，其中每条命令也都有很多的可选项，对于初学者来说很容易造成混淆；此外，这些命令之间有很多相重合的用法，即：拥有多种命令可实现相同的需求的情况。</p>
+<p>接下来，我们来把这些混淆和重合点进行下梳理：</p>
+<p><strong>一、易混淆点：关于GID的改变</strong></p>
+<p><strong>命令1</strong>：usermod -g       改变一个用户的gid</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@CentOS6 ~]#id wangx</span><br><span class="line">uid=1666(wangx) gid=1235(wangx) groups=1235(wangx)</span><br><span class="line"></span><br><span class="line">[root@CentOS6 ~]#usermod -g 4322 wangx</span><br><span class="line">[root@CentOS6 ~]#id wangx</span><br><span class="line">uid=1666(wangx) gid=4322(mage) groups=4322(mage)</span><br></pre></td></tr></table></figure>
+<p>此条命令改变了用户的主组，需注意的是新改变的主组需已存在</p>
+<p><strong>命令2：</strong>newgrp          临时改变一个用户的gid</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[wangx@CentOS6 ~]$id</span><br><span class="line">uid=1666(wangx) gid=1235(wangx) groups=1235(wangx),4322(mage) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023</span><br><span class="line"></span><br><span class="line">[wangx@CentOS6 ~]$newgrp mage</span><br><span class="line"></span><br><span class="line">[wangx@CentOS6 ~]$id</span><br><span class="line">uid=1666(wangx) gid=4322(mage) groups=4322(mage),1235(wangx) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023</span><br><span class="line"></span><br><span class="line">[wangx@CentOS6 ~]$id wangx</span><br><span class="line">uid=1666(wangx) gid=1235(wangx) groups=1235(wangx),4322(mage)</span><br></pre></td></tr></table></figure>
+<p>此条命令作用为切换当前登录用户的主组，注意是临时切换，重新登录后失效，使用id  user命令看到的还是切换前的主组</p>
+<p><strong>命令3：</strong>groupmod -g     改变组的gid</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>此条命令仅仅是改变了组的ID，组成员还是原来的组成员，没有变化。</p>
+<p><strong>二、增、删辅助组的多种方式</strong></p>
+<p>1.为一个用户添加一个辅助组有三种方式：（这里暂以添加一个辅助组为例，暂不考虑添加多个辅助组的情况）</p>
+<p><strong>命令1：</strong>groupmems -a user -g group         指定用户user加入组group</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@CentOS6 ~]#id wangx</span><br><span class="line">uid=1666(wangx) gid=1235(wangx) groups=1235(wangx)</span><br><span class="line"></span><br><span class="line">[root@CentOS6 ~]#groupmems -a wangx -g mage</span><br><span class="line"></span><br><span class="line">[root@CentOS6 ~]#id wangx</span><br><span class="line">uid=1666(wangx) gid=1235(wangx) groups=1235(wangx),4322(mage)</span><br></pre></td></tr></table></figure>
+<p><strong>命令2：</strong>gpasswd -a user group          将用户user添加至指定组group中:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@CentOS6 ~]#gpasswd -a wangx mage</span><br><span class="line">Adding user wangx to group mage</span><br><span class="line"></span><br><span class="line">[root@CentOS6 ~]#id wangx</span><br><span class="line">uid=1666(wangx) gid=1235(wangx) groups=1235(wangx),4322(mage)</span><br></pre></td></tr></table></figure>
+<p><strong>命令3：</strong>usermod -G       为user用户添加辅助组，注意：新的辅助组覆盖原辅助组:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@CentOS6 ~]#id wangx</span><br><span class="line">uid=1666(wangx) gid=1235(wangx) groups=1235(wangx)</span><br><span class="line"></span><br><span class="line">[root@CentOS6 ~]#usermod -G mage wangx</span><br><span class="line"></span><br><span class="line">[root@CentOS6 ~]#id wangx</span><br><span class="line">uid=1666(wangx) gid=1235(wangx) groups=1235(wangx),4322(mage)</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>从一个辅助组中删除一个用户也有三种方式:</li>
+</ol>
+<p><strong>命令1：</strong>groupmems  -d  user  -g  group   从group组中删除用户user</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@CentOS6 ~]#id wangx</span><br><span class="line">uid=1666(wangx) gid=1235(wangx) groups=1235(wangx),4322(mage)</span><br><span class="line"></span><br><span class="line">[root@CentOS6 ~]#groupmems -d wangx -g mage</span><br><span class="line"></span><br><span class="line">[root@CentOS6 ~]#id wangx</span><br><span class="line">uid=1666(wangx) gid=1235(wangx) groups=1235(wangx)</span><br></pre></td></tr></table></figure>
+<p><strong>命令2：</strong>gpasswd      -d   user  group    将用户user从group组中删除</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@CentOS6 ~]#id wangx</span><br><span class="line">uid=1666(wangx) gid=1235(wangx) groups=1235(wangx),4322(mage)</span><br><span class="line"></span><br><span class="line">[root@CentOS6 ~]#gpasswd -d wangx mage</span><br><span class="line">Removing user wangx from group mage</span><br><span class="line"></span><br><span class="line">[root@CentOS6 ~]#id wangx</span><br><span class="line">uid=1666(wangx) gid=1235(wangx) groups=1235(wangx)</span><br></pre></td></tr></table></figure>
+<p><strong>命令3：</strong>usermod -G   “”   user</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">usermod -G user user       两种方法均可删除所有辅助组</span><br><span class="line">[root@CentOS6 ~]#id wangx</span><br><span class="line">uid=1666(wangx) gid=1235(wangx) groups=1235(wangx),4322(mage)</span><br><span class="line"></span><br><span class="line">[root@CentOS6 ~]#usermod -G wangx wangx</span><br><span class="line">[root@CentOS6 ~]#id wangx</span><br><span class="line">uid=1666(wangx) gid=1235(wangx) groups=1235(wangx)</span><br></pre></td></tr></table></figure>
+<p><strong>三、其他的一些拥有多种命令可实现相同需求的情况：</strong></p>
+<ol>
+<li><p>修改一个用户的shell类型（2种方法）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">命令1：chsh             修改用户的shell</span><br><span class="line"></span><br><span class="line">命令2：usermod -s  新的默认shell</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="2">
+<li><p>修改一个用户的描述信息（2种方法）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">命令1：chfn              修改用户描述信息</span><br><span class="line"></span><br><span class="line">命令2：usermod -c  新的用户描述信息</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="3">
+<li><p>修改一个账号下次登录自动修改密码（2种方法）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">命令1：chage -l wang    使wang账户口令立马失效，下次登录自动修改</span><br><span class="line"></span><br><span class="line">命令2：passwd -e wang 使wang账户口令立马失效，下次登录自动修改</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="4">
+<li><p>给一个账号加锁（2种方法）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">命令1：usermod -L</span><br><span class="line"></span><br><span class="line">命令2：passwd -l</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="5">
+<li><p>给一个账号解锁（2种方法）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">命令1：usermod -U</span><br><span class="line"></span><br><span class="line">命令2：passwd -u</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>给一个账号指定最短使用期限（mindays）（2种方法）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">命令1：passwd -n</span><br><span class="line"></span><br><span class="line">命令2：chage -m</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="7">
+<li><p>最大使用期限（maxdays）（2种方法）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">命令1：passwd -x</span><br><span class="line"></span><br><span class="line">命令2：chage -M</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="8">
+<li><p>设置一个账号提前多少天开始警告（warndays）（2种方法）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">命令1：passwd -w</span><br><span class="line"></span><br><span class="line">命令2：chage -W</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置一个账号非活动期限（inactivedays）（3种方法）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">命令1：passwd -i</span><br><span class="line"></span><br><span class="line">命令2：usermod -f</span><br><span class="line"></span><br><span class="line">命令3：chage -I</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置一个账号的有效期（expiredate）（2种方法）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">命令1：usermod -e YYYY-MM-DD    设置用户账号过期时间</span><br><span class="line"></span><br><span class="line">命令2：chage -E YYYY-MM-DD 设置用户账号过期时间</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+          
         
       
     </div>
@@ -1485,19 +2132,102 @@ Linux用户与组的管理命令主要有useradd、usermod、userdel、groupadd�
       
         
           
-          在linux系统上，用户管理是基于用户名和密码的方式进行资源的分配，了解和掌握用户与组的管理是从事运维工作所必须具备的能力，也是将来从事运维行业的重要工作之一。
-Linux的安全模型 安全3A
-​    Linux通过三个机制来保证用户的安全：
-​        Authentication：认证
+            <p>在linux系统上，用户管理是基于用户名和密码的方式进行资源的分配，了解和掌握用户与组的管理是从事运维工作所必须具备的能力，也是将来从事运维行业的重要工作之一。</p>
+<h2 id="Linux的安全模型"><a href="#Linux的安全模型" class="headerlink" title="Linux的安全模型"></a>Linux的安全模型</h2><p> <strong>安全3A</strong></p>
+<p>​    Linux通过三个机制来保证用户的安全：</p>
+<p>​        Authentication：认证</p>
+<p>​        Authorization：授权</p>
+<p>​        Accouting|Audition：审计</p>
+<p><strong>安全上下文</strong></p>
+<p>​    Linux 安全上下文<br>        运行中的程序：进程 (process)<br>        以进程发起者的身份运行：<br>            root: /bin/cat<br>            mage: /bin/cat<br>    进程所能够访问资源的权限取决于进程的运行者的身份</p>
+<h2 id="User-and-Grooup"><a href="#User-and-Grooup" class="headerlink" title="User and Grooup"></a>User and Grooup</h2><h3 id="用户user"><a href="#用户user" class="headerlink" title="用户user"></a>用户user</h3><p><strong>令牌:</strong> token,identity<br><strong>Linux 用户：</strong>Username/UID<br><strong>管理员：</strong>root, 0<br><strong>普通用户：</strong>1-65535<br>    系统用户：1-499, 1-999  （CentOS7） ）<br>        对守护进程获取资源进行权限分配<br><strong>登录用户:</strong>500+, 1000+ （CentOS7） ）<br>    交互式登录</p>
+<h3 id="组-group："><a href="#组-group：" class="headerlink" title="组 group："></a>组 group：</h3><p><strong>Linux组：</strong>Groupname/GID</p>
+<p><strong>管理员组：</strong>root，GID=0</p>
+<p><strong>普通组：</strong></p>
+<p>​    系统组：1-499,1-999（centos7）</p>
+<p>​    普通组：500+，1000+（centos7）</p>
+<p>在创建用户不指定组的情况下，默认创建一个与该用户名相同的组作为该用户的主组</p>
+<h3 id="组的类别："><a href="#组的类别：" class="headerlink" title="组的类别："></a>组的类别：</h3><p><strong>用户的主要组</strong>(primary group)<br>     用户必须属于一个且只有一个主组<br>    组名同用户名，且仅包含一个用户，私有组<br><strong>用户的附加组</strong>(supplementary group)<br>    一个用户可以属于零个或多个辅助组</p>
+<h3 id="用户和组的配置文件"><a href="#用户和组的配置文件" class="headerlink" title="用户和组的配置文件"></a>用户和组的配置文件</h3><ul>
+<li>/etc/passwd：        存用户及其属性信息( 名称、UID 、主组ID 等</li>
+<li>/etc/shadow：       存放用户密码及其相关信息</li>
+<li>/etc/group：          存放组及属性信息</li>
+<li>/etc/gshadow：     存放组密码及其相关信息</li>
+<li>/etc/default/useradd：新建账户模板信息</li>
+</ul>
+<p><strong>/etc/passwd</strong></p>
+<p><img src="passwd.png" alt="passwd"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">name：password:UID:GID:GECEO:directory:shell</span><br><span class="line">1. login name ：	登录用名（lpx） ）</span><br><span class="line">2. passwd ：	密码 (x)</span><br><span class="line">3. UID号 ：	用户身份编号 (1000)</span><br><span class="line">4. GID ：	登录默认所在组编号 (1000)</span><br><span class="line">5. GECOS ：	用户全名或注释</span><br><span class="line">6. home directory录 ：	用户主目录 (/home/wang)</span><br><span class="line">7. shell ：	用户默认使用shell (/bin/bash)</span><br></pre></td></tr></table></figure>
+<p>​    </p>
+<p><strong>/etc/shadow</strong></p>
+<p><img src="shadow.png" alt="shadow"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. 登录用名</span><br><span class="line">2. 用户密码: 一般用sha512 加密</span><br><span class="line">3. 从 从1970 年1 月1 日起到密码最近一次被更改的时间</span><br><span class="line">4. 密码再过几天可以被变更（0 表示随时可被变更）</span><br><span class="line">5. 密码再过几天必须被变更（99999 表示永不过期）</span><br><span class="line">6. 密码过期前几天系统提醒用户（默认为一周）</span><br><span class="line">7. 密码过期几天后帐号会被锁定</span><br><span class="line">8. 从1970 年1 月1 日算起，多少天后帐号失效</span><br></pre></td></tr></table></figure>
+<p><img src="密码期限.png" alt="密码期限"></p>
+<p><strong>/etc/group</strong></p>
+<p><img src="group.png" alt="group"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. group_name:password:GID:user_list</span><br><span class="line">2. group_name 群组名称：就是群组名称</span><br><span class="line">3. password 群组密码：通常不需要设定，密码是被记录在</span><br><span class="line">	/etc/gshadow</span><br><span class="line">4. GID 群ID：就是群组的 ID</span><br><span class="line">5. user_list 以当前组为附加组的用户列表(分隔符为逗号)</span><br></pre></td></tr></table></figure>
+<p><strong>/etc/gshadow</strong></p>
+<p><img src="gshadow.png" alt="gshadow"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. group_name:encrypted_password:administrators:members</span><br><span class="line">2. group_name:群组名称：就是群组名称</span><br><span class="line">3. encrypted_password:群组密码：</span><br><span class="line">4. administrators:组管理员列表：组管理员的列表，更改组密码和成员</span><br><span class="line">5. members :以当前组为附加组的用户列表：(分隔符为逗号)</span><br></pre></td></tr></table></figure>
+<p><strong>/etc/default/useradd</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. useradd defaults file       创建用户默认文件</span><br><span class="line">2. GROUP=100           创建用户无指定组时默认所属的组users</span><br><span class="line">3. HOME=/home            创建用户默认家目录路径</span><br><span class="line">4. INACTIVE=-1           创建用户时默认没有宽限时间</span><br><span class="line">5. EXPIRE=               创建用户时默认有效期</span><br><span class="line">6. SHELL=/bin/bash       创建用户时默认shell类型</span><br><span class="line">7. SKEL=/etc/skel        创建用户时家目录模板</span><br><span class="line">8. CREATE_MAIL_SPOOL=yes    创建用户时默认创建邮箱</span><br></pre></td></tr></table></figure>
+<h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><p>​    vipw         等同于vi /etc/passwd</p>
+<p>​    vigr           等同于vi /etc/group</p>
+<p>​    pwck        检查passwd文件格式错误</p>
+<p>​    grpck        检查group文件格式错误</p>
+<h2 id="用户与组的管理命令"><a href="#用户与组的管理命令" class="headerlink" title="用户与组的管理命令"></a>用户与组的管理命令</h2><h3 id="用户管理命令及常用选项"><a href="#用户管理命令及常用选项" class="headerlink" title="用户管理命令及常用选项"></a>用户管理命令及常用选项</h3><ol>
+<li><p><strong>useradd:</strong> 添加登录账号          </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-u    指定uid（生产环境中多台服务器保证程序是同一UID）</span><br><span class="line">-o    不检查UID的唯一性，需配合-u使用（不建议UID一样）</span><br><span class="line">-g    创建用户时指定主组</span><br><span class="line">-c 	  创建用户时添加描述</span><br><span class="line">-d    创建用户时指定家目录路径，二层目录（生产环境中创建给服务用的账户可能会用到）</span><br><span class="line">-s    创建用户时指定shell类型/etc/shells</span><br><span class="line">-r    创建系统用户（默认不创建家目录）</span><br><span class="line">-m    强行创建家目录，用于系统用户，配合-r使用（生产环境中为服务生成系统用户）</span><br><span class="line">-M    强行不创建家目录，用于普通用户</span><br><span class="line">-G    创建用户时加入到多个辅助组里，多个辅助组用“，”分开</span><br><span class="line">-N    创建一个用户名和主组名不同的用户，默认users作为主组</span><br><span class="line">-p    创建用户添加密码（不建议此种方式添加口令，口令会在shadow文件中明文）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>usermod：</strong> 修改登录账号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-u    修改UID</span><br><span class="line">-g    修改GID（组需存在）</span><br><span class="line">-G    修改辅助组（会将原来的辅助组覆盖），如果要保留原辅助组配合-a使用</span><br><span class="line">-s    新的默认shell</span><br><span class="line">-c    新的注释信息</span><br><span class="line">-d    新家目录不会自动创建；若要创建新家目录并移动原家数据，同时使用-m选项（-m -d有顺序）</span><br><span class="line">-l    新的用户名</span><br><span class="line">-L    用户加锁</span><br><span class="line">-U    用户解锁（centos6以后禁止此方式解锁）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>userdel：</strong> 删除登录账号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-r     删除用户的所有文件，家目录及邮箱（工作中不建议用，建议保留数据）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>id：</strong> 可以显示真实有效的UID和GID</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-u:  显示UID</span><br><span class="line">-g:  显示GID</span><br><span class="line">-G:  显示用户所属的组的ID</span><br><span class="line">-n:  显示名称，需配合ugG 使用</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>su:</strong>  切换用户或以其他用户身份执行命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">示例：</span><br><span class="line">	su UserName ：非登录式切换，即不会读取目标用户的配置文件，不改变当前工作目录</span><br><span class="line">	su - UserName ：登录式切换，会读取目标用户的配置文件，切换至家目录，完全切换</span><br><span class="line">	root su 至其他用户无须密码；非root 用户切换时需要密码换个身份执行命令：</span><br><span class="line">su [-] UserName -c &apos;COMMAND&apos;</span><br><span class="line"> 	选项：-l --login</span><br><span class="line">su -l UserName 于 相当于 su - UserName</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>passwd:</strong>  修改自己的密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">passwd [OPTIONS] UserName:  修改指定用户的密码，仅root</span><br><span class="line">-l: 	锁定指定用户</span><br><span class="line">-u: 	解锁指定用户</span><br><span class="line">-e: 	强制用户下次登录修改密码</span><br><span class="line">-n mindays: 	 指定最短使用期限</span><br><span class="line">-x maxdays ：	最大使用期限</span><br><span class="line">-w warndays ：	提前多少天开始警告</span><br><span class="line">-i inactivedays ：	非活动期限</span><br><span class="line">--stdin ：	从标准输入接收用户密码</span><br><span class="line">如：	echo &quot; PASSWORD &quot; | passwd --stdin USERNAME</span><br></pre></td></tr></table></figure>
+<p><strong>newusers passwd：</strong>  格式文件 批量创建用户<br><strong>chpasswd：</strong>  批量修改用户口令</p>
+</li>
+<li><p><strong>chage：</strong>修改用户密码策略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-d LAST_DAY</span><br><span class="line">-E --expiredate EXPIRE_DATE</span><br><span class="line">-I --inactive INACTIVE</span><br><span class="line">-m --mindays MIN_DAYS</span><br><span class="line">-M --maxdays MAX_DAYS</span><br><span class="line">-W --warndays WARN_DAYS</span><br><span class="line">–l 显示</span><br><span class="line">示例：</span><br><span class="line">chage -d 0 tom  下一次登录强制重设密码</span><br><span class="line">chage -m 0 –M 42 –W 14 –I 7 tom</span><br><span class="line">chage -E 2016-09-10 tom</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>chfn:</strong>  用来改变<a href="http://man.linuxde.net/finger" target="_blank" rel="noopener">finger</a>命令显示的信息 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-f&lt;真实姓名&gt;或--full-name&lt;真实姓名&gt;：设置真实姓名；</span><br><span class="line">-h&lt;家中电话&gt;或--home-phone&lt;家中电话&gt;：设置家中的电话号码；</span><br><span class="line">-o&lt;办公地址&gt;或--office&lt;办公地址&gt;：设置办公室的地址；</span><br><span class="line">-p&lt;办公电话&gt;或--office-phone&lt;办公电话&gt;：设置办公室的电话号码；</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>chsh:</strong>  修改指定shell</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-s&lt;shell 名称&gt;或--shell&lt;shell 名称&gt;：更改系统预设的shell环境。；</span><br><span class="line">-l或--list-shells：列出目前系统可用的shell清单；</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>finger:</strong>  用于查找并显示用户信息。包括本地与远端主机的用户皆可 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-l：列出该用户的帐号名称，真实姓名，用户专属目录，登入所用的Shell，登入时间，转信地址，电子邮件状，还有计划文件和方案文件内容；</span><br><span class="line"></span><br><span class="line">-m：排除查找用户的真实姓名；</span><br><span class="line"></span><br><span class="line">-s：列出该用户的帐号名称，真实姓名，登入终端机，闲置时间，登入时间以及地址和电话；</span><br><span class="line"></span><br><span class="line">-p：列出该用户的帐号名称，真实姓名，用户专属目录，登入所用的Shell，登入时间，转信地址，电子邮件状，但不显示该用户的计划文件和方案文件内容。</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="组帐号维护命令及常用选项"><a href="#组帐号维护命令及常用选项" class="headerlink" title="组帐号维护命令及常用选项"></a>组帐号维护命令及常用选项</h3><ol>
+<li><p><strong>groupadd：</strong> 添加组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-g     指明GID号创建组</span><br><span class="line">-r      创建系统组group（centos6：ID&lt;500、centos7：ID&lt;1000）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>groupmod：</strong> 修改组信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-n     新的组名</span><br><span class="line">-g     新的GID</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>groupdel：</strong> 删除组（前提没有用户以此组为主组）</p>
+</li>
+</ol>
+<ol start="4">
+<li><p><strong>groupmems：</strong> 查看指定组的成员</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-g     更改为指定组（只有root）</span><br><span class="line">-a     指定用户加入组</span><br><span class="line">-d     从组中删除用户</span><br><span class="line">-p     从组中清除所有成员</span><br><span class="line">-l      显示组成员列表（读取的/etc/group文件中对应组的最后一个字段的全部内容）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>gpasswd：</strong>   给组添加口令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-a user     将user添加至指定组中</span><br><span class="line">-d user     从指定组中移除用户user</span><br><span class="line">-A user1，user2…  设置有管理权限的用户列表（设置组管理员）</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/03/Linux用户与组管理详解/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
@@ -1637,18 +2367,62 @@ Linux的安全模型 安全3A
       
         
           
-          所谓的通配是指：显示以指定条件的文件，英文名为glob。通配符是一种特殊语句，用来模糊搜索文件。当查找文件夹时，可以使用它来代替一个或多个真正字符它使得文件管理更加快速，便捷，大大提升了工作效率。
-常用的通配符有  * 、? 、[]  等（可通过man 7 glob的帮助文档来查看所有通配符）
+            <p>所谓的通配是指：显示以指定条件的文件，英文名为glob。通配符是一种特殊语句，用来模糊搜索文件。当查找文件夹时，可以使用它来代替一个或多个真正字符它使得文件管理更加快速，便捷，大大提升了工作效率。</p>
+<p>常用的通配符有  * 、? 、[]  等（可通过man 7 glob的帮助文档来查看所有通配符）</p>
+<ol>
+<li><p>表示任意长度的任意字符：</p>
+<p>例：ls -d /etc/a*     显示/etc目录下所有以a开头的文件与目录：</p>
+</li>
+</ol>
+<p><img src="星号.png" alt="星号"></p>
+<ol start="2">
+<li><p>? 表示任意单个字符：</p>
+<p>例：ls  a?b  显示当前目录下所有以a开头中间有一个字符b结尾的文件，a10b中间夹2个字符，因此不显示：</p>
+</li>
+</ol>
+<p><img src="问号.png" alt="问号"></p>
+<ol start="3">
+<li><p>[] 匹配指定范围内任意单个字符：</p>
+<p>例：ls -d /etc/[mn]*  显示/etc目录下所有以m开头或者n开头的文件和目录：</p>
+</li>
+</ol>
+<p><img src="3-2.png" alt="3"></p>
+<p>​    [a-Z]：表示任意一个单个字母：</p>
+<p>​    例：ls -d*[a-Z]  显示目录下所有以字母开头的文件和目录</p>
+<p><img src="字母-2.png" alt="字母"></p>
+<p>​    [0-9]：表示任意单个数字：</p>
+<pre><code>例：ls -d f[0-9]显示当前目录下所有以f开头后跟任意一个数字的文件和目录，f16因含两个数字，则不予显示：
+</code></pre><p><img src="数字.png" alt="数字"></p>
+<ol start="4">
+<li><p>[^]匹配除指定范围以外的任意单个字符：</p>
+<p>例：ls  -d   [^a]*   显示当前目录下所有不是a开头的文件和目录：</p>
+</li>
+</ol>
+<p><img src="除.png" alt="除"></p>
+<p>​    注意：对字符集或数字集取反时，托字符^加在括号内；如：<strong>[^0-9]</strong></p>
+<ol start="5">
+<li><p>常用的字符集表示方法：</p>
+<p>[:alpha:]表示所有的字母（不区分大小写）</p>
+<p>例：ls -d *[[:alpha:]] 显示当前目录下所有以字母结尾（不区分大小写）的文件和目录</p>
+</li>
+</ol>
+<p><img src="字母字符集.png" alt="字母字符集"></p>
+<p>​    [:digit:]表示任意单个数字，效果同[0-9]</p>
+<p>​    例：ls f[[:digit:]] 显示当前目录下所有f开头，单个数字结尾的文件，值得注意的是：</p>
+<p>​    [:digit:]只代表单个数，f16文件因为f后跟两个数字，则不予显示。</p>
+<p><img src="数字字符集.png" alt="数字字符集"></p>
+<p>​    [:lower:]表示任意单个小写字母</p>
+<p>​    例：ls -d [[:lower:]]*[[:lower:]]</p>
+<p>​    显示所有当前目录下以小字字母开头且以小写字母结尾的文件和目录：</p>
+<p><img src="小写字母字符集.png" alt="小写字母字符集"></p>
+<p>​    [:upper:]表示任意单个大写字母</p>
+<p>​    例：ls -d a*[[:upper:]] 显示当前目录下 所有以a开头并以一个大写字母结尾的文件和目录：</p>
+<p><img src="大写字母字符集.png" alt="大写字母字符集"></p>
+<p>​    [:alnum:]表示任意单个字母或数字</p>
+<p>​    例：ls -d [[:alnum:]]显示当前目录下 所有以字母或数字结尾的文件和目录：</p>
+<p><img src="T2H17KYXSPA7ORCX5.png" alt="T2}H17KY`(`(X%SPA7ORCX5"></p>
 
-表
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/02/带你认识Linux中的通配符/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
@@ -1788,15 +2562,44 @@ Linux的安全模型 安全3A
       
         
           
-          Linux起源：1991 年的10 月5 日，Torvalds 在comp.os.minix新闻组上发布消息，正式向外宣布他自行编写的完全自由免费的内核诞生（Freeminix-likekernel sources for 386-AT ）———FREAX英文 含义是怪诞的、怪物、 异想天开类Uni
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/01/linux入门知识/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h3 id="Linux起源："><a href="#Linux起源：" class="headerlink" title="Linux起源："></a>Linux起源：</h3><p>1991 年的10 月5 日，Torvalds 在comp.os.minix<br>新闻组上发布消息，正式向外宣布他自行编写的<br>完全自由免费的内核诞生（Freeminix-like<br>kernel sources for 386-AT ）———FREAX<br>英文 含义是怪诞的、怪物、 异想天开<br>类Unix 的内核，在GPL 下发布<br>官网：<a href="https://blog.csdn.net/lv8549510/article/details/www.kernel.org" target="_blank" rel="noopener">www.kernel.org</a><br>Linux 操作系统 ：</p>
+<blockquote>
+<p>完整的类UNIX 操作系统<br>Linux 内核+ GNU 工具<br>如：CentOS,Ubuntu,Android</p>
+</blockquote>
+<h3 id="Linux主流发行版"><a href="#Linux主流发行版" class="headerlink" title="Linux主流发行版"></a>Linux主流发行版</h3><p>linux有三大主流源头发行版，分别为</p>
+<p>slackware: 由Novell公司发布维护</p>
+<blockquote>
+<p>SUSE Linux Enterprise Server (SLES) 企业版<br>OpenSuse 个人版版</p>
+</blockquote>
+<p>debian: 由Debian维护社区发布</p>
+<blockquote>
+<p>Ubuntu 以桌面应用为主的开源GNU/Linux操作系统<br>Linux Mint:为家庭用户和企业提供一个不花钱的，易用的，并且漂亮的桌面系统</p>
+</blockquote>
+<p>redhat：由Redhat发布</p>
+<blockquote>
+<p>RHEL: RedHat Enterprise Linux 企业版 每18个月发行一个新版本<br>CentOS ：兼容RHEL的格式 企业版<br>中标麒麟：中标软件<br>Fedora ：个人版 每6个月发行一个新版本</p>
+</blockquote>
+<p>ArchLinux ：轻量简洁<br>Gentoo ：极致性能， 不提供传统意义的安装程序<br>更多详情可参考 Linux 分支参考网站：<a href="http://futurist.se/gldt/" target="_blank" rel="noopener">http://futurist.se/gldt/</a></p>
+<h3 id="linux内核版本"><a href="#linux内核版本" class="headerlink" title="linux内核版本"></a>linux内核版本</h3><p><img src="linux-kernel.png" alt="linux内核版本"></p>
+<h3 id="linux哲学思想"><a href="#linux哲学思想" class="headerlink" title="linux哲学思想"></a>linux哲学思想</h3><ul>
+<li><p>一切都是一个文件（包括硬件）：</p>
+<p>linux系统是由各种类型不同的文件组成，但是操作文件的方法却是相同的</p>
+</li>
+<li><p>小型，单一用途的程序：</p>
+<p>程序和可执行文件不要太复杂，这样才能保证了linux内核的高效运行</p>
+</li>
+<li><p>链接程序，共同完成复杂的任务：</p>
+<p>复杂的功能可以通过连接多个用途单一的程序组合实现，在保证简单程序的高效性的同事，复杂程序也必然高效</p>
+</li>
+<li><p>避免令人困惑的用户界面：</p>
+<p>linux是开源系统的，无论什么问题都可以通过简洁的命令行实现 排错，修改系统的配置，一切都是简洁明了为基础。<br>而图形化用户界面如果遇到问题，无法知道错误的原因，只能通过重启来解决问题，再不行就重装系统</p>
+</li>
+<li><p>配置数据存储在文本中：</p>
+<p>linux所有的配置文件都存放在文本配置文件当中，无论什么如何操作系统都只需修改其配置文件即可</p>
+</li>
+</ul>
+
+          
         
       
     </div>
@@ -1957,7 +2760,7 @@ Linux的安全模型 安全3A
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
 
 
 
@@ -2004,8 +2807,6 @@ Linux的安全模型 安全3A
   
 
 
-  
-
 
 
 
@@ -2046,11 +2847,6 @@ Linux的安全模型 安全3A
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
 
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
-  
-
 
   
 
@@ -2063,6 +2859,13 @@ Linux的安全模型 安全3A
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
 
   
 
@@ -2109,19 +2912,6 @@ Linux的安全模型 安全3A
   
 
 
-
-
-  
-  
-  
-  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
-
-  
-  
-  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
-  
-
-  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 
