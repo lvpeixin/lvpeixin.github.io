@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="sed,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="强大的处理文本的工具sed我们知道，sed被称为Linux中被称为文本处理三剑客之一，相比于grep命令匹配内容的功能，sed则能够做到对匹配到的文本内容对其进行编辑。 Linux文本处理三剑客简介：grep：文本过滤工具 sed：文本编辑工具 awk：Linux上的实现gawk，文本报告生成器 sed用法：sed[option]…’script’ inputfile… 其中‘script’可表示">
+<meta name="keywords" content="sed">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文本三剑客之sed">
+<meta property="og:url" content="http://yoursite.com/2018/04/15/文本三剑客之sed/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="强大的处理文本的工具sed我们知道，sed被称为Linux中被称为文本处理三剑客之一，相比于grep命令匹配内容的功能，sed则能够做到对匹配到的文本内容对其进行编辑。 Linux文本处理三剑客简介：grep：文本过滤工具 sed：文本编辑工具 awk：Linux上的实现gawk，文本报告生成器 sed用法：sed[option]…’script’ inputfile… 其中‘script’可表示">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/04/15/文本三剑客之sed/创建文件test.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/15/文本三剑客之sed/不加-n.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/15/文本三剑客之sed/加-n.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/15/文本三剑客之sed/e-1.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/15/文本三剑客之sed/f-引用文件.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/15/文本三剑客之sed/i-a.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/15/文本三剑客之sed/i-d.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/15/文本三剑客之sed/数字定界.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/15/文本三剑客之sed/正则定界-1531727657734.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/15/文本三剑客之sed/正则数字混合定界-1531727657736.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/15/文本三剑客之sed/a多行-1531727657738.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/15/文本三剑客之sed/i上方插入-1531727657747.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/15/文本三剑客之sed/c替换匹配-1531727657745.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/15/文本三剑客之sed/w-将匹配内容输出到指定文件-1531727657751.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/15/文本三剑客之sed/r-跟文件写入匹配行-1531727657786.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/15/文本三剑客之sed/！除了-1531727657788.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/15/文本三剑客之sed/正则取IP-1531727657797.png">
+<meta property="og:updated_time" content="2018-07-17T02:40:03.760Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="文本三剑客之sed">
+<meta name="twitter:description" content="强大的处理文本的工具sed我们知道，sed被称为Linux中被称为文本处理三剑客之一，相比于grep命令匹配内容的功能，sed则能够做到对匹配到的文本内容对其进行编辑。 Linux文本处理三剑客简介：grep：文本过滤工具 sed：文本编辑工具 awk：Linux上的实现gawk，文本报告生成器 sed用法：sed[option]…’script’ inputfile… 其中‘script’可表示">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/15/文本三剑客之sed/创建文件test.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/15/文本三剑客之sed/">
+
+
+
+
+
+  <title>文本三剑客之sed | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/15/文本三剑客之sed/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">文本三剑客之sed</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-15T14:10:38+08:00">
+                2018-04-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/文本三剑客/" itemprop="url" rel="index">
+                    <span itemprop="name">文本三剑客</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="强大的处理文本的工具sed"><a href="#强大的处理文本的工具sed" class="headerlink" title="强大的处理文本的工具sed"></a><strong>强大的处理文本的工具sed</strong></h1><p>我们知道，sed被称为Linux中被称为文本处理三剑客之一，相比于grep命令匹配内容的功能，sed则能够做到对匹配到的文本内容对其进行编辑。</p>
+<h3 id="Linux文本处理三剑客简介："><a href="#Linux文本处理三剑客简介：" class="headerlink" title="Linux文本处理三剑客简介："></a>Linux文本处理三剑客简介：</h3><p>grep：文本过滤工具</p>
+<p>sed：文本编辑工具</p>
+<p>awk：Linux上的实现gawk，文本报告生成器</p>
+<h3 id="sed用法："><a href="#sed用法：" class="headerlink" title="sed用法："></a>sed用法：</h3><p>sed[option]…’script’ inputfile…</p>
+<p>其中‘script’可表示为’地址定界+编辑命令’</p>
+<h3 id="option："><a href="#option：" class="headerlink" title="option："></a><strong>option：</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-n  取消默认打印内容到屏幕</span><br><span class="line">-e  多点编辑,表达且关系，与grep的-e不同，grep -e表达或关系</span><br><span class="line">-f  从指定文件中读取编辑脚本</span><br><span class="line">-r  支持使用扩展正则表达式</span><br><span class="line">-i.bak  原处编辑，并备份文件file.bak</span><br></pre></td></tr></table></figure>
+<h3 id="地址定界："><a href="#地址定界：" class="headerlink" title="地址定界："></a><strong>地址定界：</strong></h3><ol>
+<li><p><strong>不给地址：对全文进行处理</strong></p>
+</li>
+<li><p><strong>单地址：</strong></p>
+<p>#：指定的行，$：最后一行</p>
+<p>/pattern/：支持正则表达式，被此模式所能匹配到的每一行</p>
+</li>
+<li><p><strong>地址范围：</strong></p>
+<p>#，#                        </p>
+<p>#，+#</p>
+<p>/pat1/,/pat2/          </p>
+<p>/pat1/, #                  </p>
+</li>
+<li><p><strong>~：步进</strong></p>
+<p>1~2  奇数行            </p>
+<p>2~2  偶数行 </p>
+</li>
+</ol>
+<h3 id="编辑命令："><a href="#编辑命令：" class="headerlink" title="编辑命令："></a><strong>编辑命令：</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">d       删除模式空间匹配的行</span><br><span class="line">p       打印当前模式空间内容，追加到默认输出之后</span><br><span class="line">a[\]text   在指定行后面追加文本</span><br><span class="line">	如要实现插入内容空格开头可先追加\再输入空格</span><br><span class="line">	支持使用\n实现多行追加</span><br><span class="line">i[\]text     在指定行前面插入文本</span><br><span class="line">c[\]text    替换指定行尾单行或多行文本</span><br><span class="line">w /path/somefile   保存模式匹配的行到指定文件</span><br><span class="line">r /path/somefile     读取指定文件的文本匹配的行后</span><br><span class="line">	注意：w，r后跟文件一定要加空格</span><br><span class="line">	可利用此命令定义别名到.bashrc</span><br><span class="line">=       为模式空间中的行打印行号</span><br><span class="line">！    取反，！需加载地址定界和编辑命令中间，如&apos;2！d&apos;</span><br><span class="line">s///： 查找替换，支持使用其他分隔符；s###；s@@@</span><br></pre></td></tr></table></figure>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a><strong>示例</strong></h3><p>以下我们创建文件test进行示例：</p>
+<p><img src="创建文件test.png" alt="创建文件test"></p>
+<p><strong>示例1：</strong>sed   ‘1,10p’ /data/test.sed</p>
+<p>sed命令默认将文本内容打印到屏幕，由于执行命令p，文本内容被打印了两遍</p>
+<p><img src="不加-n.png" alt="不加-n"></p>
+<p>sed  -n  ‘1,10p’ /data/test.sed</p>
+<p>sed   -n选项将取消默认输出到屏幕，仅显示p的执行结果</p>
+<p><img src="加-n.png" alt="加-n"></p>
+<p><strong>示例2：</strong>sed -n -e ‘1p’  -e  ‘3p’</p>
+<p>显示第一行和第三行，-e表示且的关系</p>
+<p><img src="e-1.png" alt="-e"></p>
+<p><strong>示例3：</strong>sed -n -f sedscripts.txt  /data/test.sed</p>
+<p>将2,5p写入sedscripts.txt文件，-f选项读取sedscripts.txt，并执行文件中内容</p>
+<p><img src="f-引用文件.png" alt="-f 引用文件"></p>
+<p><strong>示例4：</strong>sed -i  ‘1,10a#’   /data/test.sed</p>
+<p>表示在第1至第10行内容后插入#，-i选项直接编辑了test.sed的文本内容</p>
+<p><img src="i-a.png" alt="-i a"></p>
+<p>sed -i  ‘/#/d’  /data/test.sed</p>
+<p>表示将所有带#的行删掉并编辑文本</p>
+<p><img src="i-d.png" alt="-i d"></p>
+<p><strong>示例5：</strong>sed -n  ‘3p’     打印第3行内容</p>
+<p>sed  -n ‘2,5p’                打印第2至第五行</p>
+<p>sed  -n ‘2,+3p’              打印第2至第5行</p>
+<p>sed  -n  ‘1~2p’              打印奇数行</p>
+<p>sed  -n  ‘2~2p’              打印偶数行</p>
+<p><img src="数字定界.png" alt="数字定界"></p>
+<p>示例6：正则定界，表示ifconfig命令输出中开头eth2的行，至开头为lo的行</p>
+<p><img src="正则定界-1531727657734.png" alt="正则定界"></p>
+<p>示例7：正则数字混合定界，表示ifconfig命令输出中，eth2开头的行到第12行的内容</p>
+<p><img src="正则数字混合定界-1531727657736.png" alt="正则数字混合定界"></p>
+<p>示例8：多行插入，将aaa\nbbb插入到每行后面</p>
+<p><img src="a多行-1531727657738.png" alt="a多行"></p>
+<p>示例9：sed  ‘1,10i#’  /data/test.sed</p>
+<p>在每一行上面插入#</p>
+<p><img src="i上方插入-1531727657747.png" alt="i上方插入"></p>
+<p>示例10：sed  ‘1,5c’  /data/test.sed</p>
+<p>将test.sed文件中1到5行替换为一个#</p>
+<p><img src="c替换匹配-1531727657745.png" alt="c替换匹配"></p>
+<p>示例11：sed  ‘2,5w  f1’  /data/test.sed</p>
+<p>将test.sed文件中第2到第5行内容打印到f1文件中</p>
+<p><img src="w-将匹配内容输出到指定文件-1531727657751.png" alt="w 将匹配内容输出到指定文件"></p>
+<p>示例12：sed  ‘2,5r  f1’  /data/test.sed</p>
+<p>将f1的内容插入到第2至第5行</p>
+<p><img src="r-跟文件写入匹配行-1531727657786.png" alt="r 跟文件写入匹配行"></p>
+<p>示例13：sed  -n  ‘2,5!  p’  /data/test.sed</p>
+<p>打印除了第2至第5行的内容</p>
+<p><img src="！除了-1531727657788.png" alt="！除了"></p>
+<p>示例14：ifconfig |sed -n “2p”|sed -r “s@.<em>addr:(.</em>) Bcast.*@\1@”</p>
+<p>利用搜索替代，我们可以将任意段字符串定义成方法，然后表示出整行，再利用后向引用即可取出该字符串。</p>
+<p><img src="正则取IP-1531727657797.png" alt="正则取IP"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sed/" rel="tag"># sed</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/13/手把手系列（三）教你自制简单Linux系统/" rel="next" title="手把手系列（三）教你自制简单Linux系统">
+                <i class="fa fa-chevron-left"></i> 手把手系列（三）教你自制简单Linux系统
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/16/文本三剑客之sed的高级用法/" rel="prev" title="文本三剑客之sed的高级用法">
+                文本三剑客之sed的高级用法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#强大的处理文本的工具sed"><span class="nav-number">1.</span> <span class="nav-text">强大的处理文本的工具sed</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux文本处理三剑客简介："><span class="nav-number">1.0.1.</span> <span class="nav-text">Linux文本处理三剑客简介：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sed用法："><span class="nav-number">1.0.2.</span> <span class="nav-text">sed用法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#option："><span class="nav-number">1.0.3.</span> <span class="nav-text">option：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地址定界："><span class="nav-number">1.0.4.</span> <span class="nav-text">地址定界：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑命令："><span class="nav-number">1.0.5.</span> <span class="nav-text">编辑命令：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">1.0.6.</span> <span class="nav-text">示例</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

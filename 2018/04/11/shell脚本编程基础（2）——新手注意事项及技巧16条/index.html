@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="shell,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="总结了一些shell编程初学者常犯的错误、注意事项及技巧：1.判断变量是否加$：（1）赋值变量时不加$ （2）如果命令能识别变量就不加$,如果命令不能识别变量加$ 2.存放多行字符时”$name”变量外加双引号可保留换行格式  3.{}和（）中执行命令的区别： （）中使用的命令为一次性的，小括号中相当于在子进程中执行命令,小括号继承括号外变量，但不会影响括号外变量 注：小括号中所说的子进程与常规的">
+<meta name="keywords" content="shell">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shell脚本编程基础（2）——新手注意事项及技巧16条">
+<meta property="og:url" content="http://yoursite.com/2018/04/11/shell脚本编程基础（2）——新手注意事项及技巧16条/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="总结了一些shell编程初学者常犯的错误、注意事项及技巧：1.判断变量是否加$：（1）赋值变量时不加$ （2）如果命令能识别变量就不加$,如果命令不能识别变量加$ 2.存放多行字符时”$name”变量外加双引号可保留换行格式  3.{}和（）中执行命令的区别： （）中使用的命令为一次性的，小括号中相当于在子进程中执行命令,小括号继承括号外变量，但不会影响括号外变量 注：小括号中所说的子进程与常规的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/shell脚本编程基础（2）——新手注意事项及技巧16条/保留格式.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/shell脚本编程基础（2）——新手注意事项及技巧16条/小括号.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/shell脚本编程基础（2）——新手注意事项及技巧16条/小括号退出.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/shell脚本编程基础（2）——新手注意事项及技巧16条/花括号.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/shell脚本编程基础（2）——新手注意事项及技巧16条/花括号退出.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/shell脚本编程基础（2）——新手注意事项及技巧16条/大于10个参数1.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/shell脚本编程基础（2）——新手注意事项及技巧16条/大于10个参数2.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/shell脚本编程基础（2）——新手注意事项及技巧16条/大于10个参数3.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/shell脚本编程基础（2）——新手注意事项及技巧16条/大于10个参数4.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/shell脚本编程基础（2）——新手注意事项及技巧16条/星-1.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/shell脚本编程基础（2）——新手注意事项及技巧16条/圈.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/shell脚本编程基础（2）——新手注意事项及技巧16条/数学运算.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/shell脚本编程基础（2）——新手注意事项及技巧16条/条件测试空格.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/shell脚本编程基础（2）——新手注意事项及技巧16条/正则表达式.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/shell脚本编程基础（2）——新手注意事项及技巧16条/类似通配符.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/shell脚本编程基础（2）——新手注意事项及技巧16条/文件条件判断.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/shell脚本编程基础（2）——新手注意事项及技巧16条/测试为空1.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/shell脚本编程基础（2）——新手注意事项及技巧16条/测试为空2.png">
+<meta property="og:updated_time" content="2018-07-17T02:25:50.576Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="shell脚本编程基础（2）——新手注意事项及技巧16条">
+<meta name="twitter:description" content="总结了一些shell编程初学者常犯的错误、注意事项及技巧：1.判断变量是否加$：（1）赋值变量时不加$ （2）如果命令能识别变量就不加$,如果命令不能识别变量加$ 2.存放多行字符时”$name”变量外加双引号可保留换行格式  3.{}和（）中执行命令的区别： （）中使用的命令为一次性的，小括号中相当于在子进程中执行命令,小括号继承括号外变量，但不会影响括号外变量 注：小括号中所说的子进程与常规的">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/11/shell脚本编程基础（2）——新手注意事项及技巧16条/保留格式.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/11/shell脚本编程基础（2）——新手注意事项及技巧16条/">
+
+
+
+
+
+  <title>shell脚本编程基础（2）——新手注意事项及技巧16条 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/11/shell脚本编程基础（2）——新手注意事项及技巧16条/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">shell脚本编程基础（2）——新手注意事项及技巧16条</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-11T14:09:03+08:00">
+                2018-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/shell脚本/" itemprop="url" rel="index">
+                    <span itemprop="name">shell脚本</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="总结了一些shell编程初学者常犯的错误、注意事项及技巧："><a href="#总结了一些shell编程初学者常犯的错误、注意事项及技巧：" class="headerlink" title="总结了一些shell编程初学者常犯的错误、注意事项及技巧："></a><strong>总结了一些shell编程初学者常犯的错误、注意事项及技巧：</strong></h2><h3 id="1-判断变量是否加-："><a href="#1-判断变量是否加-：" class="headerlink" title="1.判断变量是否加$："></a>1.判断变量是否加$：</h3><p>（1）赋值变量时不加$</p>
+<p>（2）如果命令能识别变量就不加$,如果命令不能识别变量加$</p>
+<h3 id="2-存放多行字符时”-name”变量外加双引号可保留换行格式"><a href="#2-存放多行字符时”-name”变量外加双引号可保留换行格式" class="headerlink" title="2.存放多行字符时”$name”变量外加双引号可保留换行格式"></a>2.存放多行字符时”$name”变量外加双引号可保留换行格式</h3><p><img src="保留格式.png" alt="保留格式"></p>
+<p> 3.{}和（）中执行命令的区别：</p>
+<p>（）中使用的命令为一次性的，小括号中相当于在子进程中执行命令,小括号继承括号外变量，但不会影响括号外变量</p>
+<p>注：小括号中所说的子进程与常规的子进程不是一回事</p>
+<p>而{ }中使用命令是在当前shell环境中执行，不会不开启子进程，会影响当前shell环境</p>
+<p>例1：x=1;echo $$;(echo $$;echo $x;x=2);echo $x</p>
+<p><img src="小括号.png" alt="小括号"></p>
+<p>虽然括号内开启了一个子进程，但该子进程号和括号外进程号一致；此外括号外变量会影响括号内，但括号内变量更改不会影响括号外。</p>
+<p>例2：（echo $$;exit）</p>
+<p><img src="小括号退出.png" alt="小括号退出"></p>
+<p>执行此命令，显示当前所在进程号，exit退出（）内子进程</p>
+<p>{ }中使用命令是在当前shell环境中执行，不会不开启子进程，会影响当前shell环境</p>
+<p>例3：x=1;echo $$;{ echo $$;echo $x;x=2; };echo $x</p>
+<p><img src="花括号.png" alt="花括号"></p>
+<p>{}内命令相当于当前shell执行，因此括号外和括号内进程号一致，此外{}内变量影响了{}外的变量。</p>
+<p>例4：{  echo$$;exit;  }</p>
+<p><img src="花括号退出.png" alt="花括号退出"></p>
+<p>执行此命令，显示当前所在进程号，exit退出当前shell；</p>
+<p>因此编写脚本时，想要使用括号利用exit命令退出脚本，一定要使用{}，而不能使用（）</p>
+<h3 id="4-短路与-amp-amp-和短路或-嵌套连续命令时可使用大括号"><a href="#4-短路与-amp-amp-和短路或-嵌套连续命令时可使用大括号" class="headerlink" title="4.短路与&amp;&amp;和短路或||嵌套连续命令时可使用大括号"></a>4.短路与&amp;&amp;和短路或||嵌套连续命令时可使用大括号</h3><p>如&amp;&amp;{  cmd1 ；cmd2 ； }；||{  cmd1 ；cmd2 ；}；</p>
+<p>测试或命令结果为假时，后跟连续多条命令，必须需采用此种格式：</p>
+<p>false || { echo cmd1 ; echo cmd2 ; }</p>
+<p>表示测试或命令返回false时，执行cmd1，cmd2</p>
+<p>测试或命令结果为真时，后跟连续多条命令，可写为：</p>
+<p>true &amp;&amp; echo cmd1 &amp;&amp; echo cmd2</p>
+<p>也可写为：</p>
+<p>true &amp;&amp; { echo cmd1 ; echo cmd2 ; }</p>
+<p>当条件测试或命令后同时出现短路且&amp;&amp;与短路或||有嵌套命令的情况时:</p>
+<p>如：[ Test ] &amp;&amp; { echo cmd1 ; echo cmd2 ; } || { echo cmd3; echo cmd4 ; }</p>
+<p>表示当Test为真时，执行命令cmd1，cmd2；当Test为假时，执行cmd3，cmd4；</p>
+<h3 id="5-引用超过10个以上的位置变量时，数字加-；如-10要写为-10"><a href="#5-引用超过10个以上的位置变量时，数字加-；如-10要写为-10" class="headerlink" title="5.引用超过10个以上的位置变量时，数字加{}；如$10要写为${10}"></a>5.引用超过10个以上的位置变量时，数字加{}；如$10要写为${10}</h3><p>不加{}时，默认将$10当作$1和0表示出来：</p>
+<p><img src="大于10个参数1.png" alt="大于10个参数1"></p>
+<p><img src="大于10个参数2.png" alt="大于10个参数2"></p>
+<p>当给10加上大括号后，${10}才表示第10个位置变量：</p>
+<p><img src="大于10个参数3.png" alt="大于10个参数3"></p>
+<p><img src="大于10个参数4.png" alt="大于10个参数4"></p>
+<h3 id="6-位置变量-与-的区别"><a href="#6-位置变量-与-的区别" class="headerlink" title="6.位置变量$*与$@的区别"></a>6.位置变量$*与$@的区别</h3><p>两者都可表示传递给脚本的所有参数，但$*将每个参数合并为一个字符串；</p>
+<p><img src="星-1.png" alt="$星"></p>
+<p>而$@每个参数作为独立字符</p>
+<p><img src="圈.png" alt="$圈"></p>
+<p>注意：$@、$*只在被双引号包起来的时候才会有差异。</p>
+<h3 id="7-在使用-和test引用变量时，最好加双引号””避免出问题"><a href="#7-在使用-和test引用变量时，最好加双引号””避免出问题" class="headerlink" title="7.在使用[  ]和test引用变量时，最好加双引号””避免出问题"></a>7.在使用[  ]和test引用变量时，最好加双引号””避免出问题</h3><p>不加引号也许不会出错，但加上引号肯定不会有错</p>
+<h3 id="8-脚本中进行变量的算术运算时，有空格尽量删除"><a href="#8-脚本中进行变量的算术运算时，有空格尽量删除" class="headerlink" title="8.脚本中进行变量的算术运算时，有空格尽量删除"></a>8.脚本中进行变量的算术运算时，有空格尽量删除</h3><p>变量的算术运算，多一个空格就会导致出错，所以尽量将空格删除</p>
+<p><img src="数学运算.png" alt="数学运算"></p>
+<h3 id="9-进行条件测试过程中，能加空格地方尽量都加空格"><a href="#9-进行条件测试过程中，能加空格地方尽量都加空格" class="headerlink" title="9.进行条件测试过程中，能加空格地方尽量都加空格"></a>9.进行条件测试过程中，能加空格地方尽量都加空格</h3><p>条件测试时，无论是括号两端还是字符两端少一个空格就会导致出错，所有尽量都加空格</p>
+<p><img src="条件测试空格.png" alt="条件测试空格"></p>
+<h3 id="10-使用-进行PATTERN匹配时，需要加双括号-，且正则表达式不能加引号，默认使用扩展正则表达式"><a href="#10-使用-进行PATTERN匹配时，需要加双括号-，且正则表达式不能加引号，默认使用扩展正则表达式" class="headerlink" title="10.使用=~进行PATTERN匹配时，需要加双括号[[ ]]，且正则表达式不能加引号，默认使用扩展正则表达式"></a>10.使用=~进行PATTERN匹配时，需要加双括号[[ ]]，且正则表达式不能加引号，默认使用扩展正则表达式</h3><p>正则表达式加引号就会导致错误结果，这与我们在使用grep与sed等命令利用到正则表达式需要加引号正好相反，需要注意</p>
+<p><img src="正则表达式.png" alt="正则表达式"></p>
+<h3 id="11-用于字符串比较时的用到的操作应该都使用引号"><a href="#11-用于字符串比较时的用到的操作应该都使用引号" class="headerlink" title="11.用于字符串比较时的用到的操作应该都使用引号"></a>11.用于字符串比较时的用到的操作应该都使用引号</h3><p>同上，不加引号也许不会出错，但加上引号肯定不会有错</p>
+<h3 id="12-右侧可匹配类似于通配符glob的用法"><a href="#12-右侧可匹配类似于通配符glob的用法" class="headerlink" title="12.[[  == ]]右侧可匹配类似于通配符glob的用法"></a>12.[[  == ]]右侧可匹配类似于通配符glob的用法</h3><p>此种匹配类似于通配符，但不完全等同于通配符，注意格式双中括号，双等号 [[ == ]]</p>
+<p><img src="类似通配符.png" alt="类似通配符"></p>
+<h3 id="13-脚本里不支持别名"><a href="#13-脚本里不支持别名" class="headerlink" title="13.脚本里不支持别名"></a>13.脚本里不支持别名</h3><h3 id="14-文件测试后跟空字符时，也反馈为True。"><a href="#14-文件测试后跟空字符时，也反馈为True。" class="headerlink" title="14.文件测试后跟空字符时，也反馈为True。"></a>14.文件测试后跟空字符时，也反馈为True。</h3><p>例如：/data/fstab为普通文件，用-f选项判断时，后跟fstab文件或者空时都判断为真</p>
+<p><img src="文件条件判断.png" alt="文件条件判断"></p>
+<p>因此要保证一个文件存在且满足测试条件时，</p>
+<p>可表示为：[ -n  “file”  -a  –f  “file” ]</p>
+<p>file文件是否存在且为普通文件</p>
+<h3 id="15-测试字符串是否为空除了-z及-n选项，还可用-“-var”-“”-；-x”-var”-“x”-来测试。"><a href="#15-测试字符串是否为空除了-z及-n选项，还可用-“-var”-“”-；-x”-var”-“x”-来测试。" class="headerlink" title="15.测试字符串是否为空除了-z及-n选项，还可用[  “$var”  =  “”  ]；[  x”$var”  =  “x”  ]来测试。"></a>15.测试字符串是否为空除了-z及-n选项，还可用[  “$var”  =  “”  ]；[  x”$var”  =  “x”  ]来测试。</h3><p>例1：当$var为空时，使用[  “$var”  =  “”  ]返回结果0</p>
+<p><img src="测试为空1.png" alt="测试为空1"></p>
+<p>例2：当$var为空时，[  x”$var”  =  “x”  ]返回结果为0</p>
+<p><img src="测试为空2.png" alt="测试为空2"></p>
+<h3 id="16-养成好习惯：变量一使用完后就用unset删掉。"><a href="#16-养成好习惯：变量一使用完后就用unset删掉。" class="headerlink" title="16.养成好习惯：变量一使用完后就用unset删掉。"></a>16.养成好习惯：变量一使用完后就用unset删掉。</h3>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/shell/" rel="tag"># shell</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/10/shell脚本编程基础（1）/" rel="next" title="shell脚本编程基础（1）">
+                <i class="fa fa-chevron-left"></i> shell脚本编程基础（1）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/12/Linux系统文件查找与解压缩方法/" rel="prev" title="Linux系统文件查找与解压缩方法">
+                Linux系统文件查找与解压缩方法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#总结了一些shell编程初学者常犯的错误、注意事项及技巧："><span class="nav-number">1.</span> <span class="nav-text">总结了一些shell编程初学者常犯的错误、注意事项及技巧：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-判断变量是否加-："><span class="nav-number">1.1.</span> <span class="nav-text">1.判断变量是否加$：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-存放多行字符时”-name”变量外加双引号可保留换行格式"><span class="nav-number">1.2.</span> <span class="nav-text">2.存放多行字符时”$name”变量外加双引号可保留换行格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-短路与-amp-amp-和短路或-嵌套连续命令时可使用大括号"><span class="nav-number">1.3.</span> <span class="nav-text">4.短路与&amp;&amp;和短路或||嵌套连续命令时可使用大括号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-引用超过10个以上的位置变量时，数字加-；如-10要写为-10"><span class="nav-number">1.4.</span> <span class="nav-text">5.引用超过10个以上的位置变量时，数字加{}；如$10要写为${10}</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-位置变量-与-的区别"><span class="nav-number">1.5.</span> <span class="nav-text">6.位置变量$*与$@的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-在使用-和test引用变量时，最好加双引号””避免出问题"><span class="nav-number">1.6.</span> <span class="nav-text">7.在使用[  ]和test引用变量时，最好加双引号””避免出问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-脚本中进行变量的算术运算时，有空格尽量删除"><span class="nav-number">1.7.</span> <span class="nav-text">8.脚本中进行变量的算术运算时，有空格尽量删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-进行条件测试过程中，能加空格地方尽量都加空格"><span class="nav-number">1.8.</span> <span class="nav-text">9.进行条件测试过程中，能加空格地方尽量都加空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-使用-进行PATTERN匹配时，需要加双括号-，且正则表达式不能加引号，默认使用扩展正则表达式"><span class="nav-number">1.9.</span> <span class="nav-text">10.使用=~进行PATTERN匹配时，需要加双括号[[ ]]，且正则表达式不能加引号，默认使用扩展正则表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-用于字符串比较时的用到的操作应该都使用引号"><span class="nav-number">1.10.</span> <span class="nav-text">11.用于字符串比较时的用到的操作应该都使用引号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-右侧可匹配类似于通配符glob的用法"><span class="nav-number">1.11.</span> <span class="nav-text">12.[[  == ]]右侧可匹配类似于通配符glob的用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-脚本里不支持别名"><span class="nav-number">1.12.</span> <span class="nav-text">13.脚本里不支持别名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-文件测试后跟空字符时，也反馈为True。"><span class="nav-number">1.13.</span> <span class="nav-text">14.文件测试后跟空字符时，也反馈为True。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-测试字符串是否为空除了-z及-n选项，还可用-“-var”-“”-；-x”-var”-“x”-来测试。"><span class="nav-number">1.14.</span> <span class="nav-text">15.测试字符串是否为空除了-z及-n选项，还可用[  “$var”  =  “”  ]；[  x”$var”  =  “x”  ]来测试。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16-养成好习惯：变量一使用完后就用unset删掉。"><span class="nav-number">1.15.</span> <span class="nav-text">16.养成好习惯：变量一使用完后就用unset删掉。</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

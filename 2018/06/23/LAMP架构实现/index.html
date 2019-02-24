@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="LAMP,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、LAMP介绍LAM(M)P是一组Web应用软件的组合，Linux+Apache+Mysql/MariaDB+Perl/PHP/Python一组 常用来搭建动态网站或者服务器的开源软件，所有组成产品均是开源软件，本身都是各自 独立的程序，但是因为常被放在一起使用，拥有了越来越高的兼容度，共同组成了一个强 大的Web应用程序平台。 L：Linux A：Apache (httpd) M：Mysql,">
+<meta name="keywords" content="LAMP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LAMP架构实现">
+<meta property="og:url" content="http://yoursite.com/2018/06/23/LAMP架构实现/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="一、LAMP介绍LAM(M)P是一组Web应用软件的组合，Linux+Apache+Mysql/MariaDB+Perl/PHP/Python一组 常用来搭建动态网站或者服务器的开源软件，所有组成产品均是开源软件，本身都是各自 独立的程序，但是因为常被放在一起使用，拥有了越来越高的兼容度，共同组成了一个强 大的Web应用程序平台。 L：Linux A：Apache (httpd) M：Mysql,">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/06/23/LAMP架构实现/1-34.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/23/LAMP架构实现/1-35.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/23/LAMP架构实现/2-36.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/23/LAMP架构实现/1-36.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/23/LAMP架构实现/3-35.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/23/LAMP架构实现/1-37.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/23/LAMP架构实现/2-37.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/23/LAMP架构实现/3-36.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/23/LAMP架构实现/4-27.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/23/LAMP架构实现/6-20.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/23/LAMP架构实现/7-13.png">
+<meta property="og:updated_time" content="2018-07-17T13:04:01.895Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LAMP架构实现">
+<meta name="twitter:description" content="一、LAMP介绍LAM(M)P是一组Web应用软件的组合，Linux+Apache+Mysql/MariaDB+Perl/PHP/Python一组 常用来搭建动态网站或者服务器的开源软件，所有组成产品均是开源软件，本身都是各自 独立的程序，但是因为常被放在一起使用，拥有了越来越高的兼容度，共同组成了一个强 大的Web应用程序平台。 L：Linux A：Apache (httpd) M：Mysql,">
+<meta name="twitter:image" content="http://yoursite.com/2018/06/23/LAMP架构实现/1-34.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/23/LAMP架构实现/">
+
+
+
+
+
+  <title>LAMP架构实现 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/23/LAMP架构实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">LAMP架构实现</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-23T16:08:26+08:00">
+                2018-06-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">Web服务器</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、LAMP介绍"><a href="#一、LAMP介绍" class="headerlink" title="一、LAMP介绍"></a><strong>一、LAMP介绍</strong></h2><p><strong>LAM(M)P</strong>是一组Web应用软件的组合，Linux+Apache+Mysql/MariaDB+Perl/PHP/Python一组</p>
+<p>常用来搭建动态网站或者服务器的开源软件，所有组成产品均是开源软件，本身都是各自</p>
+<p>独立的程序，但是因为常被放在一起使用，拥有了越来越高的兼容度，共同组成了一个强</p>
+<p>大的Web应用程序平台。</p>
+<p><strong>L：</strong>Linux</p>
+<p><strong>A：</strong>Apache (httpd)</p>
+<p><strong>M：</strong>Mysql, Mariadb</p>
+<p><strong>M：</strong>Memcached</p>
+<p><strong>P：</strong>PHP, Perl, Python</p>
+<h3 id="WEB资源类型："><a href="#WEB资源类型：" class="headerlink" title="WEB资源类型："></a><strong>WEB资源类型：</strong></h3><p>​    <strong>静态资源</strong>：原始形式与响应内容一致，在客户端浏览器执行</p>
+<p>   <strong>动态资源</strong>：原始形式通常为程序文件，需要在服务器端执行之后，将执行结果返回给客户端</p>
+<p><strong>Web相关语言</strong></p>
+<p>客户端技术： html，javascript</p>
+<p>服务器端技术：php, jsp，python，asp</p>
+<h3 id="LAMP工作原理："><a href="#LAMP工作原理：" class="headerlink" title="LAMP工作原理："></a><strong>LAMP工作原理：</strong></h3><p><img src="1-34.png" alt="1"></p>
+<h2 id="二、实例：LAMP搭建PhpMyAdmin"><a href="#二、实例：LAMP搭建PhpMyAdmin" class="headerlink" title="二、实例：LAMP搭建PhpMyAdmin"></a><strong>二、实例：LAMP搭建PhpMyAdmin</strong></h2><h3 id="实验环境："><a href="#实验环境：" class="headerlink" title="实验环境："></a><strong>实验环境：</strong></h3><p><strong>Linux：</strong>      CentOS 7.4</p>
+<p><strong>Apache：</strong>   httpd-2.4.6</p>
+<p><strong>MariaDB：</strong>mariadb-server-5.5.56</p>
+<p><strong>Php，php-mysql：</strong>php-5.4.16</p>
+<h3 id="具体步骤："><a href="#具体步骤：" class="headerlink" title="具体步骤："></a><strong>具体步骤：</strong></h3><p>1 下载phpMyAdmin 4.0.10.20</p>
+<p>注：此版本支持PHP 5.2 和 MySQL 5之前，不支持 PHP 5.5 更新的版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://files.phpmyadmin.net/phpMyAdmin/4.0.10.20/phpMyAdmin-4.0.10.20-all-languages.tar.xz</span><br></pre></td></tr></table></figure>
+<p>2 解压到httpd目录下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar xvf phpMyAdmin-4.0.10.20-all-languages.tar.xz -C /var/www/html/</span><br></pre></td></tr></table></figure>
+<p>  统一该目录名称，方便操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /var/www/html/</span><br><span class="line">mv phpMyAdmin-4.0.10.20-all-languages/ phpMyAdmin</span><br></pre></td></tr></table></figure>
+<p>3 复制配置文件，不需要更改内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd phpMyAdmin/</span><br><span class="line">cp config.sample.inc.php config.inc.php</span><br></pre></td></tr></table></figure>
+<p>安装php-mbstring</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install php-mbstring –y</span><br></pre></td></tr></table></figure>
+<p>4 重启httpd服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart httpd</span><br></pre></td></tr></table></figure>
+<p>5 打开浏览器访问<a href="http://192.168.30.10/phpMyAdmin/，出现下图即表示PhpMyAdmin搭建成功" target="_blank" rel="noopener">http://192.168.30.10/phpMyAdmin/，出现下图即表示PhpMyAdmin搭建成功</a></p>
+<p><img src="1-35.png" alt="1"></p>
+<p>6使用mysql账号进行登录，就可进行数据库的图形化操作了</p>
+<p><img src="2-36.png" alt="2"></p>
+<h2 id="三、实例：CentOS7编译Php-xcache"><a href="#三、实例：CentOS7编译Php-xcache" class="headerlink" title="三、实例：CentOS7编译Php-xcache"></a><strong>三、实例：CentOS7编译Php-xcache</strong></h2><h3 id="实验环境：-1"><a href="#实验环境：-1" class="headerlink" title="实验环境："></a><strong>实验环境：</strong></h3><p>亚马逊云主机一台，以WordPress搭建了<a href="http://www.wxlinux.com/" target="_blank" rel="noopener">www.wxlinux.com</a></p>
+<p>操作系统版本：CentOS7.5</p>
+<p>PHP版本为：5.4.16</p>
+<p>Httpd版本为：Apache2.4.6</p>
+<p>数据库版本：mariadb-server-5.5.56</p>
+<p>安全前我们测试下<a href="http://www.wxlinux.com的每秒请求数，为1.90次/秒" target="_blank" rel="noopener">www.wxlinux.com的每秒请求数，为1.90次/秒</a></p>
+<p>ab -c 10 -n 100 <a href="http://www.wxlinux.com/" target="_blank" rel="noopener">http://www.wxlinux.com/</a></p>
+<p><img src="1-36.png" alt="1"></p>
+<p>下载最新版本Php-xcache</p>
+<p>wget <a href="https://xcache.lighttpd.net/pub/Releases/3.2.0/xcache-3.2.0.tar.gz" target="_blank" rel="noopener">https://xcache.lighttpd.net/pub/Releases/3.2.0/xcache-3.2.0.tar.gz</a></p>
+<p>解压包到/data目录下</p>
+<p>tar  xvf  xcache-3.2.0.tar.gz  -C /data</p>
+<p><strong>cd xcache-3.2.0</strong></p>
+<p>此时xcache目录下是没有configure文件的，我们需要使用phpize命令生成它</p>
+<p>安装php-devlop包</p>
+<p>yum install php-devlop</p>
+<p>yum install gcc</p>
+<p>生成编译环境</p>
+<p>phpize</p>
+<p>查看下php-config文件位置</p>
+<p>[root@wxlinux ~]#which php-config</p>
+<p><strong>/bin/php-config</strong></p>
+<p>编译安装</p>
+<p>./configure –enable-xcache –with-php-config=/bin/php-config</p>
+<p>make &amp;&amp; make install</p>
+<p>cp xcache-3.2.0/xcache.ini /etc/php.d/</p>
+<p>重启http服务使其生效</p>
+<p>systemctl restart httpd.service</p>
+<p>再次进行测试，每秒请求数提升到3.95</p>
+<p><img src="3-35.png" alt="3"></p>
+<h2 id="四、实例：LAMP搭建wordpress"><a href="#四、实例：LAMP搭建wordpress" class="headerlink" title="四、实例：LAMP搭建wordpress"></a><strong>四、实例：LAMP搭建wordpress</strong></h2><p>前期准备：</p>
+<p>操作系统版本：CentOS7.5</p>
+<p>PHP版本为：5.4.16</p>
+<p>Httpd版本为：Apache2.4.6</p>
+<p>数据库版本：mariadb-server-5.5.56</p>
+<p>配置环境：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install httpd php mariadb-server php-mysql</span><br></pre></td></tr></table></figure>
+<p>启动相应服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start httpd mariadb</span><br></pre></td></tr></table></figure>
+<p>为数据库设置root账号密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqladmin -u root password “XXXXXXXX”</span><br></pre></td></tr></table></figure>
+<p>创建一个名为wordpress的数据库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; create database wordpress;</span><br></pre></td></tr></table></figure>
+<p>下载wordpress</p>
+<p>wget <a href="http://wordpress.org/latest.tar.gz" target="_blank" rel="noopener">http://wordpress.org/latest.tar.gz</a></p>
+<p>解压安装包</p>
+<p>tar –zxf latest.tar.gz -C /var/www/html</p>
+<p>注意wordpress目录权限</p>
+<p>setfacl -R -m u:apache:rwx /var/www/html/wordpress</p>
+<p>重启httpd服务</p>
+<p>systemctl restart httpd</p>
+<p>浏览器打开：<a href="http://192.168.30.10/wordpress" target="_blank" rel="noopener">http://192.168.30.10/wordpress</a></p>
+<p>简单的进行一些配置，即可完成wordpress的搭建</p>
+<p>![DLH}ZHW]<a href="http://www.178linux.com/wp-content/uploads/2018/06/DLHZHWGR6Q_QTE3DQSU2.png" target="_blank" rel="noopener">GR6Q_QTE3DQSU2</a></p>
+<h2 id="五、实验：centos7上源码编译安装LAMP的多虚拟主机wordpress，discuz"><a href="#五、实验：centos7上源码编译安装LAMP的多虚拟主机wordpress，discuz" class="headerlink" title="五、实验：centos7上源码编译安装LAMP的多虚拟主机wordpress，discuz"></a><strong>五、实验：centos7上源码编译安装LAMP的多虚拟主机wordpress，discuz</strong></h2><h3 id="前期准备："><a href="#前期准备：" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>虚拟机两台</p>
+<p><strong>LAMP server：</strong> CentOS 7.5，完全干净的系统环境  IP：192.168.30.17</p>
+<p><strong>Client：</strong>              CentOS7.4                                           IP：192.168.30.10</p>
+<p>准备以下安装包</p>
+<p><strong>apr-1.6.3.tar.gz</strong>                    </p>
+<p><strong>apr-util-1.6.1.tar.gz</strong></p>
+<p><strong>httpd-2.4.33.tar.bz2</strong> </p>
+<p><strong>mariadb-10.2.15-linux-x86_64.tar.gz</strong> </p>
+<p><strong>php-7.1.18.tar.bz2</strong></p>
+<p><strong>wordpress-4.9.4-zh_CN.tar.gz</strong></p>
+<p><strong>Discuz_X3.3_SC_UTF8.zip</strong></p>
+<h3 id="1-编译安装httpd"><a href="#1-编译安装httpd" class="headerlink" title="1.编译安装httpd"></a><strong>1.编译安装httpd</strong></h3><p>tar xvf httpd-2.4.33.tar.bz2</p>
+<p>tar xvf apr-1.6.3.tar.gz</p>
+<p>tar xvf apr-util-1.6.1.tar.gz</p>
+<p>cp -av apr-util-1.6.1 httpd-2.4.33/srclib/apr-util</p>
+<p>cp -av apr-1.6.3 httpd-2.4.33/srclib/apr</p>
+<p>./configure –prefix=/app/httpd24 \</p>
+<p>–enable-so \</p>
+<p>–enable-ssl \</p>
+<p>–enable-cgi \</p>
+<p>–enable-rewrite \</p>
+<p>–with-zlib \</p>
+<p>–with-pcre \</p>
+<p>–with-included-apr \</p>
+<p>–enable-modules=most \</p>
+<p>–enable-mpms-shared=all \</p>
+<p>–with-mpm=prefork</p>
+<p>make &amp;&amp; make install</p>
+<p>echo PATH=/app/httpd24/bin:$PATH &gt; /etc/profile.d/lamp.sh</p>
+<p>. /etc/profile.d/lamp.sh</p>
+<p>开启httpd服务</p>
+<p>apachectl</p>
+<h3 id="2-二进制安装mariadb"><a href="#2-二进制安装mariadb" class="headerlink" title="2.二进制安装mariadb"></a><strong>2.二进制安装mariadb</strong></h3><p>tar xvf mariadb-10.2.15-linux-x86_64.tar.gz  -C /usr/local/</p>
+<p><strong>cd /usr/local/</strong></p>
+<p>ln -s mariadb-10.2.15-linux-x86_64/ mysql</p>
+<p>useradd -r -s /sbin/nologin mysql</p>
+<p>chown -R mysql.mysql  mysql/</p>
+<p>mkdir /data/mysql -pv</p>
+<p>chown mysql.mysql /data/mysql/</p>
+<p><strong>vim /etc/profile.d/lamp.sh</strong></p>
+<p>PATH=/appl/httpd24/bin:/usr/local/mysql/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin</p>
+<p>. /etc/profile.d/lamp.sh</p>
+<p><strong>cd mysql/</strong></p>
+<p>./scripts/mysql_install_db –datadir=/data/mysql –user=mysql</p>
+<p><strong>vim /etc/my.cnf</strong></p>
+<p>datadir=/data/mysql</p>
+<p>chkconfig –add mysqld</p>
+<p>chkconfig –list</p>
+<p>service mysqld start</p>
+<p>ss -ntl</p>
+<p><img src="1-37.png" alt="1"></p>
+<p>创建wordpress数据库，和管理用户</p>
+<p>MariaDB [(none)]&gt; create database wordpress;</p>
+<p>MariaDB [(none)]&gt; grant all on wordpress.* to wpuser@’192.168.30.%’ identified by ‘centos’;</p>
+<h3 id="3-编译安装fastcgi模式的php"><a href="#3-编译安装fastcgi模式的php" class="headerlink" title="3.编译安装fastcgi模式的php"></a><strong>3.编译安装fastcgi模式的php</strong></h3><p>tar xvf php-7.1.18.tar.bz2</p>
+<p><strong>cd php-7.1.18/</strong></p>
+<p>./configure –prefix=/app/php \</p>
+<p>–enable-mysqlnd \</p>
+<p>–with-mysqli=mysqlnd \</p>
+<p>–with-openssl \</p>
+<p>–with-pdo-mysql=mysqlnd \</p>
+<p>–enable-mbstring \</p>
+<p>–with-freetype-dir \</p>
+<p>–with-jpeg-dir \</p>
+<p>–with-png-dir \</p>
+<p>–with-zlib \</p>
+<p>–with-libxml-dir=/usr \</p>
+<p>–enable-xml \</p>
+<p>–enable-sockets \</p>
+<p>–enable-fpm \</p>
+<p>–with-config-file-path=/etc \</p>
+<p>–with-config-file-scan-dir=/etc/php.d \</p>
+<p>–enable-maintainer-zts \</p>
+<p>–disable-fileinfo</p>
+<p>make &amp;&amp; make install</p>
+<p><strong>cd /root/srcs/php-7.1.18/</strong></p>
+<p>cp php.ini-production /etc/php.ini</p>
+<p>cp sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm</p>
+<p>chmod +x /etc/init.d/php-fpm</p>
+<p>chkconfig –add php-fpm</p>
+<p>chkconfig php-fpm on</p>
+<p><strong>cd /app/php/etc</strong></p>
+<p>cp php-fpm.conf.default php-fpm.conf</p>
+<p>cp php-fpm.d/<a href="http://www.conf.default" target="_blank" rel="noopener">www.conf.default</a> php-fpm.d/<a href="http://www.conf" target="_blank" rel="noopener">www.conf</a></p>
+<p>service php-fpm start</p>
+<p>ss -ntl</p>
+<p><img src="2-37.png" alt="2"></p>
+<p><strong>vim /etc/profile.d/lamp.sh</strong></p>
+<p>PATH=/app/php/bin:/app/php/sbin:/app/httpd24/bin:/usr/local/mysql/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin</p>
+<p>. /etc/profile.d/lamp.sh</p>
+<p><strong>vim /app/httpd24/conf/httpd.conf</strong></p>
+<p>取消下面两行的注释，启用代理功能</p>
+<p>LoadModule proxy_module modules/mod_proxy.so</p>
+<p>LoadModule proxy_fcgi_module modules/mod_proxy_fcgi.so</p>
+<p><img src="3-36.png" alt="3"></p>
+<p>修改下面行</p>
+<ifmodule dir_module><br><br>DirectoryIndex index.php index.html<br><br></ifmodule>
+
+<p>addType application/x-httpd-php .php</p>
+<p>AddType application/x-httpd-php-source .phps</p>
+<p>ProxyRequests Off</p>
+<p>ProxyPassMatch ^/(.*.php)$ fcgi://127.0.0.1:9000/app/httpd24/htdocs/$1</p>
+<p><img src="4-27.png" alt="4"></p>
+<p>重启httpd服务</p>
+<p>apache restart</p>
+<h3 id="4-安装wordpress"><a href="#4-安装wordpress" class="headerlink" title="4.安装wordpress"></a><strong>4.安装wordpress</strong></h3><p>解压安装包</p>
+<p>tar –zxf  – wordpress-4.9.4-zh_CN.tar.gz -C /app/httpd24/htdocs/blog</p>
+<p>注意wordpress目录权限</p>
+<p>setfacl -R -m u:apache:rwx /var/www/html/wordpress</p>
+<p>重启httpd服务</p>
+<p>systemctl restart httpd</p>
+<h3 id="5-安装Discuz"><a href="#5-安装Discuz" class="headerlink" title="5.安装Discuz"></a><strong>5.安装Discuz</strong></h3><p>mv Discuz_X3.3_SC_UTF8.zip /app/httpd24/htdocs/bbs/</p>
+<p><strong>cd /app/httpd24/htdocs/bbs/</strong></p>
+<p>unzip mv Discuz_X3.3_SC_UTF8.zip</p>
+<p>配置虚拟主机</p>
+<p>修改配置文件，开启虚拟主机配置目录</p>
+<p><strong>vim httpd-vhosts.conf</strong></p>
+<p># Virtual hosts</p>
+<p>Include conf/extra/httpd-vhosts.conf       找到此行，去掉注释</p>
+<p>6.配置虚拟主机</p>
+<p><strong>vim /app/httpd24/conf/extra/httpd-vhosts.conf</strong></p>
+<virtualhost *:80><br><br>​    servername <a href="http://www.blog.com" target="_blank" rel="noopener">www.blog.com</a><br><br>​    documentroot /app/httpd24/htdocs/blog/wordpress<br><br>​    DirectoryIndex index.php<br><br>​    ProxyRequests Off<br><br>​    ProxyPassMatch ^/(.*.php)$ fcgi://127.0.0.1:9000/app/httpd24/htdocs/blog/wordpress/$1<br><br></virtualhost>
+
+
+
+<virtualhost *:80><br><br>​    servername <a href="http://www.bbs.com" target="_blank" rel="noopener">www.bbs.com</a><br><br>​    documentroot /app/httpd24/htdocs/bbs<br><br>​    DirectoryIndex index.php<br><br>​    ProxyRequests Off<br><br>​    ProxyPassMatch ^/(.*.php)$ fcgi://127.0.0.1:9000/app/httpd24/htdocs/bbs/$1<br><br></virtualhost>
+
+
+
+<h3 id="7-测试："><a href="#7-测试：" class="headerlink" title="7.测试："></a><strong>7.测试：</strong></h3><p>此时切换到另外一台主机访问<a href="http://www.blog.com及www.bbs.com" target="_blank" rel="noopener">www.blog.com及www.bbs.com</a></p>
+<p>为了方便实现，这里修改hosts文件模拟DNS</p>
+<p>加入此行：</p>
+<p><strong>vim /etc/hosts</strong></p>
+<p>192.168.30.17 <a href="http://www.blog.com" target="_blank" rel="noopener">www.blog.com</a> <a href="http://www.bbs.com" target="_blank" rel="noopener">www.bbs.com</a></p>
+<p>切换到图形界面，打开firefox浏览器直接输入<a href="http://www.blog.com，直接转向了wordpress的安装页面" target="_blank" rel="noopener">www.blog.com，直接转向了wordpress的安装页面</a></p>
+<p><img src="6-20.png" alt="6"></p>
+<p>输入<a href="http://www.bbs.com，则直接转向了wordpress的安装页面" target="_blank" rel="noopener">www.bbs.com，则直接转向了wordpress的安装页面</a></p>
+<p><img src="7-13.png" alt="7"></p>
+<p>至此，我们完成了编译LAPM，基于主机头的wordpress和Discuz的安装！</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LAMP/" rel="tag"># LAMP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/23/PHP简介/" rel="next" title="PHP简介">
+                <i class="fa fa-chevron-left"></i> PHP简介
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/26/FTP服务介绍及相关实验/" rel="prev" title="FTP服务介绍及相关实验">
+                FTP服务介绍及相关实验 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、LAMP介绍"><span class="nav-number">1.</span> <span class="nav-text">一、LAMP介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WEB资源类型："><span class="nav-number">1.1.</span> <span class="nav-text">WEB资源类型：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LAMP工作原理："><span class="nav-number">1.2.</span> <span class="nav-text">LAMP工作原理：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、实例：LAMP搭建PhpMyAdmin"><span class="nav-number">2.</span> <span class="nav-text">二、实例：LAMP搭建PhpMyAdmin</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实验环境："><span class="nav-number">2.1.</span> <span class="nav-text">实验环境：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体步骤："><span class="nav-number">2.2.</span> <span class="nav-text">具体步骤：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、实例：CentOS7编译Php-xcache"><span class="nav-number">3.</span> <span class="nav-text">三、实例：CentOS7编译Php-xcache</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实验环境：-1"><span class="nav-number">3.1.</span> <span class="nav-text">实验环境：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、实例：LAMP搭建wordpress"><span class="nav-number">4.</span> <span class="nav-text">四、实例：LAMP搭建wordpress</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、实验：centos7上源码编译安装LAMP的多虚拟主机wordpress，discuz"><span class="nav-number">5.</span> <span class="nav-text">五、实验：centos7上源码编译安装LAMP的多虚拟主机wordpress，discuz</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备："><span class="nav-number">5.1.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-编译安装httpd"><span class="nav-number">5.2.</span> <span class="nav-text">1.编译安装httpd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-二进制安装mariadb"><span class="nav-number">5.3.</span> <span class="nav-text">2.二进制安装mariadb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-编译安装fastcgi模式的php"><span class="nav-number">5.4.</span> <span class="nav-text">3.编译安装fastcgi模式的php</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-安装wordpress"><span class="nav-number">5.5.</span> <span class="nav-text">4.安装wordpress</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-安装Discuz"><span class="nav-number">5.6.</span> <span class="nav-text">5.安装Discuz</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-测试："><span class="nav-number">5.7.</span> <span class="nav-text">7.测试：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

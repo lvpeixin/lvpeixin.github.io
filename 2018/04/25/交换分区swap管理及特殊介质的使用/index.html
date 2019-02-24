@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="swap,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、交换分区swap管理：交换分区是系统RAM的补充，相当于Windows系统中的虚拟内存，当系统RAM不够用的时候将使用交换分区来代替内存使用。 基本设置包括：  创建交换分区或者文件 使用mkswap写入特殊签名 在/etc/fstab文件中添加适当的条目 使用swapon -a激活交换分区  swapon                     启用交换分区 格式：swapon [OPTIO">
+<meta name="keywords" content="swap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="交换分区swap管理及特殊介质的使用">
+<meta property="og:url" content="http://yoursite.com/2018/04/25/交换分区swap管理及特殊介质的使用/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="一、交换分区swap管理：交换分区是系统RAM的补充，相当于Windows系统中的虚拟内存，当系统RAM不够用的时候将使用交换分区来代替内存使用。 基本设置包括：  创建交换分区或者文件 使用mkswap写入特殊签名 在/etc/fstab文件中添加适当的条目 使用swapon -a激活交换分区  swapon                     启用交换分区 格式：swapon [OPTIO">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/04/25/交换分区swap管理及特殊介质的使用/fdisk.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/25/交换分区swap管理及特殊介质的使用/mkswap.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/25/交换分区swap管理及特殊介质的使用/vim-1.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/25/交换分区swap管理及特殊介质的使用/swapona.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/25/交换分区swap管理及特殊介质的使用/swapons.png">
+<meta property="og:updated_time" content="2018-07-18T12:10:58.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="交换分区swap管理及特殊介质的使用">
+<meta name="twitter:description" content="一、交换分区swap管理：交换分区是系统RAM的补充，相当于Windows系统中的虚拟内存，当系统RAM不够用的时候将使用交换分区来代替内存使用。 基本设置包括：  创建交换分区或者文件 使用mkswap写入特殊签名 在/etc/fstab文件中添加适当的条目 使用swapon -a激活交换分区  swapon                     启用交换分区 格式：swapon [OPTIO">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/25/交换分区swap管理及特殊介质的使用/fdisk.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/25/交换分区swap管理及特殊介质的使用/">
+
+
+
+
+
+  <title>交换分区swap管理及特殊介质的使用 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/25/交换分区swap管理及特殊介质的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">交换分区swap管理及特殊介质的使用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-25T14:20:33+08:00">
+                2018-04-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、交换分区swap管理："><a href="#一、交换分区swap管理：" class="headerlink" title="一、交换分区swap管理："></a><strong>一、交换分区swap管理：</strong></h2><p><strong>交换分区</strong>是系统RAM的补充，相当于Windows系统中的虚拟内存，当系统RAM不够用的时候将使用交换分区来代替内存使用。</p>
+<p>基本设置包括：</p>
+<ul>
+<li>创建交换分区或者文件</li>
+<li>使用mkswap写入特殊签名</li>
+<li>在/etc/fstab文件中添加适当的条目</li>
+<li>使用swapon -a激活交换分区</li>
+</ul>
+<p><strong>swapon</strong>                     启用交换分区</p>
+<p><strong>格式：swapon [OPTION]…[DEVICE]</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-a              激活所有交换分区</span><br><span class="line">-p priority        指定优先级</span><br><span class="line">/etc/fstab:pri=value</span><br></pre></td></tr></table></figure>
+<p><strong>swapoff [OPTION]…[DEVICE]</strong>       禁用指定交换分区</p>
+<h3 id="swap的优先级"><a href="#swap的优先级" class="headerlink" title="swap的优先级"></a>swap的优先级</h3><p>可以指定swap分区0到32767的优先级，值越大优先级越高</p>
+<p>系统默认会给没有指定的swap指定一个优先级，从-1开始，每加入一个新的没有指定优先级的swap，会给这个优先级减一。先添加的swap的缺省优先级比较高，除非用户自己指定一个优先级，而用户指定的优先级(是正数)永远高于核心缺省指定的优先级(是负数)</p>
+<p>优化性能：分布存放，高性能磁盘存放</p>
+<h3 id="场景1：增加一个新的swap分区"><a href="#场景1：增加一个新的swap分区" class="headerlink" title="场景1：增加一个新的swap分区"></a>场景1：增加一个新的swap分区</h3><ol>
+<li><p>fdisk  /dev/sdb           创建新的swap分区，tyep=82=Linux swap</p>
+<p>注：如果文件系统分区没有同步成功，需我们手动同步分区</p>
+<p>CentOS5,7版本：partx   -a  /dev/sdb</p>
+<p>CentOS7版本： partprobe  /dev/sdb</p>
+</li>
+</ol>
+<p><img src="fdisk.png" alt="fdisk"></p>
+<ol start="2">
+<li>mkswap       /dev/sdb1 -L swap_sdb2                 添加swap文件系统</li>
+</ol>
+<p><img src="mkswap.png" alt="mkswap"></p>
+<ol start="3">
+<li><p>vim /etc/fstab</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UUID=xxx          swap    swap        defaults   0       0</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><img src="vim-1.png" alt="vim"></p>
+<ol start="4">
+<li>swapon -a                                       使swap分区生效</li>
+</ol>
+<p><img src="swapona.png" alt="swapona"></p>
+<ol start="5">
+<li>swapon<strong> -s</strong>                                       查看是否生效</li>
+</ol>
+<p><img src="swapons.png" alt="swapons"></p>
+<h3 id="场景2：使用一个文件当做新的swap分区"><a href="#场景2：使用一个文件当做新的swap分区" class="headerlink" title="场景2：使用一个文件当做新的swap分区"></a>场景2：使用一个文件当做新的swap分区</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. dd if=/dev/zero of=/swapfile  bs=1024M  count=2      创建一个2G文件</span><br><span class="line">2. mkswap     /swapfile          添加文件的文件系统为swap</span><br><span class="line">   blkid  /swapfile      查看文件系统添加成功</span><br><span class="line">3. vim /etc/fstab     修改/etc/fstab文件</span><br><span class="line">   /swapfile       swap       swap      defaults      0       0</span><br><span class="line">   注：挂载文件名，不能使用UUID  </span><br><span class="line">4. swapon -a</span><br><span class="line">5. swapon -s</span><br></pre></td></tr></table></figure>
+<h2 id="二、Linux系统光盘使用"><a href="#二、Linux系统光盘使用" class="headerlink" title="二、Linux系统光盘使用"></a><strong>二、Linux系统光盘使用</strong></h2><p>光盘在Linux图形环境下将自动挂载</p>
+<p>否则就必须手动进行挂</p>
+<p>挂载命令：   <strong>mount  /dev/cdrom   /mnt/</strong></p>
+<p>ejetc命令卸载或弹出光盘</p>
+<p>创建ISO文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp  -a  /dev/cdrom   /root/centos7.iso</span><br><span class="line">mkisofs  -r  -o  /root/etc.iso     /etc</span><br></pre></td></tr></table></figure>
+<p>刻录光盘</p>
+<p>​     wodim     -v   -eject   centos.iso</p>
+<p>mkisofs -r -o /root/etc.iso    /etc</p>
+<p>这种制作光盘方法可作为yum源，但不可做启动光盘</p>
+<p>centos官网<a href="https://wiki.centos.org" target="_blank" rel="noopener">https://wiki.centos.org</a>  可搜索mkdvdiso.sh脚本</p>
+<p>即可引导又可当yum源</p>
+<h2 id="三、Linux系统USB介质使用"><a href="#三、Linux系统USB介质使用" class="headerlink" title="三、Linux系统USB介质使用"></a><strong>三、Linux系统USB介质使用</strong></h2><p>查看USB设备是否识别</p>
+<p><strong>lsusb</strong></p>
+<p>被内核探测为SCSI设备</p>
+<p>/dev/sdaX、/dev/sdbX、或类似的设备文件</p>
+<p>在图形环境中自动挂载</p>
+<p>图标在[计算机]窗口中创建</p>
+<p>挂载在<strong>/run/media/<user>/<label></label></user></strong></p>
+<p>手动挂载</p>
+<p><strong>mount /dev/sdb1   /mnt</strong></p>
+<h2 id="四、强大的dd工具"><a href="#四、强大的dd工具" class="headerlink" title="四、强大的dd工具"></a><strong>四、强大的dd工具</strong></h2><p><strong>dd命令：convert and copy a file</strong></p>
+<p><strong>用法：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">dd if=/PATH/FROM/SRC    of=/PATH/TO/DEST</span><br><span class="line">bs=#：block size, 复制单元大小</span><br><span class="line">count=#：                复制多少个bs</span><br><span class="line">of=file             写到所命名的文件而不是到标准输出</span><br><span class="line">if=file               从所命名文件读取而不是从标准输入</span><br><span class="line">bs=size            指定块大小（既是是ibs也是obs)</span><br><span class="line">ibs=size           一次读size个byte</span><br><span class="line">obs=size                  一次写size个byte</span><br><span class="line">cbs=size                   一次转化size个byte</span><br><span class="line">skip=blocks             从开头忽略blocks个ibs大小的块</span><br><span class="line">seek=blocks            从开头忽略blocks个obs大小的块</span><br><span class="line">count=n                   只拷贝n个记录</span><br><span class="line">conv=conversion[,conversion…] 用指定的参数转换文件</span><br></pre></td></tr></table></figure>
+<p><strong>转换参数:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ascii       转换 EBCDIC 为 ASCII</span><br><span class="line">ebcdic      转换 ASCII 为 EBCDIC</span><br><span class="line">lcase       把大写字符转换为小写字符</span><br><span class="line">ucase       把小写字符转换为大写字符</span><br><span class="line">nocreat     不创建输出文件</span><br><span class="line">noerror     出错时不停止</span><br><span class="line">notrunc     不截短输出文件</span><br><span class="line">sync         把每个输入块填充到ibs个字节，不足部分用空(NUL)字符补齐</span><br></pre></td></tr></table></figure>
+<p><strong>备份MBR：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/sda of=/tmp/mbr.bak bs=512 count=1</span><br></pre></td></tr></table></figure>
+<p><strong>破坏MBR中的bootloader：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/zero of=/dev/sda bs=64 count=1 seek=446</span><br></pre></td></tr></table></figure>
+<p>有一个大与2K的二进制文件fileA。现在想从第64个字节位置开始读取，需要读取的大小是128Byts。</p>
+<p>又有fileB, 想把上面读取到的128Bytes写到第32个字节开始的位置，替换128Bytes，实现如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=fileA of=fileB bs=1 count=128 skip=63 seek=31 conv=notrunc</span><br></pre></td></tr></table></figure>
+<p><strong>备份：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/sdx of=/dev/sdy                     将本地的/dev/sdx整盘备份到/dev/sdy</span><br><span class="line"></span><br><span class="line">dd if=/dev/sdx of=/path/to/image                 将/dev/sdx全盘数据备份到指定路径的image文件</span><br><span class="line"></span><br><span class="line">dd if=/dev/sdx | gzip &gt;/path/to/image.gz   备份/dev/sdx全盘数据，并利用gzip压缩，保存到指定路径</span><br></pre></td></tr></table></figure>
+<p><strong>恢复：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dd if=/path/to/image of=/dev/sdx                 将备份文件恢复到指定盘</span><br><span class="line"></span><br><span class="line">gzip -dc /path/to/image.gz | dd of=/dev/sdx       将压缩的备份文件恢复到指定盘</span><br></pre></td></tr></table></figure>
+<p><strong>拷贝内存资料到硬盘</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/mem of=/root/mem.bin bs=1024       将内存里的数据拷贝到root目录下的mem.bin文件</span><br></pre></td></tr></table></figure>
+<p><strong>从光盘拷贝iso镜像</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/cdrom of=/root/cd.iso       拷贝光盘数据到root文件夹下，并保存为cd.iso文件</span><br></pre></td></tr></table></figure>
+<p><strong>销毁磁盘数据，文件系统</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/urandom of=/dev/sda1</span><br></pre></td></tr></table></figure>
+<p>利用随机的数据填充硬盘，在某些必要的场合可以用来销毁数据，执行此操作以后，/dev/sda1将无法挂载，</p>
+<p>创建和拷贝操作无法执行。</p>
+<p><strong>得到最恰当的block size</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/zero bs=1024 count=1000000 of=/root/1Gb.file</span><br><span class="line">dd if=/dev/zero bs=2048 count=500000 of=/root/1Gb.file</span><br><span class="line">dd if=/dev/zero bs=4096 count=250000 of=/root/1Gb.file</span><br></pre></td></tr></table></figure>
+<p>通过比较dd指令输出中命令的执行时间，即可确定系统最佳的block size大小</p>
+<p><strong>测试硬盘写速度</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/zero of=/root/1Gb.file bs=1024 count=1000000</span><br></pre></td></tr></table></figure>
+<p><strong>测试硬盘读速度</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=/root/1Gb.file bs=64k | dd of=/dev/null</span><br></pre></td></tr></table></figure>
+<p><strong>修复硬盘</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/sda of=/dev/sda</span><br></pre></td></tr></table></figure>
+<p>当硬盘较长时间（比如1,2年）放置不使用后，磁盘上会产生消磁点。当磁头读</p>
+<p>到这些区域时会遇到困难，并可能导致I/O错误。当这种情况影响到硬盘的第一</p>
+<p>个扇区时，可能导致硬盘报废。上边的命令有可能使这些数据起死回生,且这个</p>
+<p>过程是安全高效的</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/swap/" rel="tag"># swap</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/24/Linux系统磁盘及文件系统管理/" rel="next" title="Linux系统磁盘及文件系统管理">
+                <i class="fa fa-chevron-left"></i> Linux系统磁盘及文件系统管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/25/手把手系列（四）教你用kickstart自动化安装CentOS系统/" rel="prev" title="手把手系列（四）教你用kickstart自动化安装CentOS系统">
+                手把手系列（四）教你用kickstart自动化安装CentOS系统 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、交换分区swap管理："><span class="nav-number">1.</span> <span class="nav-text">一、交换分区swap管理：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#swap的优先级"><span class="nav-number">1.1.</span> <span class="nav-text">swap的优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#场景1：增加一个新的swap分区"><span class="nav-number">1.2.</span> <span class="nav-text">场景1：增加一个新的swap分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#场景2：使用一个文件当做新的swap分区"><span class="nav-number">1.3.</span> <span class="nav-text">场景2：使用一个文件当做新的swap分区</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Linux系统光盘使用"><span class="nav-number">2.</span> <span class="nav-text">二、Linux系统光盘使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Linux系统USB介质使用"><span class="nav-number">3.</span> <span class="nav-text">三、Linux系统USB介质使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、强大的dd工具"><span class="nav-number">4.</span> <span class="nav-text">四、强大的dd工具</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Ansible,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="playbook是由一个或多个”play”组成的列表 play的主要功能在于将事先归并为一组的主机装扮成事先通过ansibe中的task定义好的角色。从根本上来 讲，所谓task无非是调用ansible的module。将多个play组织在一个playbook中，即可让它们联同起来按事 先编排的机制运行。 Playbook采用YAML语言编写每一个Ansible的Playbook都是一个YAML格式">
+<meta name="keywords" content="Ansible">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ansible使用介绍（二）YAML语法及Playbook">
+<meta property="og:url" content="http://yoursite.com/2018/05/30/Ansible使用介绍（二）YAML语法及Playbook/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="playbook是由一个或多个”play”组成的列表 play的主要功能在于将事先归并为一组的主机装扮成事先通过ansibe中的task定义好的角色。从根本上来 讲，所谓task无非是调用ansible的module。将多个play组织在一个playbook中，即可让它们联同起来按事 先编排的机制运行。 Playbook采用YAML语言编写每一个Ansible的Playbook都是一个YAML格式">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Ansible使用介绍（二）YAML语法及Playbook/playbook.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Ansible使用介绍（二）YAML语法及Playbook/http.yml_.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Ansible使用介绍（二）YAML语法及Playbook/tags2.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Ansible使用介绍（二）YAML语法及Playbook/8080.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Ansible使用介绍（二）YAML语法及Playbook/80802.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Ansible使用介绍（二）YAML语法及Playbook/vsftpd.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Ansible使用介绍（二）YAML语法及Playbook/palybook赋值变量.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Ansible使用介绍（二）YAML语法及Playbook/分组变量.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Ansible使用介绍（二）YAML语法及Playbook/hostname2.png">
+<meta property="og:image" content="http://www.178linux.com/wp-content/uploads/2018/05/hostname2-3.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Ansible使用介绍（二）YAML语法及Playbook/系统变量.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Ansible使用介绍（二）YAML语法及Playbook/系统变量2.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Ansible使用介绍（二）YAML语法及Playbook/变量到文件中.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Ansible使用介绍（二）YAML语法及Playbook/变量到文件中2.png">
+<meta property="og:updated_time" content="2018-07-17T13:01:51.987Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ansible使用介绍（二）YAML语法及Playbook">
+<meta name="twitter:description" content="playbook是由一个或多个”play”组成的列表 play的主要功能在于将事先归并为一组的主机装扮成事先通过ansibe中的task定义好的角色。从根本上来 讲，所谓task无非是调用ansible的module。将多个play组织在一个playbook中，即可让它们联同起来按事 先编排的机制运行。 Playbook采用YAML语言编写每一个Ansible的Playbook都是一个YAML格式">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/30/Ansible使用介绍（二）YAML语法及Playbook/playbook.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/30/Ansible使用介绍（二）YAML语法及Playbook/">
+
+
+
+
+
+  <title>Ansible使用介绍（二）YAML语法及Playbook | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/Ansible使用介绍（二）YAML语法及Playbook/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Ansible使用介绍（二）YAML语法及Playbook</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-30T15:25:45+08:00">
+                2018-05-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/自动化运维/" itemprop="url" rel="index">
+                    <span itemprop="name">自动化运维</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>playbook</strong>是由一个或多个”play”组成的列表</p>
+<p>play的主要功能在于将事先归并为一组的主机装扮成事先通过ansibe中的task定义好的角色。从根本上来</p>
+<p>讲，所谓task无非是调用ansible的module。将多个play组织在一个playbook中，即可让它们联同起来按事</p>
+<p>先编排的机制运行。</p>
+<p><strong>Playbook</strong>采用<strong>YAML</strong>语言编写每一个Ansible的Playbook都是一个YAML格式的文件，因此要学习编写剧</p>
+<p>本(playbook)，我们先来了解<strong>YAML</strong>语法的基本用法</p>
+<h2 id="一、YAML介绍："><a href="#一、YAML介绍：" class="headerlink" title="一、YAML介绍："></a><strong>一、YAML介绍：</strong></h2><p><strong>YAML</strong>是一个可读性高的用来表达资料序列的格式。YAML参考了其他多种语言，包括：XML、</p>
+<p>C语言、Python、Perl以及电子邮件格式RFC2822等。Clark Evans在2001年在首次发表了这种</p>
+<p>语言，另外Ingy döt Net与Oren Ben-Kiki也是这语言的共同设计者</p>
+<p><strong>YAML Ain’t Markup Language</strong>，即YAML不是XML。不过，在开发的这种语言时，YAML的意</p>
+<p>思其实是：”Yet Another Markup Language”（仍是一种标记语言）</p>
+<h3 id="特性："><a href="#特性：" class="headerlink" title="特性："></a><strong>特性：</strong></h3><p>YAML的可读性好</p>
+<p>YAML和脚本语言的交互性好</p>
+<p>YAML使用实现语言的数据类型</p>
+<p>YAML有一个一致的信息模型</p>
+<p>YAML易于实现</p>
+<p>YAML可以基于流来处理</p>
+<p>YAML表达能力强，扩展性好</p>
+<p>更多的内容及规范参见<a href="http://www.yaml.org/" target="_blank" rel="noopener">http://www.yaml.org</a></p>
+<h3 id="YAML语法格式："><a href="#YAML语法格式：" class="headerlink" title="YAML语法格式："></a><strong>YAML语法格式：</strong></h3><p>1.在单一档案中，可用连续三个连字号(——)区分多个档案。另外，还有选择性的连续三个点号</p>
+<p>( … )用来表示档案结尾</p>
+<p>2.次行开始正常写Playbook的内容，一般建议写明该Playbook的功能</p>
+<p>3.使用#号注释代码</p>
+<p>4.缩进必须是统一的，不能空格和tab混用</p>
+<p>5.缩进的级别也必须是一致的，同样的缩进代表同样的级别，程序判别配置的级别是通过缩进结</p>
+<p>合换行来实现的</p>
+<p>6.YAML文件内容和Linux系统大小写判断方式保持一致，是区别大小写的，k/v的值均需大小写敏</p>
+<p>感</p>
+<p>7.k/v的值可同行写也可换行写。同行使用:分隔</p>
+<p>8.v可是个字符串，也可是另一个列表</p>
+<p>9.一个完整的代码块功能需最少元素需包括 name: task</p>
+<p>10.一个name只能包括一个task</p>
+<p>11.YAML文件扩展名通常为yml或yaml</p>
+<h3 id="YAML语法简介："><a href="#YAML语法简介：" class="headerlink" title="YAML语法简介："></a>YAML语法简介：</h3><p><strong>[列表]</strong></p>
+<p>List：列表，其所有元素均使用“-”打头</p>
+<p>示例：</p>
+<p># A list of tasty fruits</p>
+<p>– Apple</p>
+<p>– Orange</p>
+<p>– Strawberry</p>
+<p>– Mango</p>
+<p><strong>[字典]</strong></p>
+<p>Dictionary：字典，通常由多个key与value构成</p>
+<p>示例：</p>
+<p>—</p>
+<p># An employee record</p>
+<p>name: Example Developer</p>
+<p>job: Developer</p>
+<p>skill: Elite</p>
+<p>也可以将key:value放置于{}中进行表示，用,分隔多个key:value</p>
+<p>示例：</p>
+<p>—</p>
+<p># An employee record</p>
+<p>{name: Example Developer, job: Developer, skill: Elite}</p>
+<h2 id="二、剧本Playbook"><a href="#二、剧本Playbook" class="headerlink" title="二、剧本Playbook"></a><strong>二、剧本Playbook</strong></h2><h3 id="Playbook核心元素："><a href="#Playbook核心元素：" class="headerlink" title="Playbook核心元素："></a>Playbook核心元素：</h3><p><strong>Hosts</strong>：执行的远程主机列表</p>
+<p><strong>Tasks</strong>：任务列表</p>
+<p><strong>Varniables</strong>：内置变量或自定义变量在playbook中调用</p>
+<p><strong>Templates</strong>：模板，可替换模板文件中的变量并实现一些简单逻辑的文件</p>
+<p><strong>Handlers</strong>：和notify结合使用，由特定条件触发的操作，满足条件方才执行，否则不执行</p>
+<p><strong>tags</strong>：标签，指定某条任务执行，用于选择运行playbook中的部分代码。ansible具有幂等性。因此</p>
+<p>会自动跳过没有变化的部分。此时，如果确信其没有变化，就可以通过tags跳过此些代码片段</p>
+<p>下图展示的是Playbook的工作机制：</p>
+<p><img src="playbook.png" alt="playbook"></p>
+<h3 id="Hosts："><a href="#Hosts：" class="headerlink" title="Hosts："></a><strong>Hosts：</strong></h3><p><strong>作用：</strong>playbook中的每一个play的目的都是为了让某个或某些主机以某个指定的用户</p>
+<p>身份执行任务。hosts用于指定要执行指定任务的主机，须事先定义在主机清单中</p>
+<p>可以是如下形式：</p>
+<p>one.example.com</p>
+<p>one.example.com:two.example.com</p>
+<p>192.168.1.50</p>
+<p>192.168.1.*</p>
+<p>websrvs:dbsrvs               两个组的并集</p>
+<p>websrvs:&amp;dbsrvs             两个组的交集</p>
+<p>webservers:!dbsrvs 在websrvs组，但不在dbsrvs组</p>
+<p><strong>示例:</strong></p>
+<p>– hosts: websrvs：dbsrvs</p>
+<h3 id="remote-user："><a href="#remote-user：" class="headerlink" title="remote_user："></a><strong>remote_user：</strong></h3><p><strong>作用：</strong>可用于Host和task中。也可以通过指定其通过sudo的方式在远程主机上执行任务，</p>
+<p>其可用于play全局或某任务；此外，甚至可以在sudo时使用sudo_user指定sudo时切换的</p>
+<p>用户</p>
+<p>– hosts: websrvs</p>
+<p>  remote_user: root</p>
+<p>  tasks:</p>
+<p>​    – name: test connection</p>
+<p>​      ping:</p>
+<p>​      remote_user: magedu</p>
+<p>​      sudo: yes 默认sudo为root</p>
+<p>​      sudo_user:wang sudo为wang</p>
+<h3 id="tasks："><a href="#tasks：" class="headerlink" title="tasks："></a><strong>tasks：</strong></h3><p><strong>作用：</strong>任务列表</p>
+<p><strong>格式：module: arguments</strong></p>
+<p><strong>注意：</strong>shell和command模块后面跟命令，而非key=value</p>
+<p><strong>检查playbook：</strong></p>
+<p>ansible-playbook -C file.yml</p>
+<p><strong>运行playbook的方式：</strong></p>
+<p>​    <strong>ansible-playbook &lt;filrname.yml&gt; …[options]</strong></p>
+<p>​    <strong>options：</strong></p>
+<p>–check                      只检测可能会发生的改变，但不真正的操作</p>
+<p>–list-hosts                列出运行任务的主机</p>
+<p>–limit       主机列表       只针对主机列表中的主机执行</p>
+<p>-v,-vv,-vvv                 显示详细过程</p>
+<p>一个最简单的Playbook需包含的基础组件有host、remote_user、tasks</p>
+<p><strong>示例1：</strong></p>
+<p><strong>vim http.yml</strong></p>
+<p>—</p>
+<p>– hosts: websrvs</p>
+<p>  remote_user: root</p>
+<p>  tasks:</p>
+<p>​    – name: create new file</p>
+<p>​      file: name=/data/newfile state=touch</p>
+<p>​    – name: create new file</p>
+<p>​      user: name=test2 system=yes shell=/sbin/nologin</p>
+<p>​    – name: install package</p>
+<p>​      yum: name=httpd</p>
+<p>​    – name: copy index</p>
+<p>​      copy: src=/var/www/html/index.html dest=/var/www/html/</p>
+<p>​    – name: start service</p>
+<p>​      service: name=httpd state=started enabled=yes</p>
+<p><img src="http.yml_.png" alt="http.yml"></p>
+<h3 id="tags标签"><a href="#tags标签" class="headerlink" title="tags标签"></a><strong>tags标签</strong></h3><p><strong>task**</strong>任务也可以通过”tags”打标签，而后可在ansible-playbook命令上使用-t指定进行调用**</p>
+<p><strong>示例2：使用tags</strong></p>
+<p><strong>vim http.yml</strong></p>
+<p>—</p>
+<p>– host: websrvs</p>
+<p>  remote_user: root</p>
+<p>  tasks:</p>
+<p>​    – name: install httpd package</p>
+<p>​      yum: name=httpd</p>
+<p>​      tags: inshttpd</p>
+<p>​    – name: copy conf file</p>
+<p>​      copy: src=files/httpd.conf dest=/etc/httpd/conf/  backup=yes</p>
+<p>​      tags: cphttpd</p>
+<p>​    – name: start service</p>
+<p>​      service: name=httpd state=startd enable=yes</p>
+<p>​      tags: rshttpd</p>
+<p>ansible-playbook -t rshttpd httpd.yml            单独执行rshttp</p>
+<p>注：多个动作可共用一个tags标签</p>
+<p><img src="tags2.png" alt="tags2"></p>
+<h2 id="三、Playbook中handler的使用"><a href="#三、Playbook中handler的使用" class="headerlink" title="三、Playbook中handler的使用"></a><strong>三、Playbook中handler的使用</strong></h2><p>由于Ansible<strong>幂等性</strong>的特性，有时前一个task发生了变化，后续的task无变化并不会重新执行，</p>
+<p>但后续的task却可能受前一个task变化而影响。使用<strong>hanlder</strong>和<strong>notify</strong>即可解决此问题，handler</p>
+<p>用于当关注的资源发生变化时，才会采取一定的操作。在notify中列出的操作称为handler，</p>
+<p>也即notify中调用handler中定义的操作</p>
+<p><strong>示例：</strong></p>
+<p><strong>vim http.yml</strong></p>
+<p>—</p>
+<p>– host: websrvs</p>
+<p>  remote_user: root</p>
+<p>  tasks:</p>
+<p>​    – name: install httpd package</p>
+<p>​      yum: name=httpd</p>
+<p>​    – name: copy conf file</p>
+<p>​      copy: src=files/httpd.conf dest=/etc/httpd/conf/  backup=yes</p>
+<p>​    – name: start service</p>
+<p>​      service: name=httpd state=startd enable=yes</p>
+<p><strong>vim /files/httpd.conf</strong></p>
+<p>Listen 8080</p>
+<p><img src="8080.png" alt="8080"></p>
+<p>ansible-playbook http.yml</p>
+<p>此时无法重启服务，端口仍为80</p>
+<p><strong>vim http.yml</strong></p>
+<p>—</p>
+<p>– host: websrvs</p>
+<p>  remote_user: root</p>
+<p>  tasks:</p>
+<p>​    – name: install httpd package</p>
+<p>​      yum: name=httpd</p>
+<p>​    – name: copy conf file</p>
+<p>​      copy: src=files/httpd.conf dest=/etc/httpd/conf/  backup=yes</p>
+<p>​      notify: restart service</p>
+<p>​    – name: start service</p>
+<p>​      service: name=httpd state=startd enable=yes</p>
+<p>  handlers:</p>
+<p>​    – name: restart service</p>
+<p>​      service: name=httpd state=restarted</p>
+<p>由于httpd.conf发生了变化，触发了notify，执行相应的handler操作，httpd服务重启后</p>
+<p>监听端口变为8080</p>
+<p><img src="80802.png" alt="80802"></p>
+<h2 id="四、Playbook中变量的使用"><a href="#四、Playbook中变量的使用" class="headerlink" title="四、Playbook中变量的使用"></a><strong>四、Playbook中变量的使用</strong></h2><p><strong>变量名：</strong>仅能由字母、数字和下划线组成，且只能以字母开头</p>
+<p><strong>变量来源：</strong></p>
+<p><strong>1.ansible all -m setup</strong>  远程主机的所有变量都可直接调用</p>
+<p><strong>2.在/etc/ansible/hosts中定义</strong></p>
+<p>普通变量：主机组中主机单独定义，优先级高于公共变量</p>
+<p>host分组变量：针对主机组中所有主机定义统一变量</p>
+<p><strong>3.通过命令行指定变量，优先级最高</strong></p>
+<p>例如：ansible-playbook –e varname=value</p>
+<p><strong>4.在playbook中定义</strong></p>
+<p>vars:</p>
+<p>  – var1: value1</p>
+<p>  – var2: value2</p>
+<p><strong>5.在role中定义</strong></p>
+<p><strong>变量定义：</strong>key=value</p>
+<p><strong>示例：</strong>http_port=80</p>
+<p><strong>变量调用方式：</strong></p>
+<p>通过 调用变量，且变量名前后必须有空格，有时用””才生效</p>
+<p><strong>变量调用优先级：</strong></p>
+<p><strong>命令行-e &gt; playbook定义 &gt; hosts普通变量 &gt; host分组变量</strong></p>
+<p><strong>示例1：命令行变量赋值</strong></p>
+<p><strong>vim app.yml</strong></p>
+<p>—</p>
+<p>– hosts: appsrvs</p>
+<p>  remote_user: root</p>
+<p>  tasks:</p>
+<p>​    – name: install package</p>
+<p>​      yum: name=</p>
+<p>​    – name: start service</p>
+<p>​      service: name= state=started enabled=yes</p>
+<p>变量赋值并执行：</p>
+<p>ansible-playbook -e ‘pkname=vsftpd’ app.yml     </p>
+<p><img src="vsftpd.png" alt="vsftpd"></p>
+<p><strong>示例2：playbook中赋值变量</strong></p>
+<p><strong>vim app.yml</strong></p>
+<p>—</p>
+<p>– hosts: appsrvs</p>
+<p>  remote_user: root</p>
+<p>  vars:</p>
+<p>​    – pkname1: httpd</p>
+<p>​    – pkname2: vsftpd</p>
+<p>  tasks:</p>
+<p>​    – name: install package</p>
+<p>​      yum: name=</p>
+<p>​    – name: install package</p>
+<p>​      yum: name=</p>
+<p>ansible-playbook app.yml</p>
+<p><img src="palybook赋值变量.png" alt="palybook赋值变量"></p>
+<p><strong>示例3：hosts文件中定义普通变量</strong></p>
+<p><strong>vim /etc/ansible/hosts</strong></p>
+<p>192.168.30.101 httpd_port=81</p>
+<p>192.168.30.102 httpd_port=82</p>
+<p><strong>vim hostname.yml</strong></p>
+<p>—</p>
+<p>– hosts: websrvs</p>
+<p>  remote_user: root</p>
+<p>  tasks:</p>
+<p>​    – name: set hostname</p>
+<p>​      hostname: name=www.magedu.com</p>
+<p>ansible-playbook -C hostname.yml</p>
+<p><img src="分组变量.png" alt="分组变量"></p>
+<p><strong>示例4：hosts文件中定义分组变量</strong></p>
+<p><strong>vim /etc/ansible/hosts</strong></p>
+<p>[websrv:vars]</p>
+<p>nodename=www</p>
+<p>domainname=wxlinux.com</p>
+<p><img src="hostname2.png" alt="hostname2"></p>
+<p><strong>vim hostname2.yml</strong></p>
+<p>—</p>
+<p>– hosts: websrvs</p>
+<p>  remote_user: root</p>
+<p>  tasks:</p>
+<p>​    – name: set hostname</p>
+<p>​      hostname: name=.</p>
+<p>ansible-playbook hostname.yml</p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/05/hostname2-3.png" alt="hostname2 (hostname2-3.png)"></p>
+<p><strong>示例5：引用系统自带变量</strong></p>
+<p><strong>ansible all -m setup |grep  ansible_fqdn</strong>     查看系统自带变量</p>
+<p><img src="系统变量.png" alt="系统变量"></p>
+<p><strong>vim var.yml</strong></p>
+<p>—</p>
+<p>– hosts: websrvs</p>
+<p>  remote_user: root</p>
+<p>  tasks:</p>
+<p>​    – name: create log file</p>
+<p>​      file: name=/data/.log state=touch</p>
+<p><img src="系统变量2.png" alt="系统变量2"></p>
+<p><strong>示例6：定义变量到一个文件中</strong></p>
+<p><strong>vim vars.yml</strong></p>
+<p>var1: httpd</p>
+<p>var2: vsftpd</p>
+<p><img src="变量到文件中.png" alt="变量到文件中"></p>
+<p><strong>vim testvar.yml</strong></p>
+<p>—</p>
+<p>– hosts: websrvs</p>
+<p>  remote_user: root</p>
+<p>  vars_files:</p>
+<p>​    – vars.yml</p>
+<p>  tasks:</p>
+<p>​    – name: install package</p>
+<p>​      yum: name=</p>
+<p>​    – name: create file</p>
+<p>​      file: name=/data/.log state=touch</p>
+<p><img src="变量到文件中2.png" alt="变量到文件中2"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Ansible/" rel="tag"># Ansible</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/29/Ansible使用介绍（一）基本概念及常用模块/" rel="next" title="Ansible使用介绍（一）基本概念及常用模块">
+                <i class="fa fa-chevron-left"></i> Ansible使用介绍（一）基本概念及常用模块
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/31/Ansible使用介绍（三）templates及Roles角色/" rel="prev" title="Ansible使用介绍（三）templates及Roles角色">
+                Ansible使用介绍（三）templates及Roles角色 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、YAML介绍："><span class="nav-number">1.</span> <span class="nav-text">一、YAML介绍：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特性："><span class="nav-number">1.1.</span> <span class="nav-text">特性：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YAML语法格式："><span class="nav-number">1.2.</span> <span class="nav-text">YAML语法格式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YAML语法简介："><span class="nav-number">1.3.</span> <span class="nav-text">YAML语法简介：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、剧本Playbook"><span class="nav-number">2.</span> <span class="nav-text">二、剧本Playbook</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Playbook核心元素："><span class="nav-number">2.1.</span> <span class="nav-text">Playbook核心元素：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hosts："><span class="nav-number">2.2.</span> <span class="nav-text">Hosts：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#remote-user："><span class="nav-number">2.3.</span> <span class="nav-text">remote_user：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tasks："><span class="nav-number">2.4.</span> <span class="nav-text">tasks：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tags标签"><span class="nav-number">2.5.</span> <span class="nav-text">tags标签</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Playbook中handler的使用"><span class="nav-number">3.</span> <span class="nav-text">三、Playbook中handler的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、Playbook中变量的使用"><span class="nav-number">4.</span> <span class="nav-text">四、Playbook中变量的使用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

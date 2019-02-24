@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="sed,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、模式空间与保持空间：我们知道sed工作机制是每次读取一行文本至模式空间（pattern space）中，在模式空间中完成处理，将 处理结果输出至标准输出设备；在模式空间中处理一行内容后会继续处理下一行，那么对于处理过的行可 能还有其他的处理，因此可以把处理过的行传送至一个叫保持空间（hold space）中，然后在后续的处理中 再次传送回模式空间中。这就类似加工车间和仓库的概念，好比模式空间是">
+<meta name="keywords" content="sed">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文本三剑客之sed的高级用法">
+<meta property="og:url" content="http://yoursite.com/2018/04/16/文本三剑客之sed的高级用法/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="一、模式空间与保持空间：我们知道sed工作机制是每次读取一行文本至模式空间（pattern space）中，在模式空间中完成处理，将 处理结果输出至标准输出设备；在模式空间中处理一行内容后会继续处理下一行，那么对于处理过的行可 能还有其他的处理，因此可以把处理过的行传送至一个叫保持空间（hold space）中，然后在后续的处理中 再次传送回模式空间中。这就类似加工车间和仓库的概念，好比模式空间是">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/04/16/文本三剑客之sed的高级用法/文档.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/16/文本三剑客之sed的高级用法/例6.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/16/文本三剑客之sed的高级用法/例7.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/16/文本三剑客之sed的高级用法/例5.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/16/文本三剑客之sed的高级用法/例9.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/16/文本三剑客之sed的高级用法/例3.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/16/文本三剑客之sed的高级用法/例4.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/16/文本三剑客之sed的高级用法/例1.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/16/文本三剑客之sed的高级用法/奇数行.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/16/文本三剑客之sed的高级用法/例8.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/16/文本三剑客之sed的高级用法/例2.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/16/文本三剑客之sed的高级用法/例10.png">
+<meta property="og:updated_time" content="2018-07-17T02:40:13.289Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="文本三剑客之sed的高级用法">
+<meta name="twitter:description" content="一、模式空间与保持空间：我们知道sed工作机制是每次读取一行文本至模式空间（pattern space）中，在模式空间中完成处理，将 处理结果输出至标准输出设备；在模式空间中处理一行内容后会继续处理下一行，那么对于处理过的行可 能还有其他的处理，因此可以把处理过的行传送至一个叫保持空间（hold space）中，然后在后续的处理中 再次传送回模式空间中。这就类似加工车间和仓库的概念，好比模式空间是">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/16/文本三剑客之sed的高级用法/文档.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/16/文本三剑客之sed的高级用法/">
+
+
+
+
+
+  <title>文本三剑客之sed的高级用法 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/16/文本三剑客之sed的高级用法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">文本三剑客之sed的高级用法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-16T14:10:59+08:00">
+                2018-04-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/文本三剑客/" itemprop="url" rel="index">
+                    <span itemprop="name">文本三剑客</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、模式空间与保持空间："><a href="#一、模式空间与保持空间：" class="headerlink" title="一、模式空间与保持空间："></a><strong>一、模式空间与保持空间：</strong></h2><p>我们知道sed工作机制是每次读取一行文本至模式空间（pattern space）中，在模式空间中完成处理，将</p>
+<p>处理结果输出至标准输出设备；在模式空间中处理一行内容后会继续处理下一行，那么对于处理过的行可</p>
+<p>能还有其他的处理，因此可以把处理过的行传送至一个叫保持空间（hold space）中，然后在后续的处理中</p>
+<p>再次传送回模式空间中。这就类似加工车间和仓库的概念，好比模式空间是加工车间，保持空间就是仓</p>
+<p>库，不过这里的仓库存储的都是些半成品的产品。</p>
+<h2 id="二、sed高级用法："><a href="#二、sed高级用法：" class="headerlink" title="二、sed高级用法："></a><strong>二、sed高级用法：</strong></h2><p>Sed工具支持一些高级的命令来运用到保持空间中，这些高级命令有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">P：打印模式空间开端至\n内容，并追加到默认输出之前 </span><br><span class="line">h: 把模式空间中的内容覆盖至保持空间中 </span><br><span class="line">H：把模式空间中的内容追加至保持空间中 </span><br><span class="line">g: 从保持空间取出数据覆盖至模式空间 </span><br><span class="line">G：从保持空间取出内容追加至模式空间 </span><br><span class="line">x: 把模式空间中的内容与保持空间中的内容进行互换 </span><br><span class="line">n: 读取匹配到的行的下一行覆盖至模式空间 </span><br><span class="line">N：读取匹配到的行的下一行追加至模式空间 </span><br><span class="line">d: 删除模式空间中的行 </span><br><span class="line">D：如果模式空间包含换行符，则删除直到第一个换行符的模式空间中的文本，</span><br><span class="line">   并不会读取新的输入行，而使用合成的模式空间重新启动循环。如果模式空间</span><br><span class="line">   不包含换行符，则会像发出d命令那样启动正常的新循环。</span><br></pre></td></tr></table></figure>
+<h2 id="三、示例分析："><a href="#三、示例分析：" class="headerlink" title="三、示例分析："></a>三、示例分析：</h2><h3 id="以下我们均以该文档为例："><a href="#以下我们均以该文档为例：" class="headerlink" title="以下我们均以该文档为例："></a>以下我们均以该文档为例：</h3><p><img src="文档.png" alt="文档"></p>
+<p> <strong>例1：</strong>cat test2.sed |sed ‘G’</p>
+<p>解析：由于保持空间初始默认为空，所有将空行追加到每行的模式空间中输出，等同在每行的</p>
+<p>后面添加一个空行。</p>
+<p><img src="例6.png" alt="例6"></p>
+<p><strong>例2：</strong>cat test2.sed |sed ‘g’</p>
+<p>解析：g和G的区别在，g为覆盖模式空间，G为追加至模式空间，由于g默认为空，将每行的模式空间都覆</p>
+<p>盖为空行输出，所以表现为5个空行。</p>
+<p><img src="例7.png" alt="例7"></p>
+<p> <strong>例3：</strong>cat test2.sed |sed ‘$!d’</p>
+<p>解析：$表示尾行，$!d则表示除了尾行都执行删除。</p>
+<p><img src="例5.png" alt="例5"></p>
+<p><strong>例4：</strong>cat test2.sed |sed ‘n;d’</p>
+<p>解析：n将第一行读入模式空间输出，并将下一行即第二行覆盖至模式空间并删除，如此循环，最终表现为</p>
+<p>只显示文本的奇数行。</p>
+<p><img src="例9.png" alt="例9"></p>
+<p><strong>例5：</strong>cat test2.sed |sed ‘N;D’</p>
+<p>解析：N将第二行追加至第一行的模式空间中，D删除模式空间内的第一行；对第二行执行命令，将第三行追加至第二行的模式空间内，并删除模式中的第一行；如此循环，最后只输出最后一行文本。</p>
+<p><img src="例3.png" alt="例3"></p>
+<p> <strong>例6：</strong>cat test2.sed |sed ‘$!N;$!D’</p>
+<p>解析:’$!N;$!D’即对文本中除了最后一行支持’N;D’操作，由例外5可知，除了最后一行执行’N;D’操作，得出</p>
+<p>结果为只输出倒数第二行，最后一行文本不处理，默认输出，所有最后结果输出倒数两行的文本。</p>
+<p><img src="例4.png" alt="例4"></p>
+<p><strong>例7：</strong>cat test2.sed|sed -n ‘n;p’</p>
+<p>解析：对第一行执行操作，n选项将第二行覆盖至模式空间，在第一行和第二行的默认输出后追加打印出来，-n取消默认输出，如此循环，最后得出文本的偶数行。</p>
+<p><img src="例1.png" alt="例1"></p>
+<p><strong>例8：</strong>cat test2.sed|sed -n ‘1!n;p’</p>
+<p>解析：与例7相比，例8为对除了第一行的其他行执行例7的操作，则最后的结果也为得出文本的奇数行。</p>
+<p><img src="奇数行.png" alt="奇数行"></p>
+<p> <strong>例9：</strong>cat test2.sed |sed ‘/^$/d;G’</p>
+<p>解析：^$为表示地址定界匹配到的空行，d将空行删除，G在每行的文本后添加一个空行；最后的输出结果即：删除文本内的空行，并在每行后追加一行空行。</p>
+<p><img src="例8.png" alt="例8"></p>
+<p> <strong>例10：</strong>cat test2.sed |sed ‘1!G;h;$!d’</p>
+<p>解析：1!G表示除了第一行，都执行将保持空间的内容追加至模式空间并输出，h命令使上一个模式空间内容将G覆盖，最后$!d只保留对最后一行的执行结果，具体表现为：</p>
+<p>对第1行只进入模式空间默认输出，第2行将上一个模式空间内容（即第1行文本）覆盖至保持空间，共同进入模式空间（包含第2至1行文本）并输出；第3行将上一个模式空间内容（即第2至1行文本）覆盖至保持空间，共同进入模式空间（包含第3至1行文本）并输出；如此循环…….对第5行将上一个模式空间内容（第4至1行）覆盖至保持空间，共同进入模式空间（包含5至1行）输出；最后$!d除了最后一行的其他行的模式空间内容都删除，最后只留最后一行的执行结果，即将文本倒序输出。</p>
+<p><img src="例2.png" alt="例2"></p>
+<p><strong>例11：</strong>cat test2.sed |sed -n ‘1!G;h;$p’</p>
+<p>解析：与例10相比，最后的$p只打印最后一行的模式空间内容（第5至1行），-n取消所有默认输出，得出的结果与例10相同，倒序将文本输出。</p>
+<p><img src="例10.png" alt="例10"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sed/" rel="tag"># sed</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/15/文本三剑客之sed/" rel="next" title="文本三剑客之sed">
+                <i class="fa fa-chevron-left"></i> 文本三剑客之sed
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/20/Linux系统软件包管理介绍/" rel="prev" title="Linux系统软件包管理介绍">
+                Linux系统软件包管理介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、模式空间与保持空间："><span class="nav-number">1.</span> <span class="nav-text">一、模式空间与保持空间：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、sed高级用法："><span class="nav-number">2.</span> <span class="nav-text">二、sed高级用法：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、示例分析："><span class="nav-number">3.</span> <span class="nav-text">三、示例分析：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#以下我们均以该文档为例："><span class="nav-number">3.1.</span> <span class="nav-text">以下我们均以该文档为例：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

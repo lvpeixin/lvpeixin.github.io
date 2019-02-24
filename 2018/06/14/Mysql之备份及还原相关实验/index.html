@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="MySQL,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="实验准备：CentOS虚拟机两台，一台作为数据库服务器，一台作为中间存放备份的服务器 数据库服务器：操作系统：CentOS7.4              IP：192.168.30.10       提示符颜色：蓝色 中间服务器：操作系统：CentOS7.5             IP：192.168.30.17         提示符颜色：黄色 两台主机安装MariaDB 5.5.56，并且">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql之备份及还原相关实验">
+<meta property="og:url" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="实验准备：CentOS虚拟机两台，一台作为数据库服务器，一台作为中间存放备份的服务器 数据库服务器：操作系统：CentOS7.4              IP：192.168.30.10       提示符颜色：蓝色 中间服务器：操作系统：CentOS7.5             IP：192.168.30.17         提示符颜色：黄色 两台主机安装MariaDB 5.5.56，并且">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/备份前.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/2-18.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/备份前-1.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/1-17.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/2修改目录权限.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/3-15.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/4-13.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/5-13.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/6-13.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/7-9.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/9-3.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/8-5.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/1初始状态.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/2-19.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/3-17.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/4-14.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/5-14.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/6-14.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/7-10.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/1-18.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/2-20.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/3-18.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/4-15.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/5-15.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/6-15.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/1初始状态-1.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/2-21.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/3-19.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/4-16.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/5-16.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/1初始状态-2.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/2-22.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/3-20.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/4-17.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/初始.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/3-22.png">
+<meta property="og:image" content="http://www.178linux.com/wp-content/uploads/2018/06/4-2-1.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/5-17.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/初始.png">
+<meta property="og:updated_time" content="2018-07-17T13:09:32.379Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mysql之备份及还原相关实验">
+<meta name="twitter:description" content="实验准备：CentOS虚拟机两台，一台作为数据库服务器，一台作为中间存放备份的服务器 数据库服务器：操作系统：CentOS7.4              IP：192.168.30.10       提示符颜色：蓝色 中间服务器：操作系统：CentOS7.5             IP：192.168.30.17         提示符颜色：黄色 两台主机安装MariaDB 5.5.56，并且">
+<meta name="twitter:image" content="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/备份前.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/">
+
+
+
+
+
+  <title>Mysql之备份及还原相关实验 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Mysql之备份及还原相关实验</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-14T15:56:41+08:00">
+                2018-06-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="实验准备："><a href="#实验准备：" class="headerlink" title="实验准备："></a><strong>实验准备：</strong></h2><p>CentOS虚拟机两台，一台作为数据库服务器，一台作为中间存放备份的服务器</p>
+<h3 id="数据库服务器："><a href="#数据库服务器：" class="headerlink" title="数据库服务器："></a><strong>数据库服务器：</strong></h3><p>操作系统：CentOS7.4              IP：192.168.30.10       提示符颜色：<strong>蓝色</strong></p>
+<h3 id="中间服务器："><a href="#中间服务器：" class="headerlink" title="中间服务器："></a><strong>中间服务器：</strong></h3><p>操作系统：CentOS7.5             IP：192.168.30.17         提示符颜色：<strong>黄色</strong></p>
+<p>两台主机安装<strong>MariaDB 5.5.56</strong>，并且开启二进制日志功能</p>
+<h2 id="实验一：冷备份数据库并还原"><a href="#实验一：冷备份数据库并还原" class="headerlink" title="实验一：冷备份数据库并还原"></a><strong>实验一：冷备份数据库并还原</strong></h2><h3 id="备份："><a href="#备份：" class="headerlink" title="备份："></a><strong>备份：</strong></h3><p>数据库初始状态为：</p>
+<p><img src="备份前.png" alt="备份前"></p>
+<p>1停止mysql服务</p>
+<p>systemctl stop mariadb.service</p>
+<p>2打包并压缩备份文件</p>
+<p>（注：生产环境应将备份文件与数据库服务器分开存放）</p>
+<p>tar Jcvf /data/all.tar.xz /var/lib/mysql/</p>
+<p>3模拟破坏数据库</p>
+<p>rm -rf /var/lib/mysql/*</p>
+<h3 id="还原："><a href="#还原：" class="headerlink" title="还原："></a><strong>还原：</strong></h3><p>tar xvf /data/all.tar.xz</p>
+<p>mv  var/lib/mysql/* /var/lib/mysql/</p>
+<p>确认文件已生成</p>
+<p>ls /var/lib/mysql/</p>
+<p><img src="2-18.png" alt="2"></p>
+<p>重新启动服务：</p>
+<p>systemctl start mariadb.service</p>
+<p>确认数据库已恢复</p>
+<p><img src="备份前-1.png" alt="备份前"></p>
+<h2 id="实验二：结合LVM逻辑卷实现几乎热备"><a href="#实验二：结合LVM逻辑卷实现几乎热备" class="headerlink" title="实验二：结合LVM逻辑卷实现几乎热备"></a><strong>实验二：结合LVM逻辑卷实现几乎热备</strong></h2><h3 id="备份：-1"><a href="#备份：-1" class="headerlink" title="备份："></a><strong>备份：</strong></h3><p>1.创建逻辑卷</p>
+<p>新建一个磁盘分区/dev/sda6</p>
+<p>pvcreate /dev/sda6</p>
+<p>vgcreate vg0 /dev/sda6</p>
+<p>lvcreate -L 4G -n lv_mysql vg0</p>
+<p>lvcreate -L 4G -n lv_binlog vg0</p>
+<p>mkfs.xfs lv_mysql lv_binlog</p>
+<p>mkdir /data/{mysql,binlog}</p>
+<p>mount /dev/vg0/lv_mysql /data/mysql/</p>
+<p>mount /dev/vg0/lv_binlog /data/binlog/</p>
+<p><img src="1-17.png" alt="1"></p>
+<p>2修改目录权限</p>
+<p>chown -R mysql.mysql /data/mysql/</p>
+<p>chown -R mysql.mysql /data/binlog/</p>
+<p><img src="2修改目录权限.png" alt="2修改目录权限"></p>
+<p>3修改配置文件</p>
+<p><strong>vim /etc/my.cnf</strong></p>
+<p>[mysqld]</p>
+<p>datadir=/data/mysql</p>
+<p>log_bin=/data/binlog/mysql-bin</p>
+<p><img src="3-15.png" alt="3"></p>
+<p>4重启mysql服务</p>
+<p>systemctl restart mariadb</p>
+<p>5添加读锁，防止有用户继续写入数据</p>
+<p>mysql&gt; flush tables with read lock;</p>
+<p>刷新日志</p>
+<p>mysql&gt; flush logs;</p>
+<p>查看当前二进制日志</p>
+<p>mysql&gt; show master logs;</p>
+<p>记录最新的二进制日志为：mariadb-bin.000004</p>
+<p><img src="4-13.png" alt="4"></p>
+<p>6创建快照</p>
+<p>lvcreate -L 1G -n lv_mysql_snap -s -p r /dev/vg0/lv_mysql</p>
+<p><img src="5-13.png" alt="5"></p>
+<p>7解锁数据库</p>
+<p>Mysql&gt; unlock tables；</p>
+<p>8挂载逻辑卷快照</p>
+<p>mount -o nouuid,norecovery /dev/vg0/lv_mysql_snap  /mnt</p>
+<p><img src="6-13.png" alt="6"></p>
+<p>9将逻辑卷文件备份至backup目录</p>
+<p>mkdir /backup</p>
+<p>cp -a /mnt/* /backup/</p>
+<p><img src="7-9.png" alt="7"></p>
+<p>10删除快照,否则影响用户访问数据库速度</p>
+<p>umount /mnt</p>
+<p>lvremove /dev/vg0/lv_mysql_snap</p>
+<p>备份过程结束</p>
+<p>Mysql &gt;  create databases db2</p>
+<p>Mysql &gt;  create databases db3</p>
+<h3 id="模拟数据库损坏"><a href="#模拟数据库损坏" class="headerlink" title="模拟数据库损坏:"></a><strong>模拟数据库损坏:</strong></h3><p>rm –rf  /data/mysql/*</p>
+<h3 id="还原：-1"><a href="#还原：-1" class="headerlink" title="还原："></a><strong>还原：</strong></h3><p>停止mysql服务</p>
+<p>systemctl stop mariadb</p>
+<p>拷贝备份文件至数据库目录</p>
+<p>cp -av /backup/*  /data/mysql/</p>
+<p>开启mysql服务</p>
+<p>systemctl  start mariadb</p>
+<p>此时数据库已还原至快照时的状态</p>
+<p><img src="9-3.png" alt="9"></p>
+<p>二进制继续修复db1，db2</p>
+<p>mysql&gt; flush tables with read lock;</p>
+<p>mysqlbinlog –start-position=245 mysql-bin.000004 &gt; /backup/bin.sql</p>
+<p>mysqlbinlog mysql-bin.000005 &gt;&gt; /backup/bin.sql</p>
+<p>确保恢复过程中，没有用户可以读取或写入</p>
+<p><strong>vim /etc/my.cnf</strong></p>
+<p>[mysqld]</p>
+<p>skip_networking</p>
+<p>或iptables –A</p>
+<p>重启mysql服务使生效</p>
+<p>systemctl  restart mariadb</p>
+<p>导入二进制文件</p>
+<p>mysql &lt; /backup/bin.sql</p>
+<p>此时数据库已还原至最新状态</p>
+<p><img src="8-5.png" alt="8"></p>
+<p>最后，恢复用户访问</p>
+<p><strong>vim /etc/my.cnf</strong></p>
+<p>[mysqld]</p>
+<p>skip_networking              去掉</p>
+<p>或清除防火墙</p>
+<p>systemctl restart mariadb</p>
+<h2 id="实验三：数据库数据文件损坏后，利用mysqldump还原至最新状态"><a href="#实验三：数据库数据文件损坏后，利用mysqldump还原至最新状态" class="headerlink" title="实验三：数据库数据文件损坏后，利用mysqldump还原至最新状态"></a><strong>实验三：数据库数据文件损坏后，利用mysqldump还原至最新状态</strong></h2><p>初始数据库为：</p>
+<p><img src="1初始状态.png" alt="1初始状态"></p>
+<p>利用mysqldump生成备份文件</p>
+<p>mysqldump -A -F –single-transaction –master-data=2&gt;/backup/fullbak_<code>date +%F</code>.sql</p>
+<p>ls /backup -l</p>
+<p>![(}{FM3NQF{)%U<a href="http://www.178linux.com/wp-content/uploads/2018/06/FM3NQFUHU75G2IAE.png" target="_blank" rel="noopener">HU75G2IAE</a></p>
+<p>mysql&gt; create database db2</p>
+<p>mysql&gt; create database db3</p>
+<p>此时数据库为：</p>
+<p><img src="2-19.png" alt="2"></p>
+<p>最新二进制日志为：mariadb-bin.000006</p>
+<p><img src="3-17.png" alt="3"></p>
+<p>模拟日常将备份传至中间主机：<strong>192.168.30.17</strong></p>
+<p><img src="4-14.png" alt="4"></p>
+<p>接下来为了方便演示，我们之间在中间主机进行数据库恢复：</p>
+<p>rm  -rf  /var/lib/mysql</p>
+<h3 id="还原：-2"><a href="#还原：-2" class="headerlink" title="还原："></a><strong>还原：</strong></h3><p>利用mysqlbinlog命令可查看二进制日志，看到创建db2，db3发生在position245之后</p>
+<p>mysqlbinlog mariadb-bin.000006</p>
+<p><img src="5-14.png" alt="5"></p>
+<p>首先还是停止mysql服务</p>
+<p>systemctl stop mariadb.service</p>
+<p>禁止其他用户访问或修改数据库</p>
+<p><strong>vim /etc/my.cnf</strong></p>
+<p>[msyqld]</p>
+<p>skip_networking</p>
+<p>生成二进制备份文件</p>
+<p>mysqlbinlog –start-position=245  mysql-bin.000012 &gt; bin.sql</p>
+<p>重新开启mysql服务</p>
+<p>systemctl start mariadb.service</p>
+<p>修复至mysqldump全备份阶段</p>
+<p>mysql &lt; fullbak_2018-06-14.sql</p>
+<p><img src="6-14.png" alt="6"></p>
+<p>继续二进制修复db2，db3</p>
+<p>mysql &lt; bin.sql</p>
+<p><img src="7-10.png" alt="7"></p>
+<p>此时，数据库修复完成，最后别忘了修改配置文件</p>
+<p><strong>vim /etc/my.cnf</strong></p>
+<p>[msyqld]</p>
+<p>skip_networking   去掉此行</p>
+<p>重启mysql服务</p>
+<p>systemctl restart mysql</p>
+<h2 id="实验四：误删除表后，利用mysqldump还原至最新状态"><a href="#实验四：误删除表后，利用mysqldump还原至最新状态" class="headerlink" title="实验四：误删除表后，利用mysqldump还原至最新状态"></a><strong>实验四：误删除表后，利用mysqldump还原至最新状态</strong></h2><p><strong>前期准备:</strong>开启二进制日志功能</p>
+<p><strong>实验场景：</strong>模拟周日进行了全备份，周一上午10表被误删除，10点之前与之后均发生了其他操作，尝试还</p>
+<p>原数据库中误删除的表并且操作不发生丢失</p>
+<p>数据库初始状态</p>
+<p><img src="1-18.png" alt="1"></p>
+<p>模拟周日进行完全备份：</p>
+<p><img src="2-20.png" alt="2"></p>
+<p>模拟周一上午10点数据发生了修改(students表原总行数为25)</p>
+<p>Mysql &gt;  insert students values(26,’mysql’,’30’,’M’,2,3);</p>
+<p>模拟周一上午10点某张表被删除</p>
+<p>Mysql &gt;  drop table students;</p>
+<p>模拟周一上午10点至10点10分间又进行了其他操作</p>
+<p>insert teachers values(5,’mht’,’46’,’m’)；</p>
+<p>周一上午10点10分，发现students表丢失</p>
+<h3 id="还原：-3"><a href="#还原：-3" class="headerlink" title="还原："></a><strong>还原：</strong></h3><p>Mysql &gt;  flush tables with read lock;</p>
+<p>查看当前二进制日志为：mariadb-bin.000003</p>
+<p>Mysql &gt;  show master logs;</p>
+<p>刷新二进制日志</p>
+<p>Mysql &gt;  flush logs</p>
+<p><img src="3-18.png" alt="3"></p>
+<p>查看全备份的position，确定全备份到目前之间的所有日志文件及position</p>
+<p>less /backup/fullbak</p>
+<p><img src="4-15.png" alt="4"></p>
+<p>mysqlbinlog –start-position=245 /var/lib/mysql/mariadb-bin.000003 &gt; /backup/bin.sql</p>
+<p>mysqlbinlog /var/lib/mysql/mariadb-bin.000004 &gt;&gt; /backup/bin.sql</p>
+<p>找到想要撤销的操作，删除</p>
+<p>vim /backup/bin.sql</p>
+<p><img src="5-15.png" alt="5"></p>
+<p>停止mysql服务</p>
+<p>systemctl stop mariadb.service</p>
+<p>禁止其他用户访问或修改数据库</p>
+<p><strong>vim /etc/my.cnf</strong></p>
+<p>[msyqld]</p>
+<p>skip_networking</p>
+<p>删除库下数据(不用紧张^^)</p>
+<p>rm -rf /var/lib/mysql/*</p>
+<p>重新启动mysql服务</p>
+<p>systemctl start mariadb.service</p>
+<p>导入周日的全备份</p>
+<p>mysql &lt; /backup/fullbak_2018-06-14.sql</p>
+<p>继续导入修改过的二进制备份</p>
+<p>mysql &lt; /backup/bin.sql</p>
+<p>我们看到students表还原成功，而且不论是表删除之前还是之后发生的操作也都恢复回来了</p>
+<p><img src="6-15.png" alt="6"></p>
+<p>此时，数据库修复完成，最后别忘了修改配置文件</p>
+<p><strong>vim /etc/my.cnf</strong></p>
+<p>[msyqld]</p>
+<p>skip_networking   去掉此行</p>
+<p>重启mysql服务</p>
+<p>systemctl restart mysql</p>
+<h2 id="实验五：Xtrabackup完全备份及还原"><a href="#实验五：Xtrabackup完全备份及还原" class="headerlink" title="实验五：Xtrabackup完全备份及还原"></a><strong>实验五：Xtrabackup完全备份及还原</strong></h2><p>安装xtrabackup包(epel)</p>
+<p>yum install percona*</p>
+<p>数据库初始为：</p>
+<p><img src="1初始状态-1.png" alt="1初始状态"></p>
+<p>利用innobackupex命令完全备份</p>
+<p>Innobackupex  [ –user=root –password=!@#$% ]  /backup/</p>
+<p><img src="2-21.png" alt="2"></p>
+<p>模拟日常将备份传至中间主机：<strong>192.168.30.17</strong></p>
+<p>scp -r /backup/ 192.168.30.17:/</p>
+<h3 id="还原：-4"><a href="#还原：-4" class="headerlink" title="还原："></a><strong>还原：</strong></h3><p>接下来为了方便演示，我们之间在中间主机进行数据库恢复：</p>
+<p>停止mysql服务</p>
+<p>systemctl stop mariadb.service</p>
+<p>清空数据库</p>
+<p>rm –rf /var/lib/mysql/*</p>
+<p>整合完全备份</p>
+<p>innobackupex –apply-log /backup/2018-06-14_17-08-53/</p>
+<p><img src="3-19.png" alt="3"></p>
+<p>自动复制到数据库目录，但所属主为root，需要变更</p>
+<p>innobackupex –copy-back /backup/2018-06-14_17-08-53/</p>
+<p><img src="4-16.png" alt="4"></p>
+<p>chown -R mysql.mysql /var/lib/mysql/</p>
+<p>重新开启mysql服务</p>
+<p>systemctl start mariadb.server</p>
+<p>数据库恢复成功</p>
+<p><img src="5-16.png" alt="5"></p>
+<h2 id="实验六：Xtrabackup完全，增量备份及还原"><a href="#实验六：Xtrabackup完全，增量备份及还原" class="headerlink" title="实验六：Xtrabackup完全，增量备份及还原"></a><strong>实验六：Xtrabackup完全，增量备份及还原</strong></h2><p>初始数据库为：</p>
+<p><img src="1初始状态-2.png" alt="1初始状态"></p>
+<p>mkdir /backup/</p>
+<p>mkdir /backup/{inc1,inc2}</p>
+<p>Innobackupex  [ –user=root –password=!@#$% ]  /backup/</p>
+<p>模拟第一次修改数据库</p>
+<p>mysql&gt; insert students values(26,’test1′,18,’M’,1,2)；</p>
+<p>第一次增量备份</p>
+<p>innobackupex  –incremental /backup/inc1  –incremental-basedir=</p>
+<p>/backup/2018-06-14_17-50-43</p>
+<p>模拟第二次修改数据库</p>
+<p>mysql&gt; insert students values(27,’test1′,28,’M’,1,2)；</p>
+<p>第二次增量备份</p>
+<p>Innobackupex  –incremental/backup/inc2  –incremental-basedir=</p>
+<p>/backup/inc1/2018-06-14_17-55-52</p>
+<p>此时backup目录结构</p>
+<p><img src="2-22.png" alt="2"></p>
+<p>复制到远程主机做备份：</p>
+<p>scp -r /backup/ 192.68.30.17:/</p>
+<h3 id="还原：-5"><a href="#还原：-5" class="headerlink" title="还原："></a><strong>还原：</strong></h3><p>接下来为了方便演示，我们之间在中间主机进行数据库恢复：</p>
+<p>停止mysql服务</p>
+<p>systemctl stop mariadb.service</p>
+<p>清空数据库</p>
+<p>rm –rf /var/lib/mysql/*</p>
+<p>整合完全备份：</p>
+<p>innobackupex –apply-log –redo-only /backup/2018-06-14_17-50-43/</p>
+<p>整合第一次增量备份：</p>
+<p>innobackupex –apply-log –redo-only /backup/2018-06-14_17-50-43/ –incremental-dir /backup/inc1/2018-06-14_17-55-52</p>
+<p>整合第二次增量备份：</p>
+<p>innobackupex –apply-log –redo-only /backup/2018-06-14_17-50-43/ –incremental-dir /backup/inc2/2018-06-14_17-59-00</p>
+<p>自动复制到数据库目录，但所属主为root，需要变更</p>
+<p>innobackupex –copy-back /backup/2018-06-14_17-50-43/</p>
+<p><img src="3-20.png" alt="3"></p>
+<p>更改属主为mysql</p>
+<p>chown -R mysql.mysql /var/lib/mysql/*</p>
+<p>重新开启mysql服务</p>
+<p>systemctl start mariadb.service</p>
+<p>此时，我们看到第一次修改，第二次修改的数据也已还原</p>
+<p><img src="4-17.png" alt="4"></p>
+<h2 id="实验七：Xtrabackup单表导出和导入"><a href="#实验七：Xtrabackup单表导出和导入" class="headerlink" title="实验七：Xtrabackup单表导出和导入"></a><strong>实验七：Xtrabackup单表导出和导入</strong></h2><p><strong>前期准备：</strong>必须设置独立表空间</p>
+<p><strong>vim /etc/my.cnf</strong></p>
+<p>[mysqld]</p>
+<p>innodb_file_per_table</p>
+<p>初始表信息为:</p>
+<p><img src="初始.png" alt="初始"></p>
+<p>1单表备份</p>
+<p>innobackupex –include=”hellodb.students” /backup/</p>
+<p>2备份表结构</p>
+<p>mysql -e ‘show create table hellodb.students’ &gt; students.sql</p>
+<p>删除其中的多余部分，留下下图所示内容</p>
+<p><img src="3-22.png" alt="3"></p>
+<p>vim students.sql</p>
+<p>3模拟破坏表</p>
+<p>mysql -e ‘drop table hellodb.students’</p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/06/4-2-1.png" alt="4 (4-2-1.png)"></p>
+<p>### </p>
+<h3 id="还原：-6"><a href="#还原：-6" class="headerlink" title="还原："></a><strong>还原：</strong></h3><p>整合备份</p>
+<p>innobackupex –apply-log –export /backup/2018-06-14_19-03-21</p>
+<p>导入表结构</p>
+<p>mysql hellodb &lt; students.sql</p>
+<p>此时表结构已生成，但数据为空</p>
+<p><img src="5-17.png" alt="5"></p>
+<p>删除表空间</p>
+<p>mysql -e ‘alter table hellodb.students discard tablespace’</p>
+<p>复制相关文件到hellodb目录</p>
+<p>cd /backup/2018-06-14_19-37-02/hellodb/</p>
+<p>cp students.cfg students.exp students.ibd /data/mysql/hellodb/</p>
+<p>修改hellodb目录下文件权限</p>
+<p>chown mysql.mysql /data/mysql/hellodb/*</p>
+<p>mysql&gt;alter table students import tablespace;</p>
+<p>此时数据已恢复完成</p>
+<p><img src="初始.png" alt="初始"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/12/MySQL之日志管理/" rel="next" title="MySQL之日志管理">
+                <i class="fa fa-chevron-left"></i> MySQL之日志管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/18/MySQL之主从复制相关实验/" rel="prev" title="MySQL之主从复制相关实验">
+                MySQL之主从复制相关实验 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#实验准备："><span class="nav-number">1.</span> <span class="nav-text">实验准备：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库服务器："><span class="nav-number">1.1.</span> <span class="nav-text">数据库服务器：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中间服务器："><span class="nav-number">1.2.</span> <span class="nav-text">中间服务器：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验一：冷备份数据库并还原"><span class="nav-number">2.</span> <span class="nav-text">实验一：冷备份数据库并还原</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#备份："><span class="nav-number">2.1.</span> <span class="nav-text">备份：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#还原："><span class="nav-number">2.2.</span> <span class="nav-text">还原：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验二：结合LVM逻辑卷实现几乎热备"><span class="nav-number">3.</span> <span class="nav-text">实验二：结合LVM逻辑卷实现几乎热备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#备份：-1"><span class="nav-number">3.1.</span> <span class="nav-text">备份：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模拟数据库损坏"><span class="nav-number">3.2.</span> <span class="nav-text">模拟数据库损坏:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#还原：-1"><span class="nav-number">3.3.</span> <span class="nav-text">还原：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验三：数据库数据文件损坏后，利用mysqldump还原至最新状态"><span class="nav-number">4.</span> <span class="nav-text">实验三：数据库数据文件损坏后，利用mysqldump还原至最新状态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#还原：-2"><span class="nav-number">4.1.</span> <span class="nav-text">还原：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验四：误删除表后，利用mysqldump还原至最新状态"><span class="nav-number">5.</span> <span class="nav-text">实验四：误删除表后，利用mysqldump还原至最新状态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#还原：-3"><span class="nav-number">5.1.</span> <span class="nav-text">还原：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验五：Xtrabackup完全备份及还原"><span class="nav-number">6.</span> <span class="nav-text">实验五：Xtrabackup完全备份及还原</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#还原：-4"><span class="nav-number">6.1.</span> <span class="nav-text">还原：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验六：Xtrabackup完全，增量备份及还原"><span class="nav-number">7.</span> <span class="nav-text">实验六：Xtrabackup完全，增量备份及还原</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#还原：-5"><span class="nav-number">7.1.</span> <span class="nav-text">还原：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验七：Xtrabackup单表导出和导入"><span class="nav-number">8.</span> <span class="nav-text">实验七：Xtrabackup单表导出和导入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#还原：-6"><span class="nav-number">8.1.</span> <span class="nav-text">还原：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

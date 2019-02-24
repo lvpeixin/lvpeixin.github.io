@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="进程管理,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、进程相关概念：进程是正在运行的程序实体，并且包括这个运行的程序中占据的所有系统资源，比如说CPU，IO,内存，网 络资源等。通过学习Linux系统进程管理来协调多道程序之间的关系，使CPU得到充分的利用。 进程和程序的区别是什么？ 进程是一个动态的概念，当用户把一个程序或命令执行起来的时候，才有进程的概念， 系统会自动分配一个编号PID给进程。 程序是一个静态的概念，表现为一个文件 进程的分类">
+<meta name="keywords" content="进程管理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux系统进程管理及作业操作">
+<meta property="og:url" content="http://yoursite.com/2018/05/05/Linux系统进程管理及作业操作/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="一、进程相关概念：进程是正在运行的程序实体，并且包括这个运行的程序中占据的所有系统资源，比如说CPU，IO,内存，网 络资源等。通过学习Linux系统进程管理来协调多道程序之间的关系，使CPU得到充分的利用。 进程和程序的区别是什么？ 进程是一个动态的概念，当用户把一个程序或命令执行起来的时候，才有进程的概念， 系统会自动分配一个编号PID给进程。 程序是一个静态的概念，表现为一个文件 进程的分类">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/05/05/Linux系统进程管理及作业操作/信号.png">
+<meta property="og:updated_time" content="2018-07-17T13:04:48.769Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux系统进程管理及作业操作">
+<meta name="twitter:description" content="一、进程相关概念：进程是正在运行的程序实体，并且包括这个运行的程序中占据的所有系统资源，比如说CPU，IO,内存，网 络资源等。通过学习Linux系统进程管理来协调多道程序之间的关系，使CPU得到充分的利用。 进程和程序的区别是什么？ 进程是一个动态的概念，当用户把一个程序或命令执行起来的时候，才有进程的概念， 系统会自动分配一个编号PID给进程。 程序是一个静态的概念，表现为一个文件 进程的分类">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/05/Linux系统进程管理及作业操作/信号.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/05/Linux系统进程管理及作业操作/">
+
+
+
+
+
+  <title>Linux系统进程管理及作业操作 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/05/Linux系统进程管理及作业操作/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux系统进程管理及作业操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-05T14:28:32+08:00">
+                2018-05-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、进程相关概念："><a href="#一、进程相关概念：" class="headerlink" title="一、进程相关概念："></a><strong>一、进程相关概念：</strong></h2><p><strong>进程</strong>是正在运行的程序实体，并且包括这个运行的程序中占据的所有系统资源，比如说CPU，IO,内存，网</p>
+<p>络资源等。通过学习Linux系统进程管理来协调多道程序之间的关系，使CPU得到充分的利用。</p>
+<p><strong>进程和程序的区别是什么？</strong></p>
+<p><strong>进程</strong>是一个动态的概念，当用户把一个程序或命令执行起来的时候，才有进程的概念，</p>
+<p>系统会自动分配一个编号PID给进程。</p>
+<p><strong>程序</strong>是一个静态的概念，表现为一个文件</p>
+<h3 id="进程的分类："><a href="#进程的分类：" class="headerlink" title="进程的分类："></a>进程的分类：</h3><p><strong>根据进程与系统终端的关系：</strong></p>
+<p>（1）守护进程：在系统引导过程中启动的进程，即跟终端无关的进程。</p>
+<p>（2）前台进程：跟终端相关，通过终端启动的进程；</p>
+<p>注：守护进程和前台进程可相互转化</p>
+<p><strong>根据进程占用资源的多少分为：</strong></p>
+<p>（1）CPU密集型：对cpu占用率高的进程</p>
+<p>（2）IO密集型：占用磁盘读写高的进程</p>
+<h3 id="进程的状态："><a href="#进程的状态：" class="headerlink" title="进程的状态："></a>进程的状态：</h3><p>进程在被内核调度过程中的状态可分为很多种：</p>
+<p>1.运行态：running 进程正在运行中</p>
+<p>2.就绪态：ready</p>
+<p>3.睡眠态：sleeping</p>
+<p>可中断睡眠：interruptible  大部分进程处于此状态，随时可唤醒</p>
+<p>不可中断睡眠：uninterruptible</p>
+<p>4.僵尸态：zombie 找不到归属的进程，或父进程已不存在</p>
+<p>5.停止态：stopped 不可被调度并运行</p>
+<h3 id="进程优先级"><a href="#进程优先级" class="headerlink" title="进程优先级"></a>进程优先级</h3><p>进程优先级：</p>
+<p>系统优先级：数字越小，优先级越高</p>
+<p>0-139（CentOS4,5）</p>
+<p>各有140个运行队列和过期队列</p>
+<p>0-98，99（CentOS6）</p>
+<p>实时优先级: 99-0 值最大优先级最高</p>
+<p>nice值：-20到19，对应系统优先级100-139或99</p>
+<p>Big O：时间复杂度，用时和规模的关系（越往左越好）</p>
+<p>O(1), O(logn), O(n)线性, O(n^2)抛物线, O(2^n)</p>
+<h3 id="进程内存："><a href="#进程内存：" class="headerlink" title="进程内存："></a>进程内存：</h3><p>Page Frame: 页框，用存储页面数据，存储Page 4k</p>
+<p>LRU：Least Recently Used 近期最少使用算法,释放内存</p>
+<p>物理地址空间和线性地址空间</p>
+<p>MMU：Memory Management Unit负责转换线性和物理地址</p>
+<p>TLB:Translation Lookaside Buffer 翻译后备缓冲器,用于保存虚拟地址和物理地址</p>
+<p>映射关系的缓存</p>
+<p>IPC: Inter Process Communication</p>
+<p>同一主机: signal:信号</p>
+<p>shm: shared memory</p>
+<p>semaphore:信号量，一种计数器</p>
+<p>不同主机：socket: IP和端口号</p>
+<p>RPC: remote procedure call       远程过程调用</p>
+<p>MQ：消息队列，Kafka，ActiveMQ</p>
+<h2 id="二、信号操作管理"><a href="#二、信号操作管理" class="headerlink" title="二、信号操作管理"></a><strong>二、信号操作管理</strong></h2><p>我们指定同一主机间的程序是通过信号来进行通讯的，那么我们也可以通过发送信号的方式对进程进行管</p>
+<p>理。</p>
+<p>使用<strong>kill  -l</strong> 命令可以查看当前支持的信号类型：</p>
+<p><img src="信号.png" alt="信号"></p>
+<p><strong>信号的表示方式：</strong></p>
+<p>（1）数字表示：1,2,9</p>
+<p>（2）完整名称：SIGHUP</p>
+<p>（3）简写名称：HUP</p>
+<p>Linux系统支持的型号类型多达60余种，常用信号类型有：</p>
+<p><strong>SIGHUP：1，</strong>无须关闭进程而让其重新读取配置文件，使新配置生效</p>
+<p><strong>SIGINT：2，</strong>打断正在运行中的进程，相当于Ctrl+c</p>
+<p><strong>SIGQUIT：3，</strong>相当Ctrl+\</p>
+<p><strong>SIGKILL：9，</strong>强制杀死正在运行的进程</p>
+<p><strong>SIGTERN：15，</strong>终止正在运行的进程（kill命令默认信号）</p>
+<p><strong>SIGCONT：18，</strong>继续运行指定进程</p>
+<p><strong>SIGSTOP：19，</strong>后台休眠</p>
+<h3 id="信号管理命令"><a href="#信号管理命令" class="headerlink" title="信号管理命令"></a>信号管理命令</h3><p>常用的信号管理命令有kill，killall，pkill：</p>
+<p><strong>kill</strong>命令可用来向进程发送信号指令，以及显示当前系统可用的信号</p>
+<p><strong>kill</strong>发送信号格式：</p>
+<p><strong>kill [-SIGNAL] PID</strong></p>
+<p>如：kill -9 123                 强制杀死PID为123的进程</p>
+<p><strong>killall</strong>发送信号格式：</p>
+<p><strong>killall [-SIGNAL] PROCESS</strong></p>
+<p>如：kill -9 sleep      强制杀死sleep进程</p>
+<p>注意：kill命令跟PID，killall命令跟进程名</p>
+<p><strong>pkill</strong>发送信号格式：</p>
+<p><strong>pkill [options] pattern</strong></p>
+<p><strong>options：</strong></p>
+<p>-SIGNAL</p>
+<p>-u uid                生效者</p>
+<p>-U uid               真正发起运行命令者</p>
+<p>-t terminal       与指定终端相关的进程</p>
+<p>-P pid                显示指定进程的子进程</p>
+<p>如：pkill -9 -t tty2  强制杀死tty2终端下的所有进程</p>
+<h2 id="三、作业管理（job-control）"><a href="#三、作业管理（job-control）" class="headerlink" title="三、作业管理（job control）"></a><strong>三、作业管理（job control）</strong></h2><p>我们知道，在登录系统后每一个工作进程都是当前bash的子进程，通过作业管理我们可以</p>
+<p>实现多个进程同时运行，这里我们要涉及到两个新的名词：前台作业和后台作业</p>
+<p><strong>前台作业</strong>：通过终端前，且启动后一直占据终端</p>
+<p><strong>后台作业</strong>：可通过终端启动，但启动后即转入后台运行（释放前端）</p>
+<h3 id="作业状态切换："><a href="#作业状态切换：" class="headerlink" title="作业状态切换："></a>作业状态切换：</h3><p>作用运行一共有三种状态，分别为：<strong>前台执行、后台执行与后台休眠（stoped）</strong></p>
+<p><strong>jobs</strong>命令         显示当前作业编号以及作业状态</p>
+<p><strong>让作业运行于后台：</strong></p>
+<p>（1）尚未启动的作业：COMMAND &amp;</p>
+<p>（2）运行中的作业：Ctrl+z，后台休眠状态</p>
+<p><strong>将后台休眠|运行作业调回前台运行：</strong></p>
+<p>fg job_num      将作业在前台运行（foreground）</p>
+<p><strong>将后台休眠作业执行后台运行：</strong></p>
+<p>bg job_num     将作业在后台运行（background）</p>
+<p><strong>关闭后台执行：</strong></p>
+<p>（1）fg job_num；ctrl+c</p>
+<p>（2）kill %job_num</p>
+<h3 id="并行运行"><a href="#并行运行" class="headerlink" title="并行运行"></a>并行运行</h3><p>同时运行多个进程，提高效率</p>
+<p><strong>方法1：</strong></p>
+<p>利用脚本</p>
+<p>vi all.sh</p>
+<p>​         f1.sh&amp;</p>
+<p>​         f2.sh&amp;</p>
+<p>​         f3.sh&amp;</p>
+<p><strong>方法2：</strong></p>
+<p>  (CMD1&amp;);(CMD2&amp;);(CMD3&amp;)</p>
+<p><strong>方法3：</strong></p>
+<p>{ CMD1&amp; CMD2&amp; CMD3&amp; }</p>
+<h3 id="执行长时间任务时防止网络中断造成操作中断"><a href="#执行长时间任务时防止网络中断造成操作中断" class="headerlink" title="执行长时间任务时防止网络中断造成操作中断"></a>执行长时间任务时防止网络中断造成操作中断</h3><p><strong>方法1：</strong>剥离命令与终端的联系，终端中断后进程将转移至1进程上，再恢复</p>
+<p>nohup COMMAND &amp;&gt;/dev/null &amp;</p>
+<p><strong>方法2</strong>：开启一个screen会话，重新进入后screen -r即可恢复</p>
+<p>screen；COMMAND；screen -r 恢复</p>
+<h2 id="四、Linux进程管理常用命令"><a href="#四、Linux进程管理常用命令" class="headerlink" title="四、Linux进程管理常用命令"></a><strong>四、Linux进程管理常用命令</strong></h2><p>进程的管理命令有：</p>
+<p>pstree、ps、pidof、pgrep、pkill、pmap、kill、killall、job、bg、fg等</p>
+<p>进程的管理工具：</p>
+<p>top、htop、vmstat、dstat、iostat、glances等（下节介绍）</p>
+<p><strong>ps</strong>                   显示进程状态</p>
+<p><strong>BSD选项：</strong></p>
+<p>a               所有终端中的进程</p>
+<p>x                不连接终端的进程</p>
+<p>u               显示进程所有者的信息</p>
+<p>f                显示进程树</p>
+<p>k|–sort 属性 对属性排列，属性前加-表示倒序</p>
+<p>L       显示支持的属性</p>
+<p>显示PID,tty，cmd，cpu占用率，内存占用列表，并按%mem排序</p>
+<p>ps xo pid,tty,cmd,%cpu,%mem –sort %mem</p>
+<p>ps xo pid,tty,cmd,%cpu,%mem k%mem</p>
+<p>按%cpu排序，“-”表示倒序</p>
+<p>ps xo pid,tty,cmd,%cpu,%mem –sort -%cpu</p>
+<p><strong>短选项：</strong></p>
+<p>-e              显示所有进程</p>
+<p>-f               显示完整格式程序信息</p>
+<p>-F              显示更完整格式的进程信息</p>
+<p>-C              查看指定CMD或脚本的进程，多个命令用“，”分开</p>
+<p><strong>显示PID，命令，pri优先级（数字越大，优先级越高），nice优先级，realtime优先级</strong></p>
+<p>ps xo pid,cmd,pri,nice,rtprio</p>
+<p><strong>根据进程编号查询CMD命令</strong></p>
+<p>ps -p 3245  -o comm=           查找PID3245对应的命令名称</p>
+<p>ps -C sleep -o pid=           根据命令查找pid</p>
+<p><strong>常用组合：</strong></p>
+<p>ps aux                        显示所有进程的详细信息</p>
+<p>ps -ef                         类似于aux，缺少cpu%，mem%</p>
+<p>ps -eF</p>
+<p><strong>pstree</strong>              显示进程树</p>
+<p>-p                       显示PID</p>
+<p>-h                      高亮标注当前使用的进程</p>
+<p><strong>pgrep</strong>                进程搜索命令，支持正则表达式</p>
+<p><strong>格式：pgrep [options] pattern</strong></p>
+<p><strong>options：</strong></p>
+<p>-u uid                effective user,生效者</p>
+<p>-U uid               real user，真正发起运行命令者</p>
+<p>-t terminal       与指定终端相关的进程</p>
+<p>-l               显示进程名</p>
+<p>-a              显示完整格式的进程名</p>
+<p>-P pid                显示指定进程的子进程</p>
+<p><strong>pidof</strong>                 查找正在运行进程的PID</p>
+<p>如：pidof bash                显示bash进程的PID</p>
+<p><strong>uptime 命令</strong></p>
+<p>显示当前时间，系统已启动时间，当前上线人数，系统平均负载（1、5、10分钟，一般不超过1）</p>
+<p><strong>free</strong>          显示内存空间使用状态</p>
+<p><strong>options</strong></p>
+<p>-b              以字节为单位</p>
+<p>-m             以MB为单位</p>
+<p>-g              以GB为单位</p>
+<p>-h              人类已读格式</p>
+<p><strong>pmap</strong>       比较专业的查看内存与进程对应关系工具</p>
+<p><strong>pmap    12</strong>         查看进程号12的内存与进程对应关系</p>
+<p>​    -x     显示详细格式的信息</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/进程管理/" rel="tag"># 进程管理</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/01/网络基本概念及OSI参考模型、TCP-IP协议简介/" rel="next" title="网络基本概念及OSI参考模型、TCP/IP协议简介">
+                <i class="fa fa-chevron-left"></i> 网络基本概念及OSI参考模型、TCP/IP协议简介
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/05/Linux进程监控管理工具详解/" rel="prev" title="Linux进程监控管理工具详解">
+                Linux进程监控管理工具详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、进程相关概念："><span class="nav-number">1.</span> <span class="nav-text">一、进程相关概念：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的分类："><span class="nav-number">1.1.</span> <span class="nav-text">进程的分类：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的状态："><span class="nav-number">1.2.</span> <span class="nav-text">进程的状态：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程优先级"><span class="nav-number">1.3.</span> <span class="nav-text">进程优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程内存："><span class="nav-number">1.4.</span> <span class="nav-text">进程内存：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、信号操作管理"><span class="nav-number">2.</span> <span class="nav-text">二、信号操作管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#信号管理命令"><span class="nav-number">2.1.</span> <span class="nav-text">信号管理命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、作业管理（job-control）"><span class="nav-number">3.</span> <span class="nav-text">三、作业管理（job control）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#作业状态切换："><span class="nav-number">3.1.</span> <span class="nav-text">作业状态切换：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并行运行"><span class="nav-number">3.2.</span> <span class="nav-text">并行运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行长时间任务时防止网络中断造成操作中断"><span class="nav-number">3.3.</span> <span class="nav-text">执行长时间任务时防止网络中断造成操作中断</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、Linux进程管理常用命令"><span class="nav-number">4.</span> <span class="nav-text">四、Linux进程管理常用命令</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Ansible,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="随着运维自动化经历了从本地部署到基础设施即服务（IaaS）、平台即服务（PaaS）在到软件即服务 （SaaS）的发展阶段，掌握多种自动化运维工具就成了运维人员必备技能之一，ansible就是目前国内使 用比较广泛的自动化运维工具之一。 一、ansible工具介绍：常用自动化运维工具：Ansible：python，中小型应用环境，300-500台 Saltstack：python，一般需部署agen">
+<meta name="keywords" content="Ansible">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ansible使用介绍（一）基本概念及常用模块">
+<meta property="og:url" content="http://yoursite.com/2018/05/29/Ansible使用介绍（一）基本概念及常用模块/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="随着运维自动化经历了从本地部署到基础设施即服务（IaaS）、平台即服务（PaaS）在到软件即服务 （SaaS）的发展阶段，掌握多种自动化运维工具就成了运维人员必备技能之一，ansible就是目前国内使 用比较广泛的自动化运维工具之一。 一、ansible工具介绍：常用自动化运维工具：Ansible：python，中小型应用环境，300-500台 Saltstack：python，一般需部署agen">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/Ansible使用介绍（一）基本概念及常用模块/工作原理-1.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/Ansible使用介绍（一）基本概念及常用模块/ansible.cfg_.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/Ansible使用介绍（一）基本概念及常用模块/ansiblehost.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/Ansible使用介绍（一）基本概念及常用模块/绿色.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/Ansible使用介绍（一）基本概念及常用模块/黄色.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/Ansible使用介绍（一）基本概念及常用模块/红色.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/Ansible使用介绍（一）基本概念及常用模块/修改默认模块.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/Ansible使用介绍（一）基本概念及常用模块/修改密码成功.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/Ansible使用介绍（一）基本概念及常用模块/script模块.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/Ansible使用介绍（一）基本概念及常用模块/ansible-console.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/Ansible使用介绍（一）基本概念及常用模块/galaxy.png">
+<meta property="og:updated_time" content="2018-07-17T13:01:44.577Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ansible使用介绍（一）基本概念及常用模块">
+<meta name="twitter:description" content="随着运维自动化经历了从本地部署到基础设施即服务（IaaS）、平台即服务（PaaS）在到软件即服务 （SaaS）的发展阶段，掌握多种自动化运维工具就成了运维人员必备技能之一，ansible就是目前国内使 用比较广泛的自动化运维工具之一。 一、ansible工具介绍：常用自动化运维工具：Ansible：python，中小型应用环境，300-500台 Saltstack：python，一般需部署agen">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/29/Ansible使用介绍（一）基本概念及常用模块/工作原理-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/29/Ansible使用介绍（一）基本概念及常用模块/">
+
+
+
+
+
+  <title>Ansible使用介绍（一）基本概念及常用模块 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/29/Ansible使用介绍（一）基本概念及常用模块/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Ansible使用介绍（一）基本概念及常用模块</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-29T15:23:58+08:00">
+                2018-05-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/自动化运维/" itemprop="url" rel="index">
+                    <span itemprop="name">自动化运维</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>随着运维自动化经历了从<strong>本地部署</strong>到<strong>基础设施即服务（IaaS）</strong>、<strong>平台即服务（PaaS）</strong>在到<strong>软件即服务</strong></p>
+<p><strong>（SaaS）</strong>的发展阶段，掌握多种自动化运维工具就成了运维人员必备技能之一，<strong>ansible</strong>就是目前国内使</p>
+<p>用比较广泛的自动化运维工具之一。</p>
+<h2 id="一、ansible工具介绍："><a href="#一、ansible工具介绍：" class="headerlink" title="一、ansible工具介绍："></a><strong>一、ansible工具介绍：</strong></h2><h3 id="常用自动化运维工具："><a href="#常用自动化运维工具：" class="headerlink" title="常用自动化运维工具："></a><strong>常用自动化运维工具：</strong></h3><p><strong>Ansible</strong>：python，中小型应用环境，300-500台</p>
+<p><strong>Saltstack</strong>：python，一般需部署agent，执行效率更高，大型环境1000台以上</p>
+<p><strong>Puppet</strong>：ruby，功能强大，配置复杂，重型，适合大型环境</p>
+<p><strong>Fabric</strong>：python，agentless</p>
+<p><strong>Chef</strong>：ruby，国内应用少</p>
+<p><strong>Cfengine</strong></p>
+<p><strong>func</strong></p>
+<h3 id="Ansible"><a href="#Ansible" class="headerlink" title="Ansible"></a><strong>Ansible</strong></h3><p>ansible是新出现的自动化运维工具，基于Python开发，集合了众多运维工具（puppet、</p>
+<p>cfengine、chef、func、fabric）的优点，实现了批量系统配置、批量程序部署、批量</p>
+<p>运行命令等功能。</p>
+<h3 id="特性："><a href="#特性：" class="headerlink" title="特性："></a><strong>特性：</strong></h3><p><strong>模块化：</strong>调用特定的模块，完成特定任务</p>
+<p>有Paramiko,PyYAML,Jinja2（模板语言）三个关机模块</p>
+<p>支持自定义模块</p>
+<p>基于<strong>Python</strong>语言实现</p>
+<p>部署简单，<strong>基于python和SSH</strong>（默认已安装），agentless</p>
+<p>安全，基于OpenSSH</p>
+<p>支持playbook编排任务</p>
+<p><strong>幂等性：</strong>一个任务执行1遍和执行n遍效果一样，不因重复执行带来意外情况</p>
+<p>无需代理不依赖PKI（无需ssl）</p>
+<p>可使用任何编程语言写模块</p>
+<p>YAML格式，编排任务，支持丰富的数据结构</p>
+<p>较强大的多层解决方案</p>
+<h3 id="Ansible主要组成部分："><a href="#Ansible主要组成部分：" class="headerlink" title="Ansible主要组成部分："></a><strong>Ansible主要组成部分：</strong></h3><p><strong>API</strong>：供第三方程序调用的应用程序编程接口</p>
+<p><strong>Inventory</strong>：Ansible管理主机清单，存放在/etc/ansible/hosts</p>
+<p><strong>Modules</strong>：模块，Ansible执行命令的功能的模块，多个命令的组合</p>
+<p><strong>Playbook</strong>：剧本，多个模块的组合，编排定义Ansible任务集的配置文件，由Ansible顺序依次执行，通常是JSON格式的YML文件</p>
+<p><strong>Plugins</strong>：模块功能的补充，如连接类型的插件、循环插件、变量插件、过滤插件等，该功能不常用</p>
+<p><strong>Ansible</strong>：组合Inventory、API、Modules、Plugins的绿框，可以理解为是ansible命令工具，其为核心执行工具</p>
+<p><img src="工作原理-1.png" alt="工作原理"></p>
+<h3 id="相关文件："><a href="#相关文件：" class="headerlink" title="相关文件："></a><strong>相关文件：</strong></h3><p>/etc/ansible/ansible.cfg    主配置文件，配置ansible工作特性</p>
+<p>/etc/ansible/hosts                  主机清单文件</p>
+<p>/etc/ansible/rules              角色目录</p>
+<p><strong>程序：</strong></p>
+<p>/usr/bin/ansible              主程序，临时命令执行工具</p>
+<p>/usr/bin/ansible-doc              查看配置文档，模块功能查看工具</p>
+<p>/usr/bin/ansible-galaxy         下载/上传优秀代码或Roles模块的官网平台</p>
+<p>/usr/bin/ansible-playbook    定制自动化任务，编排剧本工具/usr/bin/ansible-pull 远</p>
+<p><strong>程执行命令的工具：</strong></p>
+<p>/usr/bin/ansible-vault            文件加密工具</p>
+<p>/usr/bin/ansible-console       基于Console界面与用户交互的执行工具</p>
+<h3 id="etc-ansible-ansible-cfg-ansible"><a href="#etc-ansible-ansible-cfg-ansible" class="headerlink" title="/etc/ansible/ansible.cfg ansible"></a>/etc/ansible/ansible.cfg ansible</h3><p>配置文件（一般保持默认）</p>
+<p>[defaults]</p>
+<p>#forks               = 5            并发执行数量，默认5</p>
+<p>#poll_interval = 15          拉取数据间隔时间，默认15秒</p>
+<p>#sudo_user     = root               sudo命令默认用户</p>
+<p>#remote_port = 22          连接远程端口号</p>
+<p>#host_key_checking = False          检查对应服务器的host_key，##建议取消注释</p>
+<p>#log_path=/var/log/ansible.log   日志文件，##建议取消注释</p>
+<p><img src="ansible.cfg_.png" alt="ansible.cfg"></p>
+<h3 id="etc-ansible-hosts"><a href="#etc-ansible-hosts" class="headerlink" title="/etc/ansible/hosts"></a>/etc/ansible/hosts</h3><p>主机清单inventory文件</p>
+<p>inventory文件遵循INI文件风格，中括号中的字符为组名。可以将同一个主机</p>
+<p>同时归并到多个不同的组中；此外，当如若目标主机使用了非默认的SSH端口，</p>
+<p>还可以在主机名称之后使用冒号加端口号来标明</p>
+<p>ntp.magedu.com</p>
+<p>[webservers]</p>
+<p>www1.magedu.com:2222</p>
+<p>www2.magedu.com</p>
+<p>[dbservers]</p>
+<p>db1.magedu.com</p>
+<p>db2.magedu.com</p>
+<p>db3.magedu.com</p>
+<p>如果主机名称遵循相似的命名模式，还可以使用列表的方式标识各主机</p>
+<p><strong>示例：</strong></p>
+<p>[websrvs]</p>
+<p>www[01:100].example.com</p>
+<p>[dbsrvs]</p>
+<p>db-[a:f].example.com</p>
+<p><img src="ansiblehost.png" alt="ansiblehost"></p>
+<h3 id="ansible-命令"><a href="#ansible-命令" class="headerlink" title="ansible**命令**"></a><strong>ansible**</strong>命令**</h3><p><strong>功能：</strong>通过ssh实现配置管理、应用部署、任务执行等功能</p>
+<p><strong>建议：配置ansible端能基于密钥认证的方式联系各被管理节点</strong> </p>
+<p><strong>格式：ansible <host-pattern> [-m module_name] [-a args]</host-pattern></strong></p>
+<p><strong>常用选项：</strong></p>
+<p>–version                  显示版本</p>
+<p>-m module              指定模块，默认为command</p>
+<p>-v 详细过程                   –vv -vvv更详细</p>
+<p>–list-hosts              显示主机列表，可简写—list</p>
+<p>-k, –ask-pass                  提示连接密码，默认Key验证</p>
+<p>-K, –ask-become-pass 提示输入sudo</p>
+<p>-C, –check              检查，并不执行</p>
+<p>-T, –timeout=TIMEOUT        执行命令的超时时间，默认10s</p>
+<p>-u, –user=REMOTE_USER    执行远程执行的用户</p>
+<p>-b, –become                   代替旧版的sudo 切换</p>
+<p><strong><host-pattern></host-pattern></strong>                         匹配主机的列表</p>
+<p> <strong>ALL</strong>                    表示列表中的所有主机</p>
+<p><strong>示例：</strong></p>
+<p>ansible all -m  ping</p>
+<p> <strong>*</strong>                        支持通配符</p>
+<p><strong>示例：</strong></p>
+<p>ansible “*” -m ping</p>
+<p>ansible 192.168.1.* -m ping</p>
+<p>ansible “*srvs” -m ping</p>
+<p><strong>或关系</strong></p>
+<p><strong>示例：</strong></p>
+<p>ansible “websrvs:appsrvs”  -m ping</p>
+<p>ansible “192.168.1.10:192.168.1.20” -m ping</p>
+<p><strong>逻辑与：</strong></p>
+<p>ansible “websrvs:&amp;dbsrvs”  -m ping</p>
+<p>在websrvs组，但不在dbsrvs组中的主机</p>
+<p><strong>逻辑非：</strong></p>
+<p>ansible ‘websrvs:!dbsrvs’  -m ping</p>
+<p><strong>综合逻辑：</strong></p>
+<p>ansible ‘websrvs:dbsrvs:&amp;appsrvs:!ftpsrvs’ -m -ping</p>
+<p><strong>正则表达式：</strong></p>
+<p>ansible “websrvs:&amp;dbsrvs”  -m ping</p>
+<p>ansible “~(web|db).*.magedu.com” -m ping</p>
+<h3 id="ansible命令执行过程"><a href="#ansible命令执行过程" class="headerlink" title="ansible命令执行过程"></a><strong>ansible命令执行过程</strong></h3><p>1.加载自己的配置文件 默认/etc/ansible/ansible.cfg</p>
+<p>2.加载自己对应的模块文件，如command</p>
+<p>3.通过ansible将模块或命令生成对应的临时py文件，并将该 文件传输至远程服务器</p>
+<p>的对应执行用户$HOME/.ansible/tmp/ansible-tmp-数字/XXX.PY文件</p>
+<p>4.给文件+x执行</p>
+<p>5.执行并返回结果</p>
+<p>6.删除临时py文件，sleep 0退出</p>
+<p><strong>执行状态：</strong></p>
+<p><strong>绿色：</strong>执行成功并且不需要做改变的操作</p>
+<p><img src="绿色.png" alt="绿色"></p>
+<p><strong>黄色：</strong>执行成功并且对目标主机做变更</p>
+<p><img src="黄色.png" alt="黄色"></p>
+<p><strong>红色：</strong>执行失败</p>
+<p><img src="红色.png" alt="红色"></p>
+<h2 id="二、ansible常用模块："><a href="#二、ansible常用模块：" class="headerlink" title="二、ansible常用模块："></a><strong>二、ansible常用模块：</strong></h2><p><strong>查看模块帮助：</strong></p>
+<p>ansible-doc module</p>
+<p><strong>显示模块简要说明：</strong></p>
+<p>ansible-doc  -s  module</p>
+<h3 id="Command模块"><a href="#Command模块" class="headerlink" title="Command模块"></a><strong>Command模块</strong></h3><p><strong>功能：</strong>默认模块，在远程主机执行命令，可忽略-m选项</p>
+<p>​         ansible srvs -m command -a ‘service vsftpd start’</p>
+<p>​         ansible srvs -m command -a ‘echo magedu |passwd –stdin wang’ 不成功</p>
+<p><strong>注意：</strong></p>
+<p>（1）使用Command模块执行脚本时，要注意规范，shebang机制，否则将执行失败</p>
+<p>（2）不支持管道“|”，变量“$”,以及重定向，需使用shell模块</p>
+<h3 id="Shell-模块"><a href="#Shell-模块" class="headerlink" title="Shell**模块**"></a><strong>Shell**</strong>模块**</h3><p><strong>功能：</strong>和command相似，用shell执行命令</p>
+<p>​         ansible srv -m shell -a ‘echo magedu |passwd –stdin wang’</p>
+<p><strong>注意：</strong></p>
+<p>（1）调用bash执行命令 类似 cat /tmp/stanley.md | awk -F‘|’ ‘{print $1,$2}’ &amp;&gt;</p>
+<p>/tmp/example.txt 这些复杂命令，即使使用shell也可能会失败。</p>
+<p>解决办法：写到脚本，copy到远程，执行，再把需要的结果拉回执行命令的机器</p>
+<p>（2）可将默认模块替换为shell：</p>
+<p>​        vim ansible.conf</p>
+<p>​       module_name = shell</p>
+<p><img src="修改默认模块.png" alt="修改默认模块"></p>
+<p>ansible srvs -m command -a ‘echo magedu |passwd –stdin wang’  成功</p>
+<p><img src="修改密码成功.png" alt="修改密码成功"></p>
+<h3 id="Script-模块"><a href="#Script-模块" class="headerlink" title="Script**模块**"></a><strong>Script**</strong>模块**</h3><p><strong>功能：</strong>运行脚本,不需要将脚本复制到被控端</p>
+<p>​         -a “/PATH/TO/SCRIPT_FILE”</p>
+<p>​         snsible websrvs -m script -a f1.sh</p>
+<p><img src="script模块.png" alt="script模块"></p>
+<h3 id="Copy-模块"><a href="#Copy-模块" class="headerlink" title="Copy**模块**"></a><strong>Copy**</strong>模块**</h3><p><strong>功能：</strong>从服务器复制文件到客户端,</p>
+<p>​         ansible srv -m copy -a “src=/root/f1.sh dest=/tmp/f2.sh owner=wang mode=600</p>
+<p>​         backup=yes”</p>
+<p>如目标存在，默认覆盖，此处指定先备份</p>
+<p>   ansible srv -m copy -a “content=‘test content\n’ dest=/tmp/f1.txt” 利用内容，直接生成</p>
+<p>目标文件</p>
+<h3 id="Fetch-模块"><a href="#Fetch-模块" class="headerlink" title="Fetch**模块**"></a><strong>Fetch**</strong>模块**</h3><p><strong>功能：</strong>从客户端取文件至服务器端，copy相反，目录可先tar</p>
+<p>​       ansible srv -m fetch -a ‘src=/root/a.sh dest=/data/scripts’</p>
+<p> <strong>示例：</strong></p>
+<p>打包/var/log下所有日志文件并远程抓取</p>
+<p>​         ansible all -m shell -a ‘tar Jcf log.tar.xz /var/log/*.log’</p>
+<p>​         ansible all -m fetch -a ‘src=/root/log.tar.xz dest=/data’</p>
+<h3 id="File-模块"><a href="#File-模块" class="headerlink" title="File**模块**"></a><strong>File**</strong>模块**</h3><p><strong>功能：</strong>设置文件属性</p>
+<p><strong>示例：</strong></p>
+<p>创建新文件：</p>
+<p>​         ansible all -m file -a ‘name=/data/f3 state=touch’</p>
+<p>删除文件：</p>
+<p>​         ansible all -m file -a ‘name=/data/f3 state=absent’</p>
+<p>创建目录：</p>
+<p>​         ansible all -m file -a ‘name=/data/dir1 state=directory’</p>
+<p>删除目录：</p>
+<p>​         ansible all -m file -a ‘name=/data/dir1 state=absent’</p>
+<p>创建软连接</p>
+<p>​         ansible all -m file -a ‘src=/etc/fstab dest /data/fstab.link state=link’</p>
+<p>删除软连接：</p>
+<p>​       ansible all -m file -a ‘dest /data/fstab.link state=absent’</p>
+<p>创建文件指定所有者，权限：</p>
+<p>​         ansible srv -m file -a “path=/root/a.sh owner=wang mode=755”</p>
+<p>​         ansible web -m file -a ‘src=/app/testfile dest=/app/testfile-link state=link’</p>
+<h3 id="Hostname-模块"><a href="#Hostname-模块" class="headerlink" title="Hostname**模块**"></a><strong>Hostname**</strong>模块**</h3><p><strong>功能：</strong>管理主机名，生效同时更改文件永久生效</p>
+<p><strong>示例：</strong></p>
+<p>更改一个主机的主机名：</p>
+<p>​         ansible node1 -m hostname -a “name=websrv”</p>
+<p><strong>注意：</strong></p>
+<p>（1）Host模块不会修改/etc/hosts文件中的主机名解析，注意修改</p>
+<p>（2）批量修改主机名时最好加变量，防止所有主机名一致</p>
+<h3 id="Cron-模块"><a href="#Cron-模块" class="headerlink" title="Cron**模块**"></a><strong>Cron**</strong>模块**</h3><p><strong>功能：</strong>计划任务</p>
+<p><strong>支持时间：</strong>minute，hour，day，month，weekday</p>
+<p><strong>示例：</strong></p>
+<p>创建计划任务：每周1,3,5，每分钟打印，任务名称：warningcron</p>
+<p>​         ansible all -m cron -a ‘minute=* weekday=1,3,5 job=”/usr/bin/wall FBI warning” name=warningcron’</p>
+<p>注释cronname=waringcron的计划任务：</p>
+<p>​         ansible all -m cron -a ‘disabled=true job=”/usr/bin/wall FBI warning” name=warningcron’</p>
+<p>给cronname=waringcron的计划任务去掉注释：</p>
+<p>​         ansible all -m cron -a ‘disabled=true job=”/usr/bin/wall FBI warning” name=warningcron’</p>
+<p>创建计划任务：每五分钟同步一次服务器时间，任务名称：syntime</p>
+<p>​         ansible srv -m cron -a “minute=*/5 job=’/usr/sbin/ntpdate 172.16.0.1 &amp;&gt;/dev/null’ name=Synctime”</p>
+<p>删除计划任务：Synctime</p>
+<p>​         ansible srv -m cron -a ‘state=absent name=Synctime’ </p>
+<h3 id="Yum-模块"><a href="#Yum-模块" class="headerlink" title="Yum**模块**"></a><strong>Yum**</strong>模块**</h3><p><strong>功能：</strong>管理包</p>
+<p><strong>示例：</strong></p>
+<p>yum安装vsftpd包：（默认state=installd）</p>
+<p>​         ansible all -m yum -a ‘name=vsftpd’</p>
+<p>安装多个包用逗号隔开：</p>
+<p>​         ansible all -m yum -a ‘name=vsftpd，httpd’</p>
+<p>显示所有已安装的包：</p>
+<p>​         ansible all -m yum -a ‘name=vsftpd  list=installd’</p>
+<p>卸载vsftpd包：</p>
+<p>​         ansible all -m yum -a ‘name=vsftpd  state=removed’</p>
+<p>安装从互联网下载的包：</p>
+<p>​         ansible srv -m copy -a ‘src=/root/package.rpm dest=/data/package’</p>
+<p>​         ansible srv -m yum -a ‘name=/data/package.rpm’</p>
+<p>更新缓存：</p>
+<p>​         ansible srv -m yum -a ‘update_cache=yes’</p>
+<p>更新缓存同时安装dstat包</p>
+<p>​         ansible srv -m yum -a ‘name=dstat update_cache=yes’</p>
+<h3 id="Service-模块"><a href="#Service-模块" class="headerlink" title="Service**模块**"></a><strong>Service**</strong>模块**</h3><p><strong>功能：</strong>管理服务</p>
+<p><strong>示例：</strong></p>
+<p>停止httpd服务：</p>
+<p>​         ansible srv -m service -a ‘name=httpd state=stopped’</p>
+<p>开启httpd服务：</p>
+<p>​         ansible srv -m service -a ‘name=httpd state=started’</p>
+<p>重新加载httod服务：</p>
+<p>​         ansible srv -m service -a ‘name=httpd state=reloaded’</p>
+<p>重启httpd服务：</p>
+<p>​         ansible srv -m service -a ‘name=httpd state=restarted’</p>
+<p>开启ftp服务，同时设置开机自动启动：</p>
+<p>​         ansible srv -m service -a ‘name=vsftpd state=started enabled=yes’</p>
+<p>重启ftp服务：</p>
+<p>​         ansible srv -m service -a ‘name=vsftpd state=restarted’</p>
+<h3 id="User-模块"><a href="#User-模块" class="headerlink" title="User**模块**"></a><strong>User**</strong>模块**</h3><p><strong>功能：</strong>管理用户</p>
+<p><strong>示例：</strong></p>
+<p>添加用户，指定uid、家目录、主组及注释：</p>
+<p>​     ansible srv -m user -a ‘name=user1 comment=”test user” uid=2048 home=/app/user1 group=root’</p>
+<p>添加一个系统用户：</p>
+<p>   ansible srv -m user -a ‘name=sysuser1 system=yes home=/app/sysuser1’</p>
+<p>删除用户：</p>
+<p>   ansible srv -m user -a ‘name=user1 state=absent’</p>
+<p>添加一个nginx用户：</p>
+<p>​         ansible srv -m user -a ‘name=nginx shell=/sbin/nologin system=yes home=/var/nginx groups=root,bin uid=80 comment=”nginx service”</p>
+<p>删除nginx用户同时删除家目录：</p>
+<p>​         ansible srv -m user -a ‘name=nginx state=absent remove=yes’</p>
+<h3 id="Group-模块"><a href="#Group-模块" class="headerlink" title="Group**模块**"></a><strong>Group**</strong>模块**</h3><p><strong>功能：</strong>管理组</p>
+<p><strong>示例：</strong></p>
+<p>创建一个系统组：</p>
+<p>​       ansible srv -m group -a “name=testgroup system=yes”</p>
+<p>删除一个组：</p>
+<p>​         ansible srv -m group -a “name=testgroup state=absent”</p>
+<p>创建nginx组：</p>
+<p>​         ansible srv -m group -a ‘name=nginx system=yes gid=80’</p>
+<p>删除nginx组：</p>
+<p>​         ansible srv -m group -a ‘name=nginx state=absent’</p>
+<h2 id="三、ansible系列命令："><a href="#三、ansible系列命令：" class="headerlink" title="三、ansible系列命令："></a><strong>三、ansible系列命令：</strong></h2><p><strong>ansible系列命令包括：</strong></p>
+<p>ansible</p>
+<p>ansible-doc</p>
+<p>ansible-playbook</p>
+<p>ansible-vault</p>
+<p>ansible-console</p>
+<p>ansible-galaxy</p>
+<p>ansible-pull</p>
+<h3 id="ansible-doc"><a href="#ansible-doc" class="headerlink" title="ansible-doc"></a><strong>ansible-doc</strong></h3><p><strong>功能：</strong>显示模块帮助</p>
+<p><strong>格式：ansible-doc [options] [module…]</strong></p>
+<p>-a                     显示所有模块的文档</p>
+<p>-l                        列出可用模块</p>
+<p>-s                       显示指定模块的playbook片段</p>
+<p><strong>示例：</strong></p>
+<p>ansible-doc  ping           查看ping模块帮助</p>
+<p>ansible-doc -s ping          查看ping模块的简单说明</p>
+<h3 id="Ansible-vault"><a href="#Ansible-vault" class="headerlink" title="Ansible-vault"></a><strong>Ansible-vault</strong></h3><p><strong>功能：</strong>管理加密解密yml文件</p>
+<p><strong>格式：ans**</strong>ible-vault [create|decrypt|edit|encrypt|rekey|view]**</p>
+<p>ansible-vault encrypt hello.yml 加密yml文件</p>
+<p>ansible-vault decrypt hello.yml 解密yml文件</p>
+<p>ansible-vault view hello.yml          查看yml加密文件</p>
+<p>ansible-vault edit hello.yml          编辑加密文件</p>
+<p>ansible-vault rekey hello.yml         重新修改加密口令</p>
+<p>ansible-vault create new.yml        创建新文件</p>
+<h3 id="Ansible-console"><a href="#Ansible-console" class="headerlink" title="Ansible-console"></a><strong>Ansible-console</strong></h3><p><strong>功能：</strong>ansible控制台，可交互执行命令，支持tab</p>
+<p><strong>root@test (2)[f:10] $</strong></p>
+<p><strong>执行用户@当前操作的主机组 (当前组的主机数量)[f:并发数]$</strong></p>
+<p>设置并发数： forks n 例如： forks 10</p>
+<p>切换组： cd 主机组 例如： cd web</p>
+<p>列出当前组主机列表： list</p>
+<p>列出所有的内置命令： ?或help</p>
+<p>示例：</p>
+<p>列出主机列表中所有主机：</p>
+<p>root@all (2)[f:5]$ list</p>
+<p>切换至appsrvs组：</p>
+<p>root@all (2)[f:5]$ cd appsrvs</p>
+<p>列出appsrvs组下所有主机：</p>
+<p>root@appsrvs (2)[f:5]$ list</p>
+<p>安装httpd：</p>
+<p>root@appsrvs (2)[f:5]$ yum name=httpd state=present</p>
+<p>开启httpd服务：</p>
+<p>root@appsrvs (2)[f:5]$ service name=httpd state=started</p>
+<p><img src="ansible-console.png" alt="ansible-console"></p>
+<h3 id="ansible-galaxy"><a href="#ansible-galaxy" class="headerlink" title="ansible-galaxy"></a><strong>ansible-galaxy</strong></h3><p><strong>功能：</strong>连接<a href="https://galaxy.ansible.com/" target="_blank" rel="noopener">https://galaxy.ansible.com</a>下载相应的roles</p>
+<p><img src="galaxy.png" alt="galaxy"></p>
+<p>列出所有已安装的galaxy：</p>
+<p>ansible-galaxy list</p>
+<p>安装galaxy：</p>
+<p>ansible-galaxy install geerlingguy.redis</p>
+<p>删除galaxy：</p>
+<p>ansible-galaxy remove geerlingguy.redis</p>
+<h3 id="ansible-pull"><a href="#ansible-pull" class="headerlink" title="ansible-pull"></a><strong>ansible-pull</strong></h3><p><strong>功能：</strong>推送命令至远程，效率无限提升，对运维技术要求较高</p>
+<p>当前应用还较少</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Ansible/" rel="tag"># Ansible</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/26/cobbler自动化安装系统相关实验/" rel="next" title="cobbler自动化安装系统相关实验">
+                <i class="fa fa-chevron-left"></i> cobbler自动化安装系统相关实验
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/30/Ansible使用介绍（二）YAML语法及Playbook/" rel="prev" title="Ansible使用介绍（二）YAML语法及Playbook">
+                Ansible使用介绍（二）YAML语法及Playbook <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、ansible工具介绍："><span class="nav-number">1.</span> <span class="nav-text">一、ansible工具介绍：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用自动化运维工具："><span class="nav-number">1.1.</span> <span class="nav-text">常用自动化运维工具：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ansible"><span class="nav-number">1.2.</span> <span class="nav-text">Ansible</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特性："><span class="nav-number">1.3.</span> <span class="nav-text">特性：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ansible主要组成部分："><span class="nav-number">1.4.</span> <span class="nav-text">Ansible主要组成部分：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关文件："><span class="nav-number">1.5.</span> <span class="nav-text">相关文件：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#etc-ansible-ansible-cfg-ansible"><span class="nav-number">1.6.</span> <span class="nav-text">/etc/ansible/ansible.cfg ansible</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#etc-ansible-hosts"><span class="nav-number">1.7.</span> <span class="nav-text">/etc/ansible/hosts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ansible-命令"><span class="nav-number">1.8.</span> <span class="nav-text">ansible**命令**</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ansible命令执行过程"><span class="nav-number">1.9.</span> <span class="nav-text">ansible命令执行过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、ansible常用模块："><span class="nav-number">2.</span> <span class="nav-text">二、ansible常用模块：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Command模块"><span class="nav-number">2.1.</span> <span class="nav-text">Command模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shell-模块"><span class="nav-number">2.2.</span> <span class="nav-text">Shell**模块**</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Script-模块"><span class="nav-number">2.3.</span> <span class="nav-text">Script**模块**</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Copy-模块"><span class="nav-number">2.4.</span> <span class="nav-text">Copy**模块**</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fetch-模块"><span class="nav-number">2.5.</span> <span class="nav-text">Fetch**模块**</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#File-模块"><span class="nav-number">2.6.</span> <span class="nav-text">File**模块**</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hostname-模块"><span class="nav-number">2.7.</span> <span class="nav-text">Hostname**模块**</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cron-模块"><span class="nav-number">2.8.</span> <span class="nav-text">Cron**模块**</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Yum-模块"><span class="nav-number">2.9.</span> <span class="nav-text">Yum**模块**</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Service-模块"><span class="nav-number">2.10.</span> <span class="nav-text">Service**模块**</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#User-模块"><span class="nav-number">2.11.</span> <span class="nav-text">User**模块**</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Group-模块"><span class="nav-number">2.12.</span> <span class="nav-text">Group**模块**</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、ansible系列命令："><span class="nav-number">3.</span> <span class="nav-text">三、ansible系列命令：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ansible-doc"><span class="nav-number">3.1.</span> <span class="nav-text">ansible-doc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ansible-vault"><span class="nav-number">3.2.</span> <span class="nav-text">Ansible-vault</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ansible-console"><span class="nav-number">3.3.</span> <span class="nav-text">Ansible-console</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ansible-galaxy"><span class="nav-number">3.4.</span> <span class="nav-text">ansible-galaxy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ansible-pull"><span class="nav-number">3.5.</span> <span class="nav-text">ansible-pull</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

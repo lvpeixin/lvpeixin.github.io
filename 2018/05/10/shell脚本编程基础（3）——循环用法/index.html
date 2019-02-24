@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="shell,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在前面的基础编程内容中，我们已经学习了shell脚本的顺序执行及选择执行，通过这两种方式，可 以帮我们解决一些简单需求，但要想在更复杂的场景中使用的话，就需要掌握循环执行的方式了。 一、if、case条件判断条件判断if语句：if语句 是指编程语言中用来判定所给定的条件是否满足，根据判定的结果（真或假）决定执行给出的两种操作之一。 格式： 123456789if   判断条件1；then		# 条">
+<meta name="keywords" content="shell">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shell脚本编程基础（3）——循环用法">
+<meta property="og:url" content="http://yoursite.com/2018/05/10/shell脚本编程基础（3）——循环用法/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="在前面的基础编程内容中，我们已经学习了shell脚本的顺序执行及选择执行，通过这两种方式，可 以帮我们解决一些简单需求，但要想在更复杂的场景中使用的话，就需要掌握循环执行的方式了。 一、if、case条件判断条件判断if语句：if语句 是指编程语言中用来判定所给定的条件是否满足，根据判定的结果（真或假）决定执行给出的两种操作之一。 格式： 123456789if   判断条件1；then		# 条">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/05/10/shell脚本编程基础（3）——循环用法/testfor.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/10/shell脚本编程基础（3）——循环用法/testwhile.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/10/shell脚本编程基础（3）——循环用法/testcontinue.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/10/shell脚本编程基础（3）——循环用法/testbreak.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/10/shell脚本编程基础（3）——循环用法/testdoit.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/10/shell脚本编程基础（3）——循环用法/testshifit.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/10/shell脚本编程基础（3）——循环用法/trap.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/10/shell脚本编程基础（3）——循环用法/trap2.png">
+<meta property="og:updated_time" content="2018-07-17T02:39:22.593Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="shell脚本编程基础（3）——循环用法">
+<meta name="twitter:description" content="在前面的基础编程内容中，我们已经学习了shell脚本的顺序执行及选择执行，通过这两种方式，可 以帮我们解决一些简单需求，但要想在更复杂的场景中使用的话，就需要掌握循环执行的方式了。 一、if、case条件判断条件判断if语句：if语句 是指编程语言中用来判定所给定的条件是否满足，根据判定的结果（真或假）决定执行给出的两种操作之一。 格式： 123456789if   判断条件1；then		# 条">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/10/shell脚本编程基础（3）——循环用法/testfor.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/10/shell脚本编程基础（3）——循环用法/">
+
+
+
+
+
+  <title>shell脚本编程基础（3）——循环用法 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/10/shell脚本编程基础（3）——循环用法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">shell脚本编程基础（3）——循环用法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-10T14:37:01+08:00">
+                2018-05-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/shell脚本/" itemprop="url" rel="index">
+                    <span itemprop="name">shell脚本</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在前面的基础编程内容中，我们已经学习了shell脚本的顺序执行及选择执行，通过这两种方式，可</p>
+<p>以帮我们解决一些简单需求，但要想在更复杂的场景中使用的话，就需要掌握<strong>循环执行</strong>的方式了。</p>
+<h2 id="一、if、case条件判断"><a href="#一、if、case条件判断" class="headerlink" title="一、if、case条件判断"></a>一、if、case条件判断</h2><h3 id="条件判断if语句："><a href="#条件判断if语句：" class="headerlink" title="条件判断if语句："></a>条件判断if语句：</h3><p>if语句 是指编程语言中用来判定所给定的条件是否满足，根据判定的结果（真或假）决定执行给出的两种操作之一。</p>
+<p><strong>格式：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if   判断条件1；then		# 条件1为真的分支代码</span><br><span class="line"></span><br><span class="line">elif 判断条件2；then		# 条件2为真的分支代码</span><br><span class="line"></span><br><span class="line">elif 判断条件3；then		# 条件3为真的分支代码</span><br><span class="line"></span><br><span class="line">else	# 以上条件都不满足的分支代码</span><br><span class="line"></span><br><span class="line">fi	# if语句结束标记位</span><br></pre></td></tr></table></figure>
+<p>if语句会逐条件的进行判断，当第一次遇到为”真”的条件时，就会执行其分支代码，而后结束整个if语句。</p>
+<h3 id="条件判断case语句："><a href="#条件判断case语句：" class="headerlink" title="条件判断case语句："></a>条件判断case语句：</h3><p><strong>case语句</strong>是实现选择结构程序设计的一种语句，比较适合处理离散型变量。</p>
+<p><strong>格式：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">case 变量引用 in</span><br><span class="line">1|2|3)</span><br><span class="line">cmd1</span><br><span class="line">;;</span><br><span class="line"></span><br><span class="line">4|5|6)</span><br><span class="line">   cmd2</span><br><span class="line">;;</span><br><span class="line"></span><br><span class="line">7|8|9)</span><br><span class="line">cmd3</span><br><span class="line">;;</span><br><span class="line">*)</span><br><span class="line">    cmd4</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong>case支持glob风格的通配符：</p>
+<p>如：*      表示任意长度任意字符</p>
+<p>？    表示任意单个字符</p>
+<p>[]      指定范围内的任意单个字符</p>
+<p>a|b    a或者b</p>
+<h2 id="二、for、while及until循环"><a href="#二、for、while及until循环" class="headerlink" title="二、for、while及until循环"></a>二、for、while及until循环</h2><p>循环执行</p>
+<p>将某代码段重复运行多次</p>
+<p>重复运行多少次</p>
+<p>次数已知</p>
+<p>次数未知</p>
+<p>有进入条件和退出条件</p>
+<p>循环主要语句有：<strong>for、whlie、until</strong></p>
+<h3 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a><strong>for循环</strong></h3><p>for语句将循环一个列表中的每一个元素执行一次循环体代码，直到列表中元素全部执行过一次。</p>
+<p>一般用于次数预先知道的循环。</p>
+<p><strong>格式1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for 变量名 in 列表；do</span><br><span class="line"></span><br><span class="line">循环体</span><br><span class="line"></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p><strong>其中列表的生成方式有多种：</strong></p>
+<ol>
+<li><p>直接给出列表</p>
+</li>
+<li><p>整数列表<strong>：</strong></p>
+<p>（a）{start..end[..step]}</p>
+<p>（b）$（seq[start[step]end]）</p>
+</li>
+<li><p>返回列表的命令<strong>：</strong></p>
+<p>$（COMMAND）</p>
+</li>
+<li><p>使用glob，如：*.sh</p>
+</li>
+<li><p>变量引用：</p>
+<p>$@,$*等</p>
+</li>
+</ol>
+<p>执行机制<strong>：</strong></p>
+<p>依次将列表中的元素赋值给”变量名”，每次赋值后即执行一次循环体；直到列表中的元素全部被执行，循环结束</p>
+<p><strong>格式2：C语言风格</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">for ((: for (( exp1; exp2; exp3 )); do COMMANDS; done</span><br><span class="line"></span><br><span class="line">Arithmetic for loop.</span><br><span class="line"></span><br><span class="line">Equivalent to</span><br><span class="line"></span><br><span class="line">(( EXP1 ))</span><br><span class="line"></span><br><span class="line">while (( EXP2 )); do</span><br><span class="line"></span><br><span class="line">COMMANDS</span><br><span class="line"></span><br><span class="line">(( EXP3 ))</span><br><span class="line"></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p><strong>例：利用for循环依次读取列表{1..100}中的内容，并相加，得出1到100的数字之和</strong></p>
+<p><img src="testfor.png" alt="testfor"></p>
+<h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a><strong>while循环</strong></h3><p>while结构循环为当型循环(when type loop)，一般用于不知道循环次数的情况。维持循环的是一个条件表达式，条件成立执行循环体，条件不成立退出循环。</p>
+<p><strong>格式：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while 循环控制条件；do</span><br><span class="line">循环体</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p><strong>循环控制条件：</strong>进入循环之前，先做一次判断；每次循环之后会再次做判断；当条件为True时，则继续执行循环；直到条件测试状态为false时终止循环。</p>
+<p><strong>例：利用while循环，定义变量i=0，当i小于100时，执行循环，并让变量i每执行一次循环加1，直到i=100时停止循环，得出数字1到100之和</strong></p>
+<p><img src="testwhile.png" alt="testwhile"></p>
+<p><strong>while循环的特殊用法（遍历文件的每一行）：</strong></p>
+<p><strong>while read line； do</strong></p>
+<p>  循环体</p>
+<p><strong>done &lt; /PATH/FROM/SOMEFILE</strong></p>
+<p>依次读取<strong>/PATH/FROM/SOMEFILE</strong>文件中的每一行，且将行赋值给变量line</p>
+<h3 id="for循环与while循环的区别："><a href="#for循环与while循环的区别：" class="headerlink" title="for循环与while循环的区别："></a><strong>for循环与while循环的区别：</strong></h3><p>for循环与while循环是可以<strong>相互替代</strong>的；比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for i in &#123;1..10&#125;；do</span><br><span class="line">echo &quot;OK&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p><strong>用while语句来写的话：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">i=1</span><br><span class="line">while [ $i -le 10 ];do</span><br><span class="line">echo &quot;OK&quot;</span><br><span class="line">let i++</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>两者意思都是打印10次”OK”，那什么时候用for循环，什么时候又用while循环呢？</p>
+<p>for循环用于针对集合中的每个元素的一个代码块，而while循环不断的运行，直到指定的条件不满足为止。</p>
+<p>一般来说：</p>
+<p><strong>for循环比较适合循环次数确定的情况</strong></p>
+<p><strong>while循环适合循环次数不确定的情况</strong></p>
+<h3 id="until循环"><a href="#until循环" class="headerlink" title="until循环"></a><strong>until循环</strong></h3><p>维持循环的也是一个条件表达式，但与while用法正好相反，条件不成立时执行循环体，条件成立时退出循环。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">until 循环控制条件；do</span><br><span class="line">	循环体</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p><strong>until语句和while语句可相互转化：</strong></p>
+<p>如：until [ test ]；do  等价于 while [ ! test ]；do</p>
+<h2 id="三、循环控制语句continue、break、shift"><a href="#三、循环控制语句continue、break、shift" class="headerlink" title="三、循环控制语句continue、break、shift"></a>三、循环控制语句continue、break、shift</h2><h3 id="continue语句"><a href="#continue语句" class="headerlink" title="continue语句"></a><strong>continue语句</strong></h3><p>用于循环体中</p>
+<p><strong>continue[N]：</strong>提前结束第N层的本轮循环，而直接进入下一轮判断；最内层为第1层</p>
+<p><strong>格式：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">while 循环控制条件；do</span><br><span class="line">	CMD1</span><br><span class="line">	…</span><br><span class="line">    if 判断条件；then</span><br><span class="line">   		continue</span><br><span class="line">    fi</span><br><span class="line">    CMDn</span><br><span class="line">    …</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p><strong>例：依次打印数字1至10，当continue出现在5循环中时，直接跳过，继续执行6循环；</strong></p>
+<p><strong>当continue出现在嵌套循环中时，continue 2，提前结束第二次本轮循环，并打印3次</strong></p>
+<p><img src="testcontinue.png" alt="testcontinue"></p>
+<h3 id="break语句"><a href="#break语句" class="headerlink" title="break语句"></a><strong>break语句</strong></h3><p>用于循环体中</p>
+<p><strong>break[N]：</strong>提前结束第N层循环，最内层为第一层</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">while 循环控制条件；do</span><br><span class="line">    CMD1</span><br><span class="line">    …</span><br><span class="line">    if 判断条件；then</span><br><span class="line">  	  break</span><br><span class="line">    fi</span><br><span class="line">    CMDn</span><br><span class="line">    …</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p><strong>例：break语句将直接结束本轮循环</strong></p>
+<p><img src="testbreak.png" alt="testbreak"></p>
+<h3 id="shift命令"><a href="#shift命令" class="headerlink" title="shift命令"></a><strong>shift命令</strong></h3><p><strong>shift[n]：</strong>将参量列表list左移指定次数，缺省为左移一次，适合用于处理位置参数</p>
+<p>参量列表list一旦被移动，最左端的那个参数就从列表中删除。while循环遍历位置参量列表时，</p>
+<p>常用到shift</p>
+<p><strong>例1：利用shifit，每次位置变量向左移动1位，并打印本次全部位置变量，直到位置变量为0个</strong></p>
+<p><img src="testdoit.png" alt="testdoit"></p>
+<p><strong>例2：利用shifit，每次变量向左移动一位，并打印本次第一个位置变量，直到位置变量小于1时停止执行</strong></p>
+<p><img src="testshifit.png" alt="testshifit"></p>
+<h3 id="避免出现无限循环："><a href="#避免出现无限循环：" class="headerlink" title="避免出现无限循环："></a><strong>避免出现无限循环：</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">while true；do</span><br><span class="line">	循环体</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">until false；do</span><br><span class="line">	循环体</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>每个程序员都会偶尔不小心而编写出无限循环，在循环退出条件比较微妙时尤其如此，如果程序陷入无限循环，可按<strong>ctrl+c</strong>退出</p>
+<p>要避免编写无限循环，务必对每个while、until循环进行测试，确保它按预期那样结束。</p>
+<h3 id="select循环与菜单"><a href="#select循环与菜单" class="headerlink" title="select循环与菜单"></a><strong>select循环与菜单</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select 变量 in list；do</span><br><span class="line">	循环体命令</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>select循环主要用于创建菜单，常与case语句搭配使用，用户输入菜单列表中的某个数字，执行相应的命令</p>
+<p>select是个无限循环，因此要记住用break命令退出循环，或用户exit命令终止脚本。可按ctrl+c退出循环</p>
+<p>与for循环类似，可以省略in list，此时使用位置变量。</p>
+<p>相关变量：</p>
+<p><strong>$PS3</strong>        menu菜单提示符</p>
+<p><strong>$REPLY</strong>    保存用户的输入信息</p>
+<h2 id="四、信号捕捉trap"><a href="#四、信号捕捉trap" class="headerlink" title="四、信号捕捉trap"></a>四、信号捕捉trap</h2><p><strong>trap ‘触发指令’信号</strong></p>
+<p>自定义进程收到系统发出的指定信号好，将执行触发指令，而不会执行原操作</p>
+<p><strong>trap “ 信号</strong></p>
+<p>忽略信号的操作</p>
+<p><strong>trap ‘-‘ 信号</strong></p>
+<p>恢复原信号的操作</p>
+<p><strong>trap -p</strong></p>
+<p>列出自定义信号操作</p>
+<p><strong>例：打印数字1到10的过程中，trap -p显示自定义信号操作，由于trap “int捕获了int信号，ctrl+c无法中断显示，且显示自定义输入：press ctrl+c；</strong></p>
+<p><strong>打印数字11到20的过程中，由于trap “int捕获了int信号，ctrl+c无法中断显示</strong></p>
+<p><strong>打印数字21到30的过程中，trap ‘-‘恢复了原信号操作，顾ctrl+c又可中断显示</strong></p>
+<p><img src="trap.png" alt="trap"></p>
+<p><img src="trap2.png" alt="trap2"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/shell/" rel="tag"># shell</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/06/TCP-IP协议详解/" rel="next" title="TCP/IP协议详解">
+                <i class="fa fa-chevron-left"></i> TCP/IP协议详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/10/Linux系统启动流程详解/" rel="prev" title="Linux系统启动流程详解">
+                Linux系统启动流程详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、if、case条件判断"><span class="nav-number">1.</span> <span class="nav-text">一、if、case条件判断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#条件判断if语句："><span class="nav-number">1.1.</span> <span class="nav-text">条件判断if语句：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件判断case语句："><span class="nav-number">1.2.</span> <span class="nav-text">条件判断case语句：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、for、while及until循环"><span class="nav-number">2.</span> <span class="nav-text">二、for、while及until循环</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#for循环"><span class="nav-number">2.1.</span> <span class="nav-text">for循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#while循环"><span class="nav-number">2.2.</span> <span class="nav-text">while循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for循环与while循环的区别："><span class="nav-number">2.3.</span> <span class="nav-text">for循环与while循环的区别：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#until循环"><span class="nav-number">2.4.</span> <span class="nav-text">until循环</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、循环控制语句continue、break、shift"><span class="nav-number">3.</span> <span class="nav-text">三、循环控制语句continue、break、shift</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#continue语句"><span class="nav-number">3.1.</span> <span class="nav-text">continue语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#break语句"><span class="nav-number">3.2.</span> <span class="nav-text">break语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shift命令"><span class="nav-number">3.3.</span> <span class="nav-text">shift命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#避免出现无限循环："><span class="nav-number">3.4.</span> <span class="nav-text">避免出现无限循环：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#select循环与菜单"><span class="nav-number">3.5.</span> <span class="nav-text">select循环与菜单</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、信号捕捉trap"><span class="nav-number">4.</span> <span class="nav-text">四、信号捕捉trap</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

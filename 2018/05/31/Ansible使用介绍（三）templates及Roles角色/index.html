@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Ansible,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、环境搭建：前期准备：一台虚拟机作为ansible，三台虚拟机作为被控端node 主控端： 主机名：ansible 系统版本：CentOS6.9 被控端： 主机名：node1 CPU内核数：4 系统版本：CentSO7.4 主机名：node2 CPU内核数：2 系统版本：CentSO6.9 主机名：node3 CPU内核数：1 系统版本：CentSO6.9  /etc/ansible/hosts">
+<meta name="keywords" content="Ansible">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ansible使用介绍（三）templates及Roles角色">
+<meta property="og:url" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="一、环境搭建：前期准备：一台虚拟机作为ansible，三台虚拟机作为被控端node 主控端： 主机名：ansible 系统版本：CentOS6.9 被控端： 主机名：node1 CPU内核数：4 系统版本：CentSO7.4 主机名：node2 CPU内核数：2 系统版本：CentSO6.9 主机名：node3 CPU内核数：1 系统版本：CentSO6.9  /etc/ansible/hosts">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/前期准备.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/前期准备host.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/temp1.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/tmpl2.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/lazy.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/when1.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/when2.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/迭代1.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/迭代2.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/迭代3.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/for1.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/for2.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/for3.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/for4-1.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/nginx目录结构.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/nginx.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/httpd目录机构-1.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/httpd执行结果.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/somerole目录结构.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/somerole执行结果.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/tags目录结构.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/tags执行结果.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/tags-when.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/综合演示结构目录.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/综合演示执行结果.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/memcached.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/memcached目录结构.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/memcached执行结果.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/memcached确认生效.png">
+<meta property="og:updated_time" content="2018-07-17T13:01:58.968Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ansible使用介绍（三）templates及Roles角色">
+<meta name="twitter:description" content="一、环境搭建：前期准备：一台虚拟机作为ansible，三台虚拟机作为被控端node 主控端： 主机名：ansible 系统版本：CentOS6.9 被控端： 主机名：node1 CPU内核数：4 系统版本：CentSO7.4 主机名：node2 CPU内核数：2 系统版本：CentSO6.9 主机名：node3 CPU内核数：1 系统版本：CentSO6.9  /etc/ansible/hosts">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/前期准备.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/">
+
+
+
+
+
+  <title>Ansible使用介绍（三）templates及Roles角色 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Ansible使用介绍（三）templates及Roles角色</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-31T15:27:49+08:00">
+                2018-05-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/自动化运维/" itemprop="url" rel="index">
+                    <span itemprop="name">自动化运维</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、环境搭建："><a href="#一、环境搭建：" class="headerlink" title="一、环境搭建："></a><strong>一、环境搭建：</strong></h2><p><strong>前期准备：</strong>一台虚拟机作为<strong>ansible</strong>，三台虚拟机作为被控端<strong>node</strong></p>
+<p><strong>主控端：</strong></p>
+<p>主机名：ansible</p>
+<p>系统版本：CentOS6.9</p>
+<p><strong>被控端：</strong></p>
+<p>主机名：node1</p>
+<p>CPU内核数：4</p>
+<p>系统版本：CentSO7.4</p>
+<p>主机名：node2</p>
+<p>CPU内核数：2</p>
+<p>系统版本：CentSO6.9</p>
+<p>主机名：node3</p>
+<p>CPU内核数：1</p>
+<p>系统版本：CentSO6.9</p>
+<p><img src="前期准备.png" alt="前期准备"></p>
+<p><strong>/etc/ansible/hosts</strong>文件主机列表配置如下：</p>
+<p><img src="前期准备host.png" alt="前期准备host"></p>
+<h2 id="二、Playbook中模板templates的用法"><a href="#二、Playbook中模板templates的用法" class="headerlink" title="二、Playbook中模板templates的用法"></a><strong>二、Playbook中模板templates的用法</strong></h2><h3 id="templates模板："><a href="#templates模板：" class="headerlink" title="templates模板："></a><strong>templates模板：</strong></h3><p><strong>功能：</strong>根据模块文件动态生成对应的配置文件</p>
+<p><strong>使用方法：</strong></p>
+<p>（1）templates文件必须存放在templates目录下，且以.j2为后缀</p>
+<p>（2）templates模块只能被playbook调用</p>
+<p>（3）yam文件需和templates目录平级，目录结构如下：</p>
+<p>./</p>
+<p>├── temnginx.yml</p>
+<p>└── templates</p>
+<p>└── nginx.conf.j2</p>
+<h3 id="templates使用形式："><a href="#templates使用形式：" class="headerlink" title="templates使用形式："></a><strong>templates使用形式：</strong></h3><p><strong>字符串</strong>：使用单引号或双引号</p>
+<p><strong>数字</strong>：整数，浮点数</p>
+<p><strong>列表</strong>：[item1, item2, …]</p>
+<p><strong>元组</strong>：(item1, item2, …)</p>
+<p><strong>字典</strong>：{key1:value1, key2:value2, …}</p>
+<p><strong>布尔型</strong>：true/false</p>
+<p><strong>算术运算</strong>：+, -, *, /, //, %, **</p>
+<p><strong>比较操作</strong>：==, !=, &gt;, &gt;=, &lt;, &lt;=</p>
+<p><strong>逻辑运算</strong>：and, or, not</p>
+<p><strong>流表达式</strong>：For If When</p>
+<h3 id="示例1：使用template传输配置文件"><a href="#示例1：使用template传输配置文件" class="headerlink" title="示例1：使用template传输配置文件"></a><strong>示例1：</strong>使用template传输配置文件</h3><p>cp /etc/nginx/nginx.conf  templates/nginx.conf.j2</p>
+<p><strong>vim testtemplate.yml</strong></p>
+<p>—</p>
+<p>– hosts: os6</p>
+<p>  remote_user: root</p>
+<p>  tasks:</p>
+<p>​    – name: install package</p>
+<p>​      yum: name=nginx</p>
+<p>​    – name: copy template</p>
+<p>​      template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf</p>
+<p>​    – name: start service</p>
+<p>​      service: name=nginx state=started enabled=yes</p>
+<p><strong>执行结果：</strong>运行playbook后，我们发现work process进程数量与虚拟机cpu内核数量是一致的，接下来我</p>
+<p>们将把配置模板中的work process进程数量与系统自带变量结合起来引用。</p>
+<p><img src="temp1.png" alt="temp1"></p>
+<h3 id="示例2：template引用系统变量"><a href="#示例2：template引用系统变量" class="headerlink" title="示例2：template引用系统变量"></a><strong>示例2：</strong>template引用系统变量</h3><p>ansible websrvs -m setup |grep ‘cpu’</p>
+<p><strong>vim templates/nginx.conf.j2</strong></p>
+<p>worker_processes NaN;</p>
+<p><img src="tmpl2.png" alt="tmpl2"></p>
+<p><strong>vim testtemplate.yml</strong></p>
+<p>—</p>
+<p>– hosts:os6</p>
+<p>  remote_user: root</p>
+<p>  tasks:</p>
+<p>​    – name: install package</p>
+<p>​      yum: name=nginx</p>
+<p>​    – name: copy template</p>
+<p>​      template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf</p>
+<p>​      notify: restart service</p>
+<p>​    – name: start service</p>
+<p>​      service: name=nginx state=started enabled=yes</p>
+<p>  handlers:</p>
+<p>​    – name: restart service</p>
+<p>​      service:name=nginx state=restarted</p>
+<p><strong>执行结果：</strong>再次运行playbook后，我们发现worker process进程数量等于cpu核心数量加2，这样template</p>
+<p>就能帮我们实现根据不同主机性能定制相应的配置。</p>
+<p><img src="lazy.png" alt="temp3"></p>
+<h3 id="示例3：hosts文件普通变量修改nginx服务端口"><a href="#示例3：hosts文件普通变量修改nginx服务端口" class="headerlink" title="示例3：hosts文件普通变量修改nginx服务端口"></a><strong>示例3：</strong>hosts文件普通变量修改nginx服务端口</h3><p><strong>vim /etc/ansible/hosts</strong></p>
+<p>192.168.30.101 httpd_port=81</p>
+<p>192.168.30.102 httpd_port=82</p>
+<p><strong>vim templates/nginx.conf.j2</strong></p>
+<p> server {</p>
+<p>​       listen        default server</p>
+<p>​       listen       [::]: default server</p>
+<p>  }</p>
+<h2 id="三、Playbook中逻辑语句的使用"><a href="#三、Playbook中逻辑语句的使用" class="headerlink" title="三、Playbook中逻辑语句的使用"></a><strong>三、Playbook中逻辑语句的使用</strong></h2><h3 id="When："><a href="#When：" class="headerlink" title="When："></a><strong>When：</strong></h3><p><strong>条件测试:</strong>如果需要根据变量、facts或此前任务的执行结果来做为某task执行与</p>
+<p>否的前提时要用到条件测试,通过when语句实现，在task中使用，jinja2的语法</p>
+<p>查看发行版本系统变量：</p>
+<p>ansible srv -m setup filter=”*distribution”</p>
+<p><img src="when1.png" alt="when1"></p>
+<h3 id="示例1："><a href="#示例1：" class="headerlink" title="示例1："></a><strong>示例1：</strong></h3><p><strong>vim testtemplate.yml</strong></p>
+<p>—</p>
+<p>– hosts: all</p>
+<p>  remote_user: root</p>
+<p>  tasks:</p>
+<p>​    – name: install package</p>
+<p>​      yum: name=nginx</p>
+<p>​    – name: copy template for centos7</p>
+<p>​      template: src=nginx.conf7.j2 dest=/etc/nginx/nginx.conf</p>
+<p>​      when: ansible_distribution_major_version == “7”</p>
+<p>​      notify: restart service</p>
+<p>​    – name: copy template for centos6</p>
+<p>​      template: src=nginx.conf6.j2 dest=/etc/nginx/nginx.conf</p>
+<p>​      when: ansible_distribution_major_version == “6”</p>
+<p>​      notify: restart service</p>
+<p>​    – name: start service</p>
+<p>​      service: name=nginx state=started enabled=yes</p>
+<p>  handlers:</p>
+<p>​    – name: restart service</p>
+<p>​      service:name=nginx state=restarted</p>
+<p><strong>执行结果:</strong>当when语句不匹配时，将skipping直接跳过，仅执行与when语句匹配的语句内容，最终</p>
+<p>CentOS6,7根据不同的版本号生成对应的配置并启动服务。</p>
+<p><img src="when2.png" alt="when2"></p>
+<h3 id="with-items：迭代"><a href="#with-items：迭代" class="headerlink" title="with_items：迭代"></a><strong>with_items：迭代</strong></h3><p><strong>迭代：</strong>当有需要重复性执行的任务时，可以使用迭代机制</p>
+<p>对迭代项的引用，固定变量名为“item”</p>
+<p>要在task中使用with_items给定要迭代的元素列表</p>
+<p><strong>列表格式：</strong></p>
+<p>字符串</p>
+<p>字典</p>
+<h3 id="示例1：利用迭代一次创建多个文件，安装多个命令包"><a href="#示例1：利用迭代一次创建多个文件，安装多个命令包" class="headerlink" title="示例1：利用迭代一次创建多个文件，安装多个命令包"></a><strong>示例1：</strong>利用迭代一次创建多个文件，安装多个命令包</h3><p><strong>vim testitem.yml</strong></p>
+<p>—</p>
+<p>– hosts: all</p>
+<p>  remote_user: root</p>
+<p>  tasks:</p>
+<p>​    – name: create some file</p>
+<p>​      file: name=/data/  state=touch</p>
+<p>​      when: ansible_distribution_major_version == “7”</p>
+<p>​      with_items:</p>
+<p>​        – file1</p>
+<p>​        – file2</p>
+<p>​        – file3</p>
+<p>​    – name: install some packages</p>
+<p>​      yum: name=</p>
+<p>​      with_items:</p>
+<p>​        – htop</p>
+<p>​        – sl</p>
+<p>​        – hping3</p>
+<p><strong>执行结果：</strong>当系统为CentOS7版本时，在/data目录下创建file1-3文件，安装htop，sl，hping3命令</p>
+<p><img src="迭代1.png" alt="迭代1"></p>
+<h3 id="示例2：使用迭代创建组"><a href="#示例2：使用迭代创建组" class="headerlink" title="示例2：使用迭代创建组"></a><strong>示例2：</strong>使用迭代创建组</h3><p><strong>vim testitem2.yml</strong></p>
+<p>—</p>
+<p>– hosts: all</p>
+<p>  remote_user: root</p>
+<p>  tasks:</p>
+<p>​    – name: create some groups</p>
+<p>​      group: name=</p>
+<p>​      when: ansible_distribution_major_version == “7”</p>
+<p>​      with_items:</p>
+<p>​        – g1</p>
+<p>​        – g2</p>
+<p>​        – g3</p>
+<p><strong>执行结果：</strong>当系统版本为CentOS7时，创建g1,g2,g3组</p>
+<p><img src="迭代2.png" alt="迭代2"></p>
+<h3 id="示例3：使用迭代配合字典创建用户与组"><a href="#示例3：使用迭代配合字典创建用户与组" class="headerlink" title="示例3：使用迭代配合字典创建用户与组"></a><strong>示例3：</strong>使用迭代配合字典创建用户与组</h3><p><strong>vim testitem2.yml</strong></p>
+<p>—</p>
+<p>– hosts: all</p>
+<p>  remote_user: root</p>
+<p>  tasks:</p>
+<p>​    – name: create some groups</p>
+<p>​      group: name=</p>
+<p>​      with_items:</p>
+<p>​        – g1</p>
+<p>​        – g2</p>
+<p>​        – g3</p>
+<p>​    – name: create some users</p>
+<p>​      user: name= group=</p>
+<p>​      with_items:</p>
+<p>​        – { name: ‘user1’,group: ‘g1’ }</p>
+<p>​        – { name: ‘user2’,group: ‘g2’ }</p>
+<p>​        – { name: ‘user3’,group: ‘g3’ }</p>
+<p><strong>执行结果：</strong>所有主机上创建user1，user2，user3用户，且主组为g1，g2，g3</p>
+<p><img src="迭代3.png" alt="迭代3"></p>
+<p><strong>for 与  if</strong></p>
+<h3 id="示例1：template，for"><a href="#示例1：template，for" class="headerlink" title="示例1：template，for"></a><strong>示例1：</strong>template，for</h3><p><strong>vim for1.conf.j2</strong></p>
+
+<p><strong>vim testfor.yml</strong></p>
+<p>—</p>
+<p>– hosts: websrvs</p>
+<p>  remote_user: root</p>
+<p>  vars:</p>
+<p>​    ports:</p>
+<p>​      – 81</p>
+<p>​      – 82</p>
+<p>​      – 83</p>
+<p>  tasks:</p>
+<p>​    – name: copy conf</p>
+<p>​       template: src=for1.conf.j2  dest=/data/for1.conf</p>
+<p><strong>执行结果：</strong>每台主机生成for1.conf文件，内容如下</p>
+<p><img src="for1.png" alt="for1"></p>
+<h3 id="示例2：template，for，引用字典"><a href="#示例2：template，for，引用字典" class="headerlink" title="示例2：template，for，引用字典"></a><strong>示例2：</strong>template，for，引用字典</h3><p><strong>vim for2.conf.j2</strong></p>
+
+<p>cp testfor.yml testfor2.yml</p>
+<p><strong>vim testfor2.yml</strong></p>
+<p>—</p>
+<p>– hosts: websrvs</p>
+<p>  remote_user: root</p>
+<p>  vars:</p>
+<p>​    ports:</p>
+<p>​      – listen_port: 81</p>
+<p>​      – listen_port: 82</p>
+<p>​      – listen_port: 83</p>
+<p>  tasks:</p>
+<p>​    – name: copy conf</p>
+<p>​      template:src=for2.conf.j2  dest/data/for2.conf</p>
+<p><strong>执行结果：</strong>每台主机生成for2.conf文件，内容如下</p>
+<p><img src="for2.png" alt="for2"></p>
+<p>### </p>
+<h3 id="示例3：for循环中调用字典"><a href="#示例3：for循环中调用字典" class="headerlink" title="示例3：for循环中调用字典"></a><strong>示例3：</strong>for循环中调用字典</h3><p><strong>vim for3.conf.j2</strong></p>
+
+<p>cp testfor2.yml testfor3.yml</p>
+<p><strong>vim testfor3.yml</strong></p>
+<p>—</p>
+<p>– hosts: websrvs</p>
+<p>  remote_user: root</p>
+<p>  vars:</p>
+<p>​    ports:</p>
+<p>​      – web1:</p>
+<p>​        port: 81</p>
+<p>​        name: web1.magedu.com</p>
+<p>​        rootdir: /data/website1</p>
+<p>​      – web2:</p>
+<p>​        port: 82</p>
+<p>​        name: web2.magedu.com</p>
+<p>​        rootdir: /data/website2</p>
+<p>​      – web3:</p>
+<p>​        port: 83</p>
+<p>​        name: web3.magedu.com</p>
+<p>​        rootdir: /data/website3</p>
+<p>  tasks:</p>
+<p>​    – name: copy conf</p>
+<p>​      template:src=for3.conf.j2  dest/data/for3.conf</p>
+<p><strong>执行结果：</strong>每台主机生成for3.conf文件，内容如下</p>
+<p><img src="for3.png" alt="for3"></p>
+<h3 id="示例4：for循环中调用if"><a href="#示例4：for循环中调用if" class="headerlink" title="示例4：for循环中调用if"></a><strong>示例4：</strong>for循环中调用if</h3><p><strong>vim for4.conf.j2</strong></p>
+
+<p>cp testfor3.yml testfor4.yml</p>
+<p><strong>vim testfor4.yml</strong></p>
+<p>—</p>
+<p>– hosts: websrvs</p>
+<p>  remote_user: root</p>
+<p>  vars:</p>
+<p>​    ports:</p>
+<p>​      – web1:</p>
+<p>​        port: 81</p>
+<p>​        #name: web1.magedu.com</p>
+<p>​         rootdir: /data/website1</p>
+<p>​      – web2:</p>
+<p>​        port: 82</p>
+<p>​        name: web2.magedu.com</p>
+<p>​         rootdir: /data/website1</p>
+<p>​      – web3:</p>
+<p>​        port: 83</p>
+<p>​        #name: web3.magedu.com</p>
+<p>​         rootdir: /data/website1</p>
+<p>  tasks:</p>
+<p>​    – name: copy conf</p>
+<p>​      template:src=for4.conf.j2  dest/data/for4.conf</p>
+<p><strong>执行结果：</strong>每台主机生成for3.conf文件，内容如下，web1与web3的name没赋值，所有跳过，web2的</p>
+<p>name被赋值，文件中输出结果</p>
+<p><img src="for4-1.png" alt="for4"></p>
+<h2 id="四、Roles角色"><a href="#四、Roles角色" class="headerlink" title="四、Roles角色"></a><strong>四、Roles角色</strong></h2><p><strong>角色（roles）</strong>：角色集合</p>
+<p><strong>roles/</strong></p>
+<p>  mysql/</p>
+<p>   httpd/</p>
+<p>   nginx/</p>
+<p>   memcached/</p>
+<p><strong>/roles/project/ :</strong>项目名称,有以下子目录</p>
+<p><strong>files/ ：</strong>存放由copy或script模块等调用的文件</p>
+<p><strong>templates/：</strong>template模块查找所需要模板文件的目录</p>
+<p><strong>tasks/：</strong>定义task,role的基本元素，至少应该包含一个名为main.yml的文件；其它的文</p>
+<p>件需要在此文件中通过include进行包含</p>
+<p><strong>handlers/：</strong>至少应该包含一个名为main.yml的文件；其它的文件需要在此文件中通过</p>
+<p>include进行包含</p>
+<p><strong>vars/：</strong>定义变量，至少应该包含一个名为main.yml的文件；其它的文件需要在此文件</p>
+<p>中通过include进行包含</p>
+<p><strong>meta/：</strong>定义当前角色的特殊设定及其依赖关系,至少应该包含一个名为main.yml的文</p>
+<p>件，其它文件需在此文件中通过include进行包含</p>
+<p><strong>default/：</strong>设定默认变量时使用此目录中的main.yml文件</p>
+<p><strong>建议：roles创建在ansible目录</strong></p>
+<p>mkdir roles</p>
+<p>mkdir roles/{httpd,mysql,memcache,nginx} -pv</p>
+<h3 id="示例1：定义nginx角色"><a href="#示例1：定义nginx角色" class="headerlink" title="示例1：定义nginx角色"></a><strong>示例1：</strong>定义nginx角色</h3><p><strong>思路：</strong></p>
+<p>niginx</p>
+<p>1.group:nginx</p>
+<p>2.user:nginx</p>
+<p>3.yum:nginx</p>
+<p>4.template:nigin.conf.j2</p>
+<p>5.service:nginx</p>
+<p><strong>目录结构如下：</strong></p>
+<p><img src="nginx目录结构.png" alt="nginx目录结构"></p>
+<p>cd nginx</p>
+<p>mkdir tasks templates</p>
+<p>cd tasks</p>
+<p><strong>vim group.yml</strong></p>
+<p>– name: create group</p>
+<p>  group: name=nginx gid=80</p>
+<p><strong>vim user.yml</strong></p>
+<p>– name: create user</p>
+<p>  user: name=nginx group=nginx uid=80 shell=/sbin/noligin</p>
+<p><strong>vim yum.yml</strong></p>
+<p>– name: install package</p>
+<p>  yum: name=nginx</p>
+<p><strong>vim start.yml</strong></p>
+<p>– name: start service</p>
+<p>  service: name=nginx state=started enabled=yes</p>
+<p><strong>vim restart.yml</strong></p>
+<p>– name: restart service</p>
+<p>  service: name=nginx state=restarted</p>
+<p>cp /etc/nginx/nginx.conf  template/nginx.conf.j2</p>
+<p><strong>vim template/nginx.conf.j2</strong></p>
+<p>worker_processes NaN;</p>
+<p><strong>vim templ.yml</strong></p>
+<p>– name: copy conf</p>
+<p>template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf</p>
+<p><strong>vim main.yml</strong></p>
+<p>– include: group.yml</p>
+<p>– include: user.yml</p>
+<p>– include: yum.yml</p>
+<p>– include: templ.yml</p>
+<p>– include: start.yml</p>
+<p><strong>调用角色的剧本要和roles目录在同一文件夹</strong></p>
+<p><strong>vim nginx_roles.yml</strong></p>
+<p>– hosts: websrvs</p>
+<p>  romete_user: root</p>
+<p>  roles:</p>
+<p>​    – role: nginx</p>
+<p>ansible-playbook -C nginx_role.yml</p>
+<p><strong>执行结果如下：</strong></p>
+<p><img src="nginx.png" alt="nginx"></p>
+<h3 id="示例2：增加httpd角色"><a href="#示例2：增加httpd角色" class="headerlink" title="示例2：增加httpd角色"></a><strong>示例2：</strong>增加httpd角色</h3><p><strong>结构目录如下：</strong></p>
+<p><img src="httpd目录机构-1.png" alt="httpd目录机构"></p>
+<p>cd httpd/</p>
+<p>mkdir tasks</p>
+<p>cd tasks/</p>
+<p><strong>vim user.yml</strong></p>
+<p>– name: create user</p>
+<p>  user: name=apache system=yes shell=/sbin/nologin</p>
+<p>cd httpd/</p>
+<p>mkdir files</p>
+<p>cp httpd.conf   files/</p>
+<p>cd /tasks/</p>
+<p><strong>模拟编译安装yum</strong></p>
+<p><strong>vim copyfile.yml</strong></p>
+<p>– name: copy files</p>
+<p>  copy: src=httpd.conf dest=/data/ own=apache</p>
+<p><strong>vim main.yml</strong></p>
+<p>– incluse: user.yml</p>
+<p>– incluse: copyfile.yml</p>
+<p><strong>vim httpd_role.yml</strong></p>
+<p>– hosts: websrvs</p>
+<p>  romete_user: root</p>
+<p>  roles:</p>
+<p>​    – role: httpd</p>
+<p><strong>执行结果如下：</strong></p>
+<p><img src="httpd执行结果.png" alt="httpd执行结果"></p>
+<h3 id="示例3：同时调用两个roles角色"><a href="#示例3：同时调用两个roles角色" class="headerlink" title="示例3：同时调用两个roles角色"></a><strong>示例3：</strong>同时调用两个roles角色</h3><p><strong>目录结构：</strong></p>
+<p><img src="somerole目录结构.png" alt="somerole目录结构"></p>
+<p>cp niginx_role.yml some_role.yml</p>
+<p><strong>vim some_role.yml</strong></p>
+<p>– hosts: websrvs</p>
+<p>  romete_user: root</p>
+<p>  roles:</p>
+<p>​    – role: httpd</p>
+<p>​    – role: nginx</p>
+<p><strong>执行结果如下：</strong></p>
+<p><img src="somerole执行结果.png" alt="somerole执行结果"></p>
+<p>### </p>
+<h3 id="示例4：一个roles角色调用另一个roles角色的task任务"><a href="#示例4：一个roles角色调用另一个roles角色的task任务" class="headerlink" title="示例4：一个roles角色调用另一个roles角色的task任务"></a><strong>示例4：</strong>一个roles角色调用另一个roles角色的task任务</h3><p><strong>目标：</strong>nginx调用httpd的copyfile</p>
+<p><strong>vim main.yml</strong></p>
+<p>– include: group.yml</p>
+<p>– include: user.yml</p>
+<p>– include: yum.yml</p>
+<p>– include: templ.yml</p>
+<p>– include: start.yml</p>
+<p>– inclide: roles/httpd/tasks/copyfile.yml</p>
+<h3 id="示例5：roles-playbook-tags"><a href="#示例5：roles-playbook-tags" class="headerlink" title="示例5：roles playbook tags"></a><strong>示例5：</strong>roles playbook tags</h3><p><strong>目录结构如下：</strong></p>
+<p><img src="tags目录结构.png" alt="tags目录结构"></p>
+<p>cp -r nginx/ app/     首先虚构一个app的role</p>
+<p><strong>vim some_role2.yml</strong></p>
+<p>– hosts: websrvs</p>
+<p>  romete_user: root</p>
+<p>  roles:</p>
+<p>​    – { role: httpd,tags:[‘web’,’httpd’]}</p>
+<p>​    – { role: nginx,tags:[‘web’,’nginx’]}</p>
+<p>​    – { role: app,tags:’app’}</p>
+<p>ansible-playbook -t web some_role.yml</p>
+<p><strong>执行结果：</strong>只执行标签为web的role</p>
+<p><img src="tags执行结果.png" alt="tags执行结果"></p>
+<p>### </p>
+<h3 id="示例6：roles-playbook-tags-when"><a href="#示例6：roles-playbook-tags-when" class="headerlink" title="示例6：roles playbook tags when"></a><strong>示例6：</strong>roles playbook tags when</h3><p>cp -r nginx/ app/     虚构一个role</p>
+<p><strong>vim some_role3.yml</strong></p>
+<p>– hosts: all</p>
+<p>  romete_user: root</p>
+<p>  roles:</p>
+<p>   – { role: httpd,tags:[‘web’,’httpd’]}</p>
+<p>   – { role: nginx,tags:[‘web’,’nginx’],when: ansible_distribution_major_version==”7″}</p>
+<p>   – { role: app,tags:’app’}</p>
+<p>ansible-playbook -t web some_role.yml</p>
+<p><strong>执行结果：</strong>至执行tags标签为web的roles，当主版本号为7时，才执行nginx的role</p>
+<p><img src="tags-when.png" alt="tags when"></p>
+<p>### </p>
+<h3 id="示例7：综合演示"><a href="#示例7：综合演示" class="headerlink" title="示例7：综合演示"></a><strong>示例7：</strong>综合演示</h3><p><strong>结构目录：</strong></p>
+<p><img src="综合演示结构目录.png" alt="综合演示结构目录"></p>
+<p>rm -rf /app</p>
+<p>mkdir app</p>
+<p>cd app</p>
+<p>mkdir tasks templates vars handlers files</p>
+<p>cd tasks/</p>
+<p><strong>vim group.yml</strong></p>
+<p>– name: create group</p>
+<p>  group: name=app system=yes gid=123</p>
+<p><strong>vim user.yml</strong></p>
+<p>– name: create user</p>
+<p>  user: name=app group=app system=yes shell=/sbin/nologin uid=123</p>
+<p><strong>vim yum.yml</strong></p>
+<p>– name: install package</p>
+<p>   yum: name=httpd</p>
+<p>cp /etc/httpd/conf/httpd.conf /templates/httpd.conf.j2</p>
+<p><strong>vim temlates/httpd.conf.j2</strong></p>
+<p>Listen NaN</p>
+<p>User </p>
+<p>Group </p>
+<p><strong>vim /vars/main.yml</strong></p>
+<p>username: app</p>
+<p>groupname: app</p>
+<p><strong>vim templ.yml</strong></p>
+<p>– name: copy conf</p>
+<p>  temlplate: src=httpd.conf.j2 dest=/etc/httpd/conf/httpd.conf</p>
+<p>  notify: restart service</p>
+<p><strong>vim start.yml</strong></p>
+<p>– name: start service</p>
+<p>   service: name=httpd state=started enabled=yes</p>
+<p><strong>vim handlers/main.yml</strong></p>
+<p>– name: restart service</p>
+<p>   service: name=httpd state=restarted</p>
+<p>touch files/vhosts.conf</p>
+<p><strong>vim copyfile.yml</strong></p>
+<p>– name: copy config</p>
+<p>   copy: src=vhosts.conf  dest=/ect/httpd/conf.d/</p>
+<p><strong>vim main.yml</strong></p>
+<p>– include: group.yml</p>
+<p>– include: user.yml</p>
+<p>– include: yum.yml</p>
+<p>– include: templ.yml</p>
+<p>– include: copyfile.yml</p>
+<p>– include: start.yml</p>
+<p>cd ansible/</p>
+<p><strong>vim app_role.yml</strong></p>
+<p>– hosts: websrvs</p>
+<p>  remote_user: root</p>
+<p>  roles:</p>
+<p>​    – role: app</p>
+<p><strong>执行结果如下：</strong></p>
+<p><img src="综合演示执行结果.png" alt="综合演示执行结果"></p>
+<h3 id="示例8：部署memcached，占用内存为物理内存1-4"><a href="#示例8：部署memcached，占用内存为物理内存1-4" class="headerlink" title="示例8：部署memcached，占用内存为物理内存1/4"></a><strong>示例8：</strong>部署memcached，占用内存为物理内存1/4</h3><p><img src="memcached.png" alt="memcached"></p>
+<p>yum install memcached</p>
+<p><strong>目录结构：</strong></p>
+<p><img src="memcached目录结构.png" alt="memcached目录结构"></p>
+<p>cp /etc/sysconfig/memcached templates/memcached.j2</p>
+<p><strong>vim memcached.j2</strong></p>
+<p>CACHESIZE=”NaN”</p>
+<p><strong>vim tasks/yum.yml</strong></p>
+<p>– name: install package</p>
+<p>   yum: name=memcached</p>
+<p><strong>vim templ.yum</strong></p>
+<p>– name: copy conf</p>
+<p>   template: src=memcached.j2 dest=/etc/sysconfig/memcached</p>
+<p><strong>vim start.yml</strong></p>
+<p>– name: start service</p>
+<p>  service: name=memcached state=started enabled=yes</p>
+<p><strong>vim main.yml</strong></p>
+<p>– include: yum.yml</p>
+<p>– include: templ.yml</p>
+<p>– inculde: start.yml</p>
+<p><strong>vim memcached_role.yml</strong></p>
+<p>– hosts: os6</p>
+<p>   remote_user: root</p>
+<p>   roles:</p>
+<p>​    – role: memcached</p>
+<p>ansible-playbook memcached_role.yml</p>
+<p><strong>执行结果如下：</strong></p>
+<p><img src="memcached执行结果.png" alt="memcached执行结果"></p>
+<p><strong>远程查看配置文件，确认生效：</strong></p>
+<p><img src="memcached确认生效.png" alt="memcached确认生效"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Ansible/" rel="tag"># Ansible</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/30/Ansible使用介绍（二）YAML语法及Playbook/" rel="next" title="Ansible使用介绍（二）YAML语法及Playbook">
+                <i class="fa fa-chevron-left"></i> Ansible使用介绍（二）YAML语法及Playbook
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/02/DNS服务及相关实验/" rel="prev" title="DNS服务及相关实验">
+                DNS服务及相关实验 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、环境搭建："><span class="nav-number">1.</span> <span class="nav-text">一、环境搭建：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Playbook中模板templates的用法"><span class="nav-number">2.</span> <span class="nav-text">二、Playbook中模板templates的用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#templates模板："><span class="nav-number">2.1.</span> <span class="nav-text">templates模板：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#templates使用形式："><span class="nav-number">2.2.</span> <span class="nav-text">templates使用形式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例1：使用template传输配置文件"><span class="nav-number">2.3.</span> <span class="nav-text">示例1：使用template传输配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例2：template引用系统变量"><span class="nav-number">2.4.</span> <span class="nav-text">示例2：template引用系统变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例3：hosts文件普通变量修改nginx服务端口"><span class="nav-number">2.5.</span> <span class="nav-text">示例3：hosts文件普通变量修改nginx服务端口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Playbook中逻辑语句的使用"><span class="nav-number">3.</span> <span class="nav-text">三、Playbook中逻辑语句的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#When："><span class="nav-number">3.1.</span> <span class="nav-text">When：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例1："><span class="nav-number">3.2.</span> <span class="nav-text">示例1：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#with-items：迭代"><span class="nav-number">3.3.</span> <span class="nav-text">with_items：迭代</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例1：利用迭代一次创建多个文件，安装多个命令包"><span class="nav-number">3.4.</span> <span class="nav-text">示例1：利用迭代一次创建多个文件，安装多个命令包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例2：使用迭代创建组"><span class="nav-number">3.5.</span> <span class="nav-text">示例2：使用迭代创建组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例3：使用迭代配合字典创建用户与组"><span class="nav-number">3.6.</span> <span class="nav-text">示例3：使用迭代配合字典创建用户与组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例1：template，for"><span class="nav-number">3.7.</span> <span class="nav-text">示例1：template，for</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例2：template，for，引用字典"><span class="nav-number">3.8.</span> <span class="nav-text">示例2：template，for，引用字典</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例3：for循环中调用字典"><span class="nav-number">3.9.</span> <span class="nav-text">示例3：for循环中调用字典</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例4：for循环中调用if"><span class="nav-number">3.10.</span> <span class="nav-text">示例4：for循环中调用if</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、Roles角色"><span class="nav-number">4.</span> <span class="nav-text">四、Roles角色</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#示例1：定义nginx角色"><span class="nav-number">4.1.</span> <span class="nav-text">示例1：定义nginx角色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例2：增加httpd角色"><span class="nav-number">4.2.</span> <span class="nav-text">示例2：增加httpd角色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例3：同时调用两个roles角色"><span class="nav-number">4.3.</span> <span class="nav-text">示例3：同时调用两个roles角色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例4：一个roles角色调用另一个roles角色的task任务"><span class="nav-number">4.4.</span> <span class="nav-text">示例4：一个roles角色调用另一个roles角色的task任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例5：roles-playbook-tags"><span class="nav-number">4.5.</span> <span class="nav-text">示例5：roles playbook tags</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例6：roles-playbook-tags-when"><span class="nav-number">4.6.</span> <span class="nav-text">示例6：roles playbook tags when</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例7：综合演示"><span class="nav-number">4.7.</span> <span class="nav-text">示例7：综合演示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例8：部署memcached，占用内存为物理内存1-4"><span class="nav-number">4.8.</span> <span class="nav-text">示例8：部署memcached，占用内存为物理内存1/4</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

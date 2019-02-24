@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="磁盘管理,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、磁盘基本概念设备文件：Linux中一切皆文件：open（），read（），write（），close（） 设备类型：  块设备：block，存储单位”块”，磁盘 字符设备：char，存储单位”字符”，键盘 设备文件：关联至一个设备驱动程序，进而能够跟与之对应硬件设备进行通信  设备号码：  主设备号：maj number，标识设备类型 次设备号：min number，标识同一类型下的不同设备">
+<meta name="keywords" content="磁盘管理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux系统磁盘及文件系统管理">
+<meta property="og:url" content="http://yoursite.com/2018/04/24/Linux系统磁盘及文件系统管理/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="一、磁盘基本概念设备文件：Linux中一切皆文件：open（），read（），write（），close（） 设备类型：  块设备：block，存储单位”块”，磁盘 字符设备：char，存储单位”字符”，键盘 设备文件：关联至一个设备驱动程序，进而能够跟与之对应硬件设备进行通信  设备号码：  主设备号：maj number，标识设备类型 次设备号：min number，标识同一类型下的不同设备">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/04/24/Linux系统磁盘及文件系统管理/timg_imagequality80sizeb9999_10000sec1524545986109difaed230fa17762bc91a6.jpg">
+<meta property="og:updated_time" content="2018-07-17T06:12:11.146Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux系统磁盘及文件系统管理">
+<meta name="twitter:description" content="一、磁盘基本概念设备文件：Linux中一切皆文件：open（），read（），write（），close（） 设备类型：  块设备：block，存储单位”块”，磁盘 字符设备：char，存储单位”字符”，键盘 设备文件：关联至一个设备驱动程序，进而能够跟与之对应硬件设备进行通信  设备号码：  主设备号：maj number，标识设备类型 次设备号：min number，标识同一类型下的不同设备">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/24/Linux系统磁盘及文件系统管理/timg_imagequality80sizeb9999_10000sec1524545986109difaed230fa17762bc91a6.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/24/Linux系统磁盘及文件系统管理/">
+
+
+
+
+
+  <title>Linux系统磁盘及文件系统管理 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/24/Linux系统磁盘及文件系统管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux系统磁盘及文件系统管理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-24T14:17:59+08:00">
+                2018-04-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、磁盘基本概念"><a href="#一、磁盘基本概念" class="headerlink" title="一、磁盘基本概念"></a>一、磁盘基本概念</h2><h3 id="设备文件："><a href="#设备文件：" class="headerlink" title="设备文件："></a>设备文件：</h3><p>Linux中一切皆文件：open（），read（），write（），close（）</p>
+<p>设备类型：</p>
+<ul>
+<li>块设备：block，存储单位”块”，磁盘</li>
+<li>字符设备：char，存储单位”字符”，键盘</li>
+<li>设备文件：关联至一个设备驱动程序，进而能够跟与之对应硬件设备进行通信</li>
+</ul>
+<p>设备号码：</p>
+<ul>
+<li>主设备号：maj number，标识设备类型</li>
+<li>次设备号：min number，标识同一类型下的不同设备</li>
+</ul>
+<h3 id="磁盘结构"><a href="#磁盘结构" class="headerlink" title="磁盘结构"></a>磁盘结构</h3><p>硬盘的接口类型：</p>
+<ul>
+<li><p>并行：</p>
+<p>IDE：133MB/s</p>
+<p>SCSI：640MB/s</p>
+</li>
+<li><p>串口：</p>
+<p>SATA：6Gbps</p>
+<p>SAS：6Gbps</p>
+<p>USB：480MB/s</p>
+</li>
+</ul>
+<h3 id="硬盘："><a href="#硬盘：" class="headerlink" title="硬盘："></a>硬盘：</h3><p><strong>机械硬盘（HDD）：</strong>传统普通硬盘，主要由：盘片，磁头，马达等组成</p>
+<p>​    优势：相比固态硬盘，价格低，容量大，使用寿命长</p>
+<p><strong>固态硬盘（SSD）：</strong>用固态电子存储芯片阵列而制成的硬盘。</p>
+<p>​    优势：相比机械硬盘，防震抗摔，传输速率，功率，噪音有优势</p>
+<p><strong>硬盘有价，数据无价，目前SSD不能完全取代HHD</strong></p>
+<p><img src="timg_imagequality80sizeb9999_10000sec1524545986109difaed230fa17762bc91a6.jpg" alt="timg_image&amp;quality=80&amp;size=b9999_10000&amp;sec=1524545986109&amp;di=faed230fa17762bc91a6"></p>
+<p><strong>磁盘设备的设备文件命名：</strong> /dev/DEV_FILE</p>
+<p><strong>硬盘接口命名如：SCSI,SATA,SAS,IDE,USB：</strong>      /dev/sd</p>
+<p><strong>虚拟磁盘：</strong>                 /dev/vd</p>
+<p><strong>不同磁盘标识：</strong>         a-z，aa，ab…</p>
+<p>​    例如： /dev/sda,/dev/sdb</p>
+<p><strong>同一设备的不同分区：</strong>        1,2，…</p>
+<p>​    例如：/dev/sda1,/dev/sda5</p>
+<p><strong>注：</strong>在脚本中，尽量避免使用磁盘设备文件名诸如sda，名称不稳定，应使用UUID</p>
+<h3 id="磁盘存储术语："><a href="#磁盘存储术语：" class="headerlink" title="磁盘存储术语："></a>磁盘存储术语：</h3><p><strong>head：</strong>磁头；                 8bit寻址 2**8=256</p>
+<p><strong>track：</strong>磁道；</p>
+<p><strong>ctlinder：</strong>柱面                 10bit寻址       2**10=1024</p>
+<p><strong>sector：</strong>扇区          6bit寻址 2**6=64</p>
+<p><strong>CHS：</strong>磁盘三维。柱面、磁头、扇<br>    采用24bit位寻址<br>    其中前10位表示cylinder，中间8位表示head，后面6位表示sector。<br>    最大寻址空间8GB</p>
+<p><strong>LBA：</strong> 逻辑区块地址<br>    LBA是一个整数，通过转换成CHS格式完成磁盘具体寻址<br>    LBA采用48个bit位寻址<br>    最大寻址空间128PB</p>
+<h2 id="二、磁盘分区管理"><a href="#二、磁盘分区管理" class="headerlink" title="二、磁盘分区管理"></a>二、磁盘分区管理</h2><h3 id="我们知道使用磁盘有三个步骤："><a href="#我们知道使用磁盘有三个步骤：" class="headerlink" title="我们知道使用磁盘有三个步骤："></a>我们知道使用磁盘有三个步骤：</h3><ol>
+<li>创建分区</li>
+<li>创建文件系统：格式化</li>
+<li>挂载：分配目录名</li>
+</ol>
+<h3 id="为什么要对磁盘进行分区？"><a href="#为什么要对磁盘进行分区？" class="headerlink" title="为什么要对磁盘进行分区？"></a>为什么要对磁盘进行分区？</h3><ol>
+<li>优化I/O性能</li>
+<li>实现磁盘空间配额限制</li>
+<li>提高修复速度</li>
+<li>隔离系统和程序</li>
+<li>安装多个OS</li>
+<li>采用不同的文件系统</li>
+</ol>
+<h3 id="分区类型"><a href="#分区类型" class="headerlink" title="分区类型"></a>分区类型</h3><p>两种分区方式：MBR，GPT</p>
+<h3 id="MBR：Master-Boot-Record"><a href="#MBR：Master-Boot-Record" class="headerlink" title="MBR：Master Boot Record"></a>MBR：Master Boot Record</h3><p>诞生于1982年，使用32位表示扇区数，分区不能超过2T</p>
+<p>MBR如何分区：按柱面</p>
+<p>0磁道0扇区：512bytes</p>
+<p>​            446bytes：boot loader</p>
+<p>​            64bytes：分区表</p>
+<p>​            16bytes：标识一个分区（最多4个分区）</p>
+<p>​            2bytes：55AA（分区标识位）</p>
+<p>支持4个主分区；3个主分区+1扩展分区（N个逻辑分区）</p>
+<p>注：生产中最好给MBR分区表进行备份</p>
+<p><strong>MBR分区结构:</strong></p>
+<p>MBR的硬盘主引导记录MBR由4个部分组成</p>
+<ol>
+<li>主引导程序（偏移地址0000H–0088H），它负责从活动分区中装载，并运行系统引导程序。</li>
+<li>出错信息数据区，偏移地址0089H–00E1H为出错信息，00E2H–01BDH全为0字节。</li>
+<li>分区表（DPT,Disk Partition Table）含4个分区项，偏移地址01BEH–01FDH,每个分区表项长16个字节，共64字节为分区项1、分区项2、分区项3、分区项4</li>
+<li>结束标志字，偏移地址01FE–01FF的2个字节值为结束标志55AA</li>
+</ol>
+<p><strong>BIOS+MBR</strong></p>
+<p><strong>传统BIOS运行流程：</strong></p>
+<p>​    开机–&gt;BIOS初始化–&gt;BIOS自检–&gt;引导操作系统–&gt;进入系统</p>
+<h3 id="GPT：GUID（Globals-Unique-Identifiers）"><a href="#GPT：GUID（Globals-Unique-Identifiers）" class="headerlink" title="GPT：GUID（Globals Unique Identifiers）"></a>GPT：GUID（Globals Unique Identifiers）</h3><p>支持128个分区，使用64位，支持8Z（512Byte/block）,64Z（4096Byte/block）</p>
+<p>使用128位的通用唯一识别码UUID（Universally Unique Identifier）表示磁盘和分区表自动备份在头和尾两份，并有CRC校验位</p>
+<p>UEFI（统一扩展固件接口）：硬件支持GPT，使操作系统启动</p>
+<p><strong>分区表</strong></p>
+<p>​    MBR保护+GPT分区表+GPT划分数据+备份</p>
+<p><strong>UEFI+GPT</strong></p>
+<p><strong>UERI运行流程</strong></p>
+<p>​    开机–&gt;UEFI初始化–&gt;引导操作系统–&gt;进入系统</p>
+<h3 id="管理分区"><a href="#管理分区" class="headerlink" title="管理分区"></a>管理分区</h3><p><strong>列出块设备：</strong> lsblk</p>
+<p><strong>创建分区使用：</strong></p>
+<p>​    fdisk                  创建MBR分区</p>
+<p>​    gdisk                 创建GPT分区</p>
+<p>​    parted              高级分区操作</p>
+<p> <strong>partprobe：  </strong>重新设置内存中的内核分区表版本</p>
+<p><strong>parted命令</strong></p>
+<p>parted的操作都是实时生效的，小心使用</p>
+<p><strong>格式：parted[option]…[设备[命令[参数]…]…]</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">parted /dev/sdb mklabel gpt|msdos      设置分区类型GPT或MBR</span><br><span class="line">parted /dev/sdb print             打印sdb分区列表信息</span><br><span class="line">parted /dev/sdb mkpart primary 1 200 （默认M）  设置sdb分区大小</span><br><span class="line">parted /dev/sdb rm 1             删除sdb1分区</span><br><span class="line">parted -l                      列出分区信息</span><br></pre></td></tr></table></figure>
+<p><strong>分区工具fdisk和gdisk</strong></p>
+<p><strong>查看分区:</strong> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l[-u][device…]</span><br></pre></td></tr></table></figure>
+<p><strong>管理分区（交互式）:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fdisk /dev/sdb                 </span><br><span class="line">    p         显示分区列表</span><br><span class="line">    t         更改分区类型（数据将丢失）</span><br><span class="line">    n         创建新分区</span><br><span class="line">    d         删除分区</span><br><span class="line">    t         添加设备标签</span><br><span class="line">    v         校验分区</span><br><span class="line">    u         转换单位</span><br><span class="line">    w         保存并退出</span><br><span class="line">    q         不保存并退出</span><br></pre></td></tr></table></figure>
+<p>注：可使用重定向和多行重定向echo -e “n\np\n\n\n+2G\nw\n” | fdisk /dev/sdc</p>
+<h3 id="同步分区表"><a href="#同步分区表" class="headerlink" title="同步分区表"></a>同步分区表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat/proc/partations        查看内核是否已经识别新的分区</span><br><span class="line">partprobe                 同步分区表（centos5,7可用）</span><br><span class="line">partx -a  /dev/sda         增加分区同步分区表（centos6可用）时使用；</span><br><span class="line">partx -d –nr M-N /dev/sda    删除分区同步分区表（centos6可用）时使用；</span><br></pre></td></tr></table></figure>
+<h2 id="三、文件系统管理"><a href="#三、文件系统管理" class="headerlink" title="三、文件系统管理"></a>三、<strong>文件系统管理</strong></h2><p>所谓文件系统，它是操作系统中藉以组织、存储和命名文件的结构。磁盘或分区和它所包括的文件系统的</p>
+<p>不同是很重要的，大部分应用程序都基于文件系统进行操作，在不同种文件系统上是不能工作的。</p>
+<h3 id="文件系统类型"><a href="#文件系统类型" class="headerlink" title="文件系统类型"></a>文件系统类型</h3><p><strong>Linux文件系统：</strong>ext2，ext3，ext4，xfs，btrfs，reiserfs，jfs，swap</p>
+<p><strong>光盘：</strong>iso9660</p>
+<p><strong>Windows：</strong>FAT32,exFAT,NTFS</p>
+<p><strong>Unix：</strong>FFS（fast），UFS（unix），JFS2</p>
+<p><strong>网络文件系统：</strong>NFS，CIFS</p>
+<p><strong>集群文件系统：</strong>GFS2,OCFS2</p>
+<p><strong>分布式文件系统：</strong>fastfs,ceph,moosefs,mogilefs,glusterfs,Lustre</p>
+<p><strong>RAW：</strong>未经处理或者未经格式化产生的文件系统（性能好，但不便于管理）</p>
+<p><strong>根据文件系统是否支持”journal（日志）”功能可分为：</strong></p>
+<ul>
+<li>日志型文件系统：ext3，ext4，xfs，…（牺牲读取性能，防止数据文件破坏）</li>
+<li>非日志型文件系统：ext2，vfat（易造成数据文件破坏）</li>
+</ul>
+<p><strong>文件系统的组成部分：</strong></p>
+<p>​    内核中的模块：ext4，xfs，vfat</p>
+<p>​    用户空间的管理工具：mkfs.ext4，mkfs.xfs，mkfs.vfat</p>
+<p><strong>Linux的虚拟文件系统：</strong>VFS</p>
+<p><strong>查看支持的文件系统：</strong>cat /proc/filesystems</p>
+<h3 id="创建文件系统："><a href="#创建文件系统：" class="headerlink" title="创建文件系统："></a>创建文件系统：</h3><p><strong>mkfs命令两种用法：</strong></p>
+<ol>
+<li>mkfs.FS_TYPE   /dev/DEVICE 建议使用此用法，直观不易出错</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ext4</span><br><span class="line">xfs</span><br><span class="line">btrfs</span><br><span class="line">vfat</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>mkfs -t FS_TYPE /dev/DEVICE</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-L &apos;LABEL&apos;                 设定卷标（分区标签）</span><br></pre></td></tr></table></figure>
+<p><strong>mke2fs</strong>                                 ext系统文件系统专用的管理工具</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-t &#123;ext2|ext3|ext4&#125;</span><br><span class="line">-b &#123;1024|2048|4096&#125;</span><br><span class="line">-L &apos;LABEL&apos;</span><br><span class="line">-j: 相当于 -t ext3   mkfs.ext3 = mkfs -t ext3 = mke2fs -j = mke2fs -t ext3</span><br><span class="line">-i #: 为数据空间中每多少个字节创建一个inode；此大小不应该小于block的大小</span><br><span class="line">-N #：指定分区中创建多少个inode</span><br><span class="line">-I 一个inode记录占用的磁盘空间大小，128---4096</span><br><span class="line">-m #: 默认5%,为管理人员预留空间占总空间的百分比</span><br><span class="line">-O FEATURE[,...]：启用指定特性</span><br><span class="line">-O ^FEATURE：关闭指定特性</span><br></pre></td></tr></table></figure>
+<p><strong>文件系统标签(LABEL): </strong> 它是指向设备的另一种方法，与设备无关</p>
+<p><strong>blkid</strong>          块设备属性信息查看</p>
+<p><strong>格式：</strong>blkid [option]… [DEVICE]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-U UUID          根据指定UUID来查找对应设备</span><br><span class="line">-L LABEL           根据指定卷标来查找对应设备</span><br></pre></td></tr></table></figure>
+<p><strong>e2label</strong>：管理ext系列文件系统的LABEL卷标</p>
+<p><strong>格式</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e2label DEVICE [LABEL]</span><br></pre></td></tr></table></figure>
+<p><strong>findfs</strong> : 查找分区</p>
+<p><strong>格式：</strong></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">findfs [option] LABEL = &lt;label&gt;    根据卷标查找</span><br><span class="line">findfs [option] UUID  = &lt;uuid&gt;     根据UUID查找</span><br></pre></td></tr></table></figure>
+<p><strong>tune2fs</strong>                              重新设定ext系列文件系统可调整参数的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-l             查看指定文件系统超级块信息</span><br><span class="line">-L&apos;LABEL&apos;      修改卷标</span><br><span class="line">-m #           修改预留给管理员空间的百分百</span><br><span class="line">-j             将ext2升级到ext3</span><br><span class="line">-O             文件系统属性启用或禁用，-O ^has_journal</span><br><span class="line">-o             调整文件系统的默认挂载选项，-o^acl</span><br><span class="line">-U UUID        修改UUID号</span><br></pre></td></tr></table></figure>
+<p><strong>dumpe2fs</strong>  </p>
+<p>块分组管理，32768</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-h       查看超级块信息，不显示分组信息</span><br></pre></td></tr></table></figure>
+<h3 id="超级块（superblock）"><a href="#超级块（superblock）" class="headerlink" title="超级块（superblock）"></a>超级块（superblock）</h3><p>dumpe2fs       /dev/sda1        查看分区下所有超级块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dumpe2fs 	-h         查看超级块信息</span><br><span class="line">tune2fs     -l         查看超级块信息</span><br></pre></td></tr></table></figure>
+<p>超级块时存储文件系统的大小、有多少是空的和已经填满的占多少，以及它们各自的总数和其他诸如此类的信息。</p>
+<p>要使用一个分区来进行数据访问，那么第一个要访问的就是超级块，由此可见超级块的重要性。</p>
+<p>超级块占用第一号物理块，是文件系统的控制块。</p>
+<p>超级块包括：文件系统的大小、空闲块数目、空闲块索引表、空闲i节点数目、空闲i节点索引表、封锁标记等。</p>
+<p>超级块时系统为文件分配存储空间、回收存储空间的依据。</p>
+<p>所以，为了防止超级块数据损坏，就需要对超级块数据进行备份，以便于损坏时进行修复。</p>
+<h3 id="文件系统检测和修复"><a href="#文件系统检测和修复" class="headerlink" title="文件系统检测和修复"></a>文件系统检测和修复</h3><p>常发生于死机或者非正常关机之后</p>
+<p>挂载为文件系统标记为”no clean”</p>
+<p>注意：一定不要在挂载状态下修复或检测，否则数据将破坏！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fsck                文件系统检查</span><br><span class="line">fsck.FS_type</span><br><span class="line">fsck -t FS_type</span><br><span class="line">-p                  自动修复错误</span><br><span class="line">-r                  交互式修复错误</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong>FS_TYPE一定要与分区上已设置的文件系统类型相同</p>
+<p><strong>e2fsck</strong>                                ext系列文件专用的检测修复工具</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-y                       自动回答为yes</span><br><span class="line">-f                       强制修复</span><br></pre></td></tr></table></figure>
+<h2 id="四、设备挂载管理"><a href="#四、设备挂载管理" class="headerlink" title="四、设备挂载管理"></a>四、设备挂载管理</h2><p><strong>挂载</strong>：把额外的文件系统与根文件系统现场的目录建立起关联关系，进而使得此目录作为其他文件访问入口的行为</p>
+<p>一个挂载点只能挂载一个设备，但一个设备可挂载多个挂载点</p>
+<p>挂载点建议要是空目录，否则该目录下原有文件将被隐藏，变为垃圾文件</p>
+<p>把设备关联挂载点：mount Point</p>
+<p>   <strong>monut</strong></p>
+<p><strong>卸载</strong>：为解除此关联关系的过程</p>
+<p>卸载时：可使用设备，也可使用挂载点</p>
+<p>   <strong>umount</strong></p>
+<h3 id="挂载命令：mount"><a href="#挂载命令：mount" class="headerlink" title="挂载命令：mount"></a>挂载命令：mount</h3><p>cat /proc/mounts: 查看内核追踪到的已挂载的所有设备</p>
+<p><strong>格式：</strong> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount [-fnrsvw][-t vfstype] [-o options] device  dir</span><br></pre></td></tr></table></figure>
+<p>device                       指明要挂载的设备</p>
+<ol>
+<li><p>设备文件：例如dev/sda2</p>
+</li>
+<li><p>卷标：-L’LABEL’，例如-L’MYDATA’</p>
+</li>
+<li><p>UUID，-U’UUID’，例如-U ‘35bfb8f8-1c9a-4f67-b8fe-a7edb84c4780’</p>
+</li>
+<li><p>伪文件系统名称：proc，sysfs，devtmpfs，configfs</p>
+<p>dir                挂载点</p>
+<p>事先存在；建议使用空目录</p>
+<p>进程正在使用中的设备无法被卸载</p>
+</li>
+</ol>
+<p><strong>mount常用命令选项：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-t                       指定要挂载的设备上的文件系统类型</span><br><span class="line">-r                       readontlt，只读挂载</span><br><span class="line">-w                      r+w，读写挂载（默认）</span><br><span class="line">-n                       centos6隐藏挂载，不更新/etc/mtab,mount不可见，cat /proc/mounts可见</span><br><span class="line">-a                       自动挂载所有支持自动挂载的设备</span><br><span class="line">-L&apos;LABEL&apos;                 以卷标指定挂载设备</span><br><span class="line">-U&apos;UUID&apos;                  以UUID指定要挂载的设备</span><br><span class="line">-B，–bind                绑定目录到另一个设备上。类似于软连接</span><br></pre></td></tr></table></figure>
+<p><strong>-o options：</strong>(挂载文件系统的选项)，多个选项使用逗号分隔</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">async                         异步模式（默认模式）</span><br><span class="line">sync                  同步模式,内存更改时，同时写磁盘</span><br><span class="line">atime/noatime                包含目录和文件（是否更新atime，默认更新）</span><br><span class="line">diratime/nodiratime       目录的访问时间戳</span><br><span class="line">auto/noauto            是否支持自动挂载,是否支持-a选项</span><br><span class="line">exec/noexec            是否支持将文件系统上运行应用程序</span><br><span class="line">dev/nodev                是否支持在此文件系统上使用设备文件</span><br><span class="line">suid/nosuid              是否支持suid和sgid权限</span><br><span class="line">remount                   重新挂载</span><br><span class="line">ro                      只读</span><br><span class="line">rw                      读写</span><br><span class="line">user/nouser             是否允许普通用户挂载此设备，/etc/fstab使用</span><br><span class="line">acl                     启用此文件系统上的acl功能</span><br><span class="line">loop                使用loop设备，把文件挂载目录，模拟设备</span><br></pre></td></tr></table></figure>
+<p>默认：rw，suid，dev，exec，auto，nouser，async</p>
+<h3 id="卸载命令：umount"><a href="#卸载命令：umount" class="headerlink" title="卸载命令：umount"></a>卸载命令：umount</h3><p>查看挂载情况：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">findmnt   MOUNT_POINT|DEVICE</span><br></pre></td></tr></table></figure>
+<p>查看正在访问指定文件系统的进程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lsof MONUT_POINT</span><br><span class="line">fuser  -v  MOUNT_POINT</span><br></pre></td></tr></table></figure>
+<p>终止所有在正访问指定的文件系统的进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fuser  -km MONUT_POINT</span><br></pre></td></tr></table></figure>
+<p>卸载：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">umount   DEVICE</span><br><span class="line">umount   MOUNT_POINT</span><br></pre></td></tr></table></figure>
+<h3 id="挂载点和-etc-fstab"><a href="#挂载点和-etc-fstab" class="headerlink" title="挂载点和/etc/fstab"></a>挂载点和/etc/fstab</h3><p>配置文件系统体系</p>
+<p>被mount、fsck和其他程序使用</p>
+<p>系统重启时保留文件系统体系</p>
+<p>可以在设备栏使用文件系统卷标</p>
+<p>使用mount -a 命令挂载/etc/fstab中的所有文件系统</p>
+<h3 id="etc-fstab-每行定义一个要挂载的文件系统"><a href="#etc-fstab-每行定义一个要挂载的文件系统" class="headerlink" title="/etc/fstab        每行定义一个要挂载的文件系统"></a>/etc/fstab        每行定义一个要挂载的文件系统</h3><p>设备或伪文件系统    挂载点   文件系统类型   挂载选项   备份间隔时间{0|1|2}   文件系统检查{0|1}</p>
+<p>要挂载的设备或伪文件系统</p>
+<p>设备文件</p>
+<p>​    LABEL：LABEL=” “</p>
+<p>​    UUID：UUID=” “</p>
+<p>伪文件系统名称：proc，sysfs</p>
+<p>挂载点</p>
+<p>文件系统类型</p>
+<p>挂载选项：default</p>
+<p>转储频率：0：不做备份 ； 1：每条转储 ； 2：每隔一天转储 ；</p>
+<p>自检次序：0：不自检 ； 1：首先自检；一般只有rootfs才用1</p>
+<h3 id="一些特殊文件设备的挂载永久生效的设置："><a href="#一些特殊文件设备的挂载永久生效的设置：" class="headerlink" title="一些特殊文件设备的挂载永久生效的设置："></a>一些特殊文件设备的挂载永久生效的设置：</h3><p>vim /etc/fstab</p>
+<p>/root/p1  /mnt/p1          ext4           loop            0    0         挂载普通文件</p>
+<p>/mnt/cdrom    /mnt/cdrom    iso9660    defaults      0    0      挂载光盘</p>
+<p>/boot                /mnt/boot      none          bind         0    0      挂载目录到目录下</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/磁盘管理/" rel="tag"># 磁盘管理</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/20/手把手系列（二）教你搭建自己的yum源服务器/" rel="next" title="手把手系列（二）教你搭建自己的yum源服务器">
+                <i class="fa fa-chevron-left"></i> 手把手系列（二）教你搭建自己的yum源服务器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/25/交换分区swap管理及特殊介质的使用/" rel="prev" title="交换分区swap管理及特殊介质的使用">
+                交换分区swap管理及特殊介质的使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、磁盘基本概念"><span class="nav-number">1.</span> <span class="nav-text">一、磁盘基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设备文件："><span class="nav-number">1.1.</span> <span class="nav-text">设备文件：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘结构"><span class="nav-number">1.2.</span> <span class="nav-text">磁盘结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#硬盘："><span class="nav-number">1.3.</span> <span class="nav-text">硬盘：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘存储术语："><span class="nav-number">1.4.</span> <span class="nav-text">磁盘存储术语：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、磁盘分区管理"><span class="nav-number">2.</span> <span class="nav-text">二、磁盘分区管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#我们知道使用磁盘有三个步骤："><span class="nav-number">2.1.</span> <span class="nav-text">我们知道使用磁盘有三个步骤：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要对磁盘进行分区？"><span class="nav-number">2.2.</span> <span class="nav-text">为什么要对磁盘进行分区？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区类型"><span class="nav-number">2.3.</span> <span class="nav-text">分区类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MBR：Master-Boot-Record"><span class="nav-number">2.4.</span> <span class="nav-text">MBR：Master Boot Record</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GPT：GUID（Globals-Unique-Identifiers）"><span class="nav-number">2.5.</span> <span class="nav-text">GPT：GUID（Globals Unique Identifiers）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管理分区"><span class="nav-number">2.6.</span> <span class="nav-text">管理分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同步分区表"><span class="nav-number">2.7.</span> <span class="nav-text">同步分区表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、文件系统管理"><span class="nav-number">3.</span> <span class="nav-text">三、文件系统管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件系统类型"><span class="nav-number">3.1.</span> <span class="nav-text">文件系统类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建文件系统："><span class="nav-number">3.2.</span> <span class="nav-text">创建文件系统：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#超级块（superblock）"><span class="nav-number">3.3.</span> <span class="nav-text">超级块（superblock）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件系统检测和修复"><span class="nav-number">3.4.</span> <span class="nav-text">文件系统检测和修复</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、设备挂载管理"><span class="nav-number">4.</span> <span class="nav-text">四、设备挂载管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载命令：mount"><span class="nav-number">4.1.</span> <span class="nav-text">挂载命令：mount</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卸载命令：umount"><span class="nav-number">4.2.</span> <span class="nav-text">卸载命令：umount</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载点和-etc-fstab"><span class="nav-number">4.3.</span> <span class="nav-text">挂载点和/etc/fstab</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#etc-fstab-每行定义一个要挂载的文件系统"><span class="nav-number">4.4.</span> <span class="nav-text">/etc/fstab        每行定义一个要挂载的文件系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些特殊文件设备的挂载永久生效的设置："><span class="nav-number">4.5.</span> <span class="nav-text">一些特殊文件设备的挂载永久生效的设置：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

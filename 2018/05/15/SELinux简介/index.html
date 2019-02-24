@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="SELINUX,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、SELinux介绍：SELinux(Security-Enhanced Linux) 是美国国家安全局（NSA）对于强制访问控制的实现，是 Linux历史上最杰出的新安全子系统。NSA是在Linux社区的帮助下开发了一种访问控制体系，在 这种访问控制体系的限制下，进程只能访问那些在他的任务中所需要文件。 SELinux是一种基于 域-类型 模型（domain-type）的强制访问控制（MAC）">
+<meta name="keywords" content="SELINUX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SELinux简介">
+<meta property="og:url" content="http://yoursite.com/2018/05/15/SELinux简介/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="一、SELinux介绍：SELinux(Security-Enhanced Linux) 是美国国家安全局（NSA）对于强制访问控制的实现，是 Linux历史上最杰出的新安全子系统。NSA是在Linux社区的帮助下开发了一种访问控制体系，在 这种访问控制体系的限制下，进程只能访问那些在他的任务中所需要文件。 SELinux是一种基于 域-类型 模型（domain-type）的强制访问控制（MAC）">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/05/15/SELinux简介/配置.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/15/SELinux简介/selinux数据库.png">
+<meta property="og:updated_time" content="2018-07-17T13:07:04.390Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SELinux简介">
+<meta name="twitter:description" content="一、SELinux介绍：SELinux(Security-Enhanced Linux) 是美国国家安全局（NSA）对于强制访问控制的实现，是 Linux历史上最杰出的新安全子系统。NSA是在Linux社区的帮助下开发了一种访问控制体系，在 这种访问控制体系的限制下，进程只能访问那些在他的任务中所需要文件。 SELinux是一种基于 域-类型 模型（domain-type）的强制访问控制（MAC）">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/15/SELinux简介/配置.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/15/SELinux简介/">
+
+
+
+
+
+  <title>SELinux简介 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/15/SELinux简介/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SELinux简介</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-15T14:40:36+08:00">
+                2018-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、SELinux介绍："><a href="#一、SELinux介绍：" class="headerlink" title="一、SELinux介绍："></a><strong>一、SELinux介绍：</strong></h2><p><strong>SELinux(Security-Enhanced Linux)</strong> 是美国国家安全局（NSA）对于强制访问控制的实现，是</p>
+<p>Linux历史上最杰出的新安全子系统。NSA是在Linux社区的帮助下开发了一种访问控制体系，在</p>
+<p>这种访问控制体系的限制下，<strong>进程只能访问那些在他的任务中所需要文件</strong>。</p>
+<p><strong>SELinux</strong>是一种基于 域-类型 模型（domain-type）的强制访问控制（MAC）安全系统，它由NSA</p>
+<p>编写并设计成内核模块包含到内核中，相应的某些安全相关的应用也被打了SELinux的补丁，最</p>
+<p>后还有一个相应的安全策略。任何程序对其资源享有完全的控制权。假设某个程序打算把含有潜</p>
+<p>在重要信息的文件扔到/tmp目录下，那么在DAC情况下没人能阻止他。SELinux提供了比传统的</p>
+<p>UNIX权限更好的访问控制。</p>
+<p><strong>传统UNIX系统使用的安全系统：</strong>自由访问控制（DAC：Discretionary Access Control）</p>
+<p><strong>SELinx采用的安全系统：</strong>强制访问控制（MAC：Mandatory Access Control）</p>
+<p>DAC环境下进程是无束缚的</p>
+<p>MAC环境下策略的规则决定控制的严格程度</p>
+<p>MAC环境下进程可以被限制的</p>
+<p>策略被用来定义被限制的进程能够使用那些资源（文件和端口）</p>
+<p>默认情况下，没有被明确允许的行为将被拒绝</p>
+<h3 id="SElinux的工作类型："><a href="#SElinux的工作类型：" class="headerlink" title="SElinux的工作类型："></a>SElinux的工作类型：</h3><p>使用<strong>cat /etc/selinux/config</strong> 可以查看当前SELinux类型和系统支持的所有SELinux类型，不同系统版本支持类型有所不同</p>
+<p><strong>SELinux</strong>共有<strong>四种</strong>工作类型：</p>
+<p>（1）<strong>strict</strong>：centos5,每个进程都受到selinux的控制，不识别的进程将拒绝</p>
+<p>（2）<strong>targeted</strong>： 用来保护常见的网络服务,仅有限进程受到selinux控制，只监控容易</p>
+<p>被入侵的进程，centos4只保护13个服务，centos5保护88个服务，不识别的服务将允许</p>
+<p>（3）<strong>minimum</strong>：centos7,修改的targeted，只对选择的网络服务</p>
+<p>（4）<strong>mls</strong>：提供MLS（多级安全）机制的安全性</p>
+<p><strong>targeted</strong>现为CentOS系统默认SElinux类型，minimum和mls稳定性不足，未加以应用，strict现已不存在</p>
+<h3 id="SELinux的优点与缺点："><a href="#SELinux的优点与缺点：" class="headerlink" title="SELinux的优点与缺点："></a><strong>SELinux的优点与缺点：</strong></h3><p><strong>优点：</strong></p>
+<p>（1）通过MAC对访问的控制彻底化</p>
+<p>（2）对于进程只赋予最小的权限</p>
+<p>（3）防止权限升级</p>
+<p>（4）对于用户只赋予最小的权限</p>
+<p><strong>缺点：</strong></p>
+<p>（1）存在特权用户root</p>
+<p>（2）对于文件的访问权划分不够细</p>
+<p>（3）SUID程序的权限升级</p>
+<p>（4）DAC（Discretionary Access Control）问题</p>
+<h2 id="二、SELinux安全上下文"><a href="#二、SELinux安全上下文" class="headerlink" title="二、SELinux安全上下文"></a><strong>二、SELinux安全上下文</strong></h2><p>传统Linux，一切皆文件，由用户，组，权限控制访问</p>
+<p>在SELinux中，<strong>一切皆对象（object）</strong>，由存放在inode的扩展属性域的</p>
+<p>安全元素所控制其访问</p>
+<p>所有文件和端口资源和进程都具备安全标签：<strong>安全上下文（security context）</strong></p>
+<p><strong>安全上下文有五个元素组成：</strong></p>
+<p><strong>user:role:type:sensitivity:category</strong></p>
+<p><strong>user_u:object_r:tmp_t:s0:c0</strong></p>
+<p><strong>user</strong>：指示登录系统的用户类型</p>
+<p><strong>role</strong>：定义文件，进程和用户的用途</p>
+<p><strong>type</strong>：指定了数据类别，type类别改变可能导致进程无法访问文件</p>
+<p><strong>sensitivity</strong>：限制访问的需要，由组织定义的分层安全级别。s0最低，Target策略默认使用s0</p>
+<p><strong>category</strong>：对于特定组织划分不分层的分类，Target策略默认不使用category</p>
+<p>其中<strong>最重要</strong>的一项为文件的<strong>type</strong>标签，如httpd进程只能在httpd_t 里运行，/etc/passwd只有type</p>
+<p>为passwd_file_t才能起作用，/var/log/messages文件如果不是var_log_t类型将无法记录日志等，</p>
+<p>在SELinux安全策略中，<strong>修改了type类型，可能导致文件无法正常使用</strong>。</p>
+<h2 id="三、SElinux相关操作："><a href="#三、SElinux相关操作：" class="headerlink" title="三、SElinux相关操作："></a><strong>三、SElinux相关操作：</strong></h2><h3 id="1-SELinux启用、禁用"><a href="#1-SELinux启用、禁用" class="headerlink" title="1.SELinux启用、禁用"></a><strong>1.SELinux启用、禁用</strong></h3><p>SElinux共有三种运行模式：</p>
+<p>SELINUX=enforcing                 启用SELinux</p>
+<p>SELINUX=disabled                   彻底禁用SELinux</p>
+<p>SELINUX=permissive               禁用，但违反SELinux策略会产生告警</p>
+<p>getenforce                        显示当前SEliunx运行模式</p>
+<p><strong>a）利用命令临时修改：</strong></p>
+<p>setenforce 0                     临时切换到permissive</p>
+<p>setenforce 1                     临时切换到enforcing</p>
+<p><strong>b）修改配置文件：</strong></p>
+<p>/etc/selinux/config</p>
+<p>/etc/sysconfig/selinux            SELINUX={disabled|enforcing|permissive}</p>
+<p>/boot/grub/grub.conf             使用selinux=0禁用SElinux</p>
+<p>注：grub.conf优先级高于/etc/selinux/config</p>
+<h3 id="2-修改SELinix安全标签："><a href="#2-修改SELinix安全标签：" class="headerlink" title="2.修改SELinix安全标签："></a>2.修改SELinix安全标签：</h3><p><strong>给文件重新打安全标签：</strong></p>
+<p>chcon [OPTION]… [-u USER] [-r ROLE] [-t TYPE] FILE…</p>
+<p>chcon [OPTION]… –reference=RFILE FILE…</p>
+<p>-R：递归打标；</p>
+<p><strong>恢复目录或文件默认的安全上下文：</strong></p>
+<p>restorecon [-R] /path/to/somewhere</p>
+<p><strong>SELinux端口标签：</strong></p>
+<p>semanage port -l|grep http   查看http允许使用的端口</p>
+<p>semanage port -a -t http_port_t -t tcp 9527        添加http允许使用的端口包含9527</p>
+<h3 id="3-SELinux默认数据库查询与修改"><a href="#3-SELinux默认数据库查询与修改" class="headerlink" title="3.SELinux默认数据库查询与修改"></a>3.SELinux默认数据库查询与修改</h3><p><strong>查看SELinux默认数据库：</strong></p>
+<p>semanage fcontext -l</p>
+<p><strong>查看某文件放入默认SElinux类型：</strong></p>
+<p>semanage fcontext -l | grep /path/file</p>
+<p><strong>添加到SELinux默认数据库：</strong></p>
+<p>semanage fcontext -a –t httpd_sys_content_t ‘/testdir(/.*)?’</p>
+<p>restorecon –Rv /testdir</p>
+<p><strong>从SElinux默认数据库中删除：（type类型将变回default_t）</strong></p>
+<p>semanage fcontext -d –t httpdsyscontentt ‘/testdir(/.*)?’</p>
+<h3 id="4-SELinux端口标签"><a href="#4-SELinux端口标签" class="headerlink" title="4.SELinux端口标签"></a>4.SELinux端口标签</h3><p>在SELinux安全策略中，定义了服务具体可使用的端口号，如果服务未使用对应的端口号，将会</p>
+<p>导致无法使用，semanage命令也可以用来修改这些默认端口。</p>
+<p><strong>查看端口标签：</strong></p>
+<p>semanage port –l</p>
+<p><strong>添加指定端口到指定服务：</strong></p>
+<p>semanage port -a -t port_label -p tcp|udp PORT</p>
+<p>semanage port -a -t http_port_t -p tcp 9527</p>
+<p><strong>从指定服务删除指定端口：</strong></p>
+<p>semanage port -d -t port_label -p tcp|udp PORT</p>
+<p>semanage port -d -t http_port_t -p tcp 9527</p>
+<p><strong>修改现有端口为新标签：</strong></p>
+<p>semanage port -m -t port_label -p tcp|udp PORT</p>
+<p>semanage port -m -t http_port_t -p tcp 9527</p>
+<h3 id="5-SElinux布尔值"><a href="#5-SElinux布尔值" class="headerlink" title="5.SElinux布尔值"></a>5.SElinux布尔值</h3><p><strong>布尔型规则：</strong></p>
+<p>getsebool</p>
+<p>setsebool</p>
+<p><strong>查看bool命令：</strong></p>
+<p>getsebool [-a] [boolean]</p>
+<p>semanage boolean –l</p>
+<p>semanage boolean -l –C 查看修改过的布尔值</p>
+<p><strong>设置bool值命令：</strong></p>
+<p>setsebool [-P] boolean value（on,off）               不加-P只修改内存，临时生效</p>
+<p>setsebool [-P] Boolean=value（0，1）                加-P同时修改内存和配置bool</p>
+<h3 id="6-SELinux日志管理："><a href="#6-SELinux日志管理：" class="headerlink" title="6.SELinux日志管理："></a>6.SELinux日志管理：</h3><p>将错误的信息写入/var/log/message</p>
+<p>yum install setroubleshoot（重启生效）</p>
+<p><strong>查看安全事件日志说明</strong></p>
+<p>grep setroubleshoot /var/log/messages</p>
+<p>sealert -l UUID</p>
+<p><strong>扫描并分析日志</strong></p>
+<p>sealert -a /var/log/audit/audit.log</p>
+<h3 id="7-SELinux帮助："><a href="#7-SELinux帮助：" class="headerlink" title="7.SELinux帮助："></a>7.SELinux帮助：</h3><p>yum –y install selinux-policy-devel ( centos7.2)</p>
+<p>yum –y install selinux-policy-doc （centos7.3/7.4）</p>
+<p>mandb | makewhatis</p>
+<p>man -k _selinux</p>
+<h2 id="四、操作：SELinux环境下迁移httpd服务默认目录"><a href="#四、操作：SELinux环境下迁移httpd服务默认目录" class="headerlink" title="四、操作：SELinux环境下迁移httpd服务默认目录"></a><strong>四、操作：SELinux环境下迁移httpd服务默认目录</strong></h2><p><strong>将默认目录/var/www/html迁移至/data/website/html目录</strong></p>
+<p><strong>一、创建/data/html目录：</strong></p>
+<p>mkdir   /data/html</p>
+<p><strong>二、修改httpd服务配置文件</strong></p>
+<p><strong>cat  /etc/httpd/conf/httpd.conf</strong></p>
+<p>#DocumentRoot “/var/www/html”        加上注释</p>
+<p>DocumentRoot “/data/website/html”</p>
+<p>#&lt;Directory “/var/www/html”&gt;             加上注释</p>
+<p>&lt;Directory “/data/website/html”&gt;</p>
+<p><img src="配置.png" alt="配置"></p>
+<p><strong>三、修改目录type类型：</strong></p>
+<p>semanage fcontext -l |grep /var/www/html                          查看默认目录的文件type类型</p>
+<p>chcon -R -t httpd_sys_content_t /data/website/html</p>
+<p><img src="selinux数据库.png" alt="selinux数据库"></p>
+<p><strong>或：</strong></p>
+<p><strong>修改安全上下文数据库</strong></p>
+<p>semanage fcontext -a  -t  httpd_sys_content_t   /data/html（/.*）?</p>
+<p>restorecon -R /data/html                            同步数据库type类型</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SELINUX/" rel="tag"># SELINUX</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/15/Linux系统网络管理/" rel="next" title="Linux系统网络管理">
+                <i class="fa fa-chevron-left"></i> Linux系统网络管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/17/文本三剑客之awk/" rel="prev" title="文本三剑客之awk">
+                文本三剑客之awk <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、SELinux介绍："><span class="nav-number">1.</span> <span class="nav-text">一、SELinux介绍：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SElinux的工作类型："><span class="nav-number">1.1.</span> <span class="nav-text">SElinux的工作类型：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SELinux的优点与缺点："><span class="nav-number">1.2.</span> <span class="nav-text">SELinux的优点与缺点：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、SELinux安全上下文"><span class="nav-number">2.</span> <span class="nav-text">二、SELinux安全上下文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、SElinux相关操作："><span class="nav-number">3.</span> <span class="nav-text">三、SElinux相关操作：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-SELinux启用、禁用"><span class="nav-number">3.1.</span> <span class="nav-text">1.SELinux启用、禁用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-修改SELinix安全标签："><span class="nav-number">3.2.</span> <span class="nav-text">2.修改SELinix安全标签：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-SELinux默认数据库查询与修改"><span class="nav-number">3.3.</span> <span class="nav-text">3.SELinux默认数据库查询与修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-SELinux端口标签"><span class="nav-number">3.4.</span> <span class="nav-text">4.SELinux端口标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-SElinux布尔值"><span class="nav-number">3.5.</span> <span class="nav-text">5.SElinux布尔值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-SELinux日志管理："><span class="nav-number">3.6.</span> <span class="nav-text">6.SELinux日志管理：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-SELinux帮助："><span class="nav-number">3.7.</span> <span class="nav-text">7.SELinux帮助：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、操作：SELinux环境下迁移httpd服务默认目录"><span class="nav-number">4.</span> <span class="nav-text">四、操作：SELinux环境下迁移httpd服务默认目录</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

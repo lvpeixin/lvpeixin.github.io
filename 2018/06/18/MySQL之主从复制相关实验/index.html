@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="MySQL,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="实验一：搭建主从复制前期准备：两台虚拟机 主服务器：     CentOS7.4  192.168.30.10        提示符：蓝色 从服务器：     CentOS7.5  192.168.30.18        提示符：黄色 主服务器：vim /etc/my.cnf [mariadb] log-bin server_id=1 log-basename=master">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL之主从复制相关实验">
+<meta property="og:url" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="实验一：搭建主从复制前期准备：两台虚拟机 主服务器：     CentOS7.4  192.168.30.10        提示符：蓝色 从服务器：     CentOS7.5  192.168.30.18        提示符：黄色 主服务器：vim /etc/my.cnf [mariadb] log-bin server_id=1 log-basename=master">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/1-19.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/2-23.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/3-24.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/4-19.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/5-18.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/6-16.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/1-20.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/lazy.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/3-25.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/4-20.png">
+<meta property="og:image" content="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/6-17.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/7-11.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/1-21.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/2-25.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/3-26.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/4-21.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/5-20.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/6-18.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/7-12.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/1-23.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/1-24.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/2-26.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/3-27.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/4-22.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/5-21.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/1-25.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/2-27.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/1-26.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/2-28.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/3-28.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/4-23.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/5-22.png">
+<meta property="og:updated_time" content="2018-07-17T13:09:55.099Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL之主从复制相关实验">
+<meta name="twitter:description" content="实验一：搭建主从复制前期准备：两台虚拟机 主服务器：     CentOS7.4  192.168.30.10        提示符：蓝色 从服务器：     CentOS7.5  192.168.30.18        提示符：黄色 主服务器：vim /etc/my.cnf [mariadb] log-bin server_id=1 log-basename=master">
+<meta name="twitter:image" content="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/1-19.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/">
+
+
+
+
+
+  <title>MySQL之主从复制相关实验 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MySQL之主从复制相关实验</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-18T15:58:19+08:00">
+                2018-06-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="实验一：搭建主从复制"><a href="#实验一：搭建主从复制" class="headerlink" title="实验一：搭建主从复制"></a>实验一：搭建主从复制</h2><h3 id="前期准备："><a href="#前期准备：" class="headerlink" title="前期准备："></a>前期准备：</h3><p>两台虚拟机</p>
+<p>主服务器：     CentOS7.4  192.168.30.10        提示符：<strong>蓝色</strong></p>
+<p>从服务器：     CentOS7.5  192.168.30.18        提示符：<strong>黄色</strong></p>
+<h3 id="主服务器："><a href="#主服务器：" class="headerlink" title="主服务器："></a>主服务器：</h3><p><strong>vim /etc/my.cnf</strong></p>
+<p>[mariadb]</p>
+<p>log-bin</p>
+<p>server_id=1</p>
+<p>log-basename=master            可选项</p>
+<p><img src="1-19.png" alt="1"></p>
+<p>重启mysql服务使生效</p>
+<p>systemctl restart mariadb</p>
+<p>创建有复制权限的用户账号</p>
+<p>masql&gt; grant replication slave on <em>.</em> to repluser@’192.168.30.%’ identified by ‘centos’;</p>
+<p>导入一个数据库hellodb</p>
+<p>#mysql &lt; hellodb_innodb.sql</p>
+<p>此时查看当前使用的二进制日志：</p>
+<p>masql&gt; show master logs;</p>
+<p><img src="2-23.png" alt="2"></p>
+<h3 id="从服务器："><a href="#从服务器：" class="headerlink" title="从服务器："></a><strong>从服务器：</strong></h3><p><strong>vim /etc/my.cnf</strong></p>
+<p>[mariadb]</p>
+<p>server_id=2</p>
+<p>read_only</p>
+<p>重启mysql服务使之生效</p>
+<p>systemctl restart mariadb</p>
+<p>使用有复制权限的用户账号连接至主服务器，并启动复制线程</p>
+<p>mysql&gt; CHANGE MASTER TO</p>
+<p>  MASTER_HOST=’192.168.30.10′,</p>
+<p>  MASTER_USER=’repluser’,</p>
+<p>  MASTER_PASSWORD=’centos’,</p>
+<p>  MASTER_PORT=3306,</p>
+<p>  MASTER_LOG_FILE=’mariadb-bin.000001′,</p>
+<p>  MASTER_LOG_POS=245,</p>
+<p>  MASTER_CONNECT_RETRY=10;</p>
+<p><img src="3-24.png" alt="3"></p>
+<p>开始从服务器复制</p>
+<p>mysql&gt;start slaves;</p>
+<p>此时我们可以查看从服务器的工作状态</p>
+<p>mysql&gt; show slaves status\G;</p>
+<p><img src="4-19.png" alt="4"></p>
+<p>此时我们看到从服务器已开始工作，并且已将主服务器的hellodb数据库复制过来</p>
+<p>mysql&gt; show databases;</p>
+<p><img src="5-18.png" alt="5"></p>
+<p>切换到主服务器，继续测试，创建数据库db1</p>
+<p>mysql&gt; create database db1;</p>
+<p>切换回从服务器，我们看到，从服务同步成功</p>
+<p><img src="6-16.png" alt="6"></p>
+<h2 id="实验二：为已存放大量数据的在用服务器搭建从服务器"><a href="#实验二：为已存放大量数据的在用服务器搭建从服务器" class="headerlink" title="实验二：为已存放大量数据的在用服务器搭建从服务器"></a><strong>实验二：为已存放大量数据的在用服务器搭建从服务器</strong></h2><h3 id="前期准备：-1"><a href="#前期准备：-1" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>主服务器数据库仍沿用实验一的主服务器，作为已运行且有数据的服务器</p>
+<p>数据库初始信息如下：</p>
+<p><img src="1-20.png" alt="1"></p>
+<p>从服务器为新环境下的服务器</p>
+<h3 id="主服务器：-1"><a href="#主服务器：-1" class="headerlink" title="主服务器："></a><strong>主服务器：</strong></h3><p><strong>vim /etc/my.cnf</strong></p>
+<p>[mariadb]</p>
+<p>log-bin</p>
+<p>server_id=1</p>
+<p>innod_file_per_table      单表存储</p>
+<p>log-basename=master   可选项，指定二进制文件前缀</p>
+<p>重启mysql服务使之生效</p>
+<p>systemctl restart mariadb</p>
+<p>创建有复制权限的用户账号</p>
+<p>masql&gt; grant replication slave on <em>.</em> to repluser@’192.168.30.%’ identified by ‘centos’;</p>
+<p>查看当前主服务器二进制日志状态</p>
+<p><img src="lazy.png" alt="2"></p>
+<p>使用mysqldump全备份主服务器二进制日志</p>
+<p>mysqldump -A -F –single-transaction –master-data=1 &gt; all.sql</p>
+<p>复制到新的从服务器</p>
+<p>scp all.sql 192.168.30.18:/</p>
+<h3 id="从服务器：-1"><a href="#从服务器：-1" class="headerlink" title="从服务器："></a><strong>从服务器：</strong></h3><p>[mariadb]</p>
+<p>server_id=2</p>
+<p>read_only        只读，防止普通用户修改</p>
+<p>重启mysql服务</p>
+<p>systemctl restart mysql</p>
+<p>修改全备份添加入主服务器信息：</p>
+<p>vim all.sql</p>
+<p>找到此行</p>
+<p><img src="3-25.png" alt="3"></p>
+<p>替换为：</p>
+<p>CHANGE MASTER TO</p>
+<p>  MASTER_HOST=’192.168.30.10′,</p>
+<p>  MASTER_USER=’repluser’,</p>
+<p>  MASTER_PASSWORD=’centos’,</p>
+<p>  MASTER_PORT=3306,</p>
+<p>  MASTER_LOG_FILE=’mariadb-bin.000002′,</p>
+<p>  MASTER_LOG_POS=245,</p>
+<p>  MASTER_CONNECT_RETRY=10;</p>
+<p><img src="4-20.png" alt="4"></p>
+<p>在从服务器上导入全备份</p>
+<p>mysql &lt; all.sql</p>
+<p>此时我们看到全备份中数据库已导入成功</p>
+<p><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="5"></p>
+<p>开启从服务器复制</p>
+<p>mysql&gt; start slave;</p>
+<p>查看从服务器工作状态，已开始正常工作</p>
+<p>mysql&gt; show slave status;</p>
+<p><img src="6-17.png" alt="6"></p>
+<p>切换到主服务器，继续测试，创建数据库db2</p>
+<p>mysql&gt; create database db2;</p>
+<p>切换回从服务器，我们看到，从服务同步成功</p>
+<p><img src="7-11.png" alt="7"></p>
+<h2 id="实验三：级联复制"><a href="#实验三：级联复制" class="headerlink" title="实验三：级联复制"></a><strong>实验三：级联复制</strong></h2><p><img src="1-21.png" alt="1"></p>
+<h3 id="前期准备：-2"><a href="#前期准备：-2" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>三台虚拟机</p>
+<p>主服务器：         CentOS7.4  192.168.30.10        提示符：<strong>蓝色</strong></p>
+<p>中间从服务器： CentOS7.5  192.168.30.18        提示符：<strong>黄色</strong></p>
+<p>从服务器：         CentOS7.5  192.168.30.19        提示符：<strong>红色</strong></p>
+<h3 id="主服务器：-2"><a href="#主服务器：-2" class="headerlink" title="主服务器："></a><strong>主服务器：</strong></h3><p><strong>vim /etc/my.cnf</strong></p>
+<p>[mariadb]</p>
+<p>log-bin</p>
+<p>server_id=1</p>
+<p><img src="2-25.png" alt="2"></p>
+<p>重启mysql</p>
+<p>systemctl restart mariadb</p>
+<p>创建有复制权限的用户账号</p>
+<p>masql&gt; grant replication slave on <em>.</em> to repluser@’192.168.30.%’ identified by ‘centos’;</p>
+<h3 id="中间从服务器："><a href="#中间从服务器：" class="headerlink" title="中间从服务器："></a><strong>中间从服务器：</strong></h3><p><strong>vim /etc/my.cnf</strong></p>
+<p>[mariadb]</p>
+<p>log-bin</p>
+<p>server_id=2</p>
+<p>log_slave_updates</p>
+<p>read_only</p>
+<p><img src="3-26.png" alt="3"></p>
+<p>重启mysql服务</p>
+<p>systemctl restart mariadb</p>
+<p>填写master服务信息，即主服务器信息</p>
+<p>mysql&gt; CHANGE MASTER TO</p>
+<p>  MASTER_HOST=’192.168.30.10′,</p>
+<p>  MASTER_USER=’repluser’,</p>
+<p>  MASTER_PASSWORD=’centos’,</p>
+<p>  MASTER_PORT=3306,</p>
+<p>  MASTER_LOG_FILE=’mariadb-bin.000001′,</p>
+<p>  MASTER_LOG_POS=245,</p>
+<p>  MASTER_CONNECT_RETRY=10;</p>
+<p>开启从服务器</p>
+<p>start slave;</p>
+<h3 id="从服务器：-2"><a href="#从服务器：-2" class="headerlink" title="从服务器："></a><strong>从服务器：</strong></h3><p><strong>vim /etc/my.cnf</strong></p>
+<p>[mariadb]</p>
+<p>server_id=3</p>
+<p>read_only</p>
+<p><img src="4-21.png" alt="4"></p>
+<p>重启mysql服务</p>
+<p>systemctl start mariadb</p>
+<p>指定主服务器，即中间从服务器</p>
+<p>mysql&gt; CHANGE MASTER TO</p>
+<p>  MASTER_HOST=’192.168.30.18′,</p>
+<p>  MASTER_USER=’repluser’,</p>
+<p>  MASTER_PASSWORD=’centos’,</p>
+<p>  MASTER_PORT=3306,</p>
+<p>  MASTER_LOG_FILE=’mariadb-bin.000001′,</p>
+<p>  MASTER_LOG_POS=245,</p>
+<p>  MASTER_CONNECT_RETRY=10;</p>
+<p>开启从服务</p>
+<p>mysql&gt; start slave;</p>
+<p>查看从服务器工作状态</p>
+<p>mysql&gt; show slave status;</p>
+<p><img src="5-20.png" alt="5"></p>
+<p><strong>测试：</strong></p>
+<p>主服务器导入hellodb数据库，测试是否同步成功</p>
+<p>#mysql &lt; hellodb_innodb.sql</p>
+<p>中间服务器，我们看到hellodb数据库已同步成功</p>
+<p><img src="6-18.png" alt="6"></p>
+<p>再切换至从服务器，hellodb数据库也同步成功，至此我们实现了数据库服务器的级联复制</p>
+<p><img src="7-12.png" alt="7"></p>
+<h2 id="实验四：提升一个从服务器为主服务器"><a href="#实验四：提升一个从服务器为主服务器" class="headerlink" title="实验四：提升一个从服务器为主服务器"></a><strong>实验四：提升一个从服务器为主服务器</strong></h2><h3 id="模拟场景："><a href="#模拟场景：" class="headerlink" title="模拟场景："></a><strong>模拟场景：</strong></h3><p>当主服务器出现损坏时，我们需要提升一台从服务器作为主服务器使用，由于每台从服务器同步的数据完</p>
+<p>整情况可能不同，所有第一步应该选出数据同步最完整的从服务器。</p>
+<p><strong>那么，如何查看同步数据的完整性呢？</strong></p>
+<p>当slave开启成功后，会在mysql目录下生产一个master.info的文件，里面统计的是master服务器的相关信</p>
+<p>息，其中介于二进制文件名与主机名之间的数字即为已同步数据量，我们只需要打开每一台从服务器，观</p>
+<p>察这个值，取最大的一台从服务器即可</p>
+<p><strong>cat /var/lib/mysql/master.info</strong></p>
+<p><img src="1-23.png" alt="1"></p>
+<p>将此从服务器配置修改为主服务器配置</p>
+<p>[mariadb]</p>
+<p>log-bin</p>
+<p>server_id=1</p>
+<p>再将其他从服务器的master重新执行此台从服务器即可</p>
+<p>清除其他从服务器原有master配置信息</p>
+<p>mysql&gt; reset slave all;</p>
+<p>mysql&gt; CHANGE MASTER TO</p>
+<p>  MASTER_HOST=’192.168.30.XX’,</p>
+<p>  MASTER_USER=’repluser’,</p>
+<p>  MASTER_PASSWORD=’centos’,</p>
+<p>  MASTER_PORT=3306,</p>
+<p>  MASTER_LOG_FILE=’mariadb-bin.00000X’,</p>
+<p>  MASTER_LOG_POS=XXX,</p>
+<p>  MASTER_CONNECT_RETRY=10;</p>
+<h2 id="实验五：主主复制"><a href="#实验五：主主复制" class="headerlink" title="实验五：主主复制"></a><strong>实验五：主主复制</strong></h2><p><img src="1-24.png" alt="1"></p>
+<p><strong>主主复制：</strong>互为主从</p>
+<p>容易产生的问题：数据不一致；因此慎用</p>
+<h3 id="前期准备：-3"><a href="#前期准备：-3" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>虚拟机2台</p>
+<p>主服务器1：     CentOS7.4  192.168.30.10        提示符：<strong>蓝色</strong></p>
+<p>主服务器2：     CentOS7.5  192.168.30.18        提示符：<strong>黄色</strong></p>
+<h3 id="主服务器1："><a href="#主服务器1：" class="headerlink" title="主服务器1："></a><strong>主服务器1：</strong></h3><p><strong>vim /etc/my.cnf</strong></p>
+<p>log-bin</p>
+<p>server_id=1</p>
+<p>auto_increment_offset=1</p>
+<p>auto_increment_increment=2       #自动递增，避免数据冲突，当三台互为主从，改为3</p>
+<p><img src="2-26.png" alt="2"></p>
+<p>重启mysql服务</p>
+<p>systemctl restart mariadb</p>
+<p>创建账号</p>
+<p>masql&gt; grant replication slave on <em>.</em> to repluser@’192.168.30.%’ identified by ‘centos’;</p>
+<p>互相添加master配置为对方：</p>
+<p>mysql&gt; CHANGE MASTER TO</p>
+<p>  MASTER_HOST=’192.168.30.18′,</p>
+<p>  MASTER_USER=’repluser’,</p>
+<p>  MASTER_PASSWORD=’centos’,</p>
+<p>  MASTER_PORT=3306,</p>
+<p>  MASTER_LOG_FILE=’mariadb-bin.000001′,</p>
+<p>  MASTER_LOG_POS=245,</p>
+<p>  MASTER_CONNECT_RETRY=10;</p>
+<p>mysql&gt; start slave;</p>
+<h3 id="主服务器2："><a href="#主服务器2：" class="headerlink" title="主服务器2："></a><strong>主服务器2：</strong></h3><p><strong>vim /etc/my.cnf</strong></p>
+<p>log-bin</p>
+<p>server_id=2</p>
+<p>auto_increment_offset=2</p>
+<p>auto_increment_increment=2</p>
+<p><img src="3-27.png" alt="3"></p>
+<p>重启mysql服务</p>
+<p>systemctl restart mariadb</p>
+<p>创建账号</p>
+<p>masql&gt; grant replication slave on <em>.</em> to repluser@’192.168.30.%’ identified by ‘centos’;</p>
+<p>添加master配置：</p>
+<p>mysql&gt; CHANGE MASTER TO</p>
+<p>  MASTER_HOST=’192.168.30.10′,</p>
+<p>  MASTER_USER=’repluser’,</p>
+<p>  MASTER_PASSWORD=’centos’,</p>
+<p>  MASTER_PORT=3306,</p>
+<p>  MASTER_LOG_FILE=’mariadb-bin.000001′,</p>
+<p>  MASTER_LOG_POS=245,</p>
+<p>  MASTER_CONNECT_RETRY=10;</p>
+<p>mysql&gt; start slave;</p>
+<p><strong>测试：</strong></p>
+<p>主服务器1创建db1数据库：</p>
+<p>mysql&gt; create database db1;</p>
+<p>主服务器2创建db2数据库：</p>
+<p>mysql&gt; create database db1;</p>
+<p>分别查看两台主服务器均同步成功</p>
+<p><img src="4-22.png" alt="4"></p>
+<p>当在主服务器1数据库中不指定ID添加数据时，默认以奇数递增；同理主服务2默认以偶数递增；主主复制</p>
+<p>就是通过此种方法来避免数据可能出现的冲突。</p>
+<p><img src="5-21.png" alt="5"></p>
+<h2 id="实验六：半同步复制"><a href="#实验六：半同步复制" class="headerlink" title="实验六：半同步复制"></a><strong>实验六：半同步复制</strong></h2><h3 id="应用场景："><a href="#应用场景：" class="headerlink" title="应用场景："></a><strong>应用场景：</strong></h3><p>默认情况下，MySQL的复制功能是异步的，这就会造成主服务器和从服务器的数据不一致，甚</p>
+<p>至在恢复时造成数据的丢失。半同步复制能够使从服务器始终有一台数据与主服务器保持一致，避免出现</p>
+<p>数据丢失。在生产环境中，一般都要搭建半同步复制。</p>
+<p>主服务器需要安装的mysql插件：<strong>semisync_master.so</strong></p>
+<p>从服务器需要安装的musql插件：<strong>semisync_slave.so</strong></p>
+<h3 id="主服务器：-3"><a href="#主服务器：-3" class="headerlink" title="主服务器："></a><strong>主服务器：</strong></h3><p>安装semisync_master.so插件</p>
+<p>mysql&gt; INSTALL PLUGIN rpl_semi_sync_master SONAME ‘semisync_master.so’;</p>
+<p>查看master半同步相关变量：</p>
+<p>mysql&gt; show global variables like ‘%semi%’;</p>
+<p><img src="1-25.png" alt="1"></p>
+<p>启用master半同步功能</p>
+<p>mysql&gt; set global rpl_semi_sync_master_enabled=on;</p>
+<h3 id="从服务器：-3"><a href="#从服务器：-3" class="headerlink" title="从服务器："></a><strong>从服务器：</strong></h3><p>同理在从服务器安装semisync_slave.so</p>
+<p>mysql&gt; INSTALL PLUGIN rpl_semi_sync_master SONAME ‘semisync_slave.so’;</p>
+<p>mysql&gt; show global variables like ‘%semi%’;</p>
+<p><img src="2-27.png" alt="2"></p>
+<p>启用slave半同步功能</p>
+<p>mysql&gt; set global rpl_semi_sync_slave_enabled=on;</p>
+<p>至此，主从服务器的半同步复制就搭建完成了</p>
+<h2 id="实验七：实现主从SSL加密复制"><a href="#实验七：实现主从SSL加密复制" class="headerlink" title="实验七：实现主从SSL加密复制"></a><strong>实验七：实现主从SSL加密复制</strong></h2><h3 id="前期准备：-4"><a href="#前期准备：-4" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>三台虚拟机</p>
+<p>CA：                CentOS7.4  192.168.30.10        提示符：<strong>蓝色</strong></p>
+<p>主服务器：     CentOS7.5  192.168.30.20        提示符：<strong>黄色</strong></p>
+<p>从服务器：     CentOS7.5  192.168.30.17        提示符：<strong>红色</strong></p>
+<p>生成CA的私钥</p>
+<p>cd /etc/my.cnf.d/ssl</p>
+<p>openssl genrsa 2048 &gt; cakey.pem</p>
+<p>生成自签名</p>
+<p>openssl req -new -x509 -key cakey.pem -out cacert.pem -days 3650</p>
+<p><img src="1-26.png" alt="1"></p>
+<p><strong>ls /etc/my.cnf.d/ssl</strong></p>
+<p>cacert.pem</p>
+<p>cakey.pem</p>
+<p>在本机生成master和slave的私钥</p>
+<p>同时生成主服务器的私钥和签名请求</p>
+<p>openssl req -newkey rsa:2048 –days 365 -nodes -keyout master.key &gt; master.csr</p>
+<p>CN</p>
+<p>beijing</p>
+<p>beijing</p>
+<p>magedu.com</p>
+<p>opt</p>
+<p>master.magedu.com</p>
+<p>颁发证书</p>
+<p>openssl x509 -req -in master.csr -CA cacert.pem -CAkey cakey.pem -set_serial 01 &gt; master.crt</p>
+<p>此时ssl目录下的文件有</p>
+<p><img src="2-28.png" alt="2"></p>
+<p>继续生成从服务器的私钥和签名请求</p>
+<p>openssl req -newkey rsa:2048 -days365 -nodes -keyout slave.key &gt; slave.csr</p>
+<p>CN</p>
+<p>beijing</p>
+<p>beijing</p>
+<p>magedu.com</p>
+<p>opt</p>
+<p>slave.magedu.com</p>
+<p>颁发证书</p>
+<p>openssl x509 -req -in slave.csr -CA cacert.pem -CAkey cakey.pem -set_serial 01 &gt; slave.crt</p>
+<p>此时ssl目录下文件有</p>
+<p><img src="3-28.png" alt="3"></p>
+<p>scp -r /etc/my.cnf.d/ssl 192.16.30.17:/etc/my.cnf.d</p>
+<p>scp -r /etc/my.cnf.d/ssl 192.16.30.27:/etc/my.cnf.d</p>
+<p>master 服务器保留下列文件 cacert.pem master.crt master.key</p>
+<p>slave  服务器保留下列文件 cacert.pem slave.crt slave.key</p>
+<h3 id="Master服务器配置"><a href="#Master服务器配置" class="headerlink" title="Master服务器配置"></a><strong>Master服务器配置</strong></h3><p>[mysqld]</p>
+<p>log-bin</p>
+<p>server_id=1</p>
+<p>ssl</p>
+<p>ssl-ca=/etc/my.cnf.d/ssl/cacert.pem</p>
+<p>ssl-cert=/etc/my.cnf.d/ssl/master.crt</p>
+<p>ssl-key=/etc/my.cnf.d/ssl/master.key</p>
+<p>重启mysql服务</p>
+<p>systemctl retart mariadb</p>
+<p><img src="4-23.png" alt="4"></p>
+<p>查看是否生效</p>
+<p>mysql&gt; show variables like ‘%ssl’</p>
+<p><img src="5-22.png" alt="5"></p>
+<p>创建用户且要求必须以加密方式连接</p>
+<p>masql&gt; grant replication slave on <em>.</em> to repluser@’192.168.30.%’ identified by ‘centos’ require ssl;</p>
+<p>可以在slave端测试replusr用户用ssl连接</p>
+<p>mysql -urepluser -pcentos -h192.168.30.17 –ssl-ca=cacert.pem –ssl-cert=slave.crt –ssl-key=slave.key</p>
+<h3 id="slave服务器配置"><a href="#slave服务器配置" class="headerlink" title="slave服务器配置"></a><strong>slave服务器配置</strong></h3><p><strong>第一种方法：</strong>CHANGE  MASTER TO</p>
+<p>[mysqld]</p>
+<p>serverid=2</p>
+<p>ssl</p>
+<p>重启mysql服务</p>
+<p>systemctl restart mariadb</p>
+<p>查看是否生效</p>
+<p>mysql&gt; show variables like ‘%ssl’</p>
+<p>配置master服务器信息</p>
+<p>mysql&gt; CHANGE MASTER TO MASTER_HOST=’192.68.30.20′,</p>
+<p>  MASTER_USER=’repluser’,</p>
+<p>  MASTER_PASSWORD=’centos’,</p>
+<p>  MASTER_PORT=3306,</p>
+<p>  MASTER_LOG_FILE=’ mariadb-bin.000001′,</p>
+<p>  MASTER_LOG_POS=245,</p>
+<p>  MASTER_CONNECT_RETRY=10,</p>
+<p>  MASTER_SSL=1,</p>
+<p>  MASTER_SSL_CA = ‘/etc/my.cnf.d/ssl/cacert.pem’,</p>
+<p>  MASTER_SSL_CERT = ‘/etc/my.cnf.d/ssl/slave.crt’,</p>
+<p>  MASTER_SSL_KEY = ‘/etc/my.cnf.d/ssl/slave.key’;</p>
+<p>开启从服务器</p>
+<p>mysql&gt; start slave</p>
+<p><strong>测试：</strong></p>
+<p>master创建一个数据库</p>
+<p>查看slave是否同步</p>
+<p><strong>第二种方法：</strong>写入配置</p>
+<p>stop slave;</p>
+<p>reset slave all;</p>
+<p>[mysqld]</p>
+<p>log-bin</p>
+<p>server_id=2</p>
+<p>ssl</p>
+<p>ssl-ca=/etc/my.cnf.d/ssl/cacert.pem</p>
+<p>ssl-cert=/etc/my.cnf.d/ssl/slave.crt</p>
+<p>ssl-key=/etc/my.cnf.d/ssl/slave.key</p>
+<p><strong>master服务器：</strong></p>
+<p>mysql&gt; show master logs;</p>
+<p>000002  493</p>
+<p><strong>slave服务器：</strong></p>
+<p>mysql&gt; CHANGE MASTER TO MASTER_HOST=’192.68.30.17’，</p>
+<p>  MASTER_USER=’repluser’,</p>
+<p>  MASTER_PASSWORD=’centos’,</p>
+<p>  MASTER_PORT=3306,</p>
+<p>  MASTER_LOG_FILE=’master-bin.000002′,</p>
+<p>  MASTER_LOG_POS=493,</p>
+<p>  MASTER_CONNECT_RETRY=10;</p>
+<p>  MASTER_SSL=1</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/14/Mysql之备份及还原相关实验/" rel="next" title="Mysql之备份及还原相关实验">
+                <i class="fa fa-chevron-left"></i> Mysql之备份及还原相关实验
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/19/HTTP协议介绍/" rel="prev" title="HTTP协议介绍">
+                HTTP协议介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#实验一：搭建主从复制"><span class="nav-number">1.</span> <span class="nav-text">实验一：搭建主从复制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备："><span class="nav-number">1.1.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主服务器："><span class="nav-number">1.2.</span> <span class="nav-text">主服务器：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从服务器："><span class="nav-number">1.3.</span> <span class="nav-text">从服务器：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验二：为已存放大量数据的在用服务器搭建从服务器"><span class="nav-number">2.</span> <span class="nav-text">实验二：为已存放大量数据的在用服务器搭建从服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备：-1"><span class="nav-number">2.1.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主服务器：-1"><span class="nav-number">2.2.</span> <span class="nav-text">主服务器：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从服务器：-1"><span class="nav-number">2.3.</span> <span class="nav-text">从服务器：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验三：级联复制"><span class="nav-number">3.</span> <span class="nav-text">实验三：级联复制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备：-2"><span class="nav-number">3.1.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主服务器：-2"><span class="nav-number">3.2.</span> <span class="nav-text">主服务器：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中间从服务器："><span class="nav-number">3.3.</span> <span class="nav-text">中间从服务器：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从服务器：-2"><span class="nav-number">3.4.</span> <span class="nav-text">从服务器：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验四：提升一个从服务器为主服务器"><span class="nav-number">4.</span> <span class="nav-text">实验四：提升一个从服务器为主服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模拟场景："><span class="nav-number">4.1.</span> <span class="nav-text">模拟场景：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验五：主主复制"><span class="nav-number">5.</span> <span class="nav-text">实验五：主主复制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备：-3"><span class="nav-number">5.1.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主服务器1："><span class="nav-number">5.2.</span> <span class="nav-text">主服务器1：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主服务器2："><span class="nav-number">5.3.</span> <span class="nav-text">主服务器2：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验六：半同步复制"><span class="nav-number">6.</span> <span class="nav-text">实验六：半同步复制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景："><span class="nav-number">6.1.</span> <span class="nav-text">应用场景：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主服务器：-3"><span class="nav-number">6.2.</span> <span class="nav-text">主服务器：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从服务器：-3"><span class="nav-number">6.3.</span> <span class="nav-text">从服务器：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验七：实现主从SSL加密复制"><span class="nav-number">7.</span> <span class="nav-text">实验七：实现主从SSL加密复制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备：-4"><span class="nav-number">7.1.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Master服务器配置"><span class="nav-number">7.2.</span> <span class="nav-text">Master服务器配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#slave服务器配置"><span class="nav-number">7.3.</span> <span class="nav-text">slave服务器配置</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

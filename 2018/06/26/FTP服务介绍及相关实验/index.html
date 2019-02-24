@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="FTP,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、FTP服务FTP是File Transfer Protocol（文件传输协议）的英文简称，而中文简称为“文传协议”。 用于Internet上的控制文件的双向传输。FTP协议是早期的三个应用级协议之一。 基于C/S结构 双通道协议：数据和命令连接 数据传输格式：二进制（默认）和文本 两种模式：服务器角度 主动(PORT style)：服务器主动连接 ​    命令（控制）：客户端：随机port">
+<meta name="keywords" content="FTP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FTP服务介绍及相关实验">
+<meta property="og:url" content="http://yoursite.com/2018/06/26/FTP服务介绍及相关实验/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="一、FTP服务FTP是File Transfer Protocol（文件传输协议）的英文简称，而中文简称为“文传协议”。 用于Internet上的控制文件的双向传输。FTP协议是早期的三个应用级协议之一。 基于C/S结构 双通道协议：数据和命令连接 数据传输格式：二进制（默认）和文本 两种模式：服务器角度 主动(PORT style)：服务器主动连接 ​    命令（控制）：客户端：随机port">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/06/26/FTP服务介绍及相关实验/1-42.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/26/FTP服务介绍及相关实验/2-40.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/26/FTP服务介绍及相关实验/3-40.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/26/FTP服务介绍及相关实验/4-30.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/26/FTP服务介绍及相关实验/5-26.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/26/FTP服务介绍及相关实验/1-43.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/26/FTP服务介绍及相关实验/2-41.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/26/FTP服务介绍及相关实验/3-41.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/26/FTP服务介绍及相关实验/1-44.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/26/FTP服务介绍及相关实验/2-42.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/26/FTP服务介绍及相关实验/3-42.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/26/FTP服务介绍及相关实验/4-32.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/26/FTP服务介绍及相关实验/5-27.png">
+<meta property="og:updated_time" content="2018-07-17T13:02:53.528Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FTP服务介绍及相关实验">
+<meta name="twitter:description" content="一、FTP服务FTP是File Transfer Protocol（文件传输协议）的英文简称，而中文简称为“文传协议”。 用于Internet上的控制文件的双向传输。FTP协议是早期的三个应用级协议之一。 基于C/S结构 双通道协议：数据和命令连接 数据传输格式：二进制（默认）和文本 两种模式：服务器角度 主动(PORT style)：服务器主动连接 ​    命令（控制）：客户端：随机port">
+<meta name="twitter:image" content="http://yoursite.com/2018/06/26/FTP服务介绍及相关实验/1-42.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/26/FTP服务介绍及相关实验/">
+
+
+
+
+
+  <title>FTP服务介绍及相关实验 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/26/FTP服务介绍及相关实验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">FTP服务介绍及相关实验</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-26T16:12:34+08:00">
+                2018-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、FTP服务"><a href="#一、FTP服务" class="headerlink" title="一、FTP服务"></a>一、FTP服务</h2><p><strong>FTP</strong>是File Transfer Protocol<strong>（文件传输协议）</strong>的英文简称，而中文简称为“文传协议”。</p>
+<p>用于Internet上的控制文件的双向传输。FTP协议是早期的三个应用级协议之一。</p>
+<p><strong>基于C/S结构</strong></p>
+<p>双通道协议：数据和命令连接</p>
+<p>数据传输格式：二进制（默认）和文本</p>
+<h3 id="两种模式："><a href="#两种模式：" class="headerlink" title="两种模式："></a><strong>两种模式：</strong></h3><p>服务器角度</p>
+<p><strong>主动(PORT style)</strong>：服务器主动连接</p>
+<p>​    命令（控制）：客户端：随机port — 服务器：<strong>tcp21</strong></p>
+<p>​    数据：                客户端：随机port — 服务器：<strong>tcp20</strong></p>
+<p><strong>被动(PASV style)</strong>：客户端主动连接</p>
+<p>​    命令（控制）：客户端：随机port — 服务器：<strong>tcp21</strong></p>
+<p>​    数据：                客户端：随机port — 服务器：<strong>随机port</strong></p>
+<p>服务器被动模式数据端口示例：</p>
+<p>​    227 Entering Passive Mode (192,168,175,138,224,59)</p>
+<p>​    服务器数据端口为：<strong>224*256+59</strong></p>
+<p><strong>注：</strong>Linux客户端默认使用被动模式</p>
+<p>​    Windows客户端默认使用主动模式</p>
+<p>​    Linux系统客户端若要切换主动模式，可使用：ftp -A ServerIP Port</p>
+<p><strong>主动连接与被动连接的优缺点：</strong></p>
+<ol>
+<li>主动连接对FTP服务器的管理有利，但对客户端的管理不利。因为FTP服务器企图与客户端的高位随机端口建立连接，而这个端口很有可能被客户端的防火墙阻塞掉。</li>
+<li>被动连接对FTP客户端的管理有利，但对服务器端的管理不利。因为客户端要与服务器端建立两个连接，其中一个连到一个高位随机端口，而这个端口很有可能被服务器端的防火墙阻塞掉。</li>
+</ol>
+<p><strong>注：</strong>可通过为FTP服务器指定一个有限的端口范围来减小服务器端口暴露的风险。</p>
+<h3 id="FTP服务器："><a href="#FTP服务器：" class="headerlink" title="FTP服务器："></a><strong>FTP服务器：</strong></h3><p><strong>Wu-ftpd，Proftpd，Pureftpd，ServU，IIS</strong></p>
+<p><strong>vsftpd</strong>：Very Secure FTP Daemon，CentOS默认FTP服务器</p>
+<p>高速，稳定，下载速度是WU-FTP的两倍</p>
+<p>ftp.redhat.com数据：单机最多可支持15000个并发</p>
+<h3 id="客户端软件："><a href="#客户端软件：" class="headerlink" title="客户端软件："></a><strong>客户端软件：</strong></h3><p><strong>ftp，lftp，lftpget，wget，curl</strong></p>
+<p>​    ftp -A ftpserver port -A 主动模式 -p 被动模式</p>
+<p>​    lftp -u username ftpserver</p>
+<p>​    lftp username@ftpserver</p>
+<p>​    lftpget <a href="ftp://ftpserver/pub/file" target="_blank" rel="noopener">ftp://ftpserver/pub/file</a></p>
+<p>gftp: GUI centos5 最新版2.0.19 (11/30/2008)</p>
+<p>filezilla，CuteFtp，FlashFXP，LeapFtp</p>
+<p>IE <a href="ftp://username:password@ftpserver" target="_blank" rel="noopener">ftp://username:password@ftpserver</a></p>
+<h3 id="状态码："><a href="#状态码：" class="headerlink" title="状态码："></a><strong>状态码：</strong></h3><p><strong>1XX：</strong>信息类     125：数据连接打开</p>
+<p><strong>2XX：</strong>成功类状态 200：命令OK 230：登录成功</p>
+<p><strong>3XX：</strong>补充类     331：用户名OK</p>
+<p><strong>4XX：</strong>客户端错误 425：不能打开数据连接</p>
+<p><strong>5XX：</strong>服务器错误 530：不能登录</p>
+<h3 id="用户认证："><a href="#用户认证：" class="headerlink" title="用户认证："></a><strong>用户认证：</strong></h3><p><strong>匿名用户：</strong>ftp,anonymous,对应Linux用户ftp</p>
+<p><strong>系统用户：</strong>Linux用户,用户/etc/passwd,密码/etc/shadow</p>
+<p><strong>虚拟用户：</strong>特定服务的专用用户，独立的用户/密码文件</p>
+<p><strong>nsswitch：</strong>network service switch  名称解析框架</p>
+<p><strong>pam：</strong>pluggable authentication module 可插拔认证模块 </p>
+<p>​<strong> pam的相关文件：</strong>   <strong>/lib64/security /etc/pam.d/ /etc/pam.conf</strong></p>
+<h2 id="二、vsftpd服务"><a href="#二、vsftpd服务" class="headerlink" title="二、vsftpd服务"></a><strong>二、vsftpd服务</strong></h2><p><strong>vsftpd</strong>全称为”Very Secure FTP Daemon“,意为非常安全的FTP守护进程，</p>
+<p>vsftpd最初发展理念就是建构一个以安全为重心的FTP服务器。</p>
+<p>由vsftpd包提供，CentOS 7之后不再由xinetd管理</p>
+<p>用户认证配置文件：</p>
+<p><strong>/etc/pam.d/vsftpd</strong></p>
+<p>服务脚本：</p>
+<p><strong>/usr/lib/systemd/system/vsftpd.service</strong></p>
+<p><strong>/etc/rc.d/init.d/vsftpd</strong></p>
+<p>配置文件：</p>
+<p><strong>/etc/vsftpd/vsftpd.conf</strong></p>
+<p><strong>格式：option=value</strong></p>
+<p><strong>注意：</strong>= 前后不要有空格</p>
+<p>匿名用户（映射为系统用户ftp ）登录的根目录位置：<strong>/var/ftp</strong></p>
+<p>系统用户共享文件位置：用户家目录</p>
+<p>虚拟用户共享文件位置：为其映射的系统用户的家目录</p>
+<h3 id="vsftpd虚拟用户"><a href="#vsftpd虚拟用户" class="headerlink" title="vsftpd虚拟用户"></a><strong>vsftpd虚拟用户</strong></h3><p><strong>虚拟用户：</strong></p>
+<p>所有虚拟用户会统一映射为一个指定的系统帐号：访问共享位置，即为此系统帐号的家目录</p>
+<p>各虚拟用户可被赋予不同的访问权限，通过匿名用户的权限控制参数进行指定</p>
+<p>虚拟用户帐号的存储方式：</p>
+<p>文件：编辑文本文件，此文件需要被编码为hash格式</p>
+<p>奇数行为用户名，偶数行为密码</p>
+<p>db_load -T -t hash -f vusers.txt vusers.db</p>
+<p>关系型数据库中的表中：</p>
+<p>实时查询数据库完成用户认证</p>
+<p>mysql库：pam要依赖于<strong>pam-mysql</strong></p>
+<p>/lib64/security/pam_mysql.so</p>
+<p>/usr/share/doc/pam_mysql-0.7/README</p>
+<h3 id="vsftpd-conf常用配置"><a href="#vsftpd-conf常用配置" class="headerlink" title="vsftpd.conf常用配置"></a><strong>vsftpd.conf常用配置</strong></h3><p><strong>帮助查询：</strong>man 5 vsftpd.conf</p>
+<p><strong>重设命令端口：</strong>listen_port=21</p>
+<p><strong>主动模式端口</strong></p>
+<p>​    connect_from_port_20=YES     主动模式端口为20</p>
+<p>​    ftp_data_port=20             指定主动模式的端口</p>
+<p><strong>被动模式端口范围</strong></p>
+<p>​    Linux客户端默认使用被动模式</p>
+<p>​    Windows客户端默认使用主动模式</p>
+<p>​    pasv_min_port=6000           0为随机分配</p>
+<p>​    pasv_max_port=6010</p>
+<p>   <strong>注：</strong>可以通过为FTP服务器指定一个有限的端口范围来减小服务器端口暴露的风险</p>
+<p><strong>使用当地时间</strong></p>
+<p>use_localtime=YES 使用当地时间（默认为NO，使用GMT）</p>
+<p><strong>匿名用户</strong></p>
+<p>​    anonymous_enable=YES          支持匿名用户</p>
+<p>​    no_anon_password=YES(默认NO)  匿名用户略过口令检查</p>
+<p>​    anon_world_readable_only (默认YES)只能下载全部读的文件</p>
+<p>​    anon_upload_enable=YES        匿名上传，注意:文件系统权限</p>
+<p>​    anon_mkdir_write_enable=YES   匿名创建，写权限</p>
+<p>​    anon_umask=077                指定匿名上传文件的umask</p>
+<p>​    anon_other_write_enable=YES   可删除和修改上传的文件</p>
+<p><strong>可指定上传文件的默认的所有者和权限</strong></p>
+<p>​    chown_uploads=YES(默认NO)</p>
+<p>​    chown_username=wang</p>
+<p>​    chown_upload_mode=0644</p>
+<p><strong>Linux系统用户</strong></p>
+<p>​    guest_enable=YES              所有系统用户都映射成guest用户</p>
+<p>​    guest_username=ftp            配合上面选项才生效，指定guest用户</p>
+<p>​    local_enable=YES              是否允许Linux用户登录</p>
+<p>​    write_enable-YES              是否允许Linux用户上传文件</p>
+<p>​    local_umask=022               指定系统用户上传文件的默认权限</p>
+<p>​    local_root=/ftproot           非匿名用户登录所在目录</p>
+<p><strong>禁锢所有系统用户在家目录中</strong></p>
+<p>​    chroot_local_user=YES（默认NO，不禁锢）禁锢系统用户</p>
+<p><strong>禁锢或不禁锢特定的系统用户在家目录中，与上面设置功能相反</strong></p>
+<p>​    chroot_list_enable=YES chroot_list_file=/etc/vsftpd/chroot_list</p>
+<p>​    当chroot_local_user=YES时，则chroot_list中用户不禁锢，白名单</p>
+<p>​    当chroot_local_user=NO时，则chroot_list中用户禁锢，黑名单</p>
+<h3 id="ftp日志"><a href="#ftp日志" class="headerlink" title="ftp日志"></a><strong>ftp日志</strong></h3><p><strong>wu-ftp日志</strong>：默认启用</p>
+<p>​    xferlog_enable=YES （默认）   启用记录上传下载日志</p>
+<p>​    xferlog_std_format=YES （默认）使用wu-ftp日志格式</p>
+<p>​    xferlog_file=/var/log/xferlog （默认）可自动生成</p>
+<p><strong>vsftpd日志：</strong>默认不启用</p>
+<p>​    dual_log_enable=YES           使用vsftpd日志格式，默认不启用</p>
+<p>​    vsftpd_log_file=/var/log/vsftpd.log（默认）可自动生成</p>
+<p><strong>登录提示信息</strong></p>
+<p>​    ftpd_banner=”welcome to mage ftp server”</p>
+<p>​    banner_file=/etc/vsftpd/ftpbanner.txt 优先上面项生效</p>
+<p><strong>目录访问提示信息</strong></p>
+<p>​    dirmessage_enable=YES (默认)</p>
+<p>​    message_file=.message(默认)    信息存放在指定目录下.message</p>
+<p><strong>使用PAM完成用户认证</strong></p>
+<p>​    pam_service_name=vsftpd</p>
+<p>​    pam配置文件:<strong>/etc/pam.d/vsftpd</strong></p>
+<p><strong>/etc/vsftpd/ftpusers</strong>           默认文件中用户拒绝登录</p>
+<p><strong>/etc/vsftpd/users_list</strong>         默认文件中用户拒绝登录，不提示口令输入</p>
+<p><strong>是否启用控制用户登录的列表文件</strong></p>
+<p>​    userlist_enable=YES            默认有此设置</p>
+<p>​    userlist_deny=YES(默认值)      黑名单,不提示口令，NO为白名单</p>
+<p>​    userlist_file=/etc/vsftpd/users_list 此为默认值</p>
+<p><strong>连接限制</strong></p>
+<p>​    max_clients=0                  最大并发连接数</p>
+<p>​    max_per_ip=0                   每个IP同时发起的最大连接数</p>
+<p><strong>注：</strong>生成环境一般会将最大并发连接数按需设置；单个IP最大连接数尽量调小</p>
+<p><strong>vsftpd服务指定用户身份运行</strong></p>
+<p>​    nopriv_user=nobody</p>
+<p><strong>传输速率：</strong>字节/秒</p>
+<p>​    anon_max_rate=0                匿名用户的最大传输速率</p>
+<p>​    local_max_rate=0               本地用户的最大传输速率</p>
+<p><strong>连接时间：</strong>秒为单位</p>
+<p>​    connect_timeout=60             主动模式数据连接超时时长</p>
+<p>​    accept_timeout=60              被动模式数据连接超时时长</p>
+<p>​    data_connection_timeout=300    数据连接无数据输超时时长</p>
+<p>​    idle_session_timeout=60        无命令操作超时时长</p>
+<p><strong>优先以文本方式传输</strong></p>
+<p>​    ascii_upload_enable=YES</p>
+<p>​    ascii_download_enable=YES</p>
+<p>配置FTP服务以非独立服务方运行:listen=NO，默认为独立方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/xinetd.d/rsync</span><br><span class="line">service ftp</span><br><span class="line">&#123;</span><br><span class="line">    flags = REUSE</span><br><span class="line">    socket_type = stream</span><br><span class="line">    wait = no</span><br><span class="line">    user = root</span><br><span class="line">    server = /usr/sbin/vsftpd</span><br><span class="line">    log_on_failure += USERID</span><br><span class="line">    disable = no</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="三、实验：实现基于SSL的FTPS"><a href="#三、实验：实现基于SSL的FTPS" class="headerlink" title="三、实验：实现基于SSL的FTPS"></a><strong>三、实验：实现基于SSL的FTPS</strong></h2><h3 id="前期准备："><a href="#前期准备：" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>FTP服务器：CentOS7.4</p>
+<p>IP地址：192.168.2.11</p>
+<h3 id="具体步骤："><a href="#具体步骤：" class="headerlink" title="具体步骤："></a><strong>具体步骤：</strong></h3><p><strong>查看是否支持SSL</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ldd `which vsftpd`|grep libssl  # 查看到libssl.so</span><br></pre></td></tr></table></figure>
+<p><img src="1-42.png" alt="1"></p>
+<p><strong>创建自签名证书</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/pki/tls/certs/</span><br><span class="line">make vsftpd.pem</span><br><span class="line">openssl x509 -in vsftpd.pem -noout -text</span><br></pre></td></tr></table></figure>
+<p><strong>配置vsftpd服务支持SSL：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/vsftpd/vsftpd.conf</span><br><span class="line">    ssl_enable=YES 		# 启用SSL</span><br><span class="line">    allow_anon_ssl=NO	# 匿名不支持SSL</span><br><span class="line">    force_local_logins_ssl=YES 	# 本地用户登录加密</span><br><span class="line">    force_local_data_ssl=YES 	# 本地用户数据传输加密</span><br><span class="line">    rsa_cert_file=/etc/pki/tls/certs/vsftpd.pem 	# 指定证书位置</span><br></pre></td></tr></table></figure>
+<p><img src="2-40.png" alt="2"></p>
+<p><strong>用filezilla工具测试:</strong></p>
+<ol>
+<li>点击文件–&gt;站点管理器–&gt;新站点，协议选择SFTP，登录类型选择一般</li>
+</ol>
+<p><img src="3-40.png" alt="3"></p>
+<ol start="2">
+<li>是否信任主机并继续，点确定</li>
+</ol>
+<p><img src="4-30.png" alt="4"></p>
+<ol start="3">
+<li>连接成功</li>
+</ol>
+<p><img src="5-26.png" alt="5"></p>
+<h2 id="四、实验：基于文件验证的vsftpd虚拟用户"><a href="#四、实验：基于文件验证的vsftpd虚拟用户" class="headerlink" title="四、实验：基于文件验证的vsftpd虚拟用户"></a><strong>四、实验：基于文件验证的vsftpd虚拟用户</strong></h2><h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备:"></a><strong>前期准备:</strong></h3><p>Ftp服务器: CentOS 7.4      192.168.2.7</p>
+<p>访问端：CentOS7.5         192.168.2.11</p>
+<h3 id="具体步骤：-1"><a href="#具体步骤：-1" class="headerlink" title="具体步骤："></a><strong>具体步骤：</strong></h3><ol>
+<li>创建用户数据库文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/vsftpd/vusers.txt</span><br><span class="line">    vuse1</span><br><span class="line">    centos</span><br><span class="line">    vuse2</span><br><span class="line">	lpx</span><br><span class="line">cd /etc/vsftpd/  </span><br><span class="line">db_load -T -t hash -f vusers.txt vusers.db   # 转换为db型文件</span><br><span class="line">chmod 600 vusers.db</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>创建用户和访问FTP目录</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mkdir -pv /data/ftp</span><br><span class="line">useradd -d /data/ftp -s /sbin/nologin vuser</span><br><span class="line">chmod +rx /data/ftp/</span><br><span class="line"># centos7 还需要执行以下操作：</span><br><span class="line">chmod -w /data/ftp/</span><br><span class="line">mkdir /data/ftp/upload</span><br><span class="line">setfacl -m u:vuser:rwx /data/ftp/upload</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>创建pam配置文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/pam.d/vsftpd.db</span><br><span class="line">    auth required pam_userdb.so db=/etc/vsftpd/vusers</span><br><span class="line">    account required pam_userdb.so db=/etc/vsftpd/vusers</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>指定pam</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/vsftpd/vsftpd.conf</span><br><span class="line">    guest_enable=YES</span><br><span class="line">    guest_username=vuser</span><br><span class="line">    user_config_dir=/etc/vsftpd/vusers.d/</span><br></pre></td></tr></table></figure>
+<p><img src="1-43.png" alt="1"></p>
+<p>找到此行，将vsftpd模块替换为vsftpd.db</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pam_service_name=vsftpd==&gt;pam_service_name=vsftpd.db</span><br></pre></td></tr></table></figure>
+<p><img src="2-41.png" alt="2"></p>
+<ol start="5">
+<li>虚拟用户建立独立的配置文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">mkdir /etc/vsftpd/vusers.d/</span><br><span class="line">cd /etc/vsftpd/vusers.d/</span><br><span class="line"></span><br><span class="line"># 创建个用户自己的配置文件</span><br><span class="line"># 允许vuser1用户可读写，其他用户只读</span><br><span class="line">vim vuser1</span><br><span class="line">    anon_upload_enable=YES</span><br><span class="line">    anon_mkdir_write_enable=YES</span><br><span class="line">    anon_other_write_enable=YES</span><br><span class="line"></span><br><span class="line">指定vuse2用户登录的根目录</span><br><span class="line">vim vuser2</span><br><span class="line">	local_root=/data/ftp</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>测试</li>
+</ol>
+<p>切换到另外一台主机ftp连接，虚拟用户vuser1，vuser2登录成功</p>
+<p><img src="3-41.png" alt="3"></p>
+<h2 id="五、实验：实现基于MySQL验证的vsftpd虚拟用户"><a href="#五、实验：实现基于MySQL验证的vsftpd虚拟用户" class="headerlink" title="五、实验：实现基于MySQL验证的vsftpd虚拟用户"></a><strong>五、实验：实现基于MySQL验证的vsftpd虚拟用户</strong></h2><h3 id="前期准备：-1"><a href="#前期准备：-1" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>虚拟机2台</p>
+<p>FTP服务器：  CentOS 7.4     IP：192.168.2.11</p>
+<p>MySQL服务器：CentOS 7.4     IP：192.168.2.12</p>
+<h3 id="具体步骤：-2"><a href="#具体步骤：-2" class="headerlink" title="具体步骤："></a><strong>具体步骤：</strong></h3><p><strong>一、安装所需要包和包组：</strong></p>
+<p>在数据库服务器上安装包：</p>
+<p><strong>Centos7：</strong>在数据库服务器上安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum –y install mariadb-server</span><br><span class="line">systemctl start mariadb.service</span><br><span class="line">systemctl enable mariadb</span><br></pre></td></tr></table></figure>
+<p><strong>Centos6：</strong>在数据库服务器上安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum –y install mysql-server</span><br></pre></td></tr></table></figure>
+<p>在FTP服务器上安装vsftpd和pam_mysql包</p>
+<p><strong>CentOS6：</strong>pam_mysql由epel6的源中提供</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install vsftpd pam_mysql</span><br></pre></td></tr></table></figure>
+<p><strong>CentOS7：</strong>无对应rpm包，需手动编译安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y groupinstall &quot;Development Tools&quot;</span><br><span class="line">yum -y install mariadb-devel pam-devel vsftpd</span><br></pre></td></tr></table></figure>
+<p>编译安装pam_mysql</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">下载pam_mysql-0.7RC1.tar.gz报</span><br><span class="line">tar xvf pam_mysql-0.7RC1.tar.gz</span><br><span class="line">cd pam_mysql-0.7RC1/</span><br><span class="line">./configure --with-mysql=/usr --with-pam=/usr --with-pam-mods-dir=/lib64/security</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<p><strong>二、在数据库服务器上创建虚拟用户账号</strong></p>
+<ol>
+<li>建立存储虚拟用户数据库和连接的数据库用户</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE DATABASE vsftpd;</span><br><span class="line">mysql&gt; SHOW DATABASES;</span><br><span class="line"># ftp服务和mysql不在同一主机：</span><br><span class="line">mysql&gt; GRANT SELECT ON vsftpd.* TO vsftpd@&apos;192.168.%.%&apos; IDENTIFIED BY &apos;magedu&apos;;</span><br></pre></td></tr></table></figure>
+<p>ftp服务和mysql在同一主机：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; GRANT SELECT ON vsftpd.* TO vsftpd@localhost IDENTIFIED BY &apos;magedu&apos;;</span><br><span class="line">mysql&gt; GRANT SELECT ON vsftpd.* TO vsftpd@&apos;127.0.0.1′ IDENTIFIED BY &apos;magedu&apos;;</span><br><span class="line">mysql&gt; FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>准备相关表</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; USE vsftpd;</span><br><span class="line">mysql&gt; SHOW TABLES;</span><br><span class="line">mysql&gt; CREATE TABLE users (</span><br><span class="line">    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,</span><br><span class="line">    name CHAR(50) BINARY NOT NULL,</span><br><span class="line">    password CHAR(48) BINARY NOT NULL</span><br><span class="line">);</span><br><span class="line">mysql&gt;DESC users;</span><br></pre></td></tr></table></figure>
+<p><img src="1-44.png" alt="1"></p>
+<p>测试连接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql -uvsftpd –h192.168.2.11 -pmagedu</span><br><span class="line">mysql&gt; SHOW DATABASES;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>添加虚拟用户</li>
+</ol>
+<p>根据需要添加所需要的用户，为了安全应该使用PASSWORD函数加密其密码后存储</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; DESC users;</span><br><span class="line">mysql&gt; INSERT INTO users(name,password)	values(&apos;wang&apos;,password(&apos;magedu&apos;));</span><br><span class="line">mysql&gt; INSERT INTO users(name,password) values(&apos;mage&apos;,password(&apos;magedu&apos;));</span><br><span class="line">mysql&gt; SELECT * FROM users;</span><br></pre></td></tr></table></figure>
+<p><img src="2-42.png" alt="2"></p>
+<p><strong>三、在FTP服务器上配置vsftpd服务</strong></p>
+<ol>
+<li>在FTP服务器上建立pam认证所需文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/pam.d/vsftpd.mysql 添加如下两行</span><br><span class="line">    auth required pam_mysql.so user=vsftpd passwd=magedu</span><br><span class="line">    host=192.168.2.11 db=vsftpd table=users usercolumn=name</span><br><span class="line">    passwdcolumn=password crypt=2</span><br><span class="line">    account required pam_mysql.so user=vsftpd passwd=magedu</span><br><span class="line">    host=192.168.2.11 db=vsftpd table=users usercolumn=name</span><br><span class="line">    passwdcolumn=password crypt=2</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong>参考README文档，选择正确的加密方式</p>
+<p>crypt是加密方式，0表示不加密，1表示crypt(3)加密，2表示使用mysql</p>
+<p>password()函数加密，3表示md5加密，4表示sha1加密</p>
+<p><strong>配置字段说明：</strong></p>
+<p>​    auth                       表示认证</p>
+<p>​    account                 验证账号密码正常使用</p>
+<p>​    required               表示认证要通过</p>
+<p>​    pam_mysql.so     模块是默认的相对路径，是相对/lib64/security/路径而言，也可以写绝对路径；</p>
+<p>​                    后面为给此模块传递的参数</p>
+<p>​    user=vsftpd          登录mysql的用户</p>
+<p>​    passwd=magedu  登录mysql的的密码</p>
+<p>​    host=mysqlserver mysql  服务器的主机名或ip地址</p>
+<p>​    db=vsftpd             指定连接msyql的数据库名称</p>
+<p>​    table=users          指定连接数据库中的表名</p>
+<p>​    usercolumn=name 当做用户名的字段</p>
+<p>​    passwdcolumn=password 当做用户名字段的密码</p>
+<p>​    crypt=2                 密码的加密方式为mysql password()函数加密</p>
+<ol start="2">
+<li><p>建立相应用户和修改vsftpd配置文件，使其适应mysql认证</p>
+<p>建立虚拟用户映射的系统用户及对应的目录</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">useradd -s /sbin/nologin -d /var/ftproot vuser</span><br><span class="line">chmod 555 /var/ftproot centos7 需除去ftp根目录的写权限</span><br><span class="line">mkdir /var/ftproot/&#123;upload,pub&#125;</span><br><span class="line">setfacl –m u:vuser:rwx /var/ftproot/upload</span><br><span class="line"># 确保**/etc/vsftpd.conf**中已经启用了以下选项</span><br><span class="line">vim /etc/vsftpd.conf</span><br><span class="line">	anonymous_enable=YES</span><br><span class="line"># 添加下面两项</span><br><span class="line">	guest_enable=YES</span><br><span class="line">	guest_username=vuser</span><br></pre></td></tr></table></figure>
+<p><img src="3-42.png" alt="3"></p>
+<p>修改下面一项，原系统用户无法登录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pam_service_name=vsftpd.mysql</span><br></pre></td></tr></table></figure>
+<p><img src="4-32.png" alt="4"></p>
+<p><strong>四、启动vsftpd服务</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">service vsftpd start;systemctl start vsftpd</span><br><span class="line">chkconfig vsftpd on;systemctl enable vsftpd</span><br><span class="line"></span><br><span class="line">#查看端口开启情况</span><br><span class="line">netstat -tnlp |grep :21</span><br></pre></td></tr></table></figure>
+<p><strong>五、测试：利用FTP客户端工具,以虚拟用户登录验证结果</strong></p>
+<p><img src="5-27.png" alt="5"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/FTP/" rel="tag"># FTP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/23/LAMP架构实现/" rel="next" title="LAMP架构实现">
+                <i class="fa fa-chevron-left"></i> LAMP架构实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/28/NFS文件系统介绍及相关实验/" rel="prev" title="NFS文件系统介绍及相关实验">
+                NFS文件系统介绍及相关实验 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、FTP服务"><span class="nav-number">1.</span> <span class="nav-text">一、FTP服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#两种模式："><span class="nav-number">1.1.</span> <span class="nav-text">两种模式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FTP服务器："><span class="nav-number">1.2.</span> <span class="nav-text">FTP服务器：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端软件："><span class="nav-number">1.3.</span> <span class="nav-text">客户端软件：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态码："><span class="nav-number">1.4.</span> <span class="nav-text">状态码：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户认证："><span class="nav-number">1.5.</span> <span class="nav-text">用户认证：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、vsftpd服务"><span class="nav-number">2.</span> <span class="nav-text">二、vsftpd服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vsftpd虚拟用户"><span class="nav-number">2.1.</span> <span class="nav-text">vsftpd虚拟用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vsftpd-conf常用配置"><span class="nav-number">2.2.</span> <span class="nav-text">vsftpd.conf常用配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ftp日志"><span class="nav-number">2.3.</span> <span class="nav-text">ftp日志</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、实验：实现基于SSL的FTPS"><span class="nav-number">3.</span> <span class="nav-text">三、实验：实现基于SSL的FTPS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备："><span class="nav-number">3.1.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体步骤："><span class="nav-number">3.2.</span> <span class="nav-text">具体步骤：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、实验：基于文件验证的vsftpd虚拟用户"><span class="nav-number">4.</span> <span class="nav-text">四、实验：基于文件验证的vsftpd虚拟用户</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备"><span class="nav-number">4.1.</span> <span class="nav-text">前期准备:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体步骤：-1"><span class="nav-number">4.2.</span> <span class="nav-text">具体步骤：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、实验：实现基于MySQL验证的vsftpd虚拟用户"><span class="nav-number">5.</span> <span class="nav-text">五、实验：实现基于MySQL验证的vsftpd虚拟用户</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备：-1"><span class="nav-number">5.1.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体步骤：-2"><span class="nav-number">5.2.</span> <span class="nav-text">具体步骤：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

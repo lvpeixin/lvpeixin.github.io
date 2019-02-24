@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="MySQL,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、MySQL数据库简介MySQL是一个关系型数据库管理系统，由瑞典MySQL AB 公司开发，目前 属于 Oracle 旗下产品。MySQL 是最流行的关系型数据库管理系统之一， 在 WEB 应用方面，MySQL是最好的 RDBMS (Relational Database Management  System，关系数据库管理系统) 应用软件。 MySQL历史1979年：TcX公司 Monty">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL数据库简介及安装实验">
+<meta property="og:url" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="一、MySQL数据库简介MySQL是一个关系型数据库管理系统，由瑞典MySQL AB 公司开发，目前 属于 Oracle 旗下产品。MySQL 是最流行的关系型数据库管理系统之一， 在 WEB 应用方面，MySQL是最好的 RDBMS (Relational Database Management  System，关系数据库管理系统) 应用软件。 MySQL历史1979年：TcX公司 Monty">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/网页.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/yum源.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/安装.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/加密.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/1-11.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/2-10.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/3-7.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/4-7.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/5-6.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/6-7.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/lazy.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/9-1.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/3-8.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/2-11.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/4-8.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/5-7.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/6-8.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/1-13.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/2-12.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/3-9.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/4-9.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/5-8.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/6-9.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/7-5.png">
+<meta property="og:updated_time" content="2018-07-17T13:08:40.854Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL数据库简介及安装实验">
+<meta name="twitter:description" content="一、MySQL数据库简介MySQL是一个关系型数据库管理系统，由瑞典MySQL AB 公司开发，目前 属于 Oracle 旗下产品。MySQL 是最流行的关系型数据库管理系统之一， 在 WEB 应用方面，MySQL是最好的 RDBMS (Relational Database Management  System，关系数据库管理系统) 应用软件。 MySQL历史1979年：TcX公司 Monty">
+<meta name="twitter:image" content="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/网页.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/">
+
+
+
+
+
+  <title>MySQL数据库简介及安装实验 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MySQL数据库简介及安装实验</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-05T15:32:56+08:00">
+                2018-06-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、MySQL数据库简介"><a href="#一、MySQL数据库简介" class="headerlink" title="一、MySQL数据库简介"></a><strong>一、MySQL数据库简介</strong></h2><p><strong>MySQL</strong>是一个关系型数据库管理系统，由瑞典MySQL AB 公司开发，目前</p>
+<p>属于 Oracle 旗下产品。MySQL 是最流行的关系型数据库管理系统之一，</p>
+<p>在 WEB 应用方面，MySQL是最好的 <strong>RDBMS (Relational Database Management</strong></p>
+<p> <strong>System，关系数据库管理系统)</strong> 应用软件。</p>
+<h3 id="MySQL历史"><a href="#MySQL历史" class="headerlink" title="MySQL历史"></a><strong>MySQL历史</strong></h3><p>1979年：TcX公司 Monty Widenius，Unireg</p>
+<p>1996年：发布MySQL1.0，Solaris版本，Linux版本</p>
+<p>1999年：MySQL AB公司，瑞典</p>
+<p>2003年：MySQL 5.0版本，提供视图、存储过程等功能</p>
+<p>2008年：Sun 收购</p>
+<p>2009年：Oracle收购sun</p>
+<p>2009年：Monty成立MariaDB</p>
+<h3 id="MySQL和MariaDB"><a href="#MySQL和MariaDB" class="headerlink" title="MySQL和MariaDB"></a>MySQL和MariaDB</h3><p>官方网址：</p>
+<p><a href="https://www.mysql.com/" target="_blank" rel="noopener">https://www.mysql.com/</a></p>
+<p><a href="http://mariadb.org/" target="_blank" rel="noopener">http://mariadb.org/</a></p>
+<p>官方文档</p>
+<p><a href="https://dev.mysql.com/doc/" target="_blank" rel="noopener">https://dev.mysql.com/doc/</a></p>
+<p><a href="https://mariadb.com/kb/en/" target="_blank" rel="noopener">https://mariadb.com/kb/en/</a></p>
+<p>版本演变：</p>
+<p>MySQL：5.1 –&gt; 5.5 –&gt; 5.6 –&gt; 5.7</p>
+<p>MariaDB：5.5 –&gt;10.0–&gt; 10.1 –&gt; 10.2 –&gt; 10.3</p>
+<h3 id="MariaDB的特性"><a href="#MariaDB的特性" class="headerlink" title="MariaDB的特性"></a><strong>MariaDB的特性</strong></h3><p>插件式存储引擎：也称为“表类型”，存储管理器有多种实现版本，功能和特</p>
+<p>性可能均略有差别；用户可根据需要灵活选择,Mysql5.5.5开始innoDB引擎是</p>
+<p>MYSQL默认引擎</p>
+<p>MyISAM ==&gt; Aria</p>
+<p>InnoDB ==&gt; XtraDB</p>
+<p>单进程，多线程</p>
+<p>诸多扩展和新特性</p>
+<p>提供了较多测试组件</p>
+<p>开源</p>
+<p><strong>下面我们以MariaDB为例，来介绍数据库在Linux系统上的安装</strong></p>
+<h2 id="前期准备："><a href="#前期准备：" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h2><p>操作系统：CentOS 7.4</p>
+<p>环境准备：关闭SELinux安全策略，Iptables防火墙，确认当前主机未安装MySQL或MariaDB其他版本</p>
+<p>准备对应的安装包：</p>
+<p>MariaDB 10.2.15官方下载页面：<a href="https://downloads.mariadb.org/mariadb/10.2.15/" target="_blank" rel="noopener">https://downloads.mariadb.org/mariadb/10.2.15/</a></p>
+<p><strong>mariadb-10.2.15.tar</strong>                                 MariaDB源代码安装包</p>
+<p><strong>mariadb-10.2.15-linux-x86_64.tar</strong>                 MariaDB二进制格式安装包</p>
+<p>![LG<a href="http://www.178linux.com/wp-content/uploads/2018/06/LGPR5YOL5HQZYA8@2.png" target="_blank" rel="noopener">PR<code>5{Y</code>OL{5%HQZYA8@2</a></p>
+<h2 id="一、实验：使用yum源安装MariaDB-10-2-15"><a href="#一、实验：使用yum源安装MariaDB-10-2-15" class="headerlink" title="一、实验：使用yum源安装MariaDB 10.2.15"></a><strong>一、实验：使用yum源安装MariaDB 10.2.15</strong></h2><p>去官网查询，复制yum源，yum install</p>
+<p>1登录MariaDB官方网站：<a href="http://mariadb.org/" target="_blank" rel="noopener">http://mariadb.org/</a></p>
+<p>MariaDB 10.2.15下载界面：<a href="https://downloads.mariadb.org/mariadb/10.2.15/" target="_blank" rel="noopener">https://downloads.mariadb.org/mariadb/10.2.15/</a></p>
+<p>2 找到下图所示，点击<a href="https://downloads.mariadb.org/mariadb/repositories/" target="_blank" rel="noopener">Repository Configuration Tool</a>.</p>
+<p><img src="网页.png" alt="网页"></p>
+<p>3 根据自己的系统版本选择相应的选项，就会出现对应的yum源数据库配置</p>
+<p><img src="yum源.png" alt="yum源"></p>
+<p>4.yum将数据库配置复制入库文件，并进行安装</p>
+<p><img src="安装.png" alt="安装"></p>
+<p>安装MariaDB：</p>
+<p>yum install mariadb</p>
+<p>5.添加安全加固</p>
+<p>mysql_secure_installation                       运行此脚本,交互式</p>
+<p>是否设置root口令                       y</p>
+<p>是否删除匿名用户                      y</p>
+<p>是否允许root远程登录              n</p>
+<p>是否删除test数据库                  y</p>
+<p>privilege tables                          y</p>
+<p><img src="加密.png" alt="加密"></p>
+<h2 id="二、实验：通用二进制格式安装MariaDB-10-2-15"><a href="#二、实验：通用二进制格式安装MariaDB-10-2-15" class="headerlink" title="二、实验：通用二进制格式安装MariaDB 10.2.15"></a><strong>二、实验：通用二进制格式安装MariaDB 10.2.15</strong></h2><p>1.去官网下载：</p>
+<p><strong>mariadb-10.2.15-linux-86_64.tar.gz</strong></p>
+<p>2.准备用户账号</p>
+<p>useradd -r -d  /data/mysqldb -s /sbin/nologin  mysql</p>
+<p>3.解压包到默认安装路径</p>
+<p>安装包默认路径：<strong>configure –prefix=/usr/local</strong></p>
+<p>tar -xvf mariadb-version.tar.gz  -C  /usr/local/</p>
+<p><img src="1-11.png" alt="1"></p>
+<p>4.修改文件权限</p>
+<p><strong>cd /usr/local</strong></p>
+<p>ln -s mariabd-10.2.15-linux-x86_64/  mysql</p>
+<p><strong>ll mysql/</strong></p>
+<p>chown -R root:root mysql/</p>
+<p><img src="2-10.png" alt="2"></p>
+<p>5.修改PATH变量，方便mysql目录下的二进制程序执行</p>
+<p><strong>ls /usr/local/mysql/bin</strong></p>
+<p><img src="3-7.png" alt="3"></p>
+<p>echo PATH=/usr/local/mysql/bin:$PATH &gt; /etc/profile.d/mysql.sh</p>
+<p>. /etc/profile.d/mysql.sh</p>
+<p><img src="4-7.png" alt="4"></p>
+<p>6.创建数据库路径</p>
+<p>mkdir /data/mysqldb</p>
+<p>chown mysql.mysql /data/mysqldb</p>
+<p>chmod 770  /data/mysqldb</p>
+<p><img src="5-6.png" alt="5"></p>
+<p>7.生成系统自带数据库相关文件</p>
+<p><strong>cd /usr/local/mysql</strong>                          必须在此目录下执行</p>
+<p>scripts/mysql_install_db –datadir=/data/mysqldb –user=mysql</p>
+<p><strong>ll /data/mysqldb/</strong>                     确认相关文件是否生成</p>
+<p><img src="6-7.png" alt="6"></p>
+<p>8.生成mysql配置文件</p>
+<p><strong>ll /usr/local/mysql/support-files</strong>    可查看数据库自带的各种配置模板</p>
+<p>cp /etc/my.cnf /etc/my.cnf.bak             建议备份配置文件</p>
+<p>cp my-hug.cnf  /etc/my.cnf</p>
+<p><strong>vim /etc/my.cnf</strong></p>
+<p>[mysqld]</p>
+<p>datadir             = /data/mysqldb              ##添加此行，指定数据库存放路径</p>
+<p><img src="lazy.png" alt="8"></p>
+<p>9.添加mysql到服务</p>
+<p>cp support-files/mysql.server  /etc/init.d/mysqld</p>
+<p>chkcibfug –add mysqld</p>
+<p>service mysqld start</p>
+<p><img src="9-1.png" alt="9"></p>
+<p>10.添加安全加固</p>
+<p>mysql_secure_installation</p>
+<h2 id="三、实验：编译安装MariaDB-10-2-15"><a href="#三、实验：编译安装MariaDB-10-2-15" class="headerlink" title="三、实验：编译安装MariaDB 10.2.15"></a><strong>三、实验：编译安装MariaDB 10.2.15</strong></h2><p>1.准备好源码安装包</p>
+<p><strong>mariadb-10.2.15.tar.gz</strong></p>
+<p>2.安装相关依赖包</p>
+<p>yum install bison bison-devel zlib-devel libcurl-devel libarchive-devel boost-devel gcc gcc-c++ cmake ncurses-devel gnutls-devel libxml2-devel openssl-devel libevent-devel libaio-devel</p>
+<p>3.创建用户</p>
+<p>useradd -r -s /sbin/nologin mysql</p>
+<p>4.解压缩源码包</p>
+<p>tar -xvf mariadb-10.2.15.tar.gz</p>
+<p><img src="3-8.png" alt="3"></p>
+<p>5.创建数据库路径</p>
+<p>mkdir /data/mysqldb</p>
+<p>chown mysql.mysql /data/mysqldb</p>
+<p>chmod 770  /data/mysqldb</p>
+<p><img src="2-11.png" alt="2"></p>
+<p>6.cmake编译</p>
+<p><strong>cd /mariadb-10.2.15/</strong></p>
+<p>cmake . \</p>
+<p>-DCMAKE_INSTALL_PREFIX=/app/mysql \</p>
+<p>-DMYSQL_DATADIR=/data/mysqldb/ \</p>
+<p>-DSYSCONFDIR=/etc \</p>
+<p>-DMYSQL_USER=mysql \</p>
+<p>-DWITH_INNOBASE_STORAGE_ENGINE=1 \</p>
+<p>-DWITH_ARCHIVE_STORAGE_ENGINE=1 \</p>
+<p>-DWITH_BLACKHOLE_STORAGE_ENGINE=1 \</p>
+<p>-DWITH_PARTITION_STORAGE_ENGINE=1 \</p>
+<p>-DWITHOUT_MROONGA_STORAGE_ENGINE=1 \</p>
+<p>-DWITH_DEBUG=0 \</p>
+<p>-DWITH_READLINE=1 \</p>
+<p>-DWITH_SSL=system \</p>
+<p>-DWITH_ZLIB=system \</p>
+<p>-DWITH_LIBWRAP=0 \</p>
+<p>-DENABLED_LOCAL_INFILE=1 \</p>
+<p>-DMYSQL_UNIX_ADDR=/app/mysql/mysql.sock \</p>
+<p>-DDEFAULT_CHARSET=utf8 \</p>
+<p>-DDEFAULT_COLLATION=utf8_general_ci</p>
+<p>7．编译安装</p>
+<p>make -j 4 &amp;&amp; make install</p>
+<p>8.准备环境变量</p>
+<p>echo ‘PATH=/app/mysql/bin:$PATH’ &gt; /etc/profile.d/mysql.sh</p>
+<p>. /etc/profile.d/mysql.sh</p>
+<p><img src="4-8.png" alt="4"></p>
+<p>9.生成数据库文件</p>
+<p><strong>cd /app/mysql/</strong></p>
+<p>scripts/mysql_install_db –datadir=/data/mysqldb/ –user=mysql –basedir=/app/mysql</p>
+<p>setfacl -R -m u:mysql:rwx  /app/mysql/</p>
+<p><img src="5-7.png" alt="5"></p>
+<p>10.准备配置文件</p>
+<p>cp /app/mysql/support-files/my-huge.cnf  /etc/my.cnf</p>
+<p>11.准备启动脚本</p>
+<p>cp /app/mysql/support-files/mysql.server /etc/init.d/mysqld</p>
+<p>12.启动服务</p>
+<p>chkconfig –add mysqld</p>
+<p>service mysqld start</p>
+<p><img src="6-8.png" alt="6"></p>
+<h2 id="四、实验：实现多实例安装"><a href="#四、实验：实现多实例安装" class="headerlink" title="四、实验：实现多实例安装"></a><strong>四、实验：实现多实例安装</strong></h2><p><strong>实验预期：</strong>在一台虚拟机上安装三套MariaDB数据库，数据库版本5.5</p>
+<p><strong>思路：</strong>三套配置文件（日志文件，配置文件，数据库文件），三个不同的端口</p>
+<p>1.安装第一个实例</p>
+<p>yum install mariadb-server</p>
+<p>2.规划目录</p>
+<p>mkdir /mysqldb/{3306,3307,3308}/{etc,socket,pid,log,data} –pv</p>
+<p>目录结构如下：</p>
+<p>[root@CentOS7 ~]#tree /mysqldb/</p>
+<p>/mysqldb/</p>
+<p>├── 3306</p>
+<p>│   ├── data</p>
+<p>│   ├── etc</p>
+<p>│   ├── log</p>
+<p>│   ├── pid</p>
+<p>│   └── socket</p>
+<p>├── 3307</p>
+<p>│   ├── data</p>
+<p>│   ├── etc</p>
+<p>│   ├── log</p>
+<p>│   ├── pid</p>
+<p>│   └── socket</p>
+<p>└── 3308</p>
+<p>├── data</p>
+<p>├── etc</p>
+<p>├── log</p>
+<p>├── pid</p>
+<p>└── socket</p>
+<p><img src="1-13.png" alt="1"></p>
+<p>3.修改目录及文件权限</p>
+<p>chown -R mysql.mysql  /mysql</p>
+<p><img src="2-12.png" alt="2"></p>
+<p>4.创建各自数据库文件</p>
+<p>mysql_install_db –datadir=/mysqldb/3306/data  –user=mysql [–basedir=/usr/ 二进制安装]</p>
+<p>mysql_install_db –datadir=/mysqldb/3307/data  –user=mysql</p>
+<p>mysql_install_db –datadir=/mysqldb/3308/data  –user=mysql</p>
+<p><img src="3-9.png" alt="3"></p>
+<p>5.创建各自配置文件</p>
+<p>cp /etc/my.cnf /mysqldb/3306/etc/</p>
+<p>6.修改各自配置文件</p>
+<p><strong>vim my.cnf</strong></p>
+<p>[mysqld]</p>
+<p>port=3306</p>
+<p>datadir=/mysqldb/3306/data</p>
+<p>socket=/mysqldb/3306/socket/mysql.sock</p>
+<p>[mysqld_safe]</p>
+<p>log-error=/mysqldb/3306/log/mariadb.log</p>
+<p>pid-file=/mysqldb/3306/pid/mariadb.pid</p>
+<p>#!includefir /etc/my.cnf.d               添加此行注释</p>
+<p><img src="4-9.png" alt="4"></p>
+<p>参照3306配置文件，将3307,3308配置文件也生成</p>
+<p>cp /mysqldb/3306/etc/my.cnf /mysqldb/3307/etc/my.cnf</p>
+<p>cp /mysqldb/3306/etc/my.cnf /mysqldb/3308/etc/my.cnf</p>
+<p>7.准备启动服务脚本</p>
+<p>chmod  700  mysqld            添加执行权限</p>
+<p>cp mysqld  /mysqldb/3306 /</p>
+<p>cp mysqld  /mysqldb/3307/</p>
+<p>cp mysqld  /mysqldb/3308 /</p>
+<p>注意修改启动服务脚本中的不同的参数</p>
+<p>#!/bin/bash</p>
+<p>port=3306</p>
+<p>mysql_pwd=””</p>
+<p>cmd_path=”/usr/bin”</p>
+<p><img src="5-8.png" alt="5"></p>
+<p>8.确认系统自带示例停止服务</p>
+<p>systemctl stop mariadb</p>
+<p>9.启动多实例服务</p>
+<p>/mysqldb/{3306,3307,3308}/mysqld start</p>
+<p>ss -ntl</p>
+<p><img src="6-9.png" alt="6"></p>
+<p>10.测试多实例</p>
+<p>mysql  -S /mysqldb/3308/socket/mysql.sock</p>
+<p>MariaBD [(none)]&gt; show variables like ‘%port%’;</p>
+<p><img src="7-5.png" alt="7"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/02/DNS服务及相关实验/" rel="next" title="DNS服务及相关实验">
+                <i class="fa fa-chevron-left"></i> DNS服务及相关实验
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/07/实验：实现互联网的DNS架构/" rel="prev" title="实验：实现互联网的DNS架构">
+                实验：实现互联网的DNS架构 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、MySQL数据库简介"><span class="nav-number">1.</span> <span class="nav-text">一、MySQL数据库简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL历史"><span class="nav-number">1.1.</span> <span class="nav-text">MySQL历史</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL和MariaDB"><span class="nav-number">1.2.</span> <span class="nav-text">MySQL和MariaDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MariaDB的特性"><span class="nav-number">1.3.</span> <span class="nav-text">MariaDB的特性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前期准备："><span class="nav-number">2.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、实验：使用yum源安装MariaDB-10-2-15"><span class="nav-number">3.</span> <span class="nav-text">一、实验：使用yum源安装MariaDB 10.2.15</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、实验：通用二进制格式安装MariaDB-10-2-15"><span class="nav-number">4.</span> <span class="nav-text">二、实验：通用二进制格式安装MariaDB 10.2.15</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、实验：编译安装MariaDB-10-2-15"><span class="nav-number">5.</span> <span class="nav-text">三、实验：编译安装MariaDB 10.2.15</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、实验：实现多实例安装"><span class="nav-number">6.</span> <span class="nav-text">四、实验：实现多实例安装</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

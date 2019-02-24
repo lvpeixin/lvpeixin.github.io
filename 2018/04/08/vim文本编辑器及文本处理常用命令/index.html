@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="vim,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、文本编辑器简介： vi:  Visual Interface，文本编辑器文本：ASCII, Unicode文本编辑种类：    行编辑器:  sed    全屏编辑器：nano,  vi    vim  -  Vi   Improved （vi文本编辑器的升级版）其他编辑器：    gedit 一个简单的图形编辑器    gvim 一个Vim编辑器的图形版本 二、Vim文本编辑器相关命令：Vi">
+<meta name="keywords" content="vim">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vim文本编辑器及文本处理常用命令">
+<meta property="og:url" content="http://yoursite.com/2018/04/08/vim文本编辑器及文本处理常用命令/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="一、文本编辑器简介： vi:  Visual Interface，文本编辑器文本：ASCII, Unicode文本编辑种类：    行编辑器:  sed    全屏编辑器：nano,  vi    vim  -  Vi   Improved （vi文本编辑器的升级版）其他编辑器：    gedit 一个简单的图形编辑器    gvim 一个Vim编辑器的图形版本 二、Vim文本编辑器相关命令：Vi">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/04/08/vim文本编辑器及文本处理常用命令/QQ图片20180408193404.png">
+<meta property="og:updated_time" content="2018-07-17T01:34:06.259Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vim文本编辑器及文本处理常用命令">
+<meta name="twitter:description" content="一、文本编辑器简介： vi:  Visual Interface，文本编辑器文本：ASCII, Unicode文本编辑种类：    行编辑器:  sed    全屏编辑器：nano,  vi    vim  -  Vi   Improved （vi文本编辑器的升级版）其他编辑器：    gedit 一个简单的图形编辑器    gvim 一个Vim编辑器的图形版本 二、Vim文本编辑器相关命令：Vi">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/08/vim文本编辑器及文本处理常用命令/QQ图片20180408193404.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/08/vim文本编辑器及文本处理常用命令/">
+
+
+
+
+
+  <title>vim文本编辑器及文本处理常用命令 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/08/vim文本编辑器及文本处理常用命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vim文本编辑器及文本处理常用命令</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-08T14:03:43+08:00">
+                2018-04-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、文本编辑器简介："><a href="#一、文本编辑器简介：" class="headerlink" title="一、文本编辑器简介："></a>一、文本编辑器简介：</h2><p> <strong>vi:</strong>  Visual Interface，文本编辑器<br><strong>文本：</strong>ASCII, Unicode<br><strong>文本编辑种类：</strong><br>    行编辑器:  sed<br>    全屏编辑器：nano,  vi<br>    vim  -  Vi   Improved （vi文本编辑器的升级版）<br><strong>其他编辑器：</strong><br>    gedit 一个简单的图形编辑器<br>    gvim 一个Vim编辑器的图形版本</p>
+<h2 id="二、Vim文本编辑器相关命令："><a href="#二、Vim文本编辑器相关命令：" class="headerlink" title="二、Vim文本编辑器相关命令："></a><strong>二、Vim文本编辑器相关命令：</strong></h2><p>Vim是从 vi发展出来的一个文本编辑器。代码补全、编译及错误跳转等方便编程的功能特别丰富，在程序员中被广泛使用。</p>
+<h3 id="1-vim打开文件："><a href="#1-vim打开文件：" class="headerlink" title="1.vim打开文件："></a>1.vim打开文件：</h3><p>vim[option]…FILE…</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+#    打开文件后，让光标处于第#行行首</span><br><span class="line">-o     后跟多个文件可水平显示多个窗口</span><br><span class="line">-O    后跟多个文件可垂直显示多个窗口</span><br><span class="line">-b     以二进制方式打开文件</span><br><span class="line">-d  file1  file2… 比较多个文件</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong>当一个文件不存在时，用vim打开编辑存盘后会自动创建它</p>
+<h3 id="2-vim的三种主要模式："><a href="#2-vim的三种主要模式：" class="headerlink" title="2.vim的三种主要模式："></a>2.vim的三种主要模式：</h3><p><strong>命令（normal）模式：</strong>默认模式，可移动光标，剪切/粘贴文本。左下角显示文本路径，行数，字符数，右下角显示光标位置</p>
+<p><strong>插入（insert）模式：</strong>也叫编辑模式，修改文本。左下角显示 –INSERT–</p>
+<p><strong>扩展命令（extended command）模式：</strong>保存、退出等。左下角显示 “：”</p>
+<h3 id="3-vim模式切换："><a href="#3-vim模式切换：" class="headerlink" title="3.vim模式切换："></a>3.vim模式切换：</h3><p><strong>命令模式—&gt;插入模式</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">i：在光标处输入</span><br><span class="line">I：在光标所在行首输入</span><br><span class="line">a：在光标所在处后输入</span><br><span class="line">A：在光标所在行行尾输入</span><br><span class="line">o：在光标所在行的下方打开一个新行</span><br><span class="line">O：在光标所在行的上方打开一个新行</span><br></pre></td></tr></table></figure>
+<p><strong>插入模式—&gt;命令模式</strong></p>
+<p>ESC</p>
+<p><strong>命令模式—&gt;扩展命令模式</strong></p>
+<p>：</p>
+<p><strong>扩展命令模式—&gt;命令模式</strong></p>
+<p>ESC，Enter</p>
+<h3 id="4-vim的其他一些模式："><a href="#4-vim的其他一些模式：" class="headerlink" title="4. vim的其他一些模式："></a>4. vim的其他一些模式：</h3><p><strong>替换（replace）模式：</strong>        命令模式下R切换，可随意替换字符；右下角显示–REPALCE–</p>
+<p><strong>可视化（visual）模式：</strong></p>
+<p>​    v    切换面向字符的可视化模式;右下角显示–VISUAL–</p>
+<p>​    V  切换面向行的可视化模式</p>
+<p>​    ctrl+v   面试块的可视化模式</p>
+<h3 id="5-vim关闭文件"><a href="#5-vim关闭文件" class="headerlink" title="5.vim关闭文件"></a>5.vim关闭文件</h3><p><strong>扩展模式:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">按”：”从命令模式进入Ex模式</span><br><span class="line">    wq  	 存盘退出</span><br><span class="line">    q       文本未修改，不存盘退出</span><br><span class="line">    q！  	文本已被修改，想不存盘退出</span><br><span class="line">    w file      文件另存为file</span><br><span class="line">    r file 		读取file文件内容到当前文件</span><br><span class="line">    ！command    直接在扩展模式下执行命令</span><br><span class="line">    r！command  读入命令的输入到当前文件光标处</span><br></pre></td></tr></table></figure>
+<p><strong>命令模式下也可关闭文件</strong>（不推荐使用）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ZZ     保存退出</span><br><span class="line">ZQ    不保存退出</span><br></pre></td></tr></table></figure>
+<h3 id="6-命令模式常用命令："><a href="#6-命令模式常用命令：" class="headerlink" title="6.命令模式常用命令："></a>6.命令模式常用命令：</h3><p><strong>字符间跳转</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">h: 左 l: 右 j: 下 k: 上</span><br><span class="line">#COMMAND：跳转由#指定的个数的字符</span><br></pre></td></tr></table></figure>
+<p><strong>单词间跳转：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">w：下一个单词的词首</span><br><span class="line">e：当前或下一单词的词尾</span><br><span class="line">b：当前或前一个单词的词首</span><br><span class="line">#COMMAND ：由#指定一次跳转的单词数</span><br></pre></td></tr></table></figure>
+<p><strong>当前页跳转：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">H：页首 M：页中间行 L:页底</span><br></pre></td></tr></table></figure>
+<p><strong>行首行尾跳转：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">^       跳转至行首第一个非空白字符</span><br><span class="line">0       跳转至行首</span><br><span class="line">$       跳转至行尾</span><br></pre></td></tr></table></figure>
+<p><strong>行间移动：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\#G    调至第#行；扩展模式下可执行 ：G</span><br><span class="line">G      最后一行</span><br><span class="line">1G，gg    第一行</span><br></pre></td></tr></table></figure>
+<p><strong>句间移动</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">)：下一句  (：上一句</span><br></pre></td></tr></table></figure>
+<p><strong>段落间移动：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#125;:下一段  &#123;：上一段</span><br></pre></td></tr></table></figure>
+<p><strong>命令模式下字符操作:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">x：删除光标所在处字符</span><br><span class="line">\#x：删除从光标所在处开始#个字符</span><br><span class="line">xp：交换光标所在处字符和它后面字符的位置（原理是剪切粘贴）</span><br><span class="line">~：波浪符转换大小写</span><br><span class="line">J：删除当前行后的换行符</span><br><span class="line">r：替换光标所在处字符 </span><br><span class="line"></span><br><span class="line">d：删除命令</span><br><span class="line">d$    当前光标删除至行尾</span><br><span class="line">d^    当前光标删除到非空行首</span><br><span class="line">d0    当前光标删除到行首</span><br><span class="line">dw   删除单词</span><br><span class="line">dd    删除光标所在的行</span><br><span class="line">\#dd  多行删除，一下删除#行</span><br><span class="line"></span><br><span class="line">y：复制命令（用法类似d删除）</span><br><span class="line">y$     复制当前光标到行尾</span><br><span class="line">y^     复当前光标位置到非空行首</span><br><span class="line">yw    复制单词</span><br><span class="line">yy     复制光标所在的行</span><br><span class="line"></span><br><span class="line">p：粘贴</span><br><span class="line">p       粘贴至光标所在行下一行</span><br><span class="line">P       粘贴至光标所在行上一行</span><br><span class="line"></span><br><span class="line">u：撤销更改</span><br><span class="line">\#u    撤销之前多次修改</span><br><span class="line">U      撤销光标落在这行后所有此行的修改</span><br><span class="line">Ctrl+r       返回上次撤销</span><br></pre></td></tr></table></figure>
+<h3 id="7-扩展命令模式常用命令："><a href="#7-扩展命令模式常用命令：" class="headerlink" title="7.扩展命令模式常用命令："></a>7.扩展命令模式常用命令：</h3><p><strong>格式：</strong>地址定界+编辑命令</p>
+<p><strong>地址定界</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">：#  跳到第#行</span><br><span class="line">：#，#    第左侧第#行，到右侧第#行；2,5表示第2到第5行</span><br><span class="line">：#，+#  从左侧第#行，加上右侧#的行；2，+3表示第2到5行</span><br><span class="line">：.   当前行</span><br><span class="line">$       最后一行</span><br><span class="line">%      全文，相当于1，$</span><br><span class="line">：/pat1/,/pat2/               从pat1匹配到的行开始，到第一次被pat2匹配到的行</span><br><span class="line">：/pat1/，#   可混用</span><br></pre></td></tr></table></figure>
+<p><strong>使用方式：</strong>后跟一个编辑命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d     删除</span><br><span class="line">y     复制</span><br><span class="line">w  file  将范围内行另存至指定文件中</span><br><span class="line">r  file  在指定位置插入匹配内容</span><br></pre></td></tr></table></figure>
+<p><strong>查找字符</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/PATTERN：从光标所在处向文件尾部查找</span><br><span class="line">？PATTERN：从光标所在处向文件首部查找</span><br><span class="line">n：与命令同方向</span><br><span class="line">N：与命令反方向</span><br></pre></td></tr></table></figure>
+<p><strong>s：查找并替换</strong></p>
+<p>​      <strong>格式：</strong>s/要查找的内容/替换为的内容/修饰符</p>
+<p>​      <strong>修饰符：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">i：忽略大小写</span><br><span class="line">g：全局替换每一行的第一次出现的匹配</span><br><span class="line">gc：全局替换所有匹配，每次替换前询问</span><br><span class="line">查找替换的分隔符/可用其他分隔符代替：如#，@</span><br></pre></td></tr></table></figure>
+<p><strong>命令模式</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">u：		撤销更改</span><br><span class="line">ctrl+r:  恢复上一次撤销</span><br><span class="line">.    重复执行上一次操作</span><br><span class="line">#. 	 重复执行上一次操作n次</span><br></pre></td></tr></table></figure>
+<h3 id="8-vim的剪贴板"><a href="#8-vim的剪贴板" class="headerlink" title="8.vim的剪贴板"></a>8.vim的剪贴板</h3><p>有26个命名剪贴板和一个无命名剪贴板，存放不同的剪切内容，可以不同会话间分享</p>
+<p>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;myy 	表示复制光标所在行到m剪贴板</span><br><span class="line">&quot;mp 	表示将m剪贴板内容粘贴</span><br><span class="line">3&quot;tyy 	表示复制3行内容到t剪贴板</span><br><span class="line">&quot;tp   	表示将t剪贴板内容粘贴</span><br></pre></td></tr></table></figure>
+<h3 id="9-vim多文件模式"><a href="#9-vim多文件模式" class="headerlink" title="9.vim多文件模式"></a>9.vim多文件模式</h3><p><strong>vim FILE1 FILE2 FILE3</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">：next     下一个文件</span><br><span class="line">：prev     上一个文件</span><br><span class="line">：first    第一个文件</span><br><span class="line">：last     最后一个文件</span><br><span class="line">：wall     保存所有文件</span><br><span class="line">：qall     退出所有</span><br><span class="line">：wqall    保存退出</span><br></pre></td></tr></table></figure>
+<p><strong>单文件的窗口分隔：</strong>方便对照文件内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ctrl+w放开后按s      水平分割</span><br><span class="line">ctrl+w放开后按v      垂直分割</span><br><span class="line">ctrl+w放开后按q      取消相邻窗口</span><br><span class="line">ctrl+w放开后按w      取消全部窗口；与：wqall相同</span><br></pre></td></tr></table></figure>
+<p><img src="QQ图片20180408193404.png" alt="QQ图片20180408193404"></p>
+<h2 id="三、定制vim的工作特性"><a href="#三、定制vim的工作特性" class="headerlink" title="三、定制vim的工作特性"></a><strong>三、定制vim的工作特性</strong></h2><h3 id="扩展命令模式下执行："><a href="#扩展命令模式下执行：" class="headerlink" title="扩展命令模式下执行："></a>扩展命令模式下执行：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set number     添加行号</span><br><span class="line">set nonumber   取消行号</span><br></pre></td></tr></table></figure>
+<p>此操作仅临时有效，退出重进vim后，操作失效，要想永久保存vim的工作特性，需写入配置文件中</p>
+<h3 id="配置文件：使vim工作特性永久有效"><a href="#配置文件：使vim工作特性永久有效" class="headerlink" title="配置文件：使vim工作特性永久有效"></a>配置文件：使vim工作特性永久有效</h3><p><strong>全局：</strong>/etc/vimrc</p>
+<p><strong>个人：</strong>~/.vimrc</p>
+<h3 id="其他一些常用vim特性命令："><a href="#其他一些常用vim特性命令：" class="headerlink" title="其他一些常用vim特性命令："></a>其他一些常用vim特性命令：</h3><p><strong>忽略大小写</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set ic    忽略大小写</span><br><span class="line">set noic  取消忽略大小写</span><br></pre></td></tr></table></figure>
+<p><strong>自动缩进</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set ai    自动和上一行对齐</span><br><span class="line">set noai  取消对齐</span><br></pre></td></tr></table></figure>
+<p><strong>文件格式转换</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set fileformat=unix   Windows文件转换Linux文件</span><br><span class="line">set fileformat=dos 	  Linux文件转换Windows文件</span><br></pre></td></tr></table></figure>
+<p><strong>设置光标所在行下划线</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set cursorline      启用</span><br><span class="line">set no cursorline   禁用</span><br></pre></td></tr></table></figure>
+<p><strong>复制时保留格式：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set paste      启用</span><br><span class="line">set nopaste    禁用</span><br></pre></td></tr></table></figure>
+<h3 id="查看全部已配置的vim工作特性"><a href="#查看全部已配置的vim工作特性" class="headerlink" title="查看全部已配置的vim工作特性"></a>查看全部已配置的vim工作特性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">：set      显示全部已配置set</span><br><span class="line">：help     查看帮助</span><br></pre></td></tr></table></figure>
+<h2 id="四、文本处理常用命令"><a href="#四、文本处理常用命令" class="headerlink" title="四、文本处理常用命令"></a><strong>四、文本处理常用命令</strong></h2><ol>
+<li><p><strong>cut :</strong>  按列抽取文本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-b：	仅显示行中指定直接范围的内容；</span><br><span class="line">-c：	仅显示行中指定范围的字符；</span><br><span class="line">-d：	指定字段的分隔符，默认的字段分隔符为“TAB”；</span><br><span class="line">-f：	显示指定字段的内容；</span><br><span class="line">-n：	与“-b”选项连用，不分割多字节字符；</span><br><span class="line">--complement：	补足被选择的字节、字符或字段；</span><br><span class="line">--out-delimiter=&lt;字段分隔符&gt;：	指定输出内容是的字段分割符；</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>diff:</strong>     比较两个文件直接的差别，后跟file1，file2</p>
+</li>
+<li><p><strong>head:</strong>  用于显示文件的开头的内容 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-n&lt;数字&gt;：指定显示头部内容的行数；</span><br><span class="line">-c&lt;字符数&gt;：指定显示头部内容的字符数；</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>tail:</strong>   用于显示文件的结尾的内容 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-n     显示最后n行</span><br><span class="line">-c     显示最后n个字节</span><br><span class="line">-f      跟踪文本的变化（追加内容），可写为tailf</span><br><span class="line">-F     跟踪文件名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>sort:</strong>    将文件进行排序，并将排序结果标准输出 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-t      指定分隔符（类似cut -d）</span><br><span class="line">-k     指定第几列（类似cut -f）</span><br><span class="line">-n     以数字排序</span><br><span class="line">-r      倒序排列</span><br><span class="line">-f      忽略大小写</span><br><span class="line">-u     删除重复的行压缩到一行</span><br><span class="line">-R     随机排序</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>paste</strong>     合并两个文件同行号的列到一行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-s      合并两个文件按一行显示</span><br><span class="line">-d     指定分隔符，类似cut -d的用法</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>grep:</strong>         基于行过滤的文本过滤工具</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">-v     显示不被匹配到的行</span><br><span class="line">-i      忽略字符大小写</span><br><span class="line">-n     添加匹配到的行的行号</span><br><span class="line">-c     统计被匹配到的行数</span><br><span class="line">-o     仅显示匹配到的字符</span><br><span class="line">-q     静默模式</span><br><span class="line">-A#   包含此匹配行和后#行</span><br><span class="line">-B#   包含此匹配行和前#行</span><br><span class="line">-C#   包含此匹配行和前后#行</span><br><span class="line">-e     实现多个匹配字符的或者（or）关系 -e a -e b：a或b</span><br><span class="line">-w    匹配整个单词，数字、字母、下划线都算单词一部分</span><br><span class="line">-r      递归目录</span><br><span class="line">-E     使用ERE，扩展的正则表达式</span><br><span class="line">-F     相当于fgrep</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vim/" rel="tag"># vim</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/07/文本三剑客之grep及正则表达式用法/" rel="next" title="文本三剑客之grep及正则表达式用法">
+                <i class="fa fa-chevron-left"></i> 文本三剑客之grep及正则表达式用法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/10/shell脚本编程基础（1）/" rel="prev" title="shell脚本编程基础（1）">
+                shell脚本编程基础（1） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、文本编辑器简介："><span class="nav-number">1.</span> <span class="nav-text">一、文本编辑器简介：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Vim文本编辑器相关命令："><span class="nav-number">2.</span> <span class="nav-text">二、Vim文本编辑器相关命令：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-vim打开文件："><span class="nav-number">2.1.</span> <span class="nav-text">1.vim打开文件：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-vim的三种主要模式："><span class="nav-number">2.2.</span> <span class="nav-text">2.vim的三种主要模式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-vim模式切换："><span class="nav-number">2.3.</span> <span class="nav-text">3.vim模式切换：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-vim的其他一些模式："><span class="nav-number">2.4.</span> <span class="nav-text">4. vim的其他一些模式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-vim关闭文件"><span class="nav-number">2.5.</span> <span class="nav-text">5.vim关闭文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-命令模式常用命令："><span class="nav-number">2.6.</span> <span class="nav-text">6.命令模式常用命令：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-扩展命令模式常用命令："><span class="nav-number">2.7.</span> <span class="nav-text">7.扩展命令模式常用命令：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-vim的剪贴板"><span class="nav-number">2.8.</span> <span class="nav-text">8.vim的剪贴板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-vim多文件模式"><span class="nav-number">2.9.</span> <span class="nav-text">9.vim多文件模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、定制vim的工作特性"><span class="nav-number">3.</span> <span class="nav-text">三、定制vim的工作特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展命令模式下执行："><span class="nav-number">3.1.</span> <span class="nav-text">扩展命令模式下执行：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件：使vim工作特性永久有效"><span class="nav-number">3.2.</span> <span class="nav-text">配置文件：使vim工作特性永久有效</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他一些常用vim特性命令："><span class="nav-number">3.3.</span> <span class="nav-text">其他一些常用vim特性命令：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看全部已配置的vim工作特性"><span class="nav-number">3.4.</span> <span class="nav-text">查看全部已配置的vim工作特性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、文本处理常用命令"><span class="nav-number">4.</span> <span class="nav-text">四、文本处理常用命令</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

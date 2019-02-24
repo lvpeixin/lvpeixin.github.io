@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="LVS,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本节内容主要是是lvs相关性实验，及lvs健康性检查工具Ldirectord  一、实验：实现LVS-NAT逻辑拓扑： 前期准备：CLIENT:   172.20.0.123； 网关：172.20.0.200 LVS:     VIP：192.168.30.200, DIP：172.20.0.200，启用ip_forward RS1:     192.168.30.17 RS2:     192.">
+<meta name="keywords" content="LVS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LVS虚拟服务器相关实验">
+<meta property="og:url" content="http://yoursite.com/2018/07/07/LVS虚拟服务器相关实验/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="本节内容主要是是lvs相关性实验，及lvs健康性检查工具Ldirectord  一、实验：实现LVS-NAT逻辑拓扑： 前期准备：CLIENT:   172.20.0.123； 网关：172.20.0.200 LVS:     VIP：192.168.30.200, DIP：172.20.0.200，启用ip_forward RS1:     192.168.30.17 RS2:     192.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/LVS虚拟服务器相关实验/Nat模型.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/LVS虚拟服务器相关实验/1-1.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/LVS虚拟服务器相关实验/6.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/LVS虚拟服务器相关实验/Nat-Router模型.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/LVS虚拟服务器相关实验/3-3.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/LVS虚拟服务器相关实验/4-1.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/LVS虚拟服务器相关实验/lazy.png">
+<meta property="og:image" content="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/LVS虚拟服务器相关实验/7.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/LVS虚拟服务器相关实验/8.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/LVS虚拟服务器相关实验/9.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/LVS虚拟服务器相关实验/LVS-DR模型-单网络.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/LVS虚拟服务器相关实验/1-2.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/LVS虚拟服务器相关实验/2-3.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/LVS虚拟服务器相关实验/3-4.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/LVS虚拟服务器相关实验/Ldirectord配置.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/07/LVS虚拟服务器相关实验/Ldirectord配置2.png">
+<meta property="og:updated_time" content="2018-07-17T13:06:07.574Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LVS虚拟服务器相关实验">
+<meta name="twitter:description" content="本节内容主要是是lvs相关性实验，及lvs健康性检查工具Ldirectord  一、实验：实现LVS-NAT逻辑拓扑： 前期准备：CLIENT:   172.20.0.123； 网关：172.20.0.200 LVS:     VIP：192.168.30.200, DIP：172.20.0.200，启用ip_forward RS1:     192.168.30.17 RS2:     192.">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/07/LVS虚拟服务器相关实验/Nat模型.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/07/LVS虚拟服务器相关实验/">
+
+
+
+
+
+  <title>LVS虚拟服务器相关实验 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/07/LVS虚拟服务器相关实验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">LVS虚拟服务器相关实验</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-07T16:22:12+08:00">
+                2018-07-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/集群/" itemprop="url" rel="index">
+                    <span itemprop="name">集群</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本节内容主要是是lvs相关性实验，及lvs健康性检查工具Ldirectord </p>
+<h2 id="一、实验：实现LVS-NAT"><a href="#一、实验：实现LVS-NAT" class="headerlink" title="一、实验：实现LVS-NAT"></a><strong>一、实验：实现LVS-NAT</strong></h2><h3 id="逻辑拓扑："><a href="#逻辑拓扑：" class="headerlink" title="逻辑拓扑："></a><strong>逻辑拓扑：</strong></h3><p><img src="Nat模型.jpg" alt="Nat模型"></p>
+<h3 id="前期准备："><a href="#前期准备：" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p><strong>CLIENT:</strong>   172.20.0.123； 网关：172.20.0.200</p>
+<p><strong>LVS:</strong>     VIP：192.168.30.200, DIP：172.20.0.200，启用ip_forward</p>
+<p><strong>RS1:</strong>     192.168.30.17</p>
+<p><strong>RS2:</strong>     192.168.30.27</p>
+<h3 id="LVS："><a href="#LVS：" class="headerlink" title="LVS："></a><strong>LVS：</strong></h3><p>开启路由转发</p>
+<p>echo net.ipv4.ip_forward=1 &gt;&gt; /etc/sysctl.conf</p>
+<p>sysctl –p</p>
+<p>sysctl –a |grep ip_f</p>
+<h3 id="RS1、2"><a href="#RS1、2" class="headerlink" title="RS1、2:"></a><strong>RS1、2:</strong></h3><p>搭建WEB环境</p>
+<p>网关指向192.168.30.200</p>
+<p>yum install httpd</p>
+<p><strong>RS1:</strong></p>
+<p>echo RS1&gt; /var/www/html/index.html</p>
+<p>systemctl start httpd</p>
+<p><strong>RS2:</strong></p>
+<p>echo RS2&gt; /var/www/html/index.html</p>
+<p>systemctl start httpd</p>
+<h3 id="LVS"><a href="#LVS" class="headerlink" title="LVS:"></a><strong>LVS:</strong></h3><p>添加LVS规则</p>
+<p>yum install ipvsadm</p>
+<p>Ipvsadm –A –t 172.20.0.200:80 –s rr</p>
+<p>Ipvsadm –a –t 172.20.0.200:80  –r 192.168.30.17 –m </p>
+<p>Ipvsadm –a –t 172.20.0.200:80  –r 192.168.30.27 –m </p>
+<p>Ipvsadm –Ln</p>
+<p><img src="1-1.png" alt="1"></p>
+<h3 id="测试："><a href="#测试：" class="headerlink" title="测试："></a><strong>测试：</strong></h3><p>curl 172.20.0.200</p>
+<p><img src="6.png" alt="6"></p>
+<h2 id="二、实验：实现LVS与RS之间添加路由器的LVS-NAT"><a href="#二、实验：实现LVS与RS之间添加路由器的LVS-NAT" class="headerlink" title="二、实验：实现LVS与RS之间添加路由器的LVS-NAT"></a><strong>二、实验：实现LVS与RS之间添加路由器的LVS-NAT</strong></h2><h3 id="逻辑拓扑：-1"><a href="#逻辑拓扑：-1" class="headerlink" title="逻辑拓扑："></a><strong>逻辑拓扑：</strong></h3><p><img src="Nat-Router模型.jpg" alt="Nat-Router模型"></p>
+<h3 id="前期准备：-1"><a href="#前期准备：-1" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>新增加一台虚拟机作为路由器，按下图进行网络环境搭建</p>
+<p><strong>CLIENT:</strong>   172.20.0.123；网关：172.20.0.200</p>
+<p><strong>LVS:</strong>   192.168.30.0,172.20.0.200，不启用ip_forward</p>
+<p><strong>ROUTER：</strong> VIP：172.20.0.100/16；DIP：192.168.30.200 /24，启用ip_forward</p>
+<p><strong>RS1:</strong>  192.168.30.17</p>
+<p><strong>RS2:</strong>  192.168.30.27</p>
+<p>路由器必须配置到LVS的网关，并且开启路由转发功能</p>
+<p><img src="3-3.png" alt="3"></p>
+<p>curl 172.20.0.200测试</p>
+<p><img src="4-1.png" alt="4"></p>
+<h3 id="实现端口映射："><a href="#实现端口映射：" class="headerlink" title="实现端口映射："></a><strong>实现端口映射：</strong></h3><p>以httpd服务为例，修改其中一台RS服务器的80端口为8080</p>
+<p><strong>RS1：</strong></p>
+<p><strong>vim /etc/httpd/conf/httpd.conf</strong></p>
+<p>Listen 80 ==&gt;Listen 8080</p>
+<p><strong>LVS：</strong></p>
+<p>清除原有LVS规则</p>
+<p>ipvsadm -C </p>
+<p>ipvsadm -A -t 172.20.0.200:80 -s rr</p>
+<p>ipvsadm -a -t 172.20.0.200:80 -r 192.168.30.17:8080 -m</p>
+<p>ipvsadm -a -t 172.20.0.200:80 -r 192.168.30.27:80 -m</p>
+<p><img src="lazy.png" alt="5"></p>
+<p><strong>CLIENT：</strong></p>
+<p><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="6"></p>
+<h3 id="添加权重："><a href="#添加权重：" class="headerlink" title="添加权重："></a><strong>添加权重：</strong></h3><p><strong>LVS：</strong></p>
+<p>修改调度算法为wrr模式</p>
+<p><img src="7.png" alt="7"></p>
+<p>ipvsadm -a -t 172.20.0.200:80 -r 192.168.30.17:8080 -m -w 3</p>
+<p><img src="8.png" alt="8"></p>
+<p><strong>CLIENT：</strong></p>
+<p>我们看到LVS已按RS1:RS1 = 3:1的权重进行调度</p>
+<p><img src="9.png" alt="9"></p>
+<h2 id="三、实验：实现单网络LVS-DR"><a href="#三、实验：实现单网络LVS-DR" class="headerlink" title="三、实验：实现单网络LVS-DR"></a><strong>三、实验：实现单网络LVS-DR</strong></h2><h3 id="逻辑拓扑：-2"><a href="#逻辑拓扑：-2" class="headerlink" title="逻辑拓扑："></a><strong>逻辑拓扑：</strong></h3><p><img src="LVS-DR模型-单网络.jpg" alt="LVS-DR模型-单网络"></p>
+<h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备:"></a><strong>前期准备:</strong></h3><p>5台虚拟机，网络环境配置如下：</p>
+<p><strong>CLIENT:</strong>    桥接模式；172.20.0.222/16</p>
+<p><strong>ROUTER:</strong>  桥接模式；172.20.0.200/16；192.168.30.200/24</p>
+<p><strong>LVS:</strong>  仅主机模式;VIP:192.168.30.7/24；DIP：192.168.30.100/24</p>
+<p><strong>RS1:</strong>  仅主机模式;192.168.30.17/24；VIP:192.168.30.7/24</p>
+<p><strong>RS2:</strong>  仅主机模式;192.168.30.27/24；VIP:192.168.30.7/24</p>
+<h3 id="RS1-RS2"><a href="#RS1-RS2" class="headerlink" title="RS1,RS2:"></a><strong>RS1,RS2:</strong></h3><p>echo 1&gt; /proc/sys/net/ipv4/conf/lo/arp_ignore</p>
+<p>echo 1&gt; /proc/sys/net/ipv4/conf/all/arp_ignore</p>
+<p>echo 2&gt; /proc/sys/net/ipv4/conf/lo/arp_announce</p>
+<p>echo 2&gt; /proc/sys/net/ipv4/conf/all/arp_announce</p>
+<p>一般习惯是将VIP绑定到RS服务器的回环网卡lo上</p>
+<p>ip a a 192.168.30.7/32 dev lo</p>
+<p><img src="1-2.png" alt="1"></p>
+<p>### </p>
+<p>在RS1,RS2上搭建web服务</p>
+<p>yum install httpd</p>
+<p><strong>RS1:</strong></p>
+<p>echo RS1&gt; /var/www/html/index.html</p>
+<p>systemctl start httpd</p>
+<p><strong>RS2:</strong></p>
+<p>echo RS2&gt; /var/www/html/index.html</p>
+<p>systemctl start httpd</p>
+<h3 id="LVS：-1"><a href="#LVS：-1" class="headerlink" title="LVS："></a><strong>LVS：</strong></h3><p>网络配置要求</p>
+<p><strong>VIP:</strong>  ip addr a192.168.30.7/32 dev lo</p>
+<p><strong>DIP:</strong>  192.168.30.100/24 eth0</p>
+<p><strong>GATEWAY:</strong>  192.168.30.X          #网关必须配，但可随意配置，同一网段即可</p>
+<p>配置调度策略：</p>
+<p>yum install ipvsadm</p>
+<p>ipvsadm -A -t 192.168.30.7:80 -s rr</p>
+<p>ipvsadm -a -t 192.168.30.7:80 -r 192.168.30.17      #默认dr模型</p>
+<p>ipvsadm -a -t 192.168.30.7:80 -r 192.168.30.27</p>
+<p><img src="2-3.png" alt="2"></p>
+<h3 id="CLIENT"><a href="#CLIENT" class="headerlink" title="CLIENT:"></a><strong>CLIENT:</strong></h3><p>测试</p>
+<p><img src="3-4.png" alt="3"></p>
+<h2 id="四、Ldirectord-实现LVS的RS健康性检查"><a href="#四、Ldirectord-实现LVS的RS健康性检查" class="headerlink" title="四、Ldirectord:实现LVS的RS健康性检查"></a><strong>四、Ldirectord:实现LVS的RS健康性检查</strong></h2><p><strong>ldirectord：</strong>监控和控制LVS守护进程，可管理LVS规则</p>
+<p><strong>包名：**</strong>ldirectord-3.9.6-0rc1.1.1.x86_64.rpm**</p>
+<p><strong>文件：</strong></p>
+<p>/etc/ha.d/ldirectord.cf    主配置文件</p>
+<p>/usr/share/doc/ldirectord-3.9.6/ldirectord.cf   配置模版</p>
+<p>/usr/lib/systemd/system/ldirectord.service    服务</p>
+<p>/usr/sbin/ldirectord   主程序</p>
+<p>/var/log/ldirectord.log   日志</p>
+<p>/var/run/ldirectord.ldirectord.pid pid   文件</p>
+<p><strong>Ldirectord**</strong>配置文件示例**</p>
+<p>checktimeout=3</p>
+<p>checkinterval=1</p>
+<p>autoreload=yes</p>
+<p>logfile=”/var/log/ldirectord.log”       #日志文件</p>
+<p>quiescent=no                                        #down时yes权重为0，no为删除</p>
+<p>virtual=5                                               #指定VS的FWM或IP：port</p>
+<p>real=172.16.0.7:80 gate 2</p>
+<p>real=172.16.0.8:80 gate 1</p>
+<p>fallback=127.0.0.1:80 gate #sorry server</p>
+<p>service=http</p>
+<p>scheduler=wrr</p>
+<p>checktype=negotiate</p>
+<p>checkport=80</p>
+<p>request=”index.html”</p>
+<p>receive=”test Ldirectord”</p>
+<p><img src="Ldirectord配置.png" alt="Ldirectord配置"></p>
+<p>重启ldirectord服务，将自动生成LVS规则</p>
+<p>systemctl start ldirectord</p>
+<p><img src="Ldirectord配置2.png" alt="Ldirectord配置2"></p>
+<p><strong>默认情况下，当有一台RS服务器宕机时，LVS还将继续调度，启动ldirectord服务后，当某台RS服</strong></p>
+<p><strong>务器**</strong>宕机后，LVS将不再继续调度至该台服务器**</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LVS/" rel="tag"># LVS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/03/LVS介绍及工作原理/" rel="next" title="LVS介绍及工作原理">
+                <i class="fa fa-chevron-left"></i> LVS介绍及工作原理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/10/Nginx介绍及Web服务相关配置/" rel="prev" title="Nginx介绍及Web服务相关配置">
+                Nginx介绍及Web服务相关配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、实验：实现LVS-NAT"><span class="nav-number">1.</span> <span class="nav-text">一、实验：实现LVS-NAT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑拓扑："><span class="nav-number">1.1.</span> <span class="nav-text">逻辑拓扑：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备："><span class="nav-number">1.2.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LVS："><span class="nav-number">1.3.</span> <span class="nav-text">LVS：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RS1、2"><span class="nav-number">1.4.</span> <span class="nav-text">RS1、2:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LVS"><span class="nav-number">1.5.</span> <span class="nav-text">LVS:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试："><span class="nav-number">1.6.</span> <span class="nav-text">测试：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、实验：实现LVS与RS之间添加路由器的LVS-NAT"><span class="nav-number">2.</span> <span class="nav-text">二、实验：实现LVS与RS之间添加路由器的LVS-NAT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑拓扑：-1"><span class="nav-number">2.1.</span> <span class="nav-text">逻辑拓扑：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备：-1"><span class="nav-number">2.2.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现端口映射："><span class="nav-number">2.3.</span> <span class="nav-text">实现端口映射：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加权重："><span class="nav-number">2.4.</span> <span class="nav-text">添加权重：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、实验：实现单网络LVS-DR"><span class="nav-number">3.</span> <span class="nav-text">三、实验：实现单网络LVS-DR</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑拓扑：-2"><span class="nav-number">3.1.</span> <span class="nav-text">逻辑拓扑：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备"><span class="nav-number">3.2.</span> <span class="nav-text">前期准备:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RS1-RS2"><span class="nav-number">3.3.</span> <span class="nav-text">RS1,RS2:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LVS：-1"><span class="nav-number">3.4.</span> <span class="nav-text">LVS：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CLIENT"><span class="nav-number">3.5.</span> <span class="nav-text">CLIENT:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、Ldirectord-实现LVS的RS健康性检查"><span class="nav-number">4.</span> <span class="nav-text">四、Ldirectord:实现LVS的RS健康性检查</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

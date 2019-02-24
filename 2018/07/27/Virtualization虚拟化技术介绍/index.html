@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、虚拟化基本概念什么是虚拟化？虚拟化是把物理的事物转换成为逻辑的方式表现出来 常见的虚拟化 内存虚拟化：内存页面Page File 磁盘虚拟化：RAID，Volume 网络虚拟化：vlan，vxlan FusionSphere-x86/x64服务器的虚拟化 计算能力：CPU/Memory的虚拟化 存储：VIMS文件系统 网络：分布式虚拟交换机 虚拟化的优势传统物流服务器 操作系统与物理服务器绑定">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Virtualization虚拟化技术介绍">
+<meta property="og:url" content="http://yoursite.com/2018/07/27/Virtualization虚拟化技术介绍/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="一、虚拟化基本概念什么是虚拟化？虚拟化是把物理的事物转换成为逻辑的方式表现出来 常见的虚拟化 内存虚拟化：内存页面Page File 磁盘虚拟化：RAID，Volume 网络虚拟化：vlan，vxlan FusionSphere-x86/x64服务器的虚拟化 计算能力：CPU/Memory的虚拟化 存储：VIMS文件系统 网络：分布式虚拟交换机 虚拟化的优势传统物流服务器 操作系统与物理服务器绑定">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/07/27/Virtualization虚拟化技术介绍/寄居虚拟化.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/27/Virtualization虚拟化技术介绍/裸金属虚拟化.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/27/Virtualization虚拟化技术介绍/操作系统虚拟化.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/27/Virtualization虚拟化技术介绍/混合虚拟化.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/27/Virtualization虚拟化技术介绍/1QX45XT2UT1@E8GY7NW.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/27/Virtualization虚拟化技术介绍/CPU软件虚拟化-1.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/27/Virtualization虚拟化技术介绍/CPU硬件虚拟化-1.png">
+<meta property="og:updated_time" content="2018-07-28T12:45:09.923Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Virtualization虚拟化技术介绍">
+<meta name="twitter:description" content="一、虚拟化基本概念什么是虚拟化？虚拟化是把物理的事物转换成为逻辑的方式表现出来 常见的虚拟化 内存虚拟化：内存页面Page File 磁盘虚拟化：RAID，Volume 网络虚拟化：vlan，vxlan FusionSphere-x86/x64服务器的虚拟化 计算能力：CPU/Memory的虚拟化 存储：VIMS文件系统 网络：分布式虚拟交换机 虚拟化的优势传统物流服务器 操作系统与物理服务器绑定">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/27/Virtualization虚拟化技术介绍/寄居虚拟化.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/27/Virtualization虚拟化技术介绍/">
+
+
+
+
+
+  <title>Virtualization虚拟化技术介绍 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/27/Virtualization虚拟化技术介绍/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Virtualization虚拟化技术介绍</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-27T20:44:17+08:00">
+                2018-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、虚拟化基本概念"><a href="#一、虚拟化基本概念" class="headerlink" title="一、虚拟化基本概念"></a><strong>一、虚拟化基本概念</strong></h2><h3 id="什么是虚拟化？"><a href="#什么是虚拟化？" class="headerlink" title="什么是虚拟化？"></a><strong>什么是虚拟化？</strong></h3><p><strong>虚拟化</strong>是把物理的事物转换成为逻辑的方式表现出来</p>
+<p><strong>常见的虚拟化</strong></p>
+<p>内存虚拟化：内存页面Page File</p>
+<p>磁盘虚拟化：RAID，Volume</p>
+<p>网络虚拟化：vlan，vxlan</p>
+<p><strong>FusionSphere-x86/x64服务器的虚拟化</strong></p>
+<p>计算能力：CPU/Memory的虚拟化</p>
+<p>存储：VIMS文件系统</p>
+<p>网络：分布式虚拟交换机</p>
+<h3 id="虚拟化的优势"><a href="#虚拟化的优势" class="headerlink" title="虚拟化的优势"></a><strong>虚拟化的优势</strong></h3><p><strong>传统物流服务器</strong></p>
+<p>操作系统与物理服务器绑定</p>
+<p>1.难以迁移</p>
+<p>2.难以扩展</p>
+<p>3.空间占用高</p>
+<p>4.可靠性难以控制</p>
+<p>5.资源利用率低</p>
+<p>6.难以管理</p>
+<p><strong>虚拟化服务器</strong></p>
+<p>操作系统与物理服务器分离</p>
+<p>1.易于迁移、扩展、资源整合</p>
+<p>2.标准化的虚拟硬件</p>
+<p>3.由一系列文件组成，易于保护</p>
+<h3 id="虚拟化常见概念"><a href="#虚拟化常见概念" class="headerlink" title="虚拟化常见概念"></a><strong>虚拟化常见概念</strong></h3><p><strong>Guset OS：</strong>运行在虚拟机上的OS</p>
+<p><strong>Guset Machine：</strong>虚拟出来的虚拟机</p>
+<p><strong>Hypervisor：</strong>也叫VMM (Virtual Machine Monitor)虚拟机监控器，</p>
+<p><strong>Host OS：</strong>运行在物理机上的OS</p>
+<p><strong>Host Machine：</strong>物理机</p>
+<p><strong>模拟：</strong>emulation</p>
+<p>x86 -&gt; arm</p>
+<p>sata -&gt; scsi</p>
+<p><strong>完全虚拟化：</strong>Full Virtualization</p>
+<p>开发人员直接针对物理平台开发即可，性能能达到硬件IDE的40%</p>
+<p>CPU:</p>
+<p>BT</p>
+<p>HVM</p>
+<p><strong>半虚拟化：</strong>Para Virtualization</p>
+<p>也叫<strong>不完全虚拟化</strong>，开发人员需针对虚拟化平台开发,性能能达到硬件IDE的80%</p>
+<p><strong>建议：</strong>生产环境一般使用半虚拟化技术：简单、性能好、易迁移上云</p>
+<p><strong>IAAS**</strong>：**CloudOS上部署xen或kvm这样的虚拟机，基础架构即服务</p>
+<p><strong>PAAS**</strong>：**CloudOS上直接提供一个容器作为平台，不需要用户安装操作系统，平台即服务</p>
+<p><strong>SAAS**</strong>：**本机只需运行个浏览器，其他全交给云来解决，软件即服务</p>
+<p>以此延伸，近些年还出现了：</p>
+<p><strong>DBaas：</strong>数据库即服务</p>
+<p><strong>LBaas：</strong>负载均衡即服务</p>
+<p>……</p>
+<h2 id="二、虚拟化常见架构类型"><a href="#二、虚拟化常见架构类型" class="headerlink" title="二、虚拟化常见架构类型"></a><strong>二、虚拟化常见架构类型</strong></h2><p>根据在整个系统中的位置不同，虚拟化架构分为以下几种：</p>
+<p>1.寄居虚拟化架构</p>
+<p>2.裸金属虚拟化架构</p>
+<p>3.操作系统虚拟化架构</p>
+<p>4.混合虚拟化架构</p>
+<h3 id="一-寄居虚拟化架构"><a href="#一-寄居虚拟化架构" class="headerlink" title="(一)寄居虚拟化架构"></a><strong>(一)寄居虚拟化架构</strong></h3><p>寄居虚拟化架构指在宿主操作系统之上安装和运行虚拟化程序，依赖于宿主操作系统对设备的支持和物理</p>
+<p>资源的管理。（类似 Vmware Workstation 的程序）</p>
+<p><img src="寄居虚拟化.png" alt="寄居虚拟化"></p>
+<p><strong>优点：</strong>简单、易于实现</p>
+<p><strong>缺点：</strong>1.安装和运行应用程序依赖主机操作系统对设备的支持；</p>
+<p>2.管理开销较大，性能损耗大</p>
+<p><strong>代表产品：**</strong>VMware Workstation**</p>
+<h3 id="2-）裸金属虚拟化架构"><a href="#2-）裸金属虚拟化架构" class="headerlink" title="2**）裸金属虚拟化架构**"></a><strong>2**</strong>）裸金属虚拟化架构**</h3><p>裸金属虚拟化架构指直接在硬件上面安装虚拟化软件，再在其上安装操作系统和应用，依赖虚拟层内核和</p>
+<p>服务器控制台进行管理。</p>
+<p><img src="裸金属虚拟化.png" alt="裸金属虚拟化"></p>
+<p><strong>优点：</strong>1.虚拟机不依赖操作系统</p>
+<p>2.支持多种操作系统，多种应用</p>
+<p><strong>缺点：</strong>虚拟层内核开发难度大</p>
+<p><strong>代表产品：**</strong>WNware ESXServer、Citrix XenServer**</p>
+<h3 id="三-操作系统虚拟化架构"><a href="#三-操作系统虚拟化架构" class="headerlink" title="(三)操作系统虚拟化架构"></a><strong>(三)操作系统虚拟化架构</strong></h3><p>操作系统虚拟化架构在操作系统层面增加虚拟服务器功能。操作系统虚拟化架构把单个的操作系统划分为</p>
+<p>多个容器，使用容器管理器来进行管理。</p>
+<p>宿主操作系统负责在多个虚拟服务器（即容器）之间分配硬件资源，并且让这些服务器彼此独立。</p>
+<p><img src="操作系统虚拟化.png" alt="操作系统虚拟化"></p>
+<p><strong>优点：</strong>1.简单、易于实现</p>
+<p>2.管理开销非常低</p>
+<p><strong>缺点：</strong>隔离性查，多容器共享同一操作系统</p>
+<p><strong>代表产品：**</strong>Docker**</p>
+<h3 id="四-混合虚拟化架构"><a href="#四-混合虚拟化架构" class="headerlink" title="(四)混合虚拟化架构"></a><strong>(四)混合虚拟化架构</strong></h3><p>混合虚拟化架构将一个内核级驱动器插入到宿主操作系统内核。这个驱动器作为虚拟硬件管理器来协调虚</p>
+<p>拟机和宿主操作系统之间的硬件访问。</p>
+<p><img src="混合虚拟化.png" alt="混合虚拟化"></p>
+<p><strong>优点：</strong>1.相对于寄居虚拟化架构，没有冗余，性能高；</p>
+<p>2.可支持多种操作系统</p>
+<p><strong>缺点：</strong>需底层硬件支持虚拟化拓展功能</p>
+<p><strong>代表产品：**</strong>Redhat KVM**</p>
+<h2 id="三、Xen架构简介"><a href="#三、Xen架构简介" class="headerlink" title="三、Xen架构简介"></a><strong>三、Xen架构简介</strong></h2><p><img src="1QX45XT2UT1@E8GY7NW.png" alt="1Q~X45X(T2{UT1@E8GY{7NW"></p>
+<p><strong>Domain U**</strong>：**运行在Xen Hypervisor上的普通虚拟机</p>
+<p><strong>Domain 0**</strong>：**运行在Xen Hypervisor上的特权虚拟机。它拥有访问物理I/O资源的权限，同时和系统上运</p>
+<p>行的其他虚拟机进行交互。Domain 0必须要在其他Domain启动之前启动。</p>
+<h3 id="虚拟机复用有限的外设资源："><a href="#虚拟机复用有限的外设资源：" class="headerlink" title="虚拟机复用有限的外设资源："></a><strong>虚拟机复用有限的外设资源：</strong></h3><p>1)Hypervisor截获虚拟机对物理硬件的访问请求，然后通过软件的方式来模拟真实设备的效果；</p>
+<p>2)前端设备驱动将数据通过VMM提供的接口转发到后端驱动</p>
+<p>3)后端驱动VM的数据进行分时分通道的处理</p>
+<h2 id="四、CPU虚拟化原理介绍"><a href="#四、CPU虚拟化原理介绍" class="headerlink" title="四、CPU虚拟化原理介绍"></a><strong>四、CPU虚拟化原理介绍</strong></h2><h3 id="一-基于软件的CPU的虚拟化"><a href="#一-基于软件的CPU的虚拟化" class="headerlink" title="(一)基于软件的CPU的虚拟化"></a><strong>(一)基于软件的CPU的虚拟化</strong></h3><p>基于软件的 CPU 虚拟化，故名思议，就是通过软件的形式来模拟每一条指令。通过前面的文章我们知道常</p>
+<p>用的软件虚拟化技术有两种：优先级压缩和二进制代码翻译。这两种是通用技术，可以用在所有虚拟化类</p>
+<p>型中。我们就结合 intercept 和 virtualize 来看看 CPU 软件虚拟化是怎么做的。</p>
+<p>首先，一些必须的硬件知识要知道，X86 体系架构为了让上层的软件（操作系统、应用程序）能够访问硬</p>
+<p>件，提供了四个 CPU 特权级别，Ring 0 是最高级别，Ring 1 次之，Ring 2 更次之，Ring 3 是最低级别。</p>
+<p>一般，操作系统由于要直接访问硬件和内存，因此它的代码需要运行在最高级别 Ring 0 上，而应用程序的</p>
+<p>代码运行在最低级别 Ring 3 上，如果要访问硬件和内存，比如设备访问，写文件等，就要执行相关的系统</p>
+<p>调用，CPU 的运行级别发生从 Ring 3 到 Ring 0 的切换，当完成之后，再切换回去，我们熟悉的用户态和</p>
+<p>内核态切换的本质就来自这里。</p>
+<p>虚拟化的实现也是基于这个思想，VMM 本质上是个 Host OS，运行在 Ring 0 上，Guest OS 运行在 Ring 1</p>
+<p>上，再往上是相应层次的应用程序运行在 Ring 2 和 Ring 3 上。</p>
+<p><img src="CPU软件虚拟化-1.png" alt="CPU软件虚拟化"></p>
+<h3 id="二-基于硬件的CPU虚拟化"><a href="#二-基于硬件的CPU虚拟化" class="headerlink" title="(二)基于硬件的CPU虚拟化"></a><strong>(二)基于硬件的CPU虚拟化</strong></h3><p>上面的这种截获再模拟的纯软件的虚拟化方式，势必是性能非常低的。那怎么样提高性能呢，有一种改进</p>
+<p>的方式是修改 Guest OS 中关于特权指令的相关操作，将其改为一种函数调用的方式，让 VMM 直接执</p>
+<p>行，而不是截获和模拟，这样就能在一定程度上提高性能。</p>
+<p>但这种方式并不通用，要去改 Guest OS 的代码，只能看作是一种定制。为了能够通用，又能够提高性</p>
+<p>能，就只能从硬件上去做文章了。所以，后来，以 Intel 的 VT-x 和 AMD 的 AMD-V 为主的硬件辅助的</p>
+<p>CPU 虚拟化就被提出来（Intel VT 包括 VT-x （支持 CPU 虚拟化）、EPT（支持内存虚拟化）和 VT-</p>
+<p>d（支持 I/O 虚拟化）。</p>
+<p>CPU 硬件辅助虚拟化在 Ring 模式的基础上引入了一种新的模式，叫 VMX 模式。它包括根操作模式</p>
+<p>（VMX Root Operation）和非根操作模式（VMX Non-Root Operation）。</p>
+<p>这两种模式都有 Ring 0 – Ring 3 的特权级。所以，在描述某个应用程序时，除了描述其属于哪个特权级，</p>
+<p>还要指明其处于根模式还是非根模式。</p>
+<p>引入这种模式的好处就在于，Guest OS 运行在 Ring 0 上，就意味着它的核心指令可以直接下达到硬件层</p>
+<p>去执行，而特权指令等敏感指令的执行则是由硬件辅助，直接切换到 VMM 执行，这是自动执行的，应用</p>
+<p>程序是感知不到的，性能自然就提高了。</p>
+<p><img src="CPU硬件虚拟化-1.png" alt="CPU硬件虚拟化"></p>
+<p><strong>KVM 是一种硬件辅助的虚拟化技术，支持 Intel VT-x 和 AMD-v 技术。</strong></p>
+<h2 id="五、内存虚拟化原理介绍"><a href="#五、内存虚拟化原理介绍" class="headerlink" title="五、内存虚拟化原理介绍"></a><strong>五、内存虚拟化原理介绍</strong></h2><p>通过各种内存复用技术（<strong>零页共享、内存气泡和内存交换</strong>）与合理的调度，使主机上的虚拟机对内存的</p>
+<p>访问及时响应，减少内存复用开启情况下的虚拟机性能损耗</p>
+<p><strong>(一)零页共享</strong></p>
+<p>将主机上的多个虚拟机的零页内存在物理内存中进行合并，释放出更多的物理内存供虚拟机使用。</p>
+<p><strong>(二)内存气泡</strong></p>
+<p>Hypervisor通过内存气泡将较空闲虚拟机内存释放给内存使用率较高的虚拟机，用来提升内存利用率。</p>
+<p>内存气泡技术对虚拟机性能影响较小，但是在内存减少时，用户能感知到</p>
+<p><strong>(三)内存交换</strong></p>
+<p>当虚拟机的内存压力较大时，将虚拟机内存页交换到磁盘中从而释放内存；</p>
+<p>当虚拟机内存页交换到磁盘后，虚拟机的性能将下降比较明显</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/24/Tomcat介绍及相关实验/" rel="next" title="Tomcat介绍及相关实验">
+                <i class="fa fa-chevron-left"></i> Tomcat介绍及相关实验
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/01/Zabbix监控系统详解/" rel="prev" title="zabbix监控系统">
+                zabbix监控系统 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、虚拟化基本概念"><span class="nav-number">1.</span> <span class="nav-text">一、虚拟化基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是虚拟化？"><span class="nav-number">1.1.</span> <span class="nav-text">什么是虚拟化？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟化的优势"><span class="nav-number">1.2.</span> <span class="nav-text">虚拟化的优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟化常见概念"><span class="nav-number">1.3.</span> <span class="nav-text">虚拟化常见概念</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、虚拟化常见架构类型"><span class="nav-number">2.</span> <span class="nav-text">二、虚拟化常见架构类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-寄居虚拟化架构"><span class="nav-number">2.1.</span> <span class="nav-text">(一)寄居虚拟化架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-）裸金属虚拟化架构"><span class="nav-number">2.2.</span> <span class="nav-text">2**）裸金属虚拟化架构**</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-操作系统虚拟化架构"><span class="nav-number">2.3.</span> <span class="nav-text">(三)操作系统虚拟化架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四-混合虚拟化架构"><span class="nav-number">2.4.</span> <span class="nav-text">(四)混合虚拟化架构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Xen架构简介"><span class="nav-number">3.</span> <span class="nav-text">三、Xen架构简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟机复用有限的外设资源："><span class="nav-number">3.1.</span> <span class="nav-text">虚拟机复用有限的外设资源：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、CPU虚拟化原理介绍"><span class="nav-number">4.</span> <span class="nav-text">四、CPU虚拟化原理介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-基于软件的CPU的虚拟化"><span class="nav-number">4.1.</span> <span class="nav-text">(一)基于软件的CPU的虚拟化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-基于硬件的CPU虚拟化"><span class="nav-number">4.2.</span> <span class="nav-text">(二)基于硬件的CPU虚拟化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、内存虚拟化原理介绍"><span class="nav-number">5.</span> <span class="nav-text">五、内存虚拟化原理介绍</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

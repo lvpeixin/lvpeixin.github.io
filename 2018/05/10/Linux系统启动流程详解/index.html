@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="linux,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="inux系统从按下电源键开始到系统启动要求用户输入用户名，中间究竟发生什么？了解Linux系统的启动 流程，不仅有助于我们更加深入的理解linux底层设计理念，更能帮助我们再出现系统启动故障时，迅速排 查出故障原因。 ##  一、Linux系统启动流程以下是CentOS6版本系统启动流程图： （注：下文中启动流程主要适用于CentOS6之前的版本，7版本变动较大，暂不加入讨论）  CentOS6启">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux系统启动流程详解">
+<meta property="og:url" content="http://yoursite.com/2018/05/10/Linux系统启动流程详解/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="inux系统从按下电源键开始到系统启动要求用户输入用户名，中间究竟发生什么？了解Linux系统的启动 流程，不仅有助于我们更加深入的理解linux底层设计理念，更能帮助我们再出现系统启动故障时，迅速排 查出故障原因。 ##  一、Linux系统启动流程以下是CentOS6版本系统启动流程图： （注：下文中启动流程主要适用于CentOS6之前的版本，7版本变动较大，暂不加入讨论）  CentOS6启">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/05/10/Linux系统启动流程详解/centos6启动流程_gaitubao_com_watermark.png">
+<meta property="og:updated_time" content="2018-07-17T13:04:25.773Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux系统启动流程详解">
+<meta name="twitter:description" content="inux系统从按下电源键开始到系统启动要求用户输入用户名，中间究竟发生什么？了解Linux系统的启动 流程，不仅有助于我们更加深入的理解linux底层设计理念，更能帮助我们再出现系统启动故障时，迅速排 查出故障原因。 ##  一、Linux系统启动流程以下是CentOS6版本系统启动流程图： （注：下文中启动流程主要适用于CentOS6之前的版本，7版本变动较大，暂不加入讨论）  CentOS6启">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/10/Linux系统启动流程详解/centos6启动流程_gaitubao_com_watermark.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/10/Linux系统启动流程详解/">
+
+
+
+
+
+  <title>Linux系统启动流程详解 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/10/Linux系统启动流程详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux系统启动流程详解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-10T14:38:17+08:00">
+                2018-05-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>inux系统从按下电源键开始到系统启动要求用户输入用户名，中间究竟发生什么？了解Linux系统的启动</p>
+<p>流程，不仅有助于我们更加深入的理解linux底层设计理念，更能帮助我们再出现系统启动故障时，迅速排</p>
+<p>查出故障原因。</p>
+<p>## </p>
+<h2 id="一、Linux系统启动流程"><a href="#一、Linux系统启动流程" class="headerlink" title="一、Linux系统启动流程"></a><strong>一、Linux系统启动流程</strong></h2><p><strong>以下是CentOS6版本系统启动流程图：</strong></p>
+<p>（<strong>注：</strong>下文中启动流程主要适用于CentOS6之前的版本，7版本变动较大，暂不加入讨论）</p>
+<p><img src="centos6启动流程_gaitubao_com_watermark.png" alt="centos6启动流程_gaitubao_com_watermark"></p>
+<h3 id="CentOS6启动流程："><a href="#CentOS6启动流程：" class="headerlink" title="CentOS6启动流程："></a><strong>CentOS6启动流程：</strong></h3><p>1.加载BIOS的硬件信息，进行POST加电自检</p>
+<p>2.读取第一个启动设备MBR的引导加载程序(grub)的启动信息</p>
+<p>3.加载核心操作系统的核心信息，核心开始解压缩，并尝试驱动所有的硬件设备</p>
+<p>4.核心执行init程序，并获取默认的运行信息</p>
+<p>5.init程序执行/etc/rc.d/rc.sysinit文件</p>
+<p>6.启动核心的外挂模块</p>
+<p>7.init执行运行的各个批处理文件(scripts)</p>
+<p>8.init执行/etc/rc.d/rc.local</p>
+<p>9.执行/bin/login程序，等待用户登录</p>
+<p>10.登录之后开始以Shell控制主机</p>
+<p>接下来我们对每一项流程详细讲解</p>
+<h3 id="1-POST："><a href="#1-POST：" class="headerlink" title="1.POST："></a><strong>1.POST：</strong></h3><p><strong>Power-On-Self-Test，加电自检，</strong>是BIOS功能的一个主要部分。负责完成对CPU、主板、内</p>
+<p>存、硬盘子系统、显示子系统、串并行接口、键盘、CD-ROM光驱等硬件情况检测。</p>
+<h3 id="2-加载MBR："><a href="#2-加载MBR：" class="headerlink" title="2.加载MBR："></a><strong>2.加载MBR：</strong></h3><p>MBR：Master Boot Record，主引导记录</p>
+<p>0磁道0扇区：512bytes</p>
+<p>446bytes：<strong>boot loader</strong></p>
+<p>64bytes：分区表</p>
+<p>16bytes：标识一个分区（最多4个分区）</p>
+<p>2bytes：55AA（分区标识位）</p>
+<p><strong>bootloader</strong>：引导加载器，引导程序</p>
+<p><strong>主要功能有：</strong></p>
+<p>a）识别、加载操作系统中的核心文件，并提交到内存中运行，进而来启动对应操作系统。</p>
+<p>b）提供菜单信息，并将启动管理功能转交给其他加载程序。</p>
+<p>Linux：GRUB，可引导多种操作系统</p>
+<p>windows：ntloader，只能引导windows系统</p>
+<p><strong>因此建议</strong>：同一台电脑装多个操作系统，先装windows，后装Linux</p>
+<h3 id="3-GRUB："><a href="#3-GRUB：" class="headerlink" title="3.GRUB："></a><strong>3.GRUB：</strong></h3><p>grub0.97（老版本）</p>
+<p><strong>第一阶段：MBR的前446字节</strong></p>
+<p><strong>1.5阶段：</strong>MBR后续的27个扇区，加载/boot分区文件系统驱动</p>
+<p><strong>第二阶段：</strong>识别文件系统，加载/boot/grub目录下的文件（备份gurb的文件）</p>
+<p>注：grup 修复命令依赖于/boot/grub下的文件</p>
+<p>grub-install修复命令不依赖，将自动生产gurb文件下文件，</p>
+<p>一旦用grub命令修复后，grub-install也将依赖这些文件。</p>
+<p><strong>/boot/grub/grub.conf</strong>    grub配置文件</p>
+<p>default=0                  定义了默认启动项</p>
+<p>timeout=5                定义了菜单超时时长</p>
+<p>splashimage=(hd0,0)/grub/splash.xpm.gz    定义了菜单背景图片</p>
+<p>password –md5 口令   默认无此行，添加此行后需输入正确口令才能以但用户模式破解root口令</p>
+<p>可用grub-md5-crypt生产md5口令</p>
+<p>hiddenmenu             默认隐藏菜单</p>
+<p>title                   定义了启动菜单，有几个title就有几个启动菜单</p>
+<p>root（hd0,0）</p>
+<p>krenel               定义了内核文件位置，挂载目录</p>
+<p>initrd                 定义了initramfs文件位置</p>
+<h3 id="4-加载内核Kernel："><a href="#4-加载内核Kernel：" class="headerlink" title="4.加载内核Kernel："></a><strong>4.加载内核Kernel：</strong></h3><p>探测可识别到的所有硬件设备</p>
+<p>加载硬件驱动程序（借助于ramdisk加载驱动）</p>
+<p>以只读方式挂载根文件系统：</p>
+<p><strong>/boot/initramfs-VERSION-release.img</strong>文件加载根目录文件系统驱动</p>
+<p>  <strong>/boot/grup/grup.conf</strong>文件定义了根的位置</p>
+<p>运行用户空间的第一个应用程序：/sbin/init</p>
+<p><strong>内核的核心文件：</strong></p>
+<p>/boot/vmlinuz-VERSION-release</p>
+<p>ramdisk：辅助的伪根系统，存放辅助性的驱动模块</p>
+<p>CentOS 5: /boot/initrd-VERSION-release.img      ramdisk虚拟磁盘</p>
+<p>CentOS 6,7: /boot/initramfs-VERSION-release.img  ramfs虚拟文件系统</p>
+<p>mkinitrd /boot/initramfs-<code>uname -r</code>.img <code>uname -r</code>        生成新的ramfs文件</p>
+<h3 id="5-启动init进程："><a href="#5-启动init进程：" class="headerlink" title="5.启动init进程："></a><strong>5.启动init进程：</strong></h3><p><strong>CentOS5：</strong></p>
+<p>SycV：init，redhat开发</p>
+<p>特点：启动服务程序时，有依赖的服务将被串行启动，因此centos5系统启动很缓慢</p>
+<p>配置文件：/etc/inittab</p>
+<p><strong>CentOS6：</strong></p>
+<p>Upstart：init，ubantu开发</p>
+<p>特点：守护进程间通信依赖于D-Bus进行，因此可基本实现类似并行启动</p>
+<p>配置文件：/etc/inittab，/etc/init/*.conf</p>
+<p><strong>CentOS7：</strong></p>
+<p>Systemd：systemd–&gt;init  redhat开发</p>
+<p>特点：服务只有在第一次被访问到才会启动，因此centos7系统启动过程非常快</p>
+<p>配置文件：/usr/lib/systemd/system</p>
+<p>​         /etc/systemd/system</p>
+<p><strong>/sbin/init</strong> CentOS6版本之前</p>
+<p>运行级别：为系统运行或维护等目的而设定；0-6：7个级别</p>
+<p>0：关机</p>
+<p>1：单用户模式(root自动登录), single, 维护模式</p>
+<p>2: 多用户模式，启动网络功能，但不会启动NFS；维护模式</p>
+<p>3：多用户模式，正常模式；文本界面</p>
+<p>4：预留级别；可同3级别</p>
+<p>5：多用户模式，正常模式；图形界面</p>
+<p>6：重启</p>
+<p>默认级别： 3, 5</p>
+<p>切换级别：init #</p>
+<p>查看级别：runlevel ; who -r</p>
+<h3 id="6-读取-etc-inittab文件"><a href="#6-读取-etc-inittab文件" class="headerlink" title="6.读取/etc/inittab文件"></a><strong>6.读取/etc/inittab文件</strong></h3><p><strong>CentOS5：</strong>     </p>
+<p>1.定义默认启动运行级别为3</p>
+<p>2.定义了使用/etc/rc.d/rc.sysinit进行系统初始化</p>
+<p>3.定义了每个运行级别执行的rc#文件</p>
+<p>4.定义Ctrl-Alt-Delete组合键重启</p>
+<p>5.配置不断电系统pf、pr两种机制</p>
+<p>6.定义了终端数量，默认6个</p>
+<p>7.如果是5级别，则会启动图形化界面</p>
+<p>注意：可利用#加注释方法减少5选项中的终端数量，也可复制增加可登陆终端数量</p>
+<p>建议：生产中建议关闭6选项组合键重启功能，防止误操作</p>
+<p><strong>CentOS6：</strong></p>
+<p>仅定义了系统默认启动运行级别，其他项分割为单个文件执行，原来与5版本一致。</p>
+<p>/etc/init/control-alt-delete.conf</p>
+<p>/etc/init/tty.conf</p>
+<p>/etc/init/start-ttys.conf</p>
+<p>/etc/init/rc.conf</p>
+<p>/etc/init/prefdm.conf</p>
+<h3 id="7-读取-etc-rc-d-rc-sysinit-系统初始化文件"><a href="#7-读取-etc-rc-d-rc-sysinit-系统初始化文件" class="headerlink" title="7.读取/etc/rc.d/rc.sysinit 系统初始化文件"></a><strong>7.读取/etc/rc.d/rc.sysinit 系统初始化文件</strong></h3><p>(1) 设置主机名</p>
+<p>(2) 设置欢迎信息</p>
+<p>(3) 激活udev和selinux</p>
+<p>(4) 挂载/etc/fstab文件中定义的文件系统</p>
+<p>(5) 检测根文件系统，并以读写方式重新挂载根文件系统</p>
+<p>(6) 设置系统时钟</p>
+<p>(7) 激活swap设备</p>
+<p>(8) 根据/etc/sysctl.conf文件设置内核参数</p>
+<p>(9) 激活lvm及software raid设备</p>
+<p>(10) 加载额外设备的驱动程序</p>
+<p>(11) 清理操作</p>
+<p><strong>/etc/init.d/</strong></p>
+<p>存放对应服务脚本</p>
+<p>是rc.d文件软连接的源文件</p>
+<p>通过执行init.d脚本，确定运行级别开启和关闭的服务</p>
+<h3 id="8-运行-etc-rc-d-rc-0-6-d-对应级别目录下服务"><a href="#8-运行-etc-rc-d-rc-0-6-d-对应级别目录下服务" class="headerlink" title="8.运行/etc/rc.d/ rc[0-6].d/对应级别目录下服务"></a><strong>8.运行/etc/rc.d/ rc[0-6].d/对应级别目录下服务</strong></h3><p><strong>K##*</strong>：运行级别为N时，关闭K开头的服务；##运行次序；数字越小，越先运行；数字越小的服务，通常</p>
+<p>为依赖到别的服务</p>
+<p><strong>S##*</strong>：运行级别为S时，打开S开头的服务；##运行次序；数字越小，越先运行；数字越小的服务，通常</p>
+<p>为被依赖到的服务</p>
+<p><strong>/var/lock/subsys</strong></p>
+<p>存放已启动的服务名称</p>
+<h3 id="9-运行-etc-rc-d-rc-local文件"><a href="#9-运行-etc-rc-d-rc-local文件" class="headerlink" title="9.运行/etc/rc.d/rc.local文件"></a><strong>9.运行/etc/rc.d/rc.local文件</strong></h3><p>rc.local会在所有服务启动后作为一个兜底的服务进行启动</p>
+<p><strong>注意：</strong>（1）正常级别下，最后启动一个服务S99local没有链接至/etc/rc.d/init.d一个</p>
+<p>服务脚本，而是指向了/etc/rc.d/rc.local脚本</p>
+<p>（2）不便或不需写为服务脚本放置于/etc/rc.d/init.d/目录，且又想开机时自动运行</p>
+<p>的命令，可直接放置于/etc/rc.d/rc.local文件中</p>
+<p>（3）/etc/rc.d/rc.local在指定运行级别脚本后运行</p>
+<p>（4）可以根据情况，进行自定义修改</p>
+<h3 id="10、执行-bin-login程序"><a href="#10、执行-bin-login程序" class="headerlink" title="10、执行/bin/login程序"></a><strong>10、执行/bin/login程序</strong></h3><p>此时，系统完成启动，显示请输入用户名、密码</p>
+<h2 id="二、制定自己的init服务脚本："><a href="#二、制定自己的init服务脚本：" class="headerlink" title="二、制定自己的init服务脚本："></a><strong>二、制定自己的init服务脚本：</strong></h2><h3 id="方法1："><a href="#方法1：" class="headerlink" title="方法1："></a><strong>方法1：</strong></h3><p><strong>第一步：编写服务脚本</strong></p>
+<p>#！/bin/bash</p>
+<p>#chkconfig:     345/-     95     5             <strong>关键一行</strong></p>
+<p>生效模式:345或all  S编号  K编号</p>
+<p>#description:test service</p>
+<p>source /etc/init.d/functions                    调用函数库</p>
+<p>case $1 in</p>
+<p>start）</p>
+<p>[ -f /var/lock/subsys/testsrv ] &amp;&amp; action “testsrv is started ”</p>
+<p>touch /var/lock/subsys/testsrv</p>
+<p>action starting testsrv</p>
+<p>;;</p>
+<p>stop）</p>
+<p>rm -f /var/lock/subsys/testsrv</p>
+<p>action testsrv is stopped</p>
+<p>;;</p>
+<p>status)</p>
+<p>[ -f /var/lock/subsys/testsrv ]&amp;&amp;echo testsrv is starting||echo testsrv is stopped</p>
+<p>*)</p>
+<p>echo “Usage:service testsrv start|stop|status”</p>
+<p>esac</p>
+<p><strong>第二步：放入服务目录</strong></p>
+<p>/etc/init.d/                                         放入服务目录</p>
+<p><strong>第三步：添加脚本至服务</strong></p>
+<p>chkconfig –add testsrv                            将testsrv脚本添加至服务</p>
+<h3 id="方法2："><a href="#方法2：" class="headerlink" title="方法2："></a><strong>方法2：</strong></h3><p>也可以将开机启动服务代码添加到：</p>
+<p><strong>/etc/rc.d/rc[0-6]/99Sloca</strong>l中执行</p>
+<h2 id="三、服务相关命令"><a href="#三、服务相关命令" class="headerlink" title="三、服务相关命令"></a><strong>三、服务相关命令</strong></h2><p><strong>chkconfig</strong>         服务状态控制</p>
+<p><strong>查看服务状态：</strong></p>
+<p>–list                  列出所有独立服务</p>
+<p>–list [name]             列出指定服务各运行模式状态</p>
+<p><strong>添加脚本到服务：</strong></p>
+<p>–add  name                   添加脚本到服务</p>
+<p>注：SysV服务脚本要放置于/etc/rc.d/init.d（/etc/init.d）</p>
+<p>#!/bin/bash</p>
+<p>#LLLL 表示初始在哪个级别下启动，-表示都不启动</p>
+<p># chkconfig: LLLL nn nn</p>
+<p><strong>删除服务：</strong>   </p>
+<p>–del  name            删除指定服务</p>
+<p><strong>修改服务状态：</strong> </p>
+<p>–level 35 atd off|on       将3,5模式atd服务默认开机关闭服务，不添加模式：默认2,3,4,5</p>
+<p><strong>ntsysv</strong>               查看当前模式服务启动状态，*代表开机启动</p>
+<p>–level=3          修改指定运行模式的启动服务</p>
+<p><strong>service</strong>              手动管理服务</p>
+<p>[name]  start|stop|restart     管理服务状态</p>
+<p>–status-all               当前所有服务状态</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/10/shell脚本编程基础（3）——循环用法/" rel="next" title="shell脚本编程基础（3）——循环用法">
+                <i class="fa fa-chevron-left"></i> shell脚本编程基础（3）——循环用法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/13/Linux系统计划任务/" rel="prev" title="Linux系统计划任务">
+                Linux系统计划任务 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Linux系统启动流程"><span class="nav-number">1.</span> <span class="nav-text">一、Linux系统启动流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CentOS6启动流程："><span class="nav-number">1.1.</span> <span class="nav-text">CentOS6启动流程：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-POST："><span class="nav-number">1.2.</span> <span class="nav-text">1.POST：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-加载MBR："><span class="nav-number">1.3.</span> <span class="nav-text">2.加载MBR：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-GRUB："><span class="nav-number">1.4.</span> <span class="nav-text">3.GRUB：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-加载内核Kernel："><span class="nav-number">1.5.</span> <span class="nav-text">4.加载内核Kernel：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-启动init进程："><span class="nav-number">1.6.</span> <span class="nav-text">5.启动init进程：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-读取-etc-inittab文件"><span class="nav-number">1.7.</span> <span class="nav-text">6.读取/etc/inittab文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-读取-etc-rc-d-rc-sysinit-系统初始化文件"><span class="nav-number">1.8.</span> <span class="nav-text">7.读取/etc/rc.d/rc.sysinit 系统初始化文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-运行-etc-rc-d-rc-0-6-d-对应级别目录下服务"><span class="nav-number">1.9.</span> <span class="nav-text">8.运行/etc/rc.d/ rc[0-6].d/对应级别目录下服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-运行-etc-rc-d-rc-local文件"><span class="nav-number">1.10.</span> <span class="nav-text">9.运行/etc/rc.d/rc.local文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10、执行-bin-login程序"><span class="nav-number">1.11.</span> <span class="nav-text">10、执行/bin/login程序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、制定自己的init服务脚本："><span class="nav-number">2.</span> <span class="nav-text">二、制定自己的init服务脚本：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法1："><span class="nav-number">2.1.</span> <span class="nav-text">方法1：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法2："><span class="nav-number">2.2.</span> <span class="nav-text">方法2：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、服务相关命令"><span class="nav-number">3.</span> <span class="nav-text">三、服务相关命令</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

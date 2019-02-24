@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="DNS,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、DNS服务相关介绍DNS：Domain Name Service 应用层协议 C/S,53/udp, 53/tcp BIND：Bekerley Internat Name Domain ISC （www.isc.org） 名字解析服务：将全称域名解析为IP地址 FQDN：Fully Qualified Domain Name,完整主机名 www.magedu.com         完整主机名">
+<meta name="keywords" content="DNS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DNS服务及相关实验">
+<meta property="og:url" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="一、DNS服务相关介绍DNS：Domain Name Service 应用层协议 C/S,53/udp, 53/tcp BIND：Bekerley Internat Name Domain ISC （www.isc.org） 名字解析服务：将全称域名解析为IP地址 FQDN：Fully Qualified Domain Name,完整主机名 www.magedu.com         完整主机名">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/named.conf_.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/区域配置文件.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/区域数据库解析文件.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/4dig测试.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/5修改网卡dns.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/6访问成功.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/修改区域解析库文件.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/访问成功.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/修改区域解析库文件-1.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/测试成功.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/反向解析1.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/反向解析2.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/反向解析3.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/反向解析4.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/反向解析5.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/1修改主dns主配置-1.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/5主dns区域解析库.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/2修改从dns主配置.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/sda.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/4生成slave文件-1.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/6模拟宕机.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/7客户端添加dns.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/8测试成功.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/方法1.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/方法2.1.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/方法2.2.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/方法2.3.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/方法3.1.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/方法3.2.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/3.3.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/3.4.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/3.5.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/3.6.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/全局转发1.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/全局转发2.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/全局转发3.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/全局4.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/全局5.0.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/全局5.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/特定域1.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/特定域转发2.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/智能1.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/区域解析配置.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/view4.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/view1.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/view2.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/view3.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/viww6.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/view5.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/view7.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/测试2-1.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/测试3.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/测试4.png">
+<meta property="og:updated_time" content="2018-08-19T04:17:39.944Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DNS服务及相关实验">
+<meta name="twitter:description" content="一、DNS服务相关介绍DNS：Domain Name Service 应用层协议 C/S,53/udp, 53/tcp BIND：Bekerley Internat Name Domain ISC （www.isc.org） 名字解析服务：将全称域名解析为IP地址 FQDN：Fully Qualified Domain Name,完整主机名 www.magedu.com         完整主机名">
+<meta name="twitter:image" content="http://yoursite.com/2018/06/02/DNS服务及相关实验/named.conf_.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/02/DNS服务及相关实验/">
+
+
+
+
+
+  <title>DNS服务及相关实验 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/02/DNS服务及相关实验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">DNS服务及相关实验</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-02T15:30:03+08:00">
+                2018-06-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络技术/" itemprop="url" rel="index">
+                    <span itemprop="name">网络技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、DNS服务相关介绍"><a href="#一、DNS服务相关介绍" class="headerlink" title="一、DNS服务相关介绍"></a>一、DNS服务相关介绍</h2><p><strong>DNS：Domain Name Service</strong> 应用层协议</p>
+<p>C/S,53/udp, 53/tcp</p>
+<p><strong>BIND：Bekerley Internat Name Domain</strong></p>
+<p>ISC （<a href="http://www.isc.org）" target="_blank" rel="noopener">www.isc.org）</a></p>
+<p>名字解析服务：将全称域名解析为IP地址</p>
+<p><strong>FQDN：Fully Qualified Domain Name</strong>,完整主机名</p>
+<p><a href="http://www.magedu.com" target="_blank" rel="noopener">www.magedu.com</a>         完整主机名(FQDN)</p>
+<p>www             主机名，或者别名</p>
+<p>magedu.com          domain域名</p>
+<p><strong>分散式解决方案：</strong>小环境，特定应用内部集群</p>
+<p>/etc/hosts</p>
+<p><strong>集中式解决方案：</strong>NIS，适合中小型环境</p>
+<p><strong>分布式（既分散又集中）解决方案：</strong>DNS</p>
+<p>本地名称解析配置文件：hosts</p>
+<p><strong>Linux：</strong>    /etc/hosts</p>
+<p><strong>Windows：</strong>%WINDIR%/system32/drivers/etc/hosts</p>
+<p>​         122.10.117.2  <a href="http://www.magedu.com" target="_blank" rel="noopener">www.magedu.com</a></p>
+<p>​         93.46.8.89    <a href="http://www.google.com" target="_blank" rel="noopener">www.google.com</a></p>
+<p>权威DNS服务器：查询FQDN所在的DNS服务器</p>
+<p>13组服务器，13个IP地址存放根域</p>
+<p>IPv6,25组跟服务器</p>
+<p><strong>DNS查询类型：</strong></p>
+<p>   <strong>递归查询：</strong>负责到底</p>
+<p>  <strong>迭代查询：</strong>不负责到底</p>
+<p><strong>解析类型：</strong></p>
+<p><strong>正向解析：</strong>FQDN –&gt; IP</p>
+<p><strong>反向解析：</strong>IP –&gt; FQDN</p>
+<p>注意：正反向解析是两个不同的名称空间是两棵不同的解析树</p>
+<p><strong>DNS服务器的类型：</strong></p>
+<p>主DNS服务器</p>
+<p>从DNS服务器</p>
+<p>缓存DNS服务器（转发器）</p>
+<p>主DNS服务器：管理和维护所负责解析的域内解析库的服务器</p>
+<p>从DNS服务器：从主服务器或从服务器“复制”（区域传输）解析库副本</p>
+<p>序列号：解析库版本号，主服务器解析库变化时，其序列递增 刷新时间间隔：</p>
+<p>服务器从主服务器请求同步解析的时间间隔</p>
+<p>重试时间间隔：从服务器请求同步失败时，再次尝试时间间隔</p>
+<p>过期时长：从服务器联系不到主服务器时，多久后停止服务</p>
+<p>“通知”机制：主服务器解析库发生变化时，会主动通知从服务器</p>
+<h3 id="bind"><a href="#bind" class="headerlink" title="bind"></a><strong>bind</strong></h3><p><strong>相关文件：</strong></p>
+<p>/etc/named.conf                              主配置文件</p>
+<p>/usr/sbin/named                               主程序</p>
+<p>/usr/lib/systemd/system/named.service      服务</p>
+<p>/var/named                               存放数据库</p>
+<p>/var/named/named.localhost                区域解析库参考文件</p>
+<p><strong>cat /var/named/named.localhost</strong>  </p>
+<p>$TTL 1D                                                                              一天作为缓存期</p>
+<p>@       IN SOA  @ rname.invalid. (                                   第一个@表示当前域名，第二个@表示主DNS服务器,rname.invalid表示管理员邮箱</p>
+<p>0       ; serial            版本序列号，序列号越大表示数据越新，需手动更改</p>
+<p>1D      ; refresh        刷新时间</p>
+<p>1H      ; retry            重试时间</p>
+<p>1W      ; expire        过期时间</p>
+<p>3H )    ; minimum      否定答案的TTL值</p>
+<p>NS      @</p>
+<p>A       127.0.0.1</p>
+<p>AAAA    ::1</p>
+<h3 id="资源记录："><a href="#资源记录：" class="headerlink" title="资源记录："></a><strong>资源记录：</strong></h3><p>区域解析库：由众多RR组成：</p>
+<p>资源记录：Resource Record, RR</p>
+<p><strong>记录类型：</strong>A, AAAA, PTR, SOA, NS, CNAME, MX</p>
+<p><strong>SOA：</strong>Start Of Authority，起始授权记录；一个区域解析库有且仅能有一个SOA记录，</p>
+<p>必须位于解析库的第一条记录，定义了谁是主DNS服务器，管理员邮箱及刷新时间(从属DNS服务器拉取</p>
+<p>主DNS服务器数据的时间)、重试时间、过期时间及否定答案的TTL值</p>
+<p><strong>A：</strong>internet Address，作用，FQDN –&gt; IP</p>
+<p><strong>AAAA：</strong>FQDN –&gt; IPv6</p>
+<p><strong>PTR：</strong>PoinTeR，IP –&gt; FQDN</p>
+<p><strong>NS：</strong>Name Server，专用于标明当前区域的DNS服务器</p>
+<p><strong>CNAME：</strong>Canonical Name，别名记录，如www</p>
+<p><strong>MX：</strong>Mail eXchanger，邮件交换器</p>
+<h3 id="资源记录定义的格式："><a href="#资源记录定义的格式：" class="headerlink" title="资源记录定义的格式："></a><strong>资源记录定义的格式：</strong></h3><p><strong>语法：name [TTL] IN rr_type value</strong></p>
+<p><strong>注意：</strong></p>
+<p>(1) TTL可从全局继承</p>
+<p>(2) @可用于引用当前区域的名字</p>
+<p>(3) 同一个名字可以通过多条记录定义多个不同的值；此时DNS服务器会以轮询</p>
+<p>方式响应</p>
+<p>(4) 同一个值也可能有多个不同的定义名字；通过多个不同的名字指向同一个值</p>
+<p>进行定义；此仅表示通过多个不同的名字可以找到同一个主机</p>
+<h2 id="二、实验：搭建正向主DNS服务器"><a href="#二、实验：搭建正向主DNS服务器" class="headerlink" title="二、实验：搭建正向主DNS服务器"></a>二、实验：搭建正向主DNS服务器</h2><h3 id="前期准备："><a href="#前期准备：" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>主DNS服务器：192.168.30.10</p>
+<p>web服务器：192.168.30.16</p>
+<p>客户端：192.168.30.11</p>
+<h3 id="实验预期："><a href="#实验预期：" class="headerlink" title="实验预期："></a><strong>实验预期：</strong></h3><p>客户端访问通过主DNS解析访问http服务器搭建的网页</p>
+<h3 id="具体步骤："><a href="#具体步骤：" class="headerlink" title="具体步骤："></a><strong>具体步骤：</strong></h3><p>1主DNS服务器安装bind包：</p>
+<p>yum install bind</p>
+<p>2 备份主配置文件，注意保留属性</p>
+<p>cp /etc/named.conf  /etc/named.conf.bak  -a</p>
+<p>3.开启named服务</p>
+<p>Systemctl  start  named</p>
+<p>Systemctl  enable  named</p>
+<p>4.修改主配置文件：</p>
+<p>vim /etc/named.conf</p>
+<p>options {</p>
+<p>​         listen-on port 53 { localhost; };</p>
+<p>​         allow-query     { localhost;any; };</p>
+<p>};</p>
+<p><img src="named.conf_.png" alt="img"> </p>
+<p>5.修改区域配置文件：</p>
+<p><img src="区域配置文件.png" alt="区域配置文件"></p>
+<p>6创建区域解析数据库文件</p>
+<p>可参照named.localhost文件进行创建</p>
+<p>cp named.localhost  magedu.com.zone -a</p>
+<p><strong>vim magedu.com.zone</strong></p>
+<p>$TTL 1D</p>
+<p>@       IN SOA  dns1.magedu.com. admin.magedu.com. (</p>
+<p>​                                        0       ; serial</p>
+<p>​                                        1D      ; refresh</p>
+<p>​                                        1H      ; retry</p>
+<p>​                                        1W      ; expire</p>
+<p>​                                        3H )    ; minimum</p>
+<p>magedu.com.        NS      dns1</p>
+<p>dns1                         A        192.168.30.10</p>
+<p>www                        A        192.168.30.16</p>
+<p><img src="区域数据库解析文件.png" alt="img"> </p>
+<p>7重新加载named服务：</p>
+<p>Systemctl reload named   或   rndc  reload</p>
+<p>8如启动失败，可使用语法检查</p>
+<p>named-checkconf          主配置文件语法检查</p>
+<p>named-checkzone “magedu.com” /var/named/magedu.com.zone       解析库文件语法检查</p>
+<p>9切换至客户端进行测试：</p>
+<p>dig <a href="http://www.magedu.com" target="_blank" rel="noopener">www.magedu.com</a>  @192.168.30.10            指定从192.168.30.10解析<a href="http://www.magedu.com" target="_blank" rel="noopener">www.magedu.com</a></p>
+<p><img src="4dig测试.png" alt="4dig测试"></p>
+<p>10切换到web服务器：</p>
+<p>echo welcome to Magedu &gt; /var/www/html/html.index</p>
+<p>service httpd start</p>
+<p>11.切换至客户端：</p>
+<p>添加DNS到网卡配置文件</p>
+<p><img src="5修改网卡dns.png" alt="5修改网卡dns"></p>
+<p>重启网络服务</p>
+<p>Service httpd restart</p>
+<p>12.测试访问<a href="http://www.magedu.com" target="_blank" rel="noopener">www.magedu.com</a></p>
+<p>我们看到，客户端已经由主DNS服务器解析成功访问到我们自己搭建的http网页！</p>
+<p><img src="6访问成功.png" alt="6访问成功"></p>
+<h2 id="三、实验：泛域名解析，提高访问感受"><a href="#三、实验：泛域名解析，提高访问感受" class="headerlink" title="三、实验：泛域名解析，提高访问感受"></a><strong>三、实验：泛域名解析，提高访问感受</strong></h2><h3 id="前期准备：-1"><a href="#前期准备：-1" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>实验环境承接上</p>
+<h3 id="实验预期：-1"><a href="#实验预期：-1" class="headerlink" title="实验预期："></a><strong>实验预期：</strong></h3><p>客户端访问网页时，即使将主机名输出，也可正常访问</p>
+<h3 id="具体步骤：-1"><a href="#具体步骤：-1" class="headerlink" title="具体步骤："></a><strong>具体步骤：</strong></h3><p>1修改主DNS服务器端区域数据库解析文件：</p>
+<p>增加此行：泛域名解析，如ww<a href="http://www.magedu.com也可正常访问" target="_blank" rel="noopener">www.magedu.com也可正常访问</a></p>
+<ul>
+<li>A  192.168.30.7</li>
+</ul>
+<p><img src="修改区域解析库文件.png" alt="修改区域解析库文件"></p>
+<p>2客户端测试：</p>
+<p>我们看到即时主机名输出，也可正常访问到<a href="http://www.magedu.com的http页面" target="_blank" rel="noopener">www.magedu.com的http页面</a></p>
+<p><img src="访问成功.png" alt="访问成功"></p>
+<h2 id="四、实验：利用DNS实现web服务器负载均衡"><a href="#四、实验：利用DNS实现web服务器负载均衡" class="headerlink" title="四、实验：利用DNS实现web服务器负载均衡"></a><strong>四、实验：</strong>利用DNS实现web服务器负载均衡</h2><h3 id="前期准备：-2"><a href="#前期准备：-2" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>主DNS服务器：192.168.30.10</p>
+<p>web服务器1：192.168.30.16</p>
+<p>web服务器2：192.168.30.12</p>
+<p>客户端：192.168.30.11</p>
+<h3 id="实验预期：-2"><a href="#实验预期：-2" class="headerlink" title="实验预期："></a><strong>实验预期：</strong></h3><p>当客户端访问网页时，由主DNS服务器随机指向一台web服务器</p>
+<h3 id="具体步骤：-2"><a href="#具体步骤：-2" class="headerlink" title="具体步骤："></a><strong>具体步骤：</strong></h3><p>1修改区域解析库数据文件：</p>
+<p>添加下列行：</p>
+<p>websrv A 192.168.30.17</p>
+<p>websrv A 192.168.30.27</p>
+<p>www  CNAME  websrv</p>
+<p><img src="修改区域解析库文件-1.png" alt="修改区域解析库文件"></p>
+<p>重新加载named服务:</p>
+<p>rndc reload</p>
+<p>2切换至客户端测试：</p>
+<p>我们看到当ping测<a href="http://www.magedu.com时，将随机指向一台web服务器" target="_blank" rel="noopener">www.magedu.com时，将随机指向一台web服务器</a></p>
+<p><img src="测试成功.png" alt="测试成功"></p>
+<h2 id="五、实验：实现反向解析"><a href="#五、实验：实现反向解析" class="headerlink" title="五、实验：实现反向解析"></a><strong>五、实验：实现反向解析</strong></h2><h3 id="前期准备：-3"><a href="#前期准备：-3" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>DNS服务器：192.168.30.10</p>
+<p>测试客户端：192.168.30.11</p>
+<h3 id="具体步骤：-3"><a href="#具体步骤：-3" class="headerlink" title="具体步骤："></a><strong>具体步骤：</strong></h3><p>1修改DNS服务器区域配置文件，添加反向解析区域</p>
+<p><img src="反向解析1.png" alt="反向解析1"></p>
+<p>2添加方向区域解析数据库文件</p>
+<p><img src="反向解析2.png" alt="反向解析2"></p>
+<p>重启named服务</p>
+<p>rcdn reload</p>
+<p>3切换客户端建测试</p>
+<p><strong>dig -x  IPaddr</strong> 是一个专门测试反向解析的命令</p>
+<p>dig -x 192.168.30.16</p>
+<p>我们看到192.168.30.16反向解析到了websrv.magedu.com</p>
+<p><img src="反向解析3.png" alt="反向解析3"></p>
+<p>dig -x 192.168.30.17</p>
+<p>192.168.30.16反向解析到了appsrv.wxlinux.com</p>
+<p><img src="反向解析4.png" alt="反向解析4"></p>
+<p>dig -x 192.168.30.100</p>
+<p>192.168.30.16反向解析到了mail.magedu.com</p>
+<p>与DNS服务器区域解析文件对应关系相一致</p>
+<p><img src="反向解析5.png" alt="反向解析5"></p>
+<h2 id="六、实验：搭建正向从DNS服务器"><a href="#六、实验：搭建正向从DNS服务器" class="headerlink" title="六、实验：搭建正向从DNS服务器"></a>六、实验：搭建正向从DNS服务器</h2><h3 id="前期准备：-4"><a href="#前期准备：-4" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>主DNS服务器：192.168.30.10</p>
+<p>从DNS服务器：192.168.30.12</p>
+<p>web服务器：192.168.30.16</p>
+<p>客户端：192.168.30.11</p>
+<h3 id="实验预期：-3"><a href="#实验预期：-3" class="headerlink" title="实验预期："></a><strong>实验预期：</strong></h3><p>搭建从DNS服务器，当主DNS服务器宕机时，由从DNS实现地址解析</p>
+<h3 id="具体步骤：-4"><a href="#具体步骤：-4" class="headerlink" title="具体步骤："></a><strong>具体步骤：</strong></h3><p>1.修改主DNS服务器主配置文件，</p>
+<p><strong>vim /etc/named.conf</strong></p>
+<p>options {</p>
+<p>​         listen-on port 53 { localhost; };</p>
+<p>​         allow-query     { local;any; };</p>
+<p>​         allow-transfer  { 从DNS的IP };                          加此行</p>
+<p>};</p>
+<p><img src="1修改主dns主配置-1.png" alt="1修改主dns主配置"></p>
+<p>2修改主DNS服务器区域数据库解析文件</p>
+<p>将从DNS服务器同步进去</p>
+<p><img src="5主dns区域解析库.png" alt="5主dns区域解析库"></p>
+<p>3修改从DNS服务器主配置文件</p>
+<p><strong>vim /etc/named.conf</strong></p>
+<p>allow-transfer { none; };         加此行</p>
+<p><img src="2修改从dns主配置.png" alt="2修改从dns主配置"></p>
+<p>4修改从DNS服务器区域配置文件</p>
+<p><img src="sda.png" alt="sda"></p>
+<p>重启named服务</p>
+<p>rndc reload</p>
+<p>5确认从DNS服务器slave区域文件同步成功</p>
+<p><img src="4生成slave文件-1.png" alt="4生成slave文件"></p>
+<p>6模拟主DNS服务器宕机，将虚拟机网卡断开连接</p>
+<p><img src="6模拟宕机.png" alt="6模拟宕机"></p>
+<p>7添加从服务器地址到客户端的DNS列表中：</p>
+<p><img src="7客户端添加dns.png" alt="7客户端添加dns"></p>
+<p>8.客户端测试</p>
+<p>ping <a href="http://www.magedu.com" target="_blank" rel="noopener">www.magedu.com</a></p>
+<p>经过短暂的等待（dns切换时间），从DNS服务器解析地址成功！</p>
+<p> <img src="8测试成功.png" alt="8测试成功"></p>
+<h2 id="七、实验：实现子域"><a href="#七、实验：实现子域" class="headerlink" title="七、实验：实现子域"></a><strong>七、实验：实现子域</strong></h2><h3 id="实验预期：-4"><a href="#实验预期：-4" class="headerlink" title="实验预期："></a><strong>实验预期：</strong></h3><p><a href="http://www.bj.magedu.com" target="_blank" rel="noopener">www.bj.magedu.com</a></p>
+<p><a href="http://www.zz.magedu.com" target="_blank" rel="noopener">www.zz.magedu.com</a>             使能正常访问</p>
+<h3 id="方法一：修改主DNS区域解析文件"><a href="#方法一：修改主DNS区域解析文件" class="headerlink" title="方法一：修改主DNS区域解析文件"></a><strong>方法一：修改主DNS区域解析文件</strong></h3><p>直接将子域指向子域web服务器：</p>
+<p><a href="http://www.bj" target="_blank" rel="noopener">www.bj</a>  A       192.168.30.17</p>
+<p><a href="http://www.zz" target="_blank" rel="noopener">www.zz</a>  A       192.168.30.27</p>
+<p><img src="方法1.png" alt="方法1"></p>
+<h3 id="方法二：本机独立子域"><a href="#方法二：本机独立子域" class="headerlink" title="方法二：本机独立子域"></a><strong>方法二：本机独立子域</strong></h3><p><strong>适用场景：</strong>访问量不大，较小规模，由同一个主DNS服务器管理</p>
+<p><strong>vim /etc/named.rfc1912.zones</strong></p>
+<p>zone “bj.magedu.com” IN {</p>
+<p>​         type master</p>
+<p>​         file “bj.magedu.com.zone”;</p>
+<p>zone “zz.magedu.com” IN {</p>
+<p>​         type master</p>
+<p>​         file “zz.magedu.com.zone”;</p>
+<p><img src="方法2.1.png" alt="方法2.1"></p>
+<p>cp magedu.com.zone bj.magedu.com.zone  -a</p>
+<p><strong>vim bj.magedu.com.zone</strong></p>
+<p><img src="方法2.2.png" alt="方法2.2"></p>
+<p>cp magedu.com.zone zz.magedu.com.zone  -a</p>
+<p><strong>vim zz.magedu.com.zone</strong></p>
+<p><img src="方法2.3.png" alt="方法2.3"></p>
+<h3 id="方法三：委派给另一台主机维护子域，实现分布式DNS管理"><a href="#方法三：委派给另一台主机维护子域，实现分布式DNS管理" class="headerlink" title="方法三：委派给另一台主机维护子域，实现分布式DNS管理"></a>方法三：委派给另一台主机维护子域，实现分布式DNS管理</h3><p><strong>前期准备：</strong></p>
+<p>主域magedu.com: 192.168.30.10</p>
+<p>子域bj.magedu.com: 192.168.30.16</p>
+<p>web服务器1：<a href="http://www.magedu.com" target="_blank" rel="noopener">www.magedu.com</a>: 192.168.30.17</p>
+<p>web服务器2：<a href="http://www.bj.magedu.com" target="_blank" rel="noopener">www.bj.magedu.com</a>: 192.168.30.27</p>
+<p>测试客户端：192.168.30.11</p>
+<p>1关闭dnssec功能</p>
+<p><strong>vim /etc/named.conf</strong></p>
+<p>dnssec-enable no;</p>
+<p>dnssec-validation no;</p>
+<p><img src="方法3.1.png" alt="方法3.1"></p>
+<p>2修改主域DNS区域解析文件，主域web服务器指向192.168.30.17</p>
+<p><strong>vim /var/named/magedu.com.zone</strong></p>
+<p>$TTL 1D</p>
+<p>@       IN SOA  dns1.magedu.com. admin.magedu.com. (</p>
+<p>​                                        0       ; serial</p>
+<p>​                                        1D      ; refresh</p>
+<p>​                                        1H      ; retry</p>
+<p>​                                        1W      ; expire</p>
+<p>​                                        3H )    ; minimum</p>
+<p>​     NS      dns1.magedu.com.</p>
+<p>bj                 NS      dns2.magedu.com.     ##新增</p>
+<p>dns1       A        192.168.30.10</p>
+<p>dns2                     A    192.168.30.17                         ##新增</p>
+<p><img src="方法3.2.png" alt="方法3.2"></p>
+<p>3切换至子域DNS服务器，添加bj.magedu.com的区域配置</p>
+<p><strong>vim /etc/named.rfc1912.zones</strong></p>
+<p><img src="3.3.png" alt="3.3"></p>
+<p>4添加子域DNS区域解析文件，将web服务器指向192.168.30.27</p>
+<p><img src="3.4.png" alt="3.4"></p>
+<p>重启named服务</p>
+<p>rndc reload</p>
+<p>5切换客户端进行测试</p>
+<p>dig  <a href="http://www.bj.magedu.com" target="_blank" rel="noopener">www.bj.magedu.com</a> @192.168.30.10</p>
+<p>ping <a href="http://www.bj.magedu.com" target="_blank" rel="noopener">www.bj.magedu.com</a></p>
+<p>我们看到<a href="http://www.bj.magedu.com将通过主域DNS转发至子域DNS，再经子域DNS解析指向web服务器" target="_blank" rel="noopener">www.bj.magedu.com将通过主域DNS转发至子域DNS，再经子域DNS解析指向web服务器</a></p>
+<p><img src="3.5.png" alt="3.5"></p>
+<p>dig  <a href="http://www.magedu.com" target="_blank" rel="noopener">www.magedu.com</a> @192.168.30.10</p>
+<p>ping <a href="http://www.magedu.com" target="_blank" rel="noopener">www.magedu.com</a></p>
+<p>而<a href="http://www.magedu.com还是由主域DNS负责解析，这样就实现了主域和子域DNS简单的分布式管理" target="_blank" rel="noopener">www.magedu.com还是由主域DNS负责解析，这样就实现了主域和子域DNS简单的分布式管理</a></p>
+<p><img src="3.6.png" alt="3.6"></p>
+<h2 id="八、实验：forward转发"><a href="#八、实验：forward转发" class="headerlink" title="八、实验：forward转发"></a>八、实验：forward转发</h2><h3 id="（一）全局性转发："><a href="#（一）全局性转发：" class="headerlink" title="（一）全局性转发："></a><strong>（一）全局性转发：</strong></h3><p>对非本机所负责解析区域的请求，全转发给指定的服务器</p>
+<p><strong>注意：</strong>被转发的服务器需要能够为请求者做递归否则转发请求不予进行</p>
+<h3 id="前期准备：-5"><a href="#前期准备：-5" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>DNS服务器1: 192.168.30.10</p>
+<p>DNS服务器2: 192.168.30.16</p>
+<p>Web服务器：192.168.30.100</p>
+<p>测试访问端: 192.168.30.11</p>
+<h3 id="实验预期：-5"><a href="#实验预期：-5" class="headerlink" title="实验预期："></a><strong>实验预期：</strong></h3><p>当FQDN在DNS1服务器无法解析时，直接指向到DNS2服务器进行转发</p>
+<p>1在DNS2服务器上建立<a href="http://www.wxlinux.com的区域文件及解析数据库文件，并将www.wxlinux.com指向web服务器：192.168.30.100" target="_blank" rel="noopener">www.wxlinux.com的区域文件及解析数据库文件，并将www.wxlinux.com指向web服务器：192.168.30.100</a></p>
+<p><img src="全局转发1.png" alt="全局转发1"></p>
+<p><img src="全局转发2.png" alt="全局转发2"></p>
+<p>2切换到访问端用DNS2服务器解析<a href="http://www.wxlinux.com，可以解析成功" target="_blank" rel="noopener">www.wxlinux.com，可以解析成功</a></p>
+<p>dig <a href="http://www.wxlinux.com" target="_blank" rel="noopener">www.wxlinux.com</a> @192.168.30.16</p>
+<p><img src="全局转发3.png" alt="全局转发3"></p>
+<p>3切换至DNS1服务器修改主配置文件</p>
+<p><strong>vim /etc/named.conf</strong></p>
+<p>options {</p>
+<p>​       forward first|only;                                    ##first优先在指向DNS服务器解析，only表示只在</p>
+<p>​         forwarders { 192.168.30.17; }                         ##指向的DNS服务器解析</p>
+<p>};</p>
+<p><img src="全局4.png" alt="全局4"></p>
+<p>注意确定主配置文件recursion yes;并且关闭dnssec功能否则也将导致实验失败</p>
+<p>重启named服务</p>
+<p>rndc reload</p>
+<p>4切换至客户端进行测试：</p>
+<p>首先清除dns缓存记录</p>
+<p>rndc flush</p>
+<p>进行ping测，解析成功（由于未搭建web服务器，所以显示主机不可达）</p>
+<p>ping <a href="http://www.wxlinux.com" target="_blank" rel="noopener">www.wxlinux.com</a></p>
+<p><img src="全局5.0.png" alt="全局5.0"></p>
+<p>指定DNS1服务器解析地址，发现DNS1直接指向了DNS2服务器进行解析</p>
+<p>dig <a href="http://www.wxlinux.com" target="_blank" rel="noopener">www.wxlinux.com</a> @192.168.30.10</p>
+<p><img src="全局5.png" alt="全局5"></p>
+<h3 id="（二）特定区域转发："><a href="#（二）特定区域转发：" class="headerlink" title="（二）特定区域转发："></a><strong>（二）特定区域转发：</strong></h3><p>仅转发对特定的区域的请求，比全局转发优先级高</p>
+<h3 id="前期准备：-6"><a href="#前期准备：-6" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>同全局转发实验</p>
+<h3 id="实验预期：-6"><a href="#实验预期：-6" class="headerlink" title="实验预期："></a><strong>实验预期：</strong></h3><p>只有在访问wxlinux.com域时，才优先指向DNS2服务器进行解析</p>
+<p>1在DNS1删除刚才的全局配置，新增加区域配置文件内容如下：</p>
+<p>只有当访问wxlinux.com域时，才优先转发DNS2服务器解析</p>
+<p><strong>vim /etc/named.rfc1912.zones</strong></p>
+<p>zone “wxlinux.com” IN {</p>
+<p>​         type forward;</p>
+<p>​         forward first|only;</p>
+<p>​         forwarders {192.168.30.16;};</p>
+<p><img src="特定域1.png" alt="特定域1"></p>
+<p>清理DNS1服务器的DNS缓存</p>
+<p>rndc flush</p>
+<p>2切换至客户端测试：</p>
+<p>解析成功，只在访问wxlinu.com优先指向DNS2服务器进行解析</p>
+<p>dig <a href="http://www.wxlinux.com" target="_blank" rel="noopener">www.wxlinux.com</a> @192.168.30.10</p>
+<p><img src="特定域转发2.png" alt="特定域转发2"></p>
+<h2 id="九、实验：实现智能DNS"><a href="#九、实验：实现智能DNS" class="headerlink" title="九、实验：实现智能DNS"></a>九、实验：实现智能DNS</h2><h3 id="前期准备：-7"><a href="#前期准备：-7" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>DNS服务器：两块网卡地址分别为172.20.113.242和192.168.30.10</p>
+<p>模拟192.168.30.0/24网段为北京地区地址段</p>
+<p>模拟172.20.0.0/16   网段为上海地区地址段</p>
+<h3 id="实验预期：-7"><a href="#实验预期：-7" class="headerlink" title="实验预期："></a><strong>实验预期：</strong></h3><p>北京用户访问时返回192.168.30.1</p>
+<p>上海用户访问时返回192.168.30.2</p>
+<p>其他地区用户访问时防护192.168.30.3</p>
+<p>1在主配置文件中添加ACL</p>
+<p><img src="智能1.png" alt="智能1"></p>
+<p>2建立与ACL映射的数据库</p>
+<p><img src="区域解析配置.png" alt="区域解析配置"></p>
+<p><img src="view4.png" alt="view4"></p>
+<p>3建立view，一但采用viwe，必须把所有区域信息放到view语句块中，否则将失效，为了便于管理，我们将主配置文件中此段内容剪切至/etc/named.rfc19212.zones中</p>
+<p><img src="view1.png" alt="view1"></p>
+<p><img src="view2.png" alt="view2"></p>
+<p><strong>vim /etc/named.conf</strong></p>
+<p>添加view：如图</p>
+<p><img src="view3.png" alt="view3"></p>
+<p>4创建view对应的区域数据信息</p>
+<p>cp  /etc/named.rfc1912.zone    /etc/named.rfc1912.zone.beijing –a</p>
+<p>cp  /etc/named.rfc1912.zone    /etc/named.rfc1912.zone.shanghai –a</p>
+<p><strong>vim /etc/named.rfc1912.zone.beijing</strong></p>
+<p>zone “wxlinux.com” IN {</p>
+<p>​         type master</p>
+<p>​         file “wxlinux.com.zone.beijing”;</p>
+<p><img src="viww6.png" alt="viww6"></p>
+<p><strong>vim /etc/named.rfc1912.zone.shanghai</strong></p>
+<p>zone “wxlinux.com” IN {</p>
+<p>​         type master</p>
+<p>​         file “wxlinux.com.zone.beijing”;</p>
+<p><img src="view5.png" alt="view5"></p>
+<p>最终生成三个独立的区域数据信息</p>
+<p><img src="view7.png" alt="view7"></p>
+<p>重启named服务</p>
+<p>rndc reload</p>
+<p>5切换到客户端进行测试：</p>
+<p>（1）192.168.30.0/24测试</p>
+<p>dig <a href="http://www.wxlinux.com" target="_blank" rel="noopener">www.wxlinux.com</a> @192.168.30.10</p>
+<p>当地址为192.168.30.0/24段时，web服务器指向192.168.30.1</p>
+<p><img src="测试2-1.png" alt="测试2"></p>
+<p>（2）172.20.0.0/16测试</p>
+<p>dig <a href="http://www.wxlinux.com" target="_blank" rel="noopener">www.wxlinux.com</a> @172.20.113.242</p>
+<p>当地址为172.20.0.0/16段时，web服务器指向192.168.30.2</p>
+<p><img src="测试3.png" alt="测试3"></p>
+<p>（3）其他网段测试</p>
+<p>切换回DNS服务器端：</p>
+<p>dig <a href="http://www.wxlinux.com" target="_blank" rel="noopener">www.wxlinux.com</a> @127.0.0.1</p>
+<p>由于127.0.0.1不属于上述两个网段之一，所以DNS服务器将web服务器地址指向192.168.0.3</p>
+<p><img src="测试4.png" alt="测试4"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DNS/" rel="tag"># DNS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/31/Ansible使用介绍（三）templates及Roles角色/" rel="next" title="Ansible使用介绍（三）templates及Roles角色">
+                <i class="fa fa-chevron-left"></i> Ansible使用介绍（三）templates及Roles角色
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/05/MySQL数据库简介及安装实验/" rel="prev" title="MySQL数据库简介及安装实验">
+                MySQL数据库简介及安装实验 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、DNS服务相关介绍"><span class="nav-number">1.</span> <span class="nav-text">一、DNS服务相关介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bind"><span class="nav-number">1.1.</span> <span class="nav-text">bind</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#资源记录："><span class="nav-number">1.2.</span> <span class="nav-text">资源记录：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#资源记录定义的格式："><span class="nav-number">1.3.</span> <span class="nav-text">资源记录定义的格式：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、实验：搭建正向主DNS服务器"><span class="nav-number">2.</span> <span class="nav-text">二、实验：搭建正向主DNS服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备："><span class="nav-number">2.1.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验预期："><span class="nav-number">2.2.</span> <span class="nav-text">实验预期：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体步骤："><span class="nav-number">2.3.</span> <span class="nav-text">具体步骤：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、实验：泛域名解析，提高访问感受"><span class="nav-number">3.</span> <span class="nav-text">三、实验：泛域名解析，提高访问感受</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备：-1"><span class="nav-number">3.1.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验预期：-1"><span class="nav-number">3.2.</span> <span class="nav-text">实验预期：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体步骤：-1"><span class="nav-number">3.3.</span> <span class="nav-text">具体步骤：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、实验：利用DNS实现web服务器负载均衡"><span class="nav-number">4.</span> <span class="nav-text">四、实验：利用DNS实现web服务器负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备：-2"><span class="nav-number">4.1.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验预期：-2"><span class="nav-number">4.2.</span> <span class="nav-text">实验预期：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体步骤：-2"><span class="nav-number">4.3.</span> <span class="nav-text">具体步骤：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、实验：实现反向解析"><span class="nav-number">5.</span> <span class="nav-text">五、实验：实现反向解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备：-3"><span class="nav-number">5.1.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体步骤：-3"><span class="nav-number">5.2.</span> <span class="nav-text">具体步骤：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、实验：搭建正向从DNS服务器"><span class="nav-number">6.</span> <span class="nav-text">六、实验：搭建正向从DNS服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备：-4"><span class="nav-number">6.1.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验预期：-3"><span class="nav-number">6.2.</span> <span class="nav-text">实验预期：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体步骤：-4"><span class="nav-number">6.3.</span> <span class="nav-text">具体步骤：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、实验：实现子域"><span class="nav-number">7.</span> <span class="nav-text">七、实验：实现子域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实验预期：-4"><span class="nav-number">7.1.</span> <span class="nav-text">实验预期：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一：修改主DNS区域解析文件"><span class="nav-number">7.2.</span> <span class="nav-text">方法一：修改主DNS区域解析文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法二：本机独立子域"><span class="nav-number">7.3.</span> <span class="nav-text">方法二：本机独立子域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法三：委派给另一台主机维护子域，实现分布式DNS管理"><span class="nav-number">7.4.</span> <span class="nav-text">方法三：委派给另一台主机维护子域，实现分布式DNS管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、实验：forward转发"><span class="nav-number">8.</span> <span class="nav-text">八、实验：forward转发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#（一）全局性转发："><span class="nav-number">8.1.</span> <span class="nav-text">（一）全局性转发：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备：-5"><span class="nav-number">8.2.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验预期：-5"><span class="nav-number">8.3.</span> <span class="nav-text">实验预期：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（二）特定区域转发："><span class="nav-number">8.4.</span> <span class="nav-text">（二）特定区域转发：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备：-6"><span class="nav-number">8.5.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验预期：-6"><span class="nav-number">8.6.</span> <span class="nav-text">实验预期：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九、实验：实现智能DNS"><span class="nav-number">9.</span> <span class="nav-text">九、实验：实现智能DNS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备：-7"><span class="nav-number">9.1.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验预期：-7"><span class="nav-number">9.2.</span> <span class="nav-text">实验预期：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

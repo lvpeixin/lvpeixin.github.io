@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="SSH,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、SSH协议相关概念SSH：secure shell，protocal，22/tcp，安全的远程登录； 利用 SSH 协议可以有效防止远程管理过程中的信息泄露问题，用来代替早期不安全的telnet 具体的软件实现： OpenSSH：ssh协议的开源实现。CentOS默认安装 dropbear：另一个开源实现 SSH协议版本： v1: 基于CRC-32做MAC，不安全；man-in-middle">
+<meta name="keywords" content="SSH">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSH协议及基于SSH集群key认证实验">
+<meta property="og:url" content="http://yoursite.com/2018/05/18/SSH协议及基于SSH集群key认证实验/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="一、SSH协议相关概念SSH：secure shell，protocal，22/tcp，安全的远程登录； 利用 SSH 协议可以有效防止远程管理过程中的信息泄露问题，用来代替早期不安全的telnet 具体的软件实现： OpenSSH：ssh协议的开源实现。CentOS默认安装 dropbear：另一个开源实现 SSH协议版本： v1: 基于CRC-32做MAC，不安全；man-in-middle">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/05/18/SSH协议及基于SSH集群key认证实验/ssh批量发送脚本.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/18/SSH协议及基于SSH集群key认证实验/ssh批量执行脚本.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/18/SSH协议及基于SSH集群key认证实验/发送目录.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/18/SSH协议及基于SSH集群key认证实验/脚本.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/18/SSH协议及基于SSH集群key认证实验/pssh成功失败.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/18/SSH协议及基于SSH集群key认证实验/pssh.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/18/SSH协议及基于SSH集群key认证实验/pssh批量.png">
+<meta property="og:updated_time" content="2018-07-17T13:07:17.326Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SSH协议及基于SSH集群key认证实验">
+<meta name="twitter:description" content="一、SSH协议相关概念SSH：secure shell，protocal，22/tcp，安全的远程登录； 利用 SSH 协议可以有效防止远程管理过程中的信息泄露问题，用来代替早期不安全的telnet 具体的软件实现： OpenSSH：ssh协议的开源实现。CentOS默认安装 dropbear：另一个开源实现 SSH协议版本： v1: 基于CRC-32做MAC，不安全；man-in-middle">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/18/SSH协议及基于SSH集群key认证实验/ssh批量发送脚本.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/18/SSH协议及基于SSH集群key认证实验/">
+
+
+
+
+
+  <title>SSH协议及基于SSH集群key认证实验 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/18/SSH协议及基于SSH集群key认证实验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SSH协议及基于SSH集群key认证实验</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-18T15:16:18+08:00">
+                2018-05-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、SSH协议相关概念"><a href="#一、SSH协议相关概念" class="headerlink" title="一、SSH协议相关概念"></a><strong>一、SSH协议相关概念</strong></h2><p><strong>SSH</strong>：secure shell，protocal，22/tcp，安全的远程登录；</p>
+<p>利用 SSH 协议可以有效防止远程管理过程中的信息泄露问题，用来代替早期不安全的telnet</p>
+<p><strong>具体的软件实现：</strong></p>
+<p>OpenSSH：ssh协议的开源实现。CentOS默认安装</p>
+<p>dropbear：另一个开源实现</p>
+<p><strong>SSH协议版本：</strong></p>
+<p>v1: 基于CRC-32做MAC，不安全；man-in-middle</p>
+<p>v2：双方主机协议选择安全的MAC方式</p>
+<p>基于DH算法做密钥交换，基于RSA或DSA实现身份认证</p>
+<p><strong>相关包：</strong></p>
+<p>openssh</p>
+<p>openssh-clients</p>
+<p>openssh-server</p>
+<p><strong>工具：</strong></p>
+<p>基于C/S结构：</p>
+<p><strong>Client：</strong></p>
+<p>​      <strong>Linux：</strong>ssh，scp，sftp，slogin</p>
+<p>​    <strong>Windows：</strong>xshell，putty，securecrt，sshsecureshellclient</p>
+<p><strong>Server：</strong>sshd</p>
+<p><strong>客户端组件：</strong></p>
+<p><strong>ssh</strong>, 配置文件：/etc/ssh/ssh_config</p>
+<p>Host PATTERN</p>
+<p>StrictHostKeyChecking no 首次登录不显示检查提示</p>
+<p><strong>格式：</strong></p>
+<p>ssh [user@]host [COMMAND]</p>
+<p>ssh [-l user] host [COMMAND]</p>
+<p>-p port              远程服务器监听的端口</p>
+<p>-b              指定连接的源IP</p>
+<p>-v              调试模式</p>
+<p>-C              压缩方式</p>
+<p>-X              支持x11转发，跨网络的图形界面显示；例如：xclock</p>
+<p>-Y              支持信任x11转发</p>
+<p>ForwardX11Trusted yes</p>
+<p>-t               强制伪tty分配；堡垒机可用</p>
+<p>ssh -t remoteserver1 ssh remoteserver2</p>
+<h3 id="两种方式的用户登录认证："><a href="#两种方式的用户登录认证：" class="headerlink" title="两种方式的用户登录认证："></a><strong>两种方式的用户登录认证：</strong></h3><p><strong>基于password：</strong></p>
+<p>只要你知道自己帐号和口令，就可以登录到远程主机。所有传输的数据都会被加密，但是不能保证你正在连接的服务器就是你想连接的服务器。可能会有别的服务器在冒充真正的服务器，也就是受到“中间人”这种方式的攻击。</p>
+<p><strong>大致流程：</strong></p>
+<p>1.客户端发起ssh请求，服务器会把自己的公钥发送给用户</p>
+<p>2.用户会根据服务器发来的公钥对密码进行加密</p>
+<p>3.加密后的信息回传给服务器，服务器用自己的私钥解密，如果密码正确，则用户登录成功</p>
+<p><strong>基于key：</strong></p>
+<p>需要依靠密匙，也就是你必须为自己创建一对密匙，并把公用密匙放在需要访问的服务器上。如果你要连接到SSH服务器上，客户端软件就会向服务器发出请求，请求用你的密匙进行安全验证。服务器收到请求之后，先在该服务</p>
+<p>器上你的主目录下寻找你的公用密匙，然后把它和你发送过来的公用密匙进行比较。如果两个密匙一致，服务器就用公用密匙加密“质询”（challenge）并把它发送给客户端软件。客户端软件收到“质询”之后就可以用你的</p>
+<p>私人密匙解密再把它发送给服务器。</p>
+<p><strong>大致流程：</strong></p>
+<p>1.首先在客户端生成一对密钥</p>
+<p>2.并将客户端的公钥ssh-copy-id拷贝到服务器端</p>
+<p>3.当客户端再次发送一个连接请求，包括ip、用户名</p>
+<p>4.服务端得到客户端的请求后，会到authorized_keys中查找，如果有响应的IP和用户，服务器就会发出“质询”（challenge）表现为一串随机字符，如：acdf。</p>
+<p>5.服务端将使用客户端拷贝过来的公钥对“质询”进行加密，然后发送给客户端</p>
+<p>6.得到服务端发来“质询”后，客户端会使用私钥进行解密，然后将解密后的字符串发送给服务端</p>
+<p>7.服务端接受到客户端发来的字符串后，跟之前的字符串进行对比，如果一致，就允许免密码登录</p>
+<p><strong>两种登录认证的对比：</strong></p>
+<p>基于key的认证方式，用户必须指定自己密钥的口令。但是，与第一种级别相比，第二种级别不需要在网络上传送口令。</p>
+<p>第二种级别不仅加密所有传送的数据，而且“中间人”这种攻击方式也是不可能的（因为他没有你的私人密匙）。但是整个登录的过程会比基于passwd认证稍长，可能需要10秒</p>
+<p><strong>相关文件：</strong></p>
+<p>~/.ssh/authorized_keys          存放已授权基于key登录的主机的公钥</p>
+<p>~/.ssh/know_hosts                  存放本机SSH连接过的主机的公钥</p>
+<p><strong>操作：加快ssh服务访问速度</strong></p>
+<p><strong>/etc/ssh/sshd_config</strong>文件</p>
+<p>GSSAPIAuthentication yes–&gt;no             关闭api验证</p>
+<p>#UseDNS  yes|no–&gt;UseDNS no             去掉注释，启用DNS</p>
+<p>重启sshd服务</p>
+<p>CentOS6：</p>
+<p>service  sshd   restart </p>
+<p>CentOS7：</p>
+<p>systemctl restart sshd</p>
+<h2 id="二、实验：实现基于key登录认证"><a href="#二、实验：实现基于key登录认证" class="headerlink" title="二、实验：实现基于key登录认证"></a><strong>二、实验：实现基于key登录认证</strong></h2><p><strong>一、在客户端生成一对钥匙：</strong></p>
+<p>ssh-keygen -t rsa</p>
+<p>交互式输入：</p>
+<p>默认路径</p>
+<p>输入口令</p>
+<p><strong>二、发送公钥给服务器端：</strong></p>
+<p>ssh-copy-id   <a href="mailto:wang@192.168.30.7" target="_blank" rel="noopener">wang@192.168.30.7</a></p>
+<p>再次连接：</p>
+<p>ssh <a href="mailto:wang@192.168.30.7" target="_blank" rel="noopener">wang@192.168.30.7</a>        不提示输入密码</p>
+<p>ssh <a href="mailto:wang@192.168.30.7" target="_blank" rel="noopener">wang@192.168.30.7</a>  ‘id’      远程执行命令</p>
+<p><strong>利用基于key不需输入口令登录的特性，我们可小批量的执行一些任务：</strong></p>
+<p>先把需要执行任务的服务器IP放入一个文件中：</p>
+<p>cat ip.txt</p>
+<p>192.168.30.7</p>
+<p>192.168.30.12</p>
+<p>192.168.30.17</p>
+<p>……</p>
+<p><strong>编写一个脚本显示主机名：</strong></p>
+<p>vim hostname.sh</p>
+<p>hostname</p>
+<p>chmod +x hostname.sh</p>
+<p><strong>执行命令：</strong></p>
+<p>批量传送脚本</p>
+<p>for ip in <code>cat ip.txt</code>;do scp -p f1.sh $ip:/data/;done</p>
+<p><img src="ssh批量发送脚本.png" alt="ssh批量发送脚本"></p>
+<p>批量执行脚本显示主机名</p>
+<p>for ip in <code>cat ip.txt</code>;do ssh $ip “/data/f1.sh”;done</p>
+<p><img src="ssh批量执行脚本.png" alt="ssh批量执行脚本"></p>
+<p>可结合expect实现批量密钥登录方式</p>
+<h3 id="三、实验：实现多台机器间互相基于key登录认证"><a href="#三、实验：实现多台机器间互相基于key登录认证" class="headerlink" title="三、实验：实现多台机器间互相基于key登录认证"></a>三、实验：实现多台机器间互相基于key登录认证</h3><p><strong>思路：多台机器公用一套钥匙</strong></p>
+<p><strong>一、在A机器上生成一对密钥，并对自己执行ssh-copy-id命令</strong></p>
+<p>ssh-keygen</p>
+<p>ssh-copy-id A</p>
+<p><strong>二、将本机.ssh目录发送给其他所有机器</strong></p>
+<p>scp -rp /root/.ssh  B:/root/</p>
+<p>scp -rp /root/.ssh  C:/root/</p>
+<p><img src="发送目录.png" alt="发送目录"></p>
+<p><strong>即可实现多台机器间互相基于key登录</strong></p>
+<p><strong>当然，如果我们觉得私钥不加密不安全，我们还可以给私钥重新加密</strong></p>
+<p>重设私钥口令：</p>
+<p>ssh-keygen -p</p>
+<p><strong>私钥加密后，每次连接都要求输入私钥口令，我们可采取代理托管方式省去输入口令这一环节：</strong></p>
+<p>注：代理托管重启后失效，需重新设置</p>
+<p>启用代理托管口令</p>
+<p>ssh-agent bash</p>
+<p>ssh-add</p>
+<h2 id="四、实验：实现100台机器基于key登录验证"><a href="#四、实验：实现100台机器基于key登录验证" class="headerlink" title="四、实验：实现100台机器基于key登录验证"></a><strong>四、实验：实现100台机器基于key登录验证</strong></h2><p><strong>一、准备ip列表</strong></p>
+<p>先把需要执行任务的服务器IP放入一个文件中：</p>
+<p>cat ip.txt</p>
+<p>192.168.30.x</p>
+<p>192.168.30.xx</p>
+<p>192.168.30.xxx</p>
+<p>……</p>
+<p><strong>二、编写将公钥推送到其他100台机器上的脚本</strong></p>
+<p>#!/bin/bash</p>
+<p>#安装expect包</p>
+<p>rpm -q expect &amp;&gt; /dev/null || yum install expect -y</p>
+<p>#生成一对密钥，如需加密密钥可在-P之后写上密码</p>
+<p>ssh-keygen -P “” -f “/root/.ssh/id_rsa”</p>
+<p>#服务器登录密码</p>
+<p>password=centos</p>
+<p>while read ipaddr;do</p>
+<p>expect &lt;&lt;EOF</p>
+<p>set timeout 10</p>
+<p>spawn ssh-copy-id $ipaddr</p>
+<p>expect {</p>
+<p>“yes/no” { send “yes\n”;exp_continue }</p>
+<p>“password” { send “$password\n” }</p>
+<p>}</p>
+<p>expect eof</p>
+<p>EOF</p>
+<p>done &lt; ip.txt</p>
+<p><img src="脚本.png" alt="脚本"></p>
+<p><strong>三、运行脚本，将公钥推送到其他100台机器上</strong></p>
+<p><strong>四、实现基于密钥验证无密码登录</strong></p>
+<h2 id="五、利用pssh工具实现集群管理"><a href="#五、利用pssh工具实现集群管理" class="headerlink" title="五、利用pssh工具实现集群管理"></a><strong>五、利用pssh工具实现集群管理</strong></h2><p><strong>注：系统默认未安装pssh工具，需使用epel源安装，使用pssh需先建立服务器端到用户端的基于</strong></p>
+<p><strong>key验证才可以正常使用</strong></p>
+<h3 id="pssh工具："><a href="#pssh工具：" class="headerlink" title="pssh工具："></a><strong>pssh工具：</strong></h3><p>pssh是一个python编写可在多台服务器上执行命令的工具，也可实现文件复制</p>
+<p><strong>options：</strong></p>
+<p>–version 查看版本</p>
+<p>-h              指定主机文件列表，内容格式”[user@]host[:port]”</p>
+<p>-H             指定主机，内容格式”[user@]host[:port]”</p>
+<p>-l               登录使用的用户名</p>
+<p>-p              并发的线程数[可选]</p>
+<p>-o              输出的文件目录[可选]</p>
+<p>-e              错误输入文件[可选]</p>
+<p>-t               TIMEOUT超过时间设置。0代表无限制[可选]</p>
+<p>-O             SSH的选项</p>
+<p>-v              查看过程</p>
+<p>-A              手动输入密码模式</p>
+<p>-x              额外的命令行参数使用空白符号，引号，反斜线处理</p>
+<p>-X              额外的命令行参数，单个参数模式，同-x</p>
+<p>-i               显示每个服务器执行结果输出信息，默认不显示</p>
+<p>-P              打印出服务器返回信息</p>
+<p>未建立基于key验证将显示<strong>[FAILURE]</strong>失败</p>
+<p>已建立基于key验证将显示<strong>[SUCCESS]</strong>成功</p>
+<p><img src="pssh成功失败.png" alt="pssh成功失败"></p>
+<p><strong>远程连接某主机执行hostname，显示主机名</strong></p>
+<p>pssh -H  <a href="mailto:USER@192.168.x.x" target="_blank" rel="noopener">USER@192.168.x.x</a>  -i  “hostname” </p>
+<p><img src="pssh.png" alt="pssh"></p>
+<p><strong>批量远程执行命令</strong></p>
+<p>一、将需要连接的主机写入一个文件</p>
+<p>cat ip.txt</p>
+<p>192.168.30.x</p>
+<p>192.168.30.xx</p>
+<p>192.168.30.xxx</p>
+<p>……</p>
+<p>二、批量显示文件中包含的主机名</p>
+<p>pssh -h  ip.txt  -i  “hostname”</p>
+<p><img src="pssh批量.png" alt="pssh批量"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SSH/" rel="tag"># SSH</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/18/Linux网络安全技术/" rel="next" title="Linux网络安全技术">
+                <i class="fa fa-chevron-left"></i> Linux网络安全技术
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/18/SSH端口转发及相关实验/" rel="prev" title="SSH端口转发及相关实验">
+                SSH端口转发及相关实验 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、SSH协议相关概念"><span class="nav-number">1.</span> <span class="nav-text">一、SSH协议相关概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#两种方式的用户登录认证："><span class="nav-number">1.1.</span> <span class="nav-text">两种方式的用户登录认证：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、实验：实现基于key登录认证"><span class="nav-number">2.</span> <span class="nav-text">二、实验：实现基于key登录认证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三、实验：实现多台机器间互相基于key登录认证"><span class="nav-number">2.1.</span> <span class="nav-text">三、实验：实现多台机器间互相基于key登录认证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、实验：实现100台机器基于key登录验证"><span class="nav-number">3.</span> <span class="nav-text">四、实验：实现100台机器基于key登录验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、利用pssh工具实现集群管理"><span class="nav-number">4.</span> <span class="nav-text">五、利用pssh工具实现集群管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pssh工具："><span class="nav-number">4.1.</span> <span class="nav-text">pssh工具：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

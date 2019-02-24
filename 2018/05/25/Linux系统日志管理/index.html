@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="日志管理,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Linux系统中的日志记录了系统每天发生的各种各样的事情，你可以通过它来检查错误发生的原因， 或者受到攻击时攻击者留下的痕迹。日志对于安全来说，非常重要。  一、日志介绍日志主要包含以下内容：历史事件：时间，地点，人物，事件 日志级别：事件的关键性程度，Loglevel 系统中常见日志及说明： 系统日志服务：CentOS 5之前版本 syslogd syslogd: system applicat">
+<meta name="keywords" content="日志管理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux系统日志管理">
+<meta property="og:url" content="http://yoursite.com/2018/05/25/Linux系统日志管理/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="Linux系统中的日志记录了系统每天发生的各种各样的事情，你可以通过它来检查错误发生的原因， 或者受到攻击时攻击者留下的痕迹。日志对于安全来说，非常重要。  一、日志介绍日志主要包含以下内容：历史事件：时间，地点，人物，事件 日志级别：事件的关键性程度，Loglevel 系统中常见日志及说明： 系统日志服务：CentOS 5之前版本 syslogd syslogd: system applicat">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/05/25/Linux系统日志管理/日志文件.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/25/Linux系统日志管理/服务名称.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/25/Linux系统日志管理/等级名称.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/25/Linux系统日志管理/Logrotate.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/25/Linux系统日志管理/0-1.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/25/Linux系统日志管理/1-39.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/25/Linux系统日志管理/2-38.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/25/Linux系统日志管理/3-37.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/25/Linux系统日志管理/4-28.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/25/Linux系统日志管理/1-40.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/25/Linux系统日志管理/2-39.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/25/Linux系统日志管理/3-38.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/25/Linux系统日志管理/4-29.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/25/Linux系统日志管理/5-25.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/25/Linux系统日志管理/1-41.png">
+<meta property="og:updated_time" content="2018-07-15T05:10:48.186Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux系统日志管理">
+<meta name="twitter:description" content="Linux系统中的日志记录了系统每天发生的各种各样的事情，你可以通过它来检查错误发生的原因， 或者受到攻击时攻击者留下的痕迹。日志对于安全来说，非常重要。  一、日志介绍日志主要包含以下内容：历史事件：时间，地点，人物，事件 日志级别：事件的关键性程度，Loglevel 系统中常见日志及说明： 系统日志服务：CentOS 5之前版本 syslogd syslogd: system applicat">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/25/Linux系统日志管理/日志文件.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/25/Linux系统日志管理/">
+
+
+
+
+
+  <title>Linux系统日志管理 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/25/Linux系统日志管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux系统日志管理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-25T16:10:55+08:00">
+                2018-05-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Linux系统中的日志记录了系统每天发生的各种各样的事情，你可以通过它来检查错误发生的原因，</p>
+<p>或者受到攻击时攻击者留下的痕迹。日志对于安全来说，非常重要。 </p>
+<h2 id="一、日志介绍"><a href="#一、日志介绍" class="headerlink" title="一、日志介绍"></a><strong>一、日志介绍</strong></h2><h3 id="日志主要包含以下内容："><a href="#日志主要包含以下内容：" class="headerlink" title="日志主要包含以下内容："></a><strong>日志主要包含以下内容：</strong></h3><p>历史事件：时间，地点，人物，事件</p>
+<p>日志级别：事件的关键性程度，Loglevel</p>
+<h3 id="系统中常见日志及说明："><a href="#系统中常见日志及说明：" class="headerlink" title="系统中常见日志及说明："></a><strong>系统中常见日志及说明：</strong></h3><p><img src="日志文件.png" alt="日志文件"></p>
+<h3 id="系统日志服务："><a href="#系统日志服务：" class="headerlink" title="系统日志服务："></a><strong>系统日志服务：</strong></h3><p><strong>CentOS 5之前版本</strong></p>
+<p>syslogd</p>
+<p>syslogd: system application 记录应用日志</p>
+<p>klogd: linux kernel 记录内核日志</p>
+<p>事件记录格式：</p>
+<p>日期时间 主机 进程[pid]: 事件内容</p>
+<p>C/S架构：通过TCP或UDP协议的服务完成日志记录传送，将分布在不同主</p>
+<p>机的日志实现集中管理</p>
+<p><strong>CentOS 6和7</strong></p>
+<p>rsyslog特性：</p>
+<p>多线程</p>
+<p>UDP, TCP, SSL, TLS, RELP</p>
+<p>MySQL, PGSQL, Oracle实现日志存储</p>
+<p>强大的过滤器，可实现过滤记录日志信息中任意部分</p>
+<p>自定义输出格式</p>
+<p>ELK：elasticsearch, logstash, kibana</p>
+<p>非关系型分布式数据库</p>
+<p>基于apache软件基金会jakarta项目组的项目lucene</p>
+<p>Elasticsearch是个开源分布式搜索引擎</p>
+<p>Logstash对日志进行收集、分析，并将其存储供以后使用</p>
+<p>kibana 可以提供的日志分析友好的 Web 界面</p>
+<h3 id="日志常见术语"><a href="#日志常见术语" class="headerlink" title="日志常见术语"></a><strong>日志常见术语</strong></h3><p>参见<strong>man logger</strong></p>
+<p><strong>facility：</strong>设施，从功能或程序上对日志进行归类</p>
+<p>auth, authpriv, cron, daemon,ftp,kern, lpr, mail, news, security(auth),</p>
+<p>user, uucp, local0-local7, syslog</p>
+<p><img src="服务名称.png" alt="服务名称"></p>
+<p><strong>Priority：</strong> 优先级别，从低到高排序</p>
+<p>debug, info, notice, warn(warning), err(error), crit(critical), alert, emerg(panic)</p>
+<p>参看帮助： <strong>man 3 syslog</strong></p>
+<p><img src="等级名称.png" alt="等级名称"></p>
+<h2 id="二、日志配置"><a href="#二、日志配置" class="headerlink" title="二、日志配置"></a><strong>二、日志配置</strong></h2><p>程序包：rsyslog</p>
+<p>主程序：/usr/sbin/rsyslogd</p>
+<p>CentOS 6：service rsyslog {start|stop|restart|status}</p>
+<p>CentOS 7：/usr/lib/systemd/system/rsyslog.service</p>
+<p>配置文件：/etc/rsyslog.conf，/etc/rsyslog.d/*.conf</p>
+<p>库文件： /lib64/rsyslog/*.so</p>
+<h3 id="配置文件格式："><a href="#配置文件格式：" class="headerlink" title="配置文件格式："></a><strong>配置文件格式：</strong></h3><p>由三部分组成</p>
+<p>   <strong>MODULES：</strong>相关模块配置</p>
+<p>   <strong>GLOBAL DIRECTIVES：</strong>全局配置</p>
+<p>   <strong>RULES：</strong>日志记录相关的规则配置</p>
+<h3 id="日志格式："><a href="#日志格式：" class="headerlink" title="日志格式："></a><strong>日志格式：</strong></h3><p>RULES配置格式：</p>
+<p><strong>facility.priority; facility.priority… target</strong></p>
+<p><strong>facility：</strong></p>
+<p>*：所有的facility</p>
+<p>facility1,facility2,facility3,…：指定的facility列表</p>
+<p><strong>priority：</strong></p>
+<p><em>：所有级别；如：”authpriv.</em>”表示authpriv认证信息服务产生的所有等级日志都记录</p>
+<p>none：没有级别，即不记录</p>
+<p>PRIORITY：指定级别（含）以上的所有级别</p>
+<p>=PRIORITY：仅记录指定级别的日志信息，其他等级都不记录。如：”*.emerg”表示任何日志</p>
+<p>服务产生的日志，只要等级为emerg就记录；此用法较少见，了解即可</p>
+<p><strong>target：</strong></p>
+<p>文件路径：通常在<strong>/var/log/</strong>，文件路径前的-表示异步写入</p>
+<p>用户：将日志事件通知给指定的用户，* 表示登录的所有用户</p>
+<p>日志服务器：@host，把日志送往至指定的远程服务器记录</p>
+<p>管道： | COMMAND，转发给其它命令处理</p>
+<h3 id="etc-rsyslog-conf"><a href="#etc-rsyslog-conf" class="headerlink" title="/etc/rsyslog.conf"></a><strong>/etc/rsyslog.conf</strong></h3><p>#### RULES ####</p>
+<p># Log all kernel messages to the console.</p>
+<p><strong>内核产生的任何日志</strong></p>
+<p># Logging much else clutters up the screen.</p>
+<p>#kern.*                                                 /dev/console</p>
+<p># Log anything (except mail) of level info or higher.</p>
+<p><strong>定义了系统中除邮箱，身份验证，计划任务以外的其他日志</strong></p>
+<p># Don’t log private authentication messages!</p>
+<p>*.info;mail.none;authpriv.none;cron.none                /var/log/messages</p>
+<p><strong>定义身份验证授权相关的日志文件路径</strong></p>
+<p># The authpriv file has restricted access.</p>
+<p>authpriv.*                                              /var/log/secure</p>
+<p><strong>定义邮件日志文件路径，”-“代表异步传输</strong></p>
+<p># Log all the mail messages in one place.</p>
+<p>mail.*                                                  -/var/log/maillog</p>
+<p><strong>定义计划任务日志文件路径</strong></p>
+<p># Log cron stuff</p>
+<p>cron.*                                                  /var/log/cron</p>
+<p><strong>系统出现严重问题时，每个人都会收到提示</strong></p>
+<p># Everybody gets emergency messages</p>
+<p><em>.emerg                                                 :omusrmsg:</em></p>
+<p><strong>新闻相关服务日志文件</strong></p>
+<p># Save news errors of level crit and higher in a special file.</p>
+<p>uucp,news.crit                                          /var/log/spooler</p>
+<p><strong>本地预留定制日志</strong></p>
+<p># Save boot messages also to boot.log</p>
+<p>local7.*                                                /var/log/boot.log</p>
+<p>##################################</p>
+<h2 id="三、日志管理"><a href="#三、日志管理" class="headerlink" title="三、日志管理"></a><strong>三、日志管理</strong></h2><h3 id="Journalctl工具"><a href="#Journalctl工具" class="headerlink" title="Journalctl工具"></a><strong>Journalctl工具</strong></h3><p>Systemd 统一管理所有 Unit 的启动日志。带来的好处就是，可以只用</p>
+<p>journalctl一个命令，查看所有日志（内核日志和应用日志）。日志的配置文件</p>
+<p><strong>/etc/systemd/journald.conf</strong></p>
+<p><strong>journalctl用法</strong></p>
+<p>查看所有日志（默认情况下 ，只保存本次启动的日志）</p>
+<p>  journalctl</p>
+<p>查看内核日志（不显示应用日志）</p>
+<p>  journalctl -k</p>
+<p>查看系统本次启动的日志</p>
+<p>  journalctl -b</p>
+<p>  journalctl -b -0</p>
+<p>查看上一次启动的日志（需更改设置）</p>
+<p>  journalctl -b -1</p>
+<p>查看指定时间的日志</p>
+<p>  journalctl –since=”2017-10-30 18:10:30″</p>
+<p>  journalctl –since “20 min ago”</p>
+<p>  journalctl –since yesterday</p>
+<p>  journalctl –since “2017-01-10” –until “2017-01-11 03:00”</p>
+<p>  journalctl –since 09:00 –until “1 hour ago”</p>
+<p>显示尾部的最新10行日志</p>
+<p>  journalctl -n</p>
+<p>显示尾部指定行数的日志</p>
+<p>  journalctl -n 20</p>
+<p>实时滚动显示最新日志</p>
+<p>  journalctl -f</p>
+<p>查看指定服务的日志</p>
+<p>  journalctl /usr/lib/systemd/systemd</p>
+<p>查看指定进程的日志</p>
+<p>  journalctl _PID=1</p>
+<p>查看某个路径的脚本的日志</p>
+<p>  journalctl /usr/bin/bash</p>
+<p>查看指定用户的日志</p>
+<p>  journalctl _UID=33 –since today</p>
+<p>查看某个 Unit 的日志</p>
+<p>  journalctl -u nginx.service</p>
+<p>  journalctl -u nginx.service –since today</p>
+<p>实时滚动显示某个 Unit 的最新日志</p>
+<p>  journalctl -u nginx.service -f</p>
+<p>合并显示多个 Unit 的日志</p>
+<p>  journalctl -u nginx.service -u php-fpm.service –since today</p>
+<p>查看指定优先级（及其以上级别）的日志，共有8级</p>
+<p>  0: emerg</p>
+<p>  1: alert</p>
+<p>  2: crit</p>
+<p>  3: err</p>
+<p>  4: warning</p>
+<p>  5: notice</p>
+<p>  6: info</p>
+<p>  7: debug</p>
+<p>  journalctl -p err -b</p>
+<p>日志默认分页输出，–no-pager 改为正常的标准输出</p>
+<p>  journalctl –no-pager</p>
+<p>以 JSON 格式（单行）输出</p>
+<p>  journalctl -b -u nginx.service -o json</p>
+<p>以 JSON 格式（多行）输出，可读性更好</p>
+<p>  journalctl -b -u nginx.serviceqq -o json-pretty</p>
+<p>显示日志占据的硬盘空间</p>
+<p>  journalctl –disk-usage</p>
+<p>指定日志文件占据的最大空间</p>
+<p>  journalctl –vacuum-size=1G</p>
+<p>指定日志文件保存多久</p>
+<p>  journalctl –vacuum-time=1years</p>
+<h3 id="Logrotate工具"><a href="#Logrotate工具" class="headerlink" title="Logrotate工具"></a><strong>Logrotate工具</strong></h3><p><strong>logrotate</strong> 程序是一个日志文件管理工具。用来把旧的日志文件删除，并创建新</p>
+<p>的日志文件，称为日志转储或滚动。可以根据日志文件的大小，也可以根据其</p>
+<p>天数来转储，这个过程一般通过 cron 程序来执行</p>
+<p>配置文件：<strong>/etc/logrotate.conf</strong></p>
+<p><img src="Logrotate.png" alt="Logrotate"></p>
+<h2 id="四、远程日志"><a href="#四、远程日志" class="headerlink" title="四、远程日志"></a><strong>四、远程日志</strong></h2><p>Linux系统中的日志不仅可以在本地存储，还可以远程发送至指定的主机，设置指定的Mysql数据库中。</p>
+<p>启用远程日志服务：</p>
+<p><strong>通常的日志格式：</strong></p>
+<p>事件产生的日期时间 主机 进程(pid)：事件内容</p>
+<p>如： <strong>/var/log/messages,cron,secure</strong>等</p>
+<p><strong>配置rsyslog成为日志服务器</strong></p>
+<p>#### MODULES ####</p>
+<p># Provides UDP syslog reception</p>
+<p>$ModLoad imudp</p>
+<p>$UDPServerRun 514</p>
+<p># Provides TCP syslog reception</p>
+<p>$ModLoad imtcp</p>
+<p>$InputTCPServerRun 514</p>
+<h2 id="五、实验：实现远程日志"><a href="#五、实验：实现远程日志" class="headerlink" title="五、实验：实现远程日志"></a><strong>五、实验：实现远程日志</strong></h2><h3 id="前期准备："><a href="#前期准备：" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>虚拟机三台</p>
+<p>发送日志端：192.168.30.10</p>
+<p>远程接收端：192.168.30.17</p>
+<p>访问端：192.168.30.11</p>
+<h3 id="发送日志端："><a href="#发送日志端：" class="headerlink" title="发送日志端："></a><strong>发送日志端：</strong></h3><p>修改sshd默认日志为local2，记录等级至少为INFO</p>
+<p><strong>vim /etc/ssh/sshd_config</strong></p>
+<p><img src="0-1.png" alt="0"></p>
+<p><strong>vim /etc/rsyslog.d/ssh.conf</strong></p>
+<p>local2.*          @192.168.30.17                #若使用tcp协议，格式：@@IP</p>
+<p>local2.*           /var/log/local2.log          #若要本机和远程都记录日志可添加此行</p>
+<p>重启日志及SSH服务</p>
+<p>systemctl restart rsyslog sshd</p>
+<h3 id="远程接收端："><a href="#远程接收端：" class="headerlink" title="远程接收端："></a><strong>远程接收端：</strong></h3><p>开启514端口</p>
+<p>#$ModLoad imudp        ==&gt;   去掉注释</p>
+<p>#$UDPServerRun 514  ==&gt;   去掉注释</p>
+<p><img src="1-39.png" alt="1"></p>
+<p># Save boot messages also to boot.log</p>
+<p>local2.*            /var/log/local2.log         #添加此行</p>
+<p><img src="2-38.png" alt="2"></p>
+<p>重启日志服务</p>
+<p>systemctl restart rsyslog</p>
+<p>查看514端口是否已开启</p>
+<p>ss -untl</p>
+<p><img src="3-37.png" alt="3"></p>
+<h3 id="测试："><a href="#测试：" class="headerlink" title="测试："></a><strong>测试：</strong></h3><p>切换到访问端ssh连接192.168.30.10</p>
+<p>ssh 192.168.30.10</p>
+<p>切换到远程接收端，已收到日志发生端发送过来的日志</p>
+<p><img src="4-28.png" alt="4"></p>
+<h2 id="六、实验：实现基于MySQL的远程日志"><a href="#六、实验：实现基于MySQL的远程日志" class="headerlink" title="六、实验：实现基于MySQL的远程日志"></a><strong>六、实验：实现基于MySQL的远程日志</strong></h2><h3 id="前期准备：-1"><a href="#前期准备：-1" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>虚拟机三台</p>
+<p>发送日志端：192.168.30.10</p>
+<p>远程接收端：192.168.30.17</p>
+<p>访问端：192.168.30.11</p>
+<h3 id="发送日志端：-1"><a href="#发送日志端：-1" class="headerlink" title="发送日志端："></a><strong>发送日志端：</strong></h3><p>安装rsyslog-mysql包</p>
+<p>yum install rsyslog-mysql</p>
+<p>rpm -ql rsyslog-mysql</p>
+<p><img src="1-40.png" alt="1"></p>
+<p>将mysql- createDB.sql发送到远程接收端</p>
+<p>scp /usr/share/doc/rsyslog-8.24.0/mysql-createDB.sql 192.168.30.17:/root/</p>
+<p>切换到远程接收端：</p>
+<p>导入数据库</p>
+<p>mysql &lt; mysql-createDB.sql</p>
+<p>mysql &gt; use Syslog</p>
+<p>mysql &gt; show tables;</p>
+<p><img src="2-39.png" alt="2"></p>
+<p>创建一个syslog授权用户</p>
+<p>mysql &gt; grant all on Syslog.* to syslog@’192.168.30.%’  identified by ‘centos’;</p>
+<p>musql &gt; flush privileges;</p>
+<h3 id="日志发送端："><a href="#日志发送端：" class="headerlink" title="日志发送端："></a><strong>日志发送端：</strong></h3><p><strong>vim /etc/rsyslog.conf</strong></p>
+<p>#### MODULES ####</p>
+<p>$ModLoad ommysql                  #添加ommysql模块</p>
+<p><img src="3-38.png" alt="3"></p>
+<p>#### RULES ####</p>
+<p>*.info;mail.none;authpriv.none;cron.none     :ommysql:192.168.30.17,Syslog,syslog,centos</p>
+<p><img src="4-29.png" alt="4"></p>
+<p>重启日志服务</p>
+<p>systemctl restart rsyslog</p>
+<p>模拟一条日志信息</p>
+<p>logger “this is a test log”</p>
+<p>切换回远程接收端</p>
+<p>能看到刚刚发送的模拟日志信息</p>
+<p>Mysql&gt; select * from SystemEvents\G;</p>
+<p><img src="5-25.png" alt="5"></p>
+<h2 id="七、实验：通过loganalyzer展示数据库中的日志"><a href="#七、实验：通过loganalyzer展示数据库中的日志" class="headerlink" title="七、实验：通过loganalyzer展示数据库中的日志"></a><strong>七、实验：通过loganalyzer展示数据库中的日志</strong></h2><h3 id="前期准备：-2"><a href="#前期准备：-2" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>承接基于MySQL远程日志的实验环境</p>
+<h3 id="具体步骤："><a href="#具体步骤：" class="headerlink" title="具体步骤："></a><strong>具体步骤：</strong></h3><p>在rsyslog服务器上准备amp或nmp组合</p>
+<p>yum install httpd php php-mysql php-gd</p>
+<p>安装LogAnalyzer</p>
+<p>tar xvf loganalyzer-4.1.5.tar.gz</p>
+<p>cp -a loganalyzer-4.1.5/src /var/www/html/loganalyzer</p>
+<p>cd /var/www/html/loganalyzer</p>
+<p>touch config.php</p>
+<p>chmod 644 config.php</p>
+<p>重启httpd服务</p>
+<p>systemctl start httpd</p>
+<p>打开浏览器: <a href="http://192.168.30.17/loganalyzer/,出现下图页面，进行一些数据库的配置后，就可以进入" target="_blank" rel="noopener">http://192.168.30.17/loganalyzer/,出现下图页面，进行一些数据库的配置后，就可以进入</a></p>
+<p>loganlyzer管理数据库中的日志了</p>
+<p><img src="1-41.png" alt="1"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/日志管理/" rel="tag"># 日志管理</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/18/SSH端口转发及相关实验/" rel="next" title="SSH端口转发及相关实验">
+                <i class="fa fa-chevron-left"></i> SSH端口转发及相关实验
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/26/PXE自动化安装系统相关实验/" rel="prev" title="PXE自动化安装系统相关实验">
+                PXE自动化安装系统相关实验 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、日志介绍"><span class="nav-number">1.</span> <span class="nav-text">一、日志介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#日志主要包含以下内容："><span class="nav-number">1.1.</span> <span class="nav-text">日志主要包含以下内容：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统中常见日志及说明："><span class="nav-number">1.2.</span> <span class="nav-text">系统中常见日志及说明：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统日志服务："><span class="nav-number">1.3.</span> <span class="nav-text">系统日志服务：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志常见术语"><span class="nav-number">1.4.</span> <span class="nav-text">日志常见术语</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、日志配置"><span class="nav-number">2.</span> <span class="nav-text">二、日志配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件格式："><span class="nav-number">2.1.</span> <span class="nav-text">配置文件格式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志格式："><span class="nav-number">2.2.</span> <span class="nav-text">日志格式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#etc-rsyslog-conf"><span class="nav-number">2.3.</span> <span class="nav-text">/etc/rsyslog.conf</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、日志管理"><span class="nav-number">3.</span> <span class="nav-text">三、日志管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Journalctl工具"><span class="nav-number">3.1.</span> <span class="nav-text">Journalctl工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Logrotate工具"><span class="nav-number">3.2.</span> <span class="nav-text">Logrotate工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、远程日志"><span class="nav-number">4.</span> <span class="nav-text">四、远程日志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、实验：实现远程日志"><span class="nav-number">5.</span> <span class="nav-text">五、实验：实现远程日志</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备："><span class="nav-number">5.1.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发送日志端："><span class="nav-number">5.2.</span> <span class="nav-text">发送日志端：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程接收端："><span class="nav-number">5.3.</span> <span class="nav-text">远程接收端：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试："><span class="nav-number">5.4.</span> <span class="nav-text">测试：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、实验：实现基于MySQL的远程日志"><span class="nav-number">6.</span> <span class="nav-text">六、实验：实现基于MySQL的远程日志</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备：-1"><span class="nav-number">6.1.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发送日志端：-1"><span class="nav-number">6.2.</span> <span class="nav-text">发送日志端：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志发送端："><span class="nav-number">6.3.</span> <span class="nav-text">日志发送端：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、实验：通过loganalyzer展示数据库中的日志"><span class="nav-number">7.</span> <span class="nav-text">七、实验：通过loganalyzer展示数据库中的日志</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备：-2"><span class="nav-number">7.1.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体步骤："><span class="nav-number">7.2.</span> <span class="nav-text">具体步骤：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

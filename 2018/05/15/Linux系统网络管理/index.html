@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="网络管理,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、基本网络配置：将Linux主机接入网络，需要配置网络相关设置 一般包括以下内容： 主机名 IP/netmask 路由：默认网关 DNS服务器： 主DNS服务器 次DNS服务器 网络配置文件：IP、MASK、GW、DNS相关配置文件：/etc/sysconfig/networkscripts/ifcfg-IFACE： DEVICE=eth0                   针对网卡名称（必须">
+<meta name="keywords" content="网络管理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux系统网络管理">
+<meta property="og:url" content="http://yoursite.com/2018/05/15/Linux系统网络管理/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="一、基本网络配置：将Linux主机接入网络，需要配置网络相关设置 一般包括以下内容： 主机名 IP/netmask 路由：默认网关 DNS服务器： 主DNS服务器 次DNS服务器 网络配置文件：IP、MASK、GW、DNS相关配置文件：/etc/sysconfig/networkscripts/ifcfg-IFACE： DEVICE=eth0                   针对网卡名称（必须">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-15T05:10:22.540Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux系统网络管理">
+<meta name="twitter:description" content="一、基本网络配置：将Linux主机接入网络，需要配置网络相关设置 一般包括以下内容： 主机名 IP/netmask 路由：默认网关 DNS服务器： 主DNS服务器 次DNS服务器 网络配置文件：IP、MASK、GW、DNS相关配置文件：/etc/sysconfig/networkscripts/ifcfg-IFACE： DEVICE=eth0                   针对网卡名称（必须">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/15/Linux系统网络管理/">
+
+
+
+
+
+  <title>Linux系统网络管理 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/15/Linux系统网络管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux系统网络管理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-15T14:27:11+08:00">
+                2018-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、基本网络配置："><a href="#一、基本网络配置：" class="headerlink" title="一、基本网络配置："></a><strong>一、基本网络配置：</strong></h2><p>将Linux主机接入网络，需要配置网络相关设置</p>
+<p>一般包括以下内容：</p>
+<p>主机名</p>
+<p>IP/netmask</p>
+<p>路由：默认网关</p>
+<p>DNS服务器：</p>
+<p>主DNS服务器</p>
+<p>次DNS服务器</p>
+<h3 id="网络配置文件："><a href="#网络配置文件：" class="headerlink" title="网络配置文件："></a><strong>网络配置文件：</strong></h3><p>IP、MASK、GW、DNS相关配置文件：/etc/sysconfig/networkscripts/ifcfg-IFACE：</p>
+<p>DEVICE=eth0                   针对网卡名称（必须有）</p>
+<p>ONTBOOT=yes                 yes表示开机自动启动网卡，默认yes</p>
+<p>BOOTPROTO=dhcp         自动获取，生产中一般改为手动配置static|none（必须有）</p>
+<p>IPADDR=172.20.0.6        设置IP（必须有）</p>
+<p>NETMASK=255.255.0.0  传统方式配置掩码（必须有）</p>
+<p>PREFIX=16                CIDR法设置掩码（必须有）</p>
+<p>DEFROUTE=yes            是否将此配置的网关设为默认路由</p>
+<p>GATEWAY=172.20.0.1    设置网关</p>
+<p>DNS1=114.114.114.114 设置DNS1</p>
+<p>DNS2=8.8.8.8          设置DNS2</p>
+<p>TYPE                          接口类型，常见有Ethernet，Bridge</p>
+<p>UUID                         设备唯一表示</p>
+<p>路由相关的配置文件：/etc/sysconfig/network-scripts/route-IFACE</p>
+<p>注意：需service network restart生效</p>
+<p><strong>两种风格：</strong></p>
+<p>(1) TARGET via GW</p>
+<p>如：10.0.0.0/8 via 172.16.0.1</p>
+<p>(2) 每三行定义一条路由</p>
+<p>​         ADDRESS#=TARGET</p>
+<p>​         NETMASK#=mask</p>
+<p>​         GATEWAY#=GW</p>
+<h3 id="网络配置方式："><a href="#网络配置方式：" class="headerlink" title="网络配置方式："></a>网络配置方式：</h3><p><strong>静态指定：</strong></p>
+<p>ifconfig，route，netstat</p>
+<p>ip：object{link，addr，route}，ss，tc</p>
+<p>system-config-network-tui，setup      图形工具</p>
+<p>直接修改配置文件</p>
+<p><strong>动态分配：</strong></p>
+<p>DHCP： Dynamic Host Configuration Protocol</p>
+<h2 id="二、主机、网卡名称管理"><a href="#二、主机、网卡名称管理" class="headerlink" title="二、主机、网卡名称管理"></a><strong>二、主机、网卡名称管理</strong></h2><p><strong>CentOS6网卡名称</strong></p>
+<p>接口命名方式：</p>
+<p>以太网：eth[0,1,2…]</p>
+<p>ppp：ppp[0,1,2…]</p>
+<p>网络接口识别并命名相关的udev配置文件：</p>
+<p>/etc/udev/rules.d/70-persistent-net.rules</p>
+<p><strong>查看网卡：</strong></p>
+<p>dmesg |grep –i eth</p>
+<p>ethtool -i eth0</p>
+<p><strong>卸载网卡驱动：</strong></p>
+<p>modprobe -r e1000</p>
+<p>rmmod e1000</p>
+<p><strong>装载网卡驱动：</strong></p>
+<p>modprobe e1000</p>
+<h3 id="修改主机名："><a href="#修改主机名：" class="headerlink" title="修改主机名："></a>修改主机名：</h3><p>hostname [NEWNAME] 临时生效，重启恢复</p>
+<p>永久生效：</p>
+<p><strong>CentOS6：</strong></p>
+<p>修改/etc/sysconfig/network</p>
+<p><strong>CentOS7：</strong></p>
+<p>修改/etc/hostname</p>
+<p>或：hostnamectl set-hostname [NEWNAME]</p>
+<p>hostname [NEWNAME] 使配置文件生效</p>
+<h3 id="修改CentOS7网卡命名为传统命名方式，实现自动化运维"><a href="#修改CentOS7网卡命名为传统命名方式，实现自动化运维" class="headerlink" title="修改CentOS7网卡命名为传统命名方式，实现自动化运维"></a>修改CentOS7网卡命名为传统命名方式，实现自动化运维</h3><p>(1) 编辑/etc/default/grub配置文件</p>
+<p>GRUB_CMDLINE_LINUX=”rhgb quiet net.ifnames=0″</p>
+<p>或：修改/boot/grub2/grub.cfg   linux 16 行尾添加 net.ifnames=0</p>
+<p>(2) 为grub2生成其配置文件</p>
+<p>grub2-mkconfig -o /etc/grub2.cfg</p>
+<p>(3) 重启系统</p>
+<h3 id="修改本地解析器："><a href="#修改本地解析器：" class="headerlink" title="修改本地解析器："></a>修改本地解析器：</h3><p>/etc/hosts</p>
+<p>本地主机名数据库和IP地址的映像</p>
+<p>对小型独立网络有用</p>
+<p>通常，在使用DNS前检查</p>
+<p><strong>一般建议在127.0.0.1的行尾加上本机的hostname</strong></p>
+<p>注：如果hostname发生更改，一定要记得同时更改/etc/hosts里的原添加内容</p>
+<p>搭建网站也建议将网站地址与网页名称对应写入到/etc/hosts文件中，避免解析出错</p>
+<p><strong>设置DNS：</strong></p>
+<p>/etc/resolv.conf</p>
+<p>nameserver DNS_SERVER_IP1</p>
+<p>nameserver DNS_SERVER_IP2</p>
+<p>nameserver DNS_SERVER_IP3</p>
+<h2 id="三、网卡别名"><a href="#三、网卡别名" class="headerlink" title="三、网卡别名"></a><strong>三、网卡别名</strong></h2><p>对虚拟环境有用，可将多个IP地址绑定到一个网卡上</p>
+<p>eth0：1、eth0：2、eth0：3</p>
+<p><strong>ifconfig命令：</strong></p>
+<p>ifconfig eth0:0 192.168.1.100/24 up</p>
+<p>ifconfig eth0:0 down</p>
+<p><strong>ip命令：</strong></p>
+<p>ip addr add 172.16.1.2/16 dev eth0</p>
+<p>ip addr add 172.16.1.1/16 dev eth0 label eth0:0</p>
+<p>ip addr add 172.16.1.2/16 dev eth0 label eth0:0</p>
+<p>ip addr del 172.16.1.1/16 dev eth0 label eth0:0</p>
+<p>ip addr flush dev eth0 label eth0:0</p>
+<p><strong>为别名设备添加配置文件，永久生效</strong></p>
+<p>（1）service NetworkManager stop      关闭图形界面网络管理</p>
+<p>（2）ifctg-ethX：xxx</p>
+<p>（3）必须使用静态IP配置</p>
+<p>DEVICE=eth0：0</p>
+<p>IPADDR=10.10.10.10</p>
+<p>NETMASK=255.0.0.0</p>
+<p>ONPARENT=yes</p>
+<p>（4）最后重启网络服务</p>
+<p>service network restart</p>
+<h2 id="四、网络接口配置bonding"><a href="#四、网络接口配置bonding" class="headerlink" title="四、网络接口配置bonding"></a><strong>四、网络接口配置bonding</strong></h2><p><strong>Bonding</strong>是将多个网卡绑定同一IP地址对外提供服务，可以实现高可用或者负载均衡。直接给两块网卡</p>
+<p>设置同一IP地址是不可以的。通过bonding，虚拟一块网卡对外提供链接，物理网卡被修改为相同的MAC</p>
+<p>地址</p>
+<p><strong>Bonding工作模式：</strong></p>
+<p><strong>Mode 0 (balance-rr)</strong></p>
+<p>轮转（Round-robin）策略：从头到尾顺序的在每个slave接口上发送数据包。提供负载均衡和容错的能力</p>
+<p><strong>Mode 1 (active-backup)</strong></p>
+<p>活动-备份（主备）策略：只有一个slave被激活，当且仅当活动的slave接口失败时才会激活其他slave。</p>
+<p>为了避免交换机发生混乱此时绑定的MAC地址只有一个外部端口上可见</p>
+<p><strong>Mode 3 (broadcast)</strong></p>
+<p>广播策略：在所有的slave接口上传送所有的报文,提供容错能力</p>
+<p>查看bond0主备状态：/proc/net/bonding/bond0</p>
+<p>创建bonding设备的配置文件</p>
+<p>/etc/sysconfig/network-scripts/ifcfg-bond0</p>
+<p>DEVICE=bond0</p>
+<p>BOOTPROTO=none</p>
+<p>BONDING_OPTS= “miimon=100 mode=0”</p>
+<p>/etc/sysconfig/network-scripts/ifcfg-eth0</p>
+<p>DEVICE=eth0</p>
+<p>BOOTPROTO=none</p>
+<p>MASTER=bond0</p>
+<p>SLAVE=yes</p>
+<p>USERCTL=no</p>
+<p><strong>也可使用nmcli实现bonding</strong></p>
+<p><strong>添加bonding接口</strong></p>
+<p>nmcli con add type bond con-name mybond0 ifname mybond0 mode active-backup</p>
+<p><strong>添加从属接口</strong></p>
+<p>nmcli con add type bond-slave ifname ens7 master mybond0</p>
+<p>nmcli con add type bond-slave ifname ens3 master mybond0</p>
+<p>注：如无为从属接口提供连接名，则该名称是接口名称加类型构成，要启动绑定，则必须</p>
+<p>首先启动从属接口</p>
+<p>nmcli con up bond-slave-eth0</p>
+<p>nmcli con up bond-slave-eth1</p>
+<p><strong>启动绑定</strong></p>
+<p>nmcli con up mybond0</p>
+<p><strong>取消bonding</strong></p>
+<p><strong>1.卸载驱动模块</strong></p>
+<p>lsmod                        显示所有已加载的驱动模块</p>
+<p>lsmod | grep bond</p>
+<p>ifconfig bond0 down      禁用网卡</p>
+<p>modproble -r bonding</p>
+<p><strong>2.删除和修改文件</strong></p>
+<p>rm -r ifcfg-bond0</p>
+<p>vim ifcfg-eth{0,1}</p>
+<p>service     network restart       重启网络服务</p>
+<h2 id="五、实现网络组"><a href="#五、实现网络组" class="headerlink" title="五、实现网络组"></a><strong>五、实现网络组</strong></h2><p>代替bonding的一种技术</p>
+<p><strong>网络组：将多个网卡聚合在一起的方法，从而实现冗错和提高吞吐量</strong></p>
+<p>多种方式运行：</p>
+<p><strong>broadcast</strong>                 广播模式</p>
+<p><strong>roundrobin</strong>               轮播模式</p>
+<p><strong>activebackup</strong>           主备模式</p>
+<p><strong>loadbalance</strong>              负载均衡模式</p>
+<p><strong>lacp</strong> (implements the 802.3ad Link Aggregation Control Protocol)</p>
+<p><strong>创建网络组Network Teaming（RHCE）</strong></p>
+<p>nmcli con add type team con-name team0 ifname team0 config</p>
+<p>‘{“runner”: {“name”: “loadbalance”}}’</p>
+<p>nmcli con mod team0 ipv4.addresses 192.168.1.100/24</p>
+<p>nmcli con mod team0 ipv4.method manual</p>
+<p>nmcli connection show</p>
+<p>nmcli con add con-name team0-eth1 type team-slave ifname eth1 master team0</p>
+<p>nmcli con add con-name team0-eth2 type team-slave ifname eth2 master team0</p>
+<p>nmcli con up team0</p>
+<p>nmcli con up team0-eth1</p>
+<p>nmcli con up team0-eth2</p>
+<p>nmcli connection show</p>
+<p>teamdctl team0 state</p>
+<p><strong>删除网络组：</strong></p>
+<p>第一种方法：删除network-scripts下配置文件</p>
+<p>第二种方法：nmcli connection delete team0 team0-eth1 team0-eth2</p>
+<h2 id="六、Linux网络管理常用命令："><a href="#六、Linux网络管理常用命令：" class="headerlink" title="六、Linux网络管理常用命令："></a><strong>六、Linux网络管理常用命令：</strong></h2><h3 id="ifconfig-命令-配置网络接口"><a href="#ifconfig-命令-配置网络接口" class="headerlink" title="ifconfig 命令          配置网络接口"></a><strong>ifconfig 命令          配置网络接口</strong></h3><p>-a                       查看所有接口信息</p>
+<p>interface up|down 禁用|启用接口</p>
+<p><strong>设置IP地址</strong></p>
+<p>ifconfig IFACE IP/netmask      支持两种掩码设置IP</p>
+<p>IP netmask</p>
+<p>注意：此命令执行将立即生效</p>
+<h3 id="route-命令-路由管理命令"><a href="#route-命令-路由管理命令" class="headerlink" title="route  命令                       路由管理命令"></a><strong>route  命令                       路由管理命令</strong></h3><p>-n                       查看路由表</p>
+<p><strong>添加路由：</strong></p>
+<p>route add [-net|-host] target [netmask Nm] [gw Gw] [[dev] if]    </p>
+<p>添加目标：192.168.1.3 网关：172.16.0.1到路由表</p>
+<p>route add -host 192.168.1.3 gw 172.16.0.1 dev eth0</p>
+<p>添加目标：192.168.0.0 网关：172.16.0.1到路由表</p>
+<p>route add -net 192.168.0.0 netmask 255.255.255.0 gw 172.16.0.1 dev eth0</p>
+<p>route add -net 192.168.0.0/24 gw 172.16.0.1 dev eth0</p>
+<p>添加默认路由，网关：172.16.0.1到路由表</p>
+<p>route add -net 0.0.0.0 netmask 0.0.0.0 gw 172.16.0.1</p>
+<p>route add default gw 172.16.0.1</p>
+<p><strong>删除路由：</strong></p>
+<p>route del [-net|-host] target [netmask Nm] [gw Gw] [[dev] if]</p>
+<p>配置动态路由</p>
+<p>通过首行进程获取动态路由</p>
+<p>安装quagga包</p>
+<p>支持多种路由协议：RIP（根据跳数）、OSPF（综合带宽、跳数等）和BGP</p>
+<p>命令vtysh配置</p>
+<h3 id="netstat-命令-查看网络连接，路由表，接口统计等信息"><a href="#netstat-命令-查看网络连接，路由表，接口统计等信息" class="headerlink" title="netstat   命令                   查看网络连接，路由表，接口统计等信息"></a><strong>netstat   命令                   查看网络连接，路由表，接口统计等信息</strong></h3><p><strong>option：</strong></p>
+<p>-t                       tcp协议相关</p>
+<p>-u                       udp协议相关</p>
+<p>-w                      raw socket相关</p>
+<p>-l                        处于监听状态</p>
+<p>-a                       所有状态</p>
+<p>-n                       以数字显示所有IP和端口</p>
+<p>-e                       扩展格式</p>
+<p>-p                       显示相关进程及PID</p>
+<p><strong>常用组合选项：</strong></p>
+<p>-nr                     查看路由表</p>
+<p>-nt                     查看TCP进程</p>
+<p>-ntu                   查看TCP及UDP进程</p>
+<p>-ntul                           查看处于监听状态LISTEN的服务</p>
+<p>-tul                    端口程序不进行名称解析显示</p>
+<p>-ntua                         查看所有状态的服务</p>
+<p>-ntuap                       查看哪个进程打开的此端口</p>
+<p>-ntuape                     扩展信息，包括使用用户UID</p>
+<p><strong>统计端口数据</strong></p>
+<p>-i                        查看网卡收发包信息</p>
+<p>-I=eth0                      只显示eth0网卡收发包信息等同于ifconfig -s eth0</p>
+<h3 id="ss-命令"><a href="#ss-命令" class="headerlink" title="ss 命令"></a><strong>ss 命令</strong></h3><p><strong>格式：ss [option]…[FILTER]</strong></p>
+<p>用来代替netstat的新命令，netstat通过遍历proc来获取socket信息，ss使用netlink与内核tcp_diag</p>
+<p>模块通信获取socket信息。</p>
+<p><strong>option：</strong></p>
+<p>-t                       tcp协议相关</p>
+<p>-u                       udp协议相关</p>
+<p>-w                      裸套接字相关</p>
+<p>-x                       unix sock相关</p>
+<p>-l                        listen状态的链接</p>
+<p>-a                       所有链接</p>
+<p>-n                       以数字格式显示</p>
+<p>-p                       相关的程序及PID</p>
+<p>-e                       扩展的信息</p>
+<p>-m                     内存用量</p>
+<p>-o                      计时器信息</p>
+<p><strong>TCP常见状态：</strong></p>
+<p>LISTEN                      监听</p>
+<p>ESTABLISHED           已建立的链接</p>
+<p>FIN_WAIT_1</p>
+<p>FIN_WAIT_2</p>
+<p>SYN_SENT</p>
+<p>CLOSED</p>
+<p><strong>支持EXPRESSION：</strong></p>
+<p>dport=                       目标端口</p>
+<p>sport=                       源端口</p>
+<p><strong>常用组合用法与netstat类似</strong></p>
+<p>-tan，-tanl等</p>
+<p><strong>常见用法：</strong></p>
+<p>ss -l                           显示本地打开的所有端口</p>
+<p>ss -pl                         显示每个进程具体打开的socket</p>
+<p>ss -t -a             显示所有tcp socket</p>
+<p>ss -u -a            显示所有的UDP Socekt</p>
+<p>ss -o state established ‘( dport = :ssh or sport = :ssh )’ 显示所有已建立的ssh连接</p>
+<p>ss -o state established ‘( dport = :http or sport = :http )’ 显示所有已建立的HTTP连接</p>
+<p>ss -s 列出当前socket详细信息</p>
+<h3 id="ip-命令-配置Linux网络属性"><a href="#ip-命令-配置Linux网络属性" class="headerlink" title="ip  命令    配置Linux网络属性"></a><strong>ip  命令    配置Linux网络属性</strong></h3><p><strong>格式：ip [OPTIONS] OBJECT {COMMAND|help}</strong></p>
+<p>​       OBJECT={link|addr|route}</p>
+<p><strong>网络设备配置：</strong></p>
+<p>ip link       set IFACE down|up 禁用|启用网卡</p>
+<p>ip link       show [up]                 显示数据链路层信息[仅显示处于激活状态接口]</p>
+<p><strong>ip地址设置：</strong></p>
+<p>ip addr {add|del} IP dev IFACE</p>
+<p>ip address add IP dev IFACE label ALIASIFACE              添加地址时指定网卡别名</p>
+<p>ip address add IP dev IFACE scpe{global|link|host}    指明作用域</p>
+<p>global：全局可用</p>
+<p>link：仅链接可用</p>
+<p>host：本机可用</p>
+<p>ip address flush dev IFACe  清空IP地址</p>
+<p><strong>路由管理：</strong></p>
+<p>ip r|route [show|list]                               查看路由表</p>
+<p>ip route add|del TARGET via GW dev IFACE 添加|删除路由</p>
+<p>ip route flush dev IFACE                         清空路由表</p>
+<p><strong>常用命令：</strong></p>
+<p>ip help                                                 查看ip命令使用帮助</p>
+<p>ip link                                                   查看数据链路层信息</p>
+<p>ip link set eth1 up|down                          设置eth1网卡启用|禁用</p>
+<p>ip address|a                                       查看网卡信息</p>
+<p>ip route|r                                            查看路由信息</p>
+<p>ip route add|del IP/24 via gateway                添加路由</p>
+<p>ip address add 2.2.2.2/24 dev eth0                添加IP地址</p>
+<p>ip address add 2.2.2.2/24 dev eth0 label eth0：2添加别名网卡IP地址</p>
+<p>ip address flush dev eth0                         清空eth0网卡上所有ip地址</p>
+<h3 id="nmcli-管理网络管理器的命令行工具"><a href="#nmcli-管理网络管理器的命令行工具" class="headerlink" title="nmcli                 管理网络管理器的命令行工具"></a><strong>nmcli                 管理网络管理器的命令行工具</strong></h3><p><strong>格式：nmcli [OPTIONS] OBJECT COMMAND</strong></p>
+<p><strong>OBJECT：</strong></p>
+<p>device                       显示和管理网络接口</p>
+<p>connection|con               管理网络连接</p>
+<p><strong>修改IP地址等属性：</strong></p>
+<p>nmcli connection modify IFACE [+|-]setting.property value</p>
+<p>setting.property：</p>
+<p>ipv4.addresses</p>
+<p>ipv4.gateway</p>
+<p>ipv4.dns1</p>
+<p>ipv4.method manual | auto</p>
+<p><strong>修改配置文件执行生效：</strong></p>
+<p>systemctl restart network</p>
+<p>nmcli con reload</p>
+<p>设备即网络接口，连接是对网络接口的配置。一个网络接口可有多个连接配置，</p>
+<p>但同时只有一个连接配置生效</p>
+<p><strong>使连接配置生效|失效：</strong></p>
+<p>nmcli con up|down eth0</p>
+<p><strong>显示所有包括不活动连接</strong></p>
+<p>nmcli con show</p>
+<p><strong>显示所有活动连接</strong></p>
+<p>nmcli con show –active</p>
+<p><strong>显示网络连接配置</strong></p>
+<p>nmcli con show “System eth0“</p>
+<p><strong>显示设备状态</strong></p>
+<p>nmcli dev status</p>
+<p><strong>显示网络接口属性</strong></p>
+<p>nmcli dev show eth0</p>
+<p><strong>创建新连接default，IP自动通过dhcp获取</strong></p>
+<p>nmcli con add con-name default type Ethernet ifname eth0</p>
+<p><strong>删除连接</strong></p>
+<p>nmcli con del default</p>
+<p><strong>创建新连接static ，指定静态IP，不自动连接</strong></p>
+<p>nmcti con add con-name static ifname eth0 autoconnect no type</p>
+<p>Ethernet ipv4.addresses 172.25.X.10/24 ipv4.gateway 172.25.X.254</p>
+<p><strong>启用static连接配置</strong></p>
+<p>nmcli con up static</p>
+<p><strong>启用default连接配置</strong></p>
+<p>nmcli con up default</p>
+<p><strong>查看帮助</strong></p>
+<p>nmcli con add help</p>
+<p><strong>修改连接设置</strong></p>
+<p>nmcli con mod“static” connection.autoconnect no</p>
+<p>nmcli con mod “static” ipv4.dns 172.25.X.254</p>
+<p>nmcli con mod “static” +ipv4.dns 8.8.8.8</p>
+<p>nmcli con mod “static” -ipv4.dns 8.8.8.8</p>
+<p>nmcli con mod “static” ipv4.addresses “172.25.X.10/24 172.25.X.254”</p>
+<p>nmcli con mod “static” +ipv4.addresses 10.10.10.10/16</p>
+<p><strong>DNS设置，存放在/etc/resolv.conf文件中</strong></p>
+<p>PEERDNS=no 表示当IP通过dhcp自动获取时，dns仍是手动设置，不自动获取。等价于下</p>
+<p>面命令：</p>
+<p>nmcli con mod “system eth0” ipv4.ignore-auto-dns yes</p>
+<p><strong>修改连接配置后，需要重新加载配置</strong>：</p>
+<p>nmcli con reload</p>
+<p>nmcli con down “system eth0” 可被自动激活</p>
+<p>nmcli con up “system eth0”</p>
+<p>nmcli dev dis eth0 禁用网卡，访止被自动激活</p>
+<p><strong>图形工具</strong></p>
+<p>nm-connection-editor</p>
+<p><strong>字符工具</strong></p>
+<p>nmtui</p>
+<p>nmtui-connect</p>
+<p>nmtui-edit</p>
+<p>nmtui-hostname</p>
+<h3 id="测试网络"><a href="#测试网络" class="headerlink" title="测试网络"></a><strong>测试网络</strong></h3><p>在命令行下测试网络的连通性</p>
+<p><strong>显示主机名</strong></p>
+<p>hostname</p>
+<p><strong>测试网络连通性</strong></p>
+<p>ping</p>
+<p>mtr</p>
+<p><strong>显示正确的路由表</strong></p>
+<p>ip route</p>
+<p><strong>确定名称服务器使用：</strong></p>
+<p>nslookup</p>
+<p>host</p>
+<p>dig</p>
+<p><strong>跟踪路由</strong></p>
+<p>traceroute</p>
+<p>tracepath</p>
+<h3 id="网络客户端工具"><a href="#网络客户端工具" class="headerlink" title="网络客户端工具"></a><strong>网络客户端工具</strong></h3><p>ftp，lftp：子命令：get、mget、ls、help</p>
+<p>ftp [-p port] [-u user[,password]] SERVER</p>
+<p>lftpget URL      直接跟URL地址下载</p>
+<p><strong>wget [option]… [URL]…</strong></p>
+<p>-q: 静默模式</p>
+<p>-c: 断点续传</p>
+<p>-P：保存在指定目录</p>
+<p>-O: 保存为指定的文件名</p>
+<p>–limit-rate=: 指定传输速率，单位K,M等，生产中最好限速</p>
+<p><strong>links URL          图形界面浏览器</strong></p>
+<p>–dump            只显示文字</p>
+<p>–source          查看网页源码</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/网络管理/" rel="tag"># 网络管理</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/13/Linux系统计划任务/" rel="next" title="Linux系统计划任务">
+                <i class="fa fa-chevron-left"></i> Linux系统计划任务
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/15/SELinux简介/" rel="prev" title="SELinux简介">
+                SELinux简介 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、基本网络配置："><span class="nav-number">1.</span> <span class="nav-text">一、基本网络配置：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网络配置文件："><span class="nav-number">1.1.</span> <span class="nav-text">网络配置文件：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络配置方式："><span class="nav-number">1.2.</span> <span class="nav-text">网络配置方式：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、主机、网卡名称管理"><span class="nav-number">2.</span> <span class="nav-text">二、主机、网卡名称管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改主机名："><span class="nav-number">2.1.</span> <span class="nav-text">修改主机名：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改CentOS7网卡命名为传统命名方式，实现自动化运维"><span class="nav-number">2.2.</span> <span class="nav-text">修改CentOS7网卡命名为传统命名方式，实现自动化运维</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改本地解析器："><span class="nav-number">2.3.</span> <span class="nav-text">修改本地解析器：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、网卡别名"><span class="nav-number">3.</span> <span class="nav-text">三、网卡别名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、网络接口配置bonding"><span class="nav-number">4.</span> <span class="nav-text">四、网络接口配置bonding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、实现网络组"><span class="nav-number">5.</span> <span class="nav-text">五、实现网络组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、Linux网络管理常用命令："><span class="nav-number">6.</span> <span class="nav-text">六、Linux网络管理常用命令：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ifconfig-命令-配置网络接口"><span class="nav-number">6.1.</span> <span class="nav-text">ifconfig 命令          配置网络接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#route-命令-路由管理命令"><span class="nav-number">6.2.</span> <span class="nav-text">route  命令                       路由管理命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#netstat-命令-查看网络连接，路由表，接口统计等信息"><span class="nav-number">6.3.</span> <span class="nav-text">netstat   命令                   查看网络连接，路由表，接口统计等信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ss-命令"><span class="nav-number">6.4.</span> <span class="nav-text">ss 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ip-命令-配置Linux网络属性"><span class="nav-number">6.5.</span> <span class="nav-text">ip  命令    配置Linux网络属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nmcli-管理网络管理器的命令行工具"><span class="nav-number">6.6.</span> <span class="nav-text">nmcli                 管理网络管理器的命令行工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试网络"><span class="nav-number">6.7.</span> <span class="nav-text">测试网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络客户端工具"><span class="nav-number">6.8.</span> <span class="nav-text">网络客户端工具</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

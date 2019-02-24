@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、tomcat介绍Tomcat是Apache 软件基金会（Apache Software Foundation）的Jakarta 项目中的一个核心项目，由 Apache、Sun 和其他一些公司及个人共同开发而成。因为Tomcat 技术先进、性能稳定，而且免费，因而 深受Java 爱好者的喜爱并得到了部分软件开发商的认可，成为目前比较流行的Web 应用服务器。 Tomcat 服务器是一个免费的开放">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tomcat介绍及相关实验">
+<meta property="og:url" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="一、tomcat介绍Tomcat是Apache 软件基金会（Apache Software Foundation）的Jakarta 项目中的一个核心项目，由 Apache、Sun 和其他一些公司及个人共同开发而成。因为Tomcat 技术先进、性能稳定，而且免费，因而 深受Java 爱好者的喜爱并得到了部分软件开发商的认可，成为目前比较流行的Web 应用服务器。 Tomcat 服务器是一个免费的开放">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/1-34.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/2-31.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/3-28.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/4-23.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/5-15.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/2-32.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/3-29.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/4-24.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/5-16.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/6-14.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/1-36.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/2-33.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/3-30.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/4-25.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/5-17.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/6-15.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/8-12.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/1-37.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/2-34.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/3-31.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/4-26.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/5-18.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/6-16.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/7-14.png">
+<meta property="og:updated_time" content="2018-07-28T12:43:29.596Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tomcat介绍及相关实验">
+<meta name="twitter:description" content="一、tomcat介绍Tomcat是Apache 软件基金会（Apache Software Foundation）的Jakarta 项目中的一个核心项目，由 Apache、Sun 和其他一些公司及个人共同开发而成。因为Tomcat 技术先进、性能稳定，而且免费，因而 深受Java 爱好者的喜爱并得到了部分软件开发商的认可，成为目前比较流行的Web 应用服务器。 Tomcat 服务器是一个免费的开放">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/1-34.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/">
+
+
+
+
+
+  <title>Tomcat介绍及相关实验 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Tomcat介绍及相关实验</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-24T20:42:27+08:00">
+                2018-07-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、tomcat介绍"><a href="#一、tomcat介绍" class="headerlink" title="一、tomcat介绍"></a><strong>一、tomcat介绍</strong></h2><p><strong>Tomcat</strong>是Apache 软件基金会（Apache Software Foundation）的Jakarta 项目中的一个核心项目，由</p>
+<p>Apache、Sun 和其他一些公司及个人共同开发而成。因为Tomcat 技术先进、性能稳定，而且免费，因而</p>
+<p>深受Java 爱好者的喜爱并得到了部分软件开发商的认可，成为目前比较流行的Web 应用服务器。</p>
+<p><strong>Tomcat</strong> 服务器是一个免费的开放源代码的Web 应用服务器，属于轻量级应用服务器，在中小型系统和并</p>
+<p>发访问用户不是很多的场合下被普遍使用，是开发和调试JSP 程序的首选。对于一个初学者来说，可以这</p>
+<p>样认为，当在一台机器上配置好Apache 服务器，可利用它响应HTML（标准通用标记语言下的一个应用）</p>
+<p>页面的访问请求。实际上Tomcat是Apache 服务器的扩展，但运行时它是独立运行的，所以当你运行</p>
+<p>tomcat 时，它实际上作为一个与Apache 独立的进程单独运行的。<strong>Apache 为HTML页面服务，而</strong></p>
+<p><strong>Tomcat 实际上运行JSP 页面和Servlet。</strong></p>
+<p><strong>官方网站：</strong><a href="http://tomcat.apache.org/" target="_blank" rel="noopener">http://tomcat.apache.org/</a></p>
+<h3 id="如何安装tomcat？"><a href="#如何安装tomcat？" class="headerlink" title="如何安装tomcat？"></a><strong>如何安装tomcat？</strong></h3><p><strong>方法一：</strong>本地yum安装(base源)</p>
+<p>systemctl start tomcat</p>
+<p>默认监听：8080，8005(管理端口)，8009</p>
+<p><img src="1-34.png" alt="1"></p>
+<p><strong>方法二：</strong>ASF官网站点下载安装</p>
+<p>官方网站下载地址：<a href="https://tomcat.apache.org/download-90.cgi" target="_blank" rel="noopener">https://tomcat.apache.org/download-90.cgi</a></p>
+<p>wget <a href="http://mirrors.hust.edu.cn/apache/tomcat/tomcat-8/v8.5.24/bin/apache-tomcat-8.5.24.tar.gz" target="_blank" rel="noopener">http://mirrors.hust.edu.cn/apache/tomcat/tomcat-8/v8.5.24/bin/apache-tomcat-8.5.24.tar.gz</a></p>
+<p>tar -zxf apache-tomcat-8.5.24.tar.gz</p>
+<p>启动tomcat</p>
+<p>./apache-tomcat-8.5.24/bin/startup.sh</p>
+<p>添加环境变量CATELINA_HOME</p>
+<p><strong>vim /etc/profile.d/</strong></p>
+<p>export CATALINA_BASE=/usr/local/tomcat</p>
+<p>export PATH=$CATALINA:$PATH</p>
+<p>服务控制由catalina脚本执行</p>
+<p>catalina.sh start</p>
+<p>此时，浏览器访问<strong>localhostIp:8080</strong>就可以看到tomcat默认界面了</p>
+<p><img src="2-31.png" alt="2"></p>
+<h2 id="二、tomcat服务配置"><a href="#二、tomcat服务配置" class="headerlink" title="二、tomcat服务配置"></a><strong>二、tomcat服务配置</strong></h2><h3 id="Tomcat的主要目录结构："><a href="#Tomcat的主要目录结构：" class="headerlink" title="Tomcat的主要目录结构："></a><strong>Tomcat的主要目录结构：</strong></h3><p><img src="3-28.png" alt="3"></p>
+<p><strong>bin：</strong>脚本，及启动时用到的类；</p>
+<p><strong>conf：</strong>配置文件目录；</p>
+<p><strong>lib：</strong>库文件，Java类库，jar；</p>
+<p><strong>logs：</strong>日志文件目录；</p>
+<p><strong>temp：</strong>临时文件目录；</p>
+<p><strong>webapps：</strong>webapp的默认目录；</p>
+<p><strong>work：</strong>工作目录，存放编译后的字节码文件；</p>
+<h3 id="Tomcat的配置文件构成："><a href="#Tomcat的配置文件构成：" class="headerlink" title="Tomcat的配置文件构成："></a><strong>Tomcat的配置文件构成：</strong></h3><p><strong>server.xml：</strong>主配置文件；</p>
+<p><strong>web.xml：</strong>每个webapp只有“部署”后才能被访问，它的部署方式通常由web.xml进行定义，其存放位置为</p>
+<p>WEB-INF/目录中；此文件为所有的webapps提供默认部署相关的配置；</p>
+<p><strong>context.xml：</strong>每个webapp都可以使用的配置文件，它通常由专用的配置文件context.xml来定义，其存</p>
+<p>放位置为WEB-INF/目录中；此文件为所有的webapps提供默认配置；</p>
+<p><strong>tomcat-users.xml：</strong>用户认证的账号和密码文件；角色（role），用户（User）；此文件在tomcat启动</p>
+<p>时被装入内存；</p>
+<p><strong>catalina.policy：</strong>当使用-security选项启动tomcat时，用于为tomcat设置安全策略；</p>
+<p><strong>catalina.properties：</strong>Java属性的定义文件，用于设定类加载器路径，以及一些与JVM调优相关参数；</p>
+<p><strong>logging.properties：</strong>日志系统相关的配置；</p>
+<p>Tomcat的核心组件：<strong>server.xml</strong></p>
+<server><br><br><service><br><br><connector><br><br><connector><br><br>…<br><br><engine><br><br><host><br><br><context><br><br><context><br><br>…<br><br></context></context></host><br><br><host><br><br>…<br><br></host><br><br>…<br><br></engine><br><br></connector></connector></service><br><br></server>
+
+
+
+
+
+<p>每一个组件都由一个Java“<strong>类</strong>”实现，这些组件大体可分为以下几个类型：</p>
+<p>顶级组件：Server</p>
+<p>服务类组件：Service</p>
+<p>连接器组件：http, https, ajp（apache jserv protocol）</p>
+<p>容器类：Engine, Host, Context</p>
+<p>被嵌套类：valve, logger, realm, loader, manager, …</p>
+<p>集群类组件：listener, cluster, …</p>
+<p>一般 web 项目路径结构</p>
+<p><img src="4-23.png" alt="4"></p>
+<p><strong>webapp</strong>归档格式：</p>
+<p>.war：webapp;</p>
+<p>.jar：EJB的类打包文件(类库)；</p>
+<p>.rar：资源适配器类打包文件；</p>
+<p>.ear：企业级webapp；</p>
+<p>…</p>
+<h3 id="部署-deploy-webapp的相关操作："><a href="#部署-deploy-webapp的相关操作：" class="headerlink" title="部署(deploy)webapp的相关操作："></a><strong>部署(deploy)webapp的相关操作：</strong></h3><p><strong>deploy：</strong>将webapp的源文件放置于目标目录(网页程序文件存放目录)，配置tomcat服务器能够基于</p>
+<p>web.xml和context.xml文件中定义的路径来访问此webapp；将其特有的类和依赖的类通过class loader装载</p>
+<p>至JVM；</p>
+<p>部署有两种方式：</p>
+<p>自动部署：auto deploy</p>
+<p>手动部署:</p>
+<p>冷部署：把webapp复制到指定的位置，而后才启动tomcat；</p>
+<p>热部署：在不停止tomcat的前提下进行部署；</p>
+<p>部署工具：manager、ant脚本、tcd(tomcat client deployer)等；</p>
+<p><strong>undeploy：</strong>拆除（反部署），停止webapp，并从tomcat实例上卸载webapp；</p>
+<p><strong>start：</strong>启动处于停止状态的webapp；</p>
+<p><strong>stop：</strong>停止webapp，不再向用户提供服务；其类依然在jvm上；</p>
+<p><strong>redeploy：</strong>重新部署；</p>
+<h3 id="Tomcat基础架构"><a href="#Tomcat基础架构" class="headerlink" title="Tomcat基础架构"></a><strong>Tomcat基础架构</strong></h3><p><img src="5-15.png" alt="5"></p>
+<p>连接器(connector)负责接收请求并传给引擎，由引擎运行jsp代码并返回给连接器</p>
+<p><strong>Server：</strong>代表整个服务器，一个server可以包含多个service</p>
+<p>一个Service可包含一个Engine，多个Connecter</p>
+<p><strong>Connector：</strong>连接器类元素，代表通信接</p>
+<p><strong>Engine：</strong>为特定的Service组件处理客户请求，要包含多个Host</p>
+<p><strong>Host：</strong>为特定的虚拟主机组件处理客户请求，可包含多个Context</p>
+<p><strong>Context：</strong>为特定的Web应用处理所有的客户请求</p>
+<h3 id="Tomcat的常用组件配置："><a href="#Tomcat的常用组件配置：" class="headerlink" title="Tomcat的常用组件配置："></a><strong>Tomcat的常用组件配置：</strong></h3><p><strong>Server</strong></p>
+<p><strong>功能：</strong>代表tomcat instance，即表现出的一个java进程；监听在8005端口，只接收“SHUTDOWN”。各</p>
+<p>server监听的端口不能相同，因此，在同一物理主机启动多个实例时，需要修改其监听端口为不同的端</p>
+<p>口；</p>
+<p>port=”-1″,</p>
+<p>shutdown=”RANDOM_CHARCTER”</p>
+<p><strong>Service</strong></p>
+<p><strong>功能：</strong>用于实现将一个或多个connector组件关联至一个engine组件；</p>
+<p>一个Server中可以有多个Service</p>
+<p><strong>Connector</strong></p>
+<p><strong>功能：</strong>负责接收请求，常见的有三类http/https/ajp；</p>
+<p>进入tomcat的请求可分为两类：</p>
+<p>(1) standalone : 请求来自于客户端浏览器；</p>
+<p>(2) 由其它的web server反代：来自前端的反代服务器；</p>
+<p>nginx –&gt; http connector –&gt; tomcat</p>
+<p>httpd(proxy_http_module) –&gt; http connector –&gt; tomcat</p>
+<p>httpd(proxy_ajp_module) –&gt; ajp connector –&gt; tomcat</p>
+<p>httpd(mod_jk) –&gt; ajp connector –&gt; tomcat</p>
+<p><strong>属性：</strong></p>
+<p>port=”8080″</p>
+<p>protocol=”HTTP/1.1″</p>
+<p>connectionTimeout=”20000″</p>
+<p>address：监听的IP地址；默认为本机所有可用地址；</p>
+<p>maxThreads：最大并发连接数，默认为200；</p>
+<p>enableLookups：是否启用DNS查询功能；</p>
+<p>acceptCount：等待队列的最大长度；</p>
+<p>secure：</p>
+<p>sslProtocol：</p>
+<p><strong>Engine</strong></p>
+<p><strong>功能：</strong>Servlet实例，即servlet引擎，其内部可以一个或多个host组件来定义站点； 通常需要通过</p>
+<p>defaultHost来定义默认的虚拟主机；</p>
+<p><strong>属性：</strong></p>
+<p>name=           #此引擎的逻辑名称，用于日志和错误消息。</p>
+<p>defaultHost=”localhost”   #默认主机名，用于标识将处理指向此服务器上主机名称但未在此配置文件中配</p>
+<p>置的请求的主机。</p>
+<p>jvmRoute=</p>
+<p><strong>Host</strong></p>
+<p><strong>功能：</strong>位于engine内部用于接收请求并进行相应处理的主机或虚拟主机</p>
+<p>Host元素表示一个虚拟主机</p>
+<host name="”localhost”" appbase="”webapps”" unpackwars="”true”" autodeploy="”true”"><br><br></host>
+
+
+
+<p>常用属性说明：</p>
+<p>name：名称；用于日志输出</p>
+<p>appBase：虚拟主机对应的应用基础路径，可以是个绝对路径, 或${CATALINA_BASE}相对路径</p>
+<p>xmlBase：虚拟主机XML基础路径,里面应该有Context xml配置文件；可以是个绝对路径, 或${CATALINA_BASE}相对路径</p>
+<p>createDirs：当appBase和xmlBase不存在时,是否创建目录；默认为true</p>
+<p>autoDeploy：是否周期性的检查appBase和xmlBase并deploy web应用和context描述符；默认为true</p>
+<p>deployIgnore：忽略deploy的正则</p>
+<p>deployOnStartup：Tomcat启动时是否自动deploy；默认为true</p>
+<p><strong>Context</strong></p>
+<p><strong>功能：</strong>Context元素表示一个Web应用程序，它在特定的虚拟主机中运行。每个Web应用程序都基于Web</p>
+<p>应用程序存档（WAR）文件，或者包含相应的解包内容的相应目录</p>
+<p><strong>常用属性说明：</strong></p>
+<p>altDDName：web.xml部署描述符路径；默认 /WEB-INF/web.xml</p>
+<p>docBase：Context的Root路径，和Host的appBase相结合, 可确定web应用的实际目录</p>
+<p>path ：web应用的context path；如果为根路径,则配置为空字符串(“”), 不能不配置</p>
+<p>privileged：是否使用Tomcat提供的manager servlet</p>
+<p>reloadable：/WEB-INF/classes/ 和/WEB-INF/lib/ 目录中class文件发生变化是否自动重新加载；默认为false</p>
+<p>swallowOutput：true情况下, System.out和System.err输出将被定向到web应用日志中；默认为false</p>
+<p><strong>Valve</strong></p>
+<valve classname="”org.apache.catalina.valves.AccessLogValve”" directory="”logs”" prefix="”localhost_access_log”" suffix="”.txt”" pattern="”%h" %l %u %t &quot;%r&quot; %s %b”>
+
+
+
+<p>Valve存在多种类型：</p>
+<p>定义访问日志：org.apache.catalina.valves.AccessLogValve</p>
+<p>定义访问控制：org.apache.catalina.valves.RemoteAddrValve</p>
+<valve classname="”org.apache.catalina.valves.RemoteAddrValve”" deny="”172\.16\.100\.67″/">
+
+
+
+<h2 id="三、实验：实现tomcat应用部署及版本控制"><a href="#三、实验：实现tomcat应用部署及版本控制" class="headerlink" title="三、实验：实现tomcat应用部署及版本控制"></a><strong>三、实验：实现tomcat应用部署及版本控制</strong></h2><h3 id="前期准备："><a href="#前期准备：" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>本节实验全部以yum安装为准,tomcat版本：<strong>tomcat-7.0.76-6.el7.noarch</strong></p>
+<p>创建一个测试类应用</p>
+<p>mkdir  -pv  /usr/share/tomcat/webapps/test/{classes,lib,WEB-INF}</p>
+<p><img src="2-32.png" alt="2"></p>
+<p><strong>tomcat端测试：</strong></p>
+<p>浏览器打开：tomcat.wxlinux.com/test/</p>
+<p><img src="3-29.png" alt="3"></p>
+<p>当应用被部署上线后，就会在<strong>/usr/share/tomcat/work/Catalina/localhost/test</strong>目录生成源码和类</p>
+<p>库文件</p>
+<p><img src="4-24.png" alt="4"></p>
+<h3 id="版本部署"><a href="#版本部署" class="headerlink" title="版本部署"></a><strong>版本部署</strong></h3><p>软连接实现部署部署</p>
+<p><img src="5-16.png" alt="5"></p>
+<p>软连接方式不支持热部署，需重启tomcat服务后才能连接成功</p>
+<p>systemctl restart tomcat</p>
+<p><img src="6-14.png" alt="6"></p>
+<p>生产环境中一般使用git来实现版本控制，可以使用一个目录名包含多个版本程序</p>
+<h2 id="四、实验：tomcat创建虚拟主机Host及Context"><a href="#四、实验：tomcat创建虚拟主机Host及Context" class="headerlink" title="四、实验：tomcat创建虚拟主机Host及Context"></a><strong>四、实验：tomcat创建虚拟主机Host及Context</strong></h2><h3 id="定义虚拟主机"><a href="#定义虚拟主机" class="headerlink" title="定义虚拟主机"></a><strong>定义虚拟主机</strong></h3><p>修改server配置文件添加一个host配置：</p>
+<p><strong>vim /etc/tomcat/server.xml</strong></p>
+<p><img src="1-36.png" alt="1"></p>
+<p>写入一个测试类应用，内容如下：</p>
+<p>mkdir /data/webapps/ROOT/{classes,lib,META-INF,WEB-INF} -pv</p>
+<p><img src="2-33.png" alt="2"></p>
+<p>为了方便访问，这里添加主机名解析到hosts文件中</p>
+<p><strong>vim /etc/hosts</strong></p>
+<p>192.168.30.18   node1.wxlinux.com</p>
+<p>浏览器访问node1.wxlinux.com:8080</p>
+<p><img src="3-30.png" alt="3"></p>
+<h3 id="自定义host日志："><a href="#自定义host日志：" class="headerlink" title="自定义host日志："></a><strong>自定义host日志：</strong></h3><p><strong>vim /etc/tomcat/server.xml</strong></p>
+<p><img src="4-25.png" alt="4"></p>
+<p>当host被访问时，后生成日志：</p>
+<p><img src="5-17.png" alt="5"></p>
+<p>创建一个context：</p>
+<p><strong>vim /etc/tomcat/server.xml</strong></p>
+<p><img src="6-15.png" alt="6"></p>
+<p>在context定义的目录中创建另外一个应用，为了方便对比，仅仅改变<strong>字体颜色</strong>：</p>
+<p><strong>测试访问：</strong></p>
+<p><img src="8-12.png" alt="8"></p>
+<h2 id="五、实验：开启tomcat管理页面"><a href="#五、实验：开启tomcat管理页面" class="headerlink" title="五、实验：开启tomcat管理页面"></a><strong>五、实验：开启tomcat管理页面</strong></h2><h3 id="前期准备：-1"><a href="#前期准备：-1" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>虚拟机一台</p>
+<p>系统版本：CentOS 7.4      IP：192.168.30.27</p>
+<h3 id="manager管理页面："><a href="#manager管理页面：" class="headerlink" title="manager管理页面："></a><strong>manager管理页面：</strong></h3><p><strong>vim /etc/tomcat/tomcat-users.xml</strong></p>
+<p><img src="1-37.png" alt="1"></p>
+<p>浏览器打开<strong>192.168.30.27:8080</strong>点击红色区域</p>
+<p><img src="2-34.png" alt="2"></p>
+<p>管理界面可进行对web的管理，如停止，开始，卸载部署等操作</p>
+<p><img src="3-31.png" alt="3"></p>
+<p>图形界面热部署WAR文件：</p>
+<p><img src="4-26.png" alt="4"></p>
+<h3 id="HostManager管理页面："><a href="#HostManager管理页面：" class="headerlink" title="HostManager管理页面："></a><strong>HostManager管理页面：</strong></h3><p><strong>vim /etc/tomcat/tomcat-users.xml</strong></p>
+<p><img src="5-18.png" alt="5"></p>
+<p><strong>测试访问：</strong></p>
+<p><img src="6-16.png" alt="6"><img src="7-14.png" alt="7"></p>
+</valve></valve>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/19/Varnish缓存服务介绍及相关实验/" rel="next" title="Varnish缓存服务介绍及相关实验">
+                <i class="fa fa-chevron-left"></i> Varnish缓存服务介绍及相关实验
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/27/Virtualization虚拟化技术介绍/" rel="prev" title="Virtualization虚拟化技术介绍">
+                Virtualization虚拟化技术介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、tomcat介绍"><span class="nav-number">1.</span> <span class="nav-text">一、tomcat介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何安装tomcat？"><span class="nav-number">1.1.</span> <span class="nav-text">如何安装tomcat？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、tomcat服务配置"><span class="nav-number">2.</span> <span class="nav-text">二、tomcat服务配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat的主要目录结构："><span class="nav-number">2.1.</span> <span class="nav-text">Tomcat的主要目录结构：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat的配置文件构成："><span class="nav-number">2.2.</span> <span class="nav-text">Tomcat的配置文件构成：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署-deploy-webapp的相关操作："><span class="nav-number">2.3.</span> <span class="nav-text">部署(deploy)webapp的相关操作：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat基础架构"><span class="nav-number">2.4.</span> <span class="nav-text">Tomcat基础架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat的常用组件配置："><span class="nav-number">2.5.</span> <span class="nav-text">Tomcat的常用组件配置：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、实验：实现tomcat应用部署及版本控制"><span class="nav-number">3.</span> <span class="nav-text">三、实验：实现tomcat应用部署及版本控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备："><span class="nav-number">3.1.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版本部署"><span class="nav-number">3.2.</span> <span class="nav-text">版本部署</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、实验：tomcat创建虚拟主机Host及Context"><span class="nav-number">4.</span> <span class="nav-text">四、实验：tomcat创建虚拟主机Host及Context</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义虚拟主机"><span class="nav-number">4.1.</span> <span class="nav-text">定义虚拟主机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义host日志："><span class="nav-number">4.2.</span> <span class="nav-text">自定义host日志：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、实验：开启tomcat管理页面"><span class="nav-number">5.</span> <span class="nav-text">五、实验：开启tomcat管理页面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前期准备：-1"><span class="nav-number">5.1.</span> <span class="nav-text">前期准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#manager管理页面："><span class="nav-number">5.2.</span> <span class="nav-text">manager管理页面：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HostManager管理页面："><span class="nav-number">5.3.</span> <span class="nav-text">HostManager管理页面：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

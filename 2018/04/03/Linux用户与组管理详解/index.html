@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="linux,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在linux系统上，用户管理是基于用户名和密码的方式进行资源的分配，了解和掌握用户与组的管理是从事运维工作所必须具备的能力，也是将来从事运维行业的重要工作之一。 Linux的安全模型 安全3A ​    Linux通过三个机制来保证用户的安全： ​        Authentication：认证 ​        Authorization：授权 ​        Accouting|Audit">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux用户与组管理详解">
+<meta property="og:url" content="http://yoursite.com/2018/04/03/Linux用户与组管理详解/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="在linux系统上，用户管理是基于用户名和密码的方式进行资源的分配，了解和掌握用户与组的管理是从事运维工作所必须具备的能力，也是将来从事运维行业的重要工作之一。 Linux的安全模型 安全3A ​    Linux通过三个机制来保证用户的安全： ​        Authentication：认证 ​        Authorization：授权 ​        Accouting|Audit">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/04/03/Linux用户与组管理详解/passwd.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/03/Linux用户与组管理详解/shadow.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/03/Linux用户与组管理详解/密码期限.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/03/Linux用户与组管理详解/group.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/03/Linux用户与组管理详解/gshadow.png">
+<meta property="og:updated_time" content="2018-07-15T12:10:52.051Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux用户与组管理详解">
+<meta name="twitter:description" content="在linux系统上，用户管理是基于用户名和密码的方式进行资源的分配，了解和掌握用户与组的管理是从事运维工作所必须具备的能力，也是将来从事运维行业的重要工作之一。 Linux的安全模型 安全3A ​    Linux通过三个机制来保证用户的安全： ​        Authentication：认证 ​        Authorization：授权 ​        Accouting|Audit">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/03/Linux用户与组管理详解/passwd.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/03/Linux用户与组管理详解/">
+
+
+
+
+
+  <title>Linux用户与组管理详解 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/03/Linux用户与组管理详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux用户与组管理详解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-03T13:53:13+08:00">
+                2018-04-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在linux系统上，用户管理是基于用户名和密码的方式进行资源的分配，了解和掌握用户与组的管理是从事运维工作所必须具备的能力，也是将来从事运维行业的重要工作之一。</p>
+<h2 id="Linux的安全模型"><a href="#Linux的安全模型" class="headerlink" title="Linux的安全模型"></a>Linux的安全模型</h2><p> <strong>安全3A</strong></p>
+<p>​    Linux通过三个机制来保证用户的安全：</p>
+<p>​        Authentication：认证</p>
+<p>​        Authorization：授权</p>
+<p>​        Accouting|Audition：审计</p>
+<p><strong>安全上下文</strong></p>
+<p>​    Linux 安全上下文<br>        运行中的程序：进程 (process)<br>        以进程发起者的身份运行：<br>            root: /bin/cat<br>            mage: /bin/cat<br>    进程所能够访问资源的权限取决于进程的运行者的身份</p>
+<h2 id="User-and-Grooup"><a href="#User-and-Grooup" class="headerlink" title="User and Grooup"></a>User and Grooup</h2><h3 id="用户user"><a href="#用户user" class="headerlink" title="用户user"></a>用户user</h3><p><strong>令牌:</strong> token,identity<br><strong>Linux 用户：</strong>Username/UID<br><strong>管理员：</strong>root, 0<br><strong>普通用户：</strong>1-65535<br>    系统用户：1-499, 1-999  （CentOS7） ）<br>        对守护进程获取资源进行权限分配<br><strong>登录用户:</strong>500+, 1000+ （CentOS7） ）<br>    交互式登录</p>
+<h3 id="组-group："><a href="#组-group：" class="headerlink" title="组 group："></a>组 group：</h3><p><strong>Linux组：</strong>Groupname/GID</p>
+<p><strong>管理员组：</strong>root，GID=0</p>
+<p><strong>普通组：</strong></p>
+<p>​    系统组：1-499,1-999（centos7）</p>
+<p>​    普通组：500+，1000+（centos7）</p>
+<p>在创建用户不指定组的情况下，默认创建一个与该用户名相同的组作为该用户的主组</p>
+<h3 id="组的类别："><a href="#组的类别：" class="headerlink" title="组的类别："></a>组的类别：</h3><p><strong>用户的主要组</strong>(primary group)<br>     用户必须属于一个且只有一个主组<br>    组名同用户名，且仅包含一个用户，私有组<br><strong>用户的附加组</strong>(supplementary group)<br>    一个用户可以属于零个或多个辅助组</p>
+<h3 id="用户和组的配置文件"><a href="#用户和组的配置文件" class="headerlink" title="用户和组的配置文件"></a>用户和组的配置文件</h3><ul>
+<li>/etc/passwd：        存用户及其属性信息( 名称、UID 、主组ID 等</li>
+<li>/etc/shadow：       存放用户密码及其相关信息</li>
+<li>/etc/group：          存放组及属性信息</li>
+<li>/etc/gshadow：     存放组密码及其相关信息</li>
+<li>/etc/default/useradd：新建账户模板信息</li>
+</ul>
+<p><strong>/etc/passwd</strong></p>
+<p><img src="passwd.png" alt="passwd"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">name：password:UID:GID:GECEO:directory:shell</span><br><span class="line">1. login name ：	登录用名（lpx） ）</span><br><span class="line">2. passwd ：	密码 (x)</span><br><span class="line">3. UID号 ：	用户身份编号 (1000)</span><br><span class="line">4. GID ：	登录默认所在组编号 (1000)</span><br><span class="line">5. GECOS ：	用户全名或注释</span><br><span class="line">6. home directory录 ：	用户主目录 (/home/wang)</span><br><span class="line">7. shell ：	用户默认使用shell (/bin/bash)</span><br></pre></td></tr></table></figure>
+<p>​    </p>
+<p><strong>/etc/shadow</strong></p>
+<p><img src="shadow.png" alt="shadow"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. 登录用名</span><br><span class="line">2. 用户密码: 一般用sha512 加密</span><br><span class="line">3. 从 从1970 年1 月1 日起到密码最近一次被更改的时间</span><br><span class="line">4. 密码再过几天可以被变更（0 表示随时可被变更）</span><br><span class="line">5. 密码再过几天必须被变更（99999 表示永不过期）</span><br><span class="line">6. 密码过期前几天系统提醒用户（默认为一周）</span><br><span class="line">7. 密码过期几天后帐号会被锁定</span><br><span class="line">8. 从1970 年1 月1 日算起，多少天后帐号失效</span><br></pre></td></tr></table></figure>
+<p><img src="密码期限.png" alt="密码期限"></p>
+<p><strong>/etc/group</strong></p>
+<p><img src="group.png" alt="group"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. group_name:password:GID:user_list</span><br><span class="line">2. group_name 群组名称：就是群组名称</span><br><span class="line">3. password 群组密码：通常不需要设定，密码是被记录在</span><br><span class="line">	/etc/gshadow</span><br><span class="line">4. GID 群ID：就是群组的 ID</span><br><span class="line">5. user_list 以当前组为附加组的用户列表(分隔符为逗号)</span><br></pre></td></tr></table></figure>
+<p><strong>/etc/gshadow</strong></p>
+<p><img src="gshadow.png" alt="gshadow"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. group_name:encrypted_password:administrators:members</span><br><span class="line">2. group_name:群组名称：就是群组名称</span><br><span class="line">3. encrypted_password:群组密码：</span><br><span class="line">4. administrators:组管理员列表：组管理员的列表，更改组密码和成员</span><br><span class="line">5. members :以当前组为附加组的用户列表：(分隔符为逗号)</span><br></pre></td></tr></table></figure>
+<p><strong>/etc/default/useradd</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. useradd defaults file       创建用户默认文件</span><br><span class="line">2. GROUP=100           创建用户无指定组时默认所属的组users</span><br><span class="line">3. HOME=/home            创建用户默认家目录路径</span><br><span class="line">4. INACTIVE=-1           创建用户时默认没有宽限时间</span><br><span class="line">5. EXPIRE=               创建用户时默认有效期</span><br><span class="line">6. SHELL=/bin/bash       创建用户时默认shell类型</span><br><span class="line">7. SKEL=/etc/skel        创建用户时家目录模板</span><br><span class="line">8. CREATE_MAIL_SPOOL=yes    创建用户时默认创建邮箱</span><br></pre></td></tr></table></figure>
+<h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><p>​    vipw         等同于vi /etc/passwd</p>
+<p>​    vigr           等同于vi /etc/group</p>
+<p>​    pwck        检查passwd文件格式错误</p>
+<p>​    grpck        检查group文件格式错误</p>
+<h2 id="用户与组的管理命令"><a href="#用户与组的管理命令" class="headerlink" title="用户与组的管理命令"></a>用户与组的管理命令</h2><h3 id="用户管理命令及常用选项"><a href="#用户管理命令及常用选项" class="headerlink" title="用户管理命令及常用选项"></a>用户管理命令及常用选项</h3><ol>
+<li><p><strong>useradd:</strong> 添加登录账号          </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-u    指定uid（生产环境中多台服务器保证程序是同一UID）</span><br><span class="line">-o    不检查UID的唯一性，需配合-u使用（不建议UID一样）</span><br><span class="line">-g    创建用户时指定主组</span><br><span class="line">-c 	  创建用户时添加描述</span><br><span class="line">-d    创建用户时指定家目录路径，二层目录（生产环境中创建给服务用的账户可能会用到）</span><br><span class="line">-s    创建用户时指定shell类型/etc/shells</span><br><span class="line">-r    创建系统用户（默认不创建家目录）</span><br><span class="line">-m    强行创建家目录，用于系统用户，配合-r使用（生产环境中为服务生成系统用户）</span><br><span class="line">-M    强行不创建家目录，用于普通用户</span><br><span class="line">-G    创建用户时加入到多个辅助组里，多个辅助组用“，”分开</span><br><span class="line">-N    创建一个用户名和主组名不同的用户，默认users作为主组</span><br><span class="line">-p    创建用户添加密码（不建议此种方式添加口令，口令会在shadow文件中明文）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>usermod：</strong> 修改登录账号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-u    修改UID</span><br><span class="line">-g    修改GID（组需存在）</span><br><span class="line">-G    修改辅助组（会将原来的辅助组覆盖），如果要保留原辅助组配合-a使用</span><br><span class="line">-s    新的默认shell</span><br><span class="line">-c    新的注释信息</span><br><span class="line">-d    新家目录不会自动创建；若要创建新家目录并移动原家数据，同时使用-m选项（-m -d有顺序）</span><br><span class="line">-l    新的用户名</span><br><span class="line">-L    用户加锁</span><br><span class="line">-U    用户解锁（centos6以后禁止此方式解锁）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>userdel：</strong> 删除登录账号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-r     删除用户的所有文件，家目录及邮箱（工作中不建议用，建议保留数据）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>id：</strong> 可以显示真实有效的UID和GID</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-u:  显示UID</span><br><span class="line">-g:  显示GID</span><br><span class="line">-G:  显示用户所属的组的ID</span><br><span class="line">-n:  显示名称，需配合ugG 使用</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>su:</strong>  切换用户或以其他用户身份执行命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">示例：</span><br><span class="line">	su UserName ：非登录式切换，即不会读取目标用户的配置文件，不改变当前工作目录</span><br><span class="line">	su - UserName ：登录式切换，会读取目标用户的配置文件，切换至家目录，完全切换</span><br><span class="line">	root su 至其他用户无须密码；非root 用户切换时需要密码换个身份执行命令：</span><br><span class="line">su [-] UserName -c &apos;COMMAND&apos;</span><br><span class="line"> 	选项：-l --login</span><br><span class="line">su -l UserName 于 相当于 su - UserName</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>passwd:</strong>  修改自己的密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">passwd [OPTIONS] UserName:  修改指定用户的密码，仅root</span><br><span class="line">-l: 	锁定指定用户</span><br><span class="line">-u: 	解锁指定用户</span><br><span class="line">-e: 	强制用户下次登录修改密码</span><br><span class="line">-n mindays: 	 指定最短使用期限</span><br><span class="line">-x maxdays ：	最大使用期限</span><br><span class="line">-w warndays ：	提前多少天开始警告</span><br><span class="line">-i inactivedays ：	非活动期限</span><br><span class="line">--stdin ：	从标准输入接收用户密码</span><br><span class="line">如：	echo &quot; PASSWORD &quot; | passwd --stdin USERNAME</span><br></pre></td></tr></table></figure>
+<p><strong>newusers passwd：</strong>  格式文件 批量创建用户<br><strong>chpasswd：</strong>  批量修改用户口令</p>
+</li>
+<li><p><strong>chage：</strong>修改用户密码策略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-d LAST_DAY</span><br><span class="line">-E --expiredate EXPIRE_DATE</span><br><span class="line">-I --inactive INACTIVE</span><br><span class="line">-m --mindays MIN_DAYS</span><br><span class="line">-M --maxdays MAX_DAYS</span><br><span class="line">-W --warndays WARN_DAYS</span><br><span class="line">–l 显示</span><br><span class="line">示例：</span><br><span class="line">chage -d 0 tom  下一次登录强制重设密码</span><br><span class="line">chage -m 0 –M 42 –W 14 –I 7 tom</span><br><span class="line">chage -E 2016-09-10 tom</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>chfn:</strong>  用来改变<a href="http://man.linuxde.net/finger" target="_blank" rel="noopener">finger</a>命令显示的信息 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-f&lt;真实姓名&gt;或--full-name&lt;真实姓名&gt;：设置真实姓名；</span><br><span class="line">-h&lt;家中电话&gt;或--home-phone&lt;家中电话&gt;：设置家中的电话号码；</span><br><span class="line">-o&lt;办公地址&gt;或--office&lt;办公地址&gt;：设置办公室的地址；</span><br><span class="line">-p&lt;办公电话&gt;或--office-phone&lt;办公电话&gt;：设置办公室的电话号码；</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>chsh:</strong>  修改指定shell</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-s&lt;shell 名称&gt;或--shell&lt;shell 名称&gt;：更改系统预设的shell环境。；</span><br><span class="line">-l或--list-shells：列出目前系统可用的shell清单；</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>finger:</strong>  用于查找并显示用户信息。包括本地与远端主机的用户皆可 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-l：列出该用户的帐号名称，真实姓名，用户专属目录，登入所用的Shell，登入时间，转信地址，电子邮件状，还有计划文件和方案文件内容；</span><br><span class="line"></span><br><span class="line">-m：排除查找用户的真实姓名；</span><br><span class="line"></span><br><span class="line">-s：列出该用户的帐号名称，真实姓名，登入终端机，闲置时间，登入时间以及地址和电话；</span><br><span class="line"></span><br><span class="line">-p：列出该用户的帐号名称，真实姓名，用户专属目录，登入所用的Shell，登入时间，转信地址，电子邮件状，但不显示该用户的计划文件和方案文件内容。</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="组帐号维护命令及常用选项"><a href="#组帐号维护命令及常用选项" class="headerlink" title="组帐号维护命令及常用选项"></a>组帐号维护命令及常用选项</h3><ol>
+<li><p><strong>groupadd：</strong> 添加组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-g     指明GID号创建组</span><br><span class="line">-r      创建系统组group（centos6：ID&lt;500、centos7：ID&lt;1000）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>groupmod：</strong> 修改组信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-n     新的组名</span><br><span class="line">-g     新的GID</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>groupdel：</strong> 删除组（前提没有用户以此组为主组）</p>
+</li>
+</ol>
+<ol start="4">
+<li><p><strong>groupmems：</strong> 查看指定组的成员</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-g     更改为指定组（只有root）</span><br><span class="line">-a     指定用户加入组</span><br><span class="line">-d     从组中删除用户</span><br><span class="line">-p     从组中清除所有成员</span><br><span class="line">-l      显示组成员列表（读取的/etc/group文件中对应组的最后一个字段的全部内容）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>gpasswd：</strong>   给组添加口令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-a user     将user添加至指定组中</span><br><span class="line">-d user     从指定组中移除用户user</span><br><span class="line">-A user1，user2…  设置有管理权限的用户列表（设置组管理员）</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/02/带你认识Linux中的通配符/" rel="next" title="带你认识Linux中的通配符">
+                <i class="fa fa-chevron-left"></i> 带你认识Linux中的通配符
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/03/Linux用户与组管理命令的易混淆点和重合点/" rel="prev" title="Linux用户与组管理命令的易混淆点和重合点">
+                Linux用户与组管理命令的易混淆点和重合点 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux的安全模型"><span class="nav-number">1.</span> <span class="nav-text">Linux的安全模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#User-and-Grooup"><span class="nav-number">2.</span> <span class="nav-text">User and Grooup</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用户user"><span class="nav-number">2.1.</span> <span class="nav-text">用户user</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组-group："><span class="nav-number">2.2.</span> <span class="nav-text">组 group：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组的类别："><span class="nav-number">2.3.</span> <span class="nav-text">组的类别：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户和组的配置文件"><span class="nav-number">2.4.</span> <span class="nav-text">用户和组的配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件操作"><span class="nav-number">2.5.</span> <span class="nav-text">文件操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户与组的管理命令"><span class="nav-number">3.</span> <span class="nav-text">用户与组的管理命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用户管理命令及常用选项"><span class="nav-number">3.1.</span> <span class="nav-text">用户管理命令及常用选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组帐号维护命令及常用选项"><span class="nav-number">3.2.</span> <span class="nav-text">组帐号维护命令及常用选项</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

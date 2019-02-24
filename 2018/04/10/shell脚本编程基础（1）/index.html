@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="shell,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="要想玩转Linux系统，编写shell脚本是必须要掌握的技能。那什么是shell编程呢？简单来说，shell编程就是对多个Linux命令进行逻辑处理。 下面，我们从编程的基础开始讲起： 一、编程基础1.什么是程序？程序是指：指令+数据 程序编程风格可分为： ​    过程式：以指令为中心，数据服务于指令（关注过程，小软件开发） ​    对象式：以数据为中心，指令服务于数据（关注结果，适合开发大型">
+<meta name="keywords" content="shell">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shell脚本编程基础（1）">
+<meta property="og:url" content="http://yoursite.com/2018/04/10/shell脚本编程基础（1）/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="要想玩转Linux系统，编写shell脚本是必须要掌握的技能。那什么是shell编程呢？简单来说，shell编程就是对多个Linux命令进行逻辑处理。 下面，我们从编程的基础开始讲起： 一、编程基础1.什么是程序？程序是指：指令+数据 程序编程风格可分为： ​    过程式：以指令为中心，数据服务于指令（关注过程，小软件开发） ​    对象式：以数据为中心，指令服务于数据（关注结果，适合开发大型">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-17T01:59:53.100Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="shell脚本编程基础（1）">
+<meta name="twitter:description" content="要想玩转Linux系统，编写shell脚本是必须要掌握的技能。那什么是shell编程呢？简单来说，shell编程就是对多个Linux命令进行逻辑处理。 下面，我们从编程的基础开始讲起： 一、编程基础1.什么是程序？程序是指：指令+数据 程序编程风格可分为： ​    过程式：以指令为中心，数据服务于指令（关注过程，小软件开发） ​    对象式：以数据为中心，指令服务于数据（关注结果，适合开发大型">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/10/shell脚本编程基础（1）/">
+
+
+
+
+
+  <title>shell脚本编程基础（1） | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/10/shell脚本编程基础（1）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">shell脚本编程基础（1）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-10T14:07:16+08:00">
+                2018-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/shell脚本/" itemprop="url" rel="index">
+                    <span itemprop="name">shell脚本</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>要想玩转Linux系统，编写shell脚本是必须要掌握的技能。那什么是shell编程呢？简单来说，shell编程就是对多个Linux命令进行逻辑处理。</p>
+<p>下面，我们从编程的基础开始讲起：</p>
+<h2 id="一、编程基础"><a href="#一、编程基础" class="headerlink" title="一、编程基础"></a><strong>一、编程基础</strong></h2><h3 id="1-什么是程序？"><a href="#1-什么是程序？" class="headerlink" title="1.什么是程序？"></a>1.什么是程序？</h3><p>程序是指：指令+数据</p>
+<p>程序编程风格可分为：</p>
+<p>​    过程式：以指令为中心，数据服务于指令（关注过程，小软件开发）</p>
+<p>​    对象式：以数据为中心，指令服务于数据（关注结果，适合开发大型软件）</p>
+<h3 id="2-程序的执行方式"><a href="#2-程序的执行方式" class="headerlink" title="2.程序的执行方式"></a>2.程序的执行方式</h3><p>计算机：运行二进制命令</p>
+<p>编程语言：</p>
+<p>低级：汇编</p>
+<p>高级：</p>
+<p>编译：高级语言–&gt;编译器–&gt;目标代码 (由程序员完成编译器翻译过程，安全性相对好)</p>
+<p>java，C#</p>
+<p>解释：高级语言–&gt;解释器–&gt;机器代码 （由电脑完成解释器翻译过程，安全性不如编译型）</p>
+<p>shell，perl，python</p>
+<p>shell程序：提供了编程能力，解释执行</p>
+<h3 id="3-编程基本概念"><a href="#3-编程基本概念" class="headerlink" title="3.编程基本概念"></a>3.编程基本概念</h3><p>编程逻辑处理方式：</p>
+<p>​    顺序执行</p>
+<p>​    循环执行</p>
+<p>​    选择执行</p>
+<p>shell编程：过程式、解释执行</p>
+<p>编程语言的基本结构：</p>
+<p>各种系统命令的组合</p>
+<p>数据存储：变量、数组</p>
+<p>表达式：a+b</p>
+<p>语句：if</p>
+<h2 id="二、脚本基本格式"><a href="#二、脚本基本格式" class="headerlink" title="二、脚本基本格式"></a><strong>二、脚本基本格式</strong></h2><h3 id="格式要求："><a href="#格式要求：" class="headerlink" title="格式要求："></a>格式要求：</h3><p>首行shebang机制（即声明脚本使用哪种编程语言）</p>
+<p>如：         #！/bin/bash</p>
+<p>#！/bin/python</p>
+<h3 id="shell脚本的用途有："><a href="#shell脚本的用途有：" class="headerlink" title="shell脚本的用途有："></a>shell脚本的用途有：</h3><p>自动化常用命令</p>
+<p>执行系统管理和故障排除</p>
+<p>创建简单的应用程序</p>
+<p>处理文本或文件</p>
+<h3 id="运行脚本："><a href="#运行脚本：" class="headerlink" title="运行脚本："></a>运行脚本：</h3><ol>
+<li>给予执行权限，执行</li>
+<li>直接运行解释器，将脚本作为解释器程序的参数运行</li>
+</ol>
+<h3 id="脚本规范："><a href="#脚本规范：" class="headerlink" title="脚本规范："></a>脚本规范：</h3><p>脚本代码开头约定：</p>
+<ol>
+<li>第一行一般为调用使用的语言</li>
+<li>程序名，避免更改文件名为无法找到正确的文件</li>
+<li>版本号</li>
+<li>更改后的时间</li>
+<li>作者相关信息</li>
+<li>该程序的作用，及注意事项</li>
+<li>最后是各版本的更新简要说明</li>
+</ol>
+<h3 id="脚本示例："><a href="#脚本示例：" class="headerlink" title="脚本示例："></a>脚本示例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">\#!/bin/bash</span><br><span class="line">\# ——————————————</span><br><span class="line">\# Filename:    hello.sh # Revision:    1.1</span><br><span class="line">\# Date:        2018/04/01</span><br><span class="line">\# Author:      wangx</span><br><span class="line">\# Email:       wangx@gmail.com</span><br><span class="line">\# Website:     www.donlihuoguo.cn</span><br><span class="line">\# Description: This is the first script</span><br><span class="line">\# ——————————————</span><br><span class="line">\# Copyright:   2018 wang</span><br><span class="line">\# License:     GPL  echo &quot;hello world&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="脚本调试："><a href="#脚本调试：" class="headerlink" title="脚本调试："></a>脚本调试：</h3><ul>
+<li>bash -n script  检查脚本的语法错误</li>
+<li>bash -x script  调试脚本执行</li>
+</ul>
+<h2 id="三、变量"><a href="#三、变量" class="headerlink" title="三、变量"></a><strong>三、变量</strong></h2><p>定义变量时，变量名不加$符号，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my_name=&quot;wangx&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="变量命名规则："><a href="#变量命名规则：" class="headerlink" title="变量命名规则："></a>变量命名规则：</h3><ol>
+<li>数字、字母、下划线，不能以数字开头</li>
+<li>不能使用程序中的保留字：如if，for等</li>
+<li>做到见名知意</li>
+</ol>
+<p><strong>注意：</strong></p>
+<p>​    引用变量一般需加$</p>
+<p>​    赋值变量：</p>
+<p>​    name=” “   要加引号</p>
+<p>​    存放多行字符时”$name”变量外加双引号可保留换行格式</p>
+<h3 id="bash变量的种类"><a href="#bash变量的种类" class="headerlink" title="bash变量的种类"></a>bash变量的种类</h3><p>局部变量、全局变量、本地变量、位置变量、特殊变量</p>
+<p>局部变量：只在当前shell进程生效，对当前shell之外其他shell进程，包括父shell和子shell都无效</p>
+<p>全局变量：生效范围在当前shell进程及其子进程；父进程变量可以传给子进程，子进程变量不可向上传给父进程</p>
+<p>数字变量：$10以上的变量需要加花括号${10}</p>
+<p>特殊变量：$1,$@,$*,$#,$0等、</p>
+<p>$1,$2,…：对应第1、第2参数，shift[n]换位置</p>
+<p>$0：命令本身</p>
+<p>$*：传递给脚本的所有参数，每个参数合为一个字符串</p>
+<p>$@：传递给脚本的所有参数，每个参数为独立字符串</p>
+<p>$#：传递给脚本的参数的个数</p>
+<p>$@$*只在被双引号包起来的时候才会有差异</p>
+<p>set–         清空所有位置变量</p>
+<p><strong>注：</strong>怎么判断变量前加不加$符号？</p>
+<p>如果命令能识别变量就不加$,如果命令不能识别变量加$；</p>
+<p>养成好习惯：编完脚本将变量用unset删掉；</p>
+<p>（）中使用的命令为一次性的，小括号中相当于在子进程中执行命令</p>
+<p><strong>注：</strong>小括号中所说的子进程与常规的子进程不是一回事</p>
+<p>例如：x=1;echo $$;(echo $$)中显示进程号一致</p>
+<p>{ ；}中使用命令时在当前shell环境中执行，不开启子进程影响当前shell环境</p>
+<h3 id="变量运算"><a href="#变量运算" class="headerlink" title="变量运算"></a>变量运算</h3><p>bash中的算术运算：help let</p>
+<p>+，-，*，/，%取余，**乘方</p>
+<p>实现算术运算：</p>
+<ol>
+<li>let var=算术表达式</li>
+<li>var=$[算术表达式]</li>
+<li>var=$((算术表达式))</li>
+</ol>
+<p><strong>注：</strong>算术运算过程中，空格尽量删除</p>
+<p>条件测试过程中，能加空格地方尽量加空格</p>
+<p>正则条件测试时，正则表达式不加引号</p>
+<h2 id="四、条件测试"><a href="#四、条件测试" class="headerlink" title="四、条件测试"></a><strong>四、条件测试</strong></h2><h3 id="测试命令："><a href="#测试命令：" class="headerlink" title="测试命令："></a>测试命令：</h3><ol>
+<li><p>test EXPRESSION</p>
+</li>
+<li><p>[ EXPRESSION ]</p>
+</li>
+<li><p>[[ EXPRESSION ]]    双括号一般用于左侧字符匹配右侧扩展正则表达式</p>
+<p><strong>注：</strong>EXPRESSION前后必须有空白字符</p>
+</li>
+</ol>
+<p>评估布尔声明，以便用在条件性执行中：</p>
+<p>​    若真，则返回0</p>
+<p>​    若假，则返回1</p>
+<p><strong>例如：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a=1;b=2</span><br><span class="line">[ $a -eq $b ]</span><br><span class="line">echo $?</span><br><span class="line">结果：1</span><br><span class="line">a=2;b=2</span><br><span class="line">[ $a -eq $b ]</span><br><span class="line">echo $</span><br><span class="line">结果： 0</span><br></pre></td></tr></table></figure>
+<h3 id="条件性的执行操作符"><a href="#条件性的执行操作符" class="headerlink" title="条件性的执行操作符"></a>条件性的执行操作符</h3><p><strong>&amp;&amp;</strong>代表条件性的AND THEN，前面执行结果$?=0时，继续执行&amp;&amp;后命令</p>
+<p><strong>||</strong>代表条件性的OR ELSE，前面执行结果$?不为0时，执行||后命令</p>
+<p>test  与[  ]效果相同，注意括号里内容两边需加空格</p>
+<p>-v VAR      变量VAR是否设置</p>
+<h3 id="数值测试："><a href="#数值测试：" class="headerlink" title="数值测试："></a>数值测试：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-gt    是否大于（greater-than）</span><br><span class="line">-ge   是否大于等于（greater-than-or-equal）</span><br><span class="line">-eq   是否等于（equal）</span><br><span class="line">-ne   是否不等于（not-equal）</span><br><span class="line">-lt     是否小于（less-than）</span><br><span class="line">-le    是否小于等于（less-than-or-equal）</span><br></pre></td></tr></table></figure>
+<h3 id="字符串测试："><a href="#字符串测试：" class="headerlink" title="字符串测试："></a>字符串测试：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">==    是否等于</span><br><span class="line">&gt;      ascii码是否大于ascii码</span><br><span class="line">&lt;       是否小于</span><br><span class="line">!=     是否不等于</span><br><span class="line">=~    左侧字符串是否能够被右侧的PATTERN所匹配</span><br><span class="line">注：使用PATTERN匹配时，需要加双括号[[ ]]；使用扩展的正则表达式，且正则表达式不能加引号</span><br><span class="line"></span><br><span class="line">-z      字符串是否为空，空为真，不空为假</span><br><span class="line">-n     字符串是否为不空，不空为真，空为假</span><br><span class="line">注：用于字符串比较时的用到的操作应该都使用引号</span><br><span class="line"></span><br><span class="line">字符串是否为空还可用[ &quot;$name&quot; == &quot;&quot; ]来测试。</span><br></pre></td></tr></table></figure>
+<h3 id="文件相关测试："><a href="#文件相关测试：" class="headerlink" title="文件相关测试："></a>文件相关测试：</h3><p><strong>存在性测试：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-a FILE     同-e</span><br><span class="line">-e FILE 文件存在性测试，存在为真，否则为假</span><br></pre></td></tr></table></figure>
+<p><strong>存在性及类别测试：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-b FILE 是否存在且为块设备文件</span><br><span class="line">-c FILE 是否存在且为字符设备文件</span><br><span class="line">-d FILE 是否存在且为目录文件</span><br><span class="line">-f FILE 是否存在且为普通文件</span><br><span class="line">-h FILE 同-L</span><br><span class="line">-L FILE      是否存在且为符号链接文件</span><br><span class="line">-p FILE 是否存在且为管道文件</span><br><span class="line">-S FILE 是否存在且为套接字文件</span><br></pre></td></tr></table></figure>
+<p><strong>文件权限测试：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-r FILE      是否存在且有可读权限</span><br><span class="line">-w FILE 是否存在且有可写权限</span><br><span class="line">-x FILE 是否存在且有可执行权限</span><br></pre></td></tr></table></figure>
+<p><strong>文件特殊权限测试：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-u FILE 是否存在且拥有suid权限</span><br><span class="line">-g FILE 是否存在且拥有sgid权限</span><br><span class="line">-k FILE 是否存在且拥有sticky权限</span><br></pre></td></tr></table></figure>
+<p><strong>文件小测试：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-s FILE 是否存在且非空</span><br></pre></td></tr></table></figure>
+<p><strong>文件是否打开：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-t fd：fd 文件描述符是否在终端已经打开</span><br><span class="line">-N FILE 文件自从上一次被读取之后是否被修改过</span><br><span class="line">-O FILE 当前有效用户是否为文件属主</span><br><span class="line">-G FILE 当前有效用户是否文文件属组</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong>文件测试后跟空字符时，也反馈为True，如果要保证一个文件存在且满足测试条件时，</p>
+<p>应表示为：</p>
+<p>例：[ -n “file” -a -d “file” ]</p>
+<p>file文件是否存在且为目录文件</p>
+<h3 id="双目测试："><a href="#双目测试：" class="headerlink" title="双目测试："></a>双目测试：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FILE1 -ef FILE2                 FILE1是否是FILE2的硬链接</span><br><span class="line">FILE1 -nt FILE2                 FILE1是否新于FILE2（mtime）</span><br><span class="line">FILE1 -ot FILE2                 FILE1是否旧于FILE2</span><br></pre></td></tr></table></figure>
+<h3 id="Bash的组合测试条件："><a href="#Bash的组合测试条件：" class="headerlink" title="Bash的组合测试条件："></a>Bash的组合测试条件：</h3><p><strong>第一种方式：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">COMMAND1 &amp;&amp; COMMAND2      并且</span><br><span class="line">COMMAND1 || COMMAND2        或者</span><br><span class="line">！COMMAND         非</span><br></pre></td></tr></table></figure>
+<p><strong>第二种方式：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[ EXPRESSION -a EXPRESSION ]     并且</span><br><span class="line">[ EXPRESSION -o EXPRESSION ]     或者</span><br><span class="line">[ ！EXPRESSION ]          非</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong>优先级为：”!”最高，”-a”次之，”-o”最低</p>
+<p><strong>短路与&amp;&amp;</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0&amp;&amp;0=0</span><br><span class="line">0&amp;&amp;1=0</span><br><span class="line">1&amp;&amp;0=0</span><br><span class="line">1&amp;&amp;1=1</span><br></pre></td></tr></table></figure>
+<p><strong>cmd1 &amp;&amp; cmd2</strong></p>
+<p>如果cmd1为假，cmd2不需要执行，反之cmd1为真，需要cmd2执行</p>
+<p><strong>短路或||</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0||0=0</span><br><span class="line">0||1=1</span><br><span class="line">1||0=1</span><br><span class="line">1||1=1</span><br></pre></td></tr></table></figure>
+<p><strong>cmd1 || cmd2</strong></p>
+<p>如果cmd1为真，cmd2不需要执行，反之cmd1为假，需要cmd2执行</p>
+<p><strong>异或  ^</strong></p>
+<p>如果相同为假，反则为真</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0 ^ 1 = 1</span><br><span class="line">1 ^ 0 = 1</span><br><span class="line">1 ^ 1 = 0</span><br><span class="line">0 ^ 0 = 0</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong>[  ]和test用变量时，最好加双引号””避免出问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">false || &#123; echo cmd1 ; echo cmd2 ; &#125;</span><br><span class="line"></span><br><span class="line">false || (echo cmd1 ; echo cmd2)</span><br></pre></td></tr></table></figure>
+<h3 id="使用read命令来接受输入"><a href="#使用read命令来接受输入" class="headerlink" title="使用read命令来接受输入"></a>使用read命令来接受输入</h3><p>read         使用read来把输入值分配给一个或多个shell变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-p     指定要显示的提示</span><br><span class="line">-s     静默输出，一般用于密码</span><br><span class="line">-n     N指定输入的字符长度N</span><br><span class="line">-d     ‘字符’输入结束符，类型与输入重定向的&lt;&lt;EOF</span><br><span class="line">-t N  TIMEOUT为N秒，N秒内无输入将自动退出</span><br></pre></td></tr></table></figure>
+<p>read命令从标准输入中读取单词，并给每个单词分配一个变量</p>
+<p>例如：</p>
+<p>​    read -p “Enter a filename:” FILE    标准输入将赋予变量$FILE</p>
+<p>​    read命令从标准输入中读取单词，并给每个单词分配一个变量</p>
+<p>read 给多个变量赋值的方法：</p>
+<ol>
+<li><p>将多个变量输入一个文件中，用空格分开，输出重定向</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">read a b c &lt; f</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用”&gt;&gt;&gt;”分开：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">read a b c &lt;&lt;&lt; &quot;x y z&quot;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="五、配置用户环境"><a href="#五、配置用户环境" class="headerlink" title="五、配置用户环境"></a><strong>五、配置用户环境</strong></h2><h3 id="bash的配置文件"><a href="#bash的配置文件" class="headerlink" title="bash的配置文件"></a>bash的配置文件</h3><p>按生效范围划分，存在两类：</p>
+<p><strong>全局配置：</strong></p>
+<p>​    /etc/profile</p>
+<p>​    /etc/profile.d/*.sh</p>
+<p>​    /etc/bashrc</p>
+<p><strong>个人配置：</strong></p>
+<p>​    ~/.profile</p>
+<p>​    ~/.bashrc</p>
+<p>shell登录的两种方式：</p>
+<p>​    交互式登录：</p>
+<p>​        1. 直接输入账号密码登录</p>
+<p>​        2. su – username 切换的用户</p>
+<p>​        执行顺序：/etc/profile –&gt; /etc/profile.d/*.sh –&gt; ~/.bash_profile –&gt; ~/.bashrc–&gt; /etc/bashrc</p>
+<p>​    非交互式的登录：</p>
+<p>​        1.  su usernme</p>
+<p>​        2. 图形界面打开的终端</p>
+<p>​        3. 执行脚本</p>
+<p>​        4. 任何其他的bash实例</p>
+<p>​        执行顺序：~/.bashrc –&gt; /etc/bashrc –&gt; /etc/profile.d/*.sh</p>
+<p><strong>注：只在交互式登录生效：/etc/profile，~/.bash_profile</strong></p>
+<p>配置执行文件按功能划分，存在两类：</p>
+<p>profile类和bashrc类</p>
+<p><strong>Profile类：</strong>为交互式登录的shell提供配置</p>
+<p>全局生效：/etc/profile ，/etc/profile.d/*.sh</p>
+<p>个人生效：~/.bash_profile</p>
+<p>功用：</p>
+<ol>
+<li><p>用于定义环境变量</p>
+</li>
+<li><p>运行命令或脚本</p>
+</li>
+</ol>
+<p><strong>Bashrc类：</strong>为非交互式和交互式登录的shell提供配置</p>
+<p>全局生效：/etc/bashrc</p>
+<p>个人生效：~/.bashrc</p>
+<p>功用：</p>
+<ol>
+<li>定义命令别名和函数</li>
+<li>定义本地变量</li>
+</ol>
+<p>修改profile和bashrc文件后使生效的两种方法：</p>
+<ol>
+<li><p>重新启动shell进程</p>
+</li>
+<li><p>.或sourc；例：.~/.bashrc</p>
+</li>
+</ol>
+<p><strong>注：</strong> .或source执行脚本表示将在当前进程运行，而不是开启一个子进程运行（配置文件一般用此方式执行）</p>
+<p>​    bash执行脚本则是开启一个进程执行（运行脚本一般用此方式执行）</p>
+<h3 id="Bash退出任务"><a href="#Bash退出任务" class="headerlink" title="Bash退出任务"></a>Bash退出任务</h3><p>保存在~./.bash_logout文件中（用户）</p>
+<p>在退出登录shell时运行</p>
+<p>可用于：</p>
+<p>​    创建自动备份</p>
+<p>​    清除临时文件</p>
+<p>​    清除操作历史等</p>
+<h3 id="特殊的变量"><a href="#特殊的变量" class="headerlink" title="特殊的变量$-"></a>特殊的变量$-</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">\#echo $-</span><br><span class="line">\#hibBH</span><br><span class="line"></span><br><span class="line">h：hash缓存功能；set -h，关闭hash功能；set +h，开启hash功能</span><br><span class="line">i：代表交互式shell</span><br><span class="line">m：打开监控模式</span><br><span class="line">B：大括号扩展</span><br><span class="line">H：history，命令操作历史</span><br></pre></td></tr></table></figure>
+<h3 id="bash展开命令的优先级："><a href="#bash展开命令的优先级：" class="headerlink" title="bash展开命令的优先级："></a>bash展开命令的优先级：</h3><p>把命令行分成单个命令词</p>
+<p>展开别名</p>
+<p>展开大括号{}</p>
+<p>展开波浪符~</p>
+<p>命令替换$()和<code></code></p>
+<p>再次把命令行分成命令词</p>
+<p>展开文件通配（*、？等）</p>
+<p>I/O重定向</p>
+<p>运行命令</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/shell/" rel="tag"># shell</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/08/vim文本编辑器及文本处理常用命令/" rel="next" title="vim文本编辑器及文本处理常用命令">
+                <i class="fa fa-chevron-left"></i> vim文本编辑器及文本处理常用命令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/11/shell脚本编程基础（2）——新手注意事项及技巧16条/" rel="prev" title="shell脚本编程基础（2）——新手注意事项及技巧16条">
+                shell脚本编程基础（2）——新手注意事项及技巧16条 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、编程基础"><span class="nav-number">1.</span> <span class="nav-text">一、编程基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-什么是程序？"><span class="nav-number">1.1.</span> <span class="nav-text">1.什么是程序？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-程序的执行方式"><span class="nav-number">1.2.</span> <span class="nav-text">2.程序的执行方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-编程基本概念"><span class="nav-number">1.3.</span> <span class="nav-text">3.编程基本概念</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、脚本基本格式"><span class="nav-number">2.</span> <span class="nav-text">二、脚本基本格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#格式要求："><span class="nav-number">2.1.</span> <span class="nav-text">格式要求：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shell脚本的用途有："><span class="nav-number">2.2.</span> <span class="nav-text">shell脚本的用途有：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行脚本："><span class="nav-number">2.3.</span> <span class="nav-text">运行脚本：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#脚本规范："><span class="nav-number">2.4.</span> <span class="nav-text">脚本规范：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#脚本示例："><span class="nav-number">2.5.</span> <span class="nav-text">脚本示例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#脚本调试："><span class="nav-number">2.6.</span> <span class="nav-text">脚本调试：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、变量"><span class="nav-number">3.</span> <span class="nav-text">三、变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量命名规则："><span class="nav-number">3.1.</span> <span class="nav-text">变量命名规则：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bash变量的种类"><span class="nav-number">3.2.</span> <span class="nav-text">bash变量的种类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量运算"><span class="nav-number">3.3.</span> <span class="nav-text">变量运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、条件测试"><span class="nav-number">4.</span> <span class="nav-text">四、条件测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#测试命令："><span class="nav-number">4.1.</span> <span class="nav-text">测试命令：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件性的执行操作符"><span class="nav-number">4.2.</span> <span class="nav-text">条件性的执行操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数值测试："><span class="nav-number">4.3.</span> <span class="nav-text">数值测试：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串测试："><span class="nav-number">4.4.</span> <span class="nav-text">字符串测试：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件相关测试："><span class="nav-number">4.5.</span> <span class="nav-text">文件相关测试：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双目测试："><span class="nav-number">4.6.</span> <span class="nav-text">双目测试：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bash的组合测试条件："><span class="nav-number">4.7.</span> <span class="nav-text">Bash的组合测试条件：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用read命令来接受输入"><span class="nav-number">4.8.</span> <span class="nav-text">使用read命令来接受输入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、配置用户环境"><span class="nav-number">5.</span> <span class="nav-text">五、配置用户环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bash的配置文件"><span class="nav-number">5.1.</span> <span class="nav-text">bash的配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bash退出任务"><span class="nav-number">5.2.</span> <span class="nav-text">Bash退出任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊的变量"><span class="nav-number">5.3.</span> <span class="nav-text">特殊的变量$-</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bash展开命令的优先级："><span class="nav-number">5.4.</span> <span class="nav-text">bash展开命令的优先级：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="SSH,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、SSH端口转发相关概念 在上一节我们知道，SSH会自动加密和解密所有SSH客户端和服务器之间的网络数据。但是，SSH还同时 提供了一个非常有用的功能，这就是端口转发。它能够将其他TCP端口的网络数据通过安全的SSH协议 转发，例如：Telnet，SMTP等这些TCP应用都能从中受益，避免了用户名，密码以及隐私信息的明文传 输。而与此同时，如果在你的工作环境中防火墙限制了一些网络端口的使用，但是">
+<meta name="keywords" content="SSH">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSH端口转发及相关实验">
+<meta property="og:url" content="http://yoursite.com/2018/05/18/SSH端口转发及相关实验/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="一、SSH端口转发相关概念 在上一节我们知道，SSH会自动加密和解密所有SSH客户端和服务器之间的网络数据。但是，SSH还同时 提供了一个非常有用的功能，这就是端口转发。它能够将其他TCP端口的网络数据通过安全的SSH协议 转发，例如：Telnet，SMTP等这些TCP应用都能从中受益，避免了用户名，密码以及隐私信息的明文传 输。而与此同时，如果在你的工作环境中防火墙限制了一些网络端口的使用，但是">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/05/18/SSH端口转发及相关实验/防火墙.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/18/SSH端口转发及相关实验/ping不通.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/18/SSH端口转发及相关实验/重启xinetd.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/18/SSH端口转发及相关实验/登录成功.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/18/SSH端口转发及相关实验/lanserver命令.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/18/SSH端口转发及相关实验/telnet成功.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/18/SSH端口转发及相关实验/internet.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/18/SSH端口转发及相关实验/gogole.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/18/SSH端口转发及相关实验/无法打开.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/18/SSH端口转发及相关实验/登录代理.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/18/SSH端口转发及相关实验/设置火狐.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/18/SSH端口转发及相关实验/访问成功.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/18/SSH端口转发及相关实验/字符界面登录.png">
+<meta property="og:updated_time" content="2018-07-17T13:07:26.270Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SSH端口转发及相关实验">
+<meta name="twitter:description" content="一、SSH端口转发相关概念 在上一节我们知道，SSH会自动加密和解密所有SSH客户端和服务器之间的网络数据。但是，SSH还同时 提供了一个非常有用的功能，这就是端口转发。它能够将其他TCP端口的网络数据通过安全的SSH协议 转发，例如：Telnet，SMTP等这些TCP应用都能从中受益，避免了用户名，密码以及隐私信息的明文传 输。而与此同时，如果在你的工作环境中防火墙限制了一些网络端口的使用，但是">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/18/SSH端口转发及相关实验/防火墙.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/18/SSH端口转发及相关实验/">
+
+
+
+
+
+  <title>SSH端口转发及相关实验 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/18/SSH端口转发及相关实验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SSH端口转发及相关实验</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-18T15:17:35+08:00">
+                2018-05-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>一、SSH端口转发相关概念</strong></p>
+<p>在上一节我们知道，SSH会自动加密和解密所有SSH客户端和服务器之间的网络数据。但是，SSH还同时</p>
+<p>提供了一个非常有用的功能，这就是<strong>端口转发</strong>。它能够将<strong>其他TCP端口的网络数据通过安全的SSH协议</strong></p>
+<p><strong>转发</strong>，例如：Telnet，SMTP等这些TCP应用都能从中受益，避免了用户名，密码以及隐私信息的明文传</p>
+<p>输。而与此同时，如果在你的工作环境中防火墙限制了一些网络端口的使用，但是允许SSH的连接，那么</p>
+<p>端口转发功能也能够将TCP端口转发来使用SSH进行通信。</p>
+<h4 id="SSH端口转发提供的功能主要有："><a href="#SSH端口转发提供的功能主要有：" class="headerlink" title="SSH端口转发提供的功能主要有："></a><strong>SSH端口转发提供的功能主要有：</strong></h4><p>1.加密SSH Client端至SSH Server端之间的数据</p>
+<p>2.突破防火墙的限制完成一些之前无法建立的TCP连接</p>
+<h4 id="SSH端口转发提供的类型有："><a href="#SSH端口转发提供的类型有：" class="headerlink" title="SSH端口转发提供的类型有："></a><strong>SSH端口转发提供的类型有：</strong></h4><p>本地转发</p>
+<p>远程转发</p>
+<p>动态转发</p>
+<p>X协议转发</p>
+<h3 id="本地转发："><a href="#本地转发：" class="headerlink" title="本地转发："></a><strong>本地转发：</strong></h3><p>当外网用户想要临时访问公司内部的不安全TCP协议服务器时，由于防火墙限制无法直接访问，但可利用</p>
+<p>先SSH连接至公司内网的SSH服务器在转发至不安全的TCP协议服务器。由于作为转发的SSH服务器与要访</p>
+<p>问的不安全TCP协议服务器在同一网络环境内，故这种连接就叫<strong>本地转发</strong>。</p>
+<p><strong>格式：</strong></p>
+<p>ssh -L localprot:remotehost:remotehostport  sshserver</p>
+<p>localprot：指定本机端口</p>
+<p>remotehost：指定远程不安全协议的服务器地址</p>
+<p>remotehostport：远程不安全协议的服务器地址端口</p>
+<p>sshserver：SSH服务器地址</p>
+<p><strong>options：</strong></p>
+<p>-f      后台启用</p>
+<p>-N    不打开远程shell，处于等待状态</p>
+<p>-g     启用网关功能</p>
+<p><strong>示例：</strong></p>
+<p>ssh -L 9527:telnetsrv:23  -N sshsrv</p>
+<p>telnet 127.0.0.1 9527</p>
+<p>当访问本机的9527端口时，被加密后转发到sshsrv的ssh服务，再解密被转发到telnetsrv:23</p>
+<p><strong>大致流程：</strong></p>
+<p>Data &lt;–&gt; localhost:9527 &lt;–&gt;localhost:xxxxx &lt;–&gt; sshsrv:22 &lt;–&gt;sshsrv:yyyyy &lt;–&gt; telnetsrv:23</p>
+<h3 id="远程转发："><a href="#远程转发：" class="headerlink" title="远程转发："></a><strong>远程转发：</strong></h3><p>与本地端口转发相比，我们将SSH服务器与Client访问端的位置对调，将与不安全TCP协议服务器同一内网</p>
+<p>的主机作为Client，将外部网络主机作为SSH服务器做为端口转发。由于作为转发的SSH服务器处在外部网</p>
+<p>络环境中，故这种连接就叫远程转发。</p>
+<h3 id="格式："><a href="#格式：" class="headerlink" title="格式："></a><strong>格式：</strong></h3><p>ssh -R sshserverport:remotehost:remotehostport sshserver</p>
+<p>sshserverport：指定SSH服务器端口</p>
+<p>remotehost：指定远程不安全协议的服务器地址</p>
+<p>remotehost:remotehostport：指定远程不安全协议的服务器端口</p>
+<p>sshserver：SSH服务器地址</p>
+<p><strong>示例：</strong></p>
+<p>ssh -R 9527:telnetsrv:23 -N sshsrv</p>
+<p>让sshsrv侦听9527端口的访问，如有访问，就加密后通过ssh服务转发请求到本机ssh客户端，再由本机解密后转发到telnetsrv:23</p>
+<p><strong>大致流程：</strong></p>
+<p>Data &lt;–&gt; sshsrv:9527 &lt;–&gt; sshsrv:22 &lt;–&gt; localhost:xxxxx &lt;–&gt; localhost:yyyyy &lt;–&gt; telnetsrv:23</p>
+<h3 id="动态端口转发："><a href="#动态端口转发：" class="headerlink" title="动态端口转发："></a>动态端口转发：</h3><p>在之前我们已经了解了本地转发，以及远程转发，但它们实现的前提都是要求有一个固定的应用服务端端</p>
+<p>口号。但在某些场景下，例如用浏览器浏览网页，是没有固定端口的，这时就需要利用到动态的端口转</p>
+<p>发。比如说，当用firefox访问Internet时，本机的1080端口作为代理服务器，firefox的访问请求被转发到</p>
+<p>sshserver上，由sshserver替代访问Internet</p>
+<p>ssh -D 1080 root@sshserver</p>
+<p>在本机firefox设置socketproxy:127.0.0.1:1080</p>
+<p>curl –socks5  127.0.0.1:1080  <a href="http://www.qq.com" target="_blank" rel="noopener">http://www.qq.com</a></p>
+<h3 id="X协议转发："><a href="#X协议转发：" class="headerlink" title="X协议转发："></a><strong>X协议转发：</strong></h3><p>所有图形化应用程序都是X客户程序</p>
+<p>能够通过tcp/ip连接远程X服务器</p>
+<p>数据没有加密机，但是它通过ssh连接隧道安全进行</p>
+<p>ssh -X user@remotehost gedit</p>
+<p>remotehost主机上的gedit工具，将会显示在本机的X服务器上</p>
+<p>传输的数据将通过ssh连接加密</p>
+<h3 id="相关文件："><a href="#相关文件：" class="headerlink" title="相关文件："></a><strong>相关文件：</strong></h3><p>/var/log/secure               存放日志</p>
+<p>/etc/ssh/sshd_config      SSH服务配置文件</p>
+<p><strong>#Port 22           端口</strong></p>
+<p>​                          <strong>生产中一般第一步先改端口号</strong></p>
+<p>​                          <strong>如Port 9527</strong>  </p>
+<p><strong>定义公钥、私钥存放文件名，位置</strong></p>
+<p>HostKey /etc/ssh/ssh_host_rsa_key</p>
+<p>#HostKey /etc/ssh/ssh_host_dsa_key</p>
+<p>HostKey /etc/ssh/ssh_host_ecdsa_key</p>
+<p>HostKey /etc/ssh/ssh_host_ed25519_key</p>
+<p><strong>日志设置选项，日志存放在/var/log/secure</strong></p>
+<p># Logging</p>
+<p>#SyslogFacility AUTH</p>
+<p>SyslogFacility AUTHPRIV</p>
+<p>#LogLevel INFO</p>
+<p>#LoginGraceTime 2m              不输入密码最大时间端口</p>
+<p>#PermitRootLogin yes            生产中一般改成no，普通用户连接su切换</p>
+<p>#StrictModes yes             检查文件权限</p>
+<p>#MaxAuthTries 6                      密码登录最大验证次数</p>
+<p>#MaxSessions 10                      单个会话能开的最大克隆数</p>
+<p>PasswordAuthentication yes  是否允许基于口令登录方式，no表示禁止</p>
+<p>#ClientAliveInterval 0              连接后不操作最大时间，单位：秒</p>
+<p>#ClientAliveCountMax 3                  连接环不操作最大时间次数</p>
+<p>​         <strong>生产中一般要修改AliveInterval 30</strong></p>
+<p>​                          <strong>AliveCountMax 3</strong>   </p>
+<p>​         <strong>表示连接后不进行任何操作30S，3次后自动断开连接</strong></p>
+<p>#ShowPatchLevel no</p>
+<p>UseDNS no                       <strong>是否使用DNS反向解析，关闭可提高连接速度</strong></p>
+<p>#MaxStartups 10:30:100                 <strong>最大并发连接数，默认10</strong></p>
+<p><strong>限制可登录用户的办法：</strong></p>
+<p>AllowUsers user1 user2 user3</p>
+<p>DenyUsers</p>
+<p>AllowGroups</p>
+<p>DenyGroups</p>
+<h3 id="SSH服务的最佳实践配置："><a href="#SSH服务的最佳实践配置：" class="headerlink" title="SSH服务的最佳实践配置："></a><strong>SSH服务的最佳实践配置：</strong></h3><p>建议使用非默认端口</p>
+<p>禁止使用protocol version 1</p>
+<p>限制可登录用户</p>
+<p>设定空闲会话超时时长</p>
+<p>利用防火墙设置ssh访问策略</p>
+<p>仅监听特定的IP地址</p>
+<p>基于口令认证时，使用强密码策略</p>
+<p>tr -dc A-Za-z0-9_ &lt; /dev/urandom | head -c 30| xargs</p>
+<p>使用基于密钥的认证</p>
+<p>禁止使用空密码</p>
+<p>禁止root用户直接登录</p>
+<p>限制ssh的访问频度和并发在线数</p>
+<p>经常分析日志</p>
+<h2 id="二、实验：模拟SSH本地端口转发"><a href="#二、实验：模拟SSH本地端口转发" class="headerlink" title="二、实验：模拟SSH本地端口转发"></a><strong>二、实验：模拟SSH本地端口转发</strong></h2><p><strong>应用场景：</strong>当外部客户端想要访问公司内网的Telnet服务器时，由于防火墙限制无法直接访问，可使用</p>
+<p>SSH本地端口转发实现：</p>
+<p><strong>前期准备：</strong></p>
+<p>以三台CentOS模拟机作为服务器及主机，主机名网络配置如下：</p>
+<p>客户端：192.168.30.133</p>
+<p>SSH服务器：192.168.30.158</p>
+<p>telnet服务器：192.168.30.160</p>
+<p><strong>telnet服务器端操作：</strong></p>
+<p>一、安装telnet-server包，系统默认未安装</p>
+<p>二、防火墙禁止远程客户端访问：</p>
+<p>iptables  -A  INPUT  -s  192.168.30.133  -j  REJECT</p>
+<p>为了防止之前防火墙策略干扰，最好先清空下防火墙策略：</p>
+<p>iptables  -K</p>
+<p><img src="防火墙.png" alt="防火墙"></p>
+<p>此时作为Clinet的192.168.30.133已经ping不通作为telnet服务器的192.168.30.160</p>
+<p><img src="ping不通.png" alt="ping不通"></p>
+<p>三、开启telnet-server服务</p>
+<p><strong>CentOS6：</strong></p>
+<p>service  xinted  start                       开启xinted进程</p>
+<p>chkconfig  telnet  on                        开启telnet服务</p>
+<p>service  xinted  restart                   重启xinted服务</p>
+<p><img src="重启xinetd.png" alt="重启xinetd"></p>
+<p><strong>CentOS7：</strong></p>
+<p>systemctl start telnet-scoket</p>
+<p><strong>客户端操作：</strong></p>
+<p>ssh -L 9527:192.168.30.17:23 [-Nf] 192.168.30.6</p>
+<p>加-Nf选项将后台执行，关闭时只能通过kill关闭进程</p>
+<p>telnet 127.0.0.1 9527</p>
+<p>提示输入用户名，密码；默认不让root账户使用SSH端口转发登录</p>
+<p><img src="登录成功.png" alt="登录成功"></p>
+<h2 id="三、实验：模拟SSH远程端口转发"><a href="#三、实验：模拟SSH远程端口转发" class="headerlink" title="三、实验：模拟SSH远程端口转发"></a><strong>三、实验：模拟SSH远程端口转发</strong></h2><p><strong>应用场景：</strong>当外部有工程师想要临时访问内部telnet服务器时，作为系统管理员，我们可以将对方主机作</p>
+<p>为SSH服务器进行端口转发，让其临时可访问公司的telnet服务器。</p>
+<p><strong>前期准备：</strong></p>
+<p>以三台CentOS模拟机作为服务器及主机，主机名及网络配置如下：</p>
+<p>Internet：192.168.30.133</p>
+<p>lanserver：192.168.30.158</p>
+<p>telnet服务器：192.168.30.160</p>
+<p><strong>lanserver端操作：</strong></p>
+<p>ssh -R 9527:192.168.30.17:23 [-Nf] 192.168.30.7</p>
+<p>加-Nf选项将后台执行，关闭时只能通过kill关闭进程</p>
+<p><img src="lanserver命令.png" alt="lanserver命令"></p>
+<p><strong>Internet端操作：</strong></p>
+<p>telnet 127.0.0.1 9527</p>
+<p><img src="telnet成功.png" alt="telnet成功"></p>
+<h2 id="四、实验：模拟SSH动态端口转发"><a href="#四、实验：模拟SSH动态端口转发" class="headerlink" title="四、实验：模拟SSH动态端口转发"></a><strong>四、实验：模拟SSH动态端口转发</strong></h2><p><strong>应用场景：</strong>在某些场景中，用浏览器浏览网页，是没有固定端口的，这时就需要利用到动态的端口转</p>
+<p>发。下面我们模拟用一台虚拟机模拟google网站，用Internet主机通过代理服务器proxy访问google模拟机</p>
+<p><strong>前期准备：</strong></p>
+<p>以三台CentOS模拟机作为服务器及主机，主机名及网络配置如下：</p>
+<p>Internet：192.168.30.133</p>
+<p>proxy：192.168.30.158</p>
+<p>google：192.168.30.160</p>
+<p><strong>google模拟服务器操作：</strong></p>
+<p>开启http服务，模拟网页内容：</p>
+<p><strong>CentOS6：</strong></p>
+<p>service httpd start</p>
+<p><strong>CentOS7：</strong></p>
+<p>systemctl start  httpd</p>
+<p>echo <a href="http://www.google.com" target="_blank" rel="noopener">www.google.com</a> &gt; /var/www/html/index.html</p>
+<p><img src="internet.png" alt="internet"></p>
+<p>此时访问192.168.30.160，正常网页内容显示如下:</p>
+<p><img src="gogole.png" alt="gogole"></p>
+<p><strong>Internet端操作：</strong></p>
+<p>此时在Internet端我们是无法访问google服务器的</p>
+<p><img src="无法打开.png" alt="无法打开"></p>
+<p>使用proxy的1080端口作为动态转发：</p>
+<p>ssh -D 1080 <a href="mailto:root@192.168.30.158" target="_blank" rel="noopener">root@192.168.30.158</a></p>
+<p><img src="登录代理.png" alt="登录代理"></p>
+<p>接下来我们可以通过图形界面或者字符界面来尝试访问：</p>
+<p><strong>图形界面：</strong></p>
+<p>打开firefox浏览器，按以下顺序操作：</p>
+<p>–&gt;preferences–&gt;advanced–&gt;network–setting–manual proxy configuration</p>
+<p>–&gt;SOCKS Host:127.0.0.1</p>
+<p><img src="设置火狐.png" alt="设置火狐"></p>
+<p>现在再次尝试访问192.168.30.160的google模拟服务器，发现可以正常访问了！</p>
+<p><img src="访问成功.png" alt="访问成功"></p>
+<p><strong>字符界面：</strong></p>
+<p>在字符界面我们可执行下面的命令来进行访问：</p>
+<p>curl -socks5 127.0.0.1:1080 192.168.30.17</p>
+<p><img src="字符界面登录.png" alt="字符界面登录"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SSH/" rel="tag"># SSH</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/18/SSH协议及基于SSH集群key认证实验/" rel="next" title="SSH协议及基于SSH集群key认证实验">
+                <i class="fa fa-chevron-left"></i> SSH协议及基于SSH集群key认证实验
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/25/Linux系统日志管理/" rel="prev" title="Linux系统日志管理">
+                Linux系统日志管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#SSH端口转发提供的功能主要有："><span class="nav-number">1.</span> <span class="nav-text">SSH端口转发提供的功能主要有：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSH端口转发提供的类型有："><span class="nav-number">2.</span> <span class="nav-text">SSH端口转发提供的类型有：</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#本地转发："><span class="nav-number"></span> <span class="nav-text">本地转发：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程转发："><span class="nav-number"></span> <span class="nav-text">远程转发：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#格式："><span class="nav-number"></span> <span class="nav-text">格式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态端口转发："><span class="nav-number"></span> <span class="nav-text">动态端口转发：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#X协议转发："><span class="nav-number"></span> <span class="nav-text">X协议转发：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关文件："><span class="nav-number"></span> <span class="nav-text">相关文件：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSH服务的最佳实践配置："><span class="nav-number"></span> <span class="nav-text">SSH服务的最佳实践配置：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、实验：模拟SSH本地端口转发"><span class="nav-number"></span> <span class="nav-text">二、实验：模拟SSH本地端口转发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、实验：模拟SSH远程端口转发"><span class="nav-number"></span> <span class="nav-text">三、实验：模拟SSH远程端口转发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、实验：模拟SSH动态端口转发"><span class="nav-number"></span> <span class="nav-text">四、实验：模拟SSH动态端口转发</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

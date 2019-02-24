@@ -1,0 +1,1948 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="MySQL,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、SQL语言简介：结构化查询语言(Structured Query Language)简称SQL，是一种特殊目的的编程语言，是一种数据库 查询和程序设计语言，用于存取数据以及查询、更新和管理关系数据库系统；同时也是数据库脚本文件 的扩展名 关系型数据库的常见组件数据库：database 表：table 行：row 列：column 索引：index 视图：view 用户：user 权限：priv">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL之SQL语法介绍">
+<meta property="og:url" content="http://yoursite.com/2018/06/07/MySQL之SQL语法介绍/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="一、SQL语言简介：结构化查询语言(Structured Query Language)简称SQL，是一种特殊目的的编程语言，是一种数据库 查询和程序设计语言，用于存取数据以及查询、更新和管理关系数据库系统；同时也是数据库脚本文件 的扩展名 关系型数据库的常见组件数据库：database 表：table 行：row 列：column 索引：index 视图：view 用户：user 权限：priv">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/06/07/MySQL之SQL语法介绍/语句逻辑.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/07/MySQL之SQL语法介绍/内连接.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/07/MySQL之SQL语法介绍/左连接.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/07/MySQL之SQL语法介绍/右连接.png">
+<meta property="og:updated_time" content="2018-07-17T13:08:47.435Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL之SQL语法介绍">
+<meta name="twitter:description" content="一、SQL语言简介：结构化查询语言(Structured Query Language)简称SQL，是一种特殊目的的编程语言，是一种数据库 查询和程序设计语言，用于存取数据以及查询、更新和管理关系数据库系统；同时也是数据库脚本文件 的扩展名 关系型数据库的常见组件数据库：database 表：table 行：row 列：column 索引：index 视图：view 用户：user 权限：priv">
+<meta name="twitter:image" content="http://yoursite.com/2018/06/07/MySQL之SQL语法介绍/语句逻辑.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/07/MySQL之SQL语法介绍/">
+
+
+
+
+
+  <title>MySQL之SQL语法介绍 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/07/MySQL之SQL语法介绍/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MySQL之SQL语法介绍</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-07T15:34:11+08:00">
+                2018-06-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、SQL语言简介："><a href="#一、SQL语言简介：" class="headerlink" title="一、SQL语言简介："></a><strong>一、SQL语言简介：</strong></h2><p><strong>结构化查询语言</strong>(Structured Query Language)简称<strong>SQL</strong>，是一种特殊目的的编程语言，是一种数据库</p>
+<p>查询和程序设计语言，用于存取数据以及查询、更新和管理关系数据库系统；同时也是数据库脚本文件</p>
+<p>的扩展名</p>
+<h3 id="关系型数据库的常见组件"><a href="#关系型数据库的常见组件" class="headerlink" title="关系型数据库的常见组件"></a><strong>关系型数据库的常见组件</strong></h3><p>数据库：database</p>
+<p>表：table</p>
+<p>行：row</p>
+<p>列：column</p>
+<p>索引：index</p>
+<p>视图：view</p>
+<p>用户：user</p>
+<p>权限：privilege</p>
+<p>存储过程：procedure，无返回值</p>
+<p>存储函数：function，有返回值</p>
+<p>触发器：trigger</p>
+<p>事件调度器：event scheduler，任务计划</p>
+<p><strong>命名规则：</strong></p>
+<p>必须以字母开头</p>
+<p>可包括数字和三个特殊字符（# _ $）</p>
+<p>不要使用MySQL的保留字</p>
+<p>同一database(Schema)下的对象不能同名</p>
+<h3 id="数据类型："><a href="#数据类型：" class="headerlink" title="数据类型："></a><strong>数据类型：</strong></h3><p><strong>(一)整型</strong></p>
+<p>tinyint(m) 1个字节 范围(-128~127)</p>
+<p>smallint(m) 2个字节 范围(-32768~32767)</p>
+<p>mediumint(m) 3个字节 范围(-8388608~8388607)</p>
+<p>int(m) 4个字节 范围(-2147483648~2147483647)</p>
+<p>bigint(m) 8个字节 范围(+-9.22*10的18次方)</p>
+<p>取值范围如果加了<strong>unsigned</strong>，则最大值翻倍，如tinyint unsigned的取值范围为(0~255)</p>
+<p><strong>(二)浮点型(float和double)，近似值</strong></p>
+<p>float(m,d) 单精度浮点型 8位精度(4字节) m总个数，d小数位</p>
+<p>double(m,d) 双精度浮点型16位精度(8字节) m总个数，d小数位</p>
+<p>设一个字段定义为float(6,3)，如果插入一个数123.45678,实际数据库里存</p>
+<p>的是123.457，但总个数还以实际为准，即6位</p>
+<p><strong>(三)字符串(char,varchar,_text)</strong></p>
+<p>char(n) 固定长度，最多255个字符</p>
+<p>varchar(n)可变长度，最多65535个字符</p>
+<p>inytext 可变长度，最多255个字符</p>
+<p>ext 可变长度，最多65535个字符</p>
+<p>mediumtext 可变长度，最多2的24次方-1个字符</p>
+<p>ongtext 可变长度，最多2的32次方-1个字符</p>
+<p>BINARY(M) 固定长度，可存二进制或字符，长度为0-M字节</p>
+<p>VARBINARY(M) 可变长度，可存二进制或字符，允许长度为0-M字节</p>
+<p>内建类型：ENUM枚举, SET集合</p>
+<p><strong>char和varchar：</strong></p>
+<p>1.char(n) 若存入字符数小于n，则以空格补于其后，查询之时再将空格去掉。</p>
+<p>所以char类型存储的字符串末尾不能有空格，varchar不限于此。</p>
+<p>2.char(n) 固定长度，char(4)不管是存入几个字符，都将占用4个字节，varchar</p>
+<p>是存入的实际字符数+1个字节（n&lt; n&gt;255)，所以varchar(4),存入3个字符将</p>
+<p>占用4个字节。</p>
+<p>3.char类型的字符串检索速度要比varchar类型的快</p>
+<p><strong>varchar和text：</strong></p>
+<p>1.varchar可指定n，text不能指定，内部存储varchar是存入的实际字符数+1个</p>
+<p>字节（n&lt; n&gt;255)，text是实际字符数+2个字节。</p>
+<p>2.text类型不能有默认值</p>
+<p>3.varchar可直接创建索引，text创建索引要指定前多少个字符。varchar查询速</p>
+<p>度快于text</p>
+<p><strong>(四)二进制数据：BLOB</strong></p>
+<p>BLOB和text存储方式不同，TEXT以文本方式存储，英文存储区分大小写，</p>
+<p>而Blob是以二进制方式存储，不分大小写</p>
+<p>BLOB存储的数据只能整体读出</p>
+<p>TEXT可以指定字符集，BLOB不用指定字符集</p>
+<p><strong>(五)日期时间类型</strong></p>
+<p>date 日期 ‘2008-12-2’</p>
+<p>time 时间 ’12:25:36′</p>
+<p>datetime 日期时间 ‘2008-12-2 22:06:44’</p>
+<p>timestamp 自动存储记录修改时间</p>
+<p>YEAR(2), YEAR(4)：年份</p>
+<p><strong>timestamp</strong>字段里的时间数据会随其他字段修改的时候自动刷新，这个数据类</p>
+<p>型的字段可以存放这条记录最后被修改的时间</p>
+<h3 id="修饰符："><a href="#修饰符：" class="headerlink" title="修饰符："></a><strong>修饰符：</strong></h3><p>NULL                              数据列可包含NULL值</p>
+<p>NOT NULL                    数据列不允许包含NULL值</p>
+<p>DEFAULT                      默认值</p>
+<p>PRIMARY KEY             主键</p>
+<p>UNIQUE KEY                唯一键</p>
+<p>CHARACTER SET name            指定一个字符集</p>
+<p>AUTO_INCREMENT                自动递增，适用于整数类型</p>
+<p>UNSIGNED              无符号</p>
+<h2 id="SQL语句分类："><a href="#SQL语句分类：" class="headerlink" title="SQL语句分类："></a><strong>SQL语句分类：</strong></h2><p><strong>DDL：Data Defination Language</strong>         </p>
+<p><strong>代表操作：</strong></p>
+<p>CREATE    可用来创建数据库，表</p>
+<p>DROP       可用来删除数据库，表</p>
+<p>ALTER      可用来修改表的属性，字段的结构</p>
+<p><strong>DML：Data Manipulation Language</strong>       </p>
+<p><strong>代表操作：</strong></p>
+<p>INSERT    可用来添加表中的行</p>
+<p>DELETE    可用来删除表中的行</p>
+<p>UPDATE   可用来修改标准行的信息</p>
+<p><strong>DCL：Data Control Language</strong>        </p>
+<p><strong>代表操作：</strong></p>
+<p>GRANT</p>
+<p>REVOKE</p>
+<p><strong>DQL：Data Query Language</strong>  </p>
+<p><strong>代表操作：</strong></p>
+<p>SELECT</p>
+<h2 id="二、数据定义语言-DDL-：CREATE-DROP-ALTER"><a href="#二、数据定义语言-DDL-：CREATE-DROP-ALTER" class="headerlink" title="二、数据定义语言(DDL)：CREATE, DROP, ALTER"></a><strong>二、数据定义语言(DDL)：CREATE, DROP, ALTER</strong></h2><p><strong>数据定义语言(DDL)：</strong>其语句包括动词CREATE和DROP。在数据库中创建新表或删除表（CREAT</p>
+<p>TABLE 或 DROP TABLE）；为表加入索引等。DDL包括许多与人数据库目录中获得数据</p>
+<p>有关的保留字。它也是动作查询的一部分。</p>
+<h3 id="新建数据库："><a href="#新建数据库：" class="headerlink" title="新建数据库："></a><strong>新建数据库：</strong></h3><p>CREATE DATABASE|SCHEMA [IF NOT EXISTS] DB_NAME;</p>
+<p>CHARACTER SET ‘character set name’</p>
+<p>COLLATE ‘collate name’</p>
+<h3 id="删除数据库："><a href="#删除数据库：" class="headerlink" title="删除数据库："></a><strong>删除数据库：</strong></h3><p>DROP DATABASE|SCHEMA [IF EXISTS]’DB_NAME’</p>
+<h3 id="新建表："><a href="#新建表：" class="headerlink" title="新建表："></a><strong>新建表：</strong></h3><p>CREATE TABLE</p>
+<p>(1) 直接创建</p>
+<p>(2) 通过查询现存表创建；新表会被直接插入查询而来的数据</p>
+<p>CREATE [TEMPORARY] TABLE [IF NOT EXISTS] tbl_name</p>
+<p>[(create_definition,…)] [table_options]</p>
+<p>[partition_options] select_statement</p>
+<p>(3) 通过复制现存的表的表结构创建，但不复制数据</p>
+<p>CREATE [TEMPORARY] TABLE [IF NOT EXISTS] tbl_name { LIKE</p>
+<p>oldtblname | (LIKE oldtblname) }</p>
+<p><strong>示例：直接创建表</strong></p>
+<p>MariaDB [(db1)]&gt; create table emp</p>
+<p>​    -&gt; ( id int unsigned primary key  auto_increment,</p>
+<p>​    -&gt; name varchar(30) not null ,</p>
+<p>​    -&gt; sex char(1) default ‘m’ ,</p>
+<p>​    -&gt; address varchar(100) ) engine=innodb charset=utf8;</p>
+<p><strong>示例：通过查询现存表创建</strong></p>
+<p>MariaDB [db1]&gt; create table user select user,host,password from mysql.user;</p>
+<p>MariaDB [db1]&gt; desc user;</p>
+<p>+———-+———-+——+—–+———+——-+</p>
+<p>| Field    | Type     | Null | Key | Default | Extra |</p>
+<p>+———-+———-+——+—–+———+——-+</p>
+<p>| user     | char(16) | NO   |     |         |       |</p>
+<p>| host     | char(60) | NO   |     |         |       |</p>
+<p>| password | char(41) | NO   |     |         |       |</p>
+<p>+———-+———-+——+—–+———+——-+</p>
+<p>MariaDB [db1]&gt; select * from user;</p>
+<p>+——+—————+———-+</p>
+<p>| user | host          | password |</p>
+<p>+——+—————+———-+</p>
+<p>| root | localhost     |          |</p>
+<p>| root | centos7.wangx |          |</p>
+<p>| root | 127.0.0.1     |          |</p>
+<p>| root | ::1           |          |</p>
+<p>|      | localhost     |          |</p>
+<p>|      | centos7.wangx |          |</p>
+<p>+——+—————+———-+</p>
+<p><strong>示例：通过复制现存的表的表结构创建，但不复制数据</strong></p>
+<p>MariaDB [db1]&gt; create table user3 like mysql.user;</p>
+<p><strong>示例：创建表包含复合主键</strong></p>
+<p>MariaDB [db1]&gt; create table t1 ( name char(30),city char(30),sex char(1) primary key(name,city) );</p>
+<h3 id="表操作："><a href="#表操作：" class="headerlink" title="表操作："></a><strong>表操作：</strong></h3><p>查看所有的引擎：SHOW ENGINES</p>
+<p>查看表：SHOW TABLES [FROM db_name]</p>
+<p>查看表结构：DESC [db_name.]tb_name</p>
+<p>删除表：DROP TABLE [IF EXISTS] tb_name</p>
+<p>查看表创建命令：SHOW CREATE TABLE tbl_name</p>
+<p>查看表状态：SHOW TABLE STATUS LIKE ‘tbl_name’</p>
+<p>查看库中所有表状态：SHOW TABLE STATUS FROM db_name</p>
+<p><strong>示例：直接创建TABLE</strong></p>
+<p>MariaDB [db1]&gt; CREATE TABLE students ( id tinyint unsigned not null primary key,</p>
+<p>name char(10) not null,phone char(11) not null ,sex char(1) );</p>
+<p>MariaDB [db1]&gt; show tables; </p>
+<p>+—————+</p>
+<p>| Tables_in_db1 |</p>
+<p>+—————+</p>
+<p>| students      |</p>
+<p>+—————+</p>
+<p><strong>示例：查看表状态信息</strong></p>
+<p>MariaDB [db1]&gt; show table status like ‘students’\G</p>
+<p><strong><strong><strong><strong><strong><strong>***</strong></strong></strong></strong></strong></strong> 1. row <strong><strong><strong><strong><strong><strong>***</strong></strong></strong></strong></strong></strong></p>
+<p>Name: students</p>
+<p>Engine: InnoDB</p>
+<p>Version: 10</p>
+<p>Row_format: Compact</p>
+<p>Rows: 0</p>
+<p>Avg_row_length: 0</p>
+<p>Data_length: 16384</p>
+<p>Max_data_length: 0</p>
+<p>Index_length: 0</p>
+<p>Data_free: 10485760</p>
+<p>Auto_increment: NULL</p>
+<p>Create_time: 2018-06-06 18:19:05</p>
+<p>Update_time: NULL</p>
+<p>Check_time: NULL</p>
+<p>Collation: latin1_swedish_ci</p>
+<p>Checksum: NULL</p>
+<p>Create_options:</p>
+<p>Comment:</p>
+<p>1 row in set (0.00 sec)</p>
+<p><strong>示例：查看数据库状态信息</strong></p>
+<p>MariaDB [db1]&gt; show table status from db1\G</p>
+<p><strong><strong><strong><strong><strong><strong>***</strong></strong></strong></strong></strong></strong> 1. row <strong><strong><strong><strong><strong><strong>***</strong></strong></strong></strong></strong></strong></p>
+<p>Name: students</p>
+<p>Engine: InnoDB</p>
+<p>Version: 10</p>
+<p>Row_format: Compact</p>
+<p>Rows: 0</p>
+<p>Avg_row_length: 0</p>
+<p>Data_length: 16384</p>
+<p>Max_data_length: 0</p>
+<p>Index_length: 0</p>
+<p>Data_free: 10485760</p>
+<p>Auto_increment: NULL</p>
+<p>Create_time: 2018-06-06 18:19:05</p>
+<p>Update_time: NULL</p>
+<p>Check_time: NULL</p>
+<p>Collation: latin1_swedish_ci</p>
+<p>Checksum: NULL</p>
+<p>Create_options:</p>
+<p>Comment:</p>
+<p>1 row in set (0.00 sec)</p>
+<h3 id="表操作"><a href="#表操作" class="headerlink" title="表操作"></a><strong>表操作</strong></h3><p><strong>DROP TABLE [IF EXISTS] ‘tbl_name’;</strong></p>
+<p><strong>ALTER TABLE ‘tbl_name’</strong></p>
+<p>字段：</p>
+<p>添加字段：<strong>add</strong></p>
+<p>   ADD col1 data_type [FIRST|AFTER col_name]</p>
+<p>删除字段：<strong>drop</strong></p>
+<p>修改字段：</p>
+<p><strong>alter</strong>（默认值）, <strong>change</strong>（字段名）, <strong>modify</strong>（字段属性）</p>
+<p>索引:</p>
+<p>添加索引：add index</p>
+<p>删除索引: drop index</p>
+<p>表选项</p>
+<p>修改:</p>
+<p>查看表上的索引：SHOW INDEXES FROM [db_name.]tbl_name;</p>
+<p>查看帮助：Help ALTER TABLE</p>
+<p><strong>示例：</strong></p>
+<p>修改表名</p>
+<p>ALTER TABLE students RENAME s1;</p>
+<p>添加表s1中phone列到name列后</p>
+<p>ALTER TABLE s1 ADD phone varchar(11) AFTER name;</p>
+<p>修改表s1中的phone字段属性为int</p>
+<p>ALTER TABLE s1 MODIFY phone int;</p>
+<p>修改表s1中的phone字段名称为mobile</p>
+<p>ALTER TABLE s1 CHANGE COLUMN phone mobile char(11);</p>
+<p>删掉表s1中的一个字段mobile</p>
+<p>ALTER TABLE s1 DROP COLUMN mobile;</p>
+<p>在students表中新增加一列gender，只允许填入m，f</p>
+<p>ALTER TABLE students ADD gender ENUM(‘m’,’f’)</p>
+<p>修改students表中的id字符变为sid字段</p>
+<p>ALETR TABLE students CHANGE id sid int UNSIGNED NOT NULL PRIMARY KEY;</p>
+<p>将students表中name字段设为唯一键</p>
+<p>ALTER TABLE students ADD UNIQUE KEY(name);</p>
+<p>将students表中age字段设为索引</p>
+<p>ALTER TABLE students ADD INDEX(age);</p>
+<p>DESC students;</p>
+<p>SHOW INDEXES FROM students;</p>
+<p>删掉students表中的age字段</p>
+<p>ALTER TABLE students DROP age;</p>
+<h2 id="三、数据操作语言-DML-：INSERT-UPDATE-DELETE"><a href="#三、数据操作语言-DML-：INSERT-UPDATE-DELETE" class="headerlink" title="三、数据操作语言(DML)：INSERT,UPDATE,DELETE"></a><strong>三、数据操作语言(DML)：INSERT,UPDATE,DELETE</strong></h2><p><strong>数据操作语言(DML)</strong>：其语句包括动词INSERT，UPDATE和DELETE。它们分别用于添加，修</p>
+<p>改和删除表中的行。也称为动作查询语言。</p>
+<h3 id="INSERT"><a href="#INSERT" class="headerlink" title="INSERT"></a><strong>INSERT</strong></h3><p><strong>功能：</strong>可用来添加表中的行</p>
+<p><strong>示例：添加表中的行第一种语法</strong></p>
+<p>MariaDB [db1]&gt; insert students values(1,’bai’,’10086′,’m’);</p>
+<p>MariaDB [db1]&gt; select * from students;</p>
+<p>+—-+——+——-+——+</p>
+<p>| id | name | phone | sex  |</p>
+<p>+—-+——+——-+——+</p>
+<p>|  1 | bai  | 10086 | m    |</p>
+<p>+—-+——+——-+——+</p>
+<p><strong>示例：添加表中的行第二种语法</strong></p>
+<p>MariaDB [db1]&gt; insert students(name,id) value (‘wangx’,70);</p>
+<p>MariaDB [db1]&gt; select * from students;</p>
+<p>+—-+——+——-+——+</p>
+<p>| id | name | phone | sex  |</p>
+<p>+—-+——+——-+——+</p>
+<p>|  1 | bai  | 10086 | m    |</p>
+<p>| 70 | wangx|       | NULL |</p>
+<p>+—-+——+——-+——+</p>
+<p><strong>多行添加</strong></p>
+<p>MariaDB [db1]&gt; insert students(id,name,sex) values (2,’liu’,’m’),(3,’lin’,’f’);</p>
+<p>MariaDB [db1]&gt; select * from students;</p>
+<p>+—-+——+——-+——+</p>
+<p>| id | name | phone | sex  |</p>
+<p>+—-+——+——-+——+</p>
+<p>|  1 | bai  | 10086 | m    |</p>
+<p>|  2 | liu  |       | m    |</p>
+<p>|  3 | lin  |       | f    |</p>
+<p>| 70 | wang |       | NULL |</p>
+<p>+—-+——+——-+——+</p>
+<p><strong>示例：添加表中的行第三种语法</strong></p>
+<p>MariaDB [db1]&gt; insert students set id=4,name=’zhao’ ;</p>
+<p>MariaDB [db1]&gt; select * from students;</p>
+<p>+—-+——+——-+——+</p>
+<p>| id | name | phone | sex  |</p>
+<p>+—-+——+——-+——+</p>
+<p>|  1 | bai  | 10086 | m    |</p>
+<p>|  2 | liu  |       | m    |</p>
+<p>|  3 | lin  |       | f    |</p>
+<p>|  4 | zhao |       | NULL |</p>
+<p>| 70 | wang |       | NULL |</p>
+<p>+—-+——+——-+——+</p>
+<h3 id="UPDATE"><a href="#UPDATE" class="headerlink" title="UPDATE"></a><strong>UPDATE</strong></h3><p><strong>功能：</strong>可用来修改标准行的信息</p>
+<p>UPDATE [LOW_PRIORITY] [IGNORE] table_reference</p>
+<p>SET col_name1={expr1|DEFAULT} [, col_name2={expr2|DEFAULT}] …</p>
+<p>[WHERE where_condition]</p>
+<p>[ORDER BY …]</p>
+<p>[LIMIT row_count]</p>
+<p><strong>注意：一定要有限制条件，否则将修改所有行的指定字段</strong></p>
+<p>限制条件：</p>
+<p><strong>WHERE</strong></p>
+<p><strong>LIMIT</strong></p>
+<p>Mysql 选项：–safe-updates| –i-am-a-dummy|-U</p>
+<p>MariaDB [db1]&gt; select * from students;   </p>
+<p>+—-+——+——-+——+</p>
+<p>| id | name | phone | sex  |</p>
+<p>+—-+——+——-+——+</p>
+<p>|  1 | bai  | 10086 | m    |</p>
+<p>|  2 | liu  |       | m    |</p>
+<p>|  3 | lin  |       | f    |</p>
+<p>|  4 | zhao |       | NULL |</p>
+<p>| 70 | wang |       | NULL |</p>
+<p>+—-+——+——-+——+</p>
+<p><strong>示例：修改表中行内容</strong></p>
+<p>MariaDB [db1]&gt; update students set name=’admin’,sex=’f’ where id=1;  </p>
+<p>MariaDB [db1]&gt; select * from students;</p>
+<p>+—-+——-+——-+——+</p>
+<p>| id | name  | phone | sex  |</p>
+<p>+—-+——-+——-+——+</p>
+<p>|  1 | admin | 10086 | f    |</p>
+<p>|  2 | liu   |       | m    |</p>
+<p>|  3 | lin   |       | f    |</p>
+<p>|  4 | zhao  |       | NULL |</p>
+<p>| 70 | wang  |       | NULL |</p>
+<p>+—-+——-+——-+——+</p>
+<h3 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a><strong>DELETE</strong></h3><p><strong>功能：</strong>可用来删除表中的行</p>
+<p>生产环境一般用伪删除代替DELETE：</p>
+<p>DELETE [LOW_PRIORITY] [QUICK] [IGNORE] FROM tbl_name</p>
+<p>[WHERE where_condition]</p>
+<p>[ORDER BY …]</p>
+<p>[LIMIT row_count]</p>
+<p>可先排序再指定删除的行数</p>
+<p><strong>注意：一定要有限制条件，否则将清空表中的所有数据</strong></p>
+<p>限制条件：</p>
+<p><strong>WHERE</strong></p>
+<p><strong>LIMIT</strong></p>
+<p>TRUNCATE TABLE tbl_name; 清空表，慎用！</p>
+<p>MariaDB [db1]&gt; delete from students where id=1;</p>
+<p>MariaDB [db1]&gt; select * from students;</p>
+<p>+—-+——+——-+——+</p>
+<p>| id | name | phone | sex  |</p>
+<p>+—-+——+——-+——+</p>
+<p>|  2 | liu  |       | m    |</p>
+<p>|  3 | lin  |       | f    |</p>
+<p>|  4 | zhao |       | NULL |</p>
+<p>| 70 | wang |       | NULL |</p>
+<p>+—-+——+——-+——+</p>
+<p>为避免操作时忘加where可使用安全更新模式</p>
+<p><strong>mysql –safe-updates|-U</strong></p>
+<p>当执行修该操作未指定WHERE时就会进行报错提醒</p>
+<p>MariaDB [db1]&gt; update user set user=’admin’</p>
+<p>-&gt; ;</p>
+<p>ERROR 1175 (HY000): You are using safe update mode and you tried to update a table without a WHERE that uses a KEY column</p>
+<p><strong>方法一：添加别名</strong></p>
+<p>alias mysql=mysql -U    </p>
+<p><strong>方法二：修改配置文件</strong></p>
+<p><strong>vim /etc/my.cnf.d/mysql-clients.cnf</strong></p>
+<p>[mysql]</p>
+<p>safe-updates</p>
+<h2 id="四、数据查询语言-DQL-：SELECT-LIKE-GROUP-ODER-BY"><a href="#四、数据查询语言-DQL-：SELECT-LIKE-GROUP-ODER-BY" class="headerlink" title="四、数据查询语言(DQL)：SELECT,LIKE,GROUP,ODER BY"></a><strong>四、数据查询语言(DQL)：SELECT,LIKE,GROUP,ODER BY</strong></h2><p><strong>数据查询语言(DQL)：</strong>也称为“数据检索语句”，用以从表中获得数据，确定数据怎样在</p>
+<p>应用程序给出。保留字SELECT是DQL（也是所有SQL）用得最多的动词，其他DQL常用的保</p>
+<p>留字有WHERE，ORDER BY，GROUP BY和HAVING。这些DQL保留字常与其他类型的SQL语句一</p>
+<p>起使用。</p>
+<p><strong>select语句执行顺序：</strong></p>
+<p><img src="语句逻辑.png" alt="语句逻辑"></p>
+<h3 id="SELECT"><a href="#SELECT" class="headerlink" title="SELECT"></a><strong>SELECT</strong></h3><p>[ALL | DISTINCT | DISTINCTROW ]</p>
+<p>[SQL_CACHE | SQL_NO_CACHE]</p>
+<p>select_expr [, select_expr …]</p>
+<p>[FROM table_references</p>
+<p>[WHERE where_condition]</p>
+<p>[GROUP BY {col_name | expr | position}</p>
+<p>[ASC | DESC], … [WITH ROLLUP]]</p>
+<p>[HAVING where_condition]</p>
+<p>[ORDER BY {col_name | expr | position}</p>
+<p>[ASC | DESC], …]</p>
+<p>[LIMIT {[offset,] row_count | row_count OFFSET offset}]</p>
+<p>[FOR UPDATE | LOCK IN SHARE MODE]</p>
+<p>注意：select语句用法不同会造成性能消耗不同，性能差的写法甚至可能造成宕机</p>
+<h3 id="LIKE"><a href="#LIKE" class="headerlink" title="LIKE:"></a><strong>LIKE:</strong></h3><p>%: 任意长度的任意字符</p>
+<p>_：任意单个字符</p>
+<p>RLIKE：正则表达式，索引失效，不建议使用</p>
+<p>REGEXP：匹配字符串可用正则表达式书写模式，同上</p>
+<p>逻辑操作符：</p>
+<p>​         <strong>NOT</strong></p>
+<p>​         <strong>AND</strong></p>
+<p>​         <strong>OR</strong></p>
+<p>​         <strong>XOR</strong></p>
+<h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a><strong>示例：</strong></h3><p><strong>单表操作</strong></p>
+<p>MariaDB [db1]&gt; select * from user;</p>
+<p>+——+—————+———-+</p>
+<p>| user | host          | password |</p>
+<p>+——+—————+———-+</p>
+<p>| root | localhost     |          |</p>
+<p>| root | centos7.wangx |          |</p>
+<p>| root | 127.0.0.1     |          |</p>
+<p>| root | ::1           |          |</p>
+<p>|      | localhost     |          |</p>
+<p>|      | centos7.wangx |          |</p>
+<p>+——+—————+———-+</p>
+<p><strong>select也是一种语句：</strong></p>
+<p>MariaDB [db1]&gt; select ‘hello world’;</p>
+<p>+————-+</p>
+<p>| hello world |</p>
+<p>+————-+</p>
+<p>| hello world |</p>
+<p>+————-+</p>
+<p><strong>也可以进行运算</strong></p>
+<p>MariaDB [db1]&gt; select ‘1+2=’,1+2;</p>
+<p>+——+—–+</p>
+<p>| 1+2= | 1+2 |</p>
+<p>+——+—–+</p>
+<p>| 1+2= |   3 |</p>
+<p>+——+—–+</p>
+<p><strong>有类似与sed的特性：</strong></p>
+<p>MariaDB [db1]&gt; select ‘1+2=’,1+2 from user;</p>
+<p>+——+—–+</p>
+<p>| 1+2= | 1+2 |</p>
+<p>+——+—–+</p>
+<p>| 1+2= |   3 |</p>
+<p>| 1+2= |   3 |</p>
+<p>| 1+2= |   3 |</p>
+<p>| 1+2= |   3 |</p>
+<p>| 1+2= |   3 |</p>
+<p>| 1+2= |   3 |</p>
+<p>+——+—–+</p>
+<p>MariaDB [db1]&gt; select user,password from user;    </p>
+<p>+——+———-+</p>
+<p>| user | password |</p>
+<p>+——+———-+</p>
+<p>| root |          |</p>
+<p>| root |          |</p>
+<p>| root |          |</p>
+<p>| root |          |</p>
+<p>|      |          |</p>
+<p>|      |          |</p>
+<p>+——+———-+</p>
+<p><strong>可添加自定义字符：</strong></p>
+<p>MariaDB [db1]&gt; select ‘number’,user,password from user;</p>
+<p>+——–+——+———-+</p>
+<p>| number | user | password |</p>
+<p>+——–+——+———-+</p>
+<p>| number | root |          |</p>
+<p>| number | root |          |</p>
+<p>| number | root |          |</p>
+<p>| number | root |          |</p>
+<p>| number |      |          |</p>
+<p>| number |      |          |</p>
+<p>+——–+——+———-+</p>
+<p><strong>限定条件select</strong></p>
+<p>MariaDB [db1]&gt; select ‘number’,user,password from user where user=’root’;</p>
+<p>+——–+——+———-+</p>
+<p>| number | user | password |</p>
+<p>+——–+——+———-+</p>
+<p>| number | root |          |</p>
+<p>| number | root |          |</p>
+<p>| number | root |          |</p>
+<p>| number | root |          |</p>
+<p>+——–+——+———-+</p>
+<p>MariaDB [db1]&gt; select * from students;                 </p>
+<p>+—-+——+——-+——+</p>
+<p>| id | name | phone | sex  |</p>
+<p>+—-+——+——-+——+</p>
+<p>|  2 | liu  |       | m    |</p>
+<p>|  3 | lin  |       | f    |</p>
+<p>|  4 | zhao |       | NULL |</p>
+<p>| 70 | wang |       | NULL |</p>
+<p>+—-+——+——-+——+</p>
+<p><strong>判断条件，是否为空</strong></p>
+<p><strong>搜索性别为空的学生信息</strong></p>
+<p>MariaDB [db1]&gt; select * from students where sex is null;</p>
+<p>+—-+——+——-+——+</p>
+<p>| id | name | phone | sex  |</p>
+<p>+—-+——+——-+——+</p>
+<p>|  4 | zhao |       | NULL |</p>
+<p>| 70 | wang |       | NULL |</p>
+<p>+—-+——+——-+——+</p>
+<p><strong>搜索性别不为空的学生信息</strong></p>
+<p>MariaDB [db1]&gt; select * from students where sex is not null;</p>
+<p>+—-+——+——-+——+</p>
+<p>| id | name | phone | sex  |</p>
+<p>+—-+——+——-+——+</p>
+<p>|  2 | liu  |       | m    |</p>
+<p>|  3 | lin  |       | f    |</p>
+<p>+—-+——+——-+——+</p>
+<p><strong>搜索id大于2小于5的学生信息</strong></p>
+<p>MariaDB [db1]&gt; select * from students where id &gt;=2 and id&lt;=5;</p>
+<p>+—-+——+——-+——+</p>
+<p>| id | name | phone | sex  |</p>
+<p>+—-+——+——-+——+</p>
+<p>|  2 | liu  |       | m    |</p>
+<p>|  3 | lin  |       | f    |</p>
+<p>|  4 | zhao |       | NULL |</p>
+<p>+—-+——+——-+——+</p>
+<p><strong>也可用between写法表示范围</strong></p>
+<p>MariaDB [db1]&gt; select * from students where id between 2 and 5;</p>
+<p>+—-+——+——-+——+</p>
+<p>| id | name | phone | sex  |</p>
+<p>+—-+——+——-+——+</p>
+<p>|  2 | liu  |       | m    |</p>
+<p>|  3 | lin  |       | f    |</p>
+<p>|  4 | zhao |       | NULL |</p>
+<p>+—-+——+——-+——+</p>
+<p><strong>字符范围搜索</strong></p>
+<p>MariaDB [db1]&gt; select * from students where sex in (‘f’,’m’); </p>
+<p>+—-+——+——-+——+</p>
+<p>| id | name | phone | sex  |</p>
+<p>+—-+——+——-+——+</p>
+<p>|  2 | liu  |       | m    |</p>
+<p>|  3 | lin  |       | f    |</p>
+<p>+—-+——+——-+——+</p>
+<p><strong>逻辑或关系搜索</strong></p>
+<p>MariaDB [db1]&gt; select * from students where sex in (‘f’,’m’) or sex is null;</p>
+<p>+—-+——+——-+——+</p>
+<p>| id | name | phone | sex  |</p>
+<p>+—-+——+——-+——+</p>
+<p>|  0 | 70   |       | NULL |</p>
+<p>|  2 | liu  |       | m    |</p>
+<p>|  3 | lin  |       | f    |</p>
+<p>|  4 | zhao |       | NULL |</p>
+<p>| 70 | wang |       | NULL |</p>
+<p>+—-+——+——-+——+</p>
+<p><strong>可对字段定义别名（as可省略）</strong></p>
+<p>MariaDB [db1]&gt; select id as 编号,name 姓名 from students where sex in (‘f’,’m’) or sex is null;   </p>
+<p>+——–+——–+</p>
+<p>| 编号   | 姓名   |</p>
+<p>+——–+——–+</p>
+<p>|      0 | 70     |</p>
+<p>|      2 | liu    |</p>
+<p>|      3 | lin    |</p>
+<p>|      4 | zhao   |</p>
+<p>|     70 | wang   |</p>
+<p>+——–+——–+</p>
+<h3 id="LIKE-1"><a href="#LIKE-1" class="headerlink" title="LIKE"></a><strong>LIKE</strong></h3><p><strong>功能：</strong>支持模糊搜索</p>
+<p><strong>搜索名字以w开头学生信息</strong></p>
+<p>MariaDB [db1]&gt; select * from students where name like ‘w%’;</p>
+<p>+—-+——+——-+——+</p>
+<p>| id | name | phone | sex  |</p>
+<p>+—-+——+——-+——+</p>
+<p>| 70 | wang |       | NULL |</p>
+<p>+—-+——+——-+——+</p>
+<p><strong>搜索名字包含i的学生信息</strong></p>
+<p>MariaDB [db1]&gt; select * from students where name like ‘%i%’;</p>
+<p>+—-+——+——-+——+</p>
+<p>| id | name | phone | sex  |</p>
+<p>+—-+——+——-+——+</p>
+<p>|  2 | liu  |       | m    |</p>
+<p>|  3 | lin  |       | f    |</p>
+<p>+—-+——+——-+——+</p>
+<p><strong>“_”可用来表示单个字符，搜索名字为三个字符的学生信息</strong></p>
+<p>MariaDB [db1]&gt; select * from students where name like ‘___’;</p>
+<p>+—-+——+——-+——+</p>
+<p>| id | name | phone | sex  |</p>
+<p>+—-+——+——-+——+</p>
+<p>|  2 | liu  |       | m    |</p>
+<p>|  3 | lin  |       | f    |</p>
+<p>+—-+——+——-+——+</p>
+<h3 id="RLIKE"><a href="#RLIKE" class="headerlink" title="RLIKE"></a><strong>RLIKE</strong></h3><p><strong>功能：</strong>支持正则表达式，不建议使用，将导致索引生效！！！！！</p>
+<p><strong>搜索名字以l开头的学员信息</strong></p>
+<p>MariaDB [db1]&gt; select * from students where name rlike ‘^l’;  </p>
+<p>+—-+——+——-+——+</p>
+<p>| id | name | phone | sex  |</p>
+<p>+—-+——+——-+——+</p>
+<p>|  2 | liu  |       | m    |</p>
+<p>|  3 | lin  |       | f    |</p>
+<p>+—-+——+——-+——+</p>
+<h3 id="GROUP"><a href="#GROUP" class="headerlink" title="GROUP"></a><strong>GROUP</strong></h3><p><strong>功能：</strong>根据指定的条件把查询结果进行“分组”以用于做“聚合”运算</p>
+<p><strong>avg(), max(), min(), count(), sum()</strong></p>
+<p><strong>HAVING:</strong> 对分组聚合运算后的结果指定过滤条件</p>
+<p><strong>ORDER BY:</strong> 根据指定的字段对查询结果进行排序</p>
+<p>升序：ASC</p>
+<p>降序：DESC</p>
+<p><strong>LIMIT [[offset,]row_count]：</strong>对查询的结果进行输出行数数量限制</p>
+<p>对查询结果中的数据请求施加“锁”</p>
+<p>FOR UPDATE: 写锁，独占或排它锁，只有一个读和写</p>
+<p>LOCK IN SHARE MODE: 读锁，共享锁，同时多个读</p>
+<p><strong>以下表为示例</strong></p>
+<p>MariaDB [db1]&gt; select * from students;           </p>
+<p>+—-+——-+——-+——-+——+</p>
+<p>| id | name  | phone | score | sex  |</p>
+<p>+—-+——-+——-+——-+——+</p>
+<p>|  2 | liu   |       |    88 | m    |</p>
+<p>|  3 | lin   |       |    84 | f    |</p>
+<p>|  6 | zhang | 10010 |    76 | m    |</p>
+<p>| 70 | wang  |       |    93 | f    |</p>
+<p>+—-+——-+——-+——-+——+</p>
+<p><strong>按性别分组统计最好成绩</strong></p>
+<p>MariaDB [db1]&gt; select sex,max(score) as 最好成绩 from students group by sex; </p>
+<p>+——+————–+</p>
+<p>| sex  | 最好成绩     |</p>
+<p>+——+————–+</p>
+<p>| f    |           93 |</p>
+<p>| m    |           88 |</p>
+<p>+——+————–+</p>
+<p><strong>按性别分组统计平均成绩</strong></p>
+<p>MariaDB [db1]&gt; select sex,avg(score) from students group by sex;             </p>
+<p>+——+————+</p>
+<p>| sex  | avg(score) |</p>
+<p>+——+————+</p>
+<p>| f    |    88.5000 |</p>
+<p>| m    |    82.0000 |</p>
+<p>+——+————+</p>
+<p><strong>多行分组：</strong></p>
+<p>MariaDB [db1]&gt; select * from students;                       </p>
+<p>+—-+——-+——-+——-+——+——-+</p>
+<p>| id | name  | phone | score | sex  | class |</p>
+<p>+—-+——-+——-+——-+——+——-+</p>
+<p>|  2 | liu   |       |    88 | m    |     1 |</p>
+<p>|  3 | lin   |       |    84 | f    |     1 |</p>
+<p>|  4 | abc   | 11000 |    86 | f    |     1 |</p>
+<p>|  6 | zhang | 10010 |    76 | m    |     2 |</p>
+<p>| 70 | wang  |       |    93 | f    |     2 |</p>
+<p>+—-+——-+——-+——-+——+——-+</p>
+<p><strong>统计按班级，性别分组后的各组平均成绩</strong></p>
+<p>MariaDB [db1]&gt; select class,sex,avg(score) from students group by class,sex;</p>
+<p>+——-+——+————+</p>
+<p>| class | sex  | avg(score) |</p>
+<p>+——-+——+————+</p>
+<p>|     1 | f    |    85.0000 |</p>
+<p>|     1 | m    |    88.0000 |</p>
+<p>|     2 | f    |    93.0000 |</p>
+<p>|     2 | m    |    76.0000 |</p>
+<p>+——-+——+————+</p>
+<p><strong>count()统计数量：</strong></p>
+<p>MariaDB [db1]&gt; select class,sex,count(*) from students group by class,sex;</p>
+<p>+——-+——+———-+</p>
+<p>| class | sex  | count(*) |</p>
+<p>+——-+——+———-+</p>
+<p>|     1 | f    |        2 |</p>
+<p>|     1 | m    |        1 |</p>
+<p>|     2 | f    |        1 |</p>
+<p>|     2 | m    |        1 |</p>
+<p>+——-+——+———-+</p>
+<p><strong>统计数量时建议统计主键，可提高数率</strong></p>
+<p>MariaDB [db1]&gt; select class,sex,count(id) from students group by class,sex;</p>
+<p>+——-+——+———–+</p>
+<p>| class | sex  | count(id) |</p>
+<p>+——-+——+———–+</p>
+<p>|     1 | f    |         2 |</p>
+<p>|     1 | m    |         1 |</p>
+<p>|     2 | f    |         1 |</p>
+<p>|     2 | m    |         1 |</p>
+<p>+——-+——+———–+</p>
+<p><strong>统计学生人数</strong></p>
+<p>MariaDB [db1]&gt; select count(id) from students;</p>
+<p>+———–+</p>
+<p>| count(id) |</p>
+<p>+———–+</p>
+<p>|         5 |</p>
+<p>+———–+</p>
+<p><strong>分组后过滤：</strong></p>
+<p><strong>统计按班级，性别分组后的各组平均成绩，只显示平均成绩打印80的组统计信息</strong></p>
+<p>MariaDB [db1]&gt; select class,sex,avg(score) from students group by class,sex having avg(score) &gt;80;</p>
+<p>+——-+——+————+</p>
+<p>| class | sex  | avg(score) |</p>
+<p>+——-+——+————+</p>
+<p>|     1 | f    |    85.0000 |</p>
+<p>|     1 | m    |    88.0000 |</p>
+<p>|     2 | f    |    93.0000 |</p>
+<p>+——-+——+————+</p>
+<p><strong>分组前过滤</strong></p>
+<p><strong>只显示1班分组后的统计信息</strong></p>
+<p>MariaDB [db1]&gt; select class,sex,avg(score) from students where class=1 group by class,sex having avg(score) &gt;80;</p>
+<p>+——-+——+————+</p>
+<p>| class | sex  | avg(score) |</p>
+<p>+——-+——+————+</p>
+<p>|     1 | f    |    85.0000 |</p>
+<p>|     1 | m    |    88.0000 |</p>
+<p>+——-+——+————+</p>
+<h3 id="ORDER-BY"><a href="#ORDER-BY" class="headerlink" title="ORDER BY"></a><strong>ORDER BY</strong></h3><p><strong>正序排列：</strong></p>
+<p>MariaDB [db1]&gt; select * from students order by score;</p>
+<p>+—-+——-+——-+——-+——+——-+</p>
+<p>| id | name  | phone | score | sex  | class |</p>
+<p>+—-+——-+——-+——-+——+——-+</p>
+<p>|  6 | zhang | 10010 |    76 | m    |     2 |</p>
+<p>|  3 | lin   |       |    84 | f    |     1 |</p>
+<p>|  4 | abc   | 11000 |    86 | f    |     1 |</p>
+<p>|  2 | liu   |       |    88 | m    |     1 |</p>
+<p>| 70 | wang  |       |    93 | f    |     2 |</p>
+<p>+—-+——-+——-+——-+——+——-+</p>
+<p><strong>倒序排列：</strong></p>
+<p>MariaDB [db1]&gt; select * from students order by score desc;</p>
+<p>+—-+——-+——-+——-+——+——-+</p>
+<p>| id | name  | phone | score | sex  | class |</p>
+<p>+—-+——-+——-+——-+——+——-+</p>
+<p>| 70 | wang  |       |    93 | f    |     2 |</p>
+<p>|  2 | liu   |       |    88 | m    |     1 |</p>
+<p>|  4 | abc   | 11000 |    86 | f    |     1 |</p>
+<p>|  3 | lin   |       |    84 | f    |     1 |</p>
+<p>|  6 | zhang | 10010 |    76 | m    |     2 |</p>
+<p>+—-+——-+——-+——-+——+——-+</p>
+<p><strong>小技巧：利用-调整空字符NULL的位置</strong></p>
+<p>MariaDB [db1]&gt; select * from students order by score desc;</p>
+<p>+—-+——-+——-+——-+——+——-+</p>
+<p>| id | name  | phone | score | sex  | class |</p>
+<p>+—-+——-+——-+——-+——+——-+</p>
+<p>| 70 | wang  |       |    93 | f    |     2 |</p>
+<p>|  2 | liu   |       |    88 | m    |     1 |</p>
+<p>|  4 | abc   | 11000 |    86 | f    |     1 |</p>
+<p>|  3 | lin   |       |    84 | f    |     1 |</p>
+<p>|  6 | zhang | 10010 |    76 | m    |     2 |</p>
+<p>|  7 | zz    | 10086 |    69 | m    |     2 |</p>
+<p>|  8 | zhao  | 10000 |  NULL | m    |     1 |</p>
+<p>+—-+——-+——-+——-+——+——-+</p>
+<p>MariaDB [db1]&gt; select * from students order by -score desc;</p>
+<p>+—-+——-+——-+——-+——+——-+</p>
+<p>| id | name  | phone | score | sex  | class |</p>
+<p>+—-+——-+——-+——-+——+——-+</p>
+<p>|  7 | zz    | 10086 |    69 | m    |     2 |</p>
+<p>|  6 | zhang | 10010 |    76 | m    |     2 |</p>
+<p>|  3 | lin   |       |    84 | f    |     1 |</p>
+<p>|  4 | abc   | 11000 |    86 | f    |     1 |</p>
+<p>|  2 | liu   |       |    88 | m    |     1 |</p>
+<p>| 70 | wang  |       |    93 | f    |     2 |</p>
+<p>|  8 | zhao  | 10000 |  NULL | m    |     1 |</p>
+<p>+—-+——-+——-+——-+——+——-+</p>
+<h3 id="LIMIT"><a href="#LIMIT" class="headerlink" title="LIMIT"></a><strong>LIMIT</strong></h3><p>MariaDB [db1]&gt; select * from students order by score limit 3;</p>
+<p>+—-+——-+——-+——-+——+——-+</p>
+<p>| id | name  | phone | score | sex  | class |</p>
+<p>+—-+——-+——-+——-+——+——-+</p>
+<p>|  8 | zhao  | 10000 |  NULL | m    |     1 |</p>
+<p>|  7 | zz    | 10086 |    69 | m    |     2 |</p>
+<p>|  6 | zhang | 10010 |    76 | m    |     2 |</p>
+<p>+—-+——-+——-+——-+——+——-+</p>
+<h2 id="五、多表查询SQJ-JOIN"><a href="#五、多表查询SQJ-JOIN" class="headerlink" title="五、多表查询SQJ JOIN"></a><strong>五、多表查询SQJ JOIN</strong></h2><h3 id="多表查询中主要的-SQL-JOIN-类型："><a href="#多表查询中主要的-SQL-JOIN-类型：" class="headerlink" title="多表查询中主要的 SQL JOIN 类型："></a><strong>多表查询中主要的 SQL JOIN 类型：</strong></h3><p><strong>INNER JOIN：</strong>如果表中有至少一个匹配，则返回行</p>
+<p><strong>LEFT JOIN：</strong>即使右表中没有匹配，也从左表返回所有的行</p>
+<p><strong>RIGHT JOIN：</strong>即使左表中没有匹配，也从右表返回所有的行</p>
+<p><strong>FULL JOIN：</strong>只要其中一个表中存在匹配，则返回行</p>
+<p><strong>CROSS JOIN：</strong>用于生成两张表的笛卡尔集</p>
+<p><strong>本次示例，我们将使用 HELLODB 样本数据库。</strong></p>
+<p><strong>下面是选自 “teachers” 表的数据：</strong></p>
+<p>MariaDB [hellodb]&gt; select * from teachers;</p>
+<p>+—–+—————+—–+——–+</p>
+<p>| TID | Name          | Age | Gender |</p>
+<p>+—–+—————+—–+——–+</p>
+<p>|   1 | Song Jiang    |  45 | M      |</p>
+<p>|   2 | Zhang Sanfeng |  94 | M      |</p>
+<p>|   3 | Miejue Shitai |  77 | F      |</p>
+<p>|   4 | Lin Chaoying  |  93 | F      |</p>
+<p>+—–+—————+—–+——–+</p>
+<p><strong>以下是 “students” 表的数据</strong></p>
+<p>MariaDB [hellodb]&gt; select * from students;</p>
+<p>+——-+—————+—–+——–+———+———–+</p>
+<p>| StuID | Name          | Age | Gender | ClassID | TeacherID |</p>
+<p>+——-+—————+—–+——–+———+———–+</p>
+<p>|     1 | Shi Zhongyu   |  22 | M      |       2 |         3 |</p>
+<p>|     2 | Shi Potian    |  22 | M      |       1 |         7 |</p>
+<p>|     3 | Xie Yanke     |  53 | M      |       2 |        16 |</p>
+<p>|     4 | Ding Dian     |  32 | M      |       4 |         4 |</p>
+<p>|     5 | Yu Yutong     |  26 | M      |       3 |         1 |</p>
+<p>|     6 | Shi Qing      |  46 | M      |       5 |      NULL |</p>
+<p>|     7 | Xi Ren        |  19 | F      |       3 |      NULL |</p>
+<p>|     8 | Lin Daiyu     |  17 | F      |       7 |      NULL |</p>
+<p>|     9 | Ren Yingying  |  20 | F      |       6 |      NULL |</p>
+<p>|    10 | Yue Lingshan  |  19 | F      |       3 |      NULL |</p>
+<p>|    11 | Yuan Chengzhi |  23 | M      |       6 |      NULL |</p>
+<p>|    12 | Wen Qingqing  |  19 | F      |       1 |      NULL |</p>
+<p>|    13 | Tian Boguang  |  33 | M      |       2 |      NULL |</p>
+<p>|    14 | Lu Wushuang   |  17 | F      |       3 |      NULL |</p>
+<p>|    15 | Duan Yu       |  19 | M      |       4 |      NULL |</p>
+<p>|    16 | Xu Zhu        |  21 | M      |       1 |      NULL |</p>
+<p>|    17 | Lin Chong     |  25 | M      |       4 |      NULL |</p>
+<p>|    18 | Hua Rong      |  23 | M      |       7 |      NULL |</p>
+<p>|    19 | Xue Baochai   |  18 | F      |       6 |      NULL |</p>
+<p>|    20 | Diao Chan     |  19 | F      |       7 |      NULL |</p>
+<p>|    21 | Huang Yueying |  22 | F      |       6 |      NULL |</p>
+<p>|    22 | Xiao Qiao     |  20 | F      |       1 |      NULL |</p>
+<p>|    23 | Ma Chao       |  23 | M      |       4 |      NULL |</p>
+<p>|    24 | Xu Xian       |  27 | M      |    NULL |      NULL |</p>
+<p>|    25 | Sun Dasheng   | 100 | M      |    NULL |      NULL |</p>
+<p>+——-+—————+—–+——–+———+———–+</p>
+<h3 id="内连接：INNER-JOIN"><a href="#内连接：INNER-JOIN" class="headerlink" title="内连接：INNER JOIN"></a><strong>内连接：INNER JOIN</strong></h3><p><strong>效果：</strong>如果表中有至少一个匹配，则返回行</p>
+<p><img src="内连接.png" alt="内连接"></p>
+<p><strong>写法一：</strong>旧写法</p>
+<p>MariaDB [hellodb]&gt; select s.name,t.name from students as s,teachers as t where s.teacherid=t.tid;</p>
+<p>+————-+—————+</p>
+<p>| name        | name          |</p>
+<p>+————-+—————+</p>
+<p>| Yu Yutong   | Song Jiang    |</p>
+<p>| Shi Zhongyu | Miejue Shitai |</p>
+<p>| Ding Dian   | Lin Chaoying  |</p>
+<p>+————-+—————+</p>
+<p>MariaDB [hellodb]&gt; select s.name as 学生姓名,t.name as 讲师姓名 from students as s,teachers as t where s.teacherid=t.tid;   </p>
+<p>+————–+—————+</p>
+<p>| 学生姓名     | 讲师姓名      |</p>
+<p>+————–+—————+</p>
+<p>| Yu Yutong    | Song Jiang    |</p>
+<p>| Shi Zhongyu  | Miejue Shitai |</p>
+<p>| Ding Dian    | Lin Chaoying  |</p>
+<p>+————–+—————+</p>
+<p><strong>写法二：</strong>SQL标准写法，适合其他类型数据库</p>
+<p>MariaDB [hellodb]&gt; select s.name as 学生姓名,t.name as 讲师姓名 from students as s inner join teachers as t on s.teacherid=t.tid;</p>
+<p>+————–+—————+</p>
+<p>| 学生姓名     | 讲师姓名      |</p>
+<p>+————–+—————+</p>
+<p>| Yu Yutong    | Song Jiang    |</p>
+<p>| Shi Zhongyu  | Miejue Shitai |</p>
+<p>| Ding Dian    | Lin Chaoying  |</p>
+<p>+————–+—————+</p>
+<h3 id="交叉连接：CROSS-JOIN"><a href="#交叉连接：CROSS-JOIN" class="headerlink" title="交叉连接：CROSS JOIN"></a><strong>交叉连接：CROSS JOIN</strong></h3><p><strong>效果：</strong>用于生成两张表的笛卡尔集，笛卡尔集的列数为每个表的列数之</p>
+<p>和，笛卡尔集的行数为每个表的行数相乘。我们经常做的多表查询就是在笛卡</p>
+<p>尔集中通过筛选条件得出的数据，所以笛卡尔集是多表查询的基础。</p>
+<p>MariaDB [hellodb]&gt; select * from students cross join teachers;</p>
+<p>+——-+—————+—–+——–+———+———–+—–+—————+—–+——–+</p>
+<p>| StuID | Name          | Age | Gender | ClassID | TeacherID | TID | Name          | Age | Gender |</p>
+<p>+——-+—————+—–+——–+———+———–+—–+—————+—–+——–+</p>
+<p>|     1 | Shi Zhongyu   |  22 | M      |       2 |         3 |   1 | Song Jiang    |  45 | M      |</p>
+<p>|     1 | Shi Zhongyu   |  22 | M      |       2 |         3 |   2 | Zhang Sanfeng |  94 | M      |</p>
+<p>|     1 | Shi Zhongyu   |  22 | M      |       2 |         3 |   3 | Miejue Shitai |  77 | F      |</p>
+<p>|     1 | Shi Zhongyu   |  22 | M      |       2 |         3 |   4 | Lin Chaoying  |  93 | F      |</p>
+<p>|     2 | Shi Potian    |  22 | M      |       1 |         7 |   1 | Song Jiang    |  45 | M      |</p>
+<p>|     2 | Shi Potian    |  22 | M      |       1 |         7 |   2 | Zhang Sanfeng |  94 | M      |</p>
+<p>|     2 | Shi Potian    |  22 | M      |       1 |         7 |   3 | Miejue Shitai |  77 | F      |</p>
+<p>|     2 | Shi Potian    |  22 | M      |       1 |         7 |   4 | Lin Chaoying  |  93 | F      |</p>
+<p>|     3 | Xie Yanke     |  53 | M      |       2 |        16 |   1 | Song Jiang    |  45 | M      |</p>
+<p>|     3 | Xie Yanke     |  53 | M      |       2 |        16 |   2 | Zhang Sanfeng |  94 | M      |</p>
+<p>|     3 | Xie Yanke     |  53 | M      |       2 |        16 |   3 | Miejue Shitai |  77 | F      |</p>
+<p>|     3 | Xie Yanke     |  53 | M      |       2 |        16 |   4 | Lin Chaoying  |  93 | F      |</p>
+<p>|     4 | Ding Dian     |  32 | M      |       4 |         4 |   1 | Song Jiang    |  45 | M      |</p>
+<p>|     4 | Ding Dian     |  32 | M      |       4 |         4 |   2 | Zhang Sanfeng |  94 | M      |</p>
+<p>|     4 | Ding Dian     |  32 | M      |       4 |         4 |   3 | Miejue Shitai |  77 | F      |</p>
+<p>|     4 | Ding Dian     |  32 | M      |       4 |         4 |   4 | Lin Chaoying  |  93 | F      |</p>
+<p>|     5 | Yu Yutong     |  26 | M      |       3 |         1 |   1 | Song Jiang    |  45 | M      |</p>
+<p>…….</p>
+<h3 id="左外连接：LEFT-JOIN"><a href="#左外连接：LEFT-JOIN" class="headerlink" title="左外连接：LEFT JOIN"></a><strong>左外连接：LEFT JOIN</strong></h3><p><strong>功能：</strong>即使右表中没有匹配，也从左表返回所有的行</p>
+<p><strong>注释：</strong>在某些数据库中，LEFT JOIN 称为 LEFT OUTER JOIN</p>
+<p><img src="左连接.png" alt="左连接"></p>
+<p>MariaDB [hellodb]&gt; select s.name as studentname,t.name as teachername from students as s left outer join teachers as t on s.teacherid=t.tid;</p>
+<p>+—————+—————+</p>
+<p>| studentname   | teachername   |</p>
+<p>+—————+—————+</p>
+<p>| Shi Zhongyu   | Miejue Shitai |</p>
+<p>| Shi Potian    | NULL          |</p>
+<p>| Xie Yanke     | NULL          |</p>
+<p>| Ding Dian     | Lin Chaoying  |</p>
+<p>| Yu Yutong     | Song Jiang    |</p>
+<p>| Shi Qing      | NULL          |</p>
+<p>| Xi Ren        | NULL          |</p>
+<p>| Lin Daiyu     | NULL          |</p>
+<p>| Ren Yingying  | NULL          |</p>
+<p>| Yue Lingshan  | NULL          |</p>
+<p>| Yuan Chengzhi | NULL          |</p>
+<p>| Wen Qingqing  | NULL          |</p>
+<p>| Tian Boguang  | NULL          |</p>
+<p>| Lu Wushuang   | NULL          |</p>
+<p>| Duan Yu       | NULL          |</p>
+<p>| Xu Zhu        | NULL          |</p>
+<p>| Lin Chong     | NULL          |</p>
+<p>| Hua Rong      | NULL          |</p>
+<p>| Xue Baochai   | NULL          |</p>
+<p>| Diao Chan     | NULL          |</p>
+<p>| Huang Yueying | NULL          |</p>
+<p>| Xiao Qiao     | NULL          |</p>
+<p>| Ma Chao       | NULL          |</p>
+<p>| Xu Xian       | NULL          |</p>
+<p>| Sun Dasheng   | NULL          |</p>
+<p>+—————+—————+</p>
+<h3 id="右外连接：RIGHT-JOIN"><a href="#右外连接：RIGHT-JOIN" class="headerlink" title="右外连接：RIGHT JOIN"></a><strong>右外连接：RIGHT JOIN</strong></h3><p><strong>效果：</strong>即使左表中没有匹配，也从右表返回所有的行</p>
+<p><strong>注释：</strong>在某些数据库中，LEFT JOIN 称为 RIGHT OUTER JOIN</p>
+<p><img src="右连接.png" alt="右连接"></p>
+<p>MariaDB [hellodb]&gt; select s.name as studentname,t.name as teachername from students as s right outer join teachers as t on s.teacherid=t.tid;   </p>
+<p>+————-+—————+</p>
+<p>| studentname | teachername   |</p>
+<p>+————-+—————+</p>
+<p>| Shi Zhongyu | Miejue Shitai |</p>
+<p>| Ding Dian   | Lin Chaoying  |</p>
+<p>| Yu Yutong   | Song Jiang    |</p>
+<p>| NULL        | Zhang Sanfeng |</p>
+<p>+————-+—————+</p>
+<h3 id="联合查询：union"><a href="#联合查询：union" class="headerlink" title="联合查询：union"></a><strong>联合查询：union</strong></h3><p><strong>效果：</strong>两张表上下连起来，类似cat a b的效果</p>
+<p>MariaDB [hellodb]&gt; select name from students union select name from teachers;</p>
+<p>+—————+</p>
+<p>| name          |</p>
+<p>+—————+</p>
+<p>| Shi Zhongyu   |</p>
+<p>| Shi Potian    |</p>
+<p>| Xie Yanke     |</p>
+<p>| Ding Dian     |</p>
+<p>| Yu Yutong     |</p>
+<p>| Shi Qing      |</p>
+<p>| Xi Ren        |</p>
+<p>| Lin Daiyu     |</p>
+<p>| Ren Yingying  |</p>
+<p>| Yue Lingshan  |</p>
+<p>| Yuan Chengzhi |</p>
+<p>| Wen Qingqing  |</p>
+<p>| Tian Boguang  |</p>
+<p>| Lu Wushuang   |</p>
+<p>| Duan Yu       |</p>
+<p>| Xu Zhu        |</p>
+<p>| Lin Chong     |</p>
+<p>| Hua Rong      |</p>
+<p>| Xue Baochai   |</p>
+<p>| Diao Chan     |</p>
+<p>| Huang Yueying |</p>
+<p>| Xiao Qiao     |</p>
+<p>| Ma Chao       |</p>
+<p>| Xu Xian       |</p>
+<p>| Sun Dasheng   |</p>
+<p>| Song Jiang    |</p>
+<p>| Zhang Sanfeng |</p>
+<p>| Miejue Shitai |</p>
+<p>| Lin Chaoying  |</p>
+<p>+—————+</p>
+<p>29 rows in set (0.00 sec)</p>
+<h3 id="自连接"><a href="#自连接" class="headerlink" title="自连接"></a><strong>自连接</strong></h3><p><strong>功能：</strong>将一张表想象成两张表，自己连接自己</p>
+<p>MariaDB [hellodb]&gt; select s1.name as emp,s2.name as leader from students as s1 inner join students as s2 on s1.teacherid=s2.stuid;  </p>
+<p>+————-+————-+</p>
+<p>| emp         | leader      |</p>
+<p>+————-+————-+</p>
+<p>| Shi Zhongyu | Xie Yanke   |</p>
+<p>| Shi Potian  | Xi Ren      |</p>
+<p>| Xie Yanke   | Xu Zhu      |</p>
+<p>| Ding Dian   | Ding Dian   |</p>
+<p>| Yu Yutong   | Shi Zhongyu |</p>
+<p>+————-+————-+</p>
+<h3 id="左自连接"><a href="#左自连接" class="headerlink" title="左自连接"></a>左自连接</h3><p>MariaDB [hellodb]&gt; select s1.name as emp,s2.name as leader from students as s1 left outer join students as s2 on s1.teacherid=s2.stuid;        </p>
+<p>+—————+————-+</p>
+<p>| emp           | leader      |</p>
+<p>+—————+————-+</p>
+<p>| Shi Zhongyu   | Xie Yanke   |</p>
+<p>| Shi Potian    | Xi Ren      |</p>
+<p>| Xie Yanke     | Xu Zhu      |</p>
+<p>| Ding Dian     | Ding Dian   |</p>
+<p>| Yu Yutong     | Shi Zhongyu |</p>
+<p>| Shi Qing      | NULL        |</p>
+<p>| Xi Ren        | NULL        |</p>
+<p>| Lin Daiyu     | NULL        |</p>
+<p>| Ren Yingying  | NULL        |</p>
+<p>| Yue Lingshan  | NULL        |</p>
+<p>| Yuan Chengzhi | NULL        |</p>
+<p>| Wen Qingqing  | NULL        |</p>
+<p>| Tian Boguang  | NULL        |</p>
+<p>| Lu Wushuang   | NULL        |</p>
+<p>| Duan Yu       | NULL        |</p>
+<p>| Xu Zhu        | NULL        |</p>
+<p>| Lin Chong     | NULL        |</p>
+<p>| Hua Rong      | NULL        |</p>
+<p>| Xue Baochai   | NULL        |</p>
+<p>| Diao Chan     | NULL        |</p>
+<p>| Huang Yueying | NULL        |</p>
+<p>| Xiao Qiao     | NULL        |</p>
+<p>| Ma Chao       | NULL        |</p>
+<p>| Xu Xian       | NULL        |</p>
+<p>| Sun Dasheng   | NULL        |</p>
+<p>+—————+————-+</p>
+<p><strong>右自连接</strong></p>
+<p>MariaDB [hellodb]&gt; select s1.name as emp,s2.name as leader from students as s1 right join students as s2 on s1.stuid=s2.teacherid;   </p>
+<p>+————-+—————+</p>
+<p>| emp         | leader        |</p>
+<p>+————-+—————+</p>
+<p>| Xie Yanke   | Shi Zhongyu   |</p>
+<p>| Xi Ren      | Shi Potian    |</p>
+<p>| Xu Zhu      | Xie Yanke     |</p>
+<p>| Ding Dian   | Ding Dian     |</p>
+<p>| Shi Zhongyu | Yu Yutong     |</p>
+<p>| NULL        | Shi Qing      |</p>
+<p>| NULL        | Xi Ren        |</p>
+<p>| NULL        | Lin Daiyu     |</p>
+<p>| NULL        | Ren Yingying  |</p>
+<p>| NULL        | Yue Lingshan  |</p>
+<p>| NULL        | Yuan Chengzhi |</p>
+<p>| NULL        | Wen Qingqing  |</p>
+<p>| NULL        | Tian Boguang  |</p>
+<p>| NULL        | Lu Wushuang   |</p>
+<p>| NULL        | Duan Yu       |</p>
+<p>| NULL        | Xu Zhu        |</p>
+<p>| NULL        | Lin Chong     |</p>
+<p>| NULL        | Hua Rong      |</p>
+<p>| NULL        | Xue Baochai   |</p>
+<p>| NULL        | Diao Chan     |</p>
+<p>| NULL        | Huang Yueying |</p>
+<p>| NULL        | Xiao Qiao     |</p>
+<p>| NULL        | Ma Chao       |</p>
+<p>| NULL        | Xu Xian       |</p>
+<p>| NULL        | Sun Dasheng   |</p>
+<p>+————-+—————+</p>
+<h3 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a><strong>子查询</strong></h3><p>下表是内连接查询姓名和分数信息</p>
+<p>MariaDB [hellodb]&gt; select students.name,scores.score from students inner join scores on students.stuid=scores.id;</p>
+<p>+—————+——-+</p>
+<p>| name          | score |</p>
+<p>+—————+——-+</p>
+<p>| Shi Zhongyu   |    77 |</p>
+<p>| Shi Potian    |    93 |</p>
+<p>| Xie Yanke     |    47 |</p>
+<p>| Ding Dian     |    97 |</p>
+<p>| Yu Yutong     |    88 |</p>
+<p>| Shi Qing      |    75 |</p>
+<p>| Xi Ren        |    71 |</p>
+<p>| Lin Daiyu     |    89 |</p>
+<p>| Ren Yingying  |    39 |</p>
+<p>| Yue Lingshan  |    63 |</p>
+<p>| Yuan Chengzhi |    96 |</p>
+<p>| Wen Qingqing  |    86 |</p>
+<p>| Tian Boguang  |    83 |</p>
+<p>| Lu Wushuang   |    57 |</p>
+<p>| Duan Yu       |    93 |</p>
+<p>+—————+——-+</p>
+<p><strong>取大于平均成绩的同学和成绩</strong></p>
+<p>MariaDB [hellodb]&gt; select students.name,scores.score from students inner join scores on students.stuid=scores.id and score &gt; (select avg(score) from scores);</p>
+<p>+—————+——-+</p>
+<p>| name          | score |</p>
+<p>+—————+——-+</p>
+<p>| Shi Zhongyu   |    77 |</p>
+<p>| Shi Potian    |    93 |</p>
+<p>| Ding Dian     |    97 |</p>
+<p>| Yu Yutong     |    88 |</p>
+<p>| Lin Daiyu     |    89 |</p>
+<p>| Yuan Chengzhi |    96 |</p>
+<p>| Wen Qingqing  |    86 |</p>
+<p>| Tian Boguang  |    83 |</p>
+<p>| Duan Yu       |    93 |</p>
+<p>+—————+——-+</p>
+<h2 id="六、视图VIEW"><a href="#六、视图VIEW" class="headerlink" title="六、视图VIEW"></a><strong>六、视图VIEW</strong></h2><p><strong>视图：</strong>VIEW,虚表，保存有实表的查询结果</p>
+<p>类似于shell中起个别名</p>
+<p>视图不存数据，修改视图实际是修改了背后的表</p>
+<p>物化视图：视图在磁盘上也占空间</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例:"></a><strong>示例:</strong></h3><p>MariaDB [hellodb]&gt; create view view_students as select stuid,name from students;</p>
+<p>MariaDB [hellodb]&gt; select * from view_students;</p>
+<p>+——-+—————+</p>
+<p>| stuid | name          |</p>
+<p>+——-+—————+</p>
+<p>|     1 | Shi Zhongyu   |</p>
+<p>|     2 | Shi Potian    |</p>
+<p>|     3 | Xie Yanke     |</p>
+<p>|     4 | Ding Dian     |</p>
+<p>|     5 | Yu Yutong     |</p>
+<p>|     6 | Shi Qing      |</p>
+<p>|     7 | Xi Ren        |</p>
+<p>|     8 | Lin Daiyu     |</p>
+<p>|     9 | Ren Yingying  |</p>
+<p>|    10 | Yue Lingshan  |</p>
+<p>|    11 | Yuan Chengzhi |</p>
+<p>|    12 | Wen Qingqing  |</p>
+<p>|    13 | Tian Boguang  |</p>
+<p>|    14 | Lu Wushuang   |</p>
+<p>|    15 | Duan Yu       |</p>
+<p>|    16 | Xu Zhu        |</p>
+<p>|    17 | Lin Chong     |</p>
+<p>|    18 | Hua Rong      |</p>
+<p>|    19 | Xue Baochai   |</p>
+<p>|    20 | Diao Chan     |</p>
+<p>|    21 | Huang Yueying |</p>
+<p>|    22 | Xiao Qiao     |</p>
+<p>|    23 | Ma Chao       |</p>
+<p>|    24 | Xu Xian       |</p>
+<p>|    25 | Sun Dasheng   |</p>
+<p>+——-+—————+</p>
+<p>25 rows in set (0.00 sec)</p>
+<p>判断一个表是否为视图：Comment状态</p>
+<p>MariaDB [hellodb]&gt; show tables;</p>
+<p>+——————-+</p>
+<p>| Tables_in_hellodb |</p>
+<p>+——————-+</p>
+<p>| classes           |</p>
+<p>| coc               |</p>
+<p>| courses           |</p>
+<p>| scores            |</p>
+<p>| students          |</p>
+<p>| teachers          |</p>
+<p>| toc               |</p>
+<p>| view_students     |</p>
+<p>+——————-+</p>
+<p>MariaDB [hellodb]&gt; show table status like ‘view_students’\G; </p>
+<p><strong><strong><strong><strong><strong><strong>***</strong></strong></strong></strong></strong></strong> 1. row <strong><strong><strong><strong><strong><strong>***</strong></strong></strong></strong></strong></strong></p>
+<p>Name: view_students</p>
+<p>Engine: NULL</p>
+<p>Version: NULL</p>
+<p>Row_format: NULL</p>
+<p>Rows: NULL</p>
+<p>Avg_row_length: NULL</p>
+<p>Data_length: NULL</p>
+<p>Max_data_length: NULL</p>
+<p>Index_length: NULL</p>
+<p>Data_free: NULL</p>
+<p>Auto_increment: NULL</p>
+<p>Create_time: NULL</p>
+<p>Update_time: NULL</p>
+<p>Check_time: NULL</p>
+<p>Collation: NULL</p>
+<p>Checksum: NULL</p>
+<p>Create_options: NULL</p>
+<p>​        <strong>Comment: VIEW</strong></p>
+<p>MariaDB [hellodb]&gt; show table status like ‘students’\G;    </p>
+<p><strong><strong><strong><strong><strong><strong>***</strong></strong></strong></strong></strong></strong> 1. row <strong><strong><strong><strong><strong><strong>***</strong></strong></strong></strong></strong></strong></p>
+<p>Name: students</p>
+<p>Engine: InnoDB</p>
+<p>Version: 10</p>
+<p>Row_format: Compact</p>
+<p>Rows: 25</p>
+<p>Avg_row_length: 655</p>
+<p>Data_length: 16384</p>
+<p>Max_data_length: 0</p>
+<p>Index_length: 0</p>
+<p>Data_free: 9437184</p>
+<p>Auto_increment: 26</p>
+<p>Create_time: 2018-06-06 21:25:56</p>
+<p>Update_time: NULL</p>
+<p>Check_time: NULL</p>
+<p>Collation: utf8_general_ci</p>
+<p>Checksum: NULL</p>
+<p>Create_options:</p>
+<p>Comment:</p>
+<p><strong>删除视图</strong></p>
+<p>MariaDB [hellodb]&gt; show tables;</p>
+<p>+——————-+</p>
+<p>| Tables_in_hellodb |</p>
+<p>+——————-+</p>
+<p>| classes           |</p>
+<p>| coc               |</p>
+<p>| courses           |</p>
+<p>| scores            |</p>
+<p>| students          |</p>
+<p>| teachers          |</p>
+<p>| toc               |</p>
+<p>| view_goodstudent  |</p>
+<p>| view_students     |</p>
+<p>+——————-+</p>
+<p>MariaDB [hellodb]&gt; drop view view_goodstudent;</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/07/实验：实现互联网的DNS架构/" rel="next" title="实验：实现互联网的DNS架构">
+                <i class="fa fa-chevron-left"></i> 实验：实现互联网的DNS架构
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/09/MySQL之用户与权限管理/" rel="prev" title="MySQL之用户与权限管理">
+                MySQL之用户与权限管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、SQL语言简介："><span class="nav-number">1.</span> <span class="nav-text">一、SQL语言简介：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关系型数据库的常见组件"><span class="nav-number">1.1.</span> <span class="nav-text">关系型数据库的常见组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型："><span class="nav-number">1.2.</span> <span class="nav-text">数据类型：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修饰符："><span class="nav-number">1.3.</span> <span class="nav-text">修饰符：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL语句分类："><span class="nav-number">2.</span> <span class="nav-text">SQL语句分类：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、数据定义语言-DDL-：CREATE-DROP-ALTER"><span class="nav-number">3.</span> <span class="nav-text">二、数据定义语言(DDL)：CREATE, DROP, ALTER</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新建数据库："><span class="nav-number">3.1.</span> <span class="nav-text">新建数据库：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除数据库："><span class="nav-number">3.2.</span> <span class="nav-text">删除数据库：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新建表："><span class="nav-number">3.3.</span> <span class="nav-text">新建表：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表操作："><span class="nav-number">3.4.</span> <span class="nav-text">表操作：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表操作"><span class="nav-number">3.5.</span> <span class="nav-text">表操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、数据操作语言-DML-：INSERT-UPDATE-DELETE"><span class="nav-number">4.</span> <span class="nav-text">三、数据操作语言(DML)：INSERT,UPDATE,DELETE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#INSERT"><span class="nav-number">4.1.</span> <span class="nav-text">INSERT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UPDATE"><span class="nav-number">4.2.</span> <span class="nav-text">UPDATE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DELETE"><span class="nav-number">4.3.</span> <span class="nav-text">DELETE</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、数据查询语言-DQL-：SELECT-LIKE-GROUP-ODER-BY"><span class="nav-number">5.</span> <span class="nav-text">四、数据查询语言(DQL)：SELECT,LIKE,GROUP,ODER BY</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SELECT"><span class="nav-number">5.1.</span> <span class="nav-text">SELECT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LIKE"><span class="nav-number">5.2.</span> <span class="nav-text">LIKE:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例："><span class="nav-number">5.3.</span> <span class="nav-text">示例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LIKE-1"><span class="nav-number">5.4.</span> <span class="nav-text">LIKE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RLIKE"><span class="nav-number">5.5.</span> <span class="nav-text">RLIKE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GROUP"><span class="nav-number">5.6.</span> <span class="nav-text">GROUP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ORDER-BY"><span class="nav-number">5.7.</span> <span class="nav-text">ORDER BY</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LIMIT"><span class="nav-number">5.8.</span> <span class="nav-text">LIMIT</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、多表查询SQJ-JOIN"><span class="nav-number">6.</span> <span class="nav-text">五、多表查询SQJ JOIN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多表查询中主要的-SQL-JOIN-类型："><span class="nav-number">6.1.</span> <span class="nav-text">多表查询中主要的 SQL JOIN 类型：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内连接：INNER-JOIN"><span class="nav-number">6.2.</span> <span class="nav-text">内连接：INNER JOIN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交叉连接：CROSS-JOIN"><span class="nav-number">6.3.</span> <span class="nav-text">交叉连接：CROSS JOIN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#左外连接：LEFT-JOIN"><span class="nav-number">6.4.</span> <span class="nav-text">左外连接：LEFT JOIN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#右外连接：RIGHT-JOIN"><span class="nav-number">6.5.</span> <span class="nav-text">右外连接：RIGHT JOIN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#联合查询：union"><span class="nav-number">6.6.</span> <span class="nav-text">联合查询：union</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自连接"><span class="nav-number">6.7.</span> <span class="nav-text">自连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#左自连接"><span class="nav-number">6.8.</span> <span class="nav-text">左自连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子查询"><span class="nav-number">6.9.</span> <span class="nav-text">子查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、视图VIEW"><span class="nav-number">7.</span> <span class="nav-text">六、视图VIEW</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">7.1.</span> <span class="nav-text">示例:</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

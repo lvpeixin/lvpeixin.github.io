@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="linux,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Linux系统中不仅是对用户与组根据UID,GID进行了管理，还对Linux系统中的文件，按照用户与组进行分类，针对不同的群体进行了权限管理，用他来确定谁能通过何种方式对文件和目录进行访问和操作。 一、文件权限 文件的权限针对三类对象进行定义 owner      属主，缩写u group       属组，缩写g other        其他人，缩写o    每个文件针对每类访问者定义了三种主">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux文件权限详解">
+<meta property="og:url" content="http://yoursite.com/2018/04/04/Linux文件权限详解/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="Linux系统中不仅是对用户与组根据UID,GID进行了管理，还对Linux系统中的文件，按照用户与组进行分类，针对不同的群体进行了权限管理，用他来确定谁能通过何种方式对文件和目录进行访问和操作。 一、文件权限 文件的权限针对三类对象进行定义 owner      属主，缩写u group       属组，缩写g other        其他人，缩写o    每个文件针对每类访问者定义了三种主">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/04/04/Linux文件权限详解/权限.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/04/Linux文件权限详解/">
+<meta property="og:image" content="http://yoursite.com/2018/04/04/Linux文件权限详解/%E9%BB%84%E8%89%B2sgid.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/04/Linux文件权限详解/">
+<meta property="og:updated_time" content="2018-07-18T01:29:47.279Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux文件权限详解">
+<meta name="twitter:description" content="Linux系统中不仅是对用户与组根据UID,GID进行了管理，还对Linux系统中的文件，按照用户与组进行分类，针对不同的群体进行了权限管理，用他来确定谁能通过何种方式对文件和目录进行访问和操作。 一、文件权限 文件的权限针对三类对象进行定义 owner      属主，缩写u group       属组，缩写g other        其他人，缩写o    每个文件针对每类访问者定义了三种主">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/04/Linux文件权限详解/权限.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/04/Linux文件权限详解/">
+
+
+
+
+
+  <title>Linux文件权限详解 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/04/Linux文件权限详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux文件权限详解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-04T13:56:42+08:00">
+                2018-04-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Linux系统中不仅是对用户与组根据UID,GID进行了管理，还对Linux系统中的文件，按照用户与组进行分类，针对不同的群体进行了权限管理，用他来确定谁能通过何种方式对文件和目录进行访问和操作。</p>
+<h2 id="一、文件权限"><a href="#一、文件权限" class="headerlink" title="一、文件权限"></a>一、文件权限</h2><ol>
+<li><p>文件的权限针对三类对象进行定义</p>
+<p>owner      属主，缩写u</p>
+<p>group       属组，缩写g</p>
+<p>other        其他人，缩写o</p>
+</li>
+</ol>
+<ol start="2">
+<li><p>每个文件针对每类访问者定义了三种主要权限</p>
+<p>r：Read           读</p>
+<p>w：Write         写</p>
+<p>x：eXecute      执行</p>
+</li>
+</ol>
+<p>另 X：针对目录加执行权限，文件不加执行权限（因文件具备执行权限有安全隐患）</p>
+<p>注意：root账户不受文件权限的读写限制，执行权限受限制</p>
+<ol start="3">
+<li>对于文件和目录来说，r，w，x有着不同的作用和含义：</li>
+</ol>
+<ul>
+<li><p>针对文件：</p>
+<p>r：读取文件内容</p>
+<p>w：修改文件内容</p>
+<p>x：执行权限对除二进制程序以外的文件没什么意义</p>
+</li>
+</ul>
+<ul>
+<li><p>针对目录：目录本质可看做是存放文件列表、节点号等内容的文件</p>
+<pre><code>r：查看目录下的文件列表
+
+w：删除和创建目录下的文件
+
+x：可以cd进入目录，能查看目录中文件的详细属性，能访问目录下文件内容（基础权限）
+</code></pre></li>
+</ul>
+<p><img src="权限.png" alt="权限"></p>
+<ol start="4">
+<li><p>用户获取文件权限的顺序：首先看是否为所有者，如果是，则后面权限不看；再看是否为所属组，</p>
+<p>如果是，则后面权限不看。</p>
+</li>
+</ol>
+<h2 id="二、修改文件访问权限的方法"><a href="#二、修改文件访问权限的方法" class="headerlink" title="二、修改文件访问权限的方法"></a>二、修改文件访问权限的方法</h2><ol>
+<li><p>chmod              修改权限 change mode</p>
+<p>方法1：mode法</p>
+<p>​    格式：chmod who opt per file</p>
+<p>​    who：u g o a（all）</p>
+<p>​    opt：+ – =</p>
+<p>​    per：r w x X</p>
+</li>
+</ol>
+<p>​    方法2：数字法</p>
+<p>​        格式：chmod XXX file</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">rwx</th>
+<th style="text-align:center">rw-</th>
+<th style="text-align:center">r–</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">111</td>
+<td style="text-align:center">110</td>
+<td style="text-align:center">100</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">4</td>
+</tr>
+</tbody>
+</table>
+<p>​            r：4</p>
+<p>​            w：2</p>
+<p>​            x：1</p>
+<p><strong>例：</strong>chmod 764  file        给file文件添加 rwxrw-r– 权限</p>
+<p>​    chmod -R +X dir               给dir目录添加X执行权限，dir目录下文件不添加执行权限</p>
+<p>​    （如果dir目录下有文件已具备执行权限，则添加该文件执行权限）</p>
+<h2 id="三、UMASK值"><a href="#三、UMASK值" class="headerlink" title="三、UMASK值"></a>三、UMASK值</h2><p>umask值的作用：用来设置限制新建文件权限的掩码。当新文件被创建时，其最初的权限由文件创建掩码决定 </p>
+<ul>
+<li><p>对目录：</p>
+<p>umask+default=777（dir）</p>
+</li>
+<li><p>对文件：</p>
+<p>666-umask：观察结果，如果有奇数，奇数位+1，偶数不变</p>
+</li>
+</ul>
+<h2 id="四、三种特殊权限suid、sgid、sticky"><a href="#四、三种特殊权限suid、sgid、sticky" class="headerlink" title="四、三种特殊权限suid、sgid、sticky"></a>四、三种特殊权限suid、sgid、sticky</h2><ol>
+<li><p><strong>suid</strong></p>
+<p><strong>作用：</strong>让本来没有相应权限的用户运行这个程序时，可以访问他没有权限访问的资源。 </p>
+<p>suid权限位 位于所有者的执行权限位上，如果一个文件具有suid权限，则所有者执行位为s，文件表现为红色背景</p>
+<p><strong>例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ll /usr/bin/passwd	#查看/usr/bin/passwd文件的权限</span><br><span class="line">-rwsr-xr-x. 1 root root 30768 Nov 24  2015 /usr/bin/passwd</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>   <img src="./" alt="红色suid"></p>
+<p>   给file文件增加suid权限</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod u+s file		# suid的mode法</span><br><span class="line">chmod 4755 file     # suid数字法表示为4</span><br></pre></td></tr></table></figure>
+<pre><code>注：suid只适合作用在二进制程序上
+</code></pre><ol start="2">
+<li><p><strong>sgid</strong></p>
+<p><strong>作用1</strong>：给一个用户继承二进制程序所有组拥有的权限</p>
+<p><strong>作用2：</strong>作用在目录上时，使一个目录下的新建的文件继承目录的所属组</p>
+<p>sgid权限位 位于所有组的执行权限位，如果一个文件具有suid权限，则所有组的执行位为s，文件表现为黄色背景</p>
+<p><strong>例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ll `which cat`</span><br><span class="line"></span><br><span class="line">-rwxr-sr-x. 1 root root 48568 Mar 23 2017 /bin/cat</span><br></pre></td></tr></table></figure>
+<p><img src="%E9%BB%84%E8%89%B2sgid.png" alt="黄色sgid"></p>
+<p>给file文件增加sgid权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod g+s file		# sgid的mode法</span><br><span class="line">chmod 2755 file      # sgid数字法表示为2</span><br></pre></td></tr></table></figure>
+<p> ​    </p>
+</li>
+</ol>
+<ol start="3">
+<li><p><strong>sticky</strong></p>
+<p>作用：作用于目录上，此目录的文件只能被所有者删除</p>
+<p>sticky权限位位于其他的执行权限位上，如果一个文件具有sticky权限，则其他的执行位为t，目录表现为绿色背景</p>
+<p><strong>如：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ll -d /tmp</span><br><span class="line">drwxrwxrwt. 17 root root 4096 Apr  4 10:02 /tmp</span><br></pre></td></tr></table></figure>
+<p><img src="./" alt="绿色sticky"></p>
+<p>给dir目录添加sticky权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod o+t dir		# sticky的mode法</span><br><span class="line">chmod 1777 dir      #  sticky数字法表示为1</span><br></pre></td></tr></table></figure>
+<p> ​     </p>
+</li>
+</ol>
+<h2 id="五、ACL访问控制列表"><a href="#五、ACL访问控制列表" class="headerlink" title="五、ACL访问控制列表"></a>五、ACL访问控制列表</h2><p>作用：实现更加灵活的权限管理，打破了三类用户的权限管理</p>
+<ol>
+<li><p>添加ACL权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">setfacl -m u:lpx:0 file 	# 使lpx账户对指定file文件无权限</span><br><span class="line"></span><br><span class="line">setfacl -m u:mage:rw file 	# 使mage账户对指定file文件有读写权限</span><br><span class="line"></span><br><span class="line">setfacl -m g:g1:rw file 	# 使g1组对指定file文件有读写权限</span><br><span class="line"></span><br><span class="line">getfacl file 	# 查看指定file文件的ACL权限</span><br></pre></td></tr></table></figure>
+<p>ACL权限执行顺序类似于用户获取文件权限的顺序，getfacl顺序从上到下执行，一旦生效，下面的将不再生效（如果属于多个组，权限累加）</p>
+</li>
+</ol>
+<ol start="2">
+<li><p>删除ACL权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setfacl -x u:lpx file      删除lpx账户对指定file文件的ACL权限</span><br><span class="line"></span><br><span class="line">setfacl -x g:g1 file   删除g1组对指定file文件的ACL权限</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ACL权限下的mask</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">设置用户对指定文件所能拥有的最大权限（限高作用）</span><br><span class="line"></span><br><span class="line">setfacl -m mask::r file             使指定文件file所拥有的最大权限位读r</span><br><span class="line"></span><br><span class="line">setfacl -x mask::r file               取消指定文件file的最大权限限制mask</span><br><span class="line"></span><br><span class="line">setfacl -b f1                      取消f1文件所有的ACL权限</span><br></pre></td></tr></table></figure>
+<pre><code>ACL生效顺序：所有者、自定义用户、自定义组、其他人
+</code></pre></li>
+<li><p>备份和恢复ACL权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">getfacl -R /tmp/dir1&gt;acl.txt           将dir1目录下ACL权限备份</span><br><span class="line"></span><br><span class="line">setfacl -R –set-file=acl.txt /tem/dir      恢复dir1目录下ACL权限</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="六、文件权限操作的常用命令"><a href="#六、文件权限操作的常用命令" class="headerlink" title="六、文件权限操作的常用命令"></a>六、文件权限操作的常用命令</h2><ol>
+<li><p>chown              设置文件所有者（普通用户无法修改文件所有者）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-R     递归</span><br><span class="line">user：group   同时修改所有者，所有组</span><br><span class="line">chgrp         设置文件所属组（普通用户要想该所属组，前提是文件所有者为自己，自己在所属组中）</span><br><span class="line">-R     递归</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>chmod              设置指定文件权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-R     递归</span><br><span class="line">–reference=f1 f2 f3        参考f1文件权限设置f2，f3文件</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>chattr               给指定文件添加保护，避免root账户误操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+i      锁定文件，不能删除，不能改名，不能更改内容</span><br><span class="line">-i      解锁+i</span><br><span class="line">-a      锁定文件，不能删除，不能改名，但可追加内容（追加重定向）</span><br><span class="line">-a      解锁+a</span><br><span class="line">+A      指定文件读时间atime不再更改</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>lsattr                 查看指定文件是否有锁定状态</p>
+</li>
+<li><p>setfacl              设置文件ACL权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-m mask::r file          使指定文件file所拥有的最大权限位读r</span><br><span class="line">-x mask::r file            取消指定文件file的最大权限限制mask</span><br><span class="line">-b f1                   取消f1文件所有的ACL权限</span><br><span class="line">-R –set-file=acl.txt /tem/dir   恢复dir1目录下ACL权限</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>getfacl              查看文件ACL权限</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/04/Linux文件系统简介/" rel="next" title="Linux文件系统简介">
+                <i class="fa fa-chevron-left"></i> Linux文件系统简介
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/05/浅谈几种IO重定向变形用法/" rel="prev" title="浅谈几种IO重定向变形用法">
+                浅谈几种IO重定向变形用法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、文件权限"><span class="nav-number">1.</span> <span class="nav-text">一、文件权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、修改文件访问权限的方法"><span class="nav-number">2.</span> <span class="nav-text">二、修改文件访问权限的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、UMASK值"><span class="nav-number">3.</span> <span class="nav-text">三、UMASK值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、三种特殊权限suid、sgid、sticky"><span class="nav-number">4.</span> <span class="nav-text">四、三种特殊权限suid、sgid、sticky</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、ACL访问控制列表"><span class="nav-number">5.</span> <span class="nav-text">五、ACL访问控制列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、文件权限操作的常用命令"><span class="nav-number">6.</span> <span class="nav-text">六、文件权限操作的常用命令</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

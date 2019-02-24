@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="cobbler,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、cobbler简介：cobbler 功能：用来快速建立 Linux 网络安装环境 特性： 1.基于PXE的二次封装，将多种安装参数封装到一个菜单，更加方便，自动化 2.Python编写 3.支持UEFI+GPT cobbler工作流程：1.client裸机配置了从网络启动后，开机后会广播包请求DHCP服务器（cobbler server） 发送其分配好的一个IP 2.DHCP服务器（cobbl">
+<meta name="keywords" content="cobbler">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cobbler自动化安装系统相关实验">
+<meta property="og:url" content="http://yoursite.com/2018/05/26/cobbler自动化安装系统相关实验/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="一、cobbler简介：cobbler 功能：用来快速建立 Linux 网络安装环境 特性： 1.基于PXE的二次封装，将多种安装参数封装到一个菜单，更加方便，自动化 2.Python编写 3.支持UEFI+GPT cobbler工作流程：1.client裸机配置了从网络启动后，开机后会广播包请求DHCP服务器（cobbler server） 发送其分配好的一个IP 2.DHCP服务器（cobbl">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/05/26/cobbler自动化安装系统相关实验/指定cobbler服务器.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/26/cobbler自动化安装系统相关实验/指定tftp服务器.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/26/cobbler自动化安装系统相关实验/cobbler-get-loaders.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/26/cobbler自动化安装系统相关实验/cobbler-sync.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/26/cobbler自动化安装系统相关实验/目录结构-1.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/26/cobbler自动化安装系统相关实验/设定加密口令.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/26/cobbler自动化安装系统相关实验/自动配置dhcp.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/26/cobbler自动化安装系统相关实验/修改dhcp.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/26/cobbler自动化安装系统相关实验/挂载cdrom.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/26/cobbler自动化安装系统相关实验/列出配置.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/26/cobbler自动化安装系统相关实验/tree.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/26/cobbler自动化安装系统相关实验/添加配置.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/26/cobbler自动化安装系统相关实验/开机选项.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/26/cobbler自动化安装系统相关实验/web.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/26/cobbler自动化安装系统相关实验/系统默认认证方式.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/26/cobbler自动化安装系统相关实验/默认修改.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/26/cobbler自动化安装系统相关实验/登录成功-2.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/26/cobbler自动化安装系统相关实验/pam验证.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/26/cobbler自动化安装系统相关实验/pam模块验证2.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/26/cobbler自动化安装系统相关实验/test2登录成功.png">
+<meta property="og:updated_time" content="2018-07-17T13:02:26.602Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cobbler自动化安装系统相关实验">
+<meta name="twitter:description" content="一、cobbler简介：cobbler 功能：用来快速建立 Linux 网络安装环境 特性： 1.基于PXE的二次封装，将多种安装参数封装到一个菜单，更加方便，自动化 2.Python编写 3.支持UEFI+GPT cobbler工作流程：1.client裸机配置了从网络启动后，开机后会广播包请求DHCP服务器（cobbler server） 发送其分配好的一个IP 2.DHCP服务器（cobbl">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/26/cobbler自动化安装系统相关实验/指定cobbler服务器.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/26/cobbler自动化安装系统相关实验/">
+
+
+
+
+
+  <title>cobbler自动化安装系统相关实验 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/26/cobbler自动化安装系统相关实验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">cobbler自动化安装系统相关实验</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-26T15:22:11+08:00">
+                2018-05-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/自动化运维/" itemprop="url" rel="index">
+                    <span itemprop="name">自动化运维</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、cobbler简介："><a href="#一、cobbler简介：" class="headerlink" title="一、cobbler简介："></a><strong>一、cobbler简介：</strong></h2><p><strong>cobbler</strong></p>
+<p><strong>功能：</strong>用来快速建立 Linux 网络安装环境</p>
+<p><strong>特性：</strong></p>
+<p>1.基于PXE的二次封装，将多种安装参数封装到一个菜单，更加方便，自动化</p>
+<p>2.Python编写</p>
+<p>3.支持UEFI+GPT</p>
+<h3 id="cobbler工作流程："><a href="#cobbler工作流程：" class="headerlink" title="cobbler工作流程："></a><strong>cobbler工作流程：</strong></h3><p>1.client裸机配置了从网络启动后，开机后会广播包请求DHCP服务器（cobbler server）</p>
+<p>发送其分配好的一个IP</p>
+<p>2.DHCP服务器（cobbler server）收到请求后发送responese，包括其ip地址</p>
+<p>3.client裸机拿到ip后再向cobbler server发送请求OS引导文件的请求</p>
+<p>4.cobbler server告诉裸机OS引导文件的名字和TFTP server的ip和port</p>
+<p>5.client裸机通过上面告知的TFTP server地址通信，下载引导文件</p>
+<p>6.client裸机执行执行该引导文件，确定加载信息，选择要安装的os，期间会再向</p>
+<p>cobbler server请求kickstart文件和os image</p>
+<p>7.cobbler server发送请求的kickstart和os iamge</p>
+<p>8.client裸机加载kickstart文件</p>
+<p>9.client裸机接收os image，安装该os image</p>
+<h3 id="cobbler介绍："><a href="#cobbler介绍：" class="headerlink" title="cobbler介绍："></a>cobbler介绍：</h3><p><strong>安装包：</strong></p>
+<p>系统默认未安装，需手动安装（epel源）</p>
+<p><strong>cobbler服务集成：</strong></p>
+<p>PXE</p>
+<p>​         DHCP</p>
+<p>​         rsync</p>
+<p>​         Http</p>
+<p>​         DNS</p>
+<p>​         Kickstart</p>
+<p>​         IPMI 电源管理</p>
+<p><strong>检查cobbler环境：</strong></p>
+<p>cobbler check</p>
+<p>1）指定server地址</p>
+<p>2）指定tftp服务器地址</p>
+<p>3）需要关闭SELinux</p>
+<p>4）使用cobbler get-loaders下载必要文件</p>
+<p>5）rsync服务，忽略不做</p>
+<p>6）忽略不做</p>
+<p>7）要求debian框架下安装debmirror包，忽略不做</p>
+<p>8）要求加密口令</p>
+<p>9）集群与电源相关</p>
+<h3 id="cobbler相关术语："><a href="#cobbler相关术语：" class="headerlink" title="cobbler相关术语："></a><strong>cobbler相关术语：</strong></h3><p><strong>发行版：</strong></p>
+<p>表示一个操作系统版本，它承载了内核和 initrd 的信息，以及内核参数等其他数据</p>
+<p><strong>配置文件：</strong></p>
+<p>包含一个发行版、一个 kickstart 文件以及可能的存储库，还包含更多特定的内核参</p>
+<p>数等其他数据</p>
+<p><strong>系统：</strong></p>
+<p>表示要配置的主机，它包含一个配置文件或一个镜像，还包含 IP 和 MAC 地址、电源</p>
+<p>管理（地址、凭据、类型）以及更为专业的数据等信息</p>
+<p><strong>存储库：</strong></p>
+<p>保存一个 yum 或 rsync 存储库的镜像信息</p>
+<p><strong>镜像：</strong></p>
+<p>可替换一个包含不属于此类别的文件的发行版对象（例如，无法分为内核和 initrd 的</p>
+<p>对象）</p>
+<h3 id="相关配置文件："><a href="#相关配置文件：" class="headerlink" title="相关配置文件："></a><strong>相关配置文件：</strong></h3><p><strong>配置文件目录</strong> <strong>/etc/cobbler</strong></p>
+<p>/etc/cobbler/settings : cobbler 主配置文件</p>
+<p>/etc/cobbler/iso/: iso模板配置文件</p>
+<p>/etc/cobbler/pxe: pxe模板文件</p>
+<p>/etc/cobbler/power: 电源配置文件</p>
+<p>/etc/cobbler/user.conf: web服务授权配置文件</p>
+<p>/etc/cobbler/users.digest: web访问的用户名密码配置文件</p>
+<p>/etc/cobbler/dhcp.template : dhcp服务器的的配置末班</p>
+<p>/etc/cobbler/dnsmasq.template : dns服务器的配置模板</p>
+<p>/etc/cobbler/tftpd.template : tftp服务的配置模板</p>
+<p>/etc/cobbler/modules.conf : 模块的配置文件</p>
+<p><strong>数据目录</strong></p>
+<p>/var/lib/cobbler/config/: 用于存放distros，system，profiles 等信息配置文件</p>
+<p>/var/lib/cobbler/triggers/: 用于存放用户定义的cobbler命令</p>
+<p>/var/lib/cobbler/kickstart/: 默认存放kickstart文件</p>
+<p>/var/lib/cobbler/loaders/: 存放各种引导程序</p>
+<p><strong>镜像目录</strong></p>
+<p>/var/www/cobbler/ks_mirror/: 导入的发行版系统的所有数据</p>
+<p>/var/www/cobbler/images/ : 导入发行版的kernel和initrd镜像用于远程网络启动</p>
+<p>/var/www/cobbler/repo_mirror/: yum 仓库存储目录</p>
+<p><strong>日志目录</strong></p>
+<p>/var/log/cobbler/installing: 客户端安装日志</p>
+<p>/var/log/cobbler/cobbler.log : cobbler日志</p>
+<h3 id="cobbler命令："><a href="#cobbler命令：" class="headerlink" title="cobbler命令："></a><strong>cobbler命令：</strong></h3><p>cobbler commands         介绍</p>
+<p>cobbler check                 核对当前设置是否有问题</p>
+<p>cobbler list              列出所有的cobbler元素</p>
+<p>cobbler report                列出元素的详细信息</p>
+<p>cobbler sync           同步配置到数据目录,更改配置最好都要执行下</p>
+<p>cobbler reposync   同步yum仓库</p>
+<p>cobbler distro                 查看导入的发行版系统信息</p>
+<p>cobbler system               查看添加的系统信息</p>
+<p>cobbler profile       查看配置信息</p>
+<h2 id="二、实验：模拟搭建cobbler服务器，实现cobbler自动化安装系统"><a href="#二、实验：模拟搭建cobbler服务器，实现cobbler自动化安装系统" class="headerlink" title="二、实验：模拟搭建cobbler服务器，实现cobbler自动化安装系统"></a><strong>二、实验：模拟搭建cobbler服务器，实现cobbler自动化安装系统</strong></h2><p><strong>1.开启各类服务</strong></p>
+<p>systemctl enable cobblerd dhcpd httpd tftp</p>
+<p>systemctl start cobblerd httpd tftp</p>
+<p><strong>2.检查</strong></p>
+<p>cobbler check</p>
+<p><strong>3.指定cobbler服务器地址：</strong></p>
+<p>养成好习惯，记得备份</p>
+<p>vim /etc/cobbler/settings（备份）</p>
+<p>server:192.168.30.10              <strong>line384</strong></p>
+<p><img src="指定cobbler服务器.png" alt="指定cobbler服务器"></p>
+<p><strong>4.重启服务</strong></p>
+<p>systemctl restart cobblerd</p>
+<p><strong>5.指定tftp服务器</strong></p>
+<p>next_server:192.168.30.10    <strong>line272</strong></p>
+<p><img src="指定tftp服务器.png" alt="指定tftp服务器"></p>
+<p><strong>6.关闭SELinux</strong></p>
+<p><strong>7.下载必要文件</strong></p>
+<p>cobbler get-loaders</p>
+<p><img src="cobbler-get-loaders.png" alt="cobbler get-loaders"></p>
+<p><strong>8.同步必要文件到/var/lib/tftpboot目录</strong></p>
+<p>cobbler sync</p>
+<p><img src="cobbler-sync.png" alt="cobbler sync"></p>
+<p><strong>同步后的目录结构如下：</strong></p>
+<p><img src="目录结构-1.png" alt="目录结构"></p>
+<p><strong>9.加密口令替换setting文件中的默认口令</strong></p>
+<p>#openssl passwd -1                                            交互式生成加密口令</p>
+<p>default_password_crytped    <strong>line101</strong></p>
+<p><img src="设定加密口令.png" alt="设定加密口令"></p>
+<p><strong>10.使用cobbler自动配置dhcp服务器</strong></p>
+<p>manage_dhcp:1                       <strong>line242</strong></p>
+<p><img src="自动配置dhcp.png" alt="自动配置dhcp"></p>
+<p><strong>11.重启cobbler服务</strong></p>
+<p>systemctl restart cobblerd</p>
+<p><strong>12.修改DHCP默认配置文件</strong></p>
+<p>vim /etc/cobbler/dhcp.template</p>
+<p>subnet 192.168.30.0 netmask 255.255.255.0</p>
+<p>range dynamic-bootp 192.168.30.10 192.168.30.200;                 按需修改</p>
+<p><img src="修改dhcp.png" alt="修改dhcp"></p>
+<p><strong>13.同步dhcp设置</strong></p>
+<p>cobbler sync</p>
+<p><strong>14.确保dhcp服务已启动（67端口）</strong></p>
+<p>ss -ntlu</p>
+<p><strong>15.重启httpd cobbler服务</strong></p>
+<p>systemctl restart httpd cobblerd</p>
+<p><strong>16.挂载6,7磁盘</strong></p>
+<p>mount /dev/sr0 /mnt/cdrom0</p>
+<p>mount /dev/sr1 /mnt/cdrom1</p>
+<p><img src="挂载cdrom.png" alt="挂载cdrom"></p>
+<p><strong>17.光盘导入</strong></p>
+<p>cobbler import –path=/mnt/cdrom0/  –name=CentOS-6.9-x86_64 –arch=x86_64</p>
+<p>cobbler import –path=/mnt/cdrom1/  –name=CentOS-7.4-x86_64 –arch=x86_64</p>
+<p><strong>18.光盘导入完成后会自动生成对应版本最小化安装应答文件</strong></p>
+<p>cobbler distro list                                       列出有几套系统</p>
+<p>CentOS-6.9-x86_64</p>
+<p>CentOS-7.4-x86_64</p>
+<p>cobbler profile list                                     列出有几套应答文件配置</p>
+<p>CentOS-6.9-i386</p>
+<p>CentOS-6.9-x86_64</p>
+<p>CentOS-7.4-x86_6</p>
+<p><img src="列出配置.png" alt="列出配置"></p>
+<p><strong>19.可以删除不需要的应答文件</strong></p>
+<p>cobbler profile remove –name=CentOS-6.9-i386 </p>
+<p>cobbler distro remove –name=CentOS-6.9-i386</p>
+<p><strong>20.关联自己的应答文件</strong></p>
+<p><strong>修改应答文件路径：</strong></p>
+<p>vim ks.cfg</p>
+<p>url  –url=$tree               <strong>修改路径（必要）</strong></p>
+<p><img src="tree.png" alt="$tree"></p>
+<p>放置对应目录下：</p>
+<p>cp ks6_mini.cfg  /var/lib/cobbler/kickstarts/</p>
+<p>cp ks7_desktop.cfg  /var/lib/cobbler/kickstarts/</p>
+<p>cobbler profile add  –name=CentOS-6.9-x86_64_Mini  –distro=CentOS-6.9-x86_64</p>
+<p>–kickstart=/var/lib/cobbler/kickstarts/ks6_mini.cfg</p>
+<p>cobbler profile add  –name=CentOS-7.4-x86_64_Desktop  –distro=CentOS-7.4-x86_64</p>
+<p>–kickstart=/var/lib/cobbler/kickstarts/ks7_desktop.cfg</p>
+<p><img src="添加配置.png" alt="添加配置"></p>
+<p><strong>21.安装测试，新开一台虚拟机，网卡设置为仅主机</strong></p>
+<p><img src="开机选项.png" alt="开机选项"></p>
+<h2 id="三、实验：实现基于web的cobbler"><a href="#三、实验：实现基于web的cobbler" class="headerlink" title="三、实验：实现基于web的cobbler"></a><strong>三、实验：实现基于web的cobbler</strong></h2><p><strong>前期准备：cobbler-web安装包，epel源</strong></p>
+<p><strong>服务器：CentOS7:192.168.30.10</strong></p>
+<p><strong>1.yum install cobbler-web</strong></p>
+<p><strong>2.重启httpd服务</strong></p>
+<p>systemctl restart httpd</p>
+<p><strong>3.测试cobbler网页</strong></p>
+<p><a href="https://192.168.30.10/cobbler_web/" target="_blank" rel="noopener">https://192.168.30.10/cobbler_web/</a></p>
+<p><img src="web.png" alt="web"></p>
+<p><strong>4.添加cobbler管理员账户</strong></p>
+<p>/etc/cobbler/modules.conf   定义了管理员账户的添加方式</p>
+<p>可以看到默认认证方式定义在/etc/cobbler/users.digest文件中</p>
+<p><img src="系统默认认证方式.png" alt="系统默认认证方式"></p>
+<h3 id="方法一：默认方式"><a href="#方法一：默认方式" class="headerlink" title="方法一：默认方式"></a><strong>方法一：默认方式</strong></h3><p>创建用户test1</p>
+<p>htdigest -c /etc/cobbler.users.digest  Cobbler test1</p>
+<p>要求输入口令</p>
+<p><img src="默认修改.png" alt="默认修改"></p>
+<p>使用test1账户登录：登录成功：</p>
+<p>就可以在页面上更改cobbler配置了</p>
+<p><img src="登录成功-2.png" alt="登录成功"></p>
+<h3 id="方法二：pam模块验证方法"><a href="#方法二：pam模块验证方法" class="headerlink" title="方法二：pam模块验证方法"></a><strong>方法二：pam模块验证方法</strong></h3><p>module = authn_pam</p>
+<p><img src="pam验证.png" alt="pam验证"></p>
+<p>cat /etc/cobbler/users.conf</p>
+<p>useradd -s  /sbin/nologin  test2</p>
+<p>echo magedu | passwd  –sdtin test2</p>
+<p>vim /etc/cobbler/users.conf</p>
+<p>[admins]</p>
+<p>admin = test2</p>
+<p><img src="pam模块验证2.png" alt="pam模块验证2"></p>
+<p><strong>重启cobbler服务</strong></p>
+<p>systemctl restart cobblerd</p>
+<p>使用test2账户登录：登录成功</p>
+<p><img src="test2登录成功.png" alt="test2登录成功"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/cobbler/" rel="tag"># cobbler</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/26/PXE自动化安装系统相关实验/" rel="next" title="PXE自动化安装系统相关实验">
+                <i class="fa fa-chevron-left"></i> PXE自动化安装系统相关实验
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/29/Ansible使用介绍（一）基本概念及常用模块/" rel="prev" title="Ansible使用介绍（一）基本概念及常用模块">
+                Ansible使用介绍（一）基本概念及常用模块 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、cobbler简介："><span class="nav-number">1.</span> <span class="nav-text">一、cobbler简介：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cobbler工作流程："><span class="nav-number">1.1.</span> <span class="nav-text">cobbler工作流程：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cobbler介绍："><span class="nav-number">1.2.</span> <span class="nav-text">cobbler介绍：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cobbler相关术语："><span class="nav-number">1.3.</span> <span class="nav-text">cobbler相关术语：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关配置文件："><span class="nav-number">1.4.</span> <span class="nav-text">相关配置文件：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cobbler命令："><span class="nav-number">1.5.</span> <span class="nav-text">cobbler命令：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、实验：模拟搭建cobbler服务器，实现cobbler自动化安装系统"><span class="nav-number">2.</span> <span class="nav-text">二、实验：模拟搭建cobbler服务器，实现cobbler自动化安装系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、实验：实现基于web的cobbler"><span class="nav-number">3.</span> <span class="nav-text">三、实验：实现基于web的cobbler</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一：默认方式"><span class="nav-number">3.1.</span> <span class="nav-text">方法一：默认方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法二：pam模块验证方法"><span class="nav-number">3.2.</span> <span class="nav-text">方法二：pam模块验证方法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

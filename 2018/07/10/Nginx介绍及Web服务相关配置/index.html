@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Nginx,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Nginx 是一个高性能的Web和反向代理服务器, 它具有有很多非常优越的特性:作为 Web 服务器：相比Apache，Nginx 使用更少的资源，支持更多的并发连接，体现更高的效率，这点使 Nginx尤其受到虚拟主机提供商的欢迎。 一、Nginx介绍Nginx：engine X ，2002年，开源，商业版 Nginx是免费，开源，高性能的HTTP和反向代理服务器，邮件代理服务器，通 用TCP/U">
+<meta name="keywords" content="Nginx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx介绍及Web服务相关配置">
+<meta property="og:url" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="Nginx 是一个高性能的Web和反向代理服务器, 它具有有很多非常优越的特性:作为 Web 服务器：相比Apache，Nginx 使用更少的资源，支持更多的并发连接，体现更高的效率，这点使 Nginx尤其受到虚拟主机提供商的欢迎。 一、Nginx介绍Nginx：engine X ，2002年，开源，商业版 Nginx是免费，开源，高性能的HTTP和反向代理服务器，邮件代理服务器，通 用TCP/U">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/lazy.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/http配置结构.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/1-4.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/2-4.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/3-5.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/4-3.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/5-1.png">
+<meta property="og:image" content="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/7-1.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/8-1.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/10-1.png">
+<meta property="og:image" content="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/12.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/13.png">
+<meta property="og:image" content="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/15.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/16.png">
+<meta property="og:image" content="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/18.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/19.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/20.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/21.png">
+<meta property="og:image" content="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png">
+<meta property="og:image" content="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png">
+<meta property="og:image" content="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/25.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/26.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/27.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/28.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/29.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/30.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/31.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/32.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/33.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/34.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/35.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/36.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/37.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/38.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/39.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/40.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/41.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/42.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/43.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/44.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/45.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/46.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/47.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/48.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/49.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/50.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/lazy.png">
+<meta property="og:image" content="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png">
+<meta property="og:image" content="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/54.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/55.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/56.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/57.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/58.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/59.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/60.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/61.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/62.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/63.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/64.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/65.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/66.png">
+<meta property="og:updated_time" content="2018-07-15T05:14:55.275Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nginx介绍及Web服务相关配置">
+<meta name="twitter:description" content="Nginx 是一个高性能的Web和反向代理服务器, 它具有有很多非常优越的特性:作为 Web 服务器：相比Apache，Nginx 使用更少的资源，支持更多的并发连接，体现更高的效率，这点使 Nginx尤其受到虚拟主机提供商的欢迎。 一、Nginx介绍Nginx：engine X ，2002年，开源，商业版 Nginx是免费，开源，高性能的HTTP和反向代理服务器，邮件代理服务器，通 用TCP/U">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/lazy.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/">
+
+
+
+
+
+  <title>Nginx介绍及Web服务相关配置 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Nginx介绍及Web服务相关配置</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-10T19:36:50+08:00">
+                2018-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">Web服务器</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Nginx 是一个高性能的Web和反向代理服务器, 它具有有很多非常优越的特性:作为 Web 服务器：相比Apache，Nginx 使用更少的资源，支持更多的并发连接，体现更高的效率，这点使 Nginx尤其受到虚拟主机提供商的欢迎。</p>
+<h2 id="一、Nginx介绍"><a href="#一、Nginx介绍" class="headerlink" title="一、Nginx介绍"></a><strong>一、Nginx介绍</strong></h2><p><strong>Nginx</strong>：engine X ，2002年，开源，商业版</p>
+<p>Nginx是免费，开源，高性能的HTTP和反向代理服务器，邮件代理服务器，通</p>
+<p>用TCP/UDP代理服务器</p>
+<p>解决C10K问题（10K Connections）</p>
+<p>官网：<a href="http://nginx.org/" target="_blank" rel="noopener">http://nginx.org</a></p>
+<p>二次开发版：</p>
+<p>Tengine, OpenResty（章亦春）</p>
+<h3 id="特性："><a href="#特性：" class="headerlink" title="特性："></a><strong>特性：</strong></h3><p>模块化设计，较好的扩展性</p>
+<p>高可靠性</p>
+<p>支持热部署：不停机更新配置文件，升级版本，更换日志文件</p>
+<p>低内存消耗：10000个keep-alive连接模式下的非活动连接，仅需2.5M内存</p>
+<p>event-driven,aio,mmap，sendfile</p>
+<h3 id="基本功能："><a href="#基本功能：" class="headerlink" title="基本功能："></a><strong>基本功能：</strong></h3><p>静态资源的web服务器</p>
+<p>http协议反向代理服务器</p>
+<p>pop3/imap4协议反向代理服务器</p>
+<p>FastCGI(LNMP),uWSGI(python)等协议</p>
+<p>模块化（非DSO），如zip，SSL模块</p>
+<h3 id="web服务相关的功能："><a href="#web服务相关的功能：" class="headerlink" title="web服务相关的功能："></a><strong>web服务相关的功能：</strong></h3><p>虚拟主机（server）</p>
+<p>支持 keep-alive 和管道连接</p>
+<p>访问日志（支持基于日志缓冲提高其性能）</p>
+<p>url rewirte</p>
+<p>路径别名</p>
+<p>基于IP及用户的访问控制</p>
+<p>支持速率限制及并发数限制</p>
+<p>重新配置和在线升级而无须中断客户的工作进程</p>
+<p>Memcached的GET 接口</p>
+<h3 id="为什么选择Nginx？"><a href="#为什么选择Nginx？" class="headerlink" title="为什么选择Nginx？"></a>为什么选择Nginx？</h3><p>Nginx 是一个高性能的Web和反向代理服务器, 它具有有很多非常优越的特性:作为 Web 服务器：相比</p>
+<p>Apache，Nginx 使用更少的资源，支持更多的并发连接，体现更高的效率，这点使 Nginx尤其受到虚拟主</p>
+<p>机提供商的欢迎。能够支持50000个并发连接数的响应，Nginx选择了epoll作为开发模型.</p>
+<p>作为负载均衡服务器：Nginx 既可以在内部直接支持Rails 和 PHP，也可以支持作为 HTTP代理服务器 对</p>
+<p>外进行服务。Nginx 用 C 编写, 不论是系统资源开销还是 CPU 使用效率都比Perlbal 要好的多。</p>
+<p>作为邮件代理服务器: Nginx 同时也是一个非常优秀的邮件代理服务器（最早开发这个产品的目的之一也是</p>
+<p>作为邮件代理服务器），Last.fm 描述了成功并且美妙的使用经验。</p>
+<p>Nginx 安装非常的简单，配置文件 非常简洁（还能够支持perl语法），Bugs非常少的服务器:Nginx 启动特</p>
+<p>别容易，并且几乎可以做到7*24不间断运行，即使运行数个月也不需要重新启动。你还能够在 不间断服务</p>
+<p>的情况下进行软件版本的升级。</p>
+<h3 id="Nginx程序架构"><a href="#Nginx程序架构" class="headerlink" title="Nginx程序架构"></a><strong>Nginx程序架构</strong></h3><p><img src="lazy.png" alt="nginx架构"></p>
+<p><strong>Nginx程序架构：</strong></p>
+<p><strong>master/worker</strong>结构</p>
+<p>一个<strong>master</strong>进程：</p>
+<p>负载加载和分析配置文件、管理worker进程、平滑升级</p>
+<p>一个或多个<strong>worker</strong>进程</p>
+<p>处理并响应用户请求</p>
+<p>缓存相关的进程：</p>
+<p>cache loader：载入缓存对象</p>
+<p>cache manager：管理缓存对象</p>
+<h3 id="高度模块化"><a href="#高度模块化" class="headerlink" title="高度模块化"></a><strong>高度模块化</strong></h3><p>nginx高度模块化，但其模块早期不支持DSO机制；1.9.11版本支持动态装载和</p>
+<p>卸载</p>
+<p>模块分类：</p>
+<p>核心模块：core module</p>
+<p>标准模块：</p>
+<p>HTTP 模块： ngx_http_*</p>
+<p>HTTP Core modules 默认功能</p>
+<p>HTTP Optional modules 需编译时指定</p>
+<p>Mail 模块 ngx_mail_*</p>
+<p>Stream 模块 ngx_stream_*</p>
+<p>第三方模块</p>
+<h2 id="二、Nginx服务配置"><a href="#二、Nginx服务配置" class="headerlink" title="二、Nginx服务配置"></a><strong>二、Nginx服务配置</strong></h2><p>配置文件的组成部分：</p>
+<p>主配置文件：<strong>nginx.conf</strong></p>
+<p>子配置文件：<strong>include conf.d/*.conf</strong></p>
+<p>fastcgi， uwsgi，scgi等协议相关的配置文件</p>
+<p>mime.types：支持的mime类型</p>
+<p><strong>主配置文件的配置指令：</strong></p>
+<p>directive value [value2 …];</p>
+<p><strong>注意：</strong></p>
+<p>(1) 指令必须以分号结尾</p>
+<p>(2) 支持使用配置变量</p>
+<p>内建变量：由Nginx模块引入，可直接引用</p>
+<p>自定义变量：由用户使用set命令定义</p>
+<p>set variable_name value;</p>
+<p>引用变量：$variable_name</p>
+<h3 id="主配置文件结构："><a href="#主配置文件结构：" class="headerlink" title="主配置文件结构："></a><strong>主配置文件结构：</strong></h3><p>主配置文件结构：四部分组成</p>
+<p>main block：主配置段，即全局配置段，对http,mail都有效</p>
+<p>event {</p>
+<p>…</p>
+<p>}         #事件驱动相关的配置</p>
+<p>http {</p>
+<p>…</p>
+<p>}         #http/https协议相关配置段</p>
+<p>mail {</p>
+<p>…</p>
+<p>}         #mail协议相关配置段</p>
+<p>stream {</p>
+<p>…</p>
+<p>}         # stream服务器相关配置段</p>
+<h3 id="http协议相关的配置结构"><a href="#http协议相关的配置结构" class="headerlink" title="http协议相关的配置结构"></a><strong>http协议相关的配置结构</strong></h3><p><img src="http配置结构.png" alt="http配置结构"></p>
+<h2 id="三、Web服务常见功能及配置"><a href="#三、Web服务常见功能及配置" class="headerlink" title="三、Web服务常见功能及配置"></a><strong>三、Web服务常见功能及配置</strong></h2><h3 id="一-性能优化相关的配置："><a href="#一-性能优化相关的配置：" class="headerlink" title="(一)性能优化相关的配置："></a><strong>(一)性能优化相关的配置：</strong></h3><p>1、worker_processes number | auto</p>
+<p>worker进程的数量；通常应该为当前主机的cpu的物理核心数</p>
+<p>2、worker_cpu_affinity cpumask …</p>
+<p>worker_cpu_affinity auto [cpumask] 提高缓存命中率</p>
+<p>CPU MASK： 00000001：0号CPU</p>
+<p>00000010：1号CPU</p>
+<p>10000000：8号CPU</p>
+<p>worker_cpu_affinity 0001 0010 0100 1000;</p>
+<p>worker_cpu_affinity 0101 1010;</p>
+<p>3、worker_priority number</p>
+<p>指定worker进程的nice值，设定worker进程优先级：[-20,20]</p>
+<p>4、worker_rlimit_nofile number</p>
+<p>worker进程所能够打开的文件数量上限,如65535</p>
+<p><strong>示例：修改worker**</strong>进程数量**</p>
+<p><img src="1-4.png" alt="1"></p>
+<p><img src="2-4.png" alt="2"></p>
+<p><strong>示例：设置NICE**</strong>优先级**</p>
+<p><img src="3-5.png" alt="3"></p>
+<p><img src="4-3.png" alt="4"><img src="5-1.png" alt="5"></p>
+<p><strong>变为前台执行</strong></p>
+<p>daemon on|off</p>
+<p>是否以守护进程方式运行nignx，默认是守护进程方式，用于测试环境</p>
+<p><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="6"></p>
+<p>以守护方式（前台执行）运行</p>
+<p><img src="7-1.png" alt="7"></p>
+<p><strong>EVENT**</strong>语句块**</p>
+<p><strong>每个worker**</strong>支持的最大连接1024<strong>**，生成环境应适当调大</strong></p>
+<p><strong>work_connections *Cpu个数= worker_rlimit_nofile number</strong></p>
+<p> <strong><img src="8-1.png" alt="8"></strong></p>
+<p><strong>(二)虚拟主机配置</strong></p>
+<p><strong>定义一个专门存放虚拟主机的目录：</strong></p>
+<p><strong><img src="10-1.png" alt="10"></strong></p>
+<p><strong>配置一个虚拟主机</strong></p>
+<p>server {</p>
+<p>listen address[:PORT]|PORT;</p>
+<p>server_name SERVER_NAME;</p>
+<p>root /PATH/TO/DOCUMENT_ROOT;</p>
+<p>}</p>
+<p><strong>vim a.com.conf</strong></p>
+<p><strong><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="11"></strong></p>
+<p><strong>vim b.com.conf</strong></p>
+<p>server {</p>
+<p>​            listen 8080</p>
+<p>​            server_name <a href="http://www.b.com" target="_blank" rel="noopener">www.b.com</a></p>
+<p>}</p>
+<p><img src="12.png" alt="12"><img src="13.png" alt="13"></p>
+<p><strong>(三)改变默认指向：default_server</strong></p>
+<p><strong>vim c.com.conf</strong></p>
+<p><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="14"></p>
+<p>要注意将主配置文件中的defaults_server删掉，否则nginx服务将无法正常启动</p>
+<p> <strong><img src="15.png" alt="15"></strong></p>
+<p> <strong>(四)支持通配符写法</strong></p>
+<p> <strong><img src="16.png" alt="16"></strong></p>
+<p><strong><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="17"></strong></p>
+<p><strong>匹配优先级机制从高到低：</strong></p>
+<p><strong>(1)</strong> <strong>首先是字符串精确匹配</strong> <strong>如：<a href="http://www.magedu.com" target="_blank" rel="noopener">www.magedu.com</a></strong></p>
+<p><strong>(2)</strong> <strong>左侧***</strong>通配符<strong> </strong>如：*.magedu.com**</p>
+<p><strong>(3)</strong> <strong>右侧***</strong>通配符<strong> </strong>如：<a href="http://www.magedu.\**" target="_blank" rel="noopener">www.magedu.\**</a>*</p>
+<p><strong>(4)</strong> <strong>正则表达式</strong> <strong>如： ~^.*.magedu.com$</strong></p>
+<p><strong>(5) default_server</strong></p>
+<p><strong>(五)隐藏Nginx版本</strong></p>
+<p><strong>server_tokens on | off | build | string</strong></p>
+<p>是否在响应报文的Server首部显示nginx版本</p>
+<p><img src="18.png" alt="18"></p>
+<p><strong>vim /etc/nginx/conf/nginx.conf</strong></p>
+<p><img src="19.png" alt="19"></p>
+<p>再次访问</p>
+<p><img src="20.png" alt="20"></p>
+<p> <strong>(五)软连接指向</strong></p>
+<p> <strong><img src="21.png" alt="21"></strong></p>
+<p><strong><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="22"></strong></p>
+<p> <strong>(六)针对特定文件指定存放位置</strong></p>
+<p><strong>location [ = | ~ | ~* | ^~ ] uri { … }</strong></p>
+<p><strong>location @name { … }</strong></p>
+<p><strong>在一个server**</strong>中location<strong><strong>配置段可存在多个，用于实现从uri</strong></strong>到文件系统的路**</p>
+<p><strong>径映射；ngnix**</strong>会根据用户请求的URI<strong><strong>来检查定义的所有location</strong></strong>，并找出一个最**</p>
+<p><strong>佳匹配，而后应用其配置</strong></p>
+<p><strong>示例：</strong></p>
+<p><strong>server {…</strong></p>
+<p><strong>server_name <a href="http://www.magedu.com" target="_blank" rel="noopener">www.magedu.com</a>;</strong></p>
+<p><strong>location /images/ {</strong></p>
+<p><strong>root /data/imgs/;</strong></p>
+<p><strong>}</strong></p>
+<p><strong>}</strong></p>
+<p><strong><a href="http://www.magedu.com/images/logo.jpg" target="_blank" rel="noopener">http://www.magedu.com/images/logo.jpg</a></strong></p>
+<p><strong>–&gt; /data/imgs/images/logo.jpg</strong></p>
+<p><strong>示例：</strong></p>
+<p> <strong><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="23"><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="24"></strong></p>
+<p><strong>(七)定制错误页面</strong></p>
+<p><strong>echo ‘<h1>NO FOUND PAGE</h1>’ &gt; /data/sitea/error/404.html</strong></p>
+<p><img src="25.png" alt="25"></p>
+<p>客户端访问测试：</p>
+<p> <strong><img src="26.png" alt="26"></strong></p>
+<p><img src="27.png" alt="27"></p>
+<p> <strong>(八)避免流氓浏览器404**</strong>劫持**</p>
+<p>error_page code … [=[response]] uri;</p>
+<p><strong>模块</strong>：<strong>ngx_http_core_module</strong></p>
+<p>定义错误页，以指定的响应状态码进行响应</p>
+<p>可用位置：http, server, location, if in</p>
+<p>location</p>
+<p>error_page 404 /404.html</p>
+<p>error_page 404 =200 /404.html</p>
+<p><img src="28.png" alt="28"></p>
+<p>修改配置文件</p>
+<p><img src="29.png" alt="29"></p>
+<p>再次访问：</p>
+<p><strong><img src="30.png" alt="30"></strong></p>
+<p><strong>修改404**</strong>页面到指定默认页面**</p>
+<p> <strong><img src="31.png" alt="31"></strong></p>
+<p><strong>keepalive_timeout timeout [header_timeout];</strong></p>
+<p><strong>设定保持连接超时时长，0**</strong>表示禁止长连接，默认为75s**</p>
+<p><strong>keepalive_requests number;</strong></p>
+<p><strong>在一次长连接上所允许请求的资源的最大数量</strong></p>
+<p><strong>默认为100</strong></p>
+<p><strong>(九)除了管理员域其他主机无法使用GET**</strong>以外的其他方法**</p>
+<p><img src="32.png" alt="32"></p>
+<p><strong>(十)实现基于ip**</strong>的访问控制功能**</p>
+<p><strong>ngx_http_access_module**</strong>模块**</p>
+<p>1、allow address | CIDR | unix: | all;</p>
+<p>2、deny address | CIDR | unix: | all;</p>
+<p>http, server, location, limit_except</p>
+<p><strong>自上而下检查，一旦匹配，将生效，条件严格的置前</strong></p>
+<p><strong>示例：</strong></p>
+<p>location / {</p>
+<p>deny 192.168.1.1;</p>
+<p>allow 192.168.1.0/24;</p>
+<p>allow 10.1.1.0/16;</p>
+<p>allow 2001:0db8::/32;</p>
+<p>deny all;</p>
+<p>}</p>
+<p> <strong><img src="33.png" alt="33"></strong></p>
+<p><strong>(十一)实现基于用户的访问控制：</strong></p>
+<p><strong>ngx_http_auth_basic_module**</strong>模块**</p>
+<p><strong>实现基于用户的访问控制，使用basic**</strong>机制进行用户认证**</p>
+<p><strong>1**</strong>、auth_basic string | off;**</p>
+<p><strong>2**</strong>、auth_basic_user_file file;**</p>
+<p><strong>location /admin/ {</strong></p>
+<p><strong>auth_basic “Admin Area”;</strong></p>
+<p><strong>auth_basic_user_file /etc/nginx/.ngxpasswd;</strong></p>
+<p><strong>}</strong></p>
+<p><strong>用户口令文件：</strong></p>
+<p><strong>1**</strong>、明文文本：格式name:password:comment**</p>
+<p><strong>2**</strong>、加密文本：由htpasswd<strong>**命令实现</strong></p>
+<p><strong>httpd-tools**</strong>所提供**</p>
+<p><strong>示例：</strong></p>
+<p><strong>cd /etc/nginx/conf.d/vhost</strong></p>
+<p>htpasswd -cm nginxuser httpuser1</p>
+<p>htpasswd -m nginxuser httpuser2</p>
+<p>修改配置</p>
+<p>针对整个网站生效</p>
+<p><img src="34.png" alt="34"></p>
+<p>针对特定目录生效</p>
+<p><img src="35.png" alt="35"></p>
+<p><strong><a href="http://www.a.com/admin/" target="_blank" rel="noopener">http://www.a.com/admin/</a></strong></p>
+<p><img src="36.png" alt="36"></p>
+<p><strong>(十二)Nginx**</strong>状态页**</p>
+<p><strong>ngx_http_stub_status_module**</strong>模块**</p>
+<p><strong>功能：</strong>用于输出nginx的基本状态信息</p>
+<p>输出信息示例：</p>
+<p>Active connections: 291</p>
+<p>server accepts handled requests</p>
+<p>16630948 16630948 31070465</p>
+<p>上面三个数字分别对应accepts,handled,requests三个值</p>
+<p>Reading: 6 Writing: 179 Waiting: 106</p>
+<p><strong>示例：</strong></p>
+<p><img src="37.png" alt="37"></p>
+<p>浏览器访问<strong><a href="http://192.168.30.10/status" target="_blank" rel="noopener">http://192.168.30.10/status</a></strong></p>
+<p><img src="38.png" alt="38"></p>
+<p><strong>相关参数说明：</strong></p>
+<p>Active connections:当前状态，活动状态的连接数</p>
+<p>accepts：统计总值，已经接受的客户端请求的总数</p>
+<p>handled：统计总值，已经处理完成的客户端请求的总数</p>
+<p>requests：统计总值，客户端发来的总的请求数</p>
+<p>Reading：当前状态，正在读取客户端请求报文首部的连接的连接数</p>
+<p>Writing：当前状态，正在向客户端发送响应报文过程中的连接数</p>
+<p>Waiting：当前状态，正在等待客户端发出请求的空闲连接数</p>
+<p><strong>(十三)日志相关设置</strong></p>
+<p><strong>ngx_http_log_module**</strong>模块**</p>
+<p><strong>指定日志格式记录请求</strong></p>
+<p>1、log_format name string …;</p>
+<p>string可以使用nginx核心模块及其它模块内嵌的变量</p>
+<p>2、access_log path [format [buffer=size] [gzip[=level]] [flush=time]</p>
+<p>[if=condition]];</p>
+<p>access_log off;</p>
+<p>访问日志文件路径，格式及相关的缓冲的配置</p>
+<p>buffer=size</p>
+<p>flush=time</p>
+<p>3、open_log_file_cache max=N [inactive=time] [min_uses=N] [valid=time];</p>
+<p>open_log_file_cache off;</p>
+<p>缓存各日志文件相关的元数据信息</p>
+<p>max：缓存的最大文件描述符数量</p>
+<p>min_uses：在inactive指定的时长内访问大于等于此值方可被当作活动项</p>
+<p>inactive：非活动时长</p>
+<p>valid：验证缓存中各缓存项是否为活动项的时间间隔</p>
+<p><strong>示例：自定义日志</strong></p>
+<p>系统默认：</p>
+<p><img src="39.png" alt="39"></p>
+<p>自定义一个日志：</p>
+<p><img src="40.png" alt="40"></p>
+<p>添加到access_log(可添加到任何语句块中)</p>
+<p><img src="41.png" alt="41"></p>
+<p>测试日志</p>
+<p><img src="42.png" alt="42"></p>
+<p><strong>(十四)实现**</strong>Nginx<strong><strong>的</strong></strong>SSL<strong><strong>加密</strong></strong>https**</p>
+<p><strong>ngx_http_ssl_module**</strong>模块：**</p>
+<p><strong>1、ssl on | off;</strong></p>
+<p>为指定虚拟机启用HTTPS protocol， 建议用listen指令代替</p>
+<p><strong>2、ssl_certificate file;</strong></p>
+<p>当前虚拟主机使用PEM格式的证书文件</p>
+<p><strong>3、ssl_certificate_key file;</strong></p>
+<p>当前虚拟主机上与其证书匹配的私钥文件</p>
+<p><strong>4、ssl_protocols [SSLv2] [SSLv3] [TLSv1] [TLSv1.1] [TLSv1.2];支持ssl协议版本，默</strong></p>
+<p><strong>认为后三个</strong></p>
+<p><strong>5、ssl_session_cache off | none | [builtin[:size]] [shared:name:size];</strong></p>
+<p>none: 通知客户端支持ssl session cache，但实际不支持</p>
+<p>builtin[:size]：使用OpenSSL内建缓存，为每worker进程私有</p>
+<p>[shared:name:size]：在各worker之间使用一个共享的缓存</p>
+<p><strong>6、ssl_session_timeout time;</strong></p>
+<p>客户端连接可以复用ssl session cache中缓存的ssl参数的有效时长，默认5m</p>
+<p><strong>示例：</strong></p>
+<p>server {</p>
+<p>listen 443 ssl;</p>
+<p>server_name <a href="http://www.magedu.com" target="_blank" rel="noopener">www.magedu.com</a>;</p>
+<p>root /vhosts/ssl/htdocs;</p>
+<p>ssl on;</p>
+<p>ssl_certificate /etc/nginx/ssl/nginx.crt;</p>
+<p>ssl_certificate_key /etc/nginx/ssl/nginx.key;</p>
+<p>ssl_session_cache shared:sslcache:20m;</p>
+<p>ssl_session_timeout 10m;</p>
+<p>}</p>
+<p><img src="43.png" alt="43"></p>
+<p>检查语法：</p>
+<p>nginx -t</p>
+<p><img src="44.png" alt="44"></p>
+<p>验证https</p>
+<p><img src="45.png" alt="45"></p>
+<p><strong>(十五)实现**</strong>NGINX<strong><strong>搭建多个</strong></strong>HTTPS<strong>**网站</strong></p>
+<p><img src="46.png" alt="46"></p>
+<p>修改配置文件</p>
+<p><img src="47.png" alt="47"></p>
+<p>验证https：</p>
+<p><img src="48.png" alt="48"></p>
+<p><strong>(十六)rewite**</strong>重写**</p>
+<p><strong>ngx_http_rewrite_module**</strong>模块：**</p>
+<p>The ngx_http_rewrite_module module is used to change request URI</p>
+<p>using PCRE regular expressions, return redirects, and conditionally select</p>
+<p>configurations.</p>
+<p>将用户请求的URI基于PCRE regex所描述的模式进行检查，而后完成重定向替换</p>
+<p><strong>1**</strong>、<strong>**rewrite regex replacement [flag]</strong></p>
+<p>将用户请求的URI基于regex所描述的模式进行检查，匹配到时将其替换为</p>
+<p>replacement指定的新的URI</p>
+<p>注意：如果在同一级配置块中存在多个rewrite规则，那么会自下而下逐个</p>
+<p>检查；被某条件规则替换完成后，会重新一轮的替换检查</p>
+<p>隐含有循环机制,但不超过10次；如果超过，提示500响应码，[flag]所表示</p>
+<p>的标志位用于控制此循环机制</p>
+<p>如果replacement是以http://或https://开头，则替换结果会直接以重向返</p>
+<p>回给客户端, 即永久重定向301</p>
+<p><strong>[flag]**</strong>：**</p>
+<p><strong>last：</strong>重写完成后停止对当前URI在当前location中后续的其它重写操作，</p>
+<p>而后对新的URI启动新一轮重写检查；提前重启新一轮循环，不建议在location中</p>
+<p>使用</p>
+<p><strong>break：</strong>重写完成后停止对当前URI在当前location中后续的其它重写操作，</p>
+<p>而后直接跳转至重写规则配置块之后的其它配置；结束循环，建议在location中使</p>
+<p>用</p>
+<p><strong>redirect：</strong>临时重定向，重写完成后以临时重定向方式直接返回重写后生成</p>
+<p>的新URI给客户端，由客户端重新发起请求；使用相对路径,或者http://或https://</p>
+<p>开头，状态码：302</p>
+<p><strong>permanent:</strong> 重写完成后以永久重定向方式直接返回重写后生成的新URI给</p>
+<p>客户端，由客户端重新发起请求，状态码：301</p>
+<p><strong>2**</strong>、<strong>**return</strong></p>
+<p>return code [text];</p>
+<p>return code URL;</p>
+<p>return URL;</p>
+<p>停止处理，并返回给客户端指定的响应码</p>
+<p><strong>3**</strong>、<strong>**rewrite_log on | off;</strong></p>
+<p>是否开启重写日志, 发送至error_log（notice level）</p>
+<p><strong>4**</strong>、<strong>**set $variable value;</strong></p>
+<p>用户自定义变量</p>
+<p>注意：变量定义和调用都要以$开头</p>
+<p><strong>5**</strong>、<strong>**if (condition) { … }</strong></p>
+<p>条件满足时，执行配置块中的配置指令；server, location</p>
+<p>condition：</p>
+<p>比较操作符：</p>
+<p>= 相同 != 不同</p>
+<p>~：模式匹配，区分字符大小写</p>
+<p>~*：模式匹配，不区分字符大小写</p>
+<p>!~：模式不匹配，区分字符大小写</p>
+<p>!~*：模式不匹配，不区分字符大小写</p>
+<p>文件及目录存在性判断：</p>
+<p>-e, !-e 存在（包括文件，目录，软链接）</p>
+<p>-f, !-f 文件 -d, !-d 目录 -x, !-x 执行</p>
+<p><strong>示例：</strong></p>
+<p><a href="http://www.a.com/images/a.jpg" target="_blank" rel="noopener">www.a.com/images/a.jpg</a>  –&gt;  <a href="http://www.a.com/media/images/a.jpg" target="_blank" rel="noopener">www.a.com/media/images/a.jpg</a></p>
+<p>相关配置：</p>
+<p>rewrite  ^(images/.*)$  /media/$1</p>
+<p><strong>示例：</strong></p>
+<p><a href="http://www.a.com/bbs" target="_blank" rel="noopener">www.a.com/bbs</a>  –&gt;  <a href="http://www.a.com/forum" target="_blank" rel="noopener">www.a.com/forum</a></p>
+<p><img src="49.png" alt="49"><img src="50.png" alt="50"><img src="lazy.png" alt="nginx架构"></p>
+<p><strong>redirect**</strong>模式：<strong>**302</strong></p>
+<p><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="52"><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="53"></p>
+<p><strong>permanent**</strong>模式**</p>
+<p><img src="54.png" alt="54"><img src="55.png" alt="55"></p>
+<p><strong>(十七)实现**</strong>http<strong><strong>自动跳转</strong></strong>https**</p>
+<p><img src="56.png" alt="56"><img src="57.png" alt="57"><img src="58.png" alt="58"></p>
+<p><strong>(十八)实现将**</strong>http<strong><strong>与</strong></strong>https<strong>**写入同一个虚拟机</strong></p>
+<p><img src="59.png" alt="59"><img src="60.png" alt="60"><img src="61.png" alt="61"></p>
+<p><strong>break**</strong>模式：可避免死循环**</p>
+<p><img src="62.png" alt="62"></p>
+<p><strong>(十九)实现自定义响应码</strong></p>
+<p><img src="63.png" alt="63"><img src="64.png" alt="64"></p>
+<p><strong>(二十)Nginx**</strong>防盗链**</p>
+<p><strong>ngx_http_referer_module**</strong>模块：**</p>
+<p><strong>功能：</strong>用来阻止Referer首部无有效值的请求访问，可防止盗链</p>
+<p><strong>格式：valid_referers none|blocked|server_names|string …;</strong></p>
+<p>定义referer首部的合法可用值，不能匹配的将是非法值</p>
+<p>none：请求报文首部没有referer首部</p>
+<p>blocked：请求报文有referer首部，但无有效值</p>
+<p>server_names：参数，其可以有值作为主机名或主机名模式</p>
+<p>arbitrary_string：任意字符串，但可使用*作通配符</p>
+<p>regular expression：被指定的正则表达式模式匹配到的字符串,要使用~开头</p>
+<p><img src="65.png" alt="65"></p>
+<p>开启防盗链功能后，盗链图片将无法正常显示</p>
+<p><img src="66.png" alt="66"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Nginx/" rel="tag"># Nginx</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/07/LVS虚拟服务器相关实验/" rel="next" title="LVS虚拟服务器相关实验">
+                <i class="fa fa-chevron-left"></i> LVS虚拟服务器相关实验
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/13/HAProxy介绍及相关实验/" rel="prev" title="HAProxy介绍及相关实验">
+                HAProxy介绍及相关实验 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Nginx介绍"><span class="nav-number">1.</span> <span class="nav-text">一、Nginx介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特性："><span class="nav-number">1.1.</span> <span class="nav-text">特性：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本功能："><span class="nav-number">1.2.</span> <span class="nav-text">基本功能：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web服务相关的功能："><span class="nav-number">1.3.</span> <span class="nav-text">web服务相关的功能：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么选择Nginx？"><span class="nav-number">1.4.</span> <span class="nav-text">为什么选择Nginx？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nginx程序架构"><span class="nav-number">1.5.</span> <span class="nav-text">Nginx程序架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高度模块化"><span class="nav-number">1.6.</span> <span class="nav-text">高度模块化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Nginx服务配置"><span class="nav-number">2.</span> <span class="nav-text">二、Nginx服务配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主配置文件结构："><span class="nav-number">2.1.</span> <span class="nav-text">主配置文件结构：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http协议相关的配置结构"><span class="nav-number">2.2.</span> <span class="nav-text">http协议相关的配置结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Web服务常见功能及配置"><span class="nav-number">3.</span> <span class="nav-text">三、Web服务常见功能及配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-性能优化相关的配置："><span class="nav-number">3.1.</span> <span class="nav-text">(一)性能优化相关的配置：</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">NO FOUND PAGE</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

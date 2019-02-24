@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="防火墙,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="防火墙（Firewall），也称防护墙，是由Check Point创立者Gil Shwed于1993年发明并引入国际互联网。 它是一种工作在网络或主机边缘，对进出网络或主机的数据包基于一定的规则检查，并在匹配某规则时 由规则定义的行为进行处理的一组功能的组件，基本上的实现都是默认情况下关闭所有的通过型访问， 只开放允许访问的策略  一、防火墙介绍防火墙的分类按防火墙服务范围可分为： 主机防火墙：服">
+<meta name="keywords" content="防火墙">
+<meta property="og:type" content="article">
+<meta property="og:title" content="防火墙技术(一)">
+<meta property="og:url" content="http://yoursite.com/2018/06/30/防火墙技术(一)/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="防火墙（Firewall），也称防护墙，是由Check Point创立者Gil Shwed于1993年发明并引入国际互联网。 它是一种工作在网络或主机边缘，对进出网络或主机的数据包基于一定的规则检查，并在匹配某规则时 由规则定义的行为进行处理的一组功能的组件，基本上的实现都是默认情况下关闭所有的通过型访问， 只开放允许访问的策略  一、防火墙介绍防火墙的分类按防火墙服务范围可分为： 主机防火墙：服">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/06/30/防火墙技术(一)/timg_imagequality80sizeb9999_10000sec1530335045851di3ca9d674c9be44456c2a.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/06/30/防火墙技术(一)/表链结构.png">
+<meta property="og:updated_time" content="2018-07-17T13:08:26.645Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="防火墙技术(一)">
+<meta name="twitter:description" content="防火墙（Firewall），也称防护墙，是由Check Point创立者Gil Shwed于1993年发明并引入国际互联网。 它是一种工作在网络或主机边缘，对进出网络或主机的数据包基于一定的规则检查，并在匹配某规则时 由规则定义的行为进行处理的一组功能的组件，基本上的实现都是默认情况下关闭所有的通过型访问， 只开放允许访问的策略  一、防火墙介绍防火墙的分类按防火墙服务范围可分为： 主机防火墙：服">
+<meta name="twitter:image" content="http://yoursite.com/2018/06/30/防火墙技术(一)/timg_imagequality80sizeb9999_10000sec1530335045851di3ca9d674c9be44456c2a.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/30/防火墙技术(一)/">
+
+
+
+
+
+  <title>防火墙技术(一) | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-test">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/30/防火墙技术(一)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">防火墙技术(一)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-30T16:18:20+08:00">
+                2018-06-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>防火墙（Firewall），也称防护墙，是由Check Point创立者Gil Shwed于1993年发明并引入国际互联网。</p>
+<p>它是一种工作在网络或主机边缘，对进出网络或主机的数据包基于一定的规则检查，并在匹配某规则时</p>
+<p>由规则定义的行为进行处理的一组功能的组件，基本上的实现都是默认情况下关闭所有的通过型访问，</p>
+<p>只开放允许访问的策略 </p>
+<h2 id="一、防火墙介绍"><a href="#一、防火墙介绍" class="headerlink" title="一、防火墙介绍"></a><strong>一、防火墙介绍</strong></h2><h3 id="防火墙的分类"><a href="#防火墙的分类" class="headerlink" title="防火墙的分类"></a>防火墙的分类</h3><p>按防火墙<strong>服务范围</strong>可分为：</p>
+<p><strong>主机防火墙：</strong>服务范围为当前主机</p>
+<p><strong>网络防火墙：</strong>服务范围为防火墙一侧的局域网</p>
+<p>按<strong>软硬件</strong>可分为：</p>
+<p><strong>硬件防火墙：</strong>在专用硬件级别实现部分功能的防火墙；另一个部分功能基于软件</p>
+<p>实现，Checkpoint, NetScreen</p>
+<p><strong>软件防火墙：</strong>运行于通用硬件平台之上的防火墙的应用软件</p>
+<p>按<strong>OSI模型</strong>可分为：</p>
+<p><strong>网络层防火墙：</strong>OSI下面第三层</p>
+<p><strong>应用层防火墙/代理服务器</strong>：代理网关，OSI七层</p>
+<h3 id="Netfilter组件"><a href="#Netfilter组件" class="headerlink" title="Netfilter组件"></a><strong>Netfilter组件</strong></h3><p><strong>Netfilter是Linux 2.4内核防火墙框架，该框架既简洁又灵活，可实现安全策略应用中的许多功能，</strong></p>
+<p><strong>如数据包过滤、数据包处理、地址伪装、透明代理、动态网络地址转换（NAT），</strong></p>
+<p><strong>以及基于用户及媒体访问控制（MAC）地址的过滤和基于状态的过滤、包速率限制等。</strong></p>
+<p><strong>特性：</strong></p>
+<p>内核空间，集成在Linux内核中</p>
+<p>扩展各种网络服务的结构化底层框架</p>
+<p>内核中选取五个位置放了五个hook(勾子) function<strong>(INPUT、OUTPUT、FORWARD、</strong></p>
+<p><strong>PREROUTING、POSTROUTING)</strong>，而这五个hook function向用户开放，用户可以通过一</p>
+<p>个命令工具（iptables）向其写入规则</p>
+<p>由信息过滤表（table）组成，包含控制IP包处理的规则集（rules），规则被分组放在链（chain）上</p>
+<p><strong>三种报文流向：</strong></p>
+<p>流入本机：PREROUTING –&gt; INPUT–&gt;用户空间进程</p>
+<p>流出本机：用户空间进程 –&gt;OUTPUT–&gt; POSTROUTING</p>
+<p>转发：PREROUTING –&gt; FORWARD –&gt; POSTROUTING</p>
+<p><img src="timg_imagequality80sizeb9999_10000sec1530335045851di3ca9d674c9be44456c2a.jpg" alt="timg_image&amp;quality=80&amp;size=b9999_10000&amp;sec=1530335045851&amp;di=3ca9d674c9be44456c2a"></p>
+<p><strong>iptables</strong>由四个表和五个链以及一些规则组成</p>
+<p>四个表table：<strong>filter、nat、mangle、raw</strong></p>
+<p><strong>filter表</strong>：过滤规则表，根据预定义的规则过滤符合条件的数据包</p>
+<p><strong>nat表</strong>：network address translation 地址转换规则表</p>
+<p><strong>mangle</strong>：修改数据标记位规则表</p>
+<p><strong>raw</strong>：关闭NAT表上启用的连接跟踪机制，加快封包穿越防火墙速度</p>
+<p>优先级由高到低的顺序为:<strong>raw–&gt;mangle–&gt;nat–&gt;filter</strong></p>
+<p>五个内置链chain</p>
+<p><strong>INPUT</strong></p>
+<p><strong>OUTPUT</strong></p>
+<p><strong>FORWARD</strong></p>
+<p><strong>PREROUTING</strong></p>
+<p><strong>POSTROUTING</strong></p>
+<p><img src="表链结构.png" alt="表链结构"></p>
+<h2 id="二、iptables工具"><a href="#二、iptables工具" class="headerlink" title="二、iptables工具"></a><strong>二、iptables工具</strong></h2><p><strong>格式：iptables [-t table] SUBCOMMAND chain [-m matchname [per-matchoptions]] -j</strong></p>
+<p><strong>targetname</strong>  <strong>[per-target-options]</strong></p>
+<p><strong>(1)table：</strong></p>
+<p>​    raw, mangle, nat, [filter]默认</p>
+<p><strong>(2)SUBCOMMAND：</strong></p>
+<ol>
+<li><p>链管理：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-N  new, 自定义一条新的规则链</span><br><span class="line">-X  delete，删除自定义的空的规则链</span><br><span class="line">-P  Policy，设置默认策略；对filter表中的链而言，</span><br><span class="line">其默认策略有: ACCEPT：接受</span><br><span class="line">             DROP：丢弃</span><br><span class="line">             REJECT：拒绝</span><br><span class="line">-E     重命名自定义链；引用计数不为0的自定义链不能够被重命名，也不能被删除</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-L        list, 列出指定鏈上的所有规则，本选项须置后</span><br><span class="line">-n        numberic，以数字格式显示地址和端口号</span><br><span class="line">-v        verbose，详细信息</span><br><span class="line">-vv      更详细</span><br><span class="line">-x        exactly，显示计数器结果的精确值,而非单位转换后的易读值</span><br><span class="line">–line-numbers        显示规则的序号</span><br></pre></td></tr></table></figure>
+<p>常用组合：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-vnL</span><br><span class="line">–vvnxL –line-numbers</span><br><span class="line">-S selected,以iptables-save          命令格式显示链上规则</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>规则管理：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-A：append，追加</span><br><span class="line">-I：insert, 插入，要指明插入至的规则编号，默认为第一条</span><br><span class="line">-D：delete，删除</span><br><span class="line">    (1) 指明规则序号</span><br><span class="line">    (2) 指明规则本身</span><br><span class="line">-R：replace，替换指定链上的指定规则编号</span><br><span class="line">-F：flush，清空指定的规则链</span><br><span class="line">-Z：zero，置零</span><br><span class="line">iptables的每条规则都有两个计数器</span><br><span class="line">    (1) 匹配到的报文的个数</span><br><span class="line">    (2) 匹配到的所有报文的大小之和</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>(3)扩展匹配条件</strong></p>
+<p>​    扩展匹配条件：需要加载扩展模块（/usr/lib64/xtables/*.so），方可生效</p>
+<p>​    查看帮助 man iptables-extensions</p>
+<p>​    扩展匹配分为隐性扩展和显性扩展两种</p>
+<p><strong>隐性扩展：</strong>不需要写模块名称</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>显性扩展：</strong>必须指定模块名称</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如：iptables -A INPUT -p tcp -m multiport –dports 21,80,445 -j REJECT</span><br></pre></td></tr></table></figure>
+<p><strong>(4)处理动作：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-j targetname [per-target-options]</span><br></pre></td></tr></table></figure>
+<p>简单：    <strong>ACCEPT，DROP</strong></p>
+<p>扩展：    <strong>REJECT：–reject-with:icmp-port-unreachable</strong>默认</p>
+<p>RETURN：返回调用链</p>
+<p>REDIRECT：端口重定向</p>
+<p>LOG：记录日志，dmesg</p>
+<p>MARK：做防火墙标记</p>
+<p>DNAT：目标地址转换</p>
+<p>SNAT：源地址转换</p>
+<p>MASQUERADE：地址伪装</p>
+<p>…</p>
+<p>自定义链：</p>
+<h2 id="三、iptables基本命令使用举例"><a href="#三、iptables基本命令使用举例" class="headerlink" title="三、iptables基本命令使用举例"></a><strong>三、iptables基本命令使用举例</strong></h2><h3 id="一-链及NAT的基本操作"><a href="#一-链及NAT的基本操作" class="headerlink" title="(一)链及NAT的基本操作"></a><strong>(一)链及NAT的基本操作</strong></h3><ol>
+<li><p>清除所有的规则。</p>
+<p>1）清除预设表filter中所有规则链中的规则。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -F</span><br></pre></td></tr></table></figure>
+<p>2）清除预设表filter中使用者自定链中的规则。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -X</span><br><span class="line">iptables -Z</span><br></pre></td></tr></table></figure>
+<p>3)清楚NAT表规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -F -t nat</span><br></pre></td></tr></table></figure>
+<p>4)NAT表的显示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -nL</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置链的默认策略。一般有两种方法。</p>
+<p>1）首先允许所有的包，然后再禁止有危险的包通过放火墙。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -P INPUT ACCEPT</span><br><span class="line">iptables -P OUTPUT ACCEPT</span><br><span class="line">iptables -P FORWARD ACCEPT</span><br></pre></td></tr></table></figure>
+<p>2）首先禁止所有的包，然后根据需要的服务允许特定的包通过防火墙。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -P INPUT DROP</span><br><span class="line">iptables -P OUTPUT DROP</span><br><span class="line">iptables -P FORWARD DROP</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>列出表/链中的所有规则。默认只列出filter表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -L</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>向链中添加规则。下面的语句用于开放网络接口：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -i lo -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -o lo -j ACCEPT</span><br><span class="line">iptables -A INPUT -i eth0 -j ACEPT</span><br><span class="line">iptables -A OUTPUT -o eth1 -j ACCEPT</span><br><span class="line">iptables -A FORWARD -i eth1 -j ACCEPT</span><br><span class="line">iptables -A FORWARD -0 eth1 -j ACCEPT</span><br></pre></td></tr></table></figure>
+<p>注意:由于本地进程不会经过FORWARD链，因此回环接口lo只在INPUT和OUTPUT两个链上作用。</p>
+</li>
+<li><p>使用者自定义链。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -N custom</span><br><span class="line">iptables -A custom -s 0/0 -d 0/0 -p icmp -j DROP</span><br><span class="line">iptables -A INPUT -s 0/0 -d 0/0 -j DROP</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="二-设置基本的规则匹配"><a href="#二-设置基本的规则匹配" class="headerlink" title="(二)设置基本的规则匹配"></a><strong>(二)设置基本的规则匹配</strong></h3><ol>
+<li><p>指定协议匹配。</p>
+<p>1）匹配指定协议。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp</span><br></pre></td></tr></table></figure>
+<pre><code>2）匹配指定协议之外的所有协议。
+
+       <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p !tcp</span><br></pre></td></tr></table></figure>
+</code></pre></li>
+<li><p>指定地址匹配。</p>
+<p>1）指定匹配的主机。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -s 192.168.0.18</span><br></pre></td></tr></table></figure>
+<p>2）指定匹配的网络。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -s 192.168.2.0/24</span><br></pre></td></tr></table></figure>
+<p>3）匹配指定主机之外的地址。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A FORWARD -s !192.168.0.19</span><br></pre></td></tr></table></figure>
+<pre><code>4）匹配指定网络之外的网络。
+</code></pre></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A FORWARD -s ! 192.168.3.0/24</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><p>指定网络接口匹配。</p>
+<p>1）指定单一的网络接口匹配。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -i eth0</span><br><span class="line">iptables -A FORWARD -o eth0</span><br></pre></td></tr></table></figure>
+<p>2）指定同类型的网络接口匹配。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A FORWARD -o ppp+</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指定端口匹配。</p>
+<p>1）指定单一端口匹配。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp –sport www</span><br><span class="line">iptables -A INPUT -p udp –dport 53</span><br></pre></td></tr></table></figure>
+<pre><code>2）匹配指定端口之外的端口。
+
+             <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp –dport !22</span><br></pre></td></tr></table></figure>
+
+3）匹配端口范围。
+</code></pre></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp –sport 22:80</span><br></pre></td></tr></table></figure>
+<p>​    4）匹配ICMP端口和ICMP类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INOUT -p icmp –icimp-type 8</span><br></pre></td></tr></table></figure>
+<p>​    5）指定ip碎片。</p>
+<p>​    每个网络接口都有一个MTU（最大传输单元），这个参数定义了可以通过的数据包的最大尺寸。</p>
+<p>​    如果一个    数据包大于这个参数值时，系统会将其划分成更小的数据包称为ip碎片）来传输，</p>
+<p>​    而接受方则对这些ip碎片再进行重组以还原整个包。</p>
+<p>​    这样会导致一个问题：当系统将大数据包划分成ip碎片传输时，第一个碎片含有完整的包头信息</p>
+<p>（IP+TCP、UDP和ICMP），但是后续的碎片只有包头的部分信息（如源地址、目的地址）。 </p>
+<p>​    因此，检查后面的ip碎片的头部（象有TCP、UDP和ICMP一样）是不可能的。假如有这样的一条</p>
+<p><strong>规则：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A FORWARD -p tcp -s 192.168.1.0/24 -d 192.168.2.100 –dport 80 -j ACCEPT</span><br></pre></td></tr></table></figure>
+<p>并且这时的FORWARD的policy为DROP时，系统只会让第一个ip碎片通过，而余下的碎片因为包头信息不</p>
+<p>完整而无法通过。可以通过—fragment/-f 选项来指定第二个及以后的ip碎片解决上述问题。</p>
+<p>#iptables -A FORWARD -f -s 192.168.1.0/24 -d 192.168.2.100 -j ACCEPT</p>
+<p>注意现在有许多进行ip碎片<em>的实例，如DoS</em>，因此允许ip碎片通过是有安全隐患的，对于这一点可以</p>
+<p>采用iptables的匹配扩展来进行限制。</p>
+<h3 id="三-设置扩展的规则匹配（举例已忽略目标动作）"><a href="#三-设置扩展的规则匹配（举例已忽略目标动作）" class="headerlink" title="(三)设置扩展的规则匹配（举例已忽略目标动作）"></a><strong>(三)设置扩展的规则匹配（举例已忽略目标动作）</strong></h3><p>1、多端口匹配。</p>
+<p>1）匹配多个源端口。</p>
+<p>#iptables -A INPUT -p tcp -m multiport –sport 22,53,80,110</p>
+<p>2）匹配多个目的端口。</p>
+<p>#iptables -A INPUT -p tcp -m multiport –dpoort 22,53,80</p>
+<p>3）匹配多端口(无论是源端口还是目的端口）</p>
+<p>#iptables -A INPUT -p tcp -m multiport –port 22,53,80,110</p>
+<p>2、指定TCP匹配扩展</p>
+<p>使用 –tcp-flags 选项可以根据tcp包的标志位进行过滤。</p>
+<p>#iptables -A INPUT -p tcp –tcp-flags SYN,FIN,ACK SYN</p>
+<p>#iptables -A FROWARD -p tcp –tcp-flags ALL SYN,ACK</p>
+<p>上实例中第一个表示SYN、ACK、FIN的标志都检查，但是只有SYN匹配。第二个表示ALL（SYN，</p>
+<p>ACK，FIN，RST，URG，PSH）的标志都检查，但是只有设置了SYN和ACK的匹配。</p>
+<p>#iptables -A FORWARD -p tcp –syn</p>
+<p>选项—syn相当于”–tcp-flags SYN,RST,ACK SYN”的简写。</p>
+<p>3、limit速率匹配扩展。</p>
+<p>1）指定单位时间内允许通过的数据包个数，单位时间可以是/second、/minute、/hour、/day或使用第一个子母。</p>
+<p>#iptables -A INPUT -m limit –limit 300/hour</p>
+<p>2 )指定触发事件的阀值。</p>
+<p>#iptables -A INPUT -m limit –limit-burst 10</p>
+<p>用来比对一次同时涌入的封包是否超过10个，超过此上限的包将直接丢弃。</p>
+<p>3）同时指定速率限制和触发阀值。</p>
+<p>#iptables -A INPUT -p icmp -m limit –-limit 3/m –limit-burst 3</p>
+<p>表示每分钟允许的最大包数量为限制速率（本例为3）加上当前的触发阀值burst数。任何情况下，都可保</p>
+<p>证3个数据包通过，触发阀值burst相当于允许额外的包数量。</p>
+<p>4、基于状态的匹配扩展（连接跟踪）</p>
+<p>每个网络连接包括以下信息：源地址、目标地址、源端口、目的端口，称为套接字对（socket pairs）；协</p>
+<p>议类型、连接状态（TCP协议）</p>
+<p>和超时时间等。防火墙把这些信息称为状态（stateful）。状态包过滤防火墙能在内存中维护一个跟踪状态</p>
+<p>的表，比简单包过滤防火墙具有更大的安全性，命令格式如下：</p>
+<p>iptables -m state –-state [!]state [,state,state,state]</p>
+<p>其中，state表是一个逗号分割的列表，用来指定连接状态，4种：</p>
+<p><strong>&gt;NEW：</strong>该包想要开始一个新的连接（重新连接或连接重定向）</p>
+<p><strong>&gt;RELATED：</strong>该包是属于某个已经建立的连接所建立的新连接。举例：</p>
+<p>FTP的数据传输连接和控制连接之间就是RELATED关系。</p>
+<p><strong>&gt;ESTABLISHED：</strong>该包属于某个已经建立的连接。</p>
+<p><strong>&gt;INVALID：</strong>该包不匹配于任何连接，通常这些包被DROP。</p>
+<p><strong>&gt;UNTRACKED：</strong>未进行追踪的连接，如raw表中关闭追踪</p>
+<p><strong>示例：</strong></p>
+<p>iptables -A INPUT -d 172.16.1.10 -p tcp -m multiport –dports 22,80 -m state —</p>
+<p>state NEW,ESTABLISHED -j ACCEPT</p>
+<p>iptables -A OUTPUT -s 172.16.1.10 -p tcp -m multiport –sports 22,80 -m state —</p>
+<p>state ESTABLISHED -j ACCEPT</p>
+<p>已经追踪到的并记录下来的连接信息库</p>
+<p><strong>/proc/net/nf_conntrack</strong></p>
+<p>调整连接追踪功能所能够容纳的最大连接数量</p>
+<p><strong>/proc/sys/net/nf_conntrack_max</strong></p>
+<p>不同的协议的连接追踪时长</p>
+<p><strong>/proc/sys/net/netfilter/</strong></p>
+<p>注意：CentOS7 需要加载模块： <strong>modprobe nf_conntrack</strong></p>
+<h3 id="开放被动模式的ftp服务"><a href="#开放被动模式的ftp服务" class="headerlink" title="开放被动模式的ftp服务"></a><strong>开放被动模式的ftp服务</strong></h3><ol>
+<li>装载ftp连接追踪的专用模块：</li>
+</ol>
+<p>跟踪模块路径：/lib/modules/kernelversion/kernel/net/netfilter</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/sysconfig/iptables-config </span><br><span class="line">    IPTABLES_MODULES=“nf_conntrack_ftp”</span><br><span class="line">    modproble nf_conntrack_ftp</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>放行请求报文：</li>
+</ol>
+<p>命令连接：NEW, ESTABLISHED</p>
+<p>数据连接：RELATED, ESTABLISHED</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables –I INPUT -d LocalIP -p tcp -m state –state ESTABLISHED,RELATED -j ACCEPT</span><br><span class="line"></span><br><span class="line">iptables -A INPUT -d LocalIP -p tcp –dport 21 -m state –state NEW -j ACCEPT</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>放行响应报文：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -I OUTPUT -s LocalIP -p tcp -m state –state ESTABLISHED -j ACCEPT</span><br></pre></td></tr></table></figure>
+<p><strong>开放被动模式的ftp服务示例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">yum install vsftpd</span><br><span class="line">systemctl start vsftpd</span><br><span class="line">modprobe nf_conntrack_ftp</span><br><span class="line">iptables -F</span><br><span class="line">iptables -A INPUT -m state –state ESTABLISHED,RELATED -j ACCEPT</span><br><span class="line">iptables -A INPUT -p tcp –dport 21 -m state –state NEW -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -m state –state ESTABLISHED -j ACCEPT</span><br><span class="line">iptables -P INPUT DROP</span><br><span class="line">iptables -P OUTPUT DROP</span><br><span class="line">iptables –vnL</span><br></pre></td></tr></table></figure>
+<h3 id="iptable防火墙优化原则"><a href="#iptable防火墙优化原则" class="headerlink" title="iptable防火墙优化原则"></a><strong>iptable防火墙优化原则</strong></h3><p>任何不允许的访问，应该在请求到达时给予拒绝</p>
+<p>规则在链接上的次序即为其检查时的生效次序</p>
+<p>基于上述，规则优化</p>
+<p>1 安全放行所有入站和出站的状态为ESTABLISHED状态连接</p>
+<p>2 谨慎放行入站的新请求</p>
+<p>3 有特殊目的限制访问功能，要在放行规则之前加以拒绝</p>
+<p>4 同类规则（访问同一应用），匹配范围小的放在前面，用于特殊处理</p>
+<p>5 不同类的规则（访问不同应用），匹配范围大的放在前面</p>
+<p>6 应该将那些可由一条规则能够描述的多个规则合并为一条</p>
+<p>7 设置默认策略，建议白名单（只放行特定连接）</p>
+<p>1） iptables -P，不建议</p>
+<p>2） 建议在规则的最后定义规则做为默认策略</p>
+<p>## </p>
+<h2 id="四、NAT地址转换"><a href="#四、NAT地址转换" class="headerlink" title="四、NAT地址转换"></a><strong>四、NAT地址转换</strong></h2><p><strong>NAT：network address translation</strong></p>
+<p>PREROUTING，INPUT，OUTPUT，POSTROUTING</p>
+<p><strong>请求报文：</strong>修改源/目标IP，由定义如何修改</p>
+<p><strong>响应报文</strong>：修改源/目标IP，根据跟踪机制自动实现</p>
+<p><strong>SNAT：source NAT POSTROUTING, INPUT</strong></p>
+<p>让本地网络中的主机通过某一特定地址访问外部网络，实现地址伪装</p>
+<p><strong>请求报文：</strong>修改源IP</p>
+<p><strong>典型应用场景：</strong>多个PC机使用ADSL路由器共享上网，每个PC机都配置了内网IP，PC机访问</p>
+<p>外部网络的时候，路由器将数据包的报头中的源地址替换成路由器的ip，当外部网络的服</p>
+<p>务器比如网站web服务器接到访问请求的时候，他的日志记录下来的是路由器的ip地址，而</p>
+<p>不是pc机的内网ip；这是因为，这个服务器收到的数据包的报头里边的“源地址”，已经</p>
+<p>被替换了所以叫做SNAT，基于源地址的地址转换。</p>
+<p><strong>DNAT：destination NAT PREROUTING , OUTPUT</strong></p>
+<p>把本地网络中的主机上的某服务开放给外部网络访问(发布服务和端口映射)，</p>
+<p>但隐藏真实IP</p>
+<p><strong>请求报文：</strong>修改目标IP</p>
+<p><strong>典型应用场景：</strong>比如有web服务器放在内网配置内网ip，前端有个防火墙配置公网ip，互联</p>
+<p>网上的访问者使用公网ip来访问这个网站当访问的时候，客户端发出一个数据包，这个数据</p>
+<p>包的报头里边，目标地址写的是防火墙的公网ip，防火墙会把这个数据包的报头改写一次，</p>
+<p>将目标地址改写成web服务器的内网ip，然后再把这个数据包发送到内网的web服务器上，这</p>
+<p>样，数据包就穿透了防火墙，并从公网ip变成了一个对内网地址的访问了，即DNAT，基于目</p>
+<p>标的网络地址转换。</p>
+<p><strong>PNAT：port nat，</strong>端口和IP都进行修改</p>
+<p><strong>SNAT：固定IP</strong></p>
+<p>–to-source [ipaddr[-ipaddr]][:port[-port]]</p>
+<p>–random</p>
+<p>iptables -t nat -A POSTROUTING -s LocalNET ! -d LocalNet -j SNAT –tosource ExtIP</p>
+<p>示例：</p>
+<p>iptables -t nat -A POSTROUTING -s 10.0.1.0/24 ! –d 10.0.1.0/24 -j SNAT —</p>
+<p>to-source 172.18.1.6-172.18.1.9</p>
+<p><strong>SNAT：动态IP</strong></p>
+<p>MASQUERADE：地址伪装</p>
+<p>如此配置的话，不用指定SNAT的目标ip了，不管现在网卡的出口获得了怎样的动态ip，</p>
+<p>MASQUERADE会自动读取网卡现在的ip地址然后做SNAT出去，这样就实现了很好的动态</p>
+<p>SNAT地址转换。</p>
+<p>–to-ports port[-port]</p>
+<p>–random</p>
+<p>iptables -t nat -A POSTROUTING -s LocalNET ! -d LocalNet -j  MASQUERADE</p>
+<p><strong>示例：</strong></p>
+<p>iptables -t nat -A POSTROUTING -s 10.0.1.0/24 ! –d 10.0.1.0/24 -j</p>
+<p>MASQUERADE</p>
+<h3 id="如何区分SNAT和DNAT"><a href="#如何区分SNAT和DNAT" class="headerlink" title="如何区分SNAT和DNAT"></a><strong>如何区分SNAT和DNAT</strong></h3><p>从定义来讲它们一个是源地址转换，一个是目标地址转换。都是地址转换的功能，将私有地</p>
+<p>址转换为公网地址。</p>
+<p>要区分这两个功能可以简单的由连接发起者是谁来区分：</p>
+<p>内部地址要访问公网上的服务时（如web访问），内部地址会主动发起连接，由路由器或者</p>
+<p>防火墙上的网关对内部地址做个地址转换，将内部地址的私有IP转换为公网的公有IP，网</p>
+<p>关的这个地址转换称为SNAT，主要用于内部共享IP访问外部。</p>
+<p>当内部需要提供对外服务时（如对外发布web网站），外部地址发起主动连接，由路由器或</p>
+<p>者防火墙上的网关接收这个连接，然后将连接转换到内部，此过程是由带有公网IP的网关替</p>
+<p>代内部服务来接收外部的连接，然后在内部做地址转换，此转换称为DNAT，主要用于内部服</p>
+<p>务对外发布。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/防火墙/" rel="tag"># 防火墙</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/29/SAMBA服务介绍及相关实验/" rel="next" title="SAMBA服务介绍及相关实验">
+                <i class="fa fa-chevron-left"></i> SAMBA服务介绍及相关实验
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/03/LVS介绍及工作原理/" rel="prev" title="LVS介绍及工作原理">
+                LVS介绍及工作原理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、防火墙介绍"><span class="nav-number">1.</span> <span class="nav-text">一、防火墙介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#防火墙的分类"><span class="nav-number">1.1.</span> <span class="nav-text">防火墙的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Netfilter组件"><span class="nav-number">1.2.</span> <span class="nav-text">Netfilter组件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、iptables工具"><span class="nav-number">2.</span> <span class="nav-text">二、iptables工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、iptables基本命令使用举例"><span class="nav-number">3.</span> <span class="nav-text">三、iptables基本命令使用举例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-链及NAT的基本操作"><span class="nav-number">3.1.</span> <span class="nav-text">(一)链及NAT的基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-设置基本的规则匹配"><span class="nav-number">3.2.</span> <span class="nav-text">(二)设置基本的规则匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-设置扩展的规则匹配（举例已忽略目标动作）"><span class="nav-number">3.3.</span> <span class="nav-text">(三)设置扩展的规则匹配（举例已忽略目标动作）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开放被动模式的ftp服务"><span class="nav-number">3.4.</span> <span class="nav-text">开放被动模式的ftp服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iptable防火墙优化原则"><span class="nav-number">3.5.</span> <span class="nav-text">iptable防火墙优化原则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、NAT地址转换"><span class="nav-number">4.</span> <span class="nav-text">四、NAT地址转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何区分SNAT和DNAT"><span class="nav-number">4.1.</span> <span class="nav-text">如何区分SNAT和DNAT</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
