@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -93,7 +93,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Muse',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -266,9 +266,45 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
   
 </nav>
 
@@ -390,224 +426,17 @@
       
         
           
-            <h2 id="一、KickStart安装简介"><a href="#一、KickStart安装简介" class="headerlink" title="一、KickStart安装简介"></a><strong>一、KickStart安装简介</strong></h2><p><strong>KickStart</strong>是一种半自动化的安装方式。KickStart的工作原理是通过记录典型的安装过程中所需人工干预</p>
-<p>填写的各种参数，并生成一个名为ks.cfg的文件；在其后的安装过程中（不只局限于生成KickStart安装</p>
-<p>文件的机器）当出现要求填写参数的情况时，安装程序会首先去查找KickStart生成的文件，当找到合适</p>
-<p>的参数时，就采用找到的参数，当没有找到合适的参数时，才需要安装者手工干预。这样，如果KickStart</p>
-<p>文件涵盖了安装过程中出现的所有需要填写的参数时，安装者完全可以只告诉安装程序从何获取ks.cfg文件</p>
-<p>，然后去忙自己的事情。等安装完毕，安装程序会根据ks.cfg中设置的重启选项来重启系统，并结束安装。</p>
-<h3 id="KickStart文件的格式："><a href="#KickStart文件的格式：" class="headerlink" title="KickStart文件的格式："></a><strong>KickStart文件的格式：</strong></h3><p><strong>KickStart</strong>文件格式与<strong>anaconda-ks.cfg</strong>文件格式十分类似，总体由三部分组成：</p>
-<p><strong>1）命令段：指明各种安装前配置，如键盘类型等</strong></p>
-<p><strong>必备命令：</strong></p>
-<p>authconfig：认证方式配置</p>
-<p>authconfig –useshadow –passalgo=sha512</p>
-<p>bootloader：bootloader的安装位置及相关配置</p>
-<p>bootloader –location=mbr –driveorder=sda –</p>
-<p>append=”crashkernel=auto rhgb quiet”</p>
-<p>keyboard：设定键盘类型</p>
-<p>lang：语言类型</p>
-<p>part：创建分区</p>
-<p>rootpw：指明root的密码</p>
-<p>timezone：时区</p>
-<p><strong>可选命令：</strong></p>
-<p>install OR upgrade</p>
-<p>text：文本安装界面</p>
-<p>network</p>
-<p>firewall</p>
-<p>selinux</p>
-<p>halt</p>
-<p>poweroff</p>
-<p>reboot</p>
-<p>repo</p>
-<p>user：安装完成后为系统创建新用户</p>
-<p>url: 指明安装源</p>
-<p>key –skip 跳过安装号码,适用于rhel版本</p>
-<p><strong>2）程序包段：指明要安装的程序包组或程序包，不安装的程序包等</strong></p>
-<p>%packages</p>
-<p>@group_name</p>
-<p>package</p>
-<p>-package</p>
-<p>%end</p>
-<p><strong>3）脚本段：</strong></p>
-<p><strong>%pre：安装前脚本</strong></p>
-<p>运行环境：运行于安装介质上的微型Linux环境</p>
-<p><strong>%post：安装后脚本</strong></p>
-<p>运行环境：安装完成的系统</p>
-<p>安装后脚本非常有用，我们可以在这里定义系统安装完成后自动安装yum源，创建一些普通用户等功能</p>
-<h3 id="生成ks应答文件方法："><a href="#生成ks应答文件方法：" class="headerlink" title="生成ks应答文件方法："></a><strong>生成ks应答文件方法：</strong></h3><p>1.参照anaconda-ks.cfg文件修改（不常用）</p>
-<p>2.利用system-config-kickstart图形工具制作（常用）</p>
-<p>检查ks文件语法错误：</p>
-<p>ksvalidator  /path/to/ks.cfg</p>
-<p>在实验之前，我们还是先了解下系统安装程序anaconda以及光盘中isolinux目录的功能</p>
-<h3 id="anaconda：系统安装程序"><a href="#anaconda：系统安装程序" class="headerlink" title="anaconda：系统安装程序"></a><strong>anaconda：系统安装程序</strong></h3><p><strong>1）安装前配置阶段：</strong></p>
-<p>安装过程使用的语言</p>
-<p>键盘类型</p>
-<p>安装目标存储设备</p>
-<p>Basic Storage：本地磁盘</p>
-<p>特殊设备：iSCSI</p>
-<p>设定主机名</p>
-<p>配置网络接口</p>
-<p>时区</p>
-<p>管理员密码</p>
-<p>设定分区方式及MBR的安装位置</p>
-<p>创建一个普通用户</p>
-<p>选定要安装的程序包</p>
-<p><strong>2）安装阶段：</strong></p>
-<p>在目标磁盘创建分区，执行格式化操作等</p>
-<p>将选定的程序包安装至目标位置</p>
-<p>安装bootloader和initramfs</p>
-<p><strong>3）图形模式首次启动：</strong></p>
-<p>Iptables</p>
-<p>Selinux</p>
-<p>Core dump</p>
-<p>系统在完成安装后，会在用户家目录自动生成一个anaconda-ks.cfg配置文件，记录了安装系统时选择的</p>
-<p>各种参数，安装包等内容</p>
-<h3 id="系统光盘中isolinux目录列表文件："><a href="#系统光盘中isolinux目录列表文件：" class="headerlink" title="系统光盘中isolinux目录列表文件："></a><strong>系统光盘中isolinux目录列表文件：</strong></h3><p>boot.cat                    类似于系统启动时MBR的作用</p>
-<p>grub.conf                 grub.conf文件镜像</p>
-<p>initrd.img                  是ramfs虚拟文件系统（先cpio，再gzip压缩）</p>
-<p>isolinux.bin               相当于grub的第二阶段</p>
-<p>isolinux.cfg               isolinux.bin的配置文件，当光盘启动，会自动去找isolinux.cfg文件</p>
-<p>memtest                   内存检测，这是一个独立程序</p>
-<p>splash.jpg                 光盘启动界面的背景图</p>
-<p>vesamenu.c32         菜单风格，菜单图标</p>
-<p>vmlinuz                     内核镜像</p>
-<h2 id="二、实验：使用kickstart半自动化安装CentOS系统："><a href="#二、实验：使用kickstart半自动化安装CentOS系统：" class="headerlink" title="二、实验：使用kickstart半自动化安装CentOS系统："></a><strong>二、实验：使用kickstart半自动化安装CentOS系统：</strong></h2><h3 id="CentOS6："><a href="#CentOS6：" class="headerlink" title="CentOS6："></a><strong>CentOS6：</strong></h3><p><strong>一、系统默认未安装system-config-kickstart，先进行yum安装：</strong></p>
-<p>yum install system-config-kickstart</p>
-<p><strong>二、配置kickstart</strong></p>
-<p>1.基本配置</p>
-<p>这里我们选择语言、键盘模式、时区，设置root账户密码并且选择安装后自动重启以及字符界面安装。</p>
-<p><img src="1基本配置.png" alt="1基本配置"></p>
-<p>2.选择安装方式，我们以http安装为例</p>
-<p><img src="2安装方式.png" alt="2安装方式"></p>
-<p>3.Boot Loader设置</p>
-<p><img src="3bootloader设置.png" alt="3bootloader设置"></p>
-<p>4.分区设置，与正常安装CentOS系统时设置分区类似，点击Add添加分区</p>
-<p><img src="5分区信息.png" alt="5分区信息"></p>
-<p><img src="4分区设置.png" alt="4分区设置"></p>
-<p>5.网络配置界面，用来配置系统安装完成后的网络地址</p>
-<p><img src="6网络配置.png" alt="6网络配置"></p>
-<p>6.用户加密方式设置，我们选择默认即可</p>
-<p><img src="lazy.png" alt="7用户密码加密方式"></p>
-<p>7.防火墙设置，在这里我们可以关闭SELinux策略，防火墙等级选择默认</p>
-<p><img src="8防火墙设置.png" alt="8防火墙设置"></p>
-<p>8.显示设置</p>
-<p><img src="9显示设置.png" alt="9显示设置"></p>
-<p>9.自定义安装包，我们可以在这一项选择想要安装的安装包，比如mysql数据库等</p>
-<p><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="10自定义软件包"></p>
-<p>10．安装前脚本</p>
-<p><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="11安装前脚本"></p>
-<p>11.安装后脚本</p>
-<p>我们可以在这里定义系统安装完成后自动安装yum源，创建一些普通用户等功能</p>
-<p><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="12安装后脚本"></p>
-<p><strong>三、保存ks.cfg文件</strong></p>
-<p><img src="13.保存ks.cfg文件-1.png" alt="13.保存ks.cfg文件"></p>
-<p>打开ks.cfg文件，可以看到刚才设置的参数已经保存在文件中，我们还可以直接修改ks.cfg文件，比如添加一些安装包等</p>
-<p><img src="15.修改kscfg文件-1.png" alt="15.修改kscfg文件"></p>
-<p><strong>四、在本机打开httpd服务，并将fs.cfg文件上传到网页</strong></p>
-<p>service httpd restart</p>
-<p>service iptables stop</p>
-<p>mv ks6_mini.cfg /var/www/html</p>
-<p>浏览器：<a href="http://172.20.101.101/ks6_mini.cfg确认" target="_blank" rel="noopener">http://172.20.101.101/ks6_mini.cfg确认</a></p>
-<p><img src="16确认上传浏览器-1.png" alt="16确认上传浏览器"></p>
-<p><strong>五、开启一台新虚拟机：</strong></p>
-<p>网卡设置为桥接模式</p>
-<p>在进入光盘引导界面后，按<strong>ESC</strong>，出现下图界面，输入：</p>
-<p><strong>boot:</strong> linux ip=172.20.0.222  netmask=255.255.0.0  ks=<a href="http://172.20.0.223/ks6_mini.cfg" target="_blank" rel="noopener">http://172.20.0.223/ks6_mini.cfg</a></p>
-<p>注：此处设置的ip地址是为了访问httpd服务设置的ip地址，与系统安装后的ip地址不同</p>
-<p><img src="17boot-1.png" alt="17boot"></p>
-<p><strong>六、自动化安装</strong></p>
-<p>如果ks.cfg文件没有设置出错的话，将进入自动安装界面</p>
-<p><img src="自动化安装软件包.png" alt="自动化安装软件包"></p>
-<p><strong>七、安装完成</strong></p>
-<p>我们可以看到，安装后脚本也执行成功，wang账户创建成功，分区创建成功！</p>
-<p><img src="安装完成.png" alt="安装完成"></p>
-<h3 id="CentOS7："><a href="#CentOS7：" class="headerlink" title="CentOS7："></a><strong>CentOS7：</strong></h3><p><strong>7版本的kickstart安装与6基本一致，仅需修改个别版本参数</strong></p>
-<p>需要注意的是，在可选安装包这一项，获取不到安装包信息</p>
-<p><img src="无可选安装包.png" alt="无可选安装包"></p>
-<p><strong>解决方法</strong>：将yum的base源名称改为development即可</p>
-<p><img src="修改yum源.png" alt="修改yum源"></p>
-<p>再次打开，我们发现可选安装包又出现了</p>
-<p>其他流程与安装CentOS6版本基本一致：</p>
-<p><img src="最小化安装.png" alt="最小化安装"></p>
-<h2 id="三、实验：制作CentOS6的启动光盘boot-iso"><a href="#三、实验：制作CentOS6的启动光盘boot-iso" class="headerlink" title="三、实验：制作CentOS6的启动光盘boot.iso"></a><strong>三、实验：制作CentOS6的启动光盘boot.iso</strong></h2><p><strong>思路：</strong>参考ISO光盘内文件，制作boot6.iso</p>
-<p><strong>1.将光盘isoliux目录复制到/data/myiso目录下，ks.cfg文件复制到/data/myiso/ksdir下</strong></p>
-<p>目录结构如下：</p>
-<p><img src="准备目录.png" alt="准备目录"></p>
-<p>rm -rf /data/*</p>
-<p>cd /data</p>
-<p>mkdir myiso</p>
-<p>cp -r /misc/cd/isolinux  /data/myiso/</p>
-<p>mkdir /data/myiso/ksdir</p>
-<p>cp  ks6_mini.cfg  /data/myiso/ksdir</p>
-<p>cp  ks6_desktop.cfg  /data/myiso/ksdir</p>
-<p><strong>2.修改isolinux.cfg文件</strong></p>
-<p>cd isolinux/</p>
-<p>vim isolinux.cfg</p>
-<p><strong>内存检测删掉</strong></p>
-<p><strong>本地安装留下，且留作默认项（重要）</strong></p>
-<p><strong>救援模式删掉</strong></p>
-<p><strong>增加桌面安装</strong></p>
-<p>label desktop</p>
-<p>kernel vmlinuz</p>
-<p>append initrd=initrd.img ks=cdrom:/ksdir/ks6_desktop.cfg</p>
-<p><strong>增加最小化安装</strong></p>
-<p>label mini</p>
-<p>kernel vmlinuz</p>
-<p>append initrd=initrd.img ks=cdrom:/ksdir/ks6_mini.cfg</p>
-<p><img src="修改isolinux.cfg_.png" alt="修改isolinux.cfg"></p>
-<p><strong>3.生成boot.iso文件</strong></p>
-<p>mkisofs -R -J -T -v –no-emul-boot –boot-load-size 4 –boot-info-table -V “CentOS 6.9 x86_64 boot” -b isolinux/isolinux.bin -c isolinux/boot. cat -o /root/boot.iso /data/myiso/</p>
-<p><img src="生成boot.iso_.png" alt="生成boot.iso"></p>
-<p><strong>4.将boot.iso文件导出系统，新开一台虚拟机，挂载boot.iso；并设置光盘引导启动</strong></p>
-<p><img src="修改硬盘启动项.png" alt="修改硬盘启动项"></p>
-<p><strong>5.开机成功,显示我们通过isolinux.cfg修改过的菜单选项，默认本地安装，选择其他选项将进行对应系统的自动安装</strong></p>
-<p><img src="开机画面.png" alt="开机画面"></p>
-<h2 id="四、实验：制作U盘自动安装盘"><a href="#四、实验：制作U盘自动安装盘" class="headerlink" title="四、实验：制作U盘自动安装盘"></a><strong>四、实验：制作U盘自动安装盘</strong></h2><p><strong>思路：以实验三制作完成的boot.iso为启动文件，增加一块1G的虚拟硬盘/dev /sdc模拟U盘</strong>将iso转</p>
-<p><strong>1.为混合模式</strong></p>
-<p>isohybrid  boot.iso</p>
-<p><img src="转为混合模式.png" alt="转为混合模式"></p>
-<p><strong>2.使用dd命令写入新硬盘</strong></p>
-<p>dd  if=boot.iso  of=/dev/sdc</p>
-<p><img src="dd写入.png" alt="dd写入"></p>
-<p><strong>3.开启一台新的虚拟机，插入刚才的硬盘，并设置新硬盘为启动项</strong></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/05/US6GAH3KDPSP@BASBU.png" alt="US6GAH3KDPS($P{@{]BASBU"></p>
-<p><strong>4.启动成功</strong></p>
-<p><img src="启动成功.png" alt="启动成功"></p>
-<h2 id="五、实验：制作不依赖网络的完整CentOS6系统ISO自动安装盘"><a href="#五、实验：制作不依赖网络的完整CentOS6系统ISO自动安装盘" class="headerlink" title="五、实验：制作不依赖网络的完整CentOS6系统ISO自动安装盘"></a><strong>五、实验：制作不依赖网络的完整CentOS6系统ISO自动安装盘</strong></h2><p><strong>1.将CentOS6的第一张盘和第二张盘所有内容拷入centos6目录</strong></p>
-<p>mkdir  /data/centos6  </p>
-<p>cp -rv /misc/cd/  /data/centos6                   第一张盘</p>
-<p>cp -rv /misc/cd/*  /data/centos6                     第二张盘</p>
-<p><strong>2.删除centos6/repodata/文件，只留下.*comps.xml一个文件</strong></p>
-<p><img src="repodata.png" alt="repodata"></p>
-<p><strong>3.根据.*comps.xml生成新的repodata目录</strong></p>
-<p>cd centos6/</p>
-<p>createrepo -g  .*comps.xml  </p>
-<p><img src="生成新的repodata.png" alt="生成新的repodata"></p>
-<p><strong>4.将准备好的ks.cfg文件拷入/data/centos6/ksdir目录</strong></p>
-<p>mkdir  /data/centos6/ksdir</p>
-<p>cp  ks6_mini.cfg /data/centos6/ksdir</p>
-<p>cp  ks6_desktop.cfg /data/centos6/ksdir</p>
-<p><strong>5.删除/data/centos6目录下多余的文件，如TRANS.TBL文件</strong></p>
-<p>find /data/centos6 -name TRANS.TBL -exec rm {} \;</p>
-<p><strong>6.修改ks.cfg文件启动方式为光盘启动cdrom</strong></p>
-<p><strong>vim ksdir/ks6_mini.cfg</strong></p>
-<p>#Use network installation</p>
-<p>cdrom</p>
-<p><img src="修改cd引导.png" alt="修改cd引导"></p>
-<p><strong>7.按照ks.cfg文件修改isoinux.cfg文件启动选项</strong></p>
-<p>cp /root/isolinux/isolinux.cfg   .</p>
-<p>vim isolinux.cfg</p>
-<p>注意设置本地启动为默认启动项</p>
-<p><img src="修改isolinux.cfg_-1.png" alt="修改isolinux.cfg"></p>
-<p><strong>8.生成boot.iso</strong></p>
-<p>mkisofs -R -J -T -v –no-emul-boot –boot-load-size 4 –boot-info-table -V “CentOS 6.9 x86_64 Everything” -b isolinux/isolinux.bin -c isolinux/boot.cat -o /root/CentOS-6.9-x86_64-Everything.iso /data/centos6/</p>
-<p><strong>9.将CentOS-6.9-x86_64-Everything.iso文件导出，由于文件过大，推荐使用xftp导出</strong></p>
-<p><img src="xshell传输.png" alt="xshell传输"></p>
-<p><strong>10.新开一台虚拟机，挂载CentOS-6.9-x86_64-Everything.iso，设置光盘为开机启动</strong></p>
-<p><strong>如无错误，将弹出选项可进行自动安装</strong></p>
-<p><img src="安装.png" alt="安装"></p>
-
-          
+          一、KickStart安装简介KickStart是一种半自动化的安装方式。KickStart的工作原理是通过记录典型的安装过程中所需人工干预
+填写的各种参数，并生成一个名为ks.cfg的文件；在其后的安装过程中（不只局限于生成KickStart安装
+文件的机器）当出现要求填写参数的情况时，安装程序会
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/25/手把手系列（四）教你用kickstart自动化安装CentOS系统/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -747,108 +576,23 @@
       
         
           
-            <h2 id="一、交换分区swap管理："><a href="#一、交换分区swap管理：" class="headerlink" title="一、交换分区swap管理："></a><strong>一、交换分区swap管理：</strong></h2><p><strong>交换分区</strong>是系统RAM的补充，相当于Windows系统中的虚拟内存，当系统RAM不够用的时候将使用交换分区来代替内存使用。</p>
-<p>基本设置包括：</p>
-<ul>
-<li>创建交换分区或者文件</li>
-<li>使用mkswap写入特殊签名</li>
-<li>在/etc/fstab文件中添加适当的条目</li>
-<li>使用swapon -a激活交换分区</li>
-</ul>
-<p><strong>swapon</strong>                     启用交换分区</p>
-<p><strong>格式：swapon [OPTION]…[DEVICE]</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-a              激活所有交换分区</span><br><span class="line">-p priority        指定优先级</span><br><span class="line">/etc/fstab:pri=value</span><br></pre></td></tr></table></figure>
-<p><strong>swapoff [OPTION]…[DEVICE]</strong>       禁用指定交换分区</p>
-<h3 id="swap的优先级"><a href="#swap的优先级" class="headerlink" title="swap的优先级"></a>swap的优先级</h3><p>可以指定swap分区0到32767的优先级，值越大优先级越高</p>
-<p>系统默认会给没有指定的swap指定一个优先级，从-1开始，每加入一个新的没有指定优先级的swap，会给这个优先级减一。先添加的swap的缺省优先级比较高，除非用户自己指定一个优先级，而用户指定的优先级(是正数)永远高于核心缺省指定的优先级(是负数)</p>
-<p>优化性能：分布存放，高性能磁盘存放</p>
-<h3 id="场景1：增加一个新的swap分区"><a href="#场景1：增加一个新的swap分区" class="headerlink" title="场景1：增加一个新的swap分区"></a>场景1：增加一个新的swap分区</h3><ol>
-<li><p>fdisk  /dev/sdb           创建新的swap分区，tyep=82=Linux swap</p>
-<p>注：如果文件系统分区没有同步成功，需我们手动同步分区</p>
-<p>CentOS5,7版本：partx   -a  /dev/sdb</p>
-<p>CentOS7版本： partprobe  /dev/sdb</p>
-</li>
-</ol>
-<p><img src="fdisk.png" alt="fdisk"></p>
-<ol start="2">
-<li>mkswap       /dev/sdb1 -L swap_sdb2                 添加swap文件系统</li>
-</ol>
-<p><img src="mkswap.png" alt="mkswap"></p>
-<ol start="3">
-<li><p>vim /etc/fstab</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UUID=xxx          swap    swap        defaults   0       0</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p><img src="vim-1.png" alt="vim"></p>
-<ol start="4">
-<li>swapon -a                                       使swap分区生效</li>
-</ol>
-<p><img src="swapona.png" alt="swapona"></p>
-<ol start="5">
-<li>swapon<strong> -s</strong>                                       查看是否生效</li>
-</ol>
-<p><img src="swapons.png" alt="swapons"></p>
-<h3 id="场景2：使用一个文件当做新的swap分区"><a href="#场景2：使用一个文件当做新的swap分区" class="headerlink" title="场景2：使用一个文件当做新的swap分区"></a>场景2：使用一个文件当做新的swap分区</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. dd if=/dev/zero of=/swapfile  bs=1024M  count=2      创建一个2G文件</span><br><span class="line">2. mkswap     /swapfile          添加文件的文件系统为swap</span><br><span class="line">   blkid  /swapfile      查看文件系统添加成功</span><br><span class="line">3. vim /etc/fstab     修改/etc/fstab文件</span><br><span class="line">   /swapfile       swap       swap      defaults      0       0</span><br><span class="line">   注：挂载文件名，不能使用UUID  </span><br><span class="line">4. swapon -a</span><br><span class="line">5. swapon -s</span><br></pre></td></tr></table></figure>
-<h2 id="二、Linux系统光盘使用"><a href="#二、Linux系统光盘使用" class="headerlink" title="二、Linux系统光盘使用"></a><strong>二、Linux系统光盘使用</strong></h2><p>光盘在Linux图形环境下将自动挂载</p>
-<p>否则就必须手动进行挂</p>
-<p>挂载命令：   <strong>mount  /dev/cdrom   /mnt/</strong></p>
-<p>ejetc命令卸载或弹出光盘</p>
-<p>创建ISO文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp  -a  /dev/cdrom   /root/centos7.iso</span><br><span class="line">mkisofs  -r  -o  /root/etc.iso     /etc</span><br></pre></td></tr></table></figure>
-<p>刻录光盘</p>
-<p>​     wodim     -v   -eject   centos.iso</p>
-<p>mkisofs -r -o /root/etc.iso    /etc</p>
-<p>这种制作光盘方法可作为yum源，但不可做启动光盘</p>
-<p>centos官网<a href="https://wiki.centos.org" target="_blank" rel="noopener">https://wiki.centos.org</a>  可搜索mkdvdiso.sh脚本</p>
-<p>即可引导又可当yum源</p>
-<h2 id="三、Linux系统USB介质使用"><a href="#三、Linux系统USB介质使用" class="headerlink" title="三、Linux系统USB介质使用"></a><strong>三、Linux系统USB介质使用</strong></h2><p>查看USB设备是否识别</p>
-<p><strong>lsusb</strong></p>
-<p>被内核探测为SCSI设备</p>
-<p>/dev/sdaX、/dev/sdbX、或类似的设备文件</p>
-<p>在图形环境中自动挂载</p>
-<p>图标在[计算机]窗口中创建</p>
-<p>挂载在<strong>/run/media/<user>/<label></label></user></strong></p>
-<p>手动挂载</p>
-<p><strong>mount /dev/sdb1   /mnt</strong></p>
-<h2 id="四、强大的dd工具"><a href="#四、强大的dd工具" class="headerlink" title="四、强大的dd工具"></a><strong>四、强大的dd工具</strong></h2><p><strong>dd命令：convert and copy a file</strong></p>
-<p><strong>用法：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">dd if=/PATH/FROM/SRC    of=/PATH/TO/DEST</span><br><span class="line">bs=#：block size, 复制单元大小</span><br><span class="line">count=#：                复制多少个bs</span><br><span class="line">of=file             写到所命名的文件而不是到标准输出</span><br><span class="line">if=file               从所命名文件读取而不是从标准输入</span><br><span class="line">bs=size            指定块大小（既是是ibs也是obs)</span><br><span class="line">ibs=size           一次读size个byte</span><br><span class="line">obs=size                  一次写size个byte</span><br><span class="line">cbs=size                   一次转化size个byte</span><br><span class="line">skip=blocks             从开头忽略blocks个ibs大小的块</span><br><span class="line">seek=blocks            从开头忽略blocks个obs大小的块</span><br><span class="line">count=n                   只拷贝n个记录</span><br><span class="line">conv=conversion[,conversion…] 用指定的参数转换文件</span><br></pre></td></tr></table></figure>
-<p><strong>转换参数:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ascii       转换 EBCDIC 为 ASCII</span><br><span class="line">ebcdic      转换 ASCII 为 EBCDIC</span><br><span class="line">lcase       把大写字符转换为小写字符</span><br><span class="line">ucase       把小写字符转换为大写字符</span><br><span class="line">nocreat     不创建输出文件</span><br><span class="line">noerror     出错时不停止</span><br><span class="line">notrunc     不截短输出文件</span><br><span class="line">sync         把每个输入块填充到ibs个字节，不足部分用空(NUL)字符补齐</span><br></pre></td></tr></table></figure>
-<p><strong>备份MBR：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/sda of=/tmp/mbr.bak bs=512 count=1</span><br></pre></td></tr></table></figure>
-<p><strong>破坏MBR中的bootloader：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/zero of=/dev/sda bs=64 count=1 seek=446</span><br></pre></td></tr></table></figure>
-<p>有一个大与2K的二进制文件fileA。现在想从第64个字节位置开始读取，需要读取的大小是128Byts。</p>
-<p>又有fileB, 想把上面读取到的128Bytes写到第32个字节开始的位置，替换128Bytes，实现如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=fileA of=fileB bs=1 count=128 skip=63 seek=31 conv=notrunc</span><br></pre></td></tr></table></figure>
-<p><strong>备份：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/sdx of=/dev/sdy                     将本地的/dev/sdx整盘备份到/dev/sdy</span><br><span class="line"></span><br><span class="line">dd if=/dev/sdx of=/path/to/image                 将/dev/sdx全盘数据备份到指定路径的image文件</span><br><span class="line"></span><br><span class="line">dd if=/dev/sdx | gzip &gt;/path/to/image.gz   备份/dev/sdx全盘数据，并利用gzip压缩，保存到指定路径</span><br></pre></td></tr></table></figure>
-<p><strong>恢复：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dd if=/path/to/image of=/dev/sdx                 将备份文件恢复到指定盘</span><br><span class="line"></span><br><span class="line">gzip -dc /path/to/image.gz | dd of=/dev/sdx       将压缩的备份文件恢复到指定盘</span><br></pre></td></tr></table></figure>
-<p><strong>拷贝内存资料到硬盘</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/mem of=/root/mem.bin bs=1024       将内存里的数据拷贝到root目录下的mem.bin文件</span><br></pre></td></tr></table></figure>
-<p><strong>从光盘拷贝iso镜像</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/cdrom of=/root/cd.iso       拷贝光盘数据到root文件夹下，并保存为cd.iso文件</span><br></pre></td></tr></table></figure>
-<p><strong>销毁磁盘数据，文件系统</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/urandom of=/dev/sda1</span><br></pre></td></tr></table></figure>
-<p>利用随机的数据填充硬盘，在某些必要的场合可以用来销毁数据，执行此操作以后，/dev/sda1将无法挂载，</p>
-<p>创建和拷贝操作无法执行。</p>
-<p><strong>得到最恰当的block size</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/zero bs=1024 count=1000000 of=/root/1Gb.file</span><br><span class="line">dd if=/dev/zero bs=2048 count=500000 of=/root/1Gb.file</span><br><span class="line">dd if=/dev/zero bs=4096 count=250000 of=/root/1Gb.file</span><br></pre></td></tr></table></figure>
-<p>通过比较dd指令输出中命令的执行时间，即可确定系统最佳的block size大小</p>
-<p><strong>测试硬盘写速度</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/zero of=/root/1Gb.file bs=1024 count=1000000</span><br></pre></td></tr></table></figure>
-<p><strong>测试硬盘读速度</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=/root/1Gb.file bs=64k | dd of=/dev/null</span><br></pre></td></tr></table></figure>
-<p><strong>修复硬盘</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=/dev/sda of=/dev/sda</span><br></pre></td></tr></table></figure>
-<p>当硬盘较长时间（比如1,2年）放置不使用后，磁盘上会产生消磁点。当磁头读</p>
-<p>到这些区域时会遇到困难，并可能导致I/O错误。当这种情况影响到硬盘的第一</p>
-<p>个扇区时，可能导致硬盘报废。上边的命令有可能使这些数据起死回生,且这个</p>
-<p>过程是安全高效的</p>
+          一、交换分区swap管理：交换分区是系统RAM的补充，相当于Windows系统中的虚拟内存，当系统RAM不够用的时候将使用交换分区来代替内存使用。
+基本设置包括：
 
-          
+创建交换分区或者文件
+使用mkswap写入特殊签名
+在/etc/fstab文件中添加适当的条目
+使用swapon -a激活交换分区
+
+
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/25/交换分区swap管理及特殊介质的使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -988,230 +732,24 @@
       
         
           
-            <h2 id="一、磁盘基本概念"><a href="#一、磁盘基本概念" class="headerlink" title="一、磁盘基本概念"></a>一、磁盘基本概念</h2><h3 id="设备文件："><a href="#设备文件：" class="headerlink" title="设备文件："></a>设备文件：</h3><p>Linux中一切皆文件：open（），read（），write（），close（）</p>
-<p>设备类型：</p>
-<ul>
-<li>块设备：block，存储单位”块”，磁盘</li>
-<li>字符设备：char，存储单位”字符”，键盘</li>
-<li>设备文件：关联至一个设备驱动程序，进而能够跟与之对应硬件设备进行通信</li>
-</ul>
-<p>设备号码：</p>
-<ul>
-<li>主设备号：maj number，标识设备类型</li>
-<li>次设备号：min number，标识同一类型下的不同设备</li>
-</ul>
-<h3 id="磁盘结构"><a href="#磁盘结构" class="headerlink" title="磁盘结构"></a>磁盘结构</h3><p>硬盘的接口类型：</p>
-<ul>
-<li><p>并行：</p>
-<p>IDE：133MB/s</p>
-<p>SCSI：640MB/s</p>
-</li>
-<li><p>串口：</p>
-<p>SATA：6Gbps</p>
-<p>SAS：6Gbps</p>
-<p>USB：480MB/s</p>
-</li>
-</ul>
-<h3 id="硬盘："><a href="#硬盘：" class="headerlink" title="硬盘："></a>硬盘：</h3><p><strong>机械硬盘（HDD）：</strong>传统普通硬盘，主要由：盘片，磁头，马达等组成</p>
-<p>​    优势：相比固态硬盘，价格低，容量大，使用寿命长</p>
-<p><strong>固态硬盘（SSD）：</strong>用固态电子存储芯片阵列而制成的硬盘。</p>
-<p>​    优势：相比机械硬盘，防震抗摔，传输速率，功率，噪音有优势</p>
-<p><strong>硬盘有价，数据无价，目前SSD不能完全取代HHD</strong></p>
-<p><img src="timg_imagequality80sizeb9999_10000sec1524545986109difaed230fa17762bc91a6.jpg" alt="timg_image&amp;quality=80&amp;size=b9999_10000&amp;sec=1524545986109&amp;di=faed230fa17762bc91a6"></p>
-<p><strong>磁盘设备的设备文件命名：</strong> /dev/DEV_FILE</p>
-<p><strong>硬盘接口命名如：SCSI,SATA,SAS,IDE,USB：</strong>      /dev/sd</p>
-<p><strong>虚拟磁盘：</strong>                 /dev/vd</p>
-<p><strong>不同磁盘标识：</strong>         a-z，aa，ab…</p>
-<p>​    例如： /dev/sda,/dev/sdb</p>
-<p><strong>同一设备的不同分区：</strong>        1,2，…</p>
-<p>​    例如：/dev/sda1,/dev/sda5</p>
-<p><strong>注：</strong>在脚本中，尽量避免使用磁盘设备文件名诸如sda，名称不稳定，应使用UUID</p>
-<h3 id="磁盘存储术语："><a href="#磁盘存储术语：" class="headerlink" title="磁盘存储术语："></a>磁盘存储术语：</h3><p><strong>head：</strong>磁头；                 8bit寻址 2**8=256</p>
-<p><strong>track：</strong>磁道；</p>
-<p><strong>ctlinder：</strong>柱面                 10bit寻址       2**10=1024</p>
-<p><strong>sector：</strong>扇区          6bit寻址 2**6=64</p>
-<p><strong>CHS：</strong>磁盘三维。柱面、磁头、扇<br>    采用24bit位寻址<br>    其中前10位表示cylinder，中间8位表示head，后面6位表示sector。<br>    最大寻址空间8GB</p>
-<p><strong>LBA：</strong> 逻辑区块地址<br>    LBA是一个整数，通过转换成CHS格式完成磁盘具体寻址<br>    LBA采用48个bit位寻址<br>    最大寻址空间128PB</p>
-<h2 id="二、磁盘分区管理"><a href="#二、磁盘分区管理" class="headerlink" title="二、磁盘分区管理"></a>二、磁盘分区管理</h2><h3 id="我们知道使用磁盘有三个步骤："><a href="#我们知道使用磁盘有三个步骤：" class="headerlink" title="我们知道使用磁盘有三个步骤："></a>我们知道使用磁盘有三个步骤：</h3><ol>
-<li>创建分区</li>
-<li>创建文件系统：格式化</li>
-<li>挂载：分配目录名</li>
-</ol>
-<h3 id="为什么要对磁盘进行分区？"><a href="#为什么要对磁盘进行分区？" class="headerlink" title="为什么要对磁盘进行分区？"></a>为什么要对磁盘进行分区？</h3><ol>
-<li>优化I/O性能</li>
-<li>实现磁盘空间配额限制</li>
-<li>提高修复速度</li>
-<li>隔离系统和程序</li>
-<li>安装多个OS</li>
-<li>采用不同的文件系统</li>
-</ol>
-<h3 id="分区类型"><a href="#分区类型" class="headerlink" title="分区类型"></a>分区类型</h3><p>两种分区方式：MBR，GPT</p>
-<h3 id="MBR：Master-Boot-Record"><a href="#MBR：Master-Boot-Record" class="headerlink" title="MBR：Master Boot Record"></a>MBR：Master Boot Record</h3><p>诞生于1982年，使用32位表示扇区数，分区不能超过2T</p>
-<p>MBR如何分区：按柱面</p>
-<p>0磁道0扇区：512bytes</p>
-<p>​            446bytes：boot loader</p>
-<p>​            64bytes：分区表</p>
-<p>​            16bytes：标识一个分区（最多4个分区）</p>
-<p>​            2bytes：55AA（分区标识位）</p>
-<p>支持4个主分区；3个主分区+1扩展分区（N个逻辑分区）</p>
-<p>注：生产中最好给MBR分区表进行备份</p>
-<p><strong>MBR分区结构:</strong></p>
-<p>MBR的硬盘主引导记录MBR由4个部分组成</p>
-<ol>
-<li>主引导程序（偏移地址0000H–0088H），它负责从活动分区中装载，并运行系统引导程序。</li>
-<li>出错信息数据区，偏移地址0089H–00E1H为出错信息，00E2H–01BDH全为0字节。</li>
-<li>分区表（DPT,Disk Partition Table）含4个分区项，偏移地址01BEH–01FDH,每个分区表项长16个字节，共64字节为分区项1、分区项2、分区项3、分区项4</li>
-<li>结束标志字，偏移地址01FE–01FF的2个字节值为结束标志55AA</li>
-</ol>
-<p><strong>BIOS+MBR</strong></p>
-<p><strong>传统BIOS运行流程：</strong></p>
-<p>​    开机–&gt;BIOS初始化–&gt;BIOS自检–&gt;引导操作系统–&gt;进入系统</p>
-<h3 id="GPT：GUID（Globals-Unique-Identifiers）"><a href="#GPT：GUID（Globals-Unique-Identifiers）" class="headerlink" title="GPT：GUID（Globals Unique Identifiers）"></a>GPT：GUID（Globals Unique Identifiers）</h3><p>支持128个分区，使用64位，支持8Z（512Byte/block）,64Z（4096Byte/block）</p>
-<p>使用128位的通用唯一识别码UUID（Universally Unique Identifier）表示磁盘和分区表自动备份在头和尾两份，并有CRC校验位</p>
-<p>UEFI（统一扩展固件接口）：硬件支持GPT，使操作系统启动</p>
-<p><strong>分区表</strong></p>
-<p>​    MBR保护+GPT分区表+GPT划分数据+备份</p>
-<p><strong>UEFI+GPT</strong></p>
-<p><strong>UERI运行流程</strong></p>
-<p>​    开机–&gt;UEFI初始化–&gt;引导操作系统–&gt;进入系统</p>
-<h3 id="管理分区"><a href="#管理分区" class="headerlink" title="管理分区"></a>管理分区</h3><p><strong>列出块设备：</strong> lsblk</p>
-<p><strong>创建分区使用：</strong></p>
-<p>​    fdisk                  创建MBR分区</p>
-<p>​    gdisk                 创建GPT分区</p>
-<p>​    parted              高级分区操作</p>
-<p> <strong>partprobe：  </strong>重新设置内存中的内核分区表版本</p>
-<p><strong>parted命令</strong></p>
-<p>parted的操作都是实时生效的，小心使用</p>
-<p><strong>格式：parted[option]…[设备[命令[参数]…]…]</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">parted /dev/sdb mklabel gpt|msdos      设置分区类型GPT或MBR</span><br><span class="line">parted /dev/sdb print             打印sdb分区列表信息</span><br><span class="line">parted /dev/sdb mkpart primary 1 200 （默认M）  设置sdb分区大小</span><br><span class="line">parted /dev/sdb rm 1             删除sdb1分区</span><br><span class="line">parted -l                      列出分区信息</span><br></pre></td></tr></table></figure>
-<p><strong>分区工具fdisk和gdisk</strong></p>
-<p><strong>查看分区:</strong> </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l[-u][device…]</span><br></pre></td></tr></table></figure>
-<p><strong>管理分区（交互式）:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fdisk /dev/sdb                 </span><br><span class="line">    p         显示分区列表</span><br><span class="line">    t         更改分区类型（数据将丢失）</span><br><span class="line">    n         创建新分区</span><br><span class="line">    d         删除分区</span><br><span class="line">    t         添加设备标签</span><br><span class="line">    v         校验分区</span><br><span class="line">    u         转换单位</span><br><span class="line">    w         保存并退出</span><br><span class="line">    q         不保存并退出</span><br></pre></td></tr></table></figure>
-<p>注：可使用重定向和多行重定向echo -e “n\np\n\n\n+2G\nw\n” | fdisk /dev/sdc</p>
-<h3 id="同步分区表"><a href="#同步分区表" class="headerlink" title="同步分区表"></a>同步分区表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat/proc/partations        查看内核是否已经识别新的分区</span><br><span class="line">partprobe                 同步分区表（centos5,7可用）</span><br><span class="line">partx -a  /dev/sda         增加分区同步分区表（centos6可用）时使用；</span><br><span class="line">partx -d –nr M-N /dev/sda    删除分区同步分区表（centos6可用）时使用；</span><br></pre></td></tr></table></figure>
-<h2 id="三、文件系统管理"><a href="#三、文件系统管理" class="headerlink" title="三、文件系统管理"></a>三、<strong>文件系统管理</strong></h2><p>所谓文件系统，它是操作系统中藉以组织、存储和命名文件的结构。磁盘或分区和它所包括的文件系统的</p>
-<p>不同是很重要的，大部分应用程序都基于文件系统进行操作，在不同种文件系统上是不能工作的。</p>
-<h3 id="文件系统类型"><a href="#文件系统类型" class="headerlink" title="文件系统类型"></a>文件系统类型</h3><p><strong>Linux文件系统：</strong>ext2，ext3，ext4，xfs，btrfs，reiserfs，jfs，swap</p>
-<p><strong>光盘：</strong>iso9660</p>
-<p><strong>Windows：</strong>FAT32,exFAT,NTFS</p>
-<p><strong>Unix：</strong>FFS（fast），UFS（unix），JFS2</p>
-<p><strong>网络文件系统：</strong>NFS，CIFS</p>
-<p><strong>集群文件系统：</strong>GFS2,OCFS2</p>
-<p><strong>分布式文件系统：</strong>fastfs,ceph,moosefs,mogilefs,glusterfs,Lustre</p>
-<p><strong>RAW：</strong>未经处理或者未经格式化产生的文件系统（性能好，但不便于管理）</p>
-<p><strong>根据文件系统是否支持”journal（日志）”功能可分为：</strong></p>
-<ul>
-<li>日志型文件系统：ext3，ext4，xfs，…（牺牲读取性能，防止数据文件破坏）</li>
-<li>非日志型文件系统：ext2，vfat（易造成数据文件破坏）</li>
-</ul>
-<p><strong>文件系统的组成部分：</strong></p>
-<p>​    内核中的模块：ext4，xfs，vfat</p>
-<p>​    用户空间的管理工具：mkfs.ext4，mkfs.xfs，mkfs.vfat</p>
-<p><strong>Linux的虚拟文件系统：</strong>VFS</p>
-<p><strong>查看支持的文件系统：</strong>cat /proc/filesystems</p>
-<h3 id="创建文件系统："><a href="#创建文件系统：" class="headerlink" title="创建文件系统："></a>创建文件系统：</h3><p><strong>mkfs命令两种用法：</strong></p>
-<ol>
-<li>mkfs.FS_TYPE   /dev/DEVICE 建议使用此用法，直观不易出错</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ext4</span><br><span class="line">xfs</span><br><span class="line">btrfs</span><br><span class="line">vfat</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>mkfs -t FS_TYPE /dev/DEVICE</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-L &apos;LABEL&apos;                 设定卷标（分区标签）</span><br></pre></td></tr></table></figure>
-<p><strong>mke2fs</strong>                                 ext系统文件系统专用的管理工具</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-t &#123;ext2|ext3|ext4&#125;</span><br><span class="line">-b &#123;1024|2048|4096&#125;</span><br><span class="line">-L &apos;LABEL&apos;</span><br><span class="line">-j: 相当于 -t ext3   mkfs.ext3 = mkfs -t ext3 = mke2fs -j = mke2fs -t ext3</span><br><span class="line">-i #: 为数据空间中每多少个字节创建一个inode；此大小不应该小于block的大小</span><br><span class="line">-N #：指定分区中创建多少个inode</span><br><span class="line">-I 一个inode记录占用的磁盘空间大小，128---4096</span><br><span class="line">-m #: 默认5%,为管理人员预留空间占总空间的百分比</span><br><span class="line">-O FEATURE[,...]：启用指定特性</span><br><span class="line">-O ^FEATURE：关闭指定特性</span><br></pre></td></tr></table></figure>
-<p><strong>文件系统标签(LABEL): </strong> 它是指向设备的另一种方法，与设备无关</p>
-<p><strong>blkid</strong>          块设备属性信息查看</p>
-<p><strong>格式：</strong>blkid [option]… [DEVICE]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-U UUID          根据指定UUID来查找对应设备</span><br><span class="line">-L LABEL           根据指定卷标来查找对应设备</span><br></pre></td></tr></table></figure>
-<p><strong>e2label</strong>：管理ext系列文件系统的LABEL卷标</p>
-<p><strong>格式</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e2label DEVICE [LABEL]</span><br></pre></td></tr></table></figure>
-<p><strong>findfs</strong> : 查找分区</p>
-<p><strong>格式：</strong></p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">findfs [option] LABEL = &lt;label&gt;    根据卷标查找</span><br><span class="line">findfs [option] UUID  = &lt;uuid&gt;     根据UUID查找</span><br></pre></td></tr></table></figure>
-<p><strong>tune2fs</strong>                              重新设定ext系列文件系统可调整参数的值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-l             查看指定文件系统超级块信息</span><br><span class="line">-L&apos;LABEL&apos;      修改卷标</span><br><span class="line">-m #           修改预留给管理员空间的百分百</span><br><span class="line">-j             将ext2升级到ext3</span><br><span class="line">-O             文件系统属性启用或禁用，-O ^has_journal</span><br><span class="line">-o             调整文件系统的默认挂载选项，-o^acl</span><br><span class="line">-U UUID        修改UUID号</span><br></pre></td></tr></table></figure>
-<p><strong>dumpe2fs</strong>  </p>
-<p>块分组管理，32768</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-h       查看超级块信息，不显示分组信息</span><br></pre></td></tr></table></figure>
-<h3 id="超级块（superblock）"><a href="#超级块（superblock）" class="headerlink" title="超级块（superblock）"></a>超级块（superblock）</h3><p>dumpe2fs       /dev/sda1        查看分区下所有超级块</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dumpe2fs 	-h         查看超级块信息</span><br><span class="line">tune2fs     -l         查看超级块信息</span><br></pre></td></tr></table></figure>
-<p>超级块时存储文件系统的大小、有多少是空的和已经填满的占多少，以及它们各自的总数和其他诸如此类的信息。</p>
-<p>要使用一个分区来进行数据访问，那么第一个要访问的就是超级块，由此可见超级块的重要性。</p>
-<p>超级块占用第一号物理块，是文件系统的控制块。</p>
-<p>超级块包括：文件系统的大小、空闲块数目、空闲块索引表、空闲i节点数目、空闲i节点索引表、封锁标记等。</p>
-<p>超级块时系统为文件分配存储空间、回收存储空间的依据。</p>
-<p>所以，为了防止超级块数据损坏，就需要对超级块数据进行备份，以便于损坏时进行修复。</p>
-<h3 id="文件系统检测和修复"><a href="#文件系统检测和修复" class="headerlink" title="文件系统检测和修复"></a>文件系统检测和修复</h3><p>常发生于死机或者非正常关机之后</p>
-<p>挂载为文件系统标记为”no clean”</p>
-<p>注意：一定不要在挂载状态下修复或检测，否则数据将破坏！</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fsck                文件系统检查</span><br><span class="line">fsck.FS_type</span><br><span class="line">fsck -t FS_type</span><br><span class="line">-p                  自动修复错误</span><br><span class="line">-r                  交互式修复错误</span><br></pre></td></tr></table></figure>
-<p><strong>注：</strong>FS_TYPE一定要与分区上已设置的文件系统类型相同</p>
-<p><strong>e2fsck</strong>                                ext系列文件专用的检测修复工具</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-y                       自动回答为yes</span><br><span class="line">-f                       强制修复</span><br></pre></td></tr></table></figure>
-<h2 id="四、设备挂载管理"><a href="#四、设备挂载管理" class="headerlink" title="四、设备挂载管理"></a>四、设备挂载管理</h2><p><strong>挂载</strong>：把额外的文件系统与根文件系统现场的目录建立起关联关系，进而使得此目录作为其他文件访问入口的行为</p>
-<p>一个挂载点只能挂载一个设备，但一个设备可挂载多个挂载点</p>
-<p>挂载点建议要是空目录，否则该目录下原有文件将被隐藏，变为垃圾文件</p>
-<p>把设备关联挂载点：mount Point</p>
-<p>   <strong>monut</strong></p>
-<p><strong>卸载</strong>：为解除此关联关系的过程</p>
-<p>卸载时：可使用设备，也可使用挂载点</p>
-<p>   <strong>umount</strong></p>
-<h3 id="挂载命令：mount"><a href="#挂载命令：mount" class="headerlink" title="挂载命令：mount"></a>挂载命令：mount</h3><p>cat /proc/mounts: 查看内核追踪到的已挂载的所有设备</p>
-<p><strong>格式：</strong> </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount [-fnrsvw][-t vfstype] [-o options] device  dir</span><br></pre></td></tr></table></figure>
-<p>device                       指明要挂载的设备</p>
-<ol>
-<li><p>设备文件：例如dev/sda2</p>
-</li>
-<li><p>卷标：-L’LABEL’，例如-L’MYDATA’</p>
-</li>
-<li><p>UUID，-U’UUID’，例如-U ‘35bfb8f8-1c9a-4f67-b8fe-a7edb84c4780’</p>
-</li>
-<li><p>伪文件系统名称：proc，sysfs，devtmpfs，configfs</p>
-<p>dir                挂载点</p>
-<p>事先存在；建议使用空目录</p>
-<p>进程正在使用中的设备无法被卸载</p>
-</li>
-</ol>
-<p><strong>mount常用命令选项：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-t                       指定要挂载的设备上的文件系统类型</span><br><span class="line">-r                       readontlt，只读挂载</span><br><span class="line">-w                      r+w，读写挂载（默认）</span><br><span class="line">-n                       centos6隐藏挂载，不更新/etc/mtab,mount不可见，cat /proc/mounts可见</span><br><span class="line">-a                       自动挂载所有支持自动挂载的设备</span><br><span class="line">-L&apos;LABEL&apos;                 以卷标指定挂载设备</span><br><span class="line">-U&apos;UUID&apos;                  以UUID指定要挂载的设备</span><br><span class="line">-B，–bind                绑定目录到另一个设备上。类似于软连接</span><br></pre></td></tr></table></figure>
-<p><strong>-o options：</strong>(挂载文件系统的选项)，多个选项使用逗号分隔</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">async                         异步模式（默认模式）</span><br><span class="line">sync                  同步模式,内存更改时，同时写磁盘</span><br><span class="line">atime/noatime                包含目录和文件（是否更新atime，默认更新）</span><br><span class="line">diratime/nodiratime       目录的访问时间戳</span><br><span class="line">auto/noauto            是否支持自动挂载,是否支持-a选项</span><br><span class="line">exec/noexec            是否支持将文件系统上运行应用程序</span><br><span class="line">dev/nodev                是否支持在此文件系统上使用设备文件</span><br><span class="line">suid/nosuid              是否支持suid和sgid权限</span><br><span class="line">remount                   重新挂载</span><br><span class="line">ro                      只读</span><br><span class="line">rw                      读写</span><br><span class="line">user/nouser             是否允许普通用户挂载此设备，/etc/fstab使用</span><br><span class="line">acl                     启用此文件系统上的acl功能</span><br><span class="line">loop                使用loop设备，把文件挂载目录，模拟设备</span><br></pre></td></tr></table></figure>
-<p>默认：rw，suid，dev，exec，auto，nouser，async</p>
-<h3 id="卸载命令：umount"><a href="#卸载命令：umount" class="headerlink" title="卸载命令：umount"></a>卸载命令：umount</h3><p>查看挂载情况：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">findmnt   MOUNT_POINT|DEVICE</span><br></pre></td></tr></table></figure>
-<p>查看正在访问指定文件系统的进程：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lsof MONUT_POINT</span><br><span class="line">fuser  -v  MOUNT_POINT</span><br></pre></td></tr></table></figure>
-<p>终止所有在正访问指定的文件系统的进程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fuser  -km MONUT_POINT</span><br></pre></td></tr></table></figure>
-<p>卸载：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">umount   DEVICE</span><br><span class="line">umount   MOUNT_POINT</span><br></pre></td></tr></table></figure>
-<h3 id="挂载点和-etc-fstab"><a href="#挂载点和-etc-fstab" class="headerlink" title="挂载点和/etc/fstab"></a>挂载点和/etc/fstab</h3><p>配置文件系统体系</p>
-<p>被mount、fsck和其他程序使用</p>
-<p>系统重启时保留文件系统体系</p>
-<p>可以在设备栏使用文件系统卷标</p>
-<p>使用mount -a 命令挂载/etc/fstab中的所有文件系统</p>
-<h3 id="etc-fstab-每行定义一个要挂载的文件系统"><a href="#etc-fstab-每行定义一个要挂载的文件系统" class="headerlink" title="/etc/fstab        每行定义一个要挂载的文件系统"></a>/etc/fstab        每行定义一个要挂载的文件系统</h3><p>设备或伪文件系统    挂载点   文件系统类型   挂载选项   备份间隔时间{0|1|2}   文件系统检查{0|1}</p>
-<p>要挂载的设备或伪文件系统</p>
-<p>设备文件</p>
-<p>​    LABEL：LABEL=” “</p>
-<p>​    UUID：UUID=” “</p>
-<p>伪文件系统名称：proc，sysfs</p>
-<p>挂载点</p>
-<p>文件系统类型</p>
-<p>挂载选项：default</p>
-<p>转储频率：0：不做备份 ； 1：每条转储 ； 2：每隔一天转储 ；</p>
-<p>自检次序：0：不自检 ； 1：首先自检；一般只有rootfs才用1</p>
-<h3 id="一些特殊文件设备的挂载永久生效的设置："><a href="#一些特殊文件设备的挂载永久生效的设置：" class="headerlink" title="一些特殊文件设备的挂载永久生效的设置："></a>一些特殊文件设备的挂载永久生效的设置：</h3><p>vim /etc/fstab</p>
-<p>/root/p1  /mnt/p1          ext4           loop            0    0         挂载普通文件</p>
-<p>/mnt/cdrom    /mnt/cdrom    iso9660    defaults      0    0      挂载光盘</p>
-<p>/boot                /mnt/boot      none          bind         0    0      挂载目录到目录下</p>
+          一、磁盘基本概念设备文件：Linux中一切皆文件：open（），read（），write（），close（）
+设备类型：
 
-          
+块设备：block，存储单位”块”，磁盘
+字符设备：char，存储单位”字符”，键盘
+设备文件：关联至一个设备驱动程序，进而能够跟与之对应硬件设备进行通信
+
+设备号码：
+
+主设
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/24/Linux系统磁盘及文件系统管理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1351,52 +889,17 @@
       
         
           
-            <h3 id="一、前期准备"><a href="#一、前期准备" class="headerlink" title="一、前期准备"></a><strong>一、前期准备</strong></h3><p>准备两台Linux服务器，本文所用的服务器为CentOS6.9，及CentOS7.4服务器各一台，将演示CentOS7服</p>
-<p>务器作为yum源服务器，用CentOS6服务器进行yum访问。</p>
-<h3 id="二、开启CentOS7自动挂载光盘服务"><a href="#二、开启CentOS7自动挂载光盘服务" class="headerlink" title="二、开启CentOS7自动挂载光盘服务"></a><strong>二、开启CentOS7自动挂载光盘服务</strong></h3><p>我们知道在CentOS6版本系统中，有一个“神奇”的目录/misc可实现光盘的自动挂载，但在CentOS7版本中</p>
-<p>默认并不支持此服务，需要我们进行手动安装autofs服务</p>
-<p>yum install autofs                             安装autofs包</p>
-<p>systemctl start autofs                       开启自动挂载</p>
-<p>systemctl enable autofs                    下次开机默认开启自动挂载</p>
-<p><img src="安装autofs.png" alt="安装autofs"></p>
-<p><img src="打开autofs.png" alt="打开autofs"></p>
-<h3 id="三、关闭防火墙"><a href="#三、关闭防火墙" class="headerlink" title="三、关闭防火墙"></a><strong>三、关闭防火墙</strong></h3><p>要注意CentOS6版本与CentOS7版本关闭防火墙的命令有所不同：</p>
-<p>CentOS6：</p>
-<p>service iptables stop                      关闭防火墙</p>
-<p>chkconfig iptables off                   下次启动时自动关闭防火墙</p>
-<p>CentOS7：</p>
-<p>systemctl stop firewalld                关闭防火墙</p>
-<p>systemctl disable firewalld          下次启动时自动关闭防火墙</p>
-<p><img src="关闭防火墙.png" alt="关闭防火墙"></p>
-<h3 id="四、安装httpd服务"><a href="#四、安装httpd服务" class="headerlink" title="四、安装httpd服务"></a>四<strong>、安装httpd服务</strong></h3><p>yum install httpd</p>
-<p><img src="安装httpd.png" alt="安装httpd"></p>
-<h3 id="五、开启httpd服务"><a href="#五、开启httpd服务" class="headerlink" title="五、开启httpd服务"></a>五<strong>、开启httpd服务</strong></h3><p>service httpd start</p>
-<p><img src="开启httpd服务.png" alt="开启httpd服务"></p>
-<p>将本机ip地址输入浏览器，不出意外就能访问我们搭建的测试页面啦！</p>
-<p><img src="httpd.png" alt="httpd"></p>
-<h3 id="六、创建网页目录"><a href="#六、创建网页目录" class="headerlink" title="六、创建网页目录"></a><strong>六、创建网页目录</strong></h3><p>打开httpd包的文件列表，我们看到/var/www/html的文件夹，这里就是存放网页内容的目录了</p>
-<p>rpm -ql httpd                        查看httpd包的文件列表</p>
-<p>cd /var/www/html              进入html目录</p>
-<p>mkdir -pv centos/{6,7}/os/x86_64/                    创建挂载6，7yum源的目录</p>
-<p><img src="创建文件夹.png" alt="创建文件夹"></p>
-<h3 id="七、挂载yum源"><a href="#七、挂载yum源" class="headerlink" title="七、挂载yum源"></a><strong>七、挂载yum源</strong></h3><p>mount      /dev/sr0       /var/www/centos/7/os/x86_64/           将6光盘挂载至6网络下</p>
-<p>mount      /dev/sr1        /var/www/centos/6/os/x86_64/           将7光盘挂载至7目录下</p>
-<p>此时，在浏览器输入：ipadress/centos/版本号/os/x86_64/  就能看到我们挂载的yum源了</p>
-<p><img src="6-10.png" alt="6"></p>
-<p>注：echo ‘- – -‘ &gt; /sys/class/scsi_host/host0/scan                               热添加光盘时识别光盘</p>
-<p><img src="热识别6光盘.png" alt="热识别6光盘"></p>
-<h3 id="八、在CentOS搭建yum仓库"><a href="#八、在CentOS搭建yum仓库" class="headerlink" title="八、在CentOS搭建yum仓库"></a><strong>八、在CentOS搭建yum仓库</strong></h3><p>[test]                     仓库名</p>
-<p>name=test           描述名，不设置不影响包的安装，但会报错</p>
-<p>baseurl=<a href="http://172.20.102.79/centos/6/os/x86_64/" target="_blank" rel="noopener">http://172.20.102.79/centos/6/os/x86_64/</a>                    设置仓库地址链接</p>
-<p>gpgcheck=0         默认为1，表示数字密钥安全检查，0表示不进行安全检查</p>
-<p><img src="大家yum库.png" alt="大家yum库"></p>
-<h3 id="九、更新yum仓库"><a href="#九、更新yum仓库" class="headerlink" title="九、更新yum仓库"></a><strong>九、更新yum仓库</strong></h3><p>yum clean all          清空全部yum缓存</p>
-<p>yum repolist           显示yum仓库列表</p>
-<p>此时我们看到test仓库下已经更新出有6706个包列表，现在我们就可以通过自己搭建的yum源服务器来安装</p>
-<p>程序包了！</p>
-<p><img src="yum访问.png" alt="yum访问"></p>
-
-          
+          一、前期准备准备两台Linux服务器，本文所用的服务器为CentOS6.9，及CentOS7.4服务器各一台，将演示CentOS7服
+务器作为yum源服务器，用CentOS6服务器进行yum访问。
+二、开启CentOS7自动挂载光盘服务我们知道在CentOS6版本系统中，有一个“神奇”的目录/mis
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/20/手把手系列（二）教你搭建自己的yum源服务器/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1536,111 +1039,21 @@
       
         
           
-            <h2 id="一、软件包基础"><a href="#一、软件包基础" class="headerlink" title="一、软件包基础"></a><strong>一、软件包基础</strong></h2><h3 id="软件运行环境："><a href="#软件运行环境：" class="headerlink" title="软件运行环境："></a>软件运行环境：</h3><p>程序员代码–&gt;预处理–&gt;编译–&gt;汇编–&gt;链接</p>
-<p>静态编译：.a</p>
-<p>动态编译：.so</p>
-<h3 id="包管理器："><a href="#包管理器：" class="headerlink" title="包管理器："></a>包管理器：</h3><p>二进制应用程序的组成部分</p>
-<p>二进制文件、库文件、配置文件、帮助文件</p>
-<h3 id="包命名："><a href="#包命名：" class="headerlink" title="包命名："></a>包命名：</h3><p>源代码：name-VERSION.tar.gz|bz2|xz</p>
-<p>包之间：可能存在依赖性关系，甚至循环依赖</p>
-<h3 id="解决依赖包管理工具："><a href="#解决依赖包管理工具：" class="headerlink" title="解决依赖包管理工具："></a>解决依赖包管理工具：</h3><p>yum：rpm包管理器的前端工具</p>
-<p>apt-get：deb包管理器前端工具</p>
-<p>zypper：suse上的rpm前端管理工具</p>
-<p>dnf：Fedora 18+ rpm包管理器前端管理工具</p>
-<h3 id="程序包管理器："><a href="#程序包管理器：" class="headerlink" title="程序包管理器："></a>程序包管理器：</h3><p>debian：deb文件，dpkg包管理器</p>
-<p>redhat：rpm文件，rpm包管理器</p>
-<p>rpm：Redhat Package Manager</p>
-<p>RPM Package Manager</p>
-<h2 id="二、RPM包管理"><a href="#二、RPM包管理" class="headerlink" title="二、RPM包管理"></a><strong>二、RPM包管理</strong></h2><h3 id="RPM代表Redhat-Packge-Manager（Redhat包管理器）"><a href="#RPM代表Redhat-Packge-Manager（Redhat包管理器）" class="headerlink" title="RPM代表Redhat Packge Manager（Redhat包管理器）"></a>RPM代表Redhat Packge Manager（Redhat包管理器）</h3><p>RPM现在已成为管理Redhat和UnitedLinux以及其他许多发行版本上的软件的标准。</p>
-<p>RPM本质上就是一个包，包含可以立即在特定机器体系结构上安装和运行的Linux</p>
-<p>软件。最初加载到发行版本中的所有软件都是通过一个RPM来安装的。</p>
-<h3 id="RPM剖析："><a href="#RPM剖析：" class="headerlink" title="RPM剖析："></a>RPM剖析：</h3><p>RPM是文件包，它包括关于包及其功能和依赖关系（即在该包能够运行之前必须安装</p>
-<p>其他哪些包）的信息。还包含包中的文件清单，指定这些文件必须加载到系统中的何</p>
-<p>处，以及它们的初始权限如何。RPM还包含安装前脚本，这是由包开发人员编写的。</p>
-<p>RPM其次还包含已编译的二进制文件。最后，RPM包含了安装后的脚本。</p>
-<h3 id="RPM数据库："><a href="#RPM数据库：" class="headerlink" title="RPM数据库："></a>RPM数据库：</h3><p>/var/lib/rpm</p>
-<p>包含了关于系统上已安装的每个RPM信息。这个数据库知道包之间的依赖关系，还知道每个包的</p>
-<p>文档和配置文件的位置。在加载和卸载包时，RPM使用这个数据库来检查依赖关系。用户还可以</p>
-<p>在这个数据库查询关于包的信息。</p>
-<h3 id="rpm"><a href="#rpm" class="headerlink" title="rpm"></a>rpm</h3><p>常用选项：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">-i 安装包</span><br><span class="line">-h 输出哈希（#）符号提供安装进度更新</span><br><span class="line">-v 显示详细过程</span><br><span class="line">-ihv是常用配合选项；</span><br><span class="line"></span><br><span class="line">-e 删除已安装的包</span><br><span class="line">-V 验证开关</span><br><span class="line">-U 升级</span><br><span class="line">-q 查询</span><br><span class="line">-qc 显示包的配置文件</span><br><span class="line">-qd 显示包的文档文件</span><br><span class="line">-qi 显示包描述</span><br><span class="line">-ql 显示包的文件列表</span><br><span class="line">-qR 显示包的依赖关系</span><br></pre></td></tr></table></figure>
-<h3 id="安装："><a href="#安装：" class="headerlink" title="安装："></a>安装：</h3><h3 id="rpm-i-–install-install-option-PACKAGE-FILE"><a href="#rpm-i-–install-install-option-PACKAGE-FILE" class="headerlink" title="rpm{-i|–install}[install-option]PACKAGE_FILE"></a>rpm{-i|–install}[install-option]PACKAGE_FILE</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-h 输出哈希（#）符号提供安装进度更新</span><br><span class="line">-v 显示详细过程</span><br><span class="line">-ihv是常用配合选项；</span><br></pre></td></tr></table></figure>
-<h3 id="install-option"><a href="#install-option" class="headerlink" title="[install-option]"></a>[install-option]</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">–test 测试安装，但不真正执行安装</span><br><span class="line"></span><br><span class="line">–nodeps 忽略依赖关系</span><br><span class="line"></span><br><span class="line">–replacepkgs|replacefiles 覆盖包安装（可用来修复已安装的安装包）|覆盖文件安装</span><br><span class="line"></span><br><span class="line">–nosignature 不检查来源的合法性（不安全）</span><br><span class="line"></span><br><span class="line">RPM-GPG-KEY-CentOS-6</span><br><span class="line"></span><br><span class="line">–nodigest 不检查包完整性 （不安全）</span><br><span class="line"></span><br><span class="line">–noscripts 只装包不执行程序包脚本</span><br><span class="line"></span><br><span class="line">–nopre 不执行安装前脚本</span><br><span class="line"></span><br><span class="line">–nopost 不执行安装后脚本</span><br><span class="line"></span><br><span class="line">–nopreun 不执行卸载前脚本</span><br><span class="line"></span><br><span class="line">–nopostun 不执行卸载后脚本</span><br></pre></td></tr></table></figure>
-<h3 id="升级："><a href="#升级：" class="headerlink" title="升级："></a>升级：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rpm&#123;-U|–upgrade&#125;[install-option]PACKAGE_FILE</span><br><span class="line"></span><br><span class="line">rpm&#123;-F|–freshen&#125;[install-option]PACKAGE_FILE</span><br></pre></td></tr></table></figure>
-<p><strong>upfrade</strong> 如果安装有旧版程序包，则升级</p>
-<p>如果不存在旧版程序包，则安装</p>
-<p><strong>freshen</strong> 如果安装有旧版程序包，则升级</p>
-<p>如果不存在旧版程序包，则不执行升级操作</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rpm -Uvh PACKAGE_FILE…</span><br><span class="line"></span><br><span class="line">rpm -Fvh PACKAGE_FILE…</span><br></pre></td></tr></table></figure>
-<p>注：内核升级不建议使用以上两种升级命令，建议使用-ivh重新安装另一个内核，Linux支持多内核版本共存。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">–oldpackage 降级</span><br><span class="line"></span><br><span class="line">–force 强制安装（可用来修复已安装的安装包）</span><br></pre></td></tr></table></figure>
-<h3 id="查询："><a href="#查询：" class="headerlink" title="查询："></a>查询：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm&#123;-q|–query&#125;[select-options][query-options]</span><br></pre></td></tr></table></figure>
-<p>注：包的名称必须精确匹配，不允许使用通配符。然而，如果记不住包的完整名称，您可以</p>
-<p>使用 grep 工具来帮助找到它。可以使用 -qa 开关来查询所有已安装的包，并用 grep 来管道</p>
-<p>输出您能记住的信息。例如：rpm -qa | grep name</p>
-<h3 id="select-option"><a href="#select-option" class="headerlink" title="[select-option]"></a>[select-option]</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-a 查看所有已安装的包</span><br><span class="line">-f 查看指定的文件由哪个程序包安装产生</span><br><span class="line">-p rpmfile 针对尚未安装的程序包文件做查询操作（配合文件名而不是包名）</span><br><span class="line">–whatprovides CAPABILITY 查询指定的关键字由哪个包所提供</span><br><span class="line">–whatrequires CAPABILITY 查询指定的关键字被哪个包所依赖</span><br></pre></td></tr></table></figure>
-<h3 id="query-options"><a href="#query-options" class="headerlink" title="[query-options]"></a>[query-options]</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">–changelog 查询rpm包的changelog</span><br><span class="line">-c 查询程序的配置文件</span><br><span class="line">-d 查询程序的文档</span><br><span class="line">-i 查看包描述information</span><br><span class="line">-l 查看指定的程序包安装后生成的文件</span><br><span class="line">–scripts 查看程序包自带的脚本</span><br><span class="line">–provides 列出指定程序包所提供的关键字</span><br><span class="line">-R 查询指定程序包所依赖的关键字CAPABILITY</span><br></pre></td></tr></table></figure>
-<p>rpm2cpio 包文件|cpio -itv 预览包内文件</p>
-<p>rpm2cpio 包文件|cpio -id “*.conf”释放包内文件</p>
-<h3 id="包校验："><a href="#包校验：" class="headerlink" title="包校验："></a>包校验：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm&#123;-V|–verify&#125;[select-options][verify-options]PACKAGE_FILE</span><br></pre></td></tr></table></figure>
-<p><img src="验证-V.png" alt="验证-V"><br>注：只能查看已安装的包</p>
-<h3 id="导入所需要公钥"><a href="#导入所需要公钥" class="headerlink" title="导入所需要公钥"></a>导入所需要公钥</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rpm -K|checksig rpmfile 检查包的完整性和签名</span><br><span class="line"></span><br><span class="line">rpm –import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7</span><br><span class="line"></span><br><span class="line">CentOS 7发行版光盘提供：RPM-GPG-KEY-CentOS-7</span><br><span class="line"></span><br><span class="line">rpm -qa &quot;gpg-pubkey*&quot;</span><br></pre></td></tr></table></figure>
-<h2 id="三、YUM使用介绍"><a href="#三、YUM使用介绍" class="headerlink" title="三、YUM使用介绍"></a><strong>三、YUM使用介绍</strong></h2><h3 id="Yellowdog-Update-Modifier，rpm的前端程序，可解决软件包相关依赖性，可在"><a href="#Yellowdog-Update-Modifier，rpm的前端程序，可解决软件包相关依赖性，可在" class="headerlink" title="Yellowdog Update Modifier，rpm的前端程序，可解决软件包相关依赖性，可在"></a>Yellowdog Update Modifier，rpm的前端程序，可解决软件包相关依赖性，可在</h3><h3 id="多个库之间定位软件包，up2date的替代工具。"><a href="#多个库之间定位软件包，up2date的替代工具。" class="headerlink" title="多个库之间定位软件包，up2date的替代工具。"></a>多个库之间定位软件包，up2date的替代工具。</h3><p>使用yum安装文件包出错一般都是下面2种情况：</p>
-<ol>
-<li>配置文件的格式错误</li>
-<li>缓存问题</li>
-</ol>
-<p>注：yum不支持多个终端同时执行</p>
-<p> <strong>yum repository:</strong> yum repo，存储了众多rpm包，以及包的相关的元数据文件（放置于特定目录repodata下）</p>
-<p> <strong>文件服务器</strong>：</p>
-<p>​    http://</p>
-<p>​    https://</p>
-<p>​    ftp://</p>
-<p>​    file://</p>
-<p> <strong>仓库位置</strong>：</p>
-<p>​    /etc/yum.repos.d/*.repo</p>
-<p> <strong>仓库默认设置</strong>：</p>
-<p>​    /etc/yum.conf</p>
-<p><strong>repo关键行</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[base]               仓库名，不可以加空格</span><br><span class="line"></span><br><span class="line">name=centos cdrom    描述信息</span><br><span class="line"></span><br><span class="line">baseurl= file：///mnt/cdrom</span><br><span class="line"></span><br><span class="line">注：仓库路径为repodata目录的父目录</span><br><span class="line"></span><br><span class="line">gpgcheck=0           默认为1，0表示不进行数字签名完整性检查</span><br><span class="line"></span><br><span class="line">gpgkey=file：///mnt/cdrom/RPM-GPG-KEY-CentOS-7             自动导入秘钥</span><br><span class="line"></span><br><span class="line">enabled=0            默认为1,0表示仓库禁用</span><br></pre></td></tr></table></figure>
-<p> <strong>yum日志：</strong></p>
-<p>​    /var/log/yum.log 包含了使用yum安装与卸载的日志</p>
-<p><strong>yum的repo配置文件中可用的变量：</strong></p>
-<p>​    $releasever: 当前OS的发行版的主版本号</p>
-<p>​    $basearch：基础平台；i386, x86_64</p>
-<p>例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">http://server/centos/$releasever/$basearch/</span><br><span class="line"></span><br><span class="line">http://server/centos/7/x86_64</span><br><span class="line"></span><br><span class="line">http://server/centos/6/i384</span><br></pre></td></tr></table></figure>
-<h3 id="yum"><a href="#yum" class="headerlink" title="yum"></a>yum</h3><p><strong>格式：</strong>yum[option][command][package…]PACKAGE_FILE</p>
-<h3 id="显示仓库列表："><a href="#显示仓库列表：" class="headerlink" title="显示仓库列表："></a>显示仓库列表：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum repolist[all|enabled|disabled]</span><br></pre></td></tr></table></figure>
-<h3 id="显示程序包："><a href="#显示程序包：" class="headerlink" title="显示程序包："></a>显示程序包：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum list</span><br><span class="line"></span><br><span class="line">yum list[all|glob_exp1][glob_exp2][…]</span><br><span class="line"></span><br><span class="line">yum list&#123;available|installed|updates&#125;[glob_exp1][…]</span><br></pre></td></tr></table></figure>
-<h3 id="安装程序包："><a href="#安装程序包：" class="headerlink" title="安装程序包："></a>安装程序包：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install package1 [package2][…]</span><br><span class="line"></span><br><span class="line">yum reinstall package1 [package2][…] (重新安装)</span><br></pre></td></tr></table></figure>
-<h3 id="升级程序包："><a href="#升级程序包：" class="headerlink" title="升级程序包："></a>升级程序包：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum update [package1][package2] […]（升级）</span><br><span class="line"></span><br><span class="line">yum downgrade package1 [package2][…] （降级）</span><br></pre></td></tr></table></figure>
-<h3 id="检查可用升级："><a href="#检查可用升级：" class="headerlink" title="检查可用升级："></a>检查可用升级：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum check-update</span><br></pre></td></tr></table></figure>
-<h3 id="卸载程序包："><a href="#卸载程序包：" class="headerlink" title="卸载程序包："></a>卸载程序包：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum remove | erase package1 [package2][…]</span><br></pre></td></tr></table></figure>
-<h3 id="查看程序包information："><a href="#查看程序包information：" class="headerlink" title="查看程序包information："></a>查看程序包information：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum info […] </span><br></pre></td></tr></table></figure>
-<h3 id="查看指定的特性-可以是某文件-是由哪个程序包所提供："><a href="#查看指定的特性-可以是某文件-是由哪个程序包所提供：" class="headerlink" title="查看指定的特性(可以是某文件)是由哪个程序包所提供："></a>查看指定的特性(可以是某文件)是由哪个程序包所提供：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum provides | whatprovides feature1 [feature2][…]</span><br></pre></td></tr></table></figure>
-<h3 id="清理本地缓存："><a href="#清理本地缓存：" class="headerlink" title="清理本地缓存："></a>清理本地缓存：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">清除/var/cache/yum/$basearch/$releasever缓存</span><br><span class="line"></span><br><span class="line">yum clean [ packages | metadata | expire-cache | rpmdb | plugins | all ]</span><br></pre></td></tr></table></figure>
-<h3 id="构建缓存："><a href="#构建缓存：" class="headerlink" title="构建缓存："></a>构建缓存：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="搜索："><a href="#搜索：" class="headerlink" title="搜索："></a>搜索：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum search string1 [string2][…]</span><br></pre></td></tr></table></figure>
-<p>以指定的关键字搜索程序包名及summary信息</p>
-<p>查看指定包所依赖的capabilities：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum deplist package1 [package2][…]</span><br></pre></td></tr></table></figure>
-<h3 id="查看yum执行历史："><a href="#查看yum执行历史：" class="headerlink" title="查看yum执行历史："></a>查看yum执行历史：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">yum history [info|list|packages-list|packages-info|</span><br><span class="line">			summary|addon-info |redo|undo|rollback|new|sync|stats]</span><br><span class="line"></span><br><span class="line">yum history</span><br><span class="line"></span><br><span class="line">yum history info 6yum history undo 6</span><br></pre></td></tr></table></figure>
-<h3 id="日志：-var-log-yum-log"><a href="#日志：-var-log-yum-log" class="headerlink" title="日志：/var/log/yum.log"></a>日志：/var/log/yum.log</h3><h3 id="安装及升级本地程序包："><a href="#安装及升级本地程序包：" class="headerlink" title="安装及升级本地程序包："></a>安装及升级本地程序包：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install rpmfile1 [rpmfile2][…]</span><br><span class="line"></span><br><span class="line">yum update rpmfile1 [rpmfile2][…]</span><br></pre></td></tr></table></figure>
-<h3 id="包组管理的相关命令："><a href="#包组管理的相关命令：" class="headerlink" title="包组管理的相关命令："></a>包组管理的相关命令：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">yum groupinstall group1 [group2][…]</span><br><span class="line"></span><br><span class="line">yum groupupdate group1 [group2][…]</span><br><span class="line"></span><br><span class="line">yum grouplist [hidden][groupwildcard] […]</span><br><span class="line"></span><br><span class="line">yum groupremove group1 [group2][…]</span><br><span class="line"></span><br><span class="line">yum groupinfo group1 […]</span><br></pre></td></tr></table></figure>
-<h2 id="四、源代码安装"><a href="#四、源代码安装" class="headerlink" title="四、源代码安装"></a><strong>四、源代码安装</strong></h2><p>C、C++：make项目管理器</p>
-<p>configure脚本–&gt;Makefile.in–&gt;Makefile</p>
-<p>C语言源代码编译安装三步骤：</p>
-<h3 id="1、-configure"><a href="#1、-configure" class="headerlink" title="1、./configure"></a>1、./configure</h3><p>​    –prefix=                              指定目录安装</p>
-<p>​    –sysconfidir=                      指定/etc目录独立安装</p>
-<ol>
-<li>通过选项传递参数，指定启用特性，安装路径；执行会参考用户的指定已经Makefile.in文件生成Makefile</li>
-<li>检查依赖到的外部环境，如依赖的软件包</li>
-</ol>
-<h3 id="2、make"><a href="#2、make" class="headerlink" title="2、make"></a>2、make</h3><p>编译过程，根据Makefile文件，构建应用程序</p>
-<h3 id="3、make-install"><a href="#3、make-install" class="headerlink" title="3、make install"></a>3、make install</h3><p>复制文件到相应路径</p>
-
-          
+          一、软件包基础软件运行环境：程序员代码–&gt;预处理–&gt;编译–&gt;汇编–&gt;链接
+静态编译：.a
+动态编译：.so
+包管理器：二进制应用程序的组成部分
+二进制文件、库文件、配置文件、帮助文件
+包命名：源代码：name-VERSION.tar.gz|bz2|xz
+包之间：可能存在依赖性
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/20/Linux系统软件包管理介绍/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1780,54 +1193,17 @@
       
         
           
-            <h2 id="一、模式空间与保持空间："><a href="#一、模式空间与保持空间：" class="headerlink" title="一、模式空间与保持空间："></a><strong>一、模式空间与保持空间：</strong></h2><p>我们知道sed工作机制是每次读取一行文本至模式空间（pattern space）中，在模式空间中完成处理，将</p>
-<p>处理结果输出至标准输出设备；在模式空间中处理一行内容后会继续处理下一行，那么对于处理过的行可</p>
-<p>能还有其他的处理，因此可以把处理过的行传送至一个叫保持空间（hold space）中，然后在后续的处理中</p>
-<p>再次传送回模式空间中。这就类似加工车间和仓库的概念，好比模式空间是加工车间，保持空间就是仓</p>
-<p>库，不过这里的仓库存储的都是些半成品的产品。</p>
-<h2 id="二、sed高级用法："><a href="#二、sed高级用法：" class="headerlink" title="二、sed高级用法："></a><strong>二、sed高级用法：</strong></h2><p>Sed工具支持一些高级的命令来运用到保持空间中，这些高级命令有：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">P：打印模式空间开端至\n内容，并追加到默认输出之前 </span><br><span class="line">h: 把模式空间中的内容覆盖至保持空间中 </span><br><span class="line">H：把模式空间中的内容追加至保持空间中 </span><br><span class="line">g: 从保持空间取出数据覆盖至模式空间 </span><br><span class="line">G：从保持空间取出内容追加至模式空间 </span><br><span class="line">x: 把模式空间中的内容与保持空间中的内容进行互换 </span><br><span class="line">n: 读取匹配到的行的下一行覆盖至模式空间 </span><br><span class="line">N：读取匹配到的行的下一行追加至模式空间 </span><br><span class="line">d: 删除模式空间中的行 </span><br><span class="line">D：如果模式空间包含换行符，则删除直到第一个换行符的模式空间中的文本，</span><br><span class="line">   并不会读取新的输入行，而使用合成的模式空间重新启动循环。如果模式空间</span><br><span class="line">   不包含换行符，则会像发出d命令那样启动正常的新循环。</span><br></pre></td></tr></table></figure>
-<h2 id="三、示例分析："><a href="#三、示例分析：" class="headerlink" title="三、示例分析："></a>三、示例分析：</h2><h3 id="以下我们均以该文档为例："><a href="#以下我们均以该文档为例：" class="headerlink" title="以下我们均以该文档为例："></a>以下我们均以该文档为例：</h3><p><img src="文档.png" alt="文档"></p>
-<p> <strong>例1：</strong>cat test2.sed |sed ‘G’</p>
-<p>解析：由于保持空间初始默认为空，所有将空行追加到每行的模式空间中输出，等同在每行的</p>
-<p>后面添加一个空行。</p>
-<p><img src="例6.png" alt="例6"></p>
-<p><strong>例2：</strong>cat test2.sed |sed ‘g’</p>
-<p>解析：g和G的区别在，g为覆盖模式空间，G为追加至模式空间，由于g默认为空，将每行的模式空间都覆</p>
-<p>盖为空行输出，所以表现为5个空行。</p>
-<p><img src="例7.png" alt="例7"></p>
-<p> <strong>例3：</strong>cat test2.sed |sed ‘$!d’</p>
-<p>解析：$表示尾行，$!d则表示除了尾行都执行删除。</p>
-<p><img src="例5.png" alt="例5"></p>
-<p><strong>例4：</strong>cat test2.sed |sed ‘n;d’</p>
-<p>解析：n将第一行读入模式空间输出，并将下一行即第二行覆盖至模式空间并删除，如此循环，最终表现为</p>
-<p>只显示文本的奇数行。</p>
-<p><img src="例9.png" alt="例9"></p>
-<p><strong>例5：</strong>cat test2.sed |sed ‘N;D’</p>
-<p>解析：N将第二行追加至第一行的模式空间中，D删除模式空间内的第一行；对第二行执行命令，将第三行追加至第二行的模式空间内，并删除模式中的第一行；如此循环，最后只输出最后一行文本。</p>
-<p><img src="例3.png" alt="例3"></p>
-<p> <strong>例6：</strong>cat test2.sed |sed ‘$!N;$!D’</p>
-<p>解析:’$!N;$!D’即对文本中除了最后一行支持’N;D’操作，由例外5可知，除了最后一行执行’N;D’操作，得出</p>
-<p>结果为只输出倒数第二行，最后一行文本不处理，默认输出，所有最后结果输出倒数两行的文本。</p>
-<p><img src="例4.png" alt="例4"></p>
-<p><strong>例7：</strong>cat test2.sed|sed -n ‘n;p’</p>
-<p>解析：对第一行执行操作，n选项将第二行覆盖至模式空间，在第一行和第二行的默认输出后追加打印出来，-n取消默认输出，如此循环，最后得出文本的偶数行。</p>
-<p><img src="例1.png" alt="例1"></p>
-<p><strong>例8：</strong>cat test2.sed|sed -n ‘1!n;p’</p>
-<p>解析：与例7相比，例8为对除了第一行的其他行执行例7的操作，则最后的结果也为得出文本的奇数行。</p>
-<p><img src="奇数行.png" alt="奇数行"></p>
-<p> <strong>例9：</strong>cat test2.sed |sed ‘/^$/d;G’</p>
-<p>解析：^$为表示地址定界匹配到的空行，d将空行删除，G在每行的文本后添加一个空行；最后的输出结果即：删除文本内的空行，并在每行后追加一行空行。</p>
-<p><img src="例8.png" alt="例8"></p>
-<p> <strong>例10：</strong>cat test2.sed |sed ‘1!G;h;$!d’</p>
-<p>解析：1!G表示除了第一行，都执行将保持空间的内容追加至模式空间并输出，h命令使上一个模式空间内容将G覆盖，最后$!d只保留对最后一行的执行结果，具体表现为：</p>
-<p>对第1行只进入模式空间默认输出，第2行将上一个模式空间内容（即第1行文本）覆盖至保持空间，共同进入模式空间（包含第2至1行文本）并输出；第3行将上一个模式空间内容（即第2至1行文本）覆盖至保持空间，共同进入模式空间（包含第3至1行文本）并输出；如此循环…….对第5行将上一个模式空间内容（第4至1行）覆盖至保持空间，共同进入模式空间（包含5至1行）输出；最后$!d除了最后一行的其他行的模式空间内容都删除，最后只留最后一行的执行结果，即将文本倒序输出。</p>
-<p><img src="例2.png" alt="例2"></p>
-<p><strong>例11：</strong>cat test2.sed |sed -n ‘1!G;h;$p’</p>
-<p>解析：与例10相比，最后的$p只打印最后一行的模式空间内容（第5至1行），-n取消所有默认输出，得出的结果与例10相同，倒序将文本输出。</p>
-<p><img src="例10.png" alt="例10"></p>
-
-          
+          一、模式空间与保持空间：我们知道sed工作机制是每次读取一行文本至模式空间（pattern space）中，在模式空间中完成处理，将
+处理结果输出至标准输出设备；在模式空间中处理一行内容后会继续处理下一行，那么对于处理过的行可
+能还有其他的处理，因此可以把处理过的行传送至一个叫保持空间（hold s
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/16/文本三剑客之sed的高级用法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1967,84 +1343,19 @@
       
         
           
-            <h1 id="强大的处理文本的工具sed"><a href="#强大的处理文本的工具sed" class="headerlink" title="强大的处理文本的工具sed"></a><strong>强大的处理文本的工具sed</strong></h1><p>我们知道，sed被称为Linux中被称为文本处理三剑客之一，相比于grep命令匹配内容的功能，sed则能够做到对匹配到的文本内容对其进行编辑。</p>
-<h3 id="Linux文本处理三剑客简介："><a href="#Linux文本处理三剑客简介：" class="headerlink" title="Linux文本处理三剑客简介："></a>Linux文本处理三剑客简介：</h3><p>grep：文本过滤工具</p>
-<p>sed：文本编辑工具</p>
-<p>awk：Linux上的实现gawk，文本报告生成器</p>
-<h3 id="sed用法："><a href="#sed用法：" class="headerlink" title="sed用法："></a>sed用法：</h3><p>sed[option]…’script’ inputfile…</p>
-<p>其中‘script’可表示为’地址定界+编辑命令’</p>
-<h3 id="option："><a href="#option：" class="headerlink" title="option："></a><strong>option：</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-n  取消默认打印内容到屏幕</span><br><span class="line">-e  多点编辑,表达且关系，与grep的-e不同，grep -e表达或关系</span><br><span class="line">-f  从指定文件中读取编辑脚本</span><br><span class="line">-r  支持使用扩展正则表达式</span><br><span class="line">-i.bak  原处编辑，并备份文件file.bak</span><br></pre></td></tr></table></figure>
-<h3 id="地址定界："><a href="#地址定界：" class="headerlink" title="地址定界："></a><strong>地址定界：</strong></h3><ol>
-<li><p><strong>不给地址：对全文进行处理</strong></p>
-</li>
-<li><p><strong>单地址：</strong></p>
-<p>#：指定的行，$：最后一行</p>
-<p>/pattern/：支持正则表达式，被此模式所能匹配到的每一行</p>
-</li>
-<li><p><strong>地址范围：</strong></p>
-<p>#，#                        </p>
-<p>#，+#</p>
-<p>/pat1/,/pat2/          </p>
-<p>/pat1/, #                  </p>
-</li>
-<li><p><strong>~：步进</strong></p>
-<p>1~2  奇数行            </p>
-<p>2~2  偶数行 </p>
-</li>
-</ol>
-<h3 id="编辑命令："><a href="#编辑命令：" class="headerlink" title="编辑命令："></a><strong>编辑命令：</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">d       删除模式空间匹配的行</span><br><span class="line">p       打印当前模式空间内容，追加到默认输出之后</span><br><span class="line">a[\]text   在指定行后面追加文本</span><br><span class="line">	如要实现插入内容空格开头可先追加\再输入空格</span><br><span class="line">	支持使用\n实现多行追加</span><br><span class="line">i[\]text     在指定行前面插入文本</span><br><span class="line">c[\]text    替换指定行尾单行或多行文本</span><br><span class="line">w /path/somefile   保存模式匹配的行到指定文件</span><br><span class="line">r /path/somefile     读取指定文件的文本匹配的行后</span><br><span class="line">	注意：w，r后跟文件一定要加空格</span><br><span class="line">	可利用此命令定义别名到.bashrc</span><br><span class="line">=       为模式空间中的行打印行号</span><br><span class="line">！    取反，！需加载地址定界和编辑命令中间，如&apos;2！d&apos;</span><br><span class="line">s///： 查找替换，支持使用其他分隔符；s###；s@@@</span><br></pre></td></tr></table></figure>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a><strong>示例</strong></h3><p>以下我们创建文件test进行示例：</p>
-<p><img src="创建文件test.png" alt="创建文件test"></p>
-<p><strong>示例1：</strong>sed   ‘1,10p’ /data/test.sed</p>
-<p>sed命令默认将文本内容打印到屏幕，由于执行命令p，文本内容被打印了两遍</p>
-<p><img src="不加-n.png" alt="不加-n"></p>
-<p>sed  -n  ‘1,10p’ /data/test.sed</p>
-<p>sed   -n选项将取消默认输出到屏幕，仅显示p的执行结果</p>
-<p><img src="加-n.png" alt="加-n"></p>
-<p><strong>示例2：</strong>sed -n -e ‘1p’  -e  ‘3p’</p>
-<p>显示第一行和第三行，-e表示且的关系</p>
-<p><img src="e-1.png" alt="-e"></p>
-<p><strong>示例3：</strong>sed -n -f sedscripts.txt  /data/test.sed</p>
-<p>将2,5p写入sedscripts.txt文件，-f选项读取sedscripts.txt，并执行文件中内容</p>
-<p><img src="f-引用文件.png" alt="-f 引用文件"></p>
-<p><strong>示例4：</strong>sed -i  ‘1,10a#’   /data/test.sed</p>
-<p>表示在第1至第10行内容后插入#，-i选项直接编辑了test.sed的文本内容</p>
-<p><img src="i-a.png" alt="-i a"></p>
-<p>sed -i  ‘/#/d’  /data/test.sed</p>
-<p>表示将所有带#的行删掉并编辑文本</p>
-<p><img src="i-d.png" alt="-i d"></p>
-<p><strong>示例5：</strong>sed -n  ‘3p’     打印第3行内容</p>
-<p>sed  -n ‘2,5p’                打印第2至第五行</p>
-<p>sed  -n ‘2,+3p’              打印第2至第5行</p>
-<p>sed  -n  ‘1~2p’              打印奇数行</p>
-<p>sed  -n  ‘2~2p’              打印偶数行</p>
-<p><img src="数字定界.png" alt="数字定界"></p>
-<p>示例6：正则定界，表示ifconfig命令输出中开头eth2的行，至开头为lo的行</p>
-<p><img src="正则定界-1531727657734.png" alt="正则定界"></p>
-<p>示例7：正则数字混合定界，表示ifconfig命令输出中，eth2开头的行到第12行的内容</p>
-<p><img src="正则数字混合定界-1531727657736.png" alt="正则数字混合定界"></p>
-<p>示例8：多行插入，将aaa\nbbb插入到每行后面</p>
-<p><img src="a多行-1531727657738.png" alt="a多行"></p>
-<p>示例9：sed  ‘1,10i#’  /data/test.sed</p>
-<p>在每一行上面插入#</p>
-<p><img src="i上方插入-1531727657747.png" alt="i上方插入"></p>
-<p>示例10：sed  ‘1,5c’  /data/test.sed</p>
-<p>将test.sed文件中1到5行替换为一个#</p>
-<p><img src="c替换匹配-1531727657745.png" alt="c替换匹配"></p>
-<p>示例11：sed  ‘2,5w  f1’  /data/test.sed</p>
-<p>将test.sed文件中第2到第5行内容打印到f1文件中</p>
-<p><img src="w-将匹配内容输出到指定文件-1531727657751.png" alt="w 将匹配内容输出到指定文件"></p>
-<p>示例12：sed  ‘2,5r  f1’  /data/test.sed</p>
-<p>将f1的内容插入到第2至第5行</p>
-<p><img src="r-跟文件写入匹配行-1531727657786.png" alt="r 跟文件写入匹配行"></p>
-<p>示例13：sed  -n  ‘2,5!  p’  /data/test.sed</p>
-<p>打印除了第2至第5行的内容</p>
-<p><img src="！除了-1531727657788.png" alt="！除了"></p>
-<p>示例14：ifconfig |sed -n “2p”|sed -r “s@.<em>addr:(.</em>) Bcast.*@\1@”</p>
-<p>利用搜索替代，我们可以将任意段字符串定义成方法，然后表示出整行，再利用后向引用即可取出该字符串。</p>
-<p><img src="正则取IP-1531727657797.png" alt="正则取IP"></p>
-
-          
+          强大的处理文本的工具sed我们知道，sed被称为Linux中被称为文本处理三剑客之一，相比于grep命令匹配内容的功能，sed则能够做到对匹配到的文本内容对其进行编辑。
+Linux文本处理三剑客简介：grep：文本过滤工具
+sed：文本编辑工具
+awk：Linux上的实现gawk，文本报告生成器
+s
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/15/文本三剑客之sed/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2184,68 +1495,19 @@
       
         
           
-            <p>CentOS启动相关最重要的几个文件有：内核vmlinuz文件、虚拟文件系统initramfs文件、grub文件以</p>
-<p>及init启动程序，围绕这几个文件，我们来制作一个能够简单启动的自制Linux系统</p>
-<h3 id="实验思路："><a href="#实验思路：" class="headerlink" title="实验思路："></a><strong>实验思路：</strong></h3><p>CentOS6的启动流程如下</p>
-<p>1.加载BIOS的硬件信息，进行POST加电自检</p>
-<p>2.读取第一个启动设备MBR的引导加载程序(grub)的启动信息</p>
-<p>3.加载核心操作系统的核心信息，核心开始解压缩，并尝试驱动所有的硬件设备</p>
-<p>4.核心执行init程序，并获取默认的运行信息</p>
-<p>5.init程序执行/etc/rc.d/rc.sysinit文件</p>
-<p>6.启动核心的外挂模块</p>
-<p>7.init执行运行的各个批处理文件(scripts)</p>
-<p>8.init执行/etc/rc.d/rc.local</p>
-<p>9.执行/bin/login程序，等待用户登录</p>
-<p>10.登录之后开始以Shell控制主机</p>
-<p>其中与启动相关最重要的几个文件有：<strong>内核vmlinuz文件、虚拟文件系统initramfs文件、grub文件以</strong></p>
-<p><strong>及init**</strong>启动程序**，接下来就围绕这几个重要文件，来制作一个能够简单启动的自制Linux系统</p>
-<h3 id="准备环境："><a href="#准备环境：" class="headerlink" title="准备环境："></a><strong>准备环境：</strong></h3><p>CentOS6虚拟服务器1台，准备一个硬盘或者U盘，本实验我们以一块20G的虚拟硬盘为例制作一个简单的</p>
-<p>Linux系统</p>
-<p><img src="u15607222242576059153fm27gp0.jpg" alt="u=1560722224,2576059153&amp;fm=27&amp;gp=0"></p>
-<h3 id="具体步骤："><a href="#具体步骤：" class="headerlink" title="具体步骤："></a><strong>具体步骤：</strong></h3><p><strong>第一步：针对新增加的20G硬盘创建两个分区dev/sdb1，dev/sdb2</strong></p>
-<p>fdisk /dev/sdb</p>
-<p><img src="fdisk-1.png" alt="fdisk"></p>
-<p><strong>第二步：创建文件系统，将/dev/sdb1，/dev/sdb2两个分区文件系统设置为ext4格式</strong></p>
-<p>mkfs.ext4  /dev/sdb1</p>
-<p>mkfs.ext4  /dev/sdb2</p>
-<p><img src="做文件系统.png" alt="做文件系统"></p>
-<p><strong>第三步：挂载/boot目录</strong></p>
-<p>mkdir /mnt/boot                                此处挂载子目录必须为boot</p>
-<p>mount /dev/sdb1 /mnt/boot</p>
-<p><img src="挂载boot.png" alt="挂载boot"></p>
-<p><strong>第四步：安装gurb</strong></p>
-<p>grub-install –root-director=/mnt /dev/sdb</p>
-<p>hexdump -C /dev/sdb -n 512 -v                 查看一阶段是否创建成功，446字节已生成</p>
-<p>ls /mnt/boot                                查看二阶段是否创建成功，grub目录已生成</p>
-<p><img src="查看.png" alt="查看"></p>
-<p><strong>第五步:拷贝内核vmlinuz文件及虚拟文件系统initramfs文件</strong></p>
-<p>cp /boot/vmlinuz-VERSION /mnt/boot/vmlinuz</p>
-<p>cp /boot/initramfs-VERSION.img /mnt/boot/initramfs.img</p>
-<p><img src="内核文件.png" alt="内核文件"></p>
-<p><strong>第六步:设置grub.conf文件</strong></p>
-<p><strong>vim /grub.conf</strong></p>
-<p>default=0</p>
-<p>timeout=5</p>
-<p>title linux</p>
-<p>kernel /vmlinuz-VERSION  root=/dev/sda2 init=/bin/bash</p>
-<p>initrd /initramfs.img</p>
-<p><img src="vim.png" alt="vim"></p>
-<p><strong>第七步：挂载根目录</strong></p>
-<p>mkdir /mnt/rootfs</p>
-<p>mount /dev/sdb2 /mnt/rootfs</p>
-<p><img src="挂载根目录.png" alt="挂载根目录"></p>
-<p><strong>第八步：复制相关命令和库文件</strong></p>
-<p>如：ifconfig，insmod，ping，mount，ls cat，df，lsblk，blkid等</p>
-<p><strong>第九步：准备根目录下必要目录</strong></p>
-<p>mkdir /mnt/rootfs/{dev,etc,proco,sys,usr,var,lib,mnt.home,root,tmp,lib64} -v</p>
-<p>sync；sync；sync； 确保写入硬盘</p>
-<p><img src="必要目录.png" alt="必要目录"></p>
-<p><strong>第十步：安装必要的模块，如网络模块等</strong></p>
-<p><img src="网络模块.png" alt="网络模块"></p>
-<p><strong>第十一步：关机此服务器，并将20G硬盘安装到一台无硬盘启动的虚拟机服务器上</strong></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/05/C4MJXP350W7KING88G0.png" alt="C4]~MJXP350W{7KIN`G88G0"></p>
-
-          
+          CentOS启动相关最重要的几个文件有：内核vmlinuz文件、虚拟文件系统initramfs文件、grub文件以
+及init启动程序，围绕这几个文件，我们来制作一个能够简单启动的自制Linux系统
+实验思路：CentOS6的启动流程如下
+1.加载BIOS的硬件信息，进行POST加电自检
+2.读取第
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/13/手把手系列（三）教你自制简单Linux系统/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2385,188 +1647,16 @@
       
         
           
-            <p>如同我们平时在操作 Windows系统时，文件查找与解压缩文件是经常要使用到的操作，Linux系统中也要经常用到相同的操作，今天我们就来介绍Linux系统中的一些文件查找与解压缩时使用到的工具。</p>
-<h2 id="一、文件查找"><a href="#一、文件查找" class="headerlink" title="一、文件查找"></a><strong>一、文件查找</strong></h2><p>Linux系统中自带两个文件查找命令locate和find，那两个命令如何进行使用选择呢？各自又有什么优点和缺点呢，我们来详细看一下：</p>
-<h3 id="（1）locate命令"><a href="#（1）locate命令" class="headerlink" title="（1）locate命令"></a>（1）locate命令</h3><p>优点：搜索速度快，节省系统性能（生产环境适合使用locate）</p>
-<p>缺点：不能即时更新（文件索引数据库在每次开机后更新），要想搜索最新文件需手动输入命令updatedb更新文件索引数据库，模糊搜索；</p>
-<p>Locate命令适合搜索不经常变化的文件，如系统文件</p>
-<p>查询系统上预建的文件索引数据库：</p>
-<p>/var/lib/mlocate/mlocate.db</p>
-<p>locate</p>
-<p>-i      忽略大小写</p>
-<p>-b     只搜索基名符合条件的文件</p>
-<p>-n     只列出前几个</p>
-<p>-r      支持扩展正则表达式</p>
-<h3 id="（2）find命令"><a href="#（2）find命令" class="headerlink" title="（2）find命令"></a>（2）find命令</h3><p>优点：精确查找；实时查找；搜索条件灵活</p>
-<p>缺点：查找速度慢；占用系统性能</p>
-<p>find [OPTION]…[查找路径] [查找条件] [处理动作]</p>
-<p>指定搜索层级：</p>
-<p>不指定情况下默认当前目录下搜索</p>
-<p>-maxdepth level      最大搜索深度，默认为1层</p>
-<p>-mindepth level 最小搜索深度</p>
-<p>根据文件名和inode查找：</p>
-<p>-name “filename” 支持使用通配符glob；注意文件名一定加””</p>
-<p>-iname “filename” 不区分字母大小写</p>
-<p>-inum n             按节点号inode查找文件</p>
-<p>-samefile name       查找相同inode的文件，即硬链接</p>
-<p>-links n     查找链接数为n的文件</p>
-<p>-regex “PATTERN” 使用正则表达式搜索</p>
-<p>根据属主、属组查找：</p>
-<p>-user USERNAME：查找属主为指定用户（UID）的文件</p>
-<p>-group GRPNAME：查找属组为指定组（GID）的文件</p>
-<p>-uid UID：       查找属主为指定UID号的文件</p>
-<p>-gid GID：       查找属组为指定GID号的文件</p>
-<p>-nouser：        查找没有属主的文件</p>
-<p>-nogroup：     查找没有属组的文件</p>
-<p>-nouser -o -nogroup       查找没有属主或没有属组的文件</p>
-<p>根据文件类型查找：</p>
-<p>-type TYPE：</p>
-<p>f：   普通文件</p>
-<p>d：  目录文件</p>
-<p>l：   符号链接文件</p>
-<p>s：   套接字文件</p>
-<p>b：  块设备文件</p>
-<p>c：  字符设备文件</p>
-<p>p：  管道文件</p>
-<p>搜索空文件或目录：</p>
-<p>-empty             查找空文件或空目录</p>
-<p>例：find/app -type d -empty</p>
-<p>组合条件：</p>
-<p>-a     与</p>
-<p>-o     或</p>
-<p>-not,!       非</p>
-<p>德摩根定律：</p>
-<p>​                  （非A）或（非B）=非（A且B）</p>
-<p>​                  （非A）且（非B）=非（A或B）</p>
-<p>注意：使用（）表示组合条件时，括号内两边一定要加空格,且括号一定要加转义符”\”。</p>
-<p>根据文件大小来查找：</p>
-<p>-size[+|-]#UNIT</p>
-<p>常用单位：k，M，G，c（byte）</p>
-<p>1024c  (1024-1，1024]</p>
-<p>+1024c    (1024,+)</p>
-<p>-1024c     [0,1024-1]</p>
-<p>根据时间戳查找：</p>
-<p>以“天”为单位：</p>
-<p>-atime[+|-]#</p>
-<p>3：[3,4)</p>
-<p>+3:[4,+]</p>
-<p>-4:[0,4)</p>
-<p>-mtime</p>
-<p>-ctime</p>
-<p>以“分钟”为单位：</p>
-<p>-atime</p>
-<p>-mtime</p>
-<p>-ctime</p>
-<p>根据权限查找：</p>
-<p>-perm[/|+|-]MODE</p>
-<p>MODE：精确权限匹配（数字法）</p>
-<p>/|+MODE：任何一类（u,g,o）对象的权限中只要能一位匹配即可，或关系；</p>
-<p>CentOS6使用“+”，CentOS7使用“/”</p>
-<p>-MODE：没类对象权限都有对应权限时，才会匹配，且关系；</p>
-<p>处理动作：</p>
-<p>-print                默认的处理动作，显示到屏幕</p>
-<p>-ls             类似于对查找的文件执行”ls -l”命令</p>
-<p>-delete             删除查找到的文件，不进行提示</p>
-<p>-fls file     查找到的所有文件的长格式信息保存至指定文件中</p>
-<p>-ok COMMAND{}\； {}代表前面搜索到的结果，-ok后必须跟\；结尾，语法要求；对</p>
-<p>查找到的每个文件执行COMMAND命令，每个文件执行命令时，会要求</p>
-<p>用户确认</p>
-<p>例：find -name “f*” -ok rm {} \；</p>
-<p>将f开头的文件删除，每个文件删除时会要求确认。</p>
-<p>-exec COMMAND{}\； 对每个搜索到的文件执行COMMAND命令，不要求用户确认</p>
-<p>例：find -name “f*” -exec mv {} /data/ \;</p>
-<p>将f开头的文件移动到data目录下，不要求用户确认</p>
-<h2 id="二、压缩和解压缩"><a href="#二、压缩和解压缩" class="headerlink" title="二、压缩和解压缩"></a><strong>二、压缩和解压缩</strong></h2><p>Linux系统中支持多种文件解压缩工具，不同压缩工具压缩比有所不同，压缩后的后缀名也不一样。要注意的是：前面我们说过在linux系统中，文件是不通过后缀判断的，但在解压缩中是个例外，不同的解压缩工具对后缀是有要求的。</p>
-<h3 id="Linux常见解压缩工具："><a href="#Linux常见解压缩工具：" class="headerlink" title="Linux常见解压缩工具："></a>Linux常见解压缩工具：</h3><p>file-roller         图形化解压缩工具（类似于windows系统winrar）</p>
-<p>compress/uncompress：       .Z后缀</p>
-<p>gzip/gunzip：          .gz后缀（主流）</p>
-<p>bzip2/bunzip2：              .bz2后缀（主流）</p>
-<p>xz/unxz：                 .xz后缀（主流，新兴）</p>
-<p>zip</p>
-<p>tar</p>
-<p>cpio</p>
-<p>(1)compress/uncompress</p>
-<p>-d     解压缩，相当于uncompress，压缩文件删除</p>
-<p>-c     压缩结果输出至标准输出，不删除原文件</p>
-<p>例：compress -c b &gt; b.Z 解压文件b并且不删除</p>
-<p>-v     显示详情</p>
-<p>uncompress    解压缩，同compress -d，压缩文件删除</p>
-<p>zcat file.Z &gt; file  解压缩，原压缩文件不删除</p>
-<p>(2)gzip/gunzip</p>
-<p>-d     解压缩，相当于gunzip</p>
-<p>-c     将压缩结果输出至标准输出，不删除原文件</p>
-<p>-v     显示详情</p>
-<p>zcat file.gz &gt; file  解压缩，原压缩文件不删除</p>
-<p>(3)bzip2/bunzip</p>
-<p>-k     保留原文件</p>
-<p>-d     解压缩</p>
-<p>bunzip2            解压缩</p>
-<p>bzcat                 不解压缩前提查看文本内容，与gzip的zcat用法类似</p>
-<p>(4)xz/unxz</p>
-<p>-k     保留原文件</p>
-<p>-d     解压缩</p>
-<p>unxz         解压缩，功能同xz -d</p>
-<p>xzcat                 功能同zcat，bzcat</p>
-<p>压缩比：xz &gt; bzip2 &gt; gzip &gt; compress</p>
-<p>(5)zip/unzip</p>
-<p>打包压缩</p>
-<p>zip -r /tsetdir/sysconfig /etc/sysconfig/</p>
-<p>解包解压缩</p>
-<p>unzip sysconfig.zip</p>
-<p>cat /var/log/messages|zip messages –</p>
-<p>unzip -p message &gt; message      解压缩重定向</p>
-<p>(6)tar工具：（Tape ARchive，磁带归档的缩写）打包工具，并不压缩</p>
-<p>tar[OPTION]…</p>
-<p>-c     创建一个打包文件</p>
-<p>-C     指定解压的目录</p>
-<p>-p     保留属性</p>
-<p>-v     查看过程</p>
-<p>-f      对哪个进行文件归档或打包</p>
-<p>-t      查看列表</p>
-<p>1.创建文档（打包文件或目录）</p>
-<p>tar -cpvf /PATH/TO/SOMEFILE.tar FILE…</p>
-<p>2.追加文件到归档：注：不支持对压缩文件追加</p>
-<p>tar -r -f /PATH/TO/SOMEFILE.tar FILE…</p>
-<p>3.查看归档文件中的文件列表</p>
-<p>tar -t -f /PATH/TO/SOMEFILE.tar</p>
-<p>4.展开归档（解包）</p>
-<p>tar -x -f /PATH/TO/SOMEFILE.tar</p>
-<p>tar -x -f /PATH/TO/SOMEFILE.tar -C /PATH/</p>
-<p>5.结合压缩工具实现：归档并压缩</p>
-<p>-j：bizp2</p>
-<p>-z：gzip</p>
-<p>-J：xz</p>
-<p>6.-T选项指定输入文件，-X选项指定包含要排除的文件列表</p>
-<p>例：tar zcvf myback.tgz -T /root/includefilelist -X /root/excludefilelist</p>
-<p>7.分割打的tar文件为多份小文件：</p>
-<p>split</p>
-<p>-b Size -d tar-file-name prefix-name</p>
-<p>-b 1M –d mybackup.tgz mybackup-parts</p>
-<p>-b 1M mybackup.tgz mybackup-parts</p>
-<p>8.合并tar分割的多个小文件：</p>
-<p>cat mybackup-parts* &gt; mybackup.tar.gz</p>
-<p>(7)cpio</p>
-<p>功能：复制文件从或到归档</p>
-<p>cpio命令是通过重定向的方式将文件进行打包备份，还原恢复的工具，他可以解压以</p>
-<p>“cpio”或者”tar”结尾的文件</p>
-<p>cpio[option] &gt; 文件名或者设备名</p>
-<p>cpio[option] &lt; 文件名或者设备名</p>
-<p>选项</p>
-<p>-o     将文件拷贝打包成文件或者将文件输出到设备上</p>
-<p>-i      解包，将打包文件解压或将设备上的备份还原到系统</p>
-<p>-t      预览，查看文件内容或者输出到设备上的文件内容</p>
-<p>-v     显示打包过程中的文件名称</p>
-<p>-d     解包生产目录，在cpio还原时，自动的建立目录</p>
-<p>-c     一种较新的存储方式</p>
-<p>示例：</p>
-<p>将etc目录备份</p>
-<p>find ./etc -print |cpio -ov &gt;etc.cpio</p>
-<p>内容预览</p>
-<p>cpio -tv &lt; etc.cpio</p>
-<p>解包文件</p>
-<p>cpio -idv &lt;etc.cpio</p>
-
-          
+          如同我们平时在操作 Windows系统时，文件查找与解压缩文件是经常要使用到的操作，Linux系统中也要经常用到相同的操作，今天我们就来介绍Linux系统中的一些文件查找与解压缩时使用到的工具。
+一、文件查找Linux系统中自带两个文件查找命令locate和find，那两个命令如何进行使用选择呢？各
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/12/Linux系统文件查找与解压缩方法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2706,70 +1796,19 @@
       
         
           
-            <h2 id="总结了一些shell编程初学者常犯的错误、注意事项及技巧："><a href="#总结了一些shell编程初学者常犯的错误、注意事项及技巧：" class="headerlink" title="总结了一些shell编程初学者常犯的错误、注意事项及技巧："></a><strong>总结了一些shell编程初学者常犯的错误、注意事项及技巧：</strong></h2><h3 id="1-判断变量是否加-："><a href="#1-判断变量是否加-：" class="headerlink" title="1.判断变量是否加$："></a>1.判断变量是否加$：</h3><p>（1）赋值变量时不加$</p>
-<p>（2）如果命令能识别变量就不加$,如果命令不能识别变量加$</p>
-<h3 id="2-存放多行字符时”-name”变量外加双引号可保留换行格式"><a href="#2-存放多行字符时”-name”变量外加双引号可保留换行格式" class="headerlink" title="2.存放多行字符时”$name”变量外加双引号可保留换行格式"></a>2.存放多行字符时”$name”变量外加双引号可保留换行格式</h3><p><img src="保留格式.png" alt="保留格式"></p>
-<p> 3.{}和（）中执行命令的区别：</p>
-<p>（）中使用的命令为一次性的，小括号中相当于在子进程中执行命令,小括号继承括号外变量，但不会影响括号外变量</p>
-<p>注：小括号中所说的子进程与常规的子进程不是一回事</p>
-<p>而{ }中使用命令是在当前shell环境中执行，不会不开启子进程，会影响当前shell环境</p>
-<p>例1：x=1;echo $$;(echo $$;echo $x;x=2);echo $x</p>
-<p><img src="小括号.png" alt="小括号"></p>
-<p>虽然括号内开启了一个子进程，但该子进程号和括号外进程号一致；此外括号外变量会影响括号内，但括号内变量更改不会影响括号外。</p>
-<p>例2：（echo $$;exit）</p>
-<p><img src="小括号退出.png" alt="小括号退出"></p>
-<p>执行此命令，显示当前所在进程号，exit退出（）内子进程</p>
-<p>{ }中使用命令是在当前shell环境中执行，不会不开启子进程，会影响当前shell环境</p>
-<p>例3：x=1;echo $$;{ echo $$;echo $x;x=2; };echo $x</p>
-<p><img src="花括号.png" alt="花括号"></p>
-<p>{}内命令相当于当前shell执行，因此括号外和括号内进程号一致，此外{}内变量影响了{}外的变量。</p>
-<p>例4：{  echo$$;exit;  }</p>
-<p><img src="花括号退出.png" alt="花括号退出"></p>
-<p>执行此命令，显示当前所在进程号，exit退出当前shell；</p>
-<p>因此编写脚本时，想要使用括号利用exit命令退出脚本，一定要使用{}，而不能使用（）</p>
-<h3 id="4-短路与-amp-amp-和短路或-嵌套连续命令时可使用大括号"><a href="#4-短路与-amp-amp-和短路或-嵌套连续命令时可使用大括号" class="headerlink" title="4.短路与&amp;&amp;和短路或||嵌套连续命令时可使用大括号"></a>4.短路与&amp;&amp;和短路或||嵌套连续命令时可使用大括号</h3><p>如&amp;&amp;{  cmd1 ；cmd2 ； }；||{  cmd1 ；cmd2 ；}；</p>
-<p>测试或命令结果为假时，后跟连续多条命令，必须需采用此种格式：</p>
-<p>false || { echo cmd1 ; echo cmd2 ; }</p>
-<p>表示测试或命令返回false时，执行cmd1，cmd2</p>
-<p>测试或命令结果为真时，后跟连续多条命令，可写为：</p>
-<p>true &amp;&amp; echo cmd1 &amp;&amp; echo cmd2</p>
-<p>也可写为：</p>
-<p>true &amp;&amp; { echo cmd1 ; echo cmd2 ; }</p>
-<p>当条件测试或命令后同时出现短路且&amp;&amp;与短路或||有嵌套命令的情况时:</p>
-<p>如：[ Test ] &amp;&amp; { echo cmd1 ; echo cmd2 ; } || { echo cmd3; echo cmd4 ; }</p>
-<p>表示当Test为真时，执行命令cmd1，cmd2；当Test为假时，执行cmd3，cmd4；</p>
-<h3 id="5-引用超过10个以上的位置变量时，数字加-；如-10要写为-10"><a href="#5-引用超过10个以上的位置变量时，数字加-；如-10要写为-10" class="headerlink" title="5.引用超过10个以上的位置变量时，数字加{}；如$10要写为${10}"></a>5.引用超过10个以上的位置变量时，数字加{}；如$10要写为${10}</h3><p>不加{}时，默认将$10当作$1和0表示出来：</p>
-<p><img src="大于10个参数1.png" alt="大于10个参数1"></p>
-<p><img src="大于10个参数2.png" alt="大于10个参数2"></p>
-<p>当给10加上大括号后，${10}才表示第10个位置变量：</p>
-<p><img src="大于10个参数3.png" alt="大于10个参数3"></p>
-<p><img src="大于10个参数4.png" alt="大于10个参数4"></p>
-<h3 id="6-位置变量-与-的区别"><a href="#6-位置变量-与-的区别" class="headerlink" title="6.位置变量$*与$@的区别"></a>6.位置变量$*与$@的区别</h3><p>两者都可表示传递给脚本的所有参数，但$*将每个参数合并为一个字符串；</p>
-<p><img src="星-1.png" alt="$星"></p>
-<p>而$@每个参数作为独立字符</p>
-<p><img src="圈.png" alt="$圈"></p>
-<p>注意：$@、$*只在被双引号包起来的时候才会有差异。</p>
-<h3 id="7-在使用-和test引用变量时，最好加双引号””避免出问题"><a href="#7-在使用-和test引用变量时，最好加双引号””避免出问题" class="headerlink" title="7.在使用[  ]和test引用变量时，最好加双引号””避免出问题"></a>7.在使用[  ]和test引用变量时，最好加双引号””避免出问题</h3><p>不加引号也许不会出错，但加上引号肯定不会有错</p>
-<h3 id="8-脚本中进行变量的算术运算时，有空格尽量删除"><a href="#8-脚本中进行变量的算术运算时，有空格尽量删除" class="headerlink" title="8.脚本中进行变量的算术运算时，有空格尽量删除"></a>8.脚本中进行变量的算术运算时，有空格尽量删除</h3><p>变量的算术运算，多一个空格就会导致出错，所以尽量将空格删除</p>
-<p><img src="数学运算.png" alt="数学运算"></p>
-<h3 id="9-进行条件测试过程中，能加空格地方尽量都加空格"><a href="#9-进行条件测试过程中，能加空格地方尽量都加空格" class="headerlink" title="9.进行条件测试过程中，能加空格地方尽量都加空格"></a>9.进行条件测试过程中，能加空格地方尽量都加空格</h3><p>条件测试时，无论是括号两端还是字符两端少一个空格就会导致出错，所有尽量都加空格</p>
-<p><img src="条件测试空格.png" alt="条件测试空格"></p>
-<h3 id="10-使用-进行PATTERN匹配时，需要加双括号-，且正则表达式不能加引号，默认使用扩展正则表达式"><a href="#10-使用-进行PATTERN匹配时，需要加双括号-，且正则表达式不能加引号，默认使用扩展正则表达式" class="headerlink" title="10.使用=~进行PATTERN匹配时，需要加双括号[[ ]]，且正则表达式不能加引号，默认使用扩展正则表达式"></a>10.使用=~进行PATTERN匹配时，需要加双括号[[ ]]，且正则表达式不能加引号，默认使用扩展正则表达式</h3><p>正则表达式加引号就会导致错误结果，这与我们在使用grep与sed等命令利用到正则表达式需要加引号正好相反，需要注意</p>
-<p><img src="正则表达式.png" alt="正则表达式"></p>
-<h3 id="11-用于字符串比较时的用到的操作应该都使用引号"><a href="#11-用于字符串比较时的用到的操作应该都使用引号" class="headerlink" title="11.用于字符串比较时的用到的操作应该都使用引号"></a>11.用于字符串比较时的用到的操作应该都使用引号</h3><p>同上，不加引号也许不会出错，但加上引号肯定不会有错</p>
-<h3 id="12-右侧可匹配类似于通配符glob的用法"><a href="#12-右侧可匹配类似于通配符glob的用法" class="headerlink" title="12.[[  == ]]右侧可匹配类似于通配符glob的用法"></a>12.[[  == ]]右侧可匹配类似于通配符glob的用法</h3><p>此种匹配类似于通配符，但不完全等同于通配符，注意格式双中括号，双等号 [[ == ]]</p>
-<p><img src="类似通配符.png" alt="类似通配符"></p>
-<h3 id="13-脚本里不支持别名"><a href="#13-脚本里不支持别名" class="headerlink" title="13.脚本里不支持别名"></a>13.脚本里不支持别名</h3><h3 id="14-文件测试后跟空字符时，也反馈为True。"><a href="#14-文件测试后跟空字符时，也反馈为True。" class="headerlink" title="14.文件测试后跟空字符时，也反馈为True。"></a>14.文件测试后跟空字符时，也反馈为True。</h3><p>例如：/data/fstab为普通文件，用-f选项判断时，后跟fstab文件或者空时都判断为真</p>
-<p><img src="文件条件判断.png" alt="文件条件判断"></p>
-<p>因此要保证一个文件存在且满足测试条件时，</p>
-<p>可表示为：[ -n  “file”  -a  –f  “file” ]</p>
-<p>file文件是否存在且为普通文件</p>
-<h3 id="15-测试字符串是否为空除了-z及-n选项，还可用-“-var”-“”-；-x”-var”-“x”-来测试。"><a href="#15-测试字符串是否为空除了-z及-n选项，还可用-“-var”-“”-；-x”-var”-“x”-来测试。" class="headerlink" title="15.测试字符串是否为空除了-z及-n选项，还可用[  “$var”  =  “”  ]；[  x”$var”  =  “x”  ]来测试。"></a>15.测试字符串是否为空除了-z及-n选项，还可用[  “$var”  =  “”  ]；[  x”$var”  =  “x”  ]来测试。</h3><p>例1：当$var为空时，使用[  “$var”  =  “”  ]返回结果0</p>
-<p><img src="测试为空1.png" alt="测试为空1"></p>
-<p>例2：当$var为空时，[  x”$var”  =  “x”  ]返回结果为0</p>
-<p><img src="测试为空2.png" alt="测试为空2"></p>
-<h3 id="16-养成好习惯：变量一使用完后就用unset删掉。"><a href="#16-养成好习惯：变量一使用完后就用unset删掉。" class="headerlink" title="16.养成好习惯：变量一使用完后就用unset删掉。"></a>16.养成好习惯：变量一使用完后就用unset删掉。</h3>
-          
+          总结了一些shell编程初学者常犯的错误、注意事项及技巧：1.判断变量是否加$：（1）赋值变量时不加$
+（2）如果命令能识别变量就不加$,如果命令不能识别变量加$
+2.存放多行字符时”$name”变量外加双引号可保留换行格式
+ 3.{}和（）中执行命令的区别：
+（）中使用的命令为一次性的，小括号中相
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/11/shell脚本编程基础（2）——新手注意事项及技巧16条/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2930,7 +1969,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 
@@ -2977,6 +2016,8 @@
   
 
 
+  
+
 
 
 
@@ -3015,6 +2056,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -3075,6 +2121,19 @@
   
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 

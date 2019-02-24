@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -93,7 +93,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Muse',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -266,9 +266,45 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
   
 </nav>
 
@@ -390,192 +426,17 @@
       
         
           
-            <p>在生活、生产环境中，我们可能遇到这样的场景，想在某个时刻，或者固定某个时间周期的在Linux系统中</p>
-<p>执行某项任务，例如，定时关机，定期自动清理垃圾文件等，at，crontab等命令就是帮你实现这样功能的。</p>
-<h2 id="一、同步服务器时间"><a href="#一、同步服务器时间" class="headerlink" title="一、同步服务器时间"></a><strong>一、同步服务器时间</strong></h2><p>在进行计划任务之前，一定要<strong>确保服务器的时间是准确无误的</strong>，否则将造成计划任务失败或者无法达到</p>
-<p>预期效果，尤其是在大规模的集群环境中，更显得尤为重要，所以我们首先要学会的就是同步服务器时</p>
-<p>间。</p>
-<p><strong>CentOS6：</strong></p>
-<p>ntpdata 172.x.x.x                            将时间与服务器同步</p>
-<p>vim /etc/ntp.conf                           修改此文件</p>
-<p>server 172.x.x.x iburst                  加上此行</p>
-<p>chkconfig ntpd on                           下次启动自动打开ntpd服务</p>
-<p>service ntpd start                           打开ntpd服务</p>
-<p>service ntpd status                        检查ntpd服务状态</p>
-<p><strong>CentOS7：</strong></p>
-<p>ntpdata 172.x.x.x                            将时间与服务器时间同步</p>
-<p>vim /etc/chrony.conf                     修改此文件</p>
-<p>server 172.x.x.x iburst                   加上此行</p>
-<p>systemctl enable chronyd              下次启动自动打开chronyd服务</p>
-<p>systemctl start chronyd                 打开chronyd服务</p>
-<p>systemctl status chronyd               检查chronyd服务状态</p>
-<p>至此，服务器时间同步就算是完成了！</p>
-<h2 id="二、执行一次性计划任务——at"><a href="#二、执行一次性计划任务——at" class="headerlink" title="二、执行一次性计划任务——at"></a><strong>二、执行一次性计划任务——at</strong></h2><p>Linux任务计划、周期性任务执行</p>
-<p>未来的某时间点执行一次任务</p>
-<p>   <strong>at</strong></p>
-<p><strong>batch：</strong>系统自行选择空闲时间去执行此处指定的任务</p>
-<p>周期性运行某任务</p>
-<p>   <strong>cron</strong></p>
-<p>使用at命令前，先确认at服务是否处于运行状态</p>
-<p><strong>Centos6：</strong></p>
-<p>确认当前运行级别处于on状态</p>
-<p>run level</p>
-<p>chkconfig –list atd</p>
-<p>如果服务未开启，请开启atd服务</p>
-<p>service atd start              </p>
-<p><strong>centos7：</strong></p>
-<p>确认处于active（running）状态</p>
-<p>systemctl status atd</p>
-<p>如果服务未开启，请开启atd服务</p>
-<p>systemctl start atd</p>
-<h3 id="at"><a href="#at" class="headerlink" title="at"></a><strong>at</strong></h3><p><strong>格式：at [options] TIME   最后Ctrl+d结束输出</strong></p>
-<p><strong>options：</strong></p>
-<p>-l      显示所有计划任务列表,同atq命令</p>
-<p>-d #  删除第#个计划任务，同atrm命令</p>
-<p>-c #  查看具体作用任务</p>
-<p>-m    强制发邮件</p>
-<p>-f /path/from/somefile  草丛指定文件中读取任务</p>
-<p><strong>TIME：</strong></p>
-<p>HH：MM [YYYY-mm-dd]</p>
-<p>noon,midnight,teatime （4pm）</p>
-<p>tomorrow</p>
-<p>now+#{minute，hours，days，weeks}</p>
-<p>HH：MM  02：00</p>
-<p>  <strong>在今日HH：MM进行，若该时刻已过，则明天此时执行任务</strong></p>
-<p>HH：MM YYYY-mm-dd</p>
-<p>  <strong>规定在某年某月某一天的某时刻执行任务</strong></p>
-<p>HH：MM[am|pm][month][date]</p>
-<p>04pm March 17</p>
-<p>17:20 tomorrow</p>
-<p>HH：MM[am|pm]+number[minutes|hours|days|weeks]</p>
-<p><strong>在某个时间点再加几个时间后才执行任务</strong></p>
-<p>now + 5minutes</p>
-<p>02pm + 3days</p>
-<p>注意：计划任务中的标准输出不显示在终端，将会以邮件方式发送至邮箱，所以执行计划任务最好</p>
-<p>将标准输出全部重定向到/dev/null，否则会产生大量垃圾邮件</p>
-<p><strong>at执行方式：</strong></p>
-<p>方法1：交互式</p>
-<p>例：at</p>
-<p>at 15:00  创建一个15:00的计划任务</p>
-<p>poweroff                  输入计划命令</p>
-<p>Ctrl+d               结束输出</p>
-<p>方法2：输入重定向</p>
-<p>例：at 18:00 &lt;&lt; EOF</p>
-<p>shutdown</p>
-<p>EOF</p>
-<p>方法3：at -f 文件</p>
-<p>例：echo “hello” &gt; /data/f1</p>
-<p>at 19:00 -f /data/f1</p>
-<p><strong>at任务队列存放在/var/spool/at目录中，任务执行后消失。</strong></p>
-<p><strong>at任务的黑名单（deny）、白名单（allow）文件：</strong></p>
-<p>系统默认<strong>只有黑名单文件/etc/at.deny</strong>，没有白名单文件<strong>/etc/at.allow</strong></p>
-<p><strong>/etc/at.deny</strong>    黑名单文件，放入文件中的用户将不能执行at任务计划</p>
-<p><strong>/etc/at.allow</strong>  白名单文件，当白名单文件存在时，只有白名单中的用户才能使用at。</p>
-<p>白名单文件需手动创建，优先级高于黑名单</p>
-<p>如果黑、白名单文件包含同一用户，将优先看白名单，可以使用at计划任务</p>
-<p>如果黑、白名单文件都删除，将只有root账号可以使用at计划任务。</p>
-<h2 id="三、执行周期性的计划任务——crond"><a href="#三、执行周期性的计划任务——crond" class="headerlink" title="三、执行周期性的计划任务——crond"></a><strong>三、执行周期性的计划任务——crond</strong></h2><p>使用crond周期任务计划前，先确认crond服务是否处于运行状态</p>
-<p><strong>Centos6：</strong></p>
-<p>确认处于active（running）状态</p>
-<p>service crond status         </p>
-<p>如果服务未开启，请开启crond服务</p>
-<p>service crond start        </p>
-<p><strong>centos7：</strong></p>
-<p>确认处于active（running）状态</p>
-<p>systemctl status crond</p>
-<p>如果服务未开启，请开启crond服务</p>
-<p>systemctl start crond     </p>
-<p><strong>相关文件：</strong></p>
-<p><strong>/etc/crontab</strong>          系统周期性任务计划文件（root only）</p>
-<p><strong>/var/spool/cron/</strong>         给用户创建周期计划的目录</p>
-<p><strong>/etc/cron.d/</strong>           给存储系统创建周期计划的目录</p>
-<p><strong>/var/log/cron</strong>          日志文件，可利用日志中的信息恢复误操作内容</p>
-<p><strong>注意：</strong></p>
-<p>（1）在<strong>/etc/crontab</strong>和<strong>/etc/cron.d/</strong>的文件中刚创建周期计划任务时，需要比普通用户周期计划目</p>
-<p>录的格式多添加一个<strong>用户名</strong>，位于时间和命令之间。</p>
-<p>（2）周期计划任务中的标准输出不显示在终端，将会以邮件方式发送至邮箱，所以执行计划任务建议</p>
-<p>将标准输出全部重定向到<strong>/dev/null</strong>，否则会产生大量垃圾邮件</p>
-<h3 id="crontab"><a href="#crontab" class="headerlink" title="crontab"></a><strong>crontab</strong></h3><p><strong>格式：</strong></p>
-<p><strong>crontab [options] file</strong></p>
-<p><strong>crontab [options]</strong></p>
-<p><strong>options：</strong></p>
-<p>-u <user>       指定一个用户</user></p>
-<p>-e           创建计划任务</p>
-<p>-l             列出计划任务列表</p>
-<p>-r            删除计划任务</p>
-<p>-i             删除前进行交互式提示</p>
-<p><strong>例：</strong></p>
-<p>crontab -l -u wang      查看wang用户的计划任务</p>
-<p>crontab -r -u wang     删除wang用户的计划任务</p>
-<p><strong>crontab</strong>计划任务同<strong>at</strong>命令一样，也有自己的黑、白名单文件，并且他们的作用是相类似的：</p>
-<p><strong>/etc/cron.deny</strong>    黑名单文件，放入文件中的用户将不能执行周期任务计划</p>
-<p><strong>/etc/cron.allow</strong>      白名单文件，只有白名单中的用户才能使用cron，需手动创建，优先级高于黑名单</p>
-<p>如果黑、白名单文件都删除，将只有root账号可以使用周期计划任务。</p>
-<h3 id="创建周期任务的两种方法："><a href="#创建周期任务的两种方法：" class="headerlink" title="创建周期任务的两种方法："></a>创建周期任务的两种方法：</h3><p><strong>第一种方法：修改/etc/crontab  （rootonly）</strong></p>
-<p><strong>/etc/crontab</strong> 计划任务参考格式</p>
-<p># Example of job definition:</p>
-<p># .—————- minute (0 – 59)</p>
-<p># |  .————- hour (0 – 23)</p>
-<p># |  |  .———- day of month (1 – 31)</p>
-<p># |  |  |  .——- month (1 – 12) OR jan,feb,mar,apr …</p>
-<p># |  |  |  |  .—- day of week (0 – 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</p>
-<p># |  |  |  |  |</p>
-<p># <em>  </em>  <em>  </em>  * user-name  command to be executed</p>
-<p><strong>*表示每次都执行</strong></p>
-<p><strong>*/10表示每10分钟执行一次</strong></p>
-<p><strong>例如：</strong></p>
-<p><strong># run five minutes after midnight, every day</strong></p>
-<p><strong>每五分钟执行一次：</strong></p>
-<p>5 0 <em> </em> *       $HOME/bin/daily.job &gt;&gt; $HOME/tmp/out 2&gt;&amp;1</p>
-<p><strong># run at 2:15pm on the first of every month — output mailed to paul</strong></p>
-<p><strong>每个月第一天的14:15分执行一次，并发送邮件</strong></p>
-<p>15 14 1 <em> </em>     $HOME/bin/monthly</p>
-<p><strong># run at 10 pm on weekdays, annoy Joe</strong></p>
-<p><strong>每个工作日晚上22：00，发送邮件给Joe</strong></p>
-<p>0 22 <em> </em> 1-5    mail -s “It’s 10pm” joe%Joe,%%Where are your kids?%</p>
-<p><strong>每间隔2小时的23分钟，打印一次，am0:23，am2:23，am4:23…，每天</strong></p>
-<p>23 0-23/2 <em> </em> * echo “run 23 minutes after midn, 2am, 4am …, everyday”</p>
-<p><strong>每个星期日的04:05，打印一次</strong></p>
-<p>5 4 <em> </em> sun     echo “run at 5 after 4 every sunday”</p>
-<p><strong>注意：</strong></p>
-<p>30 4 1,15 * 5     表示每月1,15日加每周五执行，或关系</p>
-<p>若想执行且关系，加脚本判断</p>
-<p><strong>特殊的时间格式：</strong></p>
-<p>这些特殊的时间规范可以用来代替一些时段和日期，用@字符作为前缀</p>
-<p><strong>@reboot</strong>         Run once after reboot   下次启动会执行，包括poweroff</p>
-<p><strong>@yearly</strong>          0 0 1 1 *           每年执行一次</p>
-<p><strong>@annually</strong>      0 0 1 1 *           每年执行一次</p>
-<p><strong>@monthly</strong>      0 0 1 <em> </em>           每月执行一次</p>
-<p><strong>@weekly</strong>        0 0 <em> </em> 0           每周执行一次</p>
-<p><strong>@daily</strong>             0 0 <em> </em> *           每天执行一次</p>
-<p><strong>@hourly</strong>          0 <em> </em> <em> </em>           每小时执行一次</p>
-<p><strong>第二种方法：crontab命令创建</strong></p>
-<p><strong>crontab -e</strong>       将以vi打开一个空白文件</p>
-<p># Example of job definition:</p>
-<p># .—————- minute (0 – 59)</p>
-<p># |  .————- hour (0 – 23)</p>
-<p># |  |  .———- day of month (1 – 31)</p>
-<p># |  |  |  .——- month (1 – 12) OR jan,feb,mar,apr …</p>
-<p># |  |  |  |  .—- day of week (0 – 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</p>
-<p># |  |  |  |  |</p>
-<p># <em>  </em>  <em>  </em>  *   command to be executed</p>
-<p><strong>不需写用户名</strong>，将以当前用户执行周期计划任务</p>
-<p>创建成功后周期计划文件自动放入<strong>/var/spool/cron</strong>目录</p>
-<p><strong>at和crontab对比：</strong></p>
-<p>一次性作业使用<strong>at</strong></p>
-<p>重复性作业使用<strong>crontab</strong></p>
-<p>at                       crontab</p>
-<p>创建任务：    at time                  crontab -e</p>
-<p>任务列表：    at -l                       crontab -l</p>
-<p>查看信息：    at -c #                    N/A</p>
-<p>删除任务：    at -d #                  crontab -r</p>
-<p>修改任务：     N/A                     crontab -e</p>
-<p><strong>注意：</strong>（1）默认不显示标准输出和标准错误，会以邮件方式邮寄给用户</p>
-<p>a.COMMAND &gt; /dev/null</p>
-<p>b.COMMAND &amp;&gt; /dev/null</p>
-<p>（2）根用户能够修改其他用户的作业</p>
-
-          
+          在生活、生产环境中，我们可能遇到这样的场景，想在某个时刻，或者固定某个时间周期的在Linux系统中
+执行某项任务，例如，定时关机，定期自动清理垃圾文件等，at，crontab等命令就是帮你实现这样功能的。
+一、同步服务器时间在进行计划任务之前，一定要确保服务器的时间是准确无误的，否则将造成计划任务失
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/13/Linux系统计划任务/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -715,188 +576,20 @@
       
         
           
-            <p>inux系统从按下电源键开始到系统启动要求用户输入用户名，中间究竟发生什么？了解Linux系统的启动</p>
-<p>流程，不仅有助于我们更加深入的理解linux底层设计理念，更能帮助我们再出现系统启动故障时，迅速排</p>
-<p>查出故障原因。</p>
-<p>## </p>
-<h2 id="一、Linux系统启动流程"><a href="#一、Linux系统启动流程" class="headerlink" title="一、Linux系统启动流程"></a><strong>一、Linux系统启动流程</strong></h2><p><strong>以下是CentOS6版本系统启动流程图：</strong></p>
-<p>（<strong>注：</strong>下文中启动流程主要适用于CentOS6之前的版本，7版本变动较大，暂不加入讨论）</p>
-<p><img src="centos6启动流程_gaitubao_com_watermark.png" alt="centos6启动流程_gaitubao_com_watermark"></p>
-<h3 id="CentOS6启动流程："><a href="#CentOS6启动流程：" class="headerlink" title="CentOS6启动流程："></a><strong>CentOS6启动流程：</strong></h3><p>1.加载BIOS的硬件信息，进行POST加电自检</p>
-<p>2.读取第一个启动设备MBR的引导加载程序(grub)的启动信息</p>
-<p>3.加载核心操作系统的核心信息，核心开始解压缩，并尝试驱动所有的硬件设备</p>
-<p>4.核心执行init程序，并获取默认的运行信息</p>
-<p>5.init程序执行/etc/rc.d/rc.sysinit文件</p>
-<p>6.启动核心的外挂模块</p>
-<p>7.init执行运行的各个批处理文件(scripts)</p>
-<p>8.init执行/etc/rc.d/rc.local</p>
-<p>9.执行/bin/login程序，等待用户登录</p>
-<p>10.登录之后开始以Shell控制主机</p>
-<p>接下来我们对每一项流程详细讲解</p>
-<h3 id="1-POST："><a href="#1-POST：" class="headerlink" title="1.POST："></a><strong>1.POST：</strong></h3><p><strong>Power-On-Self-Test，加电自检，</strong>是BIOS功能的一个主要部分。负责完成对CPU、主板、内</p>
-<p>存、硬盘子系统、显示子系统、串并行接口、键盘、CD-ROM光驱等硬件情况检测。</p>
-<h3 id="2-加载MBR："><a href="#2-加载MBR：" class="headerlink" title="2.加载MBR："></a><strong>2.加载MBR：</strong></h3><p>MBR：Master Boot Record，主引导记录</p>
-<p>0磁道0扇区：512bytes</p>
-<p>446bytes：<strong>boot loader</strong></p>
-<p>64bytes：分区表</p>
-<p>16bytes：标识一个分区（最多4个分区）</p>
-<p>2bytes：55AA（分区标识位）</p>
-<p><strong>bootloader</strong>：引导加载器，引导程序</p>
-<p><strong>主要功能有：</strong></p>
-<p>a）识别、加载操作系统中的核心文件，并提交到内存中运行，进而来启动对应操作系统。</p>
-<p>b）提供菜单信息，并将启动管理功能转交给其他加载程序。</p>
-<p>Linux：GRUB，可引导多种操作系统</p>
-<p>windows：ntloader，只能引导windows系统</p>
-<p><strong>因此建议</strong>：同一台电脑装多个操作系统，先装windows，后装Linux</p>
-<h3 id="3-GRUB："><a href="#3-GRUB：" class="headerlink" title="3.GRUB："></a><strong>3.GRUB：</strong></h3><p>grub0.97（老版本）</p>
-<p><strong>第一阶段：MBR的前446字节</strong></p>
-<p><strong>1.5阶段：</strong>MBR后续的27个扇区，加载/boot分区文件系统驱动</p>
-<p><strong>第二阶段：</strong>识别文件系统，加载/boot/grub目录下的文件（备份gurb的文件）</p>
-<p>注：grup 修复命令依赖于/boot/grub下的文件</p>
-<p>grub-install修复命令不依赖，将自动生产gurb文件下文件，</p>
-<p>一旦用grub命令修复后，grub-install也将依赖这些文件。</p>
-<p><strong>/boot/grub/grub.conf</strong>    grub配置文件</p>
-<p>default=0                  定义了默认启动项</p>
-<p>timeout=5                定义了菜单超时时长</p>
-<p>splashimage=(hd0,0)/grub/splash.xpm.gz    定义了菜单背景图片</p>
-<p>password –md5 口令   默认无此行，添加此行后需输入正确口令才能以但用户模式破解root口令</p>
-<p>可用grub-md5-crypt生产md5口令</p>
-<p>hiddenmenu             默认隐藏菜单</p>
-<p>title                   定义了启动菜单，有几个title就有几个启动菜单</p>
-<p>root（hd0,0）</p>
-<p>krenel               定义了内核文件位置，挂载目录</p>
-<p>initrd                 定义了initramfs文件位置</p>
-<h3 id="4-加载内核Kernel："><a href="#4-加载内核Kernel：" class="headerlink" title="4.加载内核Kernel："></a><strong>4.加载内核Kernel：</strong></h3><p>探测可识别到的所有硬件设备</p>
-<p>加载硬件驱动程序（借助于ramdisk加载驱动）</p>
-<p>以只读方式挂载根文件系统：</p>
-<p><strong>/boot/initramfs-VERSION-release.img</strong>文件加载根目录文件系统驱动</p>
-<p>  <strong>/boot/grup/grup.conf</strong>文件定义了根的位置</p>
-<p>运行用户空间的第一个应用程序：/sbin/init</p>
-<p><strong>内核的核心文件：</strong></p>
-<p>/boot/vmlinuz-VERSION-release</p>
-<p>ramdisk：辅助的伪根系统，存放辅助性的驱动模块</p>
-<p>CentOS 5: /boot/initrd-VERSION-release.img      ramdisk虚拟磁盘</p>
-<p>CentOS 6,7: /boot/initramfs-VERSION-release.img  ramfs虚拟文件系统</p>
-<p>mkinitrd /boot/initramfs-<code>uname -r</code>.img <code>uname -r</code>        生成新的ramfs文件</p>
-<h3 id="5-启动init进程："><a href="#5-启动init进程：" class="headerlink" title="5.启动init进程："></a><strong>5.启动init进程：</strong></h3><p><strong>CentOS5：</strong></p>
-<p>SycV：init，redhat开发</p>
-<p>特点：启动服务程序时，有依赖的服务将被串行启动，因此centos5系统启动很缓慢</p>
-<p>配置文件：/etc/inittab</p>
-<p><strong>CentOS6：</strong></p>
-<p>Upstart：init，ubantu开发</p>
-<p>特点：守护进程间通信依赖于D-Bus进行，因此可基本实现类似并行启动</p>
-<p>配置文件：/etc/inittab，/etc/init/*.conf</p>
-<p><strong>CentOS7：</strong></p>
-<p>Systemd：systemd–&gt;init  redhat开发</p>
-<p>特点：服务只有在第一次被访问到才会启动，因此centos7系统启动过程非常快</p>
-<p>配置文件：/usr/lib/systemd/system</p>
-<p>​         /etc/systemd/system</p>
-<p><strong>/sbin/init</strong> CentOS6版本之前</p>
-<p>运行级别：为系统运行或维护等目的而设定；0-6：7个级别</p>
-<p>0：关机</p>
-<p>1：单用户模式(root自动登录), single, 维护模式</p>
-<p>2: 多用户模式，启动网络功能，但不会启动NFS；维护模式</p>
-<p>3：多用户模式，正常模式；文本界面</p>
-<p>4：预留级别；可同3级别</p>
-<p>5：多用户模式，正常模式；图形界面</p>
-<p>6：重启</p>
-<p>默认级别： 3, 5</p>
-<p>切换级别：init #</p>
-<p>查看级别：runlevel ; who -r</p>
-<h3 id="6-读取-etc-inittab文件"><a href="#6-读取-etc-inittab文件" class="headerlink" title="6.读取/etc/inittab文件"></a><strong>6.读取/etc/inittab文件</strong></h3><p><strong>CentOS5：</strong>     </p>
-<p>1.定义默认启动运行级别为3</p>
-<p>2.定义了使用/etc/rc.d/rc.sysinit进行系统初始化</p>
-<p>3.定义了每个运行级别执行的rc#文件</p>
-<p>4.定义Ctrl-Alt-Delete组合键重启</p>
-<p>5.配置不断电系统pf、pr两种机制</p>
-<p>6.定义了终端数量，默认6个</p>
-<p>7.如果是5级别，则会启动图形化界面</p>
-<p>注意：可利用#加注释方法减少5选项中的终端数量，也可复制增加可登陆终端数量</p>
-<p>建议：生产中建议关闭6选项组合键重启功能，防止误操作</p>
-<p><strong>CentOS6：</strong></p>
-<p>仅定义了系统默认启动运行级别，其他项分割为单个文件执行，原来与5版本一致。</p>
-<p>/etc/init/control-alt-delete.conf</p>
-<p>/etc/init/tty.conf</p>
-<p>/etc/init/start-ttys.conf</p>
-<p>/etc/init/rc.conf</p>
-<p>/etc/init/prefdm.conf</p>
-<h3 id="7-读取-etc-rc-d-rc-sysinit-系统初始化文件"><a href="#7-读取-etc-rc-d-rc-sysinit-系统初始化文件" class="headerlink" title="7.读取/etc/rc.d/rc.sysinit 系统初始化文件"></a><strong>7.读取/etc/rc.d/rc.sysinit 系统初始化文件</strong></h3><p>(1) 设置主机名</p>
-<p>(2) 设置欢迎信息</p>
-<p>(3) 激活udev和selinux</p>
-<p>(4) 挂载/etc/fstab文件中定义的文件系统</p>
-<p>(5) 检测根文件系统，并以读写方式重新挂载根文件系统</p>
-<p>(6) 设置系统时钟</p>
-<p>(7) 激活swap设备</p>
-<p>(8) 根据/etc/sysctl.conf文件设置内核参数</p>
-<p>(9) 激活lvm及software raid设备</p>
-<p>(10) 加载额外设备的驱动程序</p>
-<p>(11) 清理操作</p>
-<p><strong>/etc/init.d/</strong></p>
-<p>存放对应服务脚本</p>
-<p>是rc.d文件软连接的源文件</p>
-<p>通过执行init.d脚本，确定运行级别开启和关闭的服务</p>
-<h3 id="8-运行-etc-rc-d-rc-0-6-d-对应级别目录下服务"><a href="#8-运行-etc-rc-d-rc-0-6-d-对应级别目录下服务" class="headerlink" title="8.运行/etc/rc.d/ rc[0-6].d/对应级别目录下服务"></a><strong>8.运行/etc/rc.d/ rc[0-6].d/对应级别目录下服务</strong></h3><p><strong>K##*</strong>：运行级别为N时，关闭K开头的服务；##运行次序；数字越小，越先运行；数字越小的服务，通常</p>
-<p>为依赖到别的服务</p>
-<p><strong>S##*</strong>：运行级别为S时，打开S开头的服务；##运行次序；数字越小，越先运行；数字越小的服务，通常</p>
-<p>为被依赖到的服务</p>
-<p><strong>/var/lock/subsys</strong></p>
-<p>存放已启动的服务名称</p>
-<h3 id="9-运行-etc-rc-d-rc-local文件"><a href="#9-运行-etc-rc-d-rc-local文件" class="headerlink" title="9.运行/etc/rc.d/rc.local文件"></a><strong>9.运行/etc/rc.d/rc.local文件</strong></h3><p>rc.local会在所有服务启动后作为一个兜底的服务进行启动</p>
-<p><strong>注意：</strong>（1）正常级别下，最后启动一个服务S99local没有链接至/etc/rc.d/init.d一个</p>
-<p>服务脚本，而是指向了/etc/rc.d/rc.local脚本</p>
-<p>（2）不便或不需写为服务脚本放置于/etc/rc.d/init.d/目录，且又想开机时自动运行</p>
-<p>的命令，可直接放置于/etc/rc.d/rc.local文件中</p>
-<p>（3）/etc/rc.d/rc.local在指定运行级别脚本后运行</p>
-<p>（4）可以根据情况，进行自定义修改</p>
-<h3 id="10、执行-bin-login程序"><a href="#10、执行-bin-login程序" class="headerlink" title="10、执行/bin/login程序"></a><strong>10、执行/bin/login程序</strong></h3><p>此时，系统完成启动，显示请输入用户名、密码</p>
-<h2 id="二、制定自己的init服务脚本："><a href="#二、制定自己的init服务脚本：" class="headerlink" title="二、制定自己的init服务脚本："></a><strong>二、制定自己的init服务脚本：</strong></h2><h3 id="方法1："><a href="#方法1：" class="headerlink" title="方法1："></a><strong>方法1：</strong></h3><p><strong>第一步：编写服务脚本</strong></p>
-<p>#！/bin/bash</p>
-<p>#chkconfig:     345/-     95     5             <strong>关键一行</strong></p>
-<p>生效模式:345或all  S编号  K编号</p>
-<p>#description:test service</p>
-<p>source /etc/init.d/functions                    调用函数库</p>
-<p>case $1 in</p>
-<p>start）</p>
-<p>[ -f /var/lock/subsys/testsrv ] &amp;&amp; action “testsrv is started ”</p>
-<p>touch /var/lock/subsys/testsrv</p>
-<p>action starting testsrv</p>
-<p>;;</p>
-<p>stop）</p>
-<p>rm -f /var/lock/subsys/testsrv</p>
-<p>action testsrv is stopped</p>
-<p>;;</p>
-<p>status)</p>
-<p>[ -f /var/lock/subsys/testsrv ]&amp;&amp;echo testsrv is starting||echo testsrv is stopped</p>
-<p>*)</p>
-<p>echo “Usage:service testsrv start|stop|status”</p>
-<p>esac</p>
-<p><strong>第二步：放入服务目录</strong></p>
-<p>/etc/init.d/                                         放入服务目录</p>
-<p><strong>第三步：添加脚本至服务</strong></p>
-<p>chkconfig –add testsrv                            将testsrv脚本添加至服务</p>
-<h3 id="方法2："><a href="#方法2：" class="headerlink" title="方法2："></a><strong>方法2：</strong></h3><p>也可以将开机启动服务代码添加到：</p>
-<p><strong>/etc/rc.d/rc[0-6]/99Sloca</strong>l中执行</p>
-<h2 id="三、服务相关命令"><a href="#三、服务相关命令" class="headerlink" title="三、服务相关命令"></a><strong>三、服务相关命令</strong></h2><p><strong>chkconfig</strong>         服务状态控制</p>
-<p><strong>查看服务状态：</strong></p>
-<p>–list                  列出所有独立服务</p>
-<p>–list [name]             列出指定服务各运行模式状态</p>
-<p><strong>添加脚本到服务：</strong></p>
-<p>–add  name                   添加脚本到服务</p>
-<p>注：SysV服务脚本要放置于/etc/rc.d/init.d（/etc/init.d）</p>
-<p>#!/bin/bash</p>
-<p>#LLLL 表示初始在哪个级别下启动，-表示都不启动</p>
-<p># chkconfig: LLLL nn nn</p>
-<p><strong>删除服务：</strong>   </p>
-<p>–del  name            删除指定服务</p>
-<p><strong>修改服务状态：</strong> </p>
-<p>–level 35 atd off|on       将3,5模式atd服务默认开机关闭服务，不添加模式：默认2,3,4,5</p>
-<p><strong>ntsysv</strong>               查看当前模式服务启动状态，*代表开机启动</p>
-<p>–level=3          修改指定运行模式的启动服务</p>
-<p><strong>service</strong>              手动管理服务</p>
-<p>[name]  start|stop|restart     管理服务状态</p>
-<p>–status-all               当前所有服务状态</p>
-
-          
+          inux系统从按下电源键开始到系统启动要求用户输入用户名，中间究竟发生什么？了解Linux系统的启动
+流程，不仅有助于我们更加深入的理解linux底层设计理念，更能帮助我们再出现系统启动故障时，迅速排
+查出故障原因。
+## 
+一、Linux系统启动流程以下是CentOS6版本系统启动流程图：
+（注：
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/10/Linux系统启动流程详解/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1036,122 +729,17 @@
       
         
           
-            <p>在前面的基础编程内容中，我们已经学习了shell脚本的顺序执行及选择执行，通过这两种方式，可</p>
-<p>以帮我们解决一些简单需求，但要想在更复杂的场景中使用的话，就需要掌握<strong>循环执行</strong>的方式了。</p>
-<h2 id="一、if、case条件判断"><a href="#一、if、case条件判断" class="headerlink" title="一、if、case条件判断"></a>一、if、case条件判断</h2><h3 id="条件判断if语句："><a href="#条件判断if语句：" class="headerlink" title="条件判断if语句："></a>条件判断if语句：</h3><p>if语句 是指编程语言中用来判定所给定的条件是否满足，根据判定的结果（真或假）决定执行给出的两种操作之一。</p>
-<p><strong>格式：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if   判断条件1；then		# 条件1为真的分支代码</span><br><span class="line"></span><br><span class="line">elif 判断条件2；then		# 条件2为真的分支代码</span><br><span class="line"></span><br><span class="line">elif 判断条件3；then		# 条件3为真的分支代码</span><br><span class="line"></span><br><span class="line">else	# 以上条件都不满足的分支代码</span><br><span class="line"></span><br><span class="line">fi	# if语句结束标记位</span><br></pre></td></tr></table></figure>
-<p>if语句会逐条件的进行判断，当第一次遇到为”真”的条件时，就会执行其分支代码，而后结束整个if语句。</p>
-<h3 id="条件判断case语句："><a href="#条件判断case语句：" class="headerlink" title="条件判断case语句："></a>条件判断case语句：</h3><p><strong>case语句</strong>是实现选择结构程序设计的一种语句，比较适合处理离散型变量。</p>
-<p><strong>格式：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">case 变量引用 in</span><br><span class="line">1|2|3)</span><br><span class="line">cmd1</span><br><span class="line">;;</span><br><span class="line"></span><br><span class="line">4|5|6)</span><br><span class="line">   cmd2</span><br><span class="line">;;</span><br><span class="line"></span><br><span class="line">7|8|9)</span><br><span class="line">cmd3</span><br><span class="line">;;</span><br><span class="line">*)</span><br><span class="line">    cmd4</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
-<p><strong>注意：</strong>case支持glob风格的通配符：</p>
-<p>如：*      表示任意长度任意字符</p>
-<p>？    表示任意单个字符</p>
-<p>[]      指定范围内的任意单个字符</p>
-<p>a|b    a或者b</p>
-<h2 id="二、for、while及until循环"><a href="#二、for、while及until循环" class="headerlink" title="二、for、while及until循环"></a>二、for、while及until循环</h2><p>循环执行</p>
-<p>将某代码段重复运行多次</p>
-<p>重复运行多少次</p>
-<p>次数已知</p>
-<p>次数未知</p>
-<p>有进入条件和退出条件</p>
-<p>循环主要语句有：<strong>for、whlie、until</strong></p>
-<h3 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a><strong>for循环</strong></h3><p>for语句将循环一个列表中的每一个元素执行一次循环体代码，直到列表中元素全部执行过一次。</p>
-<p>一般用于次数预先知道的循环。</p>
-<p><strong>格式1：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for 变量名 in 列表；do</span><br><span class="line"></span><br><span class="line">循环体</span><br><span class="line"></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<p><strong>其中列表的生成方式有多种：</strong></p>
-<ol>
-<li><p>直接给出列表</p>
-</li>
-<li><p>整数列表<strong>：</strong></p>
-<p>（a）{start..end[..step]}</p>
-<p>（b）$（seq[start[step]end]）</p>
-</li>
-<li><p>返回列表的命令<strong>：</strong></p>
-<p>$（COMMAND）</p>
-</li>
-<li><p>使用glob，如：*.sh</p>
-</li>
-<li><p>变量引用：</p>
-<p>$@,$*等</p>
-</li>
-</ol>
-<p>执行机制<strong>：</strong></p>
-<p>依次将列表中的元素赋值给”变量名”，每次赋值后即执行一次循环体；直到列表中的元素全部被执行，循环结束</p>
-<p><strong>格式2：C语言风格</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">for ((: for (( exp1; exp2; exp3 )); do COMMANDS; done</span><br><span class="line"></span><br><span class="line">Arithmetic for loop.</span><br><span class="line"></span><br><span class="line">Equivalent to</span><br><span class="line"></span><br><span class="line">(( EXP1 ))</span><br><span class="line"></span><br><span class="line">while (( EXP2 )); do</span><br><span class="line"></span><br><span class="line">COMMANDS</span><br><span class="line"></span><br><span class="line">(( EXP3 ))</span><br><span class="line"></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<p><strong>例：利用for循环依次读取列表{1..100}中的内容，并相加，得出1到100的数字之和</strong></p>
-<p><img src="testfor.png" alt="testfor"></p>
-<h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a><strong>while循环</strong></h3><p>while结构循环为当型循环(when type loop)，一般用于不知道循环次数的情况。维持循环的是一个条件表达式，条件成立执行循环体，条件不成立退出循环。</p>
-<p><strong>格式：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while 循环控制条件；do</span><br><span class="line">循环体</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<p><strong>循环控制条件：</strong>进入循环之前，先做一次判断；每次循环之后会再次做判断；当条件为True时，则继续执行循环；直到条件测试状态为false时终止循环。</p>
-<p><strong>例：利用while循环，定义变量i=0，当i小于100时，执行循环，并让变量i每执行一次循环加1，直到i=100时停止循环，得出数字1到100之和</strong></p>
-<p><img src="testwhile.png" alt="testwhile"></p>
-<p><strong>while循环的特殊用法（遍历文件的每一行）：</strong></p>
-<p><strong>while read line； do</strong></p>
-<p>  循环体</p>
-<p><strong>done &lt; /PATH/FROM/SOMEFILE</strong></p>
-<p>依次读取<strong>/PATH/FROM/SOMEFILE</strong>文件中的每一行，且将行赋值给变量line</p>
-<h3 id="for循环与while循环的区别："><a href="#for循环与while循环的区别：" class="headerlink" title="for循环与while循环的区别："></a><strong>for循环与while循环的区别：</strong></h3><p>for循环与while循环是可以<strong>相互替代</strong>的；比如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for i in &#123;1..10&#125;；do</span><br><span class="line">echo &quot;OK&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<p><strong>用while语句来写的话：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">i=1</span><br><span class="line">while [ $i -le 10 ];do</span><br><span class="line">echo &quot;OK&quot;</span><br><span class="line">let i++</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<p>两者意思都是打印10次”OK”，那什么时候用for循环，什么时候又用while循环呢？</p>
-<p>for循环用于针对集合中的每个元素的一个代码块，而while循环不断的运行，直到指定的条件不满足为止。</p>
-<p>一般来说：</p>
-<p><strong>for循环比较适合循环次数确定的情况</strong></p>
-<p><strong>while循环适合循环次数不确定的情况</strong></p>
-<h3 id="until循环"><a href="#until循环" class="headerlink" title="until循环"></a><strong>until循环</strong></h3><p>维持循环的也是一个条件表达式，但与while用法正好相反，条件不成立时执行循环体，条件成立时退出循环。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">until 循环控制条件；do</span><br><span class="line">	循环体</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<p><strong>until语句和while语句可相互转化：</strong></p>
-<p>如：until [ test ]；do  等价于 while [ ! test ]；do</p>
-<h2 id="三、循环控制语句continue、break、shift"><a href="#三、循环控制语句continue、break、shift" class="headerlink" title="三、循环控制语句continue、break、shift"></a>三、循环控制语句continue、break、shift</h2><h3 id="continue语句"><a href="#continue语句" class="headerlink" title="continue语句"></a><strong>continue语句</strong></h3><p>用于循环体中</p>
-<p><strong>continue[N]：</strong>提前结束第N层的本轮循环，而直接进入下一轮判断；最内层为第1层</p>
-<p><strong>格式：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">while 循环控制条件；do</span><br><span class="line">	CMD1</span><br><span class="line">	…</span><br><span class="line">    if 判断条件；then</span><br><span class="line">   		continue</span><br><span class="line">    fi</span><br><span class="line">    CMDn</span><br><span class="line">    …</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<p><strong>例：依次打印数字1至10，当continue出现在5循环中时，直接跳过，继续执行6循环；</strong></p>
-<p><strong>当continue出现在嵌套循环中时，continue 2，提前结束第二次本轮循环，并打印3次</strong></p>
-<p><img src="testcontinue.png" alt="testcontinue"></p>
-<h3 id="break语句"><a href="#break语句" class="headerlink" title="break语句"></a><strong>break语句</strong></h3><p>用于循环体中</p>
-<p><strong>break[N]：</strong>提前结束第N层循环，最内层为第一层</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">while 循环控制条件；do</span><br><span class="line">    CMD1</span><br><span class="line">    …</span><br><span class="line">    if 判断条件；then</span><br><span class="line">  	  break</span><br><span class="line">    fi</span><br><span class="line">    CMDn</span><br><span class="line">    …</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<p><strong>例：break语句将直接结束本轮循环</strong></p>
-<p><img src="testbreak.png" alt="testbreak"></p>
-<h3 id="shift命令"><a href="#shift命令" class="headerlink" title="shift命令"></a><strong>shift命令</strong></h3><p><strong>shift[n]：</strong>将参量列表list左移指定次数，缺省为左移一次，适合用于处理位置参数</p>
-<p>参量列表list一旦被移动，最左端的那个参数就从列表中删除。while循环遍历位置参量列表时，</p>
-<p>常用到shift</p>
-<p><strong>例1：利用shifit，每次位置变量向左移动1位，并打印本次全部位置变量，直到位置变量为0个</strong></p>
-<p><img src="testdoit.png" alt="testdoit"></p>
-<p><strong>例2：利用shifit，每次变量向左移动一位，并打印本次第一个位置变量，直到位置变量小于1时停止执行</strong></p>
-<p><img src="testshifit.png" alt="testshifit"></p>
-<h3 id="避免出现无限循环："><a href="#避免出现无限循环：" class="headerlink" title="避免出现无限循环："></a><strong>避免出现无限循环：</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">while true；do</span><br><span class="line">	循环体</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">until false；do</span><br><span class="line">	循环体</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<p>每个程序员都会偶尔不小心而编写出无限循环，在循环退出条件比较微妙时尤其如此，如果程序陷入无限循环，可按<strong>ctrl+c</strong>退出</p>
-<p>要避免编写无限循环，务必对每个while、until循环进行测试，确保它按预期那样结束。</p>
-<h3 id="select循环与菜单"><a href="#select循环与菜单" class="headerlink" title="select循环与菜单"></a><strong>select循环与菜单</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select 变量 in list；do</span><br><span class="line">	循环体命令</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<p>select循环主要用于创建菜单，常与case语句搭配使用，用户输入菜单列表中的某个数字，执行相应的命令</p>
-<p>select是个无限循环，因此要记住用break命令退出循环，或用户exit命令终止脚本。可按ctrl+c退出循环</p>
-<p>与for循环类似，可以省略in list，此时使用位置变量。</p>
-<p>相关变量：</p>
-<p><strong>$PS3</strong>        menu菜单提示符</p>
-<p><strong>$REPLY</strong>    保存用户的输入信息</p>
-<h2 id="四、信号捕捉trap"><a href="#四、信号捕捉trap" class="headerlink" title="四、信号捕捉trap"></a>四、信号捕捉trap</h2><p><strong>trap ‘触发指令’信号</strong></p>
-<p>自定义进程收到系统发出的指定信号好，将执行触发指令，而不会执行原操作</p>
-<p><strong>trap “ 信号</strong></p>
-<p>忽略信号的操作</p>
-<p><strong>trap ‘-‘ 信号</strong></p>
-<p>恢复原信号的操作</p>
-<p><strong>trap -p</strong></p>
-<p>列出自定义信号操作</p>
-<p><strong>例：打印数字1到10的过程中，trap -p显示自定义信号操作，由于trap “int捕获了int信号，ctrl+c无法中断显示，且显示自定义输入：press ctrl+c；</strong></p>
-<p><strong>打印数字11到20的过程中，由于trap “int捕获了int信号，ctrl+c无法中断显示</strong></p>
-<p><strong>打印数字21到30的过程中，trap ‘-‘恢复了原信号操作，顾ctrl+c又可中断显示</strong></p>
-<p><img src="trap.png" alt="trap"></p>
-<p><img src="trap2.png" alt="trap2"></p>
-
-          
+          在前面的基础编程内容中，我们已经学习了shell脚本的顺序执行及选择执行，通过这两种方式，可
+以帮我们解决一些简单需求，但要想在更复杂的场景中使用的话，就需要掌握循环执行的方式了。
+一、if、case条件判断条件判断if语句：if语句 是指编程语言中用来判定所给定的条件是否满足，根据判定的结果（真或
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/10/shell脚本编程基础（3）——循环用法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1291,214 +879,20 @@
       
         
           
-            <p>在前面的网络基础内容中我们了解了TCP/IP协议的定义以及TCP/IP模型的分层结构即：</p>
-<p>应用层，传输层，Internet层以及网络访问层。</p>
-<p>今天我来带大家详细了解下TCP/IP协议栈中的典型协议：</p>
-<p>传输层的TCP、UDP协议，网络层的IP协议。</p>
-<p><img src="TCP模型.png" alt="TCP模型"></p>
-<h3 id="一、TCP协议"><a href="#一、TCP协议" class="headerlink" title="一、TCP协议"></a><strong>一、TCP协议</strong></h3><p><strong>TCP</strong>是面向连接的通信协议，通过三次握手建立连接，通讯完成时要拆除连接，由于TCP是面向连</p>
-<p>接的，所有只能用于端到端的通讯。</p>
-<h3 id="TCP协议的工作特性："><a href="#TCP协议的工作特性：" class="headerlink" title="TCP协议的工作特性："></a><strong>TCP协议的工作特性：</strong></h3><p>工作在传输层</p>
-<p>面向连接协议：先协商确保网络状态正常稳定</p>
-<p>全双工协议</p>
-<p>半关闭：支持一端关闭，一端传输的半关闭状态</p>
-<p>错误检查</p>
-<p>将数据打包成段，排序</p>
-<p>确认机制：保证数据包可靠</p>
-<p>数据恢复，重传</p>
-<p>流量控制，滑动窗口</p>
-<p>拥塞控制，慢启动和拥塞避免算法</p>
-<h3 id="TCP协议报文格式："><a href="#TCP协议报文格式：" class="headerlink" title="TCP协议报文格式："></a><strong>TCP协议报文格式：</strong></h3><p>为何TCP协议具有上述工作特性呢，这就要结合TCP报文格式来讲起。</p>
-<p>下图是TCP报文格式图：</p>
-<p><img src="TCP报头.png" alt="TCP报头"></p>
-<p><strong>具体含义如下：</strong></p>
-<p><strong>1.源端口、目标端口：</strong>计算机上的进程要和其他进程通信需要通过计算机端口，而一个计算机端口</p>
-<p>某个时刻只能被一个进程占用，所以通过指定源端口和目标端口，就可以制度哪两个进程通信。</p>
-<p><strong>2.序列号：</strong>seq序号，占32位，用来标识从TCP源端口向目的端口发送的字节流，发起方发送数据时</p>
-<p>对此进行标记。</p>
-<p><strong>3.确认序号：</strong>ack序号，占32位，只有ACK标志位为1时，确认序号字段才有效，ack=seq+1</p>
-<p><strong>4.数据偏移：</strong>表示TCP报文段的首部长度，共4位，由于TCP首部包含一个长度可变的选项部</p>
-<p>分，需要指定这个TCP报文段到底有多长。它指出 TCP 报文段的数据起始处距离 TCP 报文</p>
-<p>段的起始处有多远。该字段的单位是32位(即4个字节为计算单位），4位二进制最大表示</p>
-<p>15，所以数据偏移也就是TCP首部最大60字节。</p>
-<p><strong>5.标志位：</strong>共6个，URG、ACK、PSH、RSH、SYN、FIN，具体含义如下：</p>
-<p>（1）URG：紧急指针位，0表示无效，1表示有效</p>
-<p>（2）<strong>ACK：</strong>确认序号有效</p>
-<p>（3）PSH：收到数据包后是否直接传给应用程序使用，或传到buffer</p>
-<p>（4）RST：重置位，0表示正常，1表示异常需要重传</p>
-<p>（5）<strong>SYN：</strong>同步位，代表发起一个新连接</p>
-<p>（6）<strong>FIN：</strong>代表释放一个连接</p>
-<p><strong>6.窗口大小：</strong>表示现在允许对方发送的数据量，从本报文段的确认号开始允许对方发送数据量</p>
-<p><strong>7.校验和：</strong>提供额外的可靠性</p>
-<p><strong>8.紧急指针：</strong>标记紧急数据在数据字段的位置</p>
-<p><strong>9.选项部分：</strong>其最大长度可根据TCP首部长度进行推算。TCP首部长度用4位标识，选项部分最长</p>
-<p>为：（2^4-1）*4-20=40字节</p>
-<h3 id="TCP协议端口号："><a href="#TCP协议端口号：" class="headerlink" title="TCP协议端口号："></a><strong>TCP协议端口号：</strong></h3><p>传输层通过port号，确认应用层协议</p>
-<p>tcp：传输控制协议，面向连接的协议；通信前需要建立虚拟链路；结束后拆除链路</p>
-<p>port number：0-65535</p>
-<p>其中：</p>
-<p><strong>0-1023：</strong>系统端口或特权端口（仅管理员可用），总所周知，永久的分配给固定的系统应用使用；</p>
-<p>如：22/tcp（ssh），80/tcp（http），443/tcp（https）等</p>
-<p><strong>1024-49151：</strong>用户端口或注册端口，要求并不严格，分配给程序注册为某应用使用；</p>
-<p>如：1433/tcp（SqlServer），1521/tcp（oracle）</p>
-<p>3306/tcp（mysql），11211/tcp/udp（memcached）</p>
-<p><strong>49152-65535：</strong>动态端口或私有端口，客户端程序随机使用的端口；</p>
-<p>其范围的定义：/proc/sys/net/ipv4/iplocalportrange</p>
-<h2 id="二、TCP协议三次握手及四次挥手"><a href="#二、TCP协议三次握手及四次挥手" class="headerlink" title="二、TCP协议三次握手及四次挥手"></a><strong>二、TCP协议三次握手及四次挥手</strong></h2><h3 id="TCP协议三次握手："><a href="#TCP协议三次握手：" class="headerlink" title="TCP协议三次握手："></a><strong>TCP协议三次握手：</strong></h3><p>所谓的三次握手即建立TCP连接，是指建立一个TCP连接时，需要客户端和服务端总共发送3个包以</p>
-<p>确认连接的建立。</p>
-<p>整个流程如下图所示：</p>
-<p><img src="三次握手.png" alt="三次握手"></p>
-<p><strong>第一次握手：</strong>客户端将标志位SYN置为1，随机产生一个序列值seq=x，并将该数据包发送给服务器，</p>
-<p>客户端进入SYN_SENT状态，等待Server确认。</p>
-<p><strong>第二次握手：</strong>服务器收到数据包后由标志位SYN=1指定客户端请求建立连接，服务器端将标志位SYN</p>
-<p>和ACK都置为1，ack=x+1，随机产生一个序列值seq=y，并将该数据包发送给客户端以确认连接请求，</p>
-<p>此时，服务器进入SYN_RCVD状态。</p>
-<p><strong>第三次握手：</strong>客户端收到确认后，检查ack是否为x+1，ACK是否为1，如果正确则将标志位ACK置为1，</p>
-<p>ack=y+1，发送数据包给服务器端，客户端进入ESTABLISHED状态；服务器端收到对端发来的确认数据</p>
-<p>包后也转入ESTABLISHED状态，此时三次握手完成，客户端与服务器已建立通讯连接。</p>
-<h3 id="SYN攻击"><a href="#SYN攻击" class="headerlink" title="SYN攻击"></a><strong>SYN攻击</strong></h3><p>在三次握手过程中，服务器发送SYN-ACK之后，收到客户端的ACK之前的TCP连接称为半连接，此时服务</p>
-<p>器处于SYN_RCVD状态，当收到ACK后，服务器转入ESTABLISHED状态。SYN攻击就是Client在短时间</p>
-<p>内伪造大量不存在的IP地址，并向Server不断地发送SYN包，Server回复确认包，并等待Client的确认，</p>
-<p>由于源地址是不存在的，因此，Server需要不断重发直至超时，这些伪造的SYN包将长时间占用未连接</p>
-<p>队列，导致正常的SYN请求因为队列满而被丢弃，从而引起网络堵塞甚至系统瘫痪。SYN攻击时一种典</p>
-<p>型的DDOS攻击，检测SYN攻击的方式非常简单，即当Server上有大量半连接状态且源IP地址是随机的，</p>
-<p>则可以断定遭到SYN攻击了，使用如下命令可以让之现形：</p>
-<p><strong>#netstat -nap | grep SYN_RECV</strong></p>
-<h3 id="TCP协议四次挥手："><a href="#TCP协议四次挥手：" class="headerlink" title="TCP协议四次挥手："></a><strong>TCP协议四次挥手：</strong></h3><p>所谓四次挥手即终止TCP连接，就是指断开一个TCP连接时，需要客户端和服务器端总共发送4个包以确认</p>
-<p>连接的端开。</p>
-<p>整个流程如下图所示：</p>
-<p><img src="四次挥手.png" alt="四次挥手"></p>
-<p>由于TCP连接是全双工工作，因此，<strong>每个方向都必须要单独进行关闭</strong>。即当一方完成数据发送任务后，</p>
-<p>发送一个FIN来终止这一方向的连接，收到一个FIN只是代表这一方向上没有数据流动了，即不再接收到</p>
-<p>数据，但在这个TCP连接上仍然能够发送数据，直到这一方向也发送了FIN。</p>
-<p><strong>第一次挥手：</strong>客户端发送一个FIN，用来关闭客户端到服务器端的数据传送，客户端进入FIN_WAIT_1</p>
-<p>状态。</p>
-<p><strong>第二次挥手：</strong>服务器端收到FIN后，发送一个ACK给客户端，确认序号+1，服务器进入CLOSE_WAIT状态。</p>
-<p><strong>第三次挥手：</strong>服务器端发送一个FIN，用来关闭服务器到客户端的数据传送，服务器进入LAST_WAIT状态。</p>
-<p><strong>第四次挥手：</strong>客户端收到FIN后，进入TIME_WAIT状态，在等待2个报文最大生产时限后会转入</p>
-<p>CLOSED状态，客户端发送ACK确认，服务器收到ACK确认报文后由LAST_ACK状态转为CLOSED状态。</p>
-<p>此时四次挥手完成。</p>
-<h2 id="三、UDP协议"><a href="#三、UDP协议" class="headerlink" title="三、UDP协议"></a><strong>三、UDP协议</strong></h2><p><strong>UDP</strong>是非面向连接的通讯协议，UDP数据包括目的端口号和源端口号信箱，由于通讯不需要连接，所有可</p>
-<p>以实现广播发送。</p>
-<p>UDP与TCP位于同一层，但它不管数据包的顺序、错误或重发。因此，UDP不被应用于那些使用面向连</p>
-<p>接的服务，UDP主要用于那些面向查询—应答的服务，例如NFS。相对于FTP或Telnet，这些服务需</p>
-<p>要交换的信息量较小。使用UDP的服务包括NTP（网络时间协议）和DNS（DNS也使用TCP）。</p>
-<p>UDP通讯时不需要接收方确认，属于不可靠的传输，可能会出现丢包现象。</p>
-<h3 id="UDP协议的工作特性："><a href="#UDP协议的工作特性：" class="headerlink" title="UDP协议的工作特性："></a><strong>UDP协议的工作特性：</strong></h3><p>工作在传输层</p>
-<p>提供不可靠的网络访问</p>
-<p>非面向连接协议</p>
-<p>有限的错误检查</p>
-<p>传输性能高</p>
-<p>无数据恢复特性</p>
-<h3 id="UDP协议报文格式："><a href="#UDP协议报文格式：" class="headerlink" title="UDP协议报文格式："></a><strong>UDP协议报文格式：</strong></h3><p><img src="UDP报头.png" alt="UDP报头"></p>
-<p><strong>16-bit source port：</strong>占16位，源端口</p>
-<p><strong>16-bit destination port：</strong>占16位，目的端口</p>
-<p><strong>16-bit UDP length：</strong>占16位，定义数据报长度</p>
-<p><strong>16-bit UDP checksum：</strong>占16位，校验和</p>
-<p>通过UDP协议报文格式，我们可以发现，欺骗UDP包比欺骗TCP包更容易，因为UDP没有建立初始化连</p>
-<p>接（也可以称为握手），也就是说，与UDP相关的服务面临着更大的危险。</p>
-<h3 id="四、IP协议"><a href="#四、IP协议" class="headerlink" title="四、IP协议"></a><strong>四、IP协议</strong></h3><p><strong>IP协议（Internet Protocol</strong>）是将多个包交换网络连接起来，它在源地址和目的地址之间传送一种</p>
-<p>称之为数据包的东西，它还提供对数据大小的重新组装功能，以适应不同网络对包大小的要求。</p>
-<h3 id="IP协议的工作特性："><a href="#IP协议的工作特性：" class="headerlink" title="IP协议的工作特性："></a><strong>IP协议的工作特性：</strong></h3><p>运行于 OSI 网络层</p>
-<p>面向无连接的协议</p>
-<p>独立处理数据包</p>
-<p>分层编址</p>
-<p>尽力而为传输</p>
-<p>无数据恢复功能</p>
-<h3 id="IP协议报头格式："><a href="#IP协议报头格式：" class="headerlink" title="IP协议报头格式："></a><strong>IP协议报头格式：</strong></h3><p>如下图所示：</p>
-<p><img src="IP报头.png" alt="IP报头"></p>
-<p><strong>版本：</strong>占4位，指IP协议版本，目前IP协议版本号为4，即IPv4。</p>
-<p><strong>首部长度：</strong>占4位，定义了IP首部长度最大值是60字节。</p>
-<p><strong>区分服务：</strong>占8位，用来获取更好的服务，一般情况下不使用。</p>
-<p><strong>总长度：</strong>占16位，指首部和数据之和的长度，单位为字节，因此数据包的最大长度为65535字节。总</p>
-<p>长度不可超过最大传送单元MTU。</p>
-<p><strong>标识：</strong>占16位，它是一个计数器，每发送一个报文，该值会加1，也用于数据包分片，在同一个包的若干</p>
-<p>分片中，该值相同。</p>
-<p><strong>标志（flag）：</strong>占3位，目前只有后两位有意义。</p>
-<p>（1）<strong>DF：Don’t Fragment，</strong>中间的一位，只有DF=0时才允许数据包分片。</p>
-<p>（2）<strong>MF：More Fragment，</strong>最高位，MF=1表示后面还有分片。MF=0表示这是数据包最后一个分</p>
-<p>片。</p>
-<p><strong>片偏移：</strong>占12位，值较长的分组在分片后，该分片在原分组中的相对位置，片偏移以8个字节为偏移单</p>
-<p>位。</p>
-<p><strong>生存时间：</strong>占8位，TTL（Time To Live），数据包在网络中可通过的路由器数最大值。</p>
-<p><strong>协议：</strong>占8位，指出该数据包携带的数据使用何种协议，以便目的主机的IP层将数据不符上交给哪个处理</p>
-<p>进程。其中：1表示为 ICMP 协议, 2表示为 IGMP 协议, 6表示为TCP 协议, 17表示为 UDP 协议。</p>
-<p><strong>首部校验和：</strong>占16位，只检验数据包的首部不检验数据不符。采用简单计算的方法。</p>
-<p><strong>源地址和目的地址：</strong>各占4字节，分别记录源IP地址和目的IP地址。</p>
-<h2 id="五、IP地址："><a href="#五、IP地址：" class="headerlink" title="五、IP地址："></a>五、IP地址：</h2><p><strong>IP地址</strong>用来唯一标识IP网络中的每台设备</p>
-<p>每台主机（计算机、网络设备、外围设备）必须具有唯一的地址</p>
-<p>IP地址由两部分组成：</p>
-<p>网络ID：</p>
-<p>标识网络</p>
-<p>每个网段分配一个网络ID</p>
-<p>主机ID：</p>
-<p>标识单个主机</p>
-<p>由组织分配给各设备</p>
-<h3 id="IP地址分类："><a href="#IP地址分类：" class="headerlink" title="IP地址分类："></a><strong>IP地址分类：</strong></h3><p><strong>A类地址</strong></p>
-<p>0XXXXXXX.XXXXXXXX.XXXXXXXX.XXXXXXXX</p>
-<p>8位网络ID，24位主机ID</p>
-<p>0-127.x.x.x</p>
-<p>主机数：1600万左右</p>
-<p>网段数：2^7-2=126</p>
-<p>抛去特殊0开头127开头（本地回环）</p>
-<p>1-126.x.x.x      共有126个A类可用网段</p>
-<p><strong>B类地址</strong></p>
-<p>10XXXXXX.XXXXXXXX.XXXXXXXX.XXXXXXXX</p>
-<p>16位网络ID，16位主机ID</p>
-<p>128-191.x.x.x 开头</p>
-<p>主机数：65534</p>
-<p>网段数：2^14=16384</p>
-<p><strong>C类地址</strong></p>
-<p>110XXXXX.XXXXXXXX.XXXXXXXX.XXXXXXXX</p>
-<p>24位网络ID，8位主机ID</p>
-<p>192-223.x.x.x 开头</p>
-<p>主机数：2^8-2=254</p>
-<p><strong>D类地址</strong></p>
-<p>1110XXXX.XXXXXXXX.XXXXXXXX.XXXXXXXX</p>
-<p>224-239.x.x.x 开头</p>
-<p><strong>E类地址（保留）</strong></p>
-<p>11110XXX.XXXXXXXX.XXXXXXXX.XXXXXXXX</p>
-<p>239-255.x.x.x 开头</p>
-<p><strong>特殊地址</strong></p>
-<p>0.0.0.0</p>
-<p>表示一个集合：所有不清楚的主机和目的网络</p>
-<p>255.255.255.255</p>
-<p>广播地址。对本机来说，这个地址指本网段内（同一广播域）所有主机</p>
-<p>127.0.0.1—127.255.255.254</p>
-<p>本机回环地址，主要用于测试。</p>
-<p>224.0.0.0到239.255.255.255</p>
-<p>组播地址，224.0.01特指所有主机，224.0.0.2特指所有路由器。</p>
-<p>169.254.x.x</p>
-<p><strong>公有IP地址：</strong></p>
-<p>A：1.0.0.0     到  9.255.255.255</p>
-<p>11.0.0.0    到  126.255.255.255</p>
-<p>B：128.0.0.0   到  172.15.255.255</p>
-<p>172.32.0.0  到  191.255.255.255</p>
-<p>C：192.0.0.0   到  192.167.255.255</p>
-<p>192.169.0.0 到  223.255.255.255</p>
-<p><strong>私有IP地址：局域网用</strong></p>
-<p>A：10.0.0.0    到  10.255.255.255</p>
-<p>B：172.16.0.0  到  172.31.255.255</p>
-<p>C：192.168.0.0 到  192.168.255.255</p>
-<h3 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a><strong>子网掩码</strong></h3><p>子网掩码(subnet mask)又叫网络掩码、地址掩码、子网络遮罩，它是一种用来指明一个IP地址的哪些位标</p>
-<p>识的是主机所在的子网，以及哪些位标识的是主机的位掩码。子网掩码不能单独存在，它必须结合IP地址</p>
-<p>一起使用。子网掩码只有一个作用，就是将某个IP地址划分成网络地址和主机地址两部分。</p>
-<p><strong>传统表示法：</strong></p>
-<p>XXXXXXXX.XXXXXXXX.XXXXXXXX.XXXXXXXX</p>
-<p>00000000  0</p>
-<p>10000000  128</p>
-<p>11000000  192</p>
-<p>11100000  224</p>
-<p>11110000  240</p>
-<p>11111000  248</p>
-<p>11111100  252</p>
-<p>11111110  254</p>
-<p>11111111  255</p>
-<p><strong>CIDR表示法：</strong></p>
-<p>IP/网络ID位数</p>
-<p>如192.168.10.132/30</p>
+          在前面的网络基础内容中我们了解了TCP/IP协议的定义以及TCP/IP模型的分层结构即：
+应用层，传输层，Internet层以及网络访问层。
+今天我来带大家详细了解下TCP/IP协议栈中的典型协议：
+传输层的TCP、UDP协议，网络层的IP协议。
 
-          
+一、TCP协议TCP是面向连接的通信协议，通过三次
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/06/TCP-IP协议详解/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1638,203 +1032,23 @@
       
         
           
-            <h2 id="一、top——进程监控工具"><a href="#一、top——进程监控工具" class="headerlink" title="一、top——进程监控工具"></a><strong>一、top——进程监控工具</strong></h2><p>相对于ps而言，ps显示的是某个时间点的进程状态信息，<strong>top</strong>命令工具类似于windows系统的任务管理器，</p>
-<p>可以动态的持续监控进程的运行状态</p>
-<p><img src="top.png" alt="top"></p>
-<p><strong>每一行的代表的含义为：</strong></p>
-<p><strong>第一行：</strong></p>
-<p>1.当前系统时间</p>
-<p>2.系统已启动的时间</p>
-<p>3.当前登录用户数</p>
-<p>4.系统平均负载（1min、5min、15min），超过1表示负载过高</p>
-<p><strong>第二行：</strong></p>
-<p>当前进程的总量，以及处于各种状态的进程的数量，要注意最后的zombie，不为0</p>
-<p>要及时查看哪个进程处于僵死状态</p>
-<p><strong>第三行：CPU的整体负载，多核CPU可按1切换不同CPU的负载率</strong></p>
-<p>us：user space       用户运行程序占用CPU百分比</p>
-<p>sy：system     用于运行内核占用CPU百分比</p>
-<p>ni：nice用户进程空间所改变过优先级的进程占用CPU百分比</p>
-<p>id：idle   空闲CPU百分比</p>
-<p>wa：wait to   等待I/O花费时间</p>
-<p>hi：hardware interrupt 硬件中断占用CPU的百分比</p>
-<p>si：software interrupt 软件中断占用CPU的百分比</p>
-<p>st：stolen       被偷走的CPU百分比，一般为虚拟机占用</p>
-<p><strong>第四行：表示物理内存的使用情况</strong></p>
-<p><strong>第五行：表示交换分区的使用情况</strong></p>
-<p><strong>第六行：这里默认显示空白，可以输入指令，包括：</strong></p>
-<p>P       以占据的CPU百分比大小排序</p>
-<p>M     以内存占比大小排序</p>
-<p>T       CPU累加占用时间排序</p>
-<p>l        是否显示系统负载行</p>
-<p>t       是否显示进程摘要信息及CPU负载状态</p>
-<p>1       数字1，平均或单独显示各CPU负载信息</p>
-<p>m     是否显示内存相关状态信息</p>
-<p>q       退出</p>
-<p>s       修改延迟时长</p>
-<p>k       终止指定进程</p>
-<p><strong>top输出下面的部分：</strong></p>
-<p>PID   进程ID</p>
-<p>USER        进程所有者</p>
-<p>PR    进程优先级，越小优先级越高</p>
-<p>NI     nice优先级，越小优先级越高</p>
-<p>VIRT         进程需要占用的内存大小</p>
-<p>RES  进程当前实际占用内存大小</p>
-<p>SHR  进程与其他进程恭喜的内存大小</p>
-<p>S       进程状态</p>
-<p>%CPU       CPU占有率</p>
-<p>%MEM     内存使用率</p>
-<p>TIME+      进行CPU使用时间累加</p>
-<p>COMMAND 进程或命令名称</p>
-<h2 id="二、htop——top增强版进程监控工具"><a href="#二、htop——top增强版进程监控工具" class="headerlink" title="二、htop——top增强版进程监控工具"></a><strong>二、htop——top增强版进程监控工具</strong></h2><p><strong>htop</strong>是top命令工具的增强版，系统默认没有按照，需epel源进行安装</p>
-<p><img src="htop.png" alt="htop"></p>
-<p><strong>交互式命令：</strong></p>
-<p>u       选择显示指定用户的进程</p>
-<p>l        显示光标所在进程缩打开的文件列表</p>
-<p>s       显示光标所在进程执行的系统调用</p>
-<p>a       绑定进程到指定cpu（退出htop失效）</p>
-<p>#       快速定位光标至PID为#的进程上</p>
-<p><strong>htop支持的一些信息</strong></p>
-<p>-d #  延迟时长</p>
-<p>-u USERNAME：显示指定用户的进程</p>
-<p>-s COLUMN：根据指定字段进行排序</p>
-<h2 id="三、iotop、iostat——磁盘读写监控工具"><a href="#三、iotop、iostat——磁盘读写监控工具" class="headerlink" title="三、iotop、iostat——磁盘读写监控工具"></a><strong>三、iotop、iostat——磁盘读写监控工具</strong></h2><p><strong>iotop</strong>命令是一个用来监视磁盘I/O使用状况的top类工具iotop具有与top相似的UI，其</p>
-<p>中包括PID、用户、I/O、进程等相关信息，可查看每个进程是如何使用IO</p>
-<p><img src="iotop.png" alt="iotop"></p>
-<p><strong>每一行的代表的含义为：</strong></p>
-<p><strong>第一行：Read和Write速率总计</strong></p>
-<p><strong>第二行：实际的Read和Write速率</strong></p>
-<p><strong>第三行：参数如下：</strong></p>
-<p>TID                    线程ID（按p切换为进程ID）</p>
-<p>PRIO                          优先级</p>
-<p>USER                         用户</p>
-<p>DISK READ                磁盘读速率</p>
-<p>DISK WRITE              磁盘写速率</p>
-<p>SWPIN                       swap交换百分比</p>
-<p>IO&gt;                    IO等待所占的百分比</p>
-<p>COMMAND                       线程/进程命令</p>
-<p><strong>交互按键</strong></p>
-<p>left和right方向键：改变排序</p>
-<p>r：反向排序</p>
-<p>o：切换至选项–only</p>
-<p>p：切换至–processes选项</p>
-<p>a：切换至–accumulated选项</p>
-<p>q：退出</p>
-<p>i：改变线程的优先级</p>
-<p><strong>iotop支持的选项：</strong></p>
-<p>-o, –only         只显示正在产生I/O的进程或线程，除了传参，可以在运行过程中按o生效</p>
-<p>-b, –batch                非交互模式，一般用来记录日志</p>
-<p>-n NUM, –iter=NUM      设置监测的次数，默认无限。在非交互模式下很有用</p>
-<p>-d SEC, –delay=SEC        设置每次监测的间隔，默认1秒，接受非整形数据例如1.1</p>
-<p>-p PID, –pid=PID     指定监测的进程/线程</p>
-<p>-u USER, –user=USER    指定监测某个用户产生的I/O</p>
-<p>-P, –processes                 仅显示进程，默认iotop显示所有线程</p>
-<p>-a, –accumulated   显示累积的I/O，而不是带宽</p>
-<p>-k, –kilobytes          使用kB单位，而不是对人友好的单位。在非交互模式下，脚本编程有用</p>
-<p>-t, –time                 加上时间戳，非交互非模式</p>
-<p>-q, –quiet                禁止头几行，非交互模式，有三种指定方式</p>
-<p>-q             只在第一次监测时显示列名</p>
-<p>-qq          永远不显示列名</p>
-<p>-qqq                 永远不显示I/O汇总</p>
-<p><strong>iostat</strong>                统计cpu和设备IO信息</p>
-<p><img src="iostat.png" alt="iostat"></p>
-<p><strong>第一段显示</strong>：内核版本（主机名） 当前日期  架构类型  核心数</p>
-<p><strong>第二段显示</strong>：cpu平均利用率</p>
-<p><strong>第三段显示</strong>：磁盘读写速度（kb/s）</p>
-<h2 id="四、vmstat——虚拟内存统计工具"><a href="#四、vmstat——虚拟内存统计工具" class="headerlink" title="四、vmstat——虚拟内存统计工具"></a><strong>四、vmstat——虚拟内存统计工具</strong></h2><p>通过top、htop我们可以获得一些进程对系统资源的使用情况，而<strong>vmstat</strong>则可以通过</p>
-<p>内存、磁盘、网络、CPU来动态显示系统资源的使用情况。</p>
-<p><strong>格式：vmstat [options][delay [count]]</strong></p>
-<p><strong>选项：</strong></p>
-<p>-s              显示内存的统计数据</p>
-<p>-d              显示磁盘的统计数据</p>
-<p><img src="vmstat.png" alt="vmstat"></p>
-<p><strong>vmstat输出含义：</strong></p>
-<p><strong>procs：</strong></p>
-<p>r：可运行进程的个数，和核心数有关</p>
-<p>b：处于不可终端睡眠状态</p>
-<p><strong>memory：</strong></p>
-<p>swpd：交换内存的使用总量</p>
-<p>free：空闲物理内存总量</p>
-<p>buffer：用于buffer的内存总量</p>
-<p>cache：用于cache的内存总量</p>
-<p><strong>swap：</strong></p>
-<p>si：从磁盘交换进内存的数据速率（kb/s）</p>
-<p>so：从内存交换至磁盘的数据速率（kb/s）</p>
-<p><strong>io：</strong></p>
-<p>bi：从块设备读入数据到系统的速率（kb/s）</p>
-<p>bo：保存数据至块设备的速率（kb/s）</p>
-<p><strong>system：</strong></p>
-<p>in：interrupts 中断速率，包括时钟</p>
-<p>cs：进程切换速率</p>
-<p><strong>cpu：</strong></p>
-<p>us：user space       用户运行程序占用CPU百分比</p>
-<p>sy：system     用于运行内核占用CPU百分比</p>
-<p>id：idle   空闲CPU百分比</p>
-<p>wa：wait to   等待I/O花费时间</p>
-<p>st：stolen       被偷走的CPU百分比，一般为虚拟机占用</p>
-<h2 id="五、glances——可跨平台系统监控工具"><a href="#五、glances——可跨平台系统监控工具" class="headerlink" title="五、glances——可跨平台系统监控工具"></a><strong>五、glances——可跨平台系统监控工具</strong></h2><p><strong>glances</strong>是一款系统监视工具，能够监视CPU、负载、内存、磁盘I/O、网络流量、文件</p>
-<p>系统、系统温度等信息。centos系统默认不安装glances工具，需手动安装（epel源）</p>
-<p><img src="glances-1.png" alt="glances"></p>
-<p><strong>glances可提供的监视和分析性能数据功能包括：</strong></p>
-<p>1.CPU使用率</p>
-<p>2.内存使用情况</p>
-<p>3.内核统计信息和运行队列信息</p>
-<p>4.磁盘I/O速度、传输和读/写比率</p>
-<p>5.文件系统中的可用空间</p>
-<p>6.磁盘适配器</p>
-<p>7.网络I/O速度、传输和读/写比率</p>
-<p>8.页面空间和页面速度</p>
-<p>9.消耗资源最多的进程</p>
-<p>10.计算机信息和系统资源</p>
-<p><strong>常用选项：</strong></p>
-<p>-b： 以Byte为单位显示网卡数据速率</p>
-<p>-d： 关闭磁盘I/O模块</p>
-<p>-f： /path/to/somefile: 设定输入文件位置</p>
-<p>-o： {HTML|CSV}：输出格式</p>
-<p>-m： 禁用mount模块</p>
-<p>-n： 禁用网络模块</p>
-<p>-t #： 延迟时间间隔</p>
-<p>-1：  每个CPU的相关数据单独显示</p>
-<p><strong>支持远程模式，可在C/S模式下运行glances命令：</strong></p>
-<p>注：glances版本最好一样</p>
-<p>服务器模式：</p>
-<p>glances -s -B IPADDR</p>
-<p>IPADDR: 指明监听的本机哪个地址</p>
-<p>客户端模式：</p>
-<p>glances -c IPADDR</p>
-<p>IPADDR：要连入的服务器端地址</p>
-<h2 id="六、dstat——多功能整合系统监控工具"><a href="#六、dstat——多功能整合系统监控工具" class="headerlink" title="六、dstat——多功能整合系统监控工具"></a><strong>六、dstat——多功能整合系统监控工具</strong></h2><p><strong>dstat</strong>是一个多功能工具，他包含了vmstat，iostat，netstat这些命令的功能，并</p>
-<p>增加了监控项，变得更加灵活。<strong>dstat</strong>可用于基准测试和排除故障。</p>
-<p><strong>默认情况下，dstat每秒刷新一次并显示结果，可按ctrl+c退出</strong></p>
-<p><img src="dstat.png" alt="dstat"></p>
-<p><strong>每一区列代表的含义：</strong></p>
-<p>total-cpu-usage               CPU使用率</p>
-<p>dsk/total          磁盘读写总数</p>
-<p>net/total          网络设备发送和接收数据的总数</p>
-<p>paging                       系统的分页活动，大多数情况我们希望此处两项为0</p>
-<p>system                      显示中断和上下文切换。只在有比较基线时才有意义。这一栏较高</p>
-<p>的统计值通常表示大量进程造成拥塞</p>
-<p><strong>dstat支持的选项：</strong></p>
-<p>-c     显示cpu性能指标相关统计数据</p>
-<p>-d     显示磁盘disk相关速率</p>
-<p>-g     显示page相关速率数据</p>
-<p>-m    显示内存memory相关统计数据</p>
-<p>-n     显示网络network相关统计数据</p>
-<p>-p     显示进程process相关统计数据</p>
-<p>-r      显示io请求相关统计数据</p>
-<p>-s      显示swap的相关数据</p>
-<p><strong>长选项：</strong></p>
-<p>–top-cpu         显示最占用CPU的进程</p>
-<p>–top-io   显示最占用io的进程</p>
-<p>–top-mem      显示最占用内存的进程</p>
-<p>–top-latency  显示延迟最大的进程</p>
-<p>–tcp                  显示tcp套接字相关数据</p>
-<p>–udp                 显示udp套接字相关数据</p>
-<p>–unix                显示unix sock接口相关统计数据</p>
-<p>–raw                显示raw套接的相关数据</p>
-<p>–socket 显示套接相关数据</p>
-<p>–ipc         显示进程间通信相关的速率数据</p>
+          一、top——进程监控工具相对于ps而言，ps显示的是某个时间点的进程状态信息，top命令工具类似于windows系统的任务管理器，
+可以动态的持续监控进程的运行状态
 
-          
+每一行的代表的含义为：
+第一行：
+1.当前系统时间
+2.系统已启动的时间
+3.当前登录用户数
+4.系统平均负载（1min、5min
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/05/Linux进程监控管理工具详解/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1974,172 +1188,18 @@
       
         
           
-            <h2 id="一、进程相关概念："><a href="#一、进程相关概念：" class="headerlink" title="一、进程相关概念："></a><strong>一、进程相关概念：</strong></h2><p><strong>进程</strong>是正在运行的程序实体，并且包括这个运行的程序中占据的所有系统资源，比如说CPU，IO,内存，网</p>
-<p>络资源等。通过学习Linux系统进程管理来协调多道程序之间的关系，使CPU得到充分的利用。</p>
-<p><strong>进程和程序的区别是什么？</strong></p>
-<p><strong>进程</strong>是一个动态的概念，当用户把一个程序或命令执行起来的时候，才有进程的概念，</p>
-<p>系统会自动分配一个编号PID给进程。</p>
-<p><strong>程序</strong>是一个静态的概念，表现为一个文件</p>
-<h3 id="进程的分类："><a href="#进程的分类：" class="headerlink" title="进程的分类："></a>进程的分类：</h3><p><strong>根据进程与系统终端的关系：</strong></p>
-<p>（1）守护进程：在系统引导过程中启动的进程，即跟终端无关的进程。</p>
-<p>（2）前台进程：跟终端相关，通过终端启动的进程；</p>
-<p>注：守护进程和前台进程可相互转化</p>
-<p><strong>根据进程占用资源的多少分为：</strong></p>
-<p>（1）CPU密集型：对cpu占用率高的进程</p>
-<p>（2）IO密集型：占用磁盘读写高的进程</p>
-<h3 id="进程的状态："><a href="#进程的状态：" class="headerlink" title="进程的状态："></a>进程的状态：</h3><p>进程在被内核调度过程中的状态可分为很多种：</p>
-<p>1.运行态：running 进程正在运行中</p>
-<p>2.就绪态：ready</p>
-<p>3.睡眠态：sleeping</p>
-<p>可中断睡眠：interruptible  大部分进程处于此状态，随时可唤醒</p>
-<p>不可中断睡眠：uninterruptible</p>
-<p>4.僵尸态：zombie 找不到归属的进程，或父进程已不存在</p>
-<p>5.停止态：stopped 不可被调度并运行</p>
-<h3 id="进程优先级"><a href="#进程优先级" class="headerlink" title="进程优先级"></a>进程优先级</h3><p>进程优先级：</p>
-<p>系统优先级：数字越小，优先级越高</p>
-<p>0-139（CentOS4,5）</p>
-<p>各有140个运行队列和过期队列</p>
-<p>0-98，99（CentOS6）</p>
-<p>实时优先级: 99-0 值最大优先级最高</p>
-<p>nice值：-20到19，对应系统优先级100-139或99</p>
-<p>Big O：时间复杂度，用时和规模的关系（越往左越好）</p>
-<p>O(1), O(logn), O(n)线性, O(n^2)抛物线, O(2^n)</p>
-<h3 id="进程内存："><a href="#进程内存：" class="headerlink" title="进程内存："></a>进程内存：</h3><p>Page Frame: 页框，用存储页面数据，存储Page 4k</p>
-<p>LRU：Least Recently Used 近期最少使用算法,释放内存</p>
-<p>物理地址空间和线性地址空间</p>
-<p>MMU：Memory Management Unit负责转换线性和物理地址</p>
-<p>TLB:Translation Lookaside Buffer 翻译后备缓冲器,用于保存虚拟地址和物理地址</p>
-<p>映射关系的缓存</p>
-<p>IPC: Inter Process Communication</p>
-<p>同一主机: signal:信号</p>
-<p>shm: shared memory</p>
-<p>semaphore:信号量，一种计数器</p>
-<p>不同主机：socket: IP和端口号</p>
-<p>RPC: remote procedure call       远程过程调用</p>
-<p>MQ：消息队列，Kafka，ActiveMQ</p>
-<h2 id="二、信号操作管理"><a href="#二、信号操作管理" class="headerlink" title="二、信号操作管理"></a><strong>二、信号操作管理</strong></h2><p>我们指定同一主机间的程序是通过信号来进行通讯的，那么我们也可以通过发送信号的方式对进程进行管</p>
-<p>理。</p>
-<p>使用<strong>kill  -l</strong> 命令可以查看当前支持的信号类型：</p>
-<p><img src="信号.png" alt="信号"></p>
-<p><strong>信号的表示方式：</strong></p>
-<p>（1）数字表示：1,2,9</p>
-<p>（2）完整名称：SIGHUP</p>
-<p>（3）简写名称：HUP</p>
-<p>Linux系统支持的型号类型多达60余种，常用信号类型有：</p>
-<p><strong>SIGHUP：1，</strong>无须关闭进程而让其重新读取配置文件，使新配置生效</p>
-<p><strong>SIGINT：2，</strong>打断正在运行中的进程，相当于Ctrl+c</p>
-<p><strong>SIGQUIT：3，</strong>相当Ctrl+\</p>
-<p><strong>SIGKILL：9，</strong>强制杀死正在运行的进程</p>
-<p><strong>SIGTERN：15，</strong>终止正在运行的进程（kill命令默认信号）</p>
-<p><strong>SIGCONT：18，</strong>继续运行指定进程</p>
-<p><strong>SIGSTOP：19，</strong>后台休眠</p>
-<h3 id="信号管理命令"><a href="#信号管理命令" class="headerlink" title="信号管理命令"></a>信号管理命令</h3><p>常用的信号管理命令有kill，killall，pkill：</p>
-<p><strong>kill</strong>命令可用来向进程发送信号指令，以及显示当前系统可用的信号</p>
-<p><strong>kill</strong>发送信号格式：</p>
-<p><strong>kill [-SIGNAL] PID</strong></p>
-<p>如：kill -9 123                 强制杀死PID为123的进程</p>
-<p><strong>killall</strong>发送信号格式：</p>
-<p><strong>killall [-SIGNAL] PROCESS</strong></p>
-<p>如：kill -9 sleep      强制杀死sleep进程</p>
-<p>注意：kill命令跟PID，killall命令跟进程名</p>
-<p><strong>pkill</strong>发送信号格式：</p>
-<p><strong>pkill [options] pattern</strong></p>
-<p><strong>options：</strong></p>
-<p>-SIGNAL</p>
-<p>-u uid                生效者</p>
-<p>-U uid               真正发起运行命令者</p>
-<p>-t terminal       与指定终端相关的进程</p>
-<p>-P pid                显示指定进程的子进程</p>
-<p>如：pkill -9 -t tty2  强制杀死tty2终端下的所有进程</p>
-<h2 id="三、作业管理（job-control）"><a href="#三、作业管理（job-control）" class="headerlink" title="三、作业管理（job control）"></a><strong>三、作业管理（job control）</strong></h2><p>我们知道，在登录系统后每一个工作进程都是当前bash的子进程，通过作业管理我们可以</p>
-<p>实现多个进程同时运行，这里我们要涉及到两个新的名词：前台作业和后台作业</p>
-<p><strong>前台作业</strong>：通过终端前，且启动后一直占据终端</p>
-<p><strong>后台作业</strong>：可通过终端启动，但启动后即转入后台运行（释放前端）</p>
-<h3 id="作业状态切换："><a href="#作业状态切换：" class="headerlink" title="作业状态切换："></a>作业状态切换：</h3><p>作用运行一共有三种状态，分别为：<strong>前台执行、后台执行与后台休眠（stoped）</strong></p>
-<p><strong>jobs</strong>命令         显示当前作业编号以及作业状态</p>
-<p><strong>让作业运行于后台：</strong></p>
-<p>（1）尚未启动的作业：COMMAND &amp;</p>
-<p>（2）运行中的作业：Ctrl+z，后台休眠状态</p>
-<p><strong>将后台休眠|运行作业调回前台运行：</strong></p>
-<p>fg job_num      将作业在前台运行（foreground）</p>
-<p><strong>将后台休眠作业执行后台运行：</strong></p>
-<p>bg job_num     将作业在后台运行（background）</p>
-<p><strong>关闭后台执行：</strong></p>
-<p>（1）fg job_num；ctrl+c</p>
-<p>（2）kill %job_num</p>
-<h3 id="并行运行"><a href="#并行运行" class="headerlink" title="并行运行"></a>并行运行</h3><p>同时运行多个进程，提高效率</p>
-<p><strong>方法1：</strong></p>
-<p>利用脚本</p>
-<p>vi all.sh</p>
-<p>​         f1.sh&amp;</p>
-<p>​         f2.sh&amp;</p>
-<p>​         f3.sh&amp;</p>
-<p><strong>方法2：</strong></p>
-<p>  (CMD1&amp;);(CMD2&amp;);(CMD3&amp;)</p>
-<p><strong>方法3：</strong></p>
-<p>{ CMD1&amp; CMD2&amp; CMD3&amp; }</p>
-<h3 id="执行长时间任务时防止网络中断造成操作中断"><a href="#执行长时间任务时防止网络中断造成操作中断" class="headerlink" title="执行长时间任务时防止网络中断造成操作中断"></a>执行长时间任务时防止网络中断造成操作中断</h3><p><strong>方法1：</strong>剥离命令与终端的联系，终端中断后进程将转移至1进程上，再恢复</p>
-<p>nohup COMMAND &amp;&gt;/dev/null &amp;</p>
-<p><strong>方法2</strong>：开启一个screen会话，重新进入后screen -r即可恢复</p>
-<p>screen；COMMAND；screen -r 恢复</p>
-<h2 id="四、Linux进程管理常用命令"><a href="#四、Linux进程管理常用命令" class="headerlink" title="四、Linux进程管理常用命令"></a><strong>四、Linux进程管理常用命令</strong></h2><p>进程的管理命令有：</p>
-<p>pstree、ps、pidof、pgrep、pkill、pmap、kill、killall、job、bg、fg等</p>
-<p>进程的管理工具：</p>
-<p>top、htop、vmstat、dstat、iostat、glances等（下节介绍）</p>
-<p><strong>ps</strong>                   显示进程状态</p>
-<p><strong>BSD选项：</strong></p>
-<p>a               所有终端中的进程</p>
-<p>x                不连接终端的进程</p>
-<p>u               显示进程所有者的信息</p>
-<p>f                显示进程树</p>
-<p>k|–sort 属性 对属性排列，属性前加-表示倒序</p>
-<p>L       显示支持的属性</p>
-<p>显示PID,tty，cmd，cpu占用率，内存占用列表，并按%mem排序</p>
-<p>ps xo pid,tty,cmd,%cpu,%mem –sort %mem</p>
-<p>ps xo pid,tty,cmd,%cpu,%mem k%mem</p>
-<p>按%cpu排序，“-”表示倒序</p>
-<p>ps xo pid,tty,cmd,%cpu,%mem –sort -%cpu</p>
-<p><strong>短选项：</strong></p>
-<p>-e              显示所有进程</p>
-<p>-f               显示完整格式程序信息</p>
-<p>-F              显示更完整格式的进程信息</p>
-<p>-C              查看指定CMD或脚本的进程，多个命令用“，”分开</p>
-<p><strong>显示PID，命令，pri优先级（数字越大，优先级越高），nice优先级，realtime优先级</strong></p>
-<p>ps xo pid,cmd,pri,nice,rtprio</p>
-<p><strong>根据进程编号查询CMD命令</strong></p>
-<p>ps -p 3245  -o comm=           查找PID3245对应的命令名称</p>
-<p>ps -C sleep -o pid=           根据命令查找pid</p>
-<p><strong>常用组合：</strong></p>
-<p>ps aux                        显示所有进程的详细信息</p>
-<p>ps -ef                         类似于aux，缺少cpu%，mem%</p>
-<p>ps -eF</p>
-<p><strong>pstree</strong>              显示进程树</p>
-<p>-p                       显示PID</p>
-<p>-h                      高亮标注当前使用的进程</p>
-<p><strong>pgrep</strong>                进程搜索命令，支持正则表达式</p>
-<p><strong>格式：pgrep [options] pattern</strong></p>
-<p><strong>options：</strong></p>
-<p>-u uid                effective user,生效者</p>
-<p>-U uid               real user，真正发起运行命令者</p>
-<p>-t terminal       与指定终端相关的进程</p>
-<p>-l               显示进程名</p>
-<p>-a              显示完整格式的进程名</p>
-<p>-P pid                显示指定进程的子进程</p>
-<p><strong>pidof</strong>                 查找正在运行进程的PID</p>
-<p>如：pidof bash                显示bash进程的PID</p>
-<p><strong>uptime 命令</strong></p>
-<p>显示当前时间，系统已启动时间，当前上线人数，系统平均负载（1、5、10分钟，一般不超过1）</p>
-<p><strong>free</strong>          显示内存空间使用状态</p>
-<p><strong>options</strong></p>
-<p>-b              以字节为单位</p>
-<p>-m             以MB为单位</p>
-<p>-g              以GB为单位</p>
-<p>-h              人类已读格式</p>
-<p><strong>pmap</strong>       比较专业的查看内存与进程对应关系工具</p>
-<p><strong>pmap    12</strong>         查看进程号12的内存与进程对应关系</p>
-<p>​    -x     显示详细格式的信息</p>
-
-          
+          一、进程相关概念：进程是正在运行的程序实体，并且包括这个运行的程序中占据的所有系统资源，比如说CPU，IO,内存，网
+络资源等。通过学习Linux系统进程管理来协调多道程序之间的关系，使CPU得到充分的利用。
+进程和程序的区别是什么？
+进程是一个动态的概念，当用户把一个程序或命令执行起来的时候，才有
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/05/Linux系统进程管理及作业操作/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2279,180 +1339,18 @@
       
         
           
-            <p>当今时代，运行一台没有连接网络的计算机几乎是难以想象的，幸运的是，Linux从一开始就是为</p>
-<p>网络开发的，并且网络也是Linux做的最好的事情之一。掌握网络知识，对于Linux学习而言，就显</p>
-<p>得非常有必要了。本节我们将带大家了解一些网络的基本概念，以及OSI参考模型和TCP/IP协议。</p>
-<h2 id="一、网络概念"><a href="#一、网络概念" class="headerlink" title="一、网络概念"></a><strong>一、网络概念</strong></h2><p><strong>什么是网络？</strong></p>
-<p>网络是由节点和连线构成，表示诸多对象及其相互联系。在计算机领域中，网络是信息传输、接收、</p>
-<p>共享的虚拟平台，通过它把各个点、面、体的信息联系到一起，从而实现这些资源的共享。</p>
-<p>网络是人类发展史来最重要的发明，提高了科技和人类社会的发展。</p>
-<p><strong>网络应用程序：</strong></p>
-<p>Web 浏览器（Chrome、IE、Firefox等）</p>
-<p>即时消息（QQ、微信、钉钉等）</p>
-<p>电子邮件（Outlook、foxmail 等）</p>
-<p>协作（视频会议、VNC、Netmeeting、WebEx 等）</p>
-<p>web网络服务（apache,nginx,IIS）</p>
-<p>文件网络服务（ftp,nfs,samba）</p>
-<p>数据库服务（ MySQL,MariaDB, MongoDB)</p>
-<p>中间件服务（Tomcat，JBoss）</p>
-<p>安全服务（ Netfilter）</p>
-<p><strong>网络的特征：</strong></p>
-<p>速度</p>
-<p>成本</p>
-<p>安全性</p>
-<p>可用性</p>
-<p>可扩展性</p>
-<p>可靠性</p>
-<p>拓扑</p>
-<p><strong>拓扑结构：</strong></p>
-<p>网络拓扑可分为物理拓扑和逻辑拓扑</p>
-<p>物理拓扑描述了物理设备的布线方式</p>
-<p>逻辑拓扑描述了信息在网络中的流动方式</p>
-<p>物理拓扑中又分为多种拓扑结构，常见类型有：</p>
-<p>总线拓扑：所有设备均可接收信号</p>
-<p>星型拓扑：通过中心点传输；单一故障点</p>
-<p>拓展星型拓扑：比星型拓扑的复原能力更强</p>
-<p>环拓扑：信号绕环传输；单一故障点</p>
-<p>双环拓扑：信号沿相反方向传输；比单环复原能力更强</p>
-<p>全网状拓扑：容错能力强；但实施成本高</p>
-<p>部分网状拓扑：在容错能力与成本之间寻求平衡</p>
-<p><strong>三种通讯模式：</strong></p>
-<p>单播unicast</p>
-<p>广播broadcast</p>
-<p>组播multicast</p>
-<p><strong>非屏蔽式双绞线UTP：</strong>交叉线，直通线</p>
-<p><strong>UTP交叉线线序</strong></p>
-<p>T568B：橙白 橙 绿白 蓝 蓝白 绿 棕白 棕</p>
-<p>T568A：绿白 绿 橙白 蓝 蓝白 橙 棕白 棕</p>
-<p><strong>网络通讯传输模式</strong></p>
-<p>单工：单词传播，如收音机，广播电台</p>
-<p>双工：双向</p>
-<p>全双工：同时双向，如手机</p>
-<p>半双工：轮流双向，如对讲机</p>
-<h2 id="二、OSI参考模型"><a href="#二、OSI参考模型" class="headerlink" title="二、OSI参考模型"></a><strong>二、OSI参考模型</strong></h2><p><strong>OSI(Open System Interconnect）</strong>开放系统互连参考模型是国际标准化组织(ISO)和国际电</p>
-<p>报电话咨询委员会(CCITT)联合制定的开放系统互连参考模型，为开放式互连信息系统提供了一种</p>
-<p>功能结构的框架。它从低到高分别是：物理层、数据链路层、网络层、传输层、会话层、表示层</p>
-<p>和应用层。</p>
-<p>其目的是为异种计算机互连提供一个共同的基础和标准框架，并为保持相关标准的一致性和兼容性</p>
-<p>提供共同的参考。OSI参考模型如下图所示：</p>
-<p><img src="模型.gif" alt="模型"></p>
-<p>OSI模型的七层结构：下层为相邻的上层提供服务</p>
-<h3 id="应用层："><a href="#应用层：" class="headerlink" title="应用层："></a><strong>应用层：</strong></h3><p>作用：针对特定应用的协议</p>
-<p>PDU：message</p>
-<p>协议有：HTTP FTP TFTP SMTP SNMP DNS TELNET HTTPS POP3 DHCP</p>
-<p>特性：网络进程访问应用层</p>
-<p>为应用程序进行（如电子邮件、文件传输和终端仿真）提供网络服务</p>
-<p>提供用户身份验证</p>
-<h3 id="表示层："><a href="#表示层：" class="headerlink" title="表示层："></a><strong>表示层：</strong></h3><p>作用：设备固有数据格式和网络标准数据格式的转换</p>
-<p>PDU：message</p>
-<p>格式有，JPEG、ASCll、DECOIC、加密格式等</p>
-<p>特性：数据表示</p>
-<p>确保接收系统可以读出该数据</p>
-<p>格式化数据</p>
-<p>构建数据</p>
-<p>协商用于应用层的数据传输语法</p>
-<p>提供加密</p>
-<h3 id="会话层："><a href="#会话层：" class="headerlink" title="会话层："></a><strong>会话层：</strong></h3><p>作用：通信管理。负责建立和断开通信连接（数据流动的逻辑通路）。管理传输层</p>
-<p>以下的分层</p>
-<p>PDU：message</p>
-<p>对应主机进程，指本地主机与远程主机正在进行的会话</p>
-<p>特性：主机间通信</p>
-<p>建立、管理和终止在应用程序之间的会话</p>
-<h3 id="传输层："><a href="#传输层：" class="headerlink" title="传输层："></a><strong>传输层：</strong></h3><p>作用：管理两个节点之间的数据传输，负责可靠传输（确保数据被可靠的传送到目</p>
-<p>的地址）。</p>
-<p>PDU：段segment</p>
-<p>协议有：TCP UDP，数据包一旦离开网卡即进入网络传输层</p>
-<p>特性：传输问题</p>
-<p>确保数据传输的可靠性</p>
-<p>建立、维护和终止虚拟电路</p>
-<p>通过错误检测和恢复</p>
-<p>信息流控制来保障可靠性</p>
-<h3 id="网络层："><a href="#网络层：" class="headerlink" title="网络层："></a><strong>网络层：</strong></h3><p>作用：地址管理与路由选择</p>
-<p>PDU：包packet</p>
-<p>逻辑地址：IP地址</p>
-<p>协议有：ICMP IGMP IP（IPV4 IPV6） ARP RARP</p>
-<p>特性：数据传输</p>
-<p>路由数据包</p>
-<p>选择传递数据的最佳路径</p>
-<p>支持逻辑寻址和路径选择</p>
-<h3 id="数据链路层："><a href="#数据链路层：" class="headerlink" title="数据链路层："></a><strong>数据链路层：</strong></h3><p>作用：互连设备之间传送和识别数据帧</p>
-<p>PDU：帧frame</p>
-<p>物理地址：MAC地址</p>
-<p>特性：访问介质</p>
-<p>定义如何格式化数据以便进行传输以及如何控制对网络的访问</p>
-<p>支持错误检测</p>
-<h3 id="物理层："><a href="#物理层：" class="headerlink" title="物理层："></a><strong>物理层：</strong></h3><p>作用：以“0”、“1”代表电压的高低、灯光的闪灭。界定连接器和网线的规格</p>
-<p>PDU：节bit</p>
-<p>特性：二进制传输</p>
-<p>为启动、维护已经关闭物流链路定义了电气规范、机械规范、过程规范和功能规范</p>
-<p>单位：位bit</p>
-<p><strong>PDU: Protocol Data Unit,协议数据单元是指对等层次之间传递的数据单位</strong></p>
-<p>物理层的 PDU是数据位 bit</p>
-<p>数据链路层的 PDU是数据帧 frame</p>
-<p>网络层的PDU是数据包 packet</p>
-<p>传输层的 PDU是数据段 segment</p>
-<p>其他更高层次的PDU是消息 message</p>
-<h3 id="三、TCP-IP协议"><a href="#三、TCP-IP协议" class="headerlink" title="三、TCP/IP协议"></a><strong>三、TCP/IP协议</strong></h3><p><strong>TCP/IP也称”国际协议簇”</strong>， 即不仅指 TCP/IP协议本身，而且包括与其有关的协议。 TCP</p>
-<p>为传输控制协议，IP为网际协议，是网络层最重要的协议。采用TCP/IP协议通过互联网传</p>
-<p>送信息可减少网络中的传输阻塞，方便大批量的数据在网上传输，从而提高网络的传输效率。</p>
-<p>TCP/IP协议簇的主要协议有TCP、IP、UDP、ICMP、RIP、TELNET、FTP、SMTP、ARP等</p>
-<p><strong>TCP/IP模型</strong>共定义了四层，分别是应用层，和OSI参考模型的分层有对应关系：</p>
-<p><img src="模型对应.png" alt="模型对应"></p>
-<p><strong>网络访问层(Network Access Layer)</strong>与OSI模型中的物理层以及数据链路层对应，在TCP/IP参考模</p>
-<p>型中并没有详细描述，只是指出主机必须使用某种协议与网络相连。</p>
-<p><strong>Internet层(Internet Layer)</strong>是整个体系结构的关键部分，其功能是使主机可以把分组发往任何网</p>
-<p>络，并使分组独立地传向目标。这些分组可能经由不同的网络，到达的顺序和发送的顺序也可能</p>
-<p>不同。高层如果需要顺序收发，那么就必须自行处理对分组的排序。互联网层使用因特网协议(IP</p>
-<p>，Internet Protocol)。TCP/IP参考模型的互联网层和OSI参考模型的网络层在功能上非常相似。</p>
-<p><strong>传输层(Tramsport Layer)</strong>使源端和目的端机器上的对等实体可以进行会话。</p>
-<p>在这一层定义了两个端到端的协议：传输控制协议TCP和用户数据报协议UDP。</p>
-<p><strong>应用层(Application Layer)</strong>包含所有的高层协议，包括：虚拟终端协议(TELNET，</p>
-<p>TELecommunications NETwork)、文件传输协议(FTP，File Transfer Protocol)、电子邮件传输协议</p>
-<p>(SMTP，Simple，Mail Transfer Protocol)、域名服务(DNS，Domain Name Service)、网上新闻传输协议</p>
-<p>(NNTP，Net News Transfer Protocol)和超文本传送协议(HTTP，HyperText Transfer Protocol)等。</p>
-<p> <img src="OSI.png" alt="OSI7层"></p>
-<h2 id="四、常见网络设备"><a href="#四、常见网络设备" class="headerlink" title="四、常见网络设备"></a><strong>四、常见网络设备</strong></h2><p><strong>Hub集线器</strong></p>
-<p>Hub：多端口中继器，现已基本淘汰</p>
-<p>Hub并不记忆该信息包是由哪个MAC地址发出，哪个MAC地址在Hub的哪个端口</p>
-<p>Hub的特点：</p>
-<p>共享带宽</p>
-<p>半双工</p>
-<p><strong>以太网桥</strong></p>
-<p>交换式以太网的优势</p>
-<p>扩展了网络带宽</p>
-<p>分割了网络冲突域，使网络冲突被限制在最小的范围内</p>
-<p>交换机作为更加智能的交换设备，能够提供更多用户所要</p>
-<p>求的功能：优先级、虚拟网、远程检测…</p>
-<p>学习时源MAC地址，转发时目的MAC地址</p>
-<p>网桥是不能隔断广播的</p>
-<p>同一广播域主机数量越多，网络性能越差</p>
-<p><strong>交换机（switch）</strong></p>
-<p>交换机是一种基于MAC（网卡的硬件地址）识别，能完成封装转发数据</p>
-<p>包功能的网络设备。交换机可以“学习”MAC地址，并把其存放在内部地址表中，</p>
-<p>通过在数据帧的始发者和目标接收者之间建立临时的交换路径，使数据帧直接由源</p>
-<p>地址到达目的地址。</p>
-<p><strong>Hub和交换机区别</strong></p>
-<p>集线器属于OSI的第一层物理层设备，而网桥属于OSI的第二层数据链路层设备</p>
-<p>从工作方式来看，集线器是一种广播模式，所有端口在一个冲突域里面。网桥</p>
-<p>的可以通过端口隔离冲突</p>
-<p>Hub是所有共享总线和共享带宽。网桥每个端口占一个带宽</p>
-<p><strong>路由器（router）</strong></p>
-<p>路由：把一个数据包从一个设备发送到不同网络里的另一个设备上去。这些工作</p>
-<p>依靠路由器来完成。路由器只关心网络的状态和决定网络中的最佳路径。路由的实</p>
-<p>现依靠路由器中的路由表来完成。为了实现路由,路由器需要做下列事情:</p>
-<p>分隔广播域</p>
-<p>选择路由表中到达目标最好的路径</p>
-<p>维护和检查路由信息</p>
-<p>连接广域网</p>
-<p><strong>双绞线物理层</strong></p>
-<p>wifi网络层</p>
-<p>以太网数据链路层</p>
-<p>搭建网络的分层网络架构：<strong>核心层、分布层、访问层</strong></p>
-<p>核心层Core Layer：企业级应用快速转发</p>
-<p>分布层Distribution Layer：广播域，路由，安全，远程接入，访问层汇聚</p>
-<p>访问层AccessLayer：终端接入</p>
-
-          
+          当今时代，运行一台没有连接网络的计算机几乎是难以想象的，幸运的是，Linux从一开始就是为
+网络开发的，并且网络也是Linux做的最好的事情之一。掌握网络知识，对于Linux学习而言，就显
+得非常有必要了。本节我们将带大家了解一些网络的基本概念，以及OSI参考模型和TCP/IP协议。
+一、网络概念什
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/01/网络基本概念及OSI参考模型、TCP-IP协议简介/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2592,69 +1490,16 @@
       
         
           
-            <p>在我们了解到，RAID可以实现磁盘的高性能读写，并实现冗余，而LVM逻辑卷则可以实现磁盘的弹性扩展，那么如何将两者配合使用并将它们的优势充分发挥呢，今天我们来实验在软件RAID上搭建LVM逻辑卷</p>
-<h3 id="实验预期："><a href="#实验预期：" class="headerlink" title="实验预期："></a><strong>实验预期：</strong></h3><p>在CentOS6.9系统上搭建两个RAID级别，分别为RAID0,及RAID5，将两个RAID合并为卷组并创建逻辑卷，实现冗余、性能提升、及弹性拓展。</p>
-<h3 id="实验准备环境："><a href="#实验准备环境：" class="headerlink" title="实验准备环境："></a><strong>实验准备环境：</strong></h3><p>CentOS6.9服务器一台，3块硬盘，分别为40G,60G,80G，并在每块磁盘创建分区sdx1容量为1G，sdx2容</p>
-<p>量为2G，创建挂载用空目录/test。</p>
-<p>## </p>
-<h2 id="实验一：在软件RAID创建LVM逻辑卷"><a href="#实验一：在软件RAID创建LVM逻辑卷" class="headerlink" title="实验一：在软件RAID创建LVM逻辑卷"></a><strong>实验一：在软件RAID创建LVM逻辑卷</strong></h2><p><img src="前期准备.png" alt="前期准备"></p>
-<p><strong>1.mdadm -C   /dev/md1  -a  yes  -l5  -n3   /dev/sd{b1,c1,d1}</strong></p>
-<p>将三个容量为1G的分区sdb1，sdc1，sdd1组成一个名称为md1的RAID5</p>
-<p><img src="创建RAID5.png" alt="创建RAID5"></p>
-<p><strong>2.mdadm -C   /dev/md2  -a  yes  -l0 -n3   /dev/sd{b2,c2,d2}</strong></p>
-<p>将三个容量为2G的分区sdb2，sdc2，sdd2组成一个名称为md2的条形卷RAID0</p>
-<p><img src="创建RAID0.png" alt="创建RAID0"></p>
-<p><strong>3.mdadm   -D   /dev/md1</strong></p>
-<p><strong>mdadm   -D   /dev/md2</strong></p>
-<p>查看RAID5、RAID0，确定已创建成功，md1设备可用容量为2G，md2设备可用容量为6G</p>
-<p><img src="查看RAID5.png" alt="查看RAID5"></p>
-<p><img src="查看RAID0.png" alt="查看RAID0"></p>
-<p><strong>4.pvcreate   /dev/md1   /dev/md2</strong></p>
-<p>将md1、md2设备创建为物理卷</p>
-<p><img src="创建物理卷.png" alt="创建物理卷"></p>
-<p><strong>5.vgcreate   vg_md   /dev/md1   /dev/md2</strong></p>
-<p>创建由md1、md2组成的卷组vg_md，可用容量为8G</p>
-<p><img src="创建卷组.png" alt="创建卷组"></p>
-<p><strong>6.lvcreate  -L  7G  -n  lv_md  vg_md</strong></p>
-<p>在卷组vg_md上创建一个名称为lv_md，大小为7G的逻辑卷</p>
-<p><img src="创建逻辑卷.png" alt="创建逻辑卷"></p>
-<p><strong>7.mke2fs    -t   ext4   /dev/vg_md/lv_md</strong></p>
-<p>创建逻辑卷lv_md的文件系统为ext4</p>
-<p><img src="创建文件系统.png" alt="创建文件系统"></p>
-<p><strong>8.mount    /dev/vg_md/lv_md     /test/</strong></p>
-<p>将逻辑卷lv_md挂载至提前准备好的空目录/test，这时我们看到逻辑卷lv_md已搭建在RAID0与RAID5共</p>
-<p>同组成的分区上</p>
-<p><img src="挂载.png" alt="挂载"></p>
-<p><strong>9.vim  /etc/fstab</strong></p>
-<p>将挂载信息写入/etc/fstab文件，实现开机自动挂载</p>
-<p><img src="自动挂载.png" alt="自动挂载"></p>
-<p><strong>10.dd  if=/dev/zero  of=/test/1G.file  bs=1024k  count=1000</strong></p>
-<p><strong>dd  if=/dev/zero  of=/data/1G.file  bs=1024k  count=1000</strong></p>
-<p>测试磁盘写速度，可见/test目录下写性能相比普通磁盘挂载的/data目录确实有显著提升</p>
-<p><img src="测试速度.png" alt="测试速度"></p>
-<h2 id="实验二：扩展逻辑卷到15G"><a href="#实验二：扩展逻辑卷到15G" class="headerlink" title="实验二：扩展逻辑卷到15G"></a><strong>实验二：扩展逻辑卷到15G</strong></h2><p>由于原有卷组总容量只有8G，我们选择新创建一个10G分区sda6并添加至原卷组中</p>
-<p><strong>1.pvcreate  /dev/sda6</strong>              创建卷组</p>
-<p><strong>2.vgextend    vg_md    /dev/sda6</strong>            将10G分区sda6添加至vg_md卷组</p>
-<p><strong>3.lvextend   -r  -L  15G   /dev/vg_md/lv_md</strong>      拓展逻辑卷lv_md到15G</p>
-<p><strong>注：命令3中-r选项代表同步文件系统大小与逻辑卷大小相同，也可用resize2fs     /dev/sda6命令代替</strong></p>
-<p><img src="扩容.png" alt="扩容"></p>
-<h2 id="实验三：缩减逻辑卷到5G"><a href="#实验三：缩减逻辑卷到5G" class="headerlink" title="实验三：缩减逻辑卷到5G"></a><strong>实验三：缩减逻辑卷到5G</strong></h2><p>注意：只有ext4系列文件系统可进行LVM缩容，xfs文件系统无法缩减，缩容前先保证缩容后分区容量大于</p>
-<p>数据容量，否则数据将被破坏，生产环境中一般不进行缩容LVM操作。</p>
-<p><strong>1.umount   /test/</strong>       卸载</p>
-<p><strong>resize2fs   /dev/vg_md/lv_md   5G</strong>        缩减文件系统到5G</p>
-<p>提示应先使用命令e2fsck  -f检查文件系统</p>
-<p><strong>注意文件系统与逻辑卷的执行顺序，扩容时为先扩容逻辑卷再扩容文件系统，缩容时为先缩容文件</strong></p>
-<p><strong>系统再**</strong>缩容逻辑卷，否则，执行e2fsck  -f检查文件系统将失败**</p>
-<p><img src="卸载.png" alt="卸载"></p>
-<p><strong>2.e2fsck  -f    /dev/vg_md/lv_md</strong>               检查文件系统</p>
-<p><strong>3. resize2fs   /dev/vg_md/lv_md   5G</strong>        缩减文件系统到5G</p>
-<p><img src="检查文件.png" alt="检查文件"></p>
-<p><strong>4.lvreduce  -L  5G   /dev/vg_md/lv_md</strong>       缩减逻辑卷到5G</p>
-<p><strong>5.lvdisplay</strong>            显示逻辑卷已缩减成功</p>
-<p><img src="完成.png" alt="完成"></p>
-<p><strong>总结：可见实验RAID和LVM配合使用，确实提升了磁盘的读写性能，实现了冗余，并且可弹性管理分区大小</strong></p>
-
-          
+          在我们了解到，RAID可以实现磁盘的高性能读写，并实现冗余，而LVM逻辑卷则可以实现磁盘的弹性扩展，那么如何将两者配合使用并将它们的优势充分发挥呢，今天我们来实验在软件RAID上搭建LVM逻辑卷
+实验预期：在CentOS6.9系统上搭建两个RAID级别，分别为RAID0,及RAID5，将两个RAID
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/27/实验：在软件RAID搭建LVM逻辑卷进行管理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2794,134 +1639,18 @@
       
         
           
-            <p>Linux系统中如何提高磁盘的读写性能，如何实现磁盘冗余，当磁盘快被占满时，又如何弹性拓展磁盘容量，RAID及LVM技术可以帮你轻松解决。</p>
-<h2 id="一、RAID概念及管理"><a href="#一、RAID概念及管理" class="headerlink" title="一、RAID概念及管理"></a><strong>一、RAID概念及管理</strong></h2><p><strong>RAID 廉价（独立）磁盘冗余阵列使用多个磁盘合成一个“阵列”来提供更好的性能、冗余，或者两种都提供。</strong></p>
-<p><strong>RAID的作用：</strong></p>
-<p><strong>提高IO能力: </strong>磁盘并行读写</p>
-<p><strong>提高耐用性: </strong>磁盘冗余来实现</p>
-<p><strong>级别</strong>：多块磁盘组织在一起的工作方式有所不同</p>
-<p><strong>RAID实现的方式</strong>：</p>
-<ul>
-<li>外接式磁盘阵列：通过扩展卡提供适配能力</li>
-<li>内接式RAID：主板集成RAID控制器</li>
-<li>安装OS前在BIOS里配置</li>
-<li>软件RAID：通过OS实现（生产环境很少用，一般用来测试模拟）</li>
-</ul>
-<h3 id="RAID级别"><a href="#RAID级别" class="headerlink" title="RAID级别"></a>RAID级别</h3><p><strong>RAID0</strong>      条带卷，读写能力提升，但无容错能力，最少需2块磁盘组成，磁盘利用率100%</p>
-<p><strong>RAID1</strong>       镜像卷，具有一块硬盘的容错性，需要2,2N块磁盘组成，磁盘利用率50%</p>
-<p><strong>RAID4</strong>      牺牲了1块硬盘实现冗余，至少3块磁盘组成，磁盘利用率（n-1）n</p>
-<p><strong>RAID5</strong>      带奇偶校验的条带集，至少3块磁盘组成，磁盘利用率（n-1）n，一块硬盘损坏，</p>
-<p>​        将大幅消耗系统性能，    造成宕机，应及时更换硬盘，性价比高</p>
-<p><strong>RAID6</strong>      牺牲了2块硬盘实现冗余，至少4块磁盘组成，磁盘利用率（n-2）n</p>
-<p><strong>RAID10</strong>    先做RAID1,再做RAID0，容错性相较于RAID01更强，至少4块磁盘组成，空间利用率50%。</p>
-<p>​          生产中有条件情况下建议使用RAID10</p>
-<p><strong>RAID01</strong>    先做RAID0,再做RAID1，至少4块磁盘组成，容错性较RAID10稍弱，空间利用率50%</p>
-<p><strong>RAID50</strong>    先做RAID5,再做RAID0，提供了接近RAID 10性能、可用性以及接近RAID 5成本的特性，具</p>
-<p>有较好的整体性价比，至少6块磁盘组成，空间利用率（n-2）n</p>
-<p><strong>JBOD</strong>        可用空间sum（S1,S2…），性能无提升，至少需要2块磁盘，磁盘利用率100%</p>
-<p> <strong>注：</strong>目前RAID2-4已基本淘汰，RAID0生产中也少用，RAID1,RAID5,RAID10,RAID01常见</p>
-<h3 id="常见RAID图形示意"><a href="#常见RAID图形示意" class="headerlink" title="常见RAID图形示意"></a>常见RAID图形示意</h3><p><strong>RAID0</strong>      条带卷，读写能力提升，但无容错能力，最少需2块磁盘组成，磁盘利用率100%</p>
-<p><img src="0.jpg" alt="0"></p>
-<p><strong>RAID1</strong>       镜像卷，读性能提升，写性能下降具有一块硬盘的容错性，需要2,2N块磁盘组成，磁盘利用率50%</p>
-<p><img src="1-5.jpg" alt="1"></p>
-<p><strong>RAID5</strong>      带奇偶校验的条带集，与RAID4校验位固定在一个磁盘上相比，RAID5校验位在不同磁盘上不</p>
-<p>断更替；至少3块磁盘组成，磁盘利用率（n-1）n，一块硬盘损坏，将大幅消耗系统性能，造成宕机，应</p>
-<p>及时更换硬盘，性价比高</p>
-<p><img src="5-2.jpg" alt="5"></p>
-<p><strong>RAID01</strong>    先做RAID0,再做RAID1，至少4块磁盘组成，容错性较RAID10稍弱，空间利用率50%</p>
-<p><img src="wKioL1bpX-KSDT33AAC2vBgWLfg951.jpg" alt="wKioL1bpX-KSDT33AAC2vBgWLfg951"></p>
-<p><strong>RAID10</strong>    先做RAID1,再做RAID0，容错性相较于RAID01更强，至少4块磁盘组成，空间利用率50%。</p>
-<p>生产中有条件情况下建议使用RAID10</p>
-<p><img src="10.jpg" alt="10"></p>
-<p><strong>RAID50</strong>    先做RAID5,再做RAID0，提供了接近RAID 10性能、可用性以及接近RAID 5成本的特性，具有较好的整体性价比，至少6块磁盘组成，空间利用率（n-2）n</p>
-<p><img src="50.jpg" alt="50"></p>
-<p><strong>JBOD</strong>        可用空间sum（S1,S2…），性能无提升，无冗余能力，至少需要2块磁盘，磁盘利用率100%</p>
-<p><img src="jb.jpg" alt="jb"></p>
-<p>RAID按实现方式的不同一般分为<strong>硬件RAID</strong>和<strong>软件RAID</strong>，生产环境中多数使用硬件RAID，在下面的实</p>
-<p>验测试环境中我们使用软件RAID。</p>
-<h3 id="软件RAID"><a href="#软件RAID" class="headerlink" title="软件RAID"></a>软件RAID</h3><p><strong>mdadm</strong> 命令   为软RAID提供管理界面</p>
-<p>为空余磁盘添加冗余</p>
-<p>结合内核中的md（multi devices）</p>
-<p>RAID设备可命名为/dev/md0、/dev/md1、/dev/md2、/dev/md3等</p>
-<h3 id="软件RAID的实现"><a href="#软件RAID的实现" class="headerlink" title="软件RAID的实现"></a>软件RAID的实现</h3><p><strong>mdadm：</strong>模式化的工具<br> <strong>语法格式：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mdadm [mode] &lt;raiddevice&gt; [options]&lt;component-devices&gt;</span><br></pre></td></tr></table></figure>
-<p> <strong>支持的RAID级别：</strong>LINEAR, RAID0, RAID1, RAID4,RAID5, RAID6, RAID10</p>
-<p> <strong>模式：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">创建：-C</span><br><span class="line">	-C: 创建模式</span><br><span class="line">    -n #: 使用#个块设备来创建此RAID</span><br><span class="line">    -l #：指明要创建的RAID的级别</span><br><span class="line">    -a &#123;yes|no&#125;：自动创建目标RAID设备的设备文件</span><br><span class="line">    -c CHUNK_SIZE: 指明块大小</span><br><span class="line">    -x #: 指明空闲盘的个数</span><br><span class="line">装配: -A</span><br><span class="line">监控: -F</span><br><span class="line">管理：-f, -r, -a</span><br><span class="line">	-f: 标记指定磁盘为损坏</span><br><span class="line">	-a: 添加磁盘</span><br><span class="line">	-r: 移除磁盘</span><br></pre></td></tr></table></figure>
-<p> <strong>-D：显示raid的详细信息: mdadm -D /dev/md#</strong></p>
-<p> <strong>观察md的状态：cat /proc/mdstat</strong></p>
-<h3 id="软RAID配置示例"><a href="#软RAID配置示例" class="headerlink" title="软RAID配置示例"></a>软RAID配置示例</h3><p>使用mdadm创建并定义RAID设备</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mdadm -C /dev/md0 -a yes -l 5 -n 3 -x 1 /dev/sdb1</span><br><span class="line">/dev/sdc1 /dev/sdd1 /dev/sde1</span><br></pre></td></tr></table></figure>
-<p> 用文件系统对每个RAID设备进行格式化</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mke2fs -j /dev/md0</span><br></pre></td></tr></table></figure>
-<p> 测试RAID设备<br> 使用mdadm检查RAID设备的状况</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mdadm --detail|D /dev/md0</span><br></pre></td></tr></table></figure>
-<p> 增加新的成员</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mdadm –G /dev/md0 –n4 -a /dev/sdf1</span><br></pre></td></tr></table></figure>
-<h3 id="软RAID测试和修复"><a href="#软RAID测试和修复" class="headerlink" title="软RAID测试和修复"></a>软RAID测试和修复</h3><p>模拟磁盘故障<br>mdadm /dev/md0 -f /dev/sda1<br> 移除磁盘<br>mdadm /dev/md0 –r /dev/sda1<br> 从软件RAID磁盘修复磁盘故障<br> 替换出故障的磁盘然后开机<br> 在备用驱动器上重建分区<br> mdadm /dev/md0 -a /dev/sda1<br> mdadm、/proc/mdstat及系统日志信息</p>
-<h3 id="软RAID管理"><a href="#软RAID管理" class="headerlink" title="软RAID管理"></a>软RAID管理</h3><p><strong>生成配置文件：</strong>mdadm –D  –s  &gt;&gt; /etc/mdadm.conf<br> <strong>停止设备：</strong>mdadm –S  /dev/md0<br> <strong>激活设备：</strong>mdadm –A  –s  /dev/md0 激活<br> <strong>强制启动：</strong>mdadm  –R  /dev/md0<br> <strong>删除raid信息：</strong>mdadm   –zero-superblock /dev/sdb1</p>
-<p><strong>dd if=/dev/zero  of=/dev/sdb1</strong>             破坏文件系统</p>
-<p><strong>mdadm -C /dev/md0 -a yes  -l5 -n4 -x1  /dev/sd{b,c,d,e}1</strong>     创建一个RAID5,包含4块硬盘，一块空闲盘</p>
-<p><strong>mdadm -D /dev/md0</strong>                  查看raid信息</p>
-<p><strong>mkfs.ext4 /dev/md0 -L raid</strong>     添加文件系统，添加卷标为raid</p>
-<p><strong>umount /mnt/raid/</strong>            停用</p>
-<p><strong>mdadm    -S  /dev/md0</strong>         禁用raid</p>
-<p><strong>-A</strong>              启用raid</p>
-<p><strong>mdadm    /dev/md0 -f /dev/sdd1</strong>  模拟损坏硬盘</p>
-<p><strong>mdadm   /dev/md0 -r /dev/sdd1</strong>   移除损坏硬盘</p>
-<p><strong>mdadm    /dev/md0 -a /dev/sda1</strong>    更换一个新硬盘</p>
-<p><strong>mdadm -G /dev/md0 -n4 -a /dev/sdb3</strong>     拓展RAID一个硬盘</p>
-<p><strong>ll /etc/mdadm/conf</strong></p>
-<p><strong>mdadm -Ds /dev/md0 &gt; /etc/mdadm/conf</strong>      保存配置文件</p>
-<p>将来重启或停止raid服务不会出现找不到配置文件的情况</p>
-<h2 id="二、LVM逻辑卷介绍及使用"><a href="#二、LVM逻辑卷介绍及使用" class="headerlink" title="二、LVM逻辑卷介绍及使用"></a><strong>二、LVM逻辑卷介绍及使用</strong></h2><p>   <strong>logical Volumes                                                  逻辑卷</strong></p>
-<p><strong>lvcreae  ↑                                                      创建逻辑卷  ↑</strong></p>
-<p> <strong>Volime Group                                                     卷组</strong></p>
-<p><strong>vgcreate ↑                                                       创建卷组    ↑</strong></p>
-<p><strong>Physical Volumes                                              物理卷</strong></p>
-<p><strong>pvcreate ↑                                                     创建物理卷  ↑</strong></p>
-<p> <strong>Linux Block Devices                                         Linux块设备</strong></p>
-<h3 id="pv管理工具"><a href="#pv管理工具" class="headerlink" title="pv管理工具"></a><strong>pv管理工具</strong></h3><p><strong>显示物理卷</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pvs         简要</span><br><span class="line">pvdisplay 	详细</span><br></pre></td></tr></table></figure>
-<p><strong>创建卷组</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pvcreate  /dev/DEVICE</span><br></pre></td></tr></table></figure>
-<h3 id="vg管理工具"><a href="#vg管理工具" class="headerlink" title="vg管理工具"></a><strong>vg管理工具</strong></h3><p><strong>显示卷组</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vgs			简要</span><br><span class="line">vgdisplay	详细</span><br></pre></td></tr></table></figure>
-<p><strong>创建卷组</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vgcreate [-s #[kKmMgGtTpPeE]] 卷组名 各分区物理路径</span><br></pre></td></tr></table></figure>
-<h3 id="lv管理工具"><a href="#lv管理工具" class="headerlink" title="lv管理工具"></a><strong>lv管理工具</strong></h3><p><strong>显示逻辑卷</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lvs			简要</span><br><span class="line">Lvdisplay	详细</span><br></pre></td></tr></table></figure>
-<p><strong>创建逻辑卷</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lvcreate -L #[mMgGtT] -n 逻辑卷名 卷组名</span><br><span class="line">lvcreate -l 60%VG -n mylv testvg</span><br><span class="line">lvcreate -l 100%FREE -n yourlv testvg</span><br></pre></td></tr></table></figure>
-<p><strong>lvcreate</strong> </p>
-<p><strong>常用选项</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-c      指定chunk大小</span><br><span class="line">-l      指定PE数创建逻辑卷，或[%&#123;VG|FREE|ORIGIN&#125;]</span><br><span class="line">-L       指定大小创建逻辑卷</span><br><span class="line">-n       指定逻辑卷名称</span><br><span class="line">-p&#123;r|rw&#125;	指定逻辑卷权限</span><br><span class="line">-t      测试</span><br></pre></td></tr></table></figure>
-<p><strong>删除逻辑卷</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lvremove /dev/VG_NAME/LV_NAME</span><br></pre></td></tr></table></figure>
-<p><strong>重设文件系统大小</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fsadm [options] resize device [new_size[BKMGTEP]]</span><br><span class="line">resize2fs [-f][-F] [-M][-P] [-p] device [new_size]</span><br></pre></td></tr></table></figure>
-<h3 id="LVM快照"><a href="#LVM快照" class="headerlink" title="LVM快照"></a><strong>LVM快照</strong></h3><p><strong>快照</strong>是特殊的逻辑卷，它是在生成快照时存在的逻辑卷的准确拷贝</p>
-<p>要注意快照不能替代备份作用，但可用于测试环境，在特殊情况下可代替备份效果。</p>
-<p>快照生成时需要分配给它一定的空间，这些空间只有在原来的逻辑卷或者快照有所改变才会使用</p>
-<p>这些空间，建立快照的卷大小只需要原始逻辑卷的<strong>15%-20%</strong>就可以了，也可以使用lvextend放大快照空</p>
-<p>间要注意快照必须与被快照的LV在同一个卷组中，系统恢复时文件数量不能高于快照区的实际容量。</p>
-<p>为现有逻辑卷创建快照与添加逻辑卷命令相同</p>
-<p><strong>lvcreate</strong></p>
-<p><strong>创建快照常用选项：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-l      	指定PE数创建快照，或[%&#123;VG|FREE|ORIGIN&#125;]</span><br><span class="line">-L   	 	指定大小创建快照逻辑卷</span><br><span class="line">-n    	 	指定快照名称</span><br><span class="line">-p&#123;r|rw&#125;	指定快照权限，一般设为只读</span><br></pre></td></tr></table></figure>
-<p><strong>ext系列：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lvcreate -n centoslv0-snapshot -s -L 1G -p r /dev/centos6lv0</span><br><span class="line">lvdisplay</span><br><span class="line">mkdir /mnt/snap</span><br><span class="line">mount /dev/centos6vg0/centos6lv0-snapshot  /mnt/snap</span><br></pre></td></tr></table></figure>
-<p><strong>xfs文件系统：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lvcreate -n centoslv0-snapshot -s -L 1G -p r /dev/lv0</span><br><span class="line"></span><br><span class="line">lvdisplay</span><br><span class="line"></span><br><span class="line">mkdir /mnt/snap</span><br></pre></td></tr></table></figure>
-<p><strong>注：xfs文件系统不予许相同UUID设备进行挂载</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -o nouuid  /dev/vg0/lv0-snopshot /mnt/lv0-snap</span><br></pre></td></tr></table></figure>
-<p><strong>恢复快照</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">umount /mnt/snap/</span><br><span class="line">umount /mnt/centos6lv0/</span><br><span class="line">lvconvert  –merge  /dev/centos6vg0/centos6lv0-snapshot</span><br></pre></td></tr></table></figure>
-<p>注：快照会在合并恢复后自动删除</p>
-<p><strong>删除快照</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">umount /mnt/vg0/lv0</span><br><span class="line">lvremove /dev/mnt/lv0-snap</span><br></pre></td></tr></table></figure>
-
-          
+          Linux系统中如何提高磁盘的读写性能，如何实现磁盘冗余，当磁盘快被占满时，又如何弹性拓展磁盘容量，RAID及LVM技术可以帮你轻松解决。
+一、RAID概念及管理RAID 廉价（独立）磁盘冗余阵列使用多个磁盘合成一个“阵列”来提供更好的性能、冗余，或者两种都提供。
+RAID的作用：
+提高IO能力: 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/26/Linux系统中RAID及LVM管理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -3061,57 +1790,17 @@
       
         
           
-            <p><strong>一、安装虚拟化软件</strong>：</p>
-<p>VMware Workstation是该公司出品的“虚拟 PC”软件（即：大家常说的“<a href="http://www.zdfans.com/5928.html" target="_blank" rel="noopener">虚拟机</a>”），通过它可在一台电脑上同时运行更多的Microsoft Windows、Linux、Mac OS X、DOS系统。此处我们以VMware14.1.1版本为例：</p>
-<p>1.打开VMware软件后，选择创建新的虚拟机：</p>
-<p><img src="1-38.png" alt="1"></p>
-<p>2.在类型配置选项选择典型配置，并点击下一步：</p>
-<p><img src="2-30.png" alt="2"></p>
-<p>3.安装客户机操作系统选项选择稍后安装操作系统：</p>
-<p><img src="3-23.png" alt="3"></p>
-<p>4.此处我们以安装CentOS6.9版本为例，选择Linux系统，版本选择CentOS6 64位：</p>
-<p><img src="4-20.png" alt="4"></p>
-<p>5.下一步填写虚拟机名称和虚拟机想要放置的文件路径：</p>
-<p><img src="5-16.png" alt="5"></p>
-<p>6.最大磁盘大小我们以200GB为例，虚拟磁盘选择存储为单个文件：</p>
-<p><img src="6-12.png" alt="6"></p>
-<p>7.虚拟机配置完成后，我们可以进行配置修改，并将镜像ISO文件链接至虚拟机的CD/DVD下：</p>
-<p><img src="7-10.png" alt="7"></p>
-<p><strong>二、安装CentOS 6系统：</strong></p>
-<p>1.选择第一项：安装或升级系统（Install or upgrade an existing system）：</p>
-<p><img src="1-39.png" alt="1"></p>
-<p>2.此处我们选择跳过（Skip），选择OK则进行检查IOS镜像是否完好：</p>
-<p><img src="2-31.png" alt="2"></p>
-<p>3.选择适合自己的语言及键盘使用模式，我们以英文界面安装为例，选择English：</p>
-<p><img src="3-24.png" alt="3"></p>
-<p>4.选择存储介质的类别,此处我们选择 Basic Storage Devices，如果安装到网络存储介质如SANS上，选择 Specialized Storage Devices：</p>
-<p><img src="4-21.png" alt="4"></p>
-<p>5.提示新硬盘或硬盘上的数据是否已不再需要，选择Yes，discard any data：</p>
-<p><img src="5-17.png" alt="5"></p>
-<p>6.输入主机名(hostname),在此界面也可选择Configure Network进行网络配置：</p>
-<p><img src="6-13.png" alt="6"></p>
-<p>7.时区选择：我们以北京时间为例，在地图上选择中国上海，并将System clock uses UTC，否则将与格林尼治时间相同步。</p>
-<p><img src="7-11.png" alt="7"></p>
-<p>8.输入管理员账户root的密码并重复输入确认：</p>
-<p><img src="8-10.png" alt="8"></p>
-<p>9.分区管理我们选择Create Custom Layout,进行自定义分区：</p>
-<p><img src="9-7.png" alt="9"></p>
-<p>10.点击Create进行分区创建，选择标准分区（Standard Partition），我们将sda1分区挂载至/boot目录，sda2分区挂载至“/”根目录,也可创建自己的个性化分区，如将sda3挂载至/data分区：</p>
-<p><img src="10-5.png" alt="10"></p>
-<p>11.创建swap分区：swap分区功能类似于Windows系统下的虚拟内存功能，我们选择分区类型swap，分区大小一般设置为内存的2倍左右：</p>
-<p><img src="11-5.png" alt="11"></p>
-<p>12.如图，我们已经将主要分区创建完成，点击NEXT，出现硬盘将被格式化提示，选择Format：</p>
-<p><img src="12-4.png" alt="12"></p>
-<p>13.此处可添加启动菜单，无特别需要我们选择下一步：</p>
-<p><img src="13-4.png" alt="13"></p>
-<p>14.进行服务器类型选择以及个性化初始软件安装，我们以Desktop（图形桌面）安装为例，选择Customize now可进行个性化初始软件安装：</p>
-<p><img src="14-4.png" alt="14"></p>
-<p>15.点击NEXT，进入CentOS 6安装过程：</p>
-<p><img src="15-3.png" alt="15"></p>
-<p>16.好啦，我们已经初步完成了CentOS 6.9版本的安装，进行简单的信息填写，就可以进入Linux的世界中了！</p>
-<p><img src="16-2.png" alt="16"></p>
-
-          
+          一、安装虚拟化软件：
+VMware Workstation是该公司出品的“虚拟 PC”软件（即：大家常说的“虚拟机”），通过它可在一台电脑上同时运行更多的Microsoft Windows、Linux、Mac OS X、DOS系统。此处我们以VMware14.1.1版本为例：
+1.打开VMware软
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/26/手把手教你用VMware虚拟化软件安装CentOS 6系统/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -3272,7 +1961,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 
@@ -3319,6 +2008,8 @@
   
 
 
+  
+
 
 
 
@@ -3357,6 +2048,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -3417,6 +2113,19 @@
   
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 

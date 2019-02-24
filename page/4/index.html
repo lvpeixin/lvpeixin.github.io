@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -93,7 +93,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Muse',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -266,9 +266,45 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
   
 </nav>
 
@@ -390,311 +426,18 @@
       
         
           
-            <p>随着运维自动化经历了从<strong>本地部署</strong>到<strong>基础设施即服务（IaaS）</strong>、<strong>平台即服务（PaaS）</strong>在到<strong>软件即服务</strong></p>
-<p><strong>（SaaS）</strong>的发展阶段，掌握多种自动化运维工具就成了运维人员必备技能之一，<strong>ansible</strong>就是目前国内使</p>
-<p>用比较广泛的自动化运维工具之一。</p>
-<h2 id="一、ansible工具介绍："><a href="#一、ansible工具介绍：" class="headerlink" title="一、ansible工具介绍："></a><strong>一、ansible工具介绍：</strong></h2><h3 id="常用自动化运维工具："><a href="#常用自动化运维工具：" class="headerlink" title="常用自动化运维工具："></a><strong>常用自动化运维工具：</strong></h3><p><strong>Ansible</strong>：python，中小型应用环境，300-500台</p>
-<p><strong>Saltstack</strong>：python，一般需部署agent，执行效率更高，大型环境1000台以上</p>
-<p><strong>Puppet</strong>：ruby，功能强大，配置复杂，重型，适合大型环境</p>
-<p><strong>Fabric</strong>：python，agentless</p>
-<p><strong>Chef</strong>：ruby，国内应用少</p>
-<p><strong>Cfengine</strong></p>
-<p><strong>func</strong></p>
-<h3 id="Ansible"><a href="#Ansible" class="headerlink" title="Ansible"></a><strong>Ansible</strong></h3><p>ansible是新出现的自动化运维工具，基于Python开发，集合了众多运维工具（puppet、</p>
-<p>cfengine、chef、func、fabric）的优点，实现了批量系统配置、批量程序部署、批量</p>
-<p>运行命令等功能。</p>
-<h3 id="特性："><a href="#特性：" class="headerlink" title="特性："></a><strong>特性：</strong></h3><p><strong>模块化：</strong>调用特定的模块，完成特定任务</p>
-<p>有Paramiko,PyYAML,Jinja2（模板语言）三个关机模块</p>
-<p>支持自定义模块</p>
-<p>基于<strong>Python</strong>语言实现</p>
-<p>部署简单，<strong>基于python和SSH</strong>（默认已安装），agentless</p>
-<p>安全，基于OpenSSH</p>
-<p>支持playbook编排任务</p>
-<p><strong>幂等性：</strong>一个任务执行1遍和执行n遍效果一样，不因重复执行带来意外情况</p>
-<p>无需代理不依赖PKI（无需ssl）</p>
-<p>可使用任何编程语言写模块</p>
-<p>YAML格式，编排任务，支持丰富的数据结构</p>
-<p>较强大的多层解决方案</p>
-<h3 id="Ansible主要组成部分："><a href="#Ansible主要组成部分：" class="headerlink" title="Ansible主要组成部分："></a><strong>Ansible主要组成部分：</strong></h3><p><strong>API</strong>：供第三方程序调用的应用程序编程接口</p>
-<p><strong>Inventory</strong>：Ansible管理主机清单，存放在/etc/ansible/hosts</p>
-<p><strong>Modules</strong>：模块，Ansible执行命令的功能的模块，多个命令的组合</p>
-<p><strong>Playbook</strong>：剧本，多个模块的组合，编排定义Ansible任务集的配置文件，由Ansible顺序依次执行，通常是JSON格式的YML文件</p>
-<p><strong>Plugins</strong>：模块功能的补充，如连接类型的插件、循环插件、变量插件、过滤插件等，该功能不常用</p>
-<p><strong>Ansible</strong>：组合Inventory、API、Modules、Plugins的绿框，可以理解为是ansible命令工具，其为核心执行工具</p>
-<p><img src="工作原理-1.png" alt="工作原理"></p>
-<h3 id="相关文件："><a href="#相关文件：" class="headerlink" title="相关文件："></a><strong>相关文件：</strong></h3><p>/etc/ansible/ansible.cfg    主配置文件，配置ansible工作特性</p>
-<p>/etc/ansible/hosts                  主机清单文件</p>
-<p>/etc/ansible/rules              角色目录</p>
-<p><strong>程序：</strong></p>
-<p>/usr/bin/ansible              主程序，临时命令执行工具</p>
-<p>/usr/bin/ansible-doc              查看配置文档，模块功能查看工具</p>
-<p>/usr/bin/ansible-galaxy         下载/上传优秀代码或Roles模块的官网平台</p>
-<p>/usr/bin/ansible-playbook    定制自动化任务，编排剧本工具/usr/bin/ansible-pull 远</p>
-<p><strong>程执行命令的工具：</strong></p>
-<p>/usr/bin/ansible-vault            文件加密工具</p>
-<p>/usr/bin/ansible-console       基于Console界面与用户交互的执行工具</p>
-<h3 id="etc-ansible-ansible-cfg-ansible"><a href="#etc-ansible-ansible-cfg-ansible" class="headerlink" title="/etc/ansible/ansible.cfg ansible"></a>/etc/ansible/ansible.cfg ansible</h3><p>配置文件（一般保持默认）</p>
-<p>[defaults]</p>
-<p>#forks               = 5            并发执行数量，默认5</p>
-<p>#poll_interval = 15          拉取数据间隔时间，默认15秒</p>
-<p>#sudo_user     = root               sudo命令默认用户</p>
-<p>#remote_port = 22          连接远程端口号</p>
-<p>#host_key_checking = False          检查对应服务器的host_key，##建议取消注释</p>
-<p>#log_path=/var/log/ansible.log   日志文件，##建议取消注释</p>
-<p><img src="ansible.cfg_.png" alt="ansible.cfg"></p>
-<h3 id="etc-ansible-hosts"><a href="#etc-ansible-hosts" class="headerlink" title="/etc/ansible/hosts"></a>/etc/ansible/hosts</h3><p>主机清单inventory文件</p>
-<p>inventory文件遵循INI文件风格，中括号中的字符为组名。可以将同一个主机</p>
-<p>同时归并到多个不同的组中；此外，当如若目标主机使用了非默认的SSH端口，</p>
-<p>还可以在主机名称之后使用冒号加端口号来标明</p>
-<p>ntp.magedu.com</p>
-<p>[webservers]</p>
-<p>www1.magedu.com:2222</p>
-<p>www2.magedu.com</p>
-<p>[dbservers]</p>
-<p>db1.magedu.com</p>
-<p>db2.magedu.com</p>
-<p>db3.magedu.com</p>
-<p>如果主机名称遵循相似的命名模式，还可以使用列表的方式标识各主机</p>
-<p><strong>示例：</strong></p>
-<p>[websrvs]</p>
-<p>www[01:100].example.com</p>
-<p>[dbsrvs]</p>
-<p>db-[a:f].example.com</p>
-<p><img src="ansiblehost.png" alt="ansiblehost"></p>
-<h3 id="ansible-命令"><a href="#ansible-命令" class="headerlink" title="ansible**命令**"></a><strong>ansible**</strong>命令**</h3><p><strong>功能：</strong>通过ssh实现配置管理、应用部署、任务执行等功能</p>
-<p><strong>建议：配置ansible端能基于密钥认证的方式联系各被管理节点</strong> </p>
-<p><strong>格式：ansible <host-pattern> [-m module_name] [-a args]</host-pattern></strong></p>
-<p><strong>常用选项：</strong></p>
-<p>–version                  显示版本</p>
-<p>-m module              指定模块，默认为command</p>
-<p>-v 详细过程                   –vv -vvv更详细</p>
-<p>–list-hosts              显示主机列表，可简写—list</p>
-<p>-k, –ask-pass                  提示连接密码，默认Key验证</p>
-<p>-K, –ask-become-pass 提示输入sudo</p>
-<p>-C, –check              检查，并不执行</p>
-<p>-T, –timeout=TIMEOUT        执行命令的超时时间，默认10s</p>
-<p>-u, –user=REMOTE_USER    执行远程执行的用户</p>
-<p>-b, –become                   代替旧版的sudo 切换</p>
-<p><strong><host-pattern></host-pattern></strong>                         匹配主机的列表</p>
-<p> <strong>ALL</strong>                    表示列表中的所有主机</p>
-<p><strong>示例：</strong></p>
-<p>ansible all -m  ping</p>
-<p> <strong>*</strong>                        支持通配符</p>
-<p><strong>示例：</strong></p>
-<p>ansible “*” -m ping</p>
-<p>ansible 192.168.1.* -m ping</p>
-<p>ansible “*srvs” -m ping</p>
-<p><strong>或关系</strong></p>
-<p><strong>示例：</strong></p>
-<p>ansible “websrvs:appsrvs”  -m ping</p>
-<p>ansible “192.168.1.10:192.168.1.20” -m ping</p>
-<p><strong>逻辑与：</strong></p>
-<p>ansible “websrvs:&amp;dbsrvs”  -m ping</p>
-<p>在websrvs组，但不在dbsrvs组中的主机</p>
-<p><strong>逻辑非：</strong></p>
-<p>ansible ‘websrvs:!dbsrvs’  -m ping</p>
-<p><strong>综合逻辑：</strong></p>
-<p>ansible ‘websrvs:dbsrvs:&amp;appsrvs:!ftpsrvs’ -m -ping</p>
-<p><strong>正则表达式：</strong></p>
-<p>ansible “websrvs:&amp;dbsrvs”  -m ping</p>
-<p>ansible “~(web|db).*.magedu.com” -m ping</p>
-<h3 id="ansible命令执行过程"><a href="#ansible命令执行过程" class="headerlink" title="ansible命令执行过程"></a><strong>ansible命令执行过程</strong></h3><p>1.加载自己的配置文件 默认/etc/ansible/ansible.cfg</p>
-<p>2.加载自己对应的模块文件，如command</p>
-<p>3.通过ansible将模块或命令生成对应的临时py文件，并将该 文件传输至远程服务器</p>
-<p>的对应执行用户$HOME/.ansible/tmp/ansible-tmp-数字/XXX.PY文件</p>
-<p>4.给文件+x执行</p>
-<p>5.执行并返回结果</p>
-<p>6.删除临时py文件，sleep 0退出</p>
-<p><strong>执行状态：</strong></p>
-<p><strong>绿色：</strong>执行成功并且不需要做改变的操作</p>
-<p><img src="绿色.png" alt="绿色"></p>
-<p><strong>黄色：</strong>执行成功并且对目标主机做变更</p>
-<p><img src="黄色.png" alt="黄色"></p>
-<p><strong>红色：</strong>执行失败</p>
-<p><img src="红色.png" alt="红色"></p>
-<h2 id="二、ansible常用模块："><a href="#二、ansible常用模块：" class="headerlink" title="二、ansible常用模块："></a><strong>二、ansible常用模块：</strong></h2><p><strong>查看模块帮助：</strong></p>
-<p>ansible-doc module</p>
-<p><strong>显示模块简要说明：</strong></p>
-<p>ansible-doc  -s  module</p>
-<h3 id="Command模块"><a href="#Command模块" class="headerlink" title="Command模块"></a><strong>Command模块</strong></h3><p><strong>功能：</strong>默认模块，在远程主机执行命令，可忽略-m选项</p>
-<p>​         ansible srvs -m command -a ‘service vsftpd start’</p>
-<p>​         ansible srvs -m command -a ‘echo magedu |passwd –stdin wang’ 不成功</p>
-<p><strong>注意：</strong></p>
-<p>（1）使用Command模块执行脚本时，要注意规范，shebang机制，否则将执行失败</p>
-<p>（2）不支持管道“|”，变量“$”,以及重定向，需使用shell模块</p>
-<h3 id="Shell-模块"><a href="#Shell-模块" class="headerlink" title="Shell**模块**"></a><strong>Shell**</strong>模块**</h3><p><strong>功能：</strong>和command相似，用shell执行命令</p>
-<p>​         ansible srv -m shell -a ‘echo magedu |passwd –stdin wang’</p>
-<p><strong>注意：</strong></p>
-<p>（1）调用bash执行命令 类似 cat /tmp/stanley.md | awk -F‘|’ ‘{print $1,$2}’ &amp;&gt;</p>
-<p>/tmp/example.txt 这些复杂命令，即使使用shell也可能会失败。</p>
-<p>解决办法：写到脚本，copy到远程，执行，再把需要的结果拉回执行命令的机器</p>
-<p>（2）可将默认模块替换为shell：</p>
-<p>​        vim ansible.conf</p>
-<p>​       module_name = shell</p>
-<p><img src="修改默认模块.png" alt="修改默认模块"></p>
-<p>ansible srvs -m command -a ‘echo magedu |passwd –stdin wang’  成功</p>
-<p><img src="修改密码成功.png" alt="修改密码成功"></p>
-<h3 id="Script-模块"><a href="#Script-模块" class="headerlink" title="Script**模块**"></a><strong>Script**</strong>模块**</h3><p><strong>功能：</strong>运行脚本,不需要将脚本复制到被控端</p>
-<p>​         -a “/PATH/TO/SCRIPT_FILE”</p>
-<p>​         snsible websrvs -m script -a f1.sh</p>
-<p><img src="script模块.png" alt="script模块"></p>
-<h3 id="Copy-模块"><a href="#Copy-模块" class="headerlink" title="Copy**模块**"></a><strong>Copy**</strong>模块**</h3><p><strong>功能：</strong>从服务器复制文件到客户端,</p>
-<p>​         ansible srv -m copy -a “src=/root/f1.sh dest=/tmp/f2.sh owner=wang mode=600</p>
-<p>​         backup=yes”</p>
-<p>如目标存在，默认覆盖，此处指定先备份</p>
-<p>   ansible srv -m copy -a “content=‘test content\n’ dest=/tmp/f1.txt” 利用内容，直接生成</p>
-<p>目标文件</p>
-<h3 id="Fetch-模块"><a href="#Fetch-模块" class="headerlink" title="Fetch**模块**"></a><strong>Fetch**</strong>模块**</h3><p><strong>功能：</strong>从客户端取文件至服务器端，copy相反，目录可先tar</p>
-<p>​       ansible srv -m fetch -a ‘src=/root/a.sh dest=/data/scripts’</p>
-<p> <strong>示例：</strong></p>
-<p>打包/var/log下所有日志文件并远程抓取</p>
-<p>​         ansible all -m shell -a ‘tar Jcf log.tar.xz /var/log/*.log’</p>
-<p>​         ansible all -m fetch -a ‘src=/root/log.tar.xz dest=/data’</p>
-<h3 id="File-模块"><a href="#File-模块" class="headerlink" title="File**模块**"></a><strong>File**</strong>模块**</h3><p><strong>功能：</strong>设置文件属性</p>
-<p><strong>示例：</strong></p>
-<p>创建新文件：</p>
-<p>​         ansible all -m file -a ‘name=/data/f3 state=touch’</p>
-<p>删除文件：</p>
-<p>​         ansible all -m file -a ‘name=/data/f3 state=absent’</p>
-<p>创建目录：</p>
-<p>​         ansible all -m file -a ‘name=/data/dir1 state=directory’</p>
-<p>删除目录：</p>
-<p>​         ansible all -m file -a ‘name=/data/dir1 state=absent’</p>
-<p>创建软连接</p>
-<p>​         ansible all -m file -a ‘src=/etc/fstab dest /data/fstab.link state=link’</p>
-<p>删除软连接：</p>
-<p>​       ansible all -m file -a ‘dest /data/fstab.link state=absent’</p>
-<p>创建文件指定所有者，权限：</p>
-<p>​         ansible srv -m file -a “path=/root/a.sh owner=wang mode=755”</p>
-<p>​         ansible web -m file -a ‘src=/app/testfile dest=/app/testfile-link state=link’</p>
-<h3 id="Hostname-模块"><a href="#Hostname-模块" class="headerlink" title="Hostname**模块**"></a><strong>Hostname**</strong>模块**</h3><p><strong>功能：</strong>管理主机名，生效同时更改文件永久生效</p>
-<p><strong>示例：</strong></p>
-<p>更改一个主机的主机名：</p>
-<p>​         ansible node1 -m hostname -a “name=websrv”</p>
-<p><strong>注意：</strong></p>
-<p>（1）Host模块不会修改/etc/hosts文件中的主机名解析，注意修改</p>
-<p>（2）批量修改主机名时最好加变量，防止所有主机名一致</p>
-<h3 id="Cron-模块"><a href="#Cron-模块" class="headerlink" title="Cron**模块**"></a><strong>Cron**</strong>模块**</h3><p><strong>功能：</strong>计划任务</p>
-<p><strong>支持时间：</strong>minute，hour，day，month，weekday</p>
-<p><strong>示例：</strong></p>
-<p>创建计划任务：每周1,3,5，每分钟打印，任务名称：warningcron</p>
-<p>​         ansible all -m cron -a ‘minute=* weekday=1,3,5 job=”/usr/bin/wall FBI warning” name=warningcron’</p>
-<p>注释cronname=waringcron的计划任务：</p>
-<p>​         ansible all -m cron -a ‘disabled=true job=”/usr/bin/wall FBI warning” name=warningcron’</p>
-<p>给cronname=waringcron的计划任务去掉注释：</p>
-<p>​         ansible all -m cron -a ‘disabled=true job=”/usr/bin/wall FBI warning” name=warningcron’</p>
-<p>创建计划任务：每五分钟同步一次服务器时间，任务名称：syntime</p>
-<p>​         ansible srv -m cron -a “minute=*/5 job=’/usr/sbin/ntpdate 172.16.0.1 &amp;&gt;/dev/null’ name=Synctime”</p>
-<p>删除计划任务：Synctime</p>
-<p>​         ansible srv -m cron -a ‘state=absent name=Synctime’ </p>
-<h3 id="Yum-模块"><a href="#Yum-模块" class="headerlink" title="Yum**模块**"></a><strong>Yum**</strong>模块**</h3><p><strong>功能：</strong>管理包</p>
-<p><strong>示例：</strong></p>
-<p>yum安装vsftpd包：（默认state=installd）</p>
-<p>​         ansible all -m yum -a ‘name=vsftpd’</p>
-<p>安装多个包用逗号隔开：</p>
-<p>​         ansible all -m yum -a ‘name=vsftpd，httpd’</p>
-<p>显示所有已安装的包：</p>
-<p>​         ansible all -m yum -a ‘name=vsftpd  list=installd’</p>
-<p>卸载vsftpd包：</p>
-<p>​         ansible all -m yum -a ‘name=vsftpd  state=removed’</p>
-<p>安装从互联网下载的包：</p>
-<p>​         ansible srv -m copy -a ‘src=/root/package.rpm dest=/data/package’</p>
-<p>​         ansible srv -m yum -a ‘name=/data/package.rpm’</p>
-<p>更新缓存：</p>
-<p>​         ansible srv -m yum -a ‘update_cache=yes’</p>
-<p>更新缓存同时安装dstat包</p>
-<p>​         ansible srv -m yum -a ‘name=dstat update_cache=yes’</p>
-<h3 id="Service-模块"><a href="#Service-模块" class="headerlink" title="Service**模块**"></a><strong>Service**</strong>模块**</h3><p><strong>功能：</strong>管理服务</p>
-<p><strong>示例：</strong></p>
-<p>停止httpd服务：</p>
-<p>​         ansible srv -m service -a ‘name=httpd state=stopped’</p>
-<p>开启httpd服务：</p>
-<p>​         ansible srv -m service -a ‘name=httpd state=started’</p>
-<p>重新加载httod服务：</p>
-<p>​         ansible srv -m service -a ‘name=httpd state=reloaded’</p>
-<p>重启httpd服务：</p>
-<p>​         ansible srv -m service -a ‘name=httpd state=restarted’</p>
-<p>开启ftp服务，同时设置开机自动启动：</p>
-<p>​         ansible srv -m service -a ‘name=vsftpd state=started enabled=yes’</p>
-<p>重启ftp服务：</p>
-<p>​         ansible srv -m service -a ‘name=vsftpd state=restarted’</p>
-<h3 id="User-模块"><a href="#User-模块" class="headerlink" title="User**模块**"></a><strong>User**</strong>模块**</h3><p><strong>功能：</strong>管理用户</p>
-<p><strong>示例：</strong></p>
-<p>添加用户，指定uid、家目录、主组及注释：</p>
-<p>​     ansible srv -m user -a ‘name=user1 comment=”test user” uid=2048 home=/app/user1 group=root’</p>
-<p>添加一个系统用户：</p>
-<p>   ansible srv -m user -a ‘name=sysuser1 system=yes home=/app/sysuser1’</p>
-<p>删除用户：</p>
-<p>   ansible srv -m user -a ‘name=user1 state=absent’</p>
-<p>添加一个nginx用户：</p>
-<p>​         ansible srv -m user -a ‘name=nginx shell=/sbin/nologin system=yes home=/var/nginx groups=root,bin uid=80 comment=”nginx service”</p>
-<p>删除nginx用户同时删除家目录：</p>
-<p>​         ansible srv -m user -a ‘name=nginx state=absent remove=yes’</p>
-<h3 id="Group-模块"><a href="#Group-模块" class="headerlink" title="Group**模块**"></a><strong>Group**</strong>模块**</h3><p><strong>功能：</strong>管理组</p>
-<p><strong>示例：</strong></p>
-<p>创建一个系统组：</p>
-<p>​       ansible srv -m group -a “name=testgroup system=yes”</p>
-<p>删除一个组：</p>
-<p>​         ansible srv -m group -a “name=testgroup state=absent”</p>
-<p>创建nginx组：</p>
-<p>​         ansible srv -m group -a ‘name=nginx system=yes gid=80’</p>
-<p>删除nginx组：</p>
-<p>​         ansible srv -m group -a ‘name=nginx state=absent’</p>
-<h2 id="三、ansible系列命令："><a href="#三、ansible系列命令：" class="headerlink" title="三、ansible系列命令："></a><strong>三、ansible系列命令：</strong></h2><p><strong>ansible系列命令包括：</strong></p>
-<p>ansible</p>
-<p>ansible-doc</p>
-<p>ansible-playbook</p>
-<p>ansible-vault</p>
-<p>ansible-console</p>
-<p>ansible-galaxy</p>
-<p>ansible-pull</p>
-<h3 id="ansible-doc"><a href="#ansible-doc" class="headerlink" title="ansible-doc"></a><strong>ansible-doc</strong></h3><p><strong>功能：</strong>显示模块帮助</p>
-<p><strong>格式：ansible-doc [options] [module…]</strong></p>
-<p>-a                     显示所有模块的文档</p>
-<p>-l                        列出可用模块</p>
-<p>-s                       显示指定模块的playbook片段</p>
-<p><strong>示例：</strong></p>
-<p>ansible-doc  ping           查看ping模块帮助</p>
-<p>ansible-doc -s ping          查看ping模块的简单说明</p>
-<h3 id="Ansible-vault"><a href="#Ansible-vault" class="headerlink" title="Ansible-vault"></a><strong>Ansible-vault</strong></h3><p><strong>功能：</strong>管理加密解密yml文件</p>
-<p><strong>格式：ans**</strong>ible-vault [create|decrypt|edit|encrypt|rekey|view]**</p>
-<p>ansible-vault encrypt hello.yml 加密yml文件</p>
-<p>ansible-vault decrypt hello.yml 解密yml文件</p>
-<p>ansible-vault view hello.yml          查看yml加密文件</p>
-<p>ansible-vault edit hello.yml          编辑加密文件</p>
-<p>ansible-vault rekey hello.yml         重新修改加密口令</p>
-<p>ansible-vault create new.yml        创建新文件</p>
-<h3 id="Ansible-console"><a href="#Ansible-console" class="headerlink" title="Ansible-console"></a><strong>Ansible-console</strong></h3><p><strong>功能：</strong>ansible控制台，可交互执行命令，支持tab</p>
-<p><strong>root@test (2)[f:10] $</strong></p>
-<p><strong>执行用户@当前操作的主机组 (当前组的主机数量)[f:并发数]$</strong></p>
-<p>设置并发数： forks n 例如： forks 10</p>
-<p>切换组： cd 主机组 例如： cd web</p>
-<p>列出当前组主机列表： list</p>
-<p>列出所有的内置命令： ?或help</p>
-<p>示例：</p>
-<p>列出主机列表中所有主机：</p>
-<p>root@all (2)[f:5]$ list</p>
-<p>切换至appsrvs组：</p>
-<p>root@all (2)[f:5]$ cd appsrvs</p>
-<p>列出appsrvs组下所有主机：</p>
-<p>root@appsrvs (2)[f:5]$ list</p>
-<p>安装httpd：</p>
-<p>root@appsrvs (2)[f:5]$ yum name=httpd state=present</p>
-<p>开启httpd服务：</p>
-<p>root@appsrvs (2)[f:5]$ service name=httpd state=started</p>
-<p><img src="ansible-console.png" alt="ansible-console"></p>
-<h3 id="ansible-galaxy"><a href="#ansible-galaxy" class="headerlink" title="ansible-galaxy"></a><strong>ansible-galaxy</strong></h3><p><strong>功能：</strong>连接<a href="https://galaxy.ansible.com/" target="_blank" rel="noopener">https://galaxy.ansible.com</a>下载相应的roles</p>
-<p><img src="galaxy.png" alt="galaxy"></p>
-<p>列出所有已安装的galaxy：</p>
-<p>ansible-galaxy list</p>
-<p>安装galaxy：</p>
-<p>ansible-galaxy install geerlingguy.redis</p>
-<p>删除galaxy：</p>
-<p>ansible-galaxy remove geerlingguy.redis</p>
-<h3 id="ansible-pull"><a href="#ansible-pull" class="headerlink" title="ansible-pull"></a><strong>ansible-pull</strong></h3><p><strong>功能：</strong>推送命令至远程，效率无限提升，对运维技术要求较高</p>
-<p>当前应用还较少</p>
-
-          
+          随着运维自动化经历了从本地部署到基础设施即服务（IaaS）、平台即服务（PaaS）在到软件即服务
+（SaaS）的发展阶段，掌握多种自动化运维工具就成了运维人员必备技能之一，ansible就是目前国内使
+用比较广泛的自动化运维工具之一。
+一、ansible工具介绍：常用自动化运维工具：Ansible：
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/29/Ansible使用介绍（一）基本概念及常用模块/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -834,201 +577,21 @@
       
         
           
-            <h2 id="一、cobbler简介："><a href="#一、cobbler简介：" class="headerlink" title="一、cobbler简介："></a><strong>一、cobbler简介：</strong></h2><p><strong>cobbler</strong></p>
-<p><strong>功能：</strong>用来快速建立 Linux 网络安装环境</p>
-<p><strong>特性：</strong></p>
-<p>1.基于PXE的二次封装，将多种安装参数封装到一个菜单，更加方便，自动化</p>
-<p>2.Python编写</p>
-<p>3.支持UEFI+GPT</p>
-<h3 id="cobbler工作流程："><a href="#cobbler工作流程：" class="headerlink" title="cobbler工作流程："></a><strong>cobbler工作流程：</strong></h3><p>1.client裸机配置了从网络启动后，开机后会广播包请求DHCP服务器（cobbler server）</p>
-<p>发送其分配好的一个IP</p>
-<p>2.DHCP服务器（cobbler server）收到请求后发送responese，包括其ip地址</p>
-<p>3.client裸机拿到ip后再向cobbler server发送请求OS引导文件的请求</p>
-<p>4.cobbler server告诉裸机OS引导文件的名字和TFTP server的ip和port</p>
-<p>5.client裸机通过上面告知的TFTP server地址通信，下载引导文件</p>
-<p>6.client裸机执行执行该引导文件，确定加载信息，选择要安装的os，期间会再向</p>
-<p>cobbler server请求kickstart文件和os image</p>
-<p>7.cobbler server发送请求的kickstart和os iamge</p>
-<p>8.client裸机加载kickstart文件</p>
-<p>9.client裸机接收os image，安装该os image</p>
-<h3 id="cobbler介绍："><a href="#cobbler介绍：" class="headerlink" title="cobbler介绍："></a>cobbler介绍：</h3><p><strong>安装包：</strong></p>
-<p>系统默认未安装，需手动安装（epel源）</p>
-<p><strong>cobbler服务集成：</strong></p>
-<p>PXE</p>
-<p>​         DHCP</p>
-<p>​         rsync</p>
-<p>​         Http</p>
-<p>​         DNS</p>
-<p>​         Kickstart</p>
-<p>​         IPMI 电源管理</p>
-<p><strong>检查cobbler环境：</strong></p>
-<p>cobbler check</p>
-<p>1）指定server地址</p>
-<p>2）指定tftp服务器地址</p>
-<p>3）需要关闭SELinux</p>
-<p>4）使用cobbler get-loaders下载必要文件</p>
-<p>5）rsync服务，忽略不做</p>
-<p>6）忽略不做</p>
-<p>7）要求debian框架下安装debmirror包，忽略不做</p>
-<p>8）要求加密口令</p>
-<p>9）集群与电源相关</p>
-<h3 id="cobbler相关术语："><a href="#cobbler相关术语：" class="headerlink" title="cobbler相关术语："></a><strong>cobbler相关术语：</strong></h3><p><strong>发行版：</strong></p>
-<p>表示一个操作系统版本，它承载了内核和 initrd 的信息，以及内核参数等其他数据</p>
-<p><strong>配置文件：</strong></p>
-<p>包含一个发行版、一个 kickstart 文件以及可能的存储库，还包含更多特定的内核参</p>
-<p>数等其他数据</p>
-<p><strong>系统：</strong></p>
-<p>表示要配置的主机，它包含一个配置文件或一个镜像，还包含 IP 和 MAC 地址、电源</p>
-<p>管理（地址、凭据、类型）以及更为专业的数据等信息</p>
-<p><strong>存储库：</strong></p>
-<p>保存一个 yum 或 rsync 存储库的镜像信息</p>
-<p><strong>镜像：</strong></p>
-<p>可替换一个包含不属于此类别的文件的发行版对象（例如，无法分为内核和 initrd 的</p>
-<p>对象）</p>
-<h3 id="相关配置文件："><a href="#相关配置文件：" class="headerlink" title="相关配置文件："></a><strong>相关配置文件：</strong></h3><p><strong>配置文件目录</strong> <strong>/etc/cobbler</strong></p>
-<p>/etc/cobbler/settings : cobbler 主配置文件</p>
-<p>/etc/cobbler/iso/: iso模板配置文件</p>
-<p>/etc/cobbler/pxe: pxe模板文件</p>
-<p>/etc/cobbler/power: 电源配置文件</p>
-<p>/etc/cobbler/user.conf: web服务授权配置文件</p>
-<p>/etc/cobbler/users.digest: web访问的用户名密码配置文件</p>
-<p>/etc/cobbler/dhcp.template : dhcp服务器的的配置末班</p>
-<p>/etc/cobbler/dnsmasq.template : dns服务器的配置模板</p>
-<p>/etc/cobbler/tftpd.template : tftp服务的配置模板</p>
-<p>/etc/cobbler/modules.conf : 模块的配置文件</p>
-<p><strong>数据目录</strong></p>
-<p>/var/lib/cobbler/config/: 用于存放distros，system，profiles 等信息配置文件</p>
-<p>/var/lib/cobbler/triggers/: 用于存放用户定义的cobbler命令</p>
-<p>/var/lib/cobbler/kickstart/: 默认存放kickstart文件</p>
-<p>/var/lib/cobbler/loaders/: 存放各种引导程序</p>
-<p><strong>镜像目录</strong></p>
-<p>/var/www/cobbler/ks_mirror/: 导入的发行版系统的所有数据</p>
-<p>/var/www/cobbler/images/ : 导入发行版的kernel和initrd镜像用于远程网络启动</p>
-<p>/var/www/cobbler/repo_mirror/: yum 仓库存储目录</p>
-<p><strong>日志目录</strong></p>
-<p>/var/log/cobbler/installing: 客户端安装日志</p>
-<p>/var/log/cobbler/cobbler.log : cobbler日志</p>
-<h3 id="cobbler命令："><a href="#cobbler命令：" class="headerlink" title="cobbler命令："></a><strong>cobbler命令：</strong></h3><p>cobbler commands         介绍</p>
-<p>cobbler check                 核对当前设置是否有问题</p>
-<p>cobbler list              列出所有的cobbler元素</p>
-<p>cobbler report                列出元素的详细信息</p>
-<p>cobbler sync           同步配置到数据目录,更改配置最好都要执行下</p>
-<p>cobbler reposync   同步yum仓库</p>
-<p>cobbler distro                 查看导入的发行版系统信息</p>
-<p>cobbler system               查看添加的系统信息</p>
-<p>cobbler profile       查看配置信息</p>
-<h2 id="二、实验：模拟搭建cobbler服务器，实现cobbler自动化安装系统"><a href="#二、实验：模拟搭建cobbler服务器，实现cobbler自动化安装系统" class="headerlink" title="二、实验：模拟搭建cobbler服务器，实现cobbler自动化安装系统"></a><strong>二、实验：模拟搭建cobbler服务器，实现cobbler自动化安装系统</strong></h2><p><strong>1.开启各类服务</strong></p>
-<p>systemctl enable cobblerd dhcpd httpd tftp</p>
-<p>systemctl start cobblerd httpd tftp</p>
-<p><strong>2.检查</strong></p>
-<p>cobbler check</p>
-<p><strong>3.指定cobbler服务器地址：</strong></p>
-<p>养成好习惯，记得备份</p>
-<p>vim /etc/cobbler/settings（备份）</p>
-<p>server:192.168.30.10              <strong>line384</strong></p>
-<p><img src="指定cobbler服务器.png" alt="指定cobbler服务器"></p>
-<p><strong>4.重启服务</strong></p>
-<p>systemctl restart cobblerd</p>
-<p><strong>5.指定tftp服务器</strong></p>
-<p>next_server:192.168.30.10    <strong>line272</strong></p>
-<p><img src="指定tftp服务器.png" alt="指定tftp服务器"></p>
-<p><strong>6.关闭SELinux</strong></p>
-<p><strong>7.下载必要文件</strong></p>
-<p>cobbler get-loaders</p>
-<p><img src="cobbler-get-loaders.png" alt="cobbler get-loaders"></p>
-<p><strong>8.同步必要文件到/var/lib/tftpboot目录</strong></p>
-<p>cobbler sync</p>
-<p><img src="cobbler-sync.png" alt="cobbler sync"></p>
-<p><strong>同步后的目录结构如下：</strong></p>
-<p><img src="目录结构-1.png" alt="目录结构"></p>
-<p><strong>9.加密口令替换setting文件中的默认口令</strong></p>
-<p>#openssl passwd -1                                            交互式生成加密口令</p>
-<p>default_password_crytped    <strong>line101</strong></p>
-<p><img src="设定加密口令.png" alt="设定加密口令"></p>
-<p><strong>10.使用cobbler自动配置dhcp服务器</strong></p>
-<p>manage_dhcp:1                       <strong>line242</strong></p>
-<p><img src="自动配置dhcp.png" alt="自动配置dhcp"></p>
-<p><strong>11.重启cobbler服务</strong></p>
-<p>systemctl restart cobblerd</p>
-<p><strong>12.修改DHCP默认配置文件</strong></p>
-<p>vim /etc/cobbler/dhcp.template</p>
-<p>subnet 192.168.30.0 netmask 255.255.255.0</p>
-<p>range dynamic-bootp 192.168.30.10 192.168.30.200;                 按需修改</p>
-<p><img src="修改dhcp.png" alt="修改dhcp"></p>
-<p><strong>13.同步dhcp设置</strong></p>
-<p>cobbler sync</p>
-<p><strong>14.确保dhcp服务已启动（67端口）</strong></p>
-<p>ss -ntlu</p>
-<p><strong>15.重启httpd cobbler服务</strong></p>
-<p>systemctl restart httpd cobblerd</p>
-<p><strong>16.挂载6,7磁盘</strong></p>
-<p>mount /dev/sr0 /mnt/cdrom0</p>
-<p>mount /dev/sr1 /mnt/cdrom1</p>
-<p><img src="挂载cdrom.png" alt="挂载cdrom"></p>
-<p><strong>17.光盘导入</strong></p>
-<p>cobbler import –path=/mnt/cdrom0/  –name=CentOS-6.9-x86_64 –arch=x86_64</p>
-<p>cobbler import –path=/mnt/cdrom1/  –name=CentOS-7.4-x86_64 –arch=x86_64</p>
-<p><strong>18.光盘导入完成后会自动生成对应版本最小化安装应答文件</strong></p>
-<p>cobbler distro list                                       列出有几套系统</p>
-<p>CentOS-6.9-x86_64</p>
-<p>CentOS-7.4-x86_64</p>
-<p>cobbler profile list                                     列出有几套应答文件配置</p>
-<p>CentOS-6.9-i386</p>
-<p>CentOS-6.9-x86_64</p>
-<p>CentOS-7.4-x86_6</p>
-<p><img src="列出配置.png" alt="列出配置"></p>
-<p><strong>19.可以删除不需要的应答文件</strong></p>
-<p>cobbler profile remove –name=CentOS-6.9-i386 </p>
-<p>cobbler distro remove –name=CentOS-6.9-i386</p>
-<p><strong>20.关联自己的应答文件</strong></p>
-<p><strong>修改应答文件路径：</strong></p>
-<p>vim ks.cfg</p>
-<p>url  –url=$tree               <strong>修改路径（必要）</strong></p>
-<p><img src="tree.png" alt="$tree"></p>
-<p>放置对应目录下：</p>
-<p>cp ks6_mini.cfg  /var/lib/cobbler/kickstarts/</p>
-<p>cp ks7_desktop.cfg  /var/lib/cobbler/kickstarts/</p>
-<p>cobbler profile add  –name=CentOS-6.9-x86_64_Mini  –distro=CentOS-6.9-x86_64</p>
-<p>–kickstart=/var/lib/cobbler/kickstarts/ks6_mini.cfg</p>
-<p>cobbler profile add  –name=CentOS-7.4-x86_64_Desktop  –distro=CentOS-7.4-x86_64</p>
-<p>–kickstart=/var/lib/cobbler/kickstarts/ks7_desktop.cfg</p>
-<p><img src="添加配置.png" alt="添加配置"></p>
-<p><strong>21.安装测试，新开一台虚拟机，网卡设置为仅主机</strong></p>
-<p><img src="开机选项.png" alt="开机选项"></p>
-<h2 id="三、实验：实现基于web的cobbler"><a href="#三、实验：实现基于web的cobbler" class="headerlink" title="三、实验：实现基于web的cobbler"></a><strong>三、实验：实现基于web的cobbler</strong></h2><p><strong>前期准备：cobbler-web安装包，epel源</strong></p>
-<p><strong>服务器：CentOS7:192.168.30.10</strong></p>
-<p><strong>1.yum install cobbler-web</strong></p>
-<p><strong>2.重启httpd服务</strong></p>
-<p>systemctl restart httpd</p>
-<p><strong>3.测试cobbler网页</strong></p>
-<p><a href="https://192.168.30.10/cobbler_web/" target="_blank" rel="noopener">https://192.168.30.10/cobbler_web/</a></p>
-<p><img src="web.png" alt="web"></p>
-<p><strong>4.添加cobbler管理员账户</strong></p>
-<p>/etc/cobbler/modules.conf   定义了管理员账户的添加方式</p>
-<p>可以看到默认认证方式定义在/etc/cobbler/users.digest文件中</p>
-<p><img src="系统默认认证方式.png" alt="系统默认认证方式"></p>
-<h3 id="方法一：默认方式"><a href="#方法一：默认方式" class="headerlink" title="方法一：默认方式"></a><strong>方法一：默认方式</strong></h3><p>创建用户test1</p>
-<p>htdigest -c /etc/cobbler.users.digest  Cobbler test1</p>
-<p>要求输入口令</p>
-<p><img src="默认修改.png" alt="默认修改"></p>
-<p>使用test1账户登录：登录成功：</p>
-<p>就可以在页面上更改cobbler配置了</p>
-<p><img src="登录成功-2.png" alt="登录成功"></p>
-<h3 id="方法二：pam模块验证方法"><a href="#方法二：pam模块验证方法" class="headerlink" title="方法二：pam模块验证方法"></a><strong>方法二：pam模块验证方法</strong></h3><p>module = authn_pam</p>
-<p><img src="pam验证.png" alt="pam验证"></p>
-<p>cat /etc/cobbler/users.conf</p>
-<p>useradd -s  /sbin/nologin  test2</p>
-<p>echo magedu | passwd  –sdtin test2</p>
-<p>vim /etc/cobbler/users.conf</p>
-<p>[admins]</p>
-<p>admin = test2</p>
-<p><img src="pam模块验证2.png" alt="pam模块验证2"></p>
-<p><strong>重启cobbler服务</strong></p>
-<p>systemctl restart cobblerd</p>
-<p>使用test2账户登录：登录成功</p>
-<p><img src="test2登录成功.png" alt="test2登录成功"></p>
-
-          
+          一、cobbler简介：cobbler
+功能：用来快速建立 Linux 网络安装环境
+特性：
+1.基于PXE的二次封装，将多种安装参数封装到一个菜单，更加方便，自动化
+2.Python编写
+3.支持UEFI+GPT
+cobbler工作流程：1.client裸机配置了从网络启动后，开机后会广播包请求D
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/26/cobbler自动化安装系统相关实验/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1168,267 +731,18 @@
       
         
           
-            <h2 id="一、PEX简介："><a href="#一、PEX简介：" class="headerlink" title="一、PEX简介："></a><strong>一、PEX简介：</strong></h2><p><strong>PXE(Preboot Execution Environment)</strong>：预启动执行环境</p>
-<p>PXE是由Intel设计的协议，它可以使计算机通过网络而不是从本地硬盘、光驱等设备启动。</p>
-<p>基于Client/Server的网络模式，支持远程主机通过网络从远端服务器下载</p>
-<p>映像，并由此支持通过网络启动操作系统</p>
-<p>PXE可以引导和安装Windows,linux等多种操作系统</p>
-<h3 id="PXE的工作原理："><a href="#PXE的工作原理：" class="headerlink" title="PXE的工作原理："></a>PXE的工作原理：</h3><p>1)Client向PXE Server上的DHCP发送IP地址请求消息，DHCP检测Client是否合法（主要是检</p>
-<p>测Client的网卡MAC地址），如果合法则返回Client的IP地址，同时将启动文件pxelinux.0的</p>
-<p>位置信息一并传送给Client</p>
-<p>2)Client向PXE Server上的TFTP发送获取pxelinux.0请求消息，TFTP接收到消息之后再向Client</p>
-<p>发送pxelinux.0大小信息，试探Client是否满意，当TFTP收到Client发回的同意大小信息之后，</p>
-<p>正式向Client发送pxelinux.0</p>
-<p>3)Client执行接收到的pxelinux.0文件</p>
-<p>4)Client向TFTP Server发送针对本机的配置信息文件（在TFTP 服务的pxelinux.cfg目录下），</p>
-<p>TFTP将配置文件发回Client，继而Client根据配置文件执行后续操作。</p>
-<p>5)Client向TFTP发送Linux内核请求信息，TFTP接收到消息之后将内核文件发送给Client</p>
-<p>6)Client向TFTP发送根文件请求信息，TFTP接收到消息之后返回Linux根文件系统</p>
-<p>7)Client启动Linux内核</p>
-<p>8)Client下载安装源文件，读取自动化安装脚本</p>
-<p><strong>由此可见，要想实现PXE安装系统，首先要先搭建DHCP以及tftp服务器，我们接下来先介绍如何搭</strong></p>
-<p><strong>建**</strong>一台DHCP以及tftp服务器。**</p>
-<h2 id="二、实验：模拟搭建DHCP服务器"><a href="#二、实验：模拟搭建DHCP服务器" class="headerlink" title="二、实验：模拟搭建DHCP服务器"></a><strong>二、实验：模拟搭建DHCP服务器</strong></h2><p><strong>前期准备：准备一台CentOS7虚拟机作为DHCP服务器；网卡设为仅主机模式，设置固定IP地址，</strong></p>
-<p><strong>关闭虚拟机的DHCP服务</strong></p>
-<p><img src="关闭dhcp服务.png" alt="关闭dhcp服务"></p>
-<p><strong>1.关闭iptables，selinux服务</strong></p>
-<p><strong>2.安装DHCP服务包</strong></p>
-<p>yum install dhcp</p>
-<p><strong>3.尝试启动dhcp服务</strong></p>
-<p>systemctl start dhcpd.service</p>
-<p>我们发现dhcpd服务启动失败，原因是未配置dhcp.conf文件</p>
-<p><img src="尝试启动dhcp失败.png" alt="尝试启动dhcp失败"></p>
-<p><strong>4.系统自带的dhcp.conf是空文件，我们找到安装包自带的example进行修改</strong></p>
-<p>rpm –ql dhcp | grep example</p>
-<p>cp /usr/share/doc/dhcp-4.2.5/dhcpd.conf.example   /etc/dhcp/dhcp.conf</p>
-<p><img src="找到范例.png" alt="找到范例"></p>
-<p><strong>5.修改dhcp配置文件</strong></p>
-<p><strong>vim dhcp.conf</strong></p>
-<p><strong>其中全局语句块和subnet语句块均可使配置生效，subnet语句块优先级高于全局语句块</strong></p>
-<p><strong>全局语句块：</strong></p>
-<p># option definitions common to all supported networks… </p>
-<p>option domaim-name “wxlinux.com”                   指定获取主机域后缀</p>
-<p>option domain-name-servers 114.114.114.114,8.8.8.8            指定DNS，可选</p>
-<p>default-least-time  86400                                  结合生产环境，ip越充足，租期越大越好</p>
-<p>max-lease-time  100000                                         最大租期时间</p>
-<p><strong>subnet语句块：</strong></p>
-<p># This is a very basic subnet declaration.</p>
-<p>subnet 192.168.30.0 netmask 255.255.255.0 {</p>
-<p>​        range 192.168.30.10  192.168.30.100;                指定ip地址范围</p>
-<p>​         option router 192.168.30.1                         指定网关</p>
-<p>}</p>
-<p><img src="修改dhcp.conf_.png" alt="修改dhcp.conf"></p>
-<p><strong>6.再次尝试启动dhcpd服务，并设置开机自启动</strong></p>
-<p>systemctl start dhcpd.service</p>
-<p>systemctl enable dhcpd.service</p>
-<p>发现这次没有报错，dhcpd服务顺利启动</p>
-<p><img src="顺利启动.png" alt="顺利启动"></p>
-<p><strong>7.切换到另外一台CentOS6虚拟机</strong></p>
-<p>我们看到现在的ip地址为：192.168.30.158</p>
-<p><img src="获取之前.png" alt="获取之前"></p>
-<p>执行命令重新获取ip地址：</p>
-<p>dhclient –d</p>
-<p>新获取的地址为192.168.30.11，证明dhcp服务已搭建成功</p>
-<p><img src="重新获取.png" alt="重新获取"></p>
-<p><strong>利用systemctl status dhcpd 命令可观察dhcp分发地址的全过程</strong></p>
-<p><img src="全过程.png" alt="全过程"></p>
-<h2 id="三、实验：模拟搭建tftp服务器"><a href="#三、实验：模拟搭建tftp服务器" class="headerlink" title="三、实验：模拟搭建tftp服务器"></a><strong>三、实验：模拟搭建tftp服务器</strong></h2><p><strong>前期准备：关闭服务器端，客户端的SELinux，以及防火墙</strong></p>
-<p><strong>tftp服务器端：CentOS7:192.168.30.10</strong></p>
-<p><strong>tftp客户端：CentOS6:192.168.30.11</strong></p>
-<p><strong>tftp服务器端操作：</strong></p>
-<p><strong>1.安装tftp服务</strong></p>
-<p>yum install tftp</p>
-<p>yum install tftp-server</p>
-<p><img src="安装yum.png" alt="安装yum"></p>
-<p><strong>2.开启服务</strong></p>
-<p><strong>CentOS6:</strong></p>
-<p>chkconfig tfcp on</p>
-<p>service xinted restart</p>
-<p>chkconfig tfcp enable</p>
-<p><strong>CentOS7:</strong></p>
-<p>systemctl start tftp.socket</p>
-<p>systemctl enable tftp.socket</p>
-<p><img src="开启tftp.socket.png" alt="开启tftp.socket"></p>
-<p><strong>3测试tftp服务</strong></p>
-<p>拷贝mbr7.bak文件到tftp目录下</p>
-<p>cp mbr7.bak /var/lib/tftpboot/</p>
-<p><strong>客户端：</strong></p>
-<p>tftp 192.168.30.10</p>
-<p>get menu.c23</p>
-<p>文件通过tftp传输成功</p>
-<p>![1%Y5[PKHF<a href="http://www.178linux.com/wp-content/uploads/2018/05/1Y5PKHFVCZB9PHN74UB.png" target="_blank" rel="noopener">}VCZB9PHN74UB</a></p>
-<h3 id="至此，dhcp及tfcp已在CentOS7上搭建完成，下面来实验用PEX安装CentOS系统"><a href="#至此，dhcp及tfcp已在CentOS7上搭建完成，下面来实验用PEX安装CentOS系统" class="headerlink" title="至此，dhcp及tfcp已在CentOS7上搭建完成，下面来实验用PEX安装CentOS系统"></a><strong>至此，dhcp及tfcp已在CentOS7上搭建完成，下面来实验用PEX安装CentOS系统</strong></h3><h2 id="四、实验：实现CentOS7的PXE安装"><a href="#四、实验：实现CentOS7的PXE安装" class="headerlink" title="四、实验：实现CentOS7的PXE安装"></a><strong>四、实验：实现CentOS7的PXE安装</strong></h2><p><strong>前期准备：关闭SELinux策略，firewall防火墙</strong></p>
-<p><strong>事先准备好应答文件ks7_mini.cfg，**</strong>ks7_desktop.cfg**</p>
-<p><strong>服务器端：CentOS7:192.168.30.10</strong></p>
-<p><strong>1 安装必要包，并开启httpd服务</strong></p>
-<p>yum install dhcp tftp-server httpd syslinux</p>
-<p>systemctl enable dhcpd httpd tftp.socket</p>
-<p>systemctl start httpd</p>
-<p><strong>2.准备yum源</strong></p>
-<p>mkdir /var/www/html/centos/7  -pv</p>
-<p>添加开机自动挂载光盘</p>
-<p>vim /etc/fstab</p>
-<p>/dev/sr0     /var/www/html/centos/7  iso9660 defaults 0 0</p>
-<p><img src="挂载-2.png" alt="挂载"></p>
-<p>挂载磁盘</p>
-<p>mount dev/sr0   /var/www/html/centos/7 </p>
-<p>重新读取磁盘挂载</p>
-<p>mount -a</p>
-<p><img src="挂载目录.png" alt="挂载目录"></p>
-<p><strong>2.制作ks.cfg文件</strong></p>
-<p>mkdir /var/www/html/ksdir/7  -pv</p>
-<p>cp /root/ ks7_desktop.cfg  /var/www/html/ksdir/7/ks7_desktop.cfg</p>
-<p>cp /root/ ks7_mini.cfg  /var/www/html/ksdir/7/ks7_mini.cfg</p>
-<p>chmod +r /var/www/html/ksdir/7/ks7_desktop.cfg</p>
-<p>浏览器确认ks7.cfg能正常访问</p>
-<p><img src="3浏览器访问ks.png" alt="3浏览器访问ks"></p>
-<p><strong>3.修改ks.cfg文件</strong></p>
-<p>#Use CDROM installation media</p>
-<p>url –url=<a href="http://192.168.30.7/centos/7" target="_blank" rel="noopener">http://192.168.30.7/centos/7</a></p>
-<p>#Use graphical install</p>
-<p>text</p>
-<p>#网卡</p>
-<p>onboot=on</p>
-<p>我们还可以在此添加ssh基于key的认证，使得新系统安装后可直接ssh连接</p>
-<p>添加ssh基于key验证：</p>
-<p>%post</p>
-<p>mkdir /root/.ssh</p>
-<p>cat &gt; /root/.ssh/authorized_keys &lt;&lt; EOF</p>
-<p>ssh-rsa AAABBB…（服务器自授权公钥）</p>
-<p>EOF</p>
-<p><img src="4修改ks.png" alt="4修改ks"></p>
-<p><strong>4.配置dhcp服务</strong></p>
-<p>subnet 192.168.30.0 netmask 255.255.255.0 {</p>
-<p>​        range 192.168.30.10 192.168.30.100;</p>
-<p>​        option routers 192.168.30.254;</p>
-<p>​        option domain-name-servers 8.8.8.8;</p>
-<p>​        next-server 192.168.30.7;</p>
-<p>​        filename “pxelinux.0”;</p>
-<p>}</p>
-<p>syetemctl dhcpd start</p>
-<p><img src="配置dhcp.png" alt="配置dhcp"></p>
-<p><strong>5.准备PXE相关文件</strong></p>
-<p>cd /var/lib/tftpboot/</p>
-<p>mkdir pxelinux.cfg/</p>
-<p>cp /usr/share/syslinux/pxelinux.0  /var/lib/tftpboot</p>
-<p>rpm -ql syslinux|grep menu.c32</p>
-<p>cp /usr/share/syslinux/menu.c32  /var/lib/tftpboot</p>
-<p>cp /misc/cd/isolinux/{vmlinuz,initrd.img}  /var/lib/tftpboot</p>
-<p>cp /misc/cd/isolinux/isolinux.cfg  /var/lib/tftpboot/pxelinux.cfg/default</p>
-<p>最终目录树如下：</p>
-<p><img src="5目录树.png" alt="5目录树"></p>
-<p><strong>6.制作菜单</strong></p>
-<p>vim /var/lib/tftpboot/pxelinux.cfg/default</p>
-<p>default menu.c32</p>
-<p>删掉背景，修改title等</p>
-<p>menu title Auto Install System</p>
-<p>CentOS7:</p>
-<p>见图</p>
-<p><img src="6修改目录.png" alt="6修改目录"></p>
-<p><strong>设置启动菜单：</strong></p>
-<p>menu title  Auto Install CentOS</p>
-<p>label desktop</p>
-<p>  menu label Install ^Desktop CentOS 7</p>
-<p>  kernel vmlinuz</p>
-<p>  append initrd=initrd.img ks=<a href="http://192.168.30.7/ksdir/7/ks7_desktop.cfg" target="_blank" rel="noopener">http://192.168.30.7/ksdir/7/ks7_desktop.cfg</a></p>
-<p>label mini</p>
-<p>  menu label Install ^Mini CentOS 7</p>
-<p>  kernel vmlinuz</p>
-<p>  append initrd=initrd.img ks=<a href="http://192.168.30.7/ksdir/7/ks7_mini.cfg" target="_blank" rel="noopener">http://192.168.30.7/ksdir/7/ks7_mini.cfg</a></p>
-<p>label local</p>
-<p>  menu default</p>
-<p>  menu label Boot from ^local drive</p>
-<p>  localboot 0xffff</p>
-<p>menu end</p>
-<p><img src="7.修改菜单.png" alt="7.修改菜单"></p>
-<p>7.测试安装，新开一台虚拟机：</p>
-<p>网卡设置为仅主机，正常启动将出现安装界面</p>
-<p><img src="安装界面.png" alt="安装界面"></p>
-<p>我们选择Desktop安装</p>
-<p><img src="安装包.png" alt="安装包"></p>
-<h2 id="五、实验：在CentOS7实现PXE安装CentOS6-7双系统"><a href="#五、实验：在CentOS7实现PXE安装CentOS6-7双系统" class="headerlink" title="五、实验：在CentOS7实现PXE安装CentOS6,7双系统"></a><strong>五、实验：在CentOS7实现PXE安装CentOS6,7双系统</strong></h2><p><strong>前期准备：关闭SELinux安全策略，关闭防火墙；</strong></p>
-<p><strong>事先准备好应答文件ks6_mini.cfg，**</strong>ks7_desktop.cfg**</p>
-<p><strong>服务器：CentOS7:192.168.30.10</strong></p>
-<p><strong>1 安装必要服务包</strong></p>
-<p>yum install dhcp tftp-server httpd syslinux</p>
-<p>systemctl enable dhcpd httpd tftp.socket</p>
-<p>systemctl start httpd</p>
-<p><strong>2 准备YUM源</strong></p>
-<p>mkdir /var/www/html/centos/{6,7}/ -pv</p>
-<p>vim /etc/fstab 加下面行</p>
-<p>/dev/sr0         /var/www/html/centos/6    iso9660 defaults        0 0</p>
-<p>/dev/sr1         /var/www/html/centos/7    iso9660 defaults        0 0</p>
-<p>mount -a</p>
-<p><img src="挂载-1.png" alt="挂载"></p>
-<p><strong>3 准备ks文件</strong></p>
-<p>mkdir /var/www/html/ksdir/{6,7} -pv</p>
-<p>cp /root/ks6_mini.cfg  /var/www/html/ksdir/7/ks6_mini.cfg</p>
-<p>cp /root/ks7_desktop.cfg  /var/www/html/ksdir/7/ks7_desktop.cfg</p>
-<p>chmod +r /var/www/html/ksdir/7/ks7_desktop.cfg</p>
-<p>[root@centos7 tftpboot]#tree /var/www/html/ksdir/</p>
-<p>/var/www/html/ksdir/</p>
-<p>├── 6</p>
-<p>│   └── ks6_mini.cfg</p>
-<p>└── 7</p>
-<p>​    └── ks7_desktop.cfg</p>
-<p>最好确认下应答文件是否可以httpd正常访问</p>
-<p><img src="确认httpd.png" alt="确认httpd"></p>
-<p><strong>4 配置dhcp服务</strong></p>
-<p>cp /usr/share/doc/dhcp-4.2.5/dhcpd.conf.example /etc/dhcp/dhcpd.conf</p>
-<p><strong>vim</strong> /etc/dhcp/dhcpd.conf</p>
-<p>[root@centos7 tftpboot]#cat /etc/dhcp/dhcpd.conf</p>
-<p>option domain-name “magedu.org”;</p>
-<p>option domain-name-servers 114.114.114.114,1.1.1.1;</p>
-<p>option routers 192.168.30.200;</p>
-<p>default-lease-time 86400;</p>
-<p>max-lease-time 100000;</p>
-<p>subnet 192.168.30.0 netmask 255.255.255.0 {</p>
-<p>​        range 192.168.30.10 192.168.30.100;</p>
-<p>​        option routers 192.168.30.254;</p>
-<p>​        option domain-name-servers 8.8.8.8;</p>
-<p>​        next-server 192.168.30.17;</p>
-<p>​        filename “pxelinux.0”;</p>
-<p>}</p>
-<p>systemctl start dhcpd</p>
-<p><img src="dhcp配置.png" alt="dhcp配置"></p>
-<p><strong>5 准备PXE相关文件</strong></p>
-<p>rpm -ql syslinux</p>
-<p>mkdir /var/lib/tftpboot/pxelinux.cfg/</p>
-<p>cp /usr/share/syslinux/pxelinux.0 /var/lib/tftpboot/</p>
-<p>cp /usr/share/syslinux/menu.c32 /var/lib/tftpboot/</p>
-<p>mkdir /var/lib/tftpboot/centos{6,7}</p>
-<p>cp  /var/www/html/centos/7/isolinux/{vmlinuz,initrd.img} /var/lib/tftpboot/centos7/</p>
-<p>cp  /var/www/html/centos/6/isolinux/{vmlinuz,initrd.img} /var/lib/tftpboot/centos6/</p>
-<p>cp /var/www/html/centos/7/isolinux/isolinux.cfg  /var/lib/tftpboot/pxelinux.cfg/default</p>
-<p>最终目录结构如下：</p>
-<p><img src="目录结构.png" alt="目录结构"></p>
-<p><strong>6.修改启动菜单</strong></p>
-<p>vim /var/lib/tftpboot/pxelinux.cfg/default</p>
-<p>default menu.c32</p>
-<p>timeout 600</p>
-<p>menu title AUTO Install CentOS6 or 7</p>
-<p>label centos7</p>
-<p>  menu label ^Install  Desktop CentOS  7</p>
-<p>  kernel centos7/vmlinuz</p>
-<p>  append initrd=centos7/initrd.img ks=<a href="http://192.168.30.17/ksdir/ks7_desktop.cfg" target="_blank" rel="noopener">http://192.168.30.17/ksdir/ks7_desktop.cfg</a></p>
-<p>label centos6</p>
-<p>  menu label install ^Mini CentOS 6</p>
-<p>  menu default</p>
-<p>  kernel centos6/vmlinuz</p>
-<p>  append initrd=centos6/initrd.img ks=<a href="http://192.168.30.17/ksdir/ks6_mini.cfg" target="_blank" rel="noopener">http://192.168.30.17/ksdir/ks6_mini.cfg</a></p>
-<p>label local</p>
-<p>  menu label Boot from ^local drive</p>
-<p>  localboot 0xffff</p>
-<p>menu end</p>
-<p><img src="修改default.png" alt="修改default"></p>
-<p><strong>6 客户端测试安装</strong></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/05/950G0JEL4JLFN_IUP6.png" alt="950`G(0J]]EL4JLFN_I(UP6"></p>
-<p>一般能到达安装包界面就证明安装没问题了</p>
-<p><img src="安装包-1.png" alt="安装包"></p>
-<p>登录成功：</p>
-<p><img src="登录成功-1.png" alt="登录成功"></p>
-
-          
+          一、PEX简介：PXE(Preboot Execution Environment)：预启动执行环境
+PXE是由Intel设计的协议，它可以使计算机通过网络而不是从本地硬盘、光驱等设备启动。
+基于Client/Server的网络模式，支持远程主机通过网络从远端服务器下载
+映像，并由此支持通过网络启动
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/26/PXE自动化安装系统相关实验/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1568,253 +882,20 @@
       
         
           
-            <p>Linux系统中的日志记录了系统每天发生的各种各样的事情，你可以通过它来检查错误发生的原因，</p>
-<p>或者受到攻击时攻击者留下的痕迹。日志对于安全来说，非常重要。 </p>
-<h2 id="一、日志介绍"><a href="#一、日志介绍" class="headerlink" title="一、日志介绍"></a><strong>一、日志介绍</strong></h2><h3 id="日志主要包含以下内容："><a href="#日志主要包含以下内容：" class="headerlink" title="日志主要包含以下内容："></a><strong>日志主要包含以下内容：</strong></h3><p>历史事件：时间，地点，人物，事件</p>
-<p>日志级别：事件的关键性程度，Loglevel</p>
-<h3 id="系统中常见日志及说明："><a href="#系统中常见日志及说明：" class="headerlink" title="系统中常见日志及说明："></a><strong>系统中常见日志及说明：</strong></h3><p><img src="日志文件.png" alt="日志文件"></p>
-<h3 id="系统日志服务："><a href="#系统日志服务：" class="headerlink" title="系统日志服务："></a><strong>系统日志服务：</strong></h3><p><strong>CentOS 5之前版本</strong></p>
-<p>syslogd</p>
-<p>syslogd: system application 记录应用日志</p>
-<p>klogd: linux kernel 记录内核日志</p>
-<p>事件记录格式：</p>
-<p>日期时间 主机 进程[pid]: 事件内容</p>
-<p>C/S架构：通过TCP或UDP协议的服务完成日志记录传送，将分布在不同主</p>
-<p>机的日志实现集中管理</p>
-<p><strong>CentOS 6和7</strong></p>
-<p>rsyslog特性：</p>
-<p>多线程</p>
-<p>UDP, TCP, SSL, TLS, RELP</p>
-<p>MySQL, PGSQL, Oracle实现日志存储</p>
-<p>强大的过滤器，可实现过滤记录日志信息中任意部分</p>
-<p>自定义输出格式</p>
-<p>ELK：elasticsearch, logstash, kibana</p>
-<p>非关系型分布式数据库</p>
-<p>基于apache软件基金会jakarta项目组的项目lucene</p>
-<p>Elasticsearch是个开源分布式搜索引擎</p>
-<p>Logstash对日志进行收集、分析，并将其存储供以后使用</p>
-<p>kibana 可以提供的日志分析友好的 Web 界面</p>
-<h3 id="日志常见术语"><a href="#日志常见术语" class="headerlink" title="日志常见术语"></a><strong>日志常见术语</strong></h3><p>参见<strong>man logger</strong></p>
-<p><strong>facility：</strong>设施，从功能或程序上对日志进行归类</p>
-<p>auth, authpriv, cron, daemon,ftp,kern, lpr, mail, news, security(auth),</p>
-<p>user, uucp, local0-local7, syslog</p>
-<p><img src="服务名称.png" alt="服务名称"></p>
-<p><strong>Priority：</strong> 优先级别，从低到高排序</p>
-<p>debug, info, notice, warn(warning), err(error), crit(critical), alert, emerg(panic)</p>
-<p>参看帮助： <strong>man 3 syslog</strong></p>
-<p><img src="等级名称.png" alt="等级名称"></p>
-<h2 id="二、日志配置"><a href="#二、日志配置" class="headerlink" title="二、日志配置"></a><strong>二、日志配置</strong></h2><p>程序包：rsyslog</p>
-<p>主程序：/usr/sbin/rsyslogd</p>
-<p>CentOS 6：service rsyslog {start|stop|restart|status}</p>
-<p>CentOS 7：/usr/lib/systemd/system/rsyslog.service</p>
-<p>配置文件：/etc/rsyslog.conf，/etc/rsyslog.d/*.conf</p>
-<p>库文件： /lib64/rsyslog/*.so</p>
-<h3 id="配置文件格式："><a href="#配置文件格式：" class="headerlink" title="配置文件格式："></a><strong>配置文件格式：</strong></h3><p>由三部分组成</p>
-<p>   <strong>MODULES：</strong>相关模块配置</p>
-<p>   <strong>GLOBAL DIRECTIVES：</strong>全局配置</p>
-<p>   <strong>RULES：</strong>日志记录相关的规则配置</p>
-<h3 id="日志格式："><a href="#日志格式：" class="headerlink" title="日志格式："></a><strong>日志格式：</strong></h3><p>RULES配置格式：</p>
-<p><strong>facility.priority; facility.priority… target</strong></p>
-<p><strong>facility：</strong></p>
-<p>*：所有的facility</p>
-<p>facility1,facility2,facility3,…：指定的facility列表</p>
-<p><strong>priority：</strong></p>
-<p><em>：所有级别；如：”authpriv.</em>”表示authpriv认证信息服务产生的所有等级日志都记录</p>
-<p>none：没有级别，即不记录</p>
-<p>PRIORITY：指定级别（含）以上的所有级别</p>
-<p>=PRIORITY：仅记录指定级别的日志信息，其他等级都不记录。如：”*.emerg”表示任何日志</p>
-<p>服务产生的日志，只要等级为emerg就记录；此用法较少见，了解即可</p>
-<p><strong>target：</strong></p>
-<p>文件路径：通常在<strong>/var/log/</strong>，文件路径前的-表示异步写入</p>
-<p>用户：将日志事件通知给指定的用户，* 表示登录的所有用户</p>
-<p>日志服务器：@host，把日志送往至指定的远程服务器记录</p>
-<p>管道： | COMMAND，转发给其它命令处理</p>
-<h3 id="etc-rsyslog-conf"><a href="#etc-rsyslog-conf" class="headerlink" title="/etc/rsyslog.conf"></a><strong>/etc/rsyslog.conf</strong></h3><p>#### RULES ####</p>
-<p># Log all kernel messages to the console.</p>
-<p><strong>内核产生的任何日志</strong></p>
-<p># Logging much else clutters up the screen.</p>
-<p>#kern.*                                                 /dev/console</p>
-<p># Log anything (except mail) of level info or higher.</p>
-<p><strong>定义了系统中除邮箱，身份验证，计划任务以外的其他日志</strong></p>
-<p># Don’t log private authentication messages!</p>
-<p>*.info;mail.none;authpriv.none;cron.none                /var/log/messages</p>
-<p><strong>定义身份验证授权相关的日志文件路径</strong></p>
-<p># The authpriv file has restricted access.</p>
-<p>authpriv.*                                              /var/log/secure</p>
-<p><strong>定义邮件日志文件路径，”-“代表异步传输</strong></p>
-<p># Log all the mail messages in one place.</p>
-<p>mail.*                                                  -/var/log/maillog</p>
-<p><strong>定义计划任务日志文件路径</strong></p>
-<p># Log cron stuff</p>
-<p>cron.*                                                  /var/log/cron</p>
-<p><strong>系统出现严重问题时，每个人都会收到提示</strong></p>
-<p># Everybody gets emergency messages</p>
-<p><em>.emerg                                                 :omusrmsg:</em></p>
-<p><strong>新闻相关服务日志文件</strong></p>
-<p># Save news errors of level crit and higher in a special file.</p>
-<p>uucp,news.crit                                          /var/log/spooler</p>
-<p><strong>本地预留定制日志</strong></p>
-<p># Save boot messages also to boot.log</p>
-<p>local7.*                                                /var/log/boot.log</p>
-<p>##################################</p>
-<h2 id="三、日志管理"><a href="#三、日志管理" class="headerlink" title="三、日志管理"></a><strong>三、日志管理</strong></h2><h3 id="Journalctl工具"><a href="#Journalctl工具" class="headerlink" title="Journalctl工具"></a><strong>Journalctl工具</strong></h3><p>Systemd 统一管理所有 Unit 的启动日志。带来的好处就是，可以只用</p>
-<p>journalctl一个命令，查看所有日志（内核日志和应用日志）。日志的配置文件</p>
-<p><strong>/etc/systemd/journald.conf</strong></p>
-<p><strong>journalctl用法</strong></p>
-<p>查看所有日志（默认情况下 ，只保存本次启动的日志）</p>
-<p>  journalctl</p>
-<p>查看内核日志（不显示应用日志）</p>
-<p>  journalctl -k</p>
-<p>查看系统本次启动的日志</p>
-<p>  journalctl -b</p>
-<p>  journalctl -b -0</p>
-<p>查看上一次启动的日志（需更改设置）</p>
-<p>  journalctl -b -1</p>
-<p>查看指定时间的日志</p>
-<p>  journalctl –since=”2017-10-30 18:10:30″</p>
-<p>  journalctl –since “20 min ago”</p>
-<p>  journalctl –since yesterday</p>
-<p>  journalctl –since “2017-01-10” –until “2017-01-11 03:00”</p>
-<p>  journalctl –since 09:00 –until “1 hour ago”</p>
-<p>显示尾部的最新10行日志</p>
-<p>  journalctl -n</p>
-<p>显示尾部指定行数的日志</p>
-<p>  journalctl -n 20</p>
-<p>实时滚动显示最新日志</p>
-<p>  journalctl -f</p>
-<p>查看指定服务的日志</p>
-<p>  journalctl /usr/lib/systemd/systemd</p>
-<p>查看指定进程的日志</p>
-<p>  journalctl _PID=1</p>
-<p>查看某个路径的脚本的日志</p>
-<p>  journalctl /usr/bin/bash</p>
-<p>查看指定用户的日志</p>
-<p>  journalctl _UID=33 –since today</p>
-<p>查看某个 Unit 的日志</p>
-<p>  journalctl -u nginx.service</p>
-<p>  journalctl -u nginx.service –since today</p>
-<p>实时滚动显示某个 Unit 的最新日志</p>
-<p>  journalctl -u nginx.service -f</p>
-<p>合并显示多个 Unit 的日志</p>
-<p>  journalctl -u nginx.service -u php-fpm.service –since today</p>
-<p>查看指定优先级（及其以上级别）的日志，共有8级</p>
-<p>  0: emerg</p>
-<p>  1: alert</p>
-<p>  2: crit</p>
-<p>  3: err</p>
-<p>  4: warning</p>
-<p>  5: notice</p>
-<p>  6: info</p>
-<p>  7: debug</p>
-<p>  journalctl -p err -b</p>
-<p>日志默认分页输出，–no-pager 改为正常的标准输出</p>
-<p>  journalctl –no-pager</p>
-<p>以 JSON 格式（单行）输出</p>
-<p>  journalctl -b -u nginx.service -o json</p>
-<p>以 JSON 格式（多行）输出，可读性更好</p>
-<p>  journalctl -b -u nginx.serviceqq -o json-pretty</p>
-<p>显示日志占据的硬盘空间</p>
-<p>  journalctl –disk-usage</p>
-<p>指定日志文件占据的最大空间</p>
-<p>  journalctl –vacuum-size=1G</p>
-<p>指定日志文件保存多久</p>
-<p>  journalctl –vacuum-time=1years</p>
-<h3 id="Logrotate工具"><a href="#Logrotate工具" class="headerlink" title="Logrotate工具"></a><strong>Logrotate工具</strong></h3><p><strong>logrotate</strong> 程序是一个日志文件管理工具。用来把旧的日志文件删除，并创建新</p>
-<p>的日志文件，称为日志转储或滚动。可以根据日志文件的大小，也可以根据其</p>
-<p>天数来转储，这个过程一般通过 cron 程序来执行</p>
-<p>配置文件：<strong>/etc/logrotate.conf</strong></p>
-<p><img src="Logrotate.png" alt="Logrotate"></p>
-<h2 id="四、远程日志"><a href="#四、远程日志" class="headerlink" title="四、远程日志"></a><strong>四、远程日志</strong></h2><p>Linux系统中的日志不仅可以在本地存储，还可以远程发送至指定的主机，设置指定的Mysql数据库中。</p>
-<p>启用远程日志服务：</p>
-<p><strong>通常的日志格式：</strong></p>
-<p>事件产生的日期时间 主机 进程(pid)：事件内容</p>
-<p>如： <strong>/var/log/messages,cron,secure</strong>等</p>
-<p><strong>配置rsyslog成为日志服务器</strong></p>
-<p>#### MODULES ####</p>
-<p># Provides UDP syslog reception</p>
-<p>$ModLoad imudp</p>
-<p>$UDPServerRun 514</p>
-<p># Provides TCP syslog reception</p>
-<p>$ModLoad imtcp</p>
-<p>$InputTCPServerRun 514</p>
-<h2 id="五、实验：实现远程日志"><a href="#五、实验：实现远程日志" class="headerlink" title="五、实验：实现远程日志"></a><strong>五、实验：实现远程日志</strong></h2><h3 id="前期准备："><a href="#前期准备：" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>虚拟机三台</p>
-<p>发送日志端：192.168.30.10</p>
-<p>远程接收端：192.168.30.17</p>
-<p>访问端：192.168.30.11</p>
-<h3 id="发送日志端："><a href="#发送日志端：" class="headerlink" title="发送日志端："></a><strong>发送日志端：</strong></h3><p>修改sshd默认日志为local2，记录等级至少为INFO</p>
-<p><strong>vim /etc/ssh/sshd_config</strong></p>
-<p><img src="0-1.png" alt="0"></p>
-<p><strong>vim /etc/rsyslog.d/ssh.conf</strong></p>
-<p>local2.*          @192.168.30.17                #若使用tcp协议，格式：@@IP</p>
-<p>local2.*           /var/log/local2.log          #若要本机和远程都记录日志可添加此行</p>
-<p>重启日志及SSH服务</p>
-<p>systemctl restart rsyslog sshd</p>
-<h3 id="远程接收端："><a href="#远程接收端：" class="headerlink" title="远程接收端："></a><strong>远程接收端：</strong></h3><p>开启514端口</p>
-<p>#$ModLoad imudp        ==&gt;   去掉注释</p>
-<p>#$UDPServerRun 514  ==&gt;   去掉注释</p>
-<p><img src="1-39.png" alt="1"></p>
-<p># Save boot messages also to boot.log</p>
-<p>local2.*            /var/log/local2.log         #添加此行</p>
-<p><img src="2-38.png" alt="2"></p>
-<p>重启日志服务</p>
-<p>systemctl restart rsyslog</p>
-<p>查看514端口是否已开启</p>
-<p>ss -untl</p>
-<p><img src="3-37.png" alt="3"></p>
-<h3 id="测试："><a href="#测试：" class="headerlink" title="测试："></a><strong>测试：</strong></h3><p>切换到访问端ssh连接192.168.30.10</p>
-<p>ssh 192.168.30.10</p>
-<p>切换到远程接收端，已收到日志发生端发送过来的日志</p>
-<p><img src="4-28.png" alt="4"></p>
-<h2 id="六、实验：实现基于MySQL的远程日志"><a href="#六、实验：实现基于MySQL的远程日志" class="headerlink" title="六、实验：实现基于MySQL的远程日志"></a><strong>六、实验：实现基于MySQL的远程日志</strong></h2><h3 id="前期准备：-1"><a href="#前期准备：-1" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>虚拟机三台</p>
-<p>发送日志端：192.168.30.10</p>
-<p>远程接收端：192.168.30.17</p>
-<p>访问端：192.168.30.11</p>
-<h3 id="发送日志端：-1"><a href="#发送日志端：-1" class="headerlink" title="发送日志端："></a><strong>发送日志端：</strong></h3><p>安装rsyslog-mysql包</p>
-<p>yum install rsyslog-mysql</p>
-<p>rpm -ql rsyslog-mysql</p>
-<p><img src="1-40.png" alt="1"></p>
-<p>将mysql- createDB.sql发送到远程接收端</p>
-<p>scp /usr/share/doc/rsyslog-8.24.0/mysql-createDB.sql 192.168.30.17:/root/</p>
-<p>切换到远程接收端：</p>
-<p>导入数据库</p>
-<p>mysql &lt; mysql-createDB.sql</p>
-<p>mysql &gt; use Syslog</p>
-<p>mysql &gt; show tables;</p>
-<p><img src="2-39.png" alt="2"></p>
-<p>创建一个syslog授权用户</p>
-<p>mysql &gt; grant all on Syslog.* to syslog@’192.168.30.%’  identified by ‘centos’;</p>
-<p>musql &gt; flush privileges;</p>
-<h3 id="日志发送端："><a href="#日志发送端：" class="headerlink" title="日志发送端："></a><strong>日志发送端：</strong></h3><p><strong>vim /etc/rsyslog.conf</strong></p>
-<p>#### MODULES ####</p>
-<p>$ModLoad ommysql                  #添加ommysql模块</p>
-<p><img src="3-38.png" alt="3"></p>
-<p>#### RULES ####</p>
-<p>*.info;mail.none;authpriv.none;cron.none     :ommysql:192.168.30.17,Syslog,syslog,centos</p>
-<p><img src="4-29.png" alt="4"></p>
-<p>重启日志服务</p>
-<p>systemctl restart rsyslog</p>
-<p>模拟一条日志信息</p>
-<p>logger “this is a test log”</p>
-<p>切换回远程接收端</p>
-<p>能看到刚刚发送的模拟日志信息</p>
-<p>Mysql&gt; select * from SystemEvents\G;</p>
-<p><img src="5-25.png" alt="5"></p>
-<h2 id="七、实验：通过loganalyzer展示数据库中的日志"><a href="#七、实验：通过loganalyzer展示数据库中的日志" class="headerlink" title="七、实验：通过loganalyzer展示数据库中的日志"></a><strong>七、实验：通过loganalyzer展示数据库中的日志</strong></h2><h3 id="前期准备：-2"><a href="#前期准备：-2" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>承接基于MySQL远程日志的实验环境</p>
-<h3 id="具体步骤："><a href="#具体步骤：" class="headerlink" title="具体步骤："></a><strong>具体步骤：</strong></h3><p>在rsyslog服务器上准备amp或nmp组合</p>
-<p>yum install httpd php php-mysql php-gd</p>
-<p>安装LogAnalyzer</p>
-<p>tar xvf loganalyzer-4.1.5.tar.gz</p>
-<p>cp -a loganalyzer-4.1.5/src /var/www/html/loganalyzer</p>
-<p>cd /var/www/html/loganalyzer</p>
-<p>touch config.php</p>
-<p>chmod 644 config.php</p>
-<p>重启httpd服务</p>
-<p>systemctl start httpd</p>
-<p>打开浏览器: <a href="http://192.168.30.17/loganalyzer/,出现下图页面，进行一些数据库的配置后，就可以进入" target="_blank" rel="noopener">http://192.168.30.17/loganalyzer/,出现下图页面，进行一些数据库的配置后，就可以进入</a></p>
-<p>loganlyzer管理数据库中的日志了</p>
-<p><img src="1-41.png" alt="1"></p>
-
-          
+          Linux系统中的日志记录了系统每天发生的各种各样的事情，你可以通过它来检查错误发生的原因，
+或者受到攻击时攻击者留下的痕迹。日志对于安全来说，非常重要。 
+一、日志介绍日志主要包含以下内容：历史事件：时间，地点，人物，事件
+日志级别：事件的关键性程度，Loglevel
+系统中常见日志及说明：
+系统
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/25/Linux系统日志管理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1954,191 +1035,18 @@
       
         
           
-            <p><strong>一、SSH端口转发相关概念</strong></p>
-<p>在上一节我们知道，SSH会自动加密和解密所有SSH客户端和服务器之间的网络数据。但是，SSH还同时</p>
-<p>提供了一个非常有用的功能，这就是<strong>端口转发</strong>。它能够将<strong>其他TCP端口的网络数据通过安全的SSH协议</strong></p>
-<p><strong>转发</strong>，例如：Telnet，SMTP等这些TCP应用都能从中受益，避免了用户名，密码以及隐私信息的明文传</p>
-<p>输。而与此同时，如果在你的工作环境中防火墙限制了一些网络端口的使用，但是允许SSH的连接，那么</p>
-<p>端口转发功能也能够将TCP端口转发来使用SSH进行通信。</p>
-<h4 id="SSH端口转发提供的功能主要有："><a href="#SSH端口转发提供的功能主要有：" class="headerlink" title="SSH端口转发提供的功能主要有："></a><strong>SSH端口转发提供的功能主要有：</strong></h4><p>1.加密SSH Client端至SSH Server端之间的数据</p>
-<p>2.突破防火墙的限制完成一些之前无法建立的TCP连接</p>
-<h4 id="SSH端口转发提供的类型有："><a href="#SSH端口转发提供的类型有：" class="headerlink" title="SSH端口转发提供的类型有："></a><strong>SSH端口转发提供的类型有：</strong></h4><p>本地转发</p>
-<p>远程转发</p>
-<p>动态转发</p>
-<p>X协议转发</p>
-<h3 id="本地转发："><a href="#本地转发：" class="headerlink" title="本地转发："></a><strong>本地转发：</strong></h3><p>当外网用户想要临时访问公司内部的不安全TCP协议服务器时，由于防火墙限制无法直接访问，但可利用</p>
-<p>先SSH连接至公司内网的SSH服务器在转发至不安全的TCP协议服务器。由于作为转发的SSH服务器与要访</p>
-<p>问的不安全TCP协议服务器在同一网络环境内，故这种连接就叫<strong>本地转发</strong>。</p>
-<p><strong>格式：</strong></p>
-<p>ssh -L localprot:remotehost:remotehostport  sshserver</p>
-<p>localprot：指定本机端口</p>
-<p>remotehost：指定远程不安全协议的服务器地址</p>
-<p>remotehostport：远程不安全协议的服务器地址端口</p>
-<p>sshserver：SSH服务器地址</p>
-<p><strong>options：</strong></p>
-<p>-f      后台启用</p>
-<p>-N    不打开远程shell，处于等待状态</p>
-<p>-g     启用网关功能</p>
-<p><strong>示例：</strong></p>
-<p>ssh -L 9527:telnetsrv:23  -N sshsrv</p>
-<p>telnet 127.0.0.1 9527</p>
-<p>当访问本机的9527端口时，被加密后转发到sshsrv的ssh服务，再解密被转发到telnetsrv:23</p>
-<p><strong>大致流程：</strong></p>
-<p>Data &lt;–&gt; localhost:9527 &lt;–&gt;localhost:xxxxx &lt;–&gt; sshsrv:22 &lt;–&gt;sshsrv:yyyyy &lt;–&gt; telnetsrv:23</p>
-<h3 id="远程转发："><a href="#远程转发：" class="headerlink" title="远程转发："></a><strong>远程转发：</strong></h3><p>与本地端口转发相比，我们将SSH服务器与Client访问端的位置对调，将与不安全TCP协议服务器同一内网</p>
-<p>的主机作为Client，将外部网络主机作为SSH服务器做为端口转发。由于作为转发的SSH服务器处在外部网</p>
-<p>络环境中，故这种连接就叫远程转发。</p>
-<h3 id="格式："><a href="#格式：" class="headerlink" title="格式："></a><strong>格式：</strong></h3><p>ssh -R sshserverport:remotehost:remotehostport sshserver</p>
-<p>sshserverport：指定SSH服务器端口</p>
-<p>remotehost：指定远程不安全协议的服务器地址</p>
-<p>remotehost:remotehostport：指定远程不安全协议的服务器端口</p>
-<p>sshserver：SSH服务器地址</p>
-<p><strong>示例：</strong></p>
-<p>ssh -R 9527:telnetsrv:23 -N sshsrv</p>
-<p>让sshsrv侦听9527端口的访问，如有访问，就加密后通过ssh服务转发请求到本机ssh客户端，再由本机解密后转发到telnetsrv:23</p>
-<p><strong>大致流程：</strong></p>
-<p>Data &lt;–&gt; sshsrv:9527 &lt;–&gt; sshsrv:22 &lt;–&gt; localhost:xxxxx &lt;–&gt; localhost:yyyyy &lt;–&gt; telnetsrv:23</p>
-<h3 id="动态端口转发："><a href="#动态端口转发：" class="headerlink" title="动态端口转发："></a>动态端口转发：</h3><p>在之前我们已经了解了本地转发，以及远程转发，但它们实现的前提都是要求有一个固定的应用服务端端</p>
-<p>口号。但在某些场景下，例如用浏览器浏览网页，是没有固定端口的，这时就需要利用到动态的端口转</p>
-<p>发。比如说，当用firefox访问Internet时，本机的1080端口作为代理服务器，firefox的访问请求被转发到</p>
-<p>sshserver上，由sshserver替代访问Internet</p>
-<p>ssh -D 1080 root@sshserver</p>
-<p>在本机firefox设置socketproxy:127.0.0.1:1080</p>
-<p>curl –socks5  127.0.0.1:1080  <a href="http://www.qq.com" target="_blank" rel="noopener">http://www.qq.com</a></p>
-<h3 id="X协议转发："><a href="#X协议转发：" class="headerlink" title="X协议转发："></a><strong>X协议转发：</strong></h3><p>所有图形化应用程序都是X客户程序</p>
-<p>能够通过tcp/ip连接远程X服务器</p>
-<p>数据没有加密机，但是它通过ssh连接隧道安全进行</p>
-<p>ssh -X user@remotehost gedit</p>
-<p>remotehost主机上的gedit工具，将会显示在本机的X服务器上</p>
-<p>传输的数据将通过ssh连接加密</p>
-<h3 id="相关文件："><a href="#相关文件：" class="headerlink" title="相关文件："></a><strong>相关文件：</strong></h3><p>/var/log/secure               存放日志</p>
-<p>/etc/ssh/sshd_config      SSH服务配置文件</p>
-<p><strong>#Port 22           端口</strong></p>
-<p>​                          <strong>生产中一般第一步先改端口号</strong></p>
-<p>​                          <strong>如Port 9527</strong>  </p>
-<p><strong>定义公钥、私钥存放文件名，位置</strong></p>
-<p>HostKey /etc/ssh/ssh_host_rsa_key</p>
-<p>#HostKey /etc/ssh/ssh_host_dsa_key</p>
-<p>HostKey /etc/ssh/ssh_host_ecdsa_key</p>
-<p>HostKey /etc/ssh/ssh_host_ed25519_key</p>
-<p><strong>日志设置选项，日志存放在/var/log/secure</strong></p>
-<p># Logging</p>
-<p>#SyslogFacility AUTH</p>
-<p>SyslogFacility AUTHPRIV</p>
-<p>#LogLevel INFO</p>
-<p>#LoginGraceTime 2m              不输入密码最大时间端口</p>
-<p>#PermitRootLogin yes            生产中一般改成no，普通用户连接su切换</p>
-<p>#StrictModes yes             检查文件权限</p>
-<p>#MaxAuthTries 6                      密码登录最大验证次数</p>
-<p>#MaxSessions 10                      单个会话能开的最大克隆数</p>
-<p>PasswordAuthentication yes  是否允许基于口令登录方式，no表示禁止</p>
-<p>#ClientAliveInterval 0              连接后不操作最大时间，单位：秒</p>
-<p>#ClientAliveCountMax 3                  连接环不操作最大时间次数</p>
-<p>​         <strong>生产中一般要修改AliveInterval 30</strong></p>
-<p>​                          <strong>AliveCountMax 3</strong>   </p>
-<p>​         <strong>表示连接后不进行任何操作30S，3次后自动断开连接</strong></p>
-<p>#ShowPatchLevel no</p>
-<p>UseDNS no                       <strong>是否使用DNS反向解析，关闭可提高连接速度</strong></p>
-<p>#MaxStartups 10:30:100                 <strong>最大并发连接数，默认10</strong></p>
-<p><strong>限制可登录用户的办法：</strong></p>
-<p>AllowUsers user1 user2 user3</p>
-<p>DenyUsers</p>
-<p>AllowGroups</p>
-<p>DenyGroups</p>
-<h3 id="SSH服务的最佳实践配置："><a href="#SSH服务的最佳实践配置：" class="headerlink" title="SSH服务的最佳实践配置："></a><strong>SSH服务的最佳实践配置：</strong></h3><p>建议使用非默认端口</p>
-<p>禁止使用protocol version 1</p>
-<p>限制可登录用户</p>
-<p>设定空闲会话超时时长</p>
-<p>利用防火墙设置ssh访问策略</p>
-<p>仅监听特定的IP地址</p>
-<p>基于口令认证时，使用强密码策略</p>
-<p>tr -dc A-Za-z0-9_ &lt; /dev/urandom | head -c 30| xargs</p>
-<p>使用基于密钥的认证</p>
-<p>禁止使用空密码</p>
-<p>禁止root用户直接登录</p>
-<p>限制ssh的访问频度和并发在线数</p>
-<p>经常分析日志</p>
-<h2 id="二、实验：模拟SSH本地端口转发"><a href="#二、实验：模拟SSH本地端口转发" class="headerlink" title="二、实验：模拟SSH本地端口转发"></a><strong>二、实验：模拟SSH本地端口转发</strong></h2><p><strong>应用场景：</strong>当外部客户端想要访问公司内网的Telnet服务器时，由于防火墙限制无法直接访问，可使用</p>
-<p>SSH本地端口转发实现：</p>
-<p><strong>前期准备：</strong></p>
-<p>以三台CentOS模拟机作为服务器及主机，主机名网络配置如下：</p>
-<p>客户端：192.168.30.133</p>
-<p>SSH服务器：192.168.30.158</p>
-<p>telnet服务器：192.168.30.160</p>
-<p><strong>telnet服务器端操作：</strong></p>
-<p>一、安装telnet-server包，系统默认未安装</p>
-<p>二、防火墙禁止远程客户端访问：</p>
-<p>iptables  -A  INPUT  -s  192.168.30.133  -j  REJECT</p>
-<p>为了防止之前防火墙策略干扰，最好先清空下防火墙策略：</p>
-<p>iptables  -K</p>
-<p><img src="防火墙.png" alt="防火墙"></p>
-<p>此时作为Clinet的192.168.30.133已经ping不通作为telnet服务器的192.168.30.160</p>
-<p><img src="ping不通.png" alt="ping不通"></p>
-<p>三、开启telnet-server服务</p>
-<p><strong>CentOS6：</strong></p>
-<p>service  xinted  start                       开启xinted进程</p>
-<p>chkconfig  telnet  on                        开启telnet服务</p>
-<p>service  xinted  restart                   重启xinted服务</p>
-<p><img src="重启xinetd.png" alt="重启xinetd"></p>
-<p><strong>CentOS7：</strong></p>
-<p>systemctl start telnet-scoket</p>
-<p><strong>客户端操作：</strong></p>
-<p>ssh -L 9527:192.168.30.17:23 [-Nf] 192.168.30.6</p>
-<p>加-Nf选项将后台执行，关闭时只能通过kill关闭进程</p>
-<p>telnet 127.0.0.1 9527</p>
-<p>提示输入用户名，密码；默认不让root账户使用SSH端口转发登录</p>
-<p><img src="登录成功.png" alt="登录成功"></p>
-<h2 id="三、实验：模拟SSH远程端口转发"><a href="#三、实验：模拟SSH远程端口转发" class="headerlink" title="三、实验：模拟SSH远程端口转发"></a><strong>三、实验：模拟SSH远程端口转发</strong></h2><p><strong>应用场景：</strong>当外部有工程师想要临时访问内部telnet服务器时，作为系统管理员，我们可以将对方主机作</p>
-<p>为SSH服务器进行端口转发，让其临时可访问公司的telnet服务器。</p>
-<p><strong>前期准备：</strong></p>
-<p>以三台CentOS模拟机作为服务器及主机，主机名及网络配置如下：</p>
-<p>Internet：192.168.30.133</p>
-<p>lanserver：192.168.30.158</p>
-<p>telnet服务器：192.168.30.160</p>
-<p><strong>lanserver端操作：</strong></p>
-<p>ssh -R 9527:192.168.30.17:23 [-Nf] 192.168.30.7</p>
-<p>加-Nf选项将后台执行，关闭时只能通过kill关闭进程</p>
-<p><img src="lanserver命令.png" alt="lanserver命令"></p>
-<p><strong>Internet端操作：</strong></p>
-<p>telnet 127.0.0.1 9527</p>
-<p><img src="telnet成功.png" alt="telnet成功"></p>
-<h2 id="四、实验：模拟SSH动态端口转发"><a href="#四、实验：模拟SSH动态端口转发" class="headerlink" title="四、实验：模拟SSH动态端口转发"></a><strong>四、实验：模拟SSH动态端口转发</strong></h2><p><strong>应用场景：</strong>在某些场景中，用浏览器浏览网页，是没有固定端口的，这时就需要利用到动态的端口转</p>
-<p>发。下面我们模拟用一台虚拟机模拟google网站，用Internet主机通过代理服务器proxy访问google模拟机</p>
-<p><strong>前期准备：</strong></p>
-<p>以三台CentOS模拟机作为服务器及主机，主机名及网络配置如下：</p>
-<p>Internet：192.168.30.133</p>
-<p>proxy：192.168.30.158</p>
-<p>google：192.168.30.160</p>
-<p><strong>google模拟服务器操作：</strong></p>
-<p>开启http服务，模拟网页内容：</p>
-<p><strong>CentOS6：</strong></p>
-<p>service httpd start</p>
-<p><strong>CentOS7：</strong></p>
-<p>systemctl start  httpd</p>
-<p>echo <a href="http://www.google.com" target="_blank" rel="noopener">www.google.com</a> &gt; /var/www/html/index.html</p>
-<p><img src="internet.png" alt="internet"></p>
-<p>此时访问192.168.30.160，正常网页内容显示如下:</p>
-<p><img src="gogole.png" alt="gogole"></p>
-<p><strong>Internet端操作：</strong></p>
-<p>此时在Internet端我们是无法访问google服务器的</p>
-<p><img src="无法打开.png" alt="无法打开"></p>
-<p>使用proxy的1080端口作为动态转发：</p>
-<p>ssh -D 1080 <a href="mailto:root@192.168.30.158" target="_blank" rel="noopener">root@192.168.30.158</a></p>
-<p><img src="登录代理.png" alt="登录代理"></p>
-<p>接下来我们可以通过图形界面或者字符界面来尝试访问：</p>
-<p><strong>图形界面：</strong></p>
-<p>打开firefox浏览器，按以下顺序操作：</p>
-<p>–&gt;preferences–&gt;advanced–&gt;network–setting–manual proxy configuration</p>
-<p>–&gt;SOCKS Host:127.0.0.1</p>
-<p><img src="设置火狐.png" alt="设置火狐"></p>
-<p>现在再次尝试访问192.168.30.160的google模拟服务器，发现可以正常访问了！</p>
-<p><img src="访问成功.png" alt="访问成功"></p>
-<p><strong>字符界面：</strong></p>
-<p>在字符界面我们可执行下面的命令来进行访问：</p>
-<p>curl -socks5 127.0.0.1:1080 192.168.30.17</p>
-<p><img src="字符界面登录.png" alt="字符界面登录"></p>
-
-          
+          一、SSH端口转发相关概念
+在上一节我们知道，SSH会自动加密和解密所有SSH客户端和服务器之间的网络数据。但是，SSH还同时
+提供了一个非常有用的功能，这就是端口转发。它能够将其他TCP端口的网络数据通过安全的SSH协议
+转发，例如：Telnet，SMTP等这些TCP应用都能从中受益，避免了用户名
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/18/SSH端口转发及相关实验/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2278,186 +1186,19 @@
       
         
           
-            <h2 id="一、SSH协议相关概念"><a href="#一、SSH协议相关概念" class="headerlink" title="一、SSH协议相关概念"></a><strong>一、SSH协议相关概念</strong></h2><p><strong>SSH</strong>：secure shell，protocal，22/tcp，安全的远程登录；</p>
-<p>利用 SSH 协议可以有效防止远程管理过程中的信息泄露问题，用来代替早期不安全的telnet</p>
-<p><strong>具体的软件实现：</strong></p>
-<p>OpenSSH：ssh协议的开源实现。CentOS默认安装</p>
-<p>dropbear：另一个开源实现</p>
-<p><strong>SSH协议版本：</strong></p>
-<p>v1: 基于CRC-32做MAC，不安全；man-in-middle</p>
-<p>v2：双方主机协议选择安全的MAC方式</p>
-<p>基于DH算法做密钥交换，基于RSA或DSA实现身份认证</p>
-<p><strong>相关包：</strong></p>
-<p>openssh</p>
-<p>openssh-clients</p>
-<p>openssh-server</p>
-<p><strong>工具：</strong></p>
-<p>基于C/S结构：</p>
-<p><strong>Client：</strong></p>
-<p>​      <strong>Linux：</strong>ssh，scp，sftp，slogin</p>
-<p>​    <strong>Windows：</strong>xshell，putty，securecrt，sshsecureshellclient</p>
-<p><strong>Server：</strong>sshd</p>
-<p><strong>客户端组件：</strong></p>
-<p><strong>ssh</strong>, 配置文件：/etc/ssh/ssh_config</p>
-<p>Host PATTERN</p>
-<p>StrictHostKeyChecking no 首次登录不显示检查提示</p>
-<p><strong>格式：</strong></p>
-<p>ssh [user@]host [COMMAND]</p>
-<p>ssh [-l user] host [COMMAND]</p>
-<p>-p port              远程服务器监听的端口</p>
-<p>-b              指定连接的源IP</p>
-<p>-v              调试模式</p>
-<p>-C              压缩方式</p>
-<p>-X              支持x11转发，跨网络的图形界面显示；例如：xclock</p>
-<p>-Y              支持信任x11转发</p>
-<p>ForwardX11Trusted yes</p>
-<p>-t               强制伪tty分配；堡垒机可用</p>
-<p>ssh -t remoteserver1 ssh remoteserver2</p>
-<h3 id="两种方式的用户登录认证："><a href="#两种方式的用户登录认证：" class="headerlink" title="两种方式的用户登录认证："></a><strong>两种方式的用户登录认证：</strong></h3><p><strong>基于password：</strong></p>
-<p>只要你知道自己帐号和口令，就可以登录到远程主机。所有传输的数据都会被加密，但是不能保证你正在连接的服务器就是你想连接的服务器。可能会有别的服务器在冒充真正的服务器，也就是受到“中间人”这种方式的攻击。</p>
-<p><strong>大致流程：</strong></p>
-<p>1.客户端发起ssh请求，服务器会把自己的公钥发送给用户</p>
-<p>2.用户会根据服务器发来的公钥对密码进行加密</p>
-<p>3.加密后的信息回传给服务器，服务器用自己的私钥解密，如果密码正确，则用户登录成功</p>
-<p><strong>基于key：</strong></p>
-<p>需要依靠密匙，也就是你必须为自己创建一对密匙，并把公用密匙放在需要访问的服务器上。如果你要连接到SSH服务器上，客户端软件就会向服务器发出请求，请求用你的密匙进行安全验证。服务器收到请求之后，先在该服务</p>
-<p>器上你的主目录下寻找你的公用密匙，然后把它和你发送过来的公用密匙进行比较。如果两个密匙一致，服务器就用公用密匙加密“质询”（challenge）并把它发送给客户端软件。客户端软件收到“质询”之后就可以用你的</p>
-<p>私人密匙解密再把它发送给服务器。</p>
-<p><strong>大致流程：</strong></p>
-<p>1.首先在客户端生成一对密钥</p>
-<p>2.并将客户端的公钥ssh-copy-id拷贝到服务器端</p>
-<p>3.当客户端再次发送一个连接请求，包括ip、用户名</p>
-<p>4.服务端得到客户端的请求后，会到authorized_keys中查找，如果有响应的IP和用户，服务器就会发出“质询”（challenge）表现为一串随机字符，如：acdf。</p>
-<p>5.服务端将使用客户端拷贝过来的公钥对“质询”进行加密，然后发送给客户端</p>
-<p>6.得到服务端发来“质询”后，客户端会使用私钥进行解密，然后将解密后的字符串发送给服务端</p>
-<p>7.服务端接受到客户端发来的字符串后，跟之前的字符串进行对比，如果一致，就允许免密码登录</p>
-<p><strong>两种登录认证的对比：</strong></p>
-<p>基于key的认证方式，用户必须指定自己密钥的口令。但是，与第一种级别相比，第二种级别不需要在网络上传送口令。</p>
-<p>第二种级别不仅加密所有传送的数据，而且“中间人”这种攻击方式也是不可能的（因为他没有你的私人密匙）。但是整个登录的过程会比基于passwd认证稍长，可能需要10秒</p>
-<p><strong>相关文件：</strong></p>
-<p>~/.ssh/authorized_keys          存放已授权基于key登录的主机的公钥</p>
-<p>~/.ssh/know_hosts                  存放本机SSH连接过的主机的公钥</p>
-<p><strong>操作：加快ssh服务访问速度</strong></p>
-<p><strong>/etc/ssh/sshd_config</strong>文件</p>
-<p>GSSAPIAuthentication yes–&gt;no             关闭api验证</p>
-<p>#UseDNS  yes|no–&gt;UseDNS no             去掉注释，启用DNS</p>
-<p>重启sshd服务</p>
-<p>CentOS6：</p>
-<p>service  sshd   restart </p>
-<p>CentOS7：</p>
-<p>systemctl restart sshd</p>
-<h2 id="二、实验：实现基于key登录认证"><a href="#二、实验：实现基于key登录认证" class="headerlink" title="二、实验：实现基于key登录认证"></a><strong>二、实验：实现基于key登录认证</strong></h2><p><strong>一、在客户端生成一对钥匙：</strong></p>
-<p>ssh-keygen -t rsa</p>
-<p>交互式输入：</p>
-<p>默认路径</p>
-<p>输入口令</p>
-<p><strong>二、发送公钥给服务器端：</strong></p>
-<p>ssh-copy-id   <a href="mailto:wang@192.168.30.7" target="_blank" rel="noopener">wang@192.168.30.7</a></p>
-<p>再次连接：</p>
-<p>ssh <a href="mailto:wang@192.168.30.7" target="_blank" rel="noopener">wang@192.168.30.7</a>        不提示输入密码</p>
-<p>ssh <a href="mailto:wang@192.168.30.7" target="_blank" rel="noopener">wang@192.168.30.7</a>  ‘id’      远程执行命令</p>
-<p><strong>利用基于key不需输入口令登录的特性，我们可小批量的执行一些任务：</strong></p>
-<p>先把需要执行任务的服务器IP放入一个文件中：</p>
-<p>cat ip.txt</p>
-<p>192.168.30.7</p>
-<p>192.168.30.12</p>
-<p>192.168.30.17</p>
-<p>……</p>
-<p><strong>编写一个脚本显示主机名：</strong></p>
-<p>vim hostname.sh</p>
-<p>hostname</p>
-<p>chmod +x hostname.sh</p>
-<p><strong>执行命令：</strong></p>
-<p>批量传送脚本</p>
-<p>for ip in <code>cat ip.txt</code>;do scp -p f1.sh $ip:/data/;done</p>
-<p><img src="ssh批量发送脚本.png" alt="ssh批量发送脚本"></p>
-<p>批量执行脚本显示主机名</p>
-<p>for ip in <code>cat ip.txt</code>;do ssh $ip “/data/f1.sh”;done</p>
-<p><img src="ssh批量执行脚本.png" alt="ssh批量执行脚本"></p>
-<p>可结合expect实现批量密钥登录方式</p>
-<h3 id="三、实验：实现多台机器间互相基于key登录认证"><a href="#三、实验：实现多台机器间互相基于key登录认证" class="headerlink" title="三、实验：实现多台机器间互相基于key登录认证"></a>三、实验：实现多台机器间互相基于key登录认证</h3><p><strong>思路：多台机器公用一套钥匙</strong></p>
-<p><strong>一、在A机器上生成一对密钥，并对自己执行ssh-copy-id命令</strong></p>
-<p>ssh-keygen</p>
-<p>ssh-copy-id A</p>
-<p><strong>二、将本机.ssh目录发送给其他所有机器</strong></p>
-<p>scp -rp /root/.ssh  B:/root/</p>
-<p>scp -rp /root/.ssh  C:/root/</p>
-<p><img src="发送目录.png" alt="发送目录"></p>
-<p><strong>即可实现多台机器间互相基于key登录</strong></p>
-<p><strong>当然，如果我们觉得私钥不加密不安全，我们还可以给私钥重新加密</strong></p>
-<p>重设私钥口令：</p>
-<p>ssh-keygen -p</p>
-<p><strong>私钥加密后，每次连接都要求输入私钥口令，我们可采取代理托管方式省去输入口令这一环节：</strong></p>
-<p>注：代理托管重启后失效，需重新设置</p>
-<p>启用代理托管口令</p>
-<p>ssh-agent bash</p>
-<p>ssh-add</p>
-<h2 id="四、实验：实现100台机器基于key登录验证"><a href="#四、实验：实现100台机器基于key登录验证" class="headerlink" title="四、实验：实现100台机器基于key登录验证"></a><strong>四、实验：实现100台机器基于key登录验证</strong></h2><p><strong>一、准备ip列表</strong></p>
-<p>先把需要执行任务的服务器IP放入一个文件中：</p>
-<p>cat ip.txt</p>
-<p>192.168.30.x</p>
-<p>192.168.30.xx</p>
-<p>192.168.30.xxx</p>
-<p>……</p>
-<p><strong>二、编写将公钥推送到其他100台机器上的脚本</strong></p>
-<p>#!/bin/bash</p>
-<p>#安装expect包</p>
-<p>rpm -q expect &amp;&gt; /dev/null || yum install expect -y</p>
-<p>#生成一对密钥，如需加密密钥可在-P之后写上密码</p>
-<p>ssh-keygen -P “” -f “/root/.ssh/id_rsa”</p>
-<p>#服务器登录密码</p>
-<p>password=centos</p>
-<p>while read ipaddr;do</p>
-<p>expect &lt;&lt;EOF</p>
-<p>set timeout 10</p>
-<p>spawn ssh-copy-id $ipaddr</p>
-<p>expect {</p>
-<p>“yes/no” { send “yes\n”;exp_continue }</p>
-<p>“password” { send “$password\n” }</p>
-<p>}</p>
-<p>expect eof</p>
-<p>EOF</p>
-<p>done &lt; ip.txt</p>
-<p><img src="脚本.png" alt="脚本"></p>
-<p><strong>三、运行脚本，将公钥推送到其他100台机器上</strong></p>
-<p><strong>四、实现基于密钥验证无密码登录</strong></p>
-<h2 id="五、利用pssh工具实现集群管理"><a href="#五、利用pssh工具实现集群管理" class="headerlink" title="五、利用pssh工具实现集群管理"></a><strong>五、利用pssh工具实现集群管理</strong></h2><p><strong>注：系统默认未安装pssh工具，需使用epel源安装，使用pssh需先建立服务器端到用户端的基于</strong></p>
-<p><strong>key验证才可以正常使用</strong></p>
-<h3 id="pssh工具："><a href="#pssh工具：" class="headerlink" title="pssh工具："></a><strong>pssh工具：</strong></h3><p>pssh是一个python编写可在多台服务器上执行命令的工具，也可实现文件复制</p>
-<p><strong>options：</strong></p>
-<p>–version 查看版本</p>
-<p>-h              指定主机文件列表，内容格式”[user@]host[:port]”</p>
-<p>-H             指定主机，内容格式”[user@]host[:port]”</p>
-<p>-l               登录使用的用户名</p>
-<p>-p              并发的线程数[可选]</p>
-<p>-o              输出的文件目录[可选]</p>
-<p>-e              错误输入文件[可选]</p>
-<p>-t               TIMEOUT超过时间设置。0代表无限制[可选]</p>
-<p>-O             SSH的选项</p>
-<p>-v              查看过程</p>
-<p>-A              手动输入密码模式</p>
-<p>-x              额外的命令行参数使用空白符号，引号，反斜线处理</p>
-<p>-X              额外的命令行参数，单个参数模式，同-x</p>
-<p>-i               显示每个服务器执行结果输出信息，默认不显示</p>
-<p>-P              打印出服务器返回信息</p>
-<p>未建立基于key验证将显示<strong>[FAILURE]</strong>失败</p>
-<p>已建立基于key验证将显示<strong>[SUCCESS]</strong>成功</p>
-<p><img src="pssh成功失败.png" alt="pssh成功失败"></p>
-<p><strong>远程连接某主机执行hostname，显示主机名</strong></p>
-<p>pssh -H  <a href="mailto:USER@192.168.x.x" target="_blank" rel="noopener">USER@192.168.x.x</a>  -i  “hostname” </p>
-<p><img src="pssh.png" alt="pssh"></p>
-<p><strong>批量远程执行命令</strong></p>
-<p>一、将需要连接的主机写入一个文件</p>
-<p>cat ip.txt</p>
-<p>192.168.30.x</p>
-<p>192.168.30.xx</p>
-<p>192.168.30.xxx</p>
-<p>……</p>
-<p>二、批量显示文件中包含的主机名</p>
-<p>pssh -h  ip.txt  -i  “hostname”</p>
-<p><img src="pssh批量.png" alt="pssh批量"></p>
-
-          
+          一、SSH协议相关概念SSH：secure shell，protocal，22/tcp，安全的远程登录；
+利用 SSH 协议可以有效防止远程管理过程中的信息泄露问题，用来代替早期不安全的telnet
+具体的软件实现：
+OpenSSH：ssh协议的开源实现。CentOS默认安装
+dropbear：另一
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/18/SSH协议及基于SSH集群key认证实验/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2597,266 +1338,20 @@
       
         
           
-            <h2 id="一、网络安全基本概念"><a href="#一、网络安全基本概念" class="headerlink" title="一、网络安全基本概念"></a>一、网络安全基本概念</h2><h3 id="信息安全防护的目标有："><a href="#信息安全防护的目标有：" class="headerlink" title="信息安全防护的目标有："></a>信息安全防护的目标有：</h3><p><strong>保密性 Confidentiality</strong></p>
-<p>信息不泄露给非授权用户、实体或过程，或供其利用的特性。</p>
-<p><strong>完整性 Integrity</strong></p>
-<p>数据未经授权不能进行改变的特性。即信息在存储或传输过程中保持不被修改、不被破坏和丢失的特性。</p>
-<p><strong>可用性 Usability</strong></p>
-<p>可被授权实体访问并按需求使用的特性。即当需要时能否存取所需的信息。例如网络环境下拒绝服务、破坏网络和有关系统的正常运行等都属于对可用性的攻击；</p>
-<p><strong>可控制性Controlability</strong></p>
-<p>对信息的传播及内容具有控制能力。</p>
-<p><strong>不可抵赖性 Non-repudiation</strong></p>
-<p>不可抵赖性包括对自己行为的不可抵赖及对行为发生的时间的不可抵赖。通过进行身份认证和数字签名可以避免对交易行为的抵赖，通过数字时间戳可以避免对行为发生的抵赖。</p>
-<p><strong>对于运维工程师最关键的两个工作职责：保证数据安全性、保证高可用性</strong></p>
-<h3 id="安全防护环节"><a href="#安全防护环节" class="headerlink" title="安全防护环节"></a>安全防护环节</h3><p>物理安全：各种设备/主机、机房环境</p>
-<p>系统安全：主机或设备的操作系统</p>
-<p>应用安全：各种网络服务、应用程序</p>
-<p>网络安全：对网络访问的控制、防火墙规则</p>
-<p>数据安全：信息的备份与恢复、加密解密</p>
-<p>管理安全：各种保障性的规范、流程、方法</p>
-<h3 id="生产环境中可能遇到的安全攻击"><a href="#生产环境中可能遇到的安全攻击" class="headerlink" title="生产环境中可能遇到的安全攻击"></a>生产环境中可能遇到的安全攻击</h3><p><strong>Spoofing 假冒</strong></p>
-<p>假冒指的是某个实体（人或系统）发出含有其他实体身份信息的数据信息，假扮成其他实体，从而以欺骗方式获取一些合法用户的权利和特权。</p>
-<p><strong>Tampering 篡改</strong></p>
-<p>篡改消息是指一个合法消息的某些部分被改变、删除，消息被延迟或改变顺序，通常用以产生一个未授权的效果。如修改传输消息中的数据，将“允许甲执行操作”改为“允许乙执行操作”。</p>
-<p><strong>Repudiation 否认</strong></p>
-<p><strong>Information Disclosure 信息泄漏</strong></p>
-<p>窃听是网络攻击中最常用的手段。目前应用最广泛的局域网上的数据传送是基于广播方式进行的，这就使一台主机有可能受到本子网上传送的所有信息。</p>
-<p><strong>Denial of Service 拒绝服务</strong></p>
-<p>拒绝服务即常说的DoS（Deny of Service），会导致对通讯设备正常使用或管理被无条件地终端。通常是对整个网络实施破坏，以达到降低性能、终端服务的目的。这种攻击也可能有一个特定的目标，如到某一特定目的地（如安全审计服务）的所有数据包都被组织。</p>
-<p><strong>Elevation of Privilege 提升权限</strong></p>
-<p>黑客可能通过一些漏洞来执行一些远程代码，来在你的系统中得到权限，当黑客得到管理者权限之后，就会通过一些特权命令或者提全程序来得到root权限。来达到控制你的系统的目的。</p>
-<h2 id="二、加密技术"><a href="#二、加密技术" class="headerlink" title="二、加密技术"></a><strong>二、加密技术</strong></h2><p><strong>加密技术</strong>是电子商务采取的基本安全措施，交易双方可根据需要在信息交换的阶段使用。加密技术分为两</p>
-<p>类，即<strong>对称加密</strong>和<strong>非对称加密</strong>。</p>
-<p>### </p>
-<h3 id="1-对称加密"><a href="#1-对称加密" class="headerlink" title="1.对称加密"></a><strong>1.对称加密</strong></h3><p><strong>对称加密：</strong>加密key1与解密key2用的是用一把密钥</p>
-<p><strong>优势：</strong>速度快、效率高，适合加密大量的数据</p>
-<p><strong>特性：</strong>将原始数据分割成固定大小的块，逐个进行加密</p>
-<p><strong>缺点：</strong>密钥过多；密钥分发；数据来源无法确认</p>
-<p><strong>算法：</strong>DES、3DES、AES、Blowfish、Twofish、IDEA、RC6、CAST5等</p>
-<h3 id="对称加密命令："><a href="#对称加密命令：" class="headerlink" title="对称加密命令："></a><strong>对称加密命令：</strong></h3><p><strong>1）gpg命令：</strong></p>
-<p>对称加密file文件</p>
-<p>​         gpg -c file</p>
-<p>​         ls file.gpg</p>
-<p>在另一台主机上解密file</p>
-<p>​       gpg -o file -d file.gpg</p>
-<p><strong>2）openssl命令：</strong></p>
-<p>对称加密：</p>
-<p>工具：openssl enc, gpg</p>
-<p>算法：3des, aes, blowfish, twofish</p>
-<p>enc命令：</p>
-<p>帮助：man enc</p>
-<p>加密：</p>
-<p>​         openssl enc -e -des3 -a -salt -in testfile</p>
-<p>​                  -out testfile.cipher</p>
-<p>解密：</p>
-<p>​         openssl enc -d -des3 -a -salt –in testfile.cipher</p>
-<p>​                  -out testfile</p>
-<p>​         openssl ?</p>
-<h3 id="2-非对称加密"><a href="#2-非对称加密" class="headerlink" title="2.非对称加密"></a><strong>2.非对称加密</strong></h3><p>使用<strong>一对密钥</strong>来分别完成加密和解密操作，其中一个公开发布（即<strong>公钥</strong>），另一个由用户自己秘密保存（即<strong>私钥</strong>）</p>
-<p>举例来讲，Alice要与Bob进行通信：</p>
-<p>Alice —&gt; Bob</p>
-<p>Alice：public-A（公钥），secret-A（私钥）</p>
-<p>Bob：public-B（公钥），secret-B（私钥）</p>
-<p><strong>公钥公开，私钥不可公开，只有自己有</strong></p>
-<p><strong>公钥加密—&gt;需要对应私钥解密</strong></p>
-<p><strong>优点：</strong>解决了对称加密无法确认数据来源，密钥过多的缺点</p>
-<p><strong>缺点：</strong>加密效率低、速度慢、密码长，适合加密较小的数据</p>
-<p><strong>算法：</strong>RSA（加密、数字签名），DSA（数字签名），ELGamal</p>
-<p>data—加密Pb（data）—解密Sb{Pb（data）}—data    加密功能</p>
-<p>data—加密Sa（data）—解密Pa{Sa（data）}—data     数据来源功能</p>
-<p><strong>非对称算法DES和**</strong>对称算法RSA<strong>**和大概对应关系：</strong></p>
-<p>加密算法  文件大小  加密后大小  加密所需时间  解密所需时间</p>
-<p>DES           1G               2G                    4m                   8m</p>
-<p>RSA           1G               1G                    1m                 64hour</p>
-<h3 id="非对称加密命令："><a href="#非对称加密命令：" class="headerlink" title="非对称加密命令："></a><strong>非对称加密命令：</strong></h3><p><strong>1）gpg命令：</strong></p>
-<p>在hostB主机上用公钥加密，在hostA主机上解密</p>
-<p>在hostA主机上生成公钥/私钥对</p>
-<p>注：此步骤必须在图形界面下进行</p>
-<p>​         gpg –gen-key          rng_tools</p>
-<p>在hostA主机上查看公钥</p>
-<p>​       gpg –list-keys</p>
-<p>在hostA主机上导出公钥到wang.pubkey</p>
-<p>​         gpg -a –export -o wang.pubkey</p>
-<p>从hostA主机上复制公钥文件到需加密的B主机上</p>
-<p>​         scp wang.pubkey hostB:</p>
-<p>在需加密数据的hostB主机上生成公钥/私钥对</p>
-<p>​         gpg –list-keys</p>
-<p>​         gpg –gen-key</p>
-<p>在hostB主机上导入公钥</p>
-<p>​         gpg –import wang.pubkey</p>
-<p>​         gpg –list-keys</p>
-<p>用从hostA主机导入的公钥，加密hostB主机的文件file,生成file.gpg</p>
-<p>​       gpg -e -r wangx file</p>
-<p>​         file file.gpg</p>
-<p>复制加密文件到hostA主机</p>
-<p>​         scp fstab.gpg hostA:</p>
-<p>在hostA主机解密文件</p>
-<p>​         gpg -d file.gpg</p>
-<p>​         gpg -o file -d file.gpg</p>
-<p>删除公钥和私钥</p>
-<p>​         gpg –delete-keys wangx</p>
-<p>​         gpg –delete-secret-keys wangx</p>
-<p><strong>2）openssl命令：</strong></p>
-<p>生成密钥对：man genrsa</p>
-<p>生成私钥</p>
-<p>​         openssl genrsa -out /PATH/TO/PRIVATEKEY.FILE NUM_BITS</p>
-<p>​         (umask 077; openssl genrsa –out test.key –des 2048)</p>
-<p>openssl rsa -in test.key –out test2.key 将加密key解密</p>
-<p>从私钥中提取出公钥</p>
-<p>​         openssl rsa -in PRIVATEKEYFILE –pubout –out PUBLICKEYFILE</p>
-<p>​         openssl rsa –in test.key –pubout –out test.key.pub</p>
-<h2 id="三、认证技术"><a href="#三、认证技术" class="headerlink" title="三、认证技术"></a><strong>三、认证技术</strong></h2><p><strong>认证技术</strong>是用电子手段证明发送者和接收者身份及其文件完整性的技术，即确认双方的身份信息在传送或存储过程中未被篡改过。</p>
-<p>要想解释数字签名的原理，先来了解<strong>hash单向散列</strong>和<strong>digest摘要</strong>概念：</p>
-<p><strong>单向散列</strong>：将任意数据缩小成固定大小的“指纹”</p>
-<p><strong>特性：</strong></p>
-<p>任意长度输入</p>
-<p>固定长度输出</p>
-<p>若修改数据，指纹也会改变（“不会产生冲突”）</p>
-<p>法从指纹中重新生成数据（“单向”）</p>
-<p><strong>功能：</strong>数据完整性</p>
-<p><strong>常见hash算法：</strong></p>
-<p>md5: 128bits、sha1: 160bits、sha224</p>
-<p>sha256、sha384、sha512</p>
-<p><strong>常用工具：</strong></p>
-<p>md5sum | sha1sum [ –check ] file</p>
-<p>openssl、gpg</p>
-<p>rpm -V</p>
-<p><strong>digest摘要=hash（data）</strong></p>
-<p>经过hash算法得出的结果我们称为<strong>摘要</strong>，摘要单向不可推，即<strong>只拿到摘要digest是无法反推出数据的</strong></p>
-<p><strong>特性：</strong>数据不变，摘要不变；数据有小变化，则摘要完全改变，雪崩效应</p>
-<p>digest长度固定大小</p>
-<p>md5：128</p>
-<p>shal：160</p>
-<h3 id="1-数字签名"><a href="#1-数字签名" class="headerlink" title="1.数字签名"></a><strong>1.数字签名</strong></h3><p>数字签名：对数据进行hash计算后的摘要进行私钥加密。</p>
-<p>也称电子签名，如同出示手写签名一样，能起到电子文件认证、核准和生效的作用。</p>
-<p>即：Sa{hash（data）}</p>
-<p>数字证书完整流程：</p>
-<p><img src="数字证书流程.png" alt="数字证书流程"><strong>客户端：</strong></p>
-<p>1.对原文进行hash运算得到摘要digest</p>
-<p>hash（data）</p>
-<p>2.将摘要用本方私钥加密得到数字签名</p>
-<p>Sa{hash（data）}</p>
-<p>3.连同原文同签名一起发送</p>
-<p>data+Sa{hash（data）}</p>
-<p><strong>服务器端：</strong></p>
-<p>1.接收到原文与签名后，用客户端公钥解锁摘要</p>
-<p>pa–&gt;hash（data）</p>
-<p>2.再对原文进行hash计算</p>
-<p>hash（data）</p>
-<p>3.计算后的摘要与解锁摘要对比；如相同，则未被篡改；如不同，则发生过篡改</p>
-<p>pa–&gt;hash（data）对比 hash（data）</p>
-<h3 id="2-数字证书"><a href="#2-数字证书" class="headerlink" title="2.数字证书"></a><strong>2.数字证书</strong></h3><p><strong>数字证书</strong>是一个经证书授权中心（CA）数字签名的包括公钥拥有者信息以及公钥的文件。</p>
-<p>数字证书的最主要构成包括一个用户公钥，加上密钥所有者的用户身份标识符，以及用户信任的证书权威机构（CA）签名</p>
-<p><strong>数字证书相关概念：</strong></p>
-<p>签证机构：CA（Certificate Authority）</p>
-<p>注册机构：RA</p>
-<p>证书吊销列表：CRL</p>
-<p>X.509：定义了证书的结构以及认证协议标准</p>
-<p>版本号</p>
-<p>序列号</p>
-<p>签名算法</p>
-<p>颁发者</p>
-<p>有效期限</p>
-<p>主体名称</p>
-<p><strong>根CA：</strong>普通CA上端还有其他CA认证，一个CA认证链的最顶端称为根CA或Root CA，Root CA自己给自己签名。</p>
-<p><strong>数字证书类型：</strong></p>
-<p>普通域名证书：<a href="http://www.tmall.com" target="_blank" rel="noopener">www.tmall.com</a> 只签名一个网站地址</p>
-<p>泛域名证书：*.tmall.com            签名一类网站地址</p>
-<p><strong>数字证书获取：</strong></p>
-<p>a）使用证书授权机构</p>
-<p>生成签名请求（csr）</p>
-<p>将csr发送给CA</p>
-<p>从CA处接收签名</p>
-<p>b）自签名的证书</p>
-<p>自己签发自己的公钥</p>
-<p>适用于公司内部网络加密，互联网中不认可</p>
-<h2 id="四、安全套接层协议SSL与OpenSSL"><a href="#四、安全套接层协议SSL与OpenSSL" class="headerlink" title="四、安全套接层协议SSL与OpenSSL"></a><strong>四、安全套接层协议SSL与OpenSSL</strong></h2><p><strong>SSL协议</strong>位于传输层和应用层之间，由<strong>SSL记录协议、SSL握手协议和SSL警报协议</strong>组成的。</p>
-<p><strong>SSL握手协议</strong>被用来在客户与服务器真正传输应用层数据之前建立安全机制。当客户与服务器第一次通信时，双方通过握手协议在版本号、密钥交换算法、数据加密算法和Hash算法上达成一致，然后互相验证</p>
-<p>对方身份，最后使用协商好的密钥交换算法产生一个只有双方知道的秘密信息，客户和服务器各自根据此秘密信息产生数据加密算法和Hash算法参数。</p>
-<p><strong>SSL记录协议</strong>根据SSL握手协议协商的参数，对应用层送来的数据进行加密、压缩、计算消息鉴别码MAC，然后经网络传输层发送给对方。</p>
-<p><strong>SSL警报协议</strong>用来在客户和服务器之间传递SSL出错信息。</p>
-<p><strong>Record 协议：</strong>包括对消息的分段、压缩、消息认证和完整性保护、加密等</p>
-<p><strong>HTTPS 协议：</strong>就是“HTTP 协议”和“SSL/TLS 协议”的组合。HTTP over</p>
-<p>SSL”或“HTTP over TLS”，对http协议的文本数据进行加密处理后，成为二</p>
-<p>进制形式传输</p>
-<h3 id="OpenSSL："><a href="#OpenSSL：" class="headerlink" title="OpenSSL："></a>OpenSSL：</h3><p><strong>OpenSSL</strong> 是一个安全套接字层密码库，囊括主要的密码算法、常用的密钥和证书封装管理功能及SSL协议，并提供丰富的应用程序供测试或其它目的使用。</p>
-<p><strong>三个组件：</strong></p>
-<p>openssl：多用途的命令行工具，包openssl</p>
-<p>libcrypto：加密算法库，包openssl-libs</p>
-<p>libssl：加密模块应用库，实现了ssl及tls，包nss</p>
-<p><strong>openssl命令：</strong></p>
-<p>两种运行模式：交互模式和批处理模式</p>
-<p>openssl version：程序版本号</p>
-<p>标准命令、消息摘要命令、加密命令</p>
-<p>标准命令：</p>
-<p>enc, ca, req, …</p>
-<p>对称加密与非对称加密命令上面已经提到，介绍下openssl的其他功能：</p>
-<p><strong>单向加密：</strong></p>
-<p>工具：md5sum, sha1sum, sha224sum,sha256sum…</p>
-<p>openssl dgst</p>
-<p><strong>dgst命令：</strong></p>
-<p>帮助：man dgst</p>
-<p>​         openssl dgst -md5 [-hex默认] /PATH/SOMEFILE</p>
-<p>​         openssl dgst -md5 testfile</p>
-<p>​         md5sum /PATH/TO/SOMEFILE</p>
-<p>MAC: Message Authentication Code，单向加密的一种延伸应用，用于实现</p>
-<p>网络通信中保证所传输数据的完整性机制</p>
-<p>CBC-MAC</p>
-<p>HMAC：使用md5或sha1算法</p>
-<p><strong>生成用户密码：</strong></p>
-<p>passwd命令:</p>
-<p>帮助：man sslpasswd</p>
-<p>​         openssl passwd -1 -salt SALT(最多8位)</p>
-<p>​         openssl passwd -1 –salt centos</p>
-<p><strong>生成随机数：</strong></p>
-<p>帮助：man sslrand</p>
-<p>​         openssl rand -base64|-hex NUM</p>
-<p>NUM: 表示字节数；-hex时，每个字符为十六进制，相当于4位二进制，出现的字符数为NUM*2</p>
-<p>随机数生成器：伪随机数字</p>
-<p>键盘和鼠标，块设备中断</p>
-<p>/dev/random：仅从熵池返回随机数；随机数用尽，阻塞</p>
-<p>/dev/urandom：从熵池返回随机数；随机数用尽，会利用软件生成伪随机数,非阻塞</p>
-<h2 id="五、操作：搭建私有根CA，并向CA申请证书"><a href="#五、操作：搭建私有根CA，并向CA申请证书" class="headerlink" title="五、操作：搭建私有根CA，并向CA申请证书"></a><strong>五、操作：搭建私有根CA，并向CA申请证书</strong></h2><p><strong>一、建立Root CA</strong></p>
-<p>1.生成私钥</p>
-<p>​         vim /etc/pki/tls/openssl.conf</p>
-<p>​        (umask 066;openssl genrsa -out /etc/pki/CA/private/cakey.pem 4096)</p>
-<p>2.自签名证书</p>
-<p>​        openssl   req   -new   -x509   -key   /etc/pki/CA/private/cakey.pem   -out   /etc/pki/CA/cacert.pem -days   3650</p>
-<p>-x509代表自己给自己前面</p>
-<p>交互式填写：</p>
-<p>国家：CN</p>
-<p>省份：beijing</p>
-<p>城市：beijing</p>
-<p>公司名称：magedu</p>
-<p>部门：M30</p>
-<p>Common name：Magedu.com</p>
-<p>查看生成的签名证书</p>
-<p>​         openssl x509 -in cacert.pem  -noout -text</p>
-<p>​        </p>
-<p><strong>二、用户或服务器</strong></p>
-<p>1.生成私钥</p>
-<p>​         （umask 066；openssl genrsa -out app.key 1024）</p>
-<p>2.生成证书申请</p>
-<p>​         openssl req -new -key app.key -out app.csr</p>
-<p>交互式填写：</p>
-<p>国家：CN</p>
-<p>省份：beijing</p>
-<p>城市：beijing</p>
-<p>公司名称：magedu</p>
-<p>部门：M30</p>
-<p>Common name：app.Magedu.com</p>
-<p>注：国家，省份，公司必须一致才能申请成功</p>
-<p>3.将申请文件发给CA</p>
-<p>​         scp app.csr   CA:IP</p>
-<p><strong>三、CA颁发证书</strong></p>
-<p>touch /etc/pki/CA/index.txt               建立已颁发证书信息列表文件；V：生效；R：吊销；</p>
-<p>echo 0F &gt; /etc/pki/CA/serial      建立证书序列号</p>
-<p>openssl ca -in app.csr -out /etc/pki/CA/certs/app.crt -days 100</p>
-<p><strong>四、证书发送给客户端</strong></p>
-<p>​         scp app.crt   Client:IP</p>
-<p><strong>五、应用软件使用证书</strong></p>
-
-          
+          一、网络安全基本概念信息安全防护的目标有：保密性 Confidentiality
+信息不泄露给非授权用户、实体或过程，或供其利用的特性。
+完整性 Integrity
+数据未经授权不能进行改变的特性。即信息在存储或传输过程中保持不被修改、不被破坏和丢失的特性。
+可用性 Usability
+可被授权实体
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/18/Linux网络安全技术/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2996,227 +1491,18 @@
       
         
           
-            <h2 id="awk介绍："><a href="#awk介绍：" class="headerlink" title="awk介绍："></a><strong>awk介绍：</strong></h2><p><strong>awk</strong>的名称来源于三个开发者的姓名：Aho, Weinberger, Kernighan，报告生成器，格式化文本输出，</p>
-<p>Linux文本处理三剑客之一。</p>
-<p>有多种版本：New awk（nawk），GNU awk（gawk）</p>
-<p>现在默认linux系统下日常使用的是gawk，用命令可以查看正在应用的awk的来源（ls -l /bin/awk ）</p>
-<h3 id="Linux文本处理三剑客："><a href="#Linux文本处理三剑客：" class="headerlink" title="Linux文本处理三剑客："></a>Linux文本处理三剑客：</h3><p>grep：文本过滤工具（</p>
-<p>sed： 文本编辑工具</p>
-<p>awk：Linux上的实现gawk，文本报告生成</p>
-<p><strong>Awk</strong>编程语言用于处理文本文件。Awk在默认情况下，Awk文件的每一行都被视为一个记录。然后Awk记</p>
-<p>录进一步分解成一系列的字段。Awk程序就是一系列作用在记录和字段上的”识别-执行”操作语句。</p>
-<p><strong>行row</strong>：记录record</p>
-<p><strong>列column</strong>：字段，域field，属性</p>
-<h3 id="awk工作原理："><a href="#awk工作原理：" class="headerlink" title="awk工作原理："></a><strong>awk工作原理：</strong></h3><p><strong>awk</strong> 程序通常由：BEGIN语句块、能够使用模式匹配的通用语句块、END语句块，共3部分组成</p>
-<p>第一步：执行BEGIN{action；…}语句块中的语句</p>
-<p>第二步：从文件或标准输入读取一行，然后执行pattern{action;…}语句块，它逐行扫描文件，</p>
-<p>​        从第一行到最后一行重复这个过程，直到文件全部被读取完毕。</p>
-<p>第三步：当读至输入流末尾时，执行END{action;…}语句块</p>
-<p><strong>BEGIN语句块: </strong>在awk开始从输入流中读取行之前被执行，这是一个可选的语句块，比如变量初始化、打印输入表格的表头等语句通常可以写在BEGIN语句块中，</p>
-<p><strong>END语句块: </strong>在awk从输入流中读取完所有的行后才被执行，比如打印所有所有行的分析结果，这里信息汇总都在END语句块中完成，它也是一个可选语句块</p>
-<p><strong>pattern语句块: </strong>中的同用命令是最重要的部分，也是可选的。如果没有提供pattern语句块，则默认执行{print}，即打印每一个读取到的行，awk读取的每一行都会执行该语句块</p>
-<p><strong>BEGIN语句常用于打印表头</strong></p>
-<p><strong>END语句往往用来做汇总</strong></p>
-<h2 id="awk基本用法："><a href="#awk基本用法：" class="headerlink" title="awk基本用法："></a><strong>awk基本用法：</strong></h2><h3 id="awk"><a href="#awk" class="headerlink" title="awk"></a><strong>awk</strong></h3><p><strong>基本用法：</strong></p>
-<p>​        awk [options] ‘program’ var=value file…</p>
-<p>​         awk [options] -f programfile var=value file…</p>
-<p>​         awk [options] ‘BEGIN{ action;… } pattern{ action;… } END{ action;… }’ file …</p>
-<p><strong>option：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-F    指明输入时用到的字段分隔符</span><br><span class="line"></span><br><span class="line">-v    var=value: 自定义变量</span><br></pre></td></tr></table></figure>
-<p><strong>基本格式：</strong>awk [options] ‘program’ var=value file…</p>
-<p><strong>program：</strong>pattern{action statement}</p>
-<p>其中 pattern 表示 AWK 在数据中查找的内容，而 action 是在找到匹配内容时所执行的一系列命令。</p>
-<p><strong>pattern和action：</strong></p>
-<p>pattern部分决定动作语句何时触发及触发事件</p>
-<p>如：BEGIN，END</p>
-<p>action statements对数据进行处理，放在{}内指明</p>
-<p>如：print，printf</p>
-<p><strong>分隔符、域和记录</strong></p>
-<p>awk执行时，由分隔符分隔的字段（域）标记$1,$2…$n成为标识域。$0表示所有域，即整行</p>
-<p>文件的每一行成为记录（record）</p>
-<p><strong>省略action,则默认执行print $0的操作</strong></p>
-<h3 id="awk-pattern"><a href="#awk-pattern" class="headerlink" title="awk pattern"></a><strong>awk pattern</strong></h3><p>根据pattern条件，过滤匹配到的行，再做处理</p>
-<ol>
-<li><p><strong>如果未指定：空模式，匹配每一行</strong></p>
-</li>
-<li><p><strong>/regular expression/：仅处理能够模式匹配到的行，需要用/ /括起来</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;/^UUID/&#123;print $1&#125;&apos; /etc/fstab       取出包含UUID的行的第一个域</span><br><span class="line"></span><br><span class="line">awk &apos;！/^UUID/&#123;print $1&#125;&apos; /etc/fstab   取出不包含UUID的行的第一个域</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol start="3">
-<li><p><strong>relational expression：关系表达式，结果为”真”才会被处理</strong></p>
-<p>​    真：结果为非0值，非空字符串</p>
-<p>​    假：结果为空字符串或0值</p>
-<p><strong>示例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;i=1&apos; /etc/passwd            结果为非零值，显示/etc/passwd内容</span><br><span class="line"></span><br><span class="line">awk &apos;i=0&apos; /etc/passwd            结果为零值，不显示/etc/passwd内容</span><br><span class="line"></span><br><span class="line">awk &apos;i=&quot;&quot;&apos; /etc/passwd        结果为空，不显示/etc/passwd内容</span><br><span class="line"></span><br><span class="line">awk &apos;!(i=&quot;&quot;)&apos; /etc/passwd        结果不为空，显示/etc/passwd内容</span><br><span class="line"></span><br><span class="line">awk -F: &apos;$NF==&quot;/bin/bash&quot;&#123;print $1$NF&#125;&apos; /etc/passwd</span><br><span class="line">	显示/etc/passwd文件中Shell为/bin/bash行的用户名和Shell类型</span><br><span class="line"></span><br><span class="line">awk -F: &apos;$NF~/bash$/&#123;print $1$NF&#125;&apos; /etc/passwd</span><br><span class="line">	显示/etc/passwd文件中以bash结尾行的用户名和Shell类型</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>line ranges：行范围</strong></p>
-<p>起始行，结尾行：/pat1/,/pat2/不支持直接给出数字格式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 显示root开头的行到nobody开头的行之间的用户名</span><br><span class="line">awk -F: &apos;/^root\&gt;/,/^nobody\&gt;/&#123;print $1&#125;&apos;  /etc/passwd</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 	显示第10行到第20行，标准行号并显示用户名</span><br><span class="line">awk -F: &apos;(NR&gt;=10&amp;&amp;NR&lt;=20)&#123;print NR,$1&#125;&apos;  /etc/passwd</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>BEGIN/END模式</strong></p>
-<p>BEGIN{}：仅在开始处理文件中的文本之前执行一次</p>
-<p>END{}：仅在文本处理完成之后执行一次</p>
-<p> <strong>示例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 在/etc/passwd文件每一行上都添加USER USERID，并在处理完文本后打印end file</span><br><span class="line">awk -F: &apos;&#123;print &quot;USER USEID\n&quot;$1&quot;:&quot;$3&#125;END&#123;print &quot;end file&quot;&#125;&apos; /etc/passwd</span><br><span class="line">awk -F: &apos;&#123;print &quot;USER USEID&quot;;print $1″:&quot;$3&#125;END&#123;print&quot;end file&quot;&#125;&apos; /etc/passwd</span><br><span class="line"># 结果为0，条件为假，不显示</span><br><span class="line"></span><br><span class="line">seq 10|awk &apos;i=0&apos;</span><br><span class="line"># 结果不为0，条件为真，显示所有数字</span><br><span class="line">seq 10|awk &apos;i=1&apos;</span><br><span class="line"></span><br><span class="line"># 显示奇数，第一行i为空，!i则为非空，打印该行，第二行i为非空，!i为空则不打印，以此类推</span><br><span class="line">seq 10|awk &apos;i=!i&apos;</span><br><span class="line"></span><br><span class="line"># 显示1,0,1,0…即上例工作原理</span><br><span class="line">seq 10 | awk &apos;&#123;i=!i;print i&#125;&apos;</span><br><span class="line"></span><br><span class="line"># 显示偶数</span><br><span class="line">seq 10|awk &apos;!(i=!i)&apos;</span><br><span class="line"></span><br><span class="line"># 显示偶数，第一行i已赋值，所以!i为空，不显示</span><br><span class="line">seq 10 |awk -v i=1 &apos;i=!i&apos;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="awp操作符："><a href="#awp操作符：" class="headerlink" title="awp操作符："></a><strong>awp操作符：</strong></h2><h3 id="输出操作符：print、printf"><a href="#输出操作符：print、printf" class="headerlink" title="输出操作符：print、printf"></a><strong>输出操作符：print、printf</strong></h3><p><strong>print格式：</strong></p>
-<p>print item1，item2，…</p>
-<p><strong>要点：</strong></p>
-<ol>
-<li>逗号分隔符</li>
-<li>输出的各item可以是字符串，也可以是数值；当前记录的字段、变量或awk的表达式</li>
-<li>如省略item，相当于打印整行print $0</li>
-</ol>
-<p><strong>printf格式：</strong></p>
-<p>格式化输出：print “FORMAT”,item1,item2,…</p>
-<p>要点：</p>
-<ol>
-<li>必须指定FORMAT（格式）</li>
-<li>不会自动换行，需要显示给出换行控制符，\n</li>
-<li>FROMAT中需要分别为后面每个item指定格式符</li>
-</ol>
-<p><strong>格式符：与item一一对应</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">%c         显示字符的ASCII码</span><br><span class="line">%d,%i      显示十进制整数</span><br><span class="line">%e,%E      显示科学计数法数值</span><br><span class="line">%f         显示为浮点数</span><br><span class="line">%g,%G      以科学计数法或浮点形式显示数值</span><br><span class="line">%s         显示字符串</span><br><span class="line">%u         无符号整数</span><br><span class="line">%%         显示%自身</span><br></pre></td></tr></table></figure>
-<p><strong>修饰符：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#[.#]     第一个#控制显示的宽度；第二个#表示小数点后精度，%3.1f</span><br><span class="line">–    左对齐（默认右对齐）%-15s</span><br><span class="line">+	 显示数值的正负符号 %+d</span><br></pre></td></tr></table></figure>
-<p><strong>示例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># 将/etc/passwd文件中所有用户名作为一个字符串输出</span><br><span class="line">	awk -F: &apos;&#123;printf &quot;%s&quot;,$1&#125;&apos; /etc/passwd</span><br><span class="line">	awk -F: &apos;&#123;printf &quot;%s\n&quot;,$1&#125;&apos; /etc/passwd</span><br><span class="line">效果等同于awk -F: &apos;&#123;print $1&#125;&apos; /etc/passwd</span><br><span class="line"></span><br><span class="line"># 显示用户名左对齐，UID以十进制数显示且宽度为10</span><br><span class="line">	awk -F: &apos;&#123;printf &quot;%-20s %10d\n&quot;,$1,$3&#125;&apos; /etc/passwd</span><br><span class="line"></span><br><span class="line">	awk -F: &apos;&#123;printf &quot;Username: %s\n&quot;,$1&#125;&apos; /etc/passwd</span><br><span class="line">效果等同于awk -F: &apos;&#123;print &quot;Username: &quot;$1&#125;&apos; /etc/passwd</span><br><span class="line"></span><br><span class="line">awk -F: &apos;&#123;printf &quot;Username: %s,UID:%d\n&quot;,$1,$3&#125;&apos; /etc/passwd</span><br><span class="line">显示结果如：</span><br><span class="line">	Username: basher,UID:504</span><br><span class="line"></span><br><span class="line">awk -F: &apos;&#123;printf &quot;Username: %15s,UID:%d\n&quot;,$1,$3&#125;&apos; /etc/passwd</span><br><span class="line">显示结果如：</span><br><span class="line">	Username:  basher,UID:504</span><br></pre></td></tr></table></figure>
-<h3 id="awk变量："><a href="#awk变量：" class="headerlink" title="awk变量："></a><strong>awk变量：</strong></h3><p><strong>变量：内置和自定义变量</strong></p>
-<p><strong>内置变量：</strong></p>
-<ul>
-<li>FS：输入字段分隔符，默认为空白字符</li>
-<li>OFS：输出字段分隔符，默认为空白字符</li>
-<li>RS：输入记录分隔符，指定输入时的换行符</li>
-<li>ORS：输出记录分隔符，输出时用指定符号代替换行符</li>
-<li>NF：字段数量</li>
-<li>NR：记录号，相当于行号</li>
-<li>FNR：同时针对多个文件时，分别计数，添加记录号</li>
-<li>FILENAME：当前文件名</li>
-<li>ARGC：命令行参数的个数</li>
-<li>ARGV：数组，保存的是命令行所给定的各参数，参数标号默认从0开始，且第一个参数为awk命令本身</li>
-</ul>
-<p><strong>注：</strong>引用内置变量不需要加$</p>
-<p><strong>示例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"># 以：作为分隔符，显示每行的第一和第三个域，即用户名和UID</span><br><span class="line">awk -F:  &apos;&#123;print $1″:&quot;$3&#125;&apos;  /etc/passwd               等价于</span><br><span class="line">awk -v FS=&apos;:&apos; &apos;&#123;print $1FS$3&#125;&apos; /etc/passwd</span><br><span class="line"></span><br><span class="line"># 以：作为分隔符，取出用户名，UID，shell类型，并以：分隔</span><br><span class="line">awk -v FS=&quot;:&quot; -v OFS=&quot;:&quot; &apos;&#123;print $1,$3,$7&#125;&apos; /etc/passwd</span><br><span class="line"></span><br><span class="line">没# 有记录分隔符，文件被看做一个整体记录，取$2即为第二行</span><br><span class="line">awk -v RS=&quot; &apos;&#123;print$2&#125;&apos; /etc/passwd</span><br><span class="line"></span><br><span class="line"># 没有记录分隔符，文件被看做一个整体的记录，文件尾添加###</span><br><span class="line">awk -v RS=&quot; -v ORS=&apos;###&apos; &apos;&#123;print&#125;&apos; /etc/passwd</span><br><span class="line"></span><br><span class="line"># 显示以：为分隔符，每一个行的字段数量</span><br><span class="line">awk -F: &apos;&#123;print NF&#125;&apos; /etc/passwd</span><br><span class="line"></span><br><span class="line"># 打印/etc/passwd每行的倒数第二个字段</span><br><span class="line">awk -F: &apos;&#123;print $(NF-1)&#125;&apos; /etc/passwd</span><br><span class="line"></span><br><span class="line"># 显示/etc/fstab文件每行行号，总行号</span><br><span class="line">awk &apos;&#123;print NR&#125;&apos; /etc/fstab ; awk END&apos;&#123;print NR&#125;&apos; /etc/fstab</span><br><span class="line"></span><br><span class="line"># 对/etc/fstab和/etc/inittab文件分别计数，显示行号</span><br><span class="line">awk &apos;&#123;print FNR&#125;&apos; /etc/fstab /etc/inittab</span><br><span class="line"></span><br><span class="line"># 在/etc/fstab文件每一行显示文件名</span><br><span class="line">awk &apos;&#123;print FILENAME&#125;&apos; /etc/fstab</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 显示每行参数的个数</span><br><span class="line">awk &apos;&#123;print ARGC&#125;&apos; /etc/fstab /etc/inittab</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 显示第一个和第二个参数：awk   /etc/fstab</span><br><span class="line">awk &apos;BEGIN&#123;print ARGV[0],ARGV[1]&#125;&apos; /etc/fstab /etc/inittab</span><br></pre></td></tr></table></figure>
-<p><strong>自定义变量（区分字符大小写）：</strong></p>
-<ol>
-<li>-v var=value</li>
-<li>在program中直接定义</li>
-</ol>
-<p><strong>注：</strong>{}内赋值变量要用；隔开；</p>
-<p>​    {}外赋值变量时，每个变量前都要加-v选项；</p>
-<p><strong>示例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 在/etc/fstab文件每一行打印hello</span><br><span class="line">awk -v test=&apos;hello&apos; &apos;&#123;print test&#125;&apos; /etc/fstab    </span><br><span class="line"></span><br><span class="line"># 打印hello</span><br><span class="line">awk -v test=&apos;hello&apos; &apos;BEGIN&#123;print test&#125;&apos;</span><br><span class="line"></span><br><span class="line"># 打印hello，&#123;&#125;内赋值变量后加；</span><br><span class="line">awk &apos;BEGIN&#123;test=&quot;hello&quot;;print test&#125;&apos;     </span><br><span class="line"></span><br><span class="line"># 取出每行用户名，并在用户名后，打印male 18</span><br><span class="line">awk -F: &apos;&#123;age=18;sex=&quot;male&quot;;print $1,sex,age;&#125;&apos; /etc/passwd</span><br><span class="line"></span><br><span class="line"># 取出每一行的用户名和UID并在每行前面打印awk</span><br><span class="line">cat awkscript</span><br><span class="line">	&#123;print script$1$3&#125;</span><br><span class="line">awk -F: -f awkscript  script=&quot;awk&quot;  /etc/passwd</span><br></pre></td></tr></table></figure>
-<h3 id="算术操作符："><a href="#算术操作符：" class="headerlink" title="算术操作符："></a><strong>算术操作符：</strong></h3><p>x+y   加法运算</p>
-<p>x-y   减法运算</p>
-<p>x*y   乘法运算</p>
-<p>x/y   除法运算（可精确到小数点）</p>
-<p>x^y   乘方运算</p>
-<p>x%y  取余运算</p>
-<p><strong>示例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">计算9/2.2的结果为4.09091</span><br><span class="line">awk &apos;BEGIN&#123;print 9/2.2&#125;&apos;</span><br><span class="line"></span><br><span class="line">计算2的10次方显示1024</span><br><span class="line">awk &apos;BEGIN&#123;print 2^10&#125;&apos;</span><br></pre></td></tr></table></figure>
-<p>字符串操作符：没有符合的操作符，字符串连接</p>
-<p><strong>赋值操作符：</strong></p>
-<p>=，+=，-=，*=，/=，%=，^=，++，–</p>
-<p><strong>示例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;BEGIN&#123;i=0;print ++i,i &#125;&apos;</span><br><span class="line">显示：1  1</span><br><span class="line"></span><br><span class="line">awk &apos;BEGIN&#123;i=0;print i++,i &#125;&apos;</span><br><span class="line">显示：0  1</span><br><span class="line"></span><br><span class="line">awk &apos;BEGIN&#123;i=0;print i+=5,i&#125;&apos;</span><br><span class="line">显示：5  5</span><br></pre></td></tr></table></figure>
-<p><strong>比较操作符：</strong></p>
-<p>==，!=，&gt;，&gt;=，&lt;，&lt;=</p>
-<p><strong>模式匹配符：</strong></p>
-<p>~ ：左边是否和右边匹配包含!~：是否不匹配</p>
-<p><strong>示例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 取/etc/passwd文件中包含root的行中以：为分隔符的第一个域</span><br><span class="line">awk -F: &apos;$0 ~ /root/&#123;print $1&#125;&apos; /etc/passwd</span><br><span class="line"></span><br><span class="line"># 取/etc/passwd文件中以root开头的行</span><br><span class="line">awk &apos;$0 ~ &quot;^root&quot;&apos; /etc/passwd</span><br><span class="line"></span><br><span class="line">取/etc/passwd文件中不包含root的行</span><br><span class="line">awk &apos;$0 !~ &quot;root&quot;&apos; /etc/passwd</span><br><span class="line"></span><br><span class="line"># 取/etc/passwd文件中UID=0的行</span><br><span class="line">awk -F: &apos;$3==0&apos; /etc/passwd</span><br></pre></td></tr></table></figure>
-<h3 id="逻辑操作符："><a href="#逻辑操作符：" class="headerlink" title="逻辑操作符："></a><strong>逻辑操作符：</strong></h3><p>&amp;&amp;   与</p>
-<p>||     或</p>
-<p>！    非</p>
-<p>注意：这里的&amp;&amp;和||不是shell中的短路与和短路或，而是类似于[test]判断中的-a和-e</p>
-<p>示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 取出/etc/passwd文件中UID大于0且小于1000的用户名</span><br><span class="line">awk -F: &apos;$3&gt;=0 &amp;&amp; $3&lt;=1000&#123;print $1&#125;&apos; /etc/passwd</span><br><span class="line"></span><br><span class="line"># 取出/etc/passwd文件中UID等于0或小于1000的用户名</span><br><span class="line">awk -F: &apos;$3==0 || $3&lt;=1000&#123;print $1&#125;&apos; /etc/passwd</span><br><span class="line"></span><br><span class="line"># 取出/etc/passwd文件中UID不等于0的用户名</span><br><span class="line">awk -F: &apos;!($3==0)&#123;print $1&#125;&apos; /etc/passwd</span><br></pre></td></tr></table></figure>
-<p><strong>函数调用：</strong>function_name（argu1，argu2…）</p>
-<h3 id="条件表达式（三目表达式）："><a href="#条件表达式（三目表达式）：" class="headerlink" title="条件表达式（三目表达式）："></a><strong>条件表达式（三目表达式）：</strong></h3><p>格式：</p>
-<p><strong>条件判断式？</strong>if-true-expression:if-false-expression</p>
-<p><strong>示例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 判断/etc/passwd文件中如果UID大于1000，在用户名后标注普通用户，如果UID小于1000，则标注root或系统用户</span><br><span class="line">awk -F:  &apos;&#123;$3&gt;=1000?usertype=&quot;Common User&quot;:usertype=&quot;Sysadmin or SysUser&quot;;printf</span><br><span class="line">&quot;%15s:%-s\n&quot;,$1,usertype&#125;&apos;  /etc/passwd</span><br><span class="line"></span><br><span class="line">显示：rpcuser:Sysadmin or SysUser</span><br><span class="line">	 nfsnobody:Common User</span><br></pre></td></tr></table></figure>
-<h2 id="awk循环判断："><a href="#awk循环判断：" class="headerlink" title="awk循环判断："></a><strong>awk循环判断：</strong></h2><h3 id="if-else语句"><a href="#if-else语句" class="headerlink" title="if-else语句"></a><strong>if-else语句</strong></h3><p>语法：if（condition）{statement;…}[else statement]</p>
-<p>​      if（condition1）{statement1;…}else if（condition2）{statement2;…}else{statement3}</p>
-<p>使用场景：对awk取得的整行或某个字段做条件判断</p>
-<p><strong>示例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 打印UID大于等于1000的用户名和UID</span><br><span class="line">awk -F: &apos;&#123;if($3&gt;=1000)print$1,$3&#125;&apos; /etc/passwd</span><br><span class="line"></span><br><span class="line"># 打印shell类型为/bin/bash的用户名和UID</span><br><span class="line">awk -F: &apos;&#123;if($NF==&quot;/bin/bash&quot;)print$1,$3&#125;&apos; /etc/passwd</span><br><span class="line"></span><br><span class="line"># 显示/etc/fstab文件中字段大于5的行</span><br><span class="line">awk &apos;&#123;if(NF&gt;5)print$0&#125;&apos; /etc/fstab</span><br><span class="line"></span><br><span class="line"># 取出UID大于等于1000用户名，并在前面加Common user：其他用户名前加System or root：</span><br><span class="line">awk -F: &apos;&#123;if($3&gt;=1000)&#123;printf &quot;Common user: %s\n&quot;,$1&#125;else&#123;printf &quot;System or root: %s\n&quot;,$1&#125;&#125;&apos;  /etc/passwd</span><br><span class="line"></span><br><span class="line"># 等同于上例，在只有两种条件时，可用此格式替换</span><br><span class="line">awk -F: &apos;&#123;if($3&gt;=1000)printf &quot;Common user: %s\n&quot;,$1;else printf &quot;System or root: %s\n&quot;,$1&#125;&apos;  /etc/passwd</span><br><span class="line"></span><br><span class="line"># 取出磁盘利用率大于80的磁盘名称和磁盘利用率</span><br><span class="line">df -h|awk -F% &apos;/^\/dev/&#123;print $1&#125;&apos;|awk &apos;$NF&gt;80&#123;print $1,$NF&#125;&apos;</span><br><span class="line"></span><br><span class="line"># 如果test打印90显示very good，大于60小于90显示good，小于60显示no pass</span><br><span class="line">awk &apos;BEGIN&#123;test=100;if(test&gt;90)&#123;print &quot;very good&quot;&#125;else if(test&gt;60)&#123; print &quot;good&quot;&#125;else&#123;print &quot;no pass&quot;&#125;&#125;&apos;</span><br></pre></td></tr></table></figure>
-<h3 id="while循环语句"><a href="#while循环语句" class="headerlink" title="while循环语句"></a>while循环语句</h3><p>语法：while（condition）{statement}</p>
-<p>条件为”真”，进入循环；条件为”假”，退出循环</p>
-<p>使用场景：</p>
-<p>a）对一行内的多个字段之一类似处理时使用</p>
-<p>b）对数组中的各元素逐一处理时使用</p>
-<p><strong>示例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 取出grub2文件中空白开头跟linux16的行，并显示每个字段和每个字段的字符数</span><br><span class="line">awk &apos;/^[[:space:]]*linux16/&#123;i=1;while(i&lt;=NF) &#123;print $i,length($i); i++&#125;&#125;&apos; /etc/grub2.cfg</span><br><span class="line"></span><br><span class="line"># 取出grub2文件中空白开头跟linux16的行，并显示字符数大于10个的字段和对应字段的字符数</span><br><span class="line">awk &apos;/^[[:space:]]*linux16/&#123;i=1;while(i&lt;=NF)&#123;if(length($i)&gt;=10) &#123;print $i,length($i)&#125;; i++&#125;&#125;&apos; /etc/grub2.cfg</span><br></pre></td></tr></table></figure>
-<h3 id="do-whlie循环语句"><a href="#do-whlie循环语句" class="headerlink" title="do-whlie循环语句"></a><strong>do-whlie循环语句</strong></h3><p>语法：do{statement;…}while（condition）</p>
-<p>意义：无论真假，至少执行一次循环体</p>
-<p>示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">计算1到100的数字之和：</span><br><span class="line">awk &apos;BEGIN&#123;i=1;sum=0;do&#123;sum+=i;i++;&#125;while(i&lt;=100);print sum&#125;&apos;</span><br><span class="line">对比</span><br><span class="line">awk &apos;BEGIN&#123;i=1;sum=0;while(i&lt;=100)&#123;sum+=i;i++&#125;;print sum&#125;&apos;</span><br></pre></td></tr></table></figure>
-<h3 id="for循环语句"><a href="#for循环语句" class="headerlink" title="for循环语句"></a><strong>for循环语句</strong></h3><p><strong>语法：</strong>for(expr1;expr2;expr3) {statement;…}</p>
-<p><strong>常见用法：</strong></p>
-<p>for(variable assignment;condition;iteration process)</p>
-<p>{for-body}</p>
-<p><strong>特殊用法：</strong>能够遍历数组中的元素</p>
-<p><strong>语法：</strong>for(var in array) {for-body}</p>
-<p><strong>示例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">计算1到100数字之和</span><br><span class="line">awk &quot;BEGIN&#123;for(i=0;i&lt;=100;i++)sum+=i;print sum&#125;&quot;</span><br><span class="line"></span><br><span class="line">与shell语言for循环第二种风格很类似：</span><br><span class="line">for ((i=1,sum=0;i&lt;=100;i++));do let sum+=i;done;echo $sum</span><br></pre></td></tr></table></figure>
-<h3 id="break和continue"><a href="#break和continue" class="headerlink" title="break和continue"></a><strong>break和continue</strong></h3><p>用于循环体中</p>
-<p>break：提前结束本轮循环</p>
-<p>continue：提前结束本轮循环，而直接进入下一轮判断；</p>
-<p>break[N]：提前结束第N层循环，最内层为第一层</p>
-<p>continue[N]：提前结束第N层的本轮循环，而直接进入下一轮判断；最内层为第1层</p>
-<p><strong>示例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 计算1到100奇数之和，数字为偶数时跳过，奇数时相加</span><br><span class="line">awk &apos;BEGIN&#123;sum=0;for(i=1;i&lt;=100;i++)&#123;if(i%2==0)continue;sum+=i&#125;print sum&#125;&apos;</span><br><span class="line"></span><br><span class="line"># 数字加到66时，break退出循环，结果为1到66的数字之和</span><br><span class="line">awk &apos;BEGIN&#123;sum=0;for(i=1;i&lt;=100;i++)&#123;if(i==66)break;sum+=i&#125;print sum&#125;&apos;</span><br></pre></td></tr></table></figure>
-<h3 id="next语句"><a href="#next语句" class="headerlink" title="next语句"></a><strong>next语句</strong></h3><p>提前结束对本行处理而直接进入下一行处理（awk自身循环）</p>
-<p>awk -F: ‘{if($3%2!=0) next; print $1,$3}’ /etc/passwd</p>
-<h3 id="awk数组："><a href="#awk数组：" class="headerlink" title="awk数组："></a><strong>awk数组：</strong></h3><p><strong>关联数组：</strong>array[#]</p>
-<p><strong>下标：</strong></p>
-<p>​    a. 可使用任意字符串；字符串要使用双引号括起来</p>
-<p>​    b. 如果某数组元素事先不存在，在引用时，awk会自动创建此元素，并将其值初始化为”空串”</p>
-<p><strong>示例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">weekdays[&quot;mon&quot;]=&quot;Monday&quot;</span><br><span class="line"></span><br><span class="line">awk &apos;BEGIN&#123;weekdays[&quot;mon&quot;]=&quot;Monday&quot;;weekdays[&quot;tue&quot;]=&quot;Tuesday&quot;;print weekdays[&quot;mon&quot;]&#125;&apos;</span><br><span class="line"></span><br><span class="line">awk !arr[$0]++  dupfile     取出文件内容重复行</span><br></pre></td></tr></table></figure>
-<h3 id="遍历数组："><a href="#遍历数组：" class="headerlink" title="遍历数组："></a><strong>遍历数组：</strong></h3><p>使用for循环可遍历数组中的每个元素</p>
-<p>格式：for(var in array) {for-body}</p>
-<p>注意：var会遍历array的每个索引</p>
-<p><strong>示例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 显示weekdays[]数组中的每个元素</span><br><span class="line">awk &apos;BEGIN&#123;weekdays[&quot;mon&quot;]=&quot;Monday&quot;;weekdays[&quot;tue&quot;]=&quot;Tuesday&quot;;for(i in weekdays) &#123;print weekdays[i]&#125;&#125;&apos;</span><br><span class="line"></span><br><span class="line"># 显示网络连接每种状态的数量</span><br><span class="line">netstat -tan|awk &apos;/^tcp/&#123;state[$NF]++&#125;END&#123;for(i in state)&#123;print i,state[i]&#125;&#125;&apos;</span><br><span class="line"></span><br><span class="line"># 统计网络访问ip和访问次数</span><br><span class="line">awk &apos;&#123;ip[$1]++&#125;END&#123;for(i in ip) &#123;print i,ip[i]&#125;&#125;&apos; /var/log/httpd/access_log</span><br></pre></td></tr></table></figure>
-<h3 id="awk函数："><a href="#awk函数：" class="headerlink" title="awk函数："></a><strong>awk函数：</strong></h3><p><strong>系统内置函数：</strong></p>
-<p>数组处理：</p>
-<ul>
-<li><p>rand（）：返回0和1之间一个随机数，只有和srand（）函数配合才生效</p>
-<p><strong>示例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 返回0和1之间一个随机数</span><br><span class="line">awk &apos;BEGIN&#123;srand();print rand()&#125;&apos;</span><br><span class="line"></span><br><span class="line"># 返回10个0到100之间的随机数</span><br><span class="line">awk &apos;BEGIN&#123;srand();for(i=1;i&lt;=10;i++)print rand()*100&#125;&apos;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>字符串处理：</strong></p>
-<ul>
-<li><p>length([s])：返回指定字符串的长度</p>
-</li>
-<li><p>sub(r,s,[t])：对t字符串进行搜索r表示的模式匹配的内容，并将第一个匹配的内容替换为s</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">示例：替换字符第一个出现的&quot;：&quot;为&quot;-&quot;；</span><br><span class="line">echo &quot;2008:08:08 08:08:08&quot; | awk &apos;sub(/:/,&quot;-&quot;,$1)&apos;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>gsub(r,s,[t])：对t字符串进行搜索r表示的模式匹配的内容，并全部替换为s所表示的内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">示例：全局替换字符第一个出现的&quot;：&quot;为&quot;-&quot;；</span><br><span class="line">echo &quot;2008:08:08 08:08:08&quot; | awk &apos;gsub(/:/,&quot;-&quot;,$0)&apos;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>split(s,array,[r])：以r为分隔符，切割字符串s，并将切割后的结果保存至array所表示的数组中，</p>
-<p>第一个索引值为1,第二个索引值为2,…</p>
-</li>
-</ul>
-<p><strong>自定义函数：</strong></p>
-<p><strong>格式：</strong></p>
-<p>function name ( parameter, parameter, … ) {</p>
-<p>​         statements</p>
-<p>​         return expression</p>
-<p>}</p>
-<p><strong>示例：</strong> 编写一个awk函数，比较两个数字的大小</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cat fun.awk</span><br><span class="line">    function max(v1,v2) &#123;</span><br><span class="line">    v1&gt;v2?var=v1:var=v2</span><br><span class="line">    return var</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    BEGIN&#123;a=3;b=2;print max(a,b)&#125;</span><br><span class="line"># 文件调用函数</span><br><span class="line">awk –f fun.awk</span><br></pre></td></tr></table></figure>
-<h3 id="awk中调用shell命令："><a href="#awk中调用shell命令：" class="headerlink" title="awk中调用shell命令："></a><strong>awk中调用shell命令：</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">awk BEGIN&apos;&#123;system(&quot;hostname&quot;) &#125;&apos;</span><br><span class="line"></span><br><span class="line">awk &apos;BEGIN&#123;score=100; system(&quot;echo your score is &quot; score) &#125;&apos;</span><br></pre></td></tr></table></figure>
-
-          
+          awk介绍：awk的名称来源于三个开发者的姓名：Aho, Weinberger, Kernighan，报告生成器，格式化文本输出，
+Linux文本处理三剑客之一。
+有多种版本：New awk（nawk），GNU awk（gawk）
+现在默认linux系统下日常使用的是gawk，用命令可以查看正在应用
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/17/文本三剑客之awk/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -3356,139 +1642,17 @@
       
         
           
-            <h2 id="一、SELinux介绍："><a href="#一、SELinux介绍：" class="headerlink" title="一、SELinux介绍："></a><strong>一、SELinux介绍：</strong></h2><p><strong>SELinux(Security-Enhanced Linux)</strong> 是美国国家安全局（NSA）对于强制访问控制的实现，是</p>
-<p>Linux历史上最杰出的新安全子系统。NSA是在Linux社区的帮助下开发了一种访问控制体系，在</p>
-<p>这种访问控制体系的限制下，<strong>进程只能访问那些在他的任务中所需要文件</strong>。</p>
-<p><strong>SELinux</strong>是一种基于 域-类型 模型（domain-type）的强制访问控制（MAC）安全系统，它由NSA</p>
-<p>编写并设计成内核模块包含到内核中，相应的某些安全相关的应用也被打了SELinux的补丁，最</p>
-<p>后还有一个相应的安全策略。任何程序对其资源享有完全的控制权。假设某个程序打算把含有潜</p>
-<p>在重要信息的文件扔到/tmp目录下，那么在DAC情况下没人能阻止他。SELinux提供了比传统的</p>
-<p>UNIX权限更好的访问控制。</p>
-<p><strong>传统UNIX系统使用的安全系统：</strong>自由访问控制（DAC：Discretionary Access Control）</p>
-<p><strong>SELinx采用的安全系统：</strong>强制访问控制（MAC：Mandatory Access Control）</p>
-<p>DAC环境下进程是无束缚的</p>
-<p>MAC环境下策略的规则决定控制的严格程度</p>
-<p>MAC环境下进程可以被限制的</p>
-<p>策略被用来定义被限制的进程能够使用那些资源（文件和端口）</p>
-<p>默认情况下，没有被明确允许的行为将被拒绝</p>
-<h3 id="SElinux的工作类型："><a href="#SElinux的工作类型：" class="headerlink" title="SElinux的工作类型："></a>SElinux的工作类型：</h3><p>使用<strong>cat /etc/selinux/config</strong> 可以查看当前SELinux类型和系统支持的所有SELinux类型，不同系统版本支持类型有所不同</p>
-<p><strong>SELinux</strong>共有<strong>四种</strong>工作类型：</p>
-<p>（1）<strong>strict</strong>：centos5,每个进程都受到selinux的控制，不识别的进程将拒绝</p>
-<p>（2）<strong>targeted</strong>： 用来保护常见的网络服务,仅有限进程受到selinux控制，只监控容易</p>
-<p>被入侵的进程，centos4只保护13个服务，centos5保护88个服务，不识别的服务将允许</p>
-<p>（3）<strong>minimum</strong>：centos7,修改的targeted，只对选择的网络服务</p>
-<p>（4）<strong>mls</strong>：提供MLS（多级安全）机制的安全性</p>
-<p><strong>targeted</strong>现为CentOS系统默认SElinux类型，minimum和mls稳定性不足，未加以应用，strict现已不存在</p>
-<h3 id="SELinux的优点与缺点："><a href="#SELinux的优点与缺点：" class="headerlink" title="SELinux的优点与缺点："></a><strong>SELinux的优点与缺点：</strong></h3><p><strong>优点：</strong></p>
-<p>（1）通过MAC对访问的控制彻底化</p>
-<p>（2）对于进程只赋予最小的权限</p>
-<p>（3）防止权限升级</p>
-<p>（4）对于用户只赋予最小的权限</p>
-<p><strong>缺点：</strong></p>
-<p>（1）存在特权用户root</p>
-<p>（2）对于文件的访问权划分不够细</p>
-<p>（3）SUID程序的权限升级</p>
-<p>（4）DAC（Discretionary Access Control）问题</p>
-<h2 id="二、SELinux安全上下文"><a href="#二、SELinux安全上下文" class="headerlink" title="二、SELinux安全上下文"></a><strong>二、SELinux安全上下文</strong></h2><p>传统Linux，一切皆文件，由用户，组，权限控制访问</p>
-<p>在SELinux中，<strong>一切皆对象（object）</strong>，由存放在inode的扩展属性域的</p>
-<p>安全元素所控制其访问</p>
-<p>所有文件和端口资源和进程都具备安全标签：<strong>安全上下文（security context）</strong></p>
-<p><strong>安全上下文有五个元素组成：</strong></p>
-<p><strong>user:role:type:sensitivity:category</strong></p>
-<p><strong>user_u:object_r:tmp_t:s0:c0</strong></p>
-<p><strong>user</strong>：指示登录系统的用户类型</p>
-<p><strong>role</strong>：定义文件，进程和用户的用途</p>
-<p><strong>type</strong>：指定了数据类别，type类别改变可能导致进程无法访问文件</p>
-<p><strong>sensitivity</strong>：限制访问的需要，由组织定义的分层安全级别。s0最低，Target策略默认使用s0</p>
-<p><strong>category</strong>：对于特定组织划分不分层的分类，Target策略默认不使用category</p>
-<p>其中<strong>最重要</strong>的一项为文件的<strong>type</strong>标签，如httpd进程只能在httpd_t 里运行，/etc/passwd只有type</p>
-<p>为passwd_file_t才能起作用，/var/log/messages文件如果不是var_log_t类型将无法记录日志等，</p>
-<p>在SELinux安全策略中，<strong>修改了type类型，可能导致文件无法正常使用</strong>。</p>
-<h2 id="三、SElinux相关操作："><a href="#三、SElinux相关操作：" class="headerlink" title="三、SElinux相关操作："></a><strong>三、SElinux相关操作：</strong></h2><h3 id="1-SELinux启用、禁用"><a href="#1-SELinux启用、禁用" class="headerlink" title="1.SELinux启用、禁用"></a><strong>1.SELinux启用、禁用</strong></h3><p>SElinux共有三种运行模式：</p>
-<p>SELINUX=enforcing                 启用SELinux</p>
-<p>SELINUX=disabled                   彻底禁用SELinux</p>
-<p>SELINUX=permissive               禁用，但违反SELinux策略会产生告警</p>
-<p>getenforce                        显示当前SEliunx运行模式</p>
-<p><strong>a）利用命令临时修改：</strong></p>
-<p>setenforce 0                     临时切换到permissive</p>
-<p>setenforce 1                     临时切换到enforcing</p>
-<p><strong>b）修改配置文件：</strong></p>
-<p>/etc/selinux/config</p>
-<p>/etc/sysconfig/selinux            SELINUX={disabled|enforcing|permissive}</p>
-<p>/boot/grub/grub.conf             使用selinux=0禁用SElinux</p>
-<p>注：grub.conf优先级高于/etc/selinux/config</p>
-<h3 id="2-修改SELinix安全标签："><a href="#2-修改SELinix安全标签：" class="headerlink" title="2.修改SELinix安全标签："></a>2.修改SELinix安全标签：</h3><p><strong>给文件重新打安全标签：</strong></p>
-<p>chcon [OPTION]… [-u USER] [-r ROLE] [-t TYPE] FILE…</p>
-<p>chcon [OPTION]… –reference=RFILE FILE…</p>
-<p>-R：递归打标；</p>
-<p><strong>恢复目录或文件默认的安全上下文：</strong></p>
-<p>restorecon [-R] /path/to/somewhere</p>
-<p><strong>SELinux端口标签：</strong></p>
-<p>semanage port -l|grep http   查看http允许使用的端口</p>
-<p>semanage port -a -t http_port_t -t tcp 9527        添加http允许使用的端口包含9527</p>
-<h3 id="3-SELinux默认数据库查询与修改"><a href="#3-SELinux默认数据库查询与修改" class="headerlink" title="3.SELinux默认数据库查询与修改"></a>3.SELinux默认数据库查询与修改</h3><p><strong>查看SELinux默认数据库：</strong></p>
-<p>semanage fcontext -l</p>
-<p><strong>查看某文件放入默认SElinux类型：</strong></p>
-<p>semanage fcontext -l | grep /path/file</p>
-<p><strong>添加到SELinux默认数据库：</strong></p>
-<p>semanage fcontext -a –t httpd_sys_content_t ‘/testdir(/.*)?’</p>
-<p>restorecon –Rv /testdir</p>
-<p><strong>从SElinux默认数据库中删除：（type类型将变回default_t）</strong></p>
-<p>semanage fcontext -d –t httpdsyscontentt ‘/testdir(/.*)?’</p>
-<h3 id="4-SELinux端口标签"><a href="#4-SELinux端口标签" class="headerlink" title="4.SELinux端口标签"></a>4.SELinux端口标签</h3><p>在SELinux安全策略中，定义了服务具体可使用的端口号，如果服务未使用对应的端口号，将会</p>
-<p>导致无法使用，semanage命令也可以用来修改这些默认端口。</p>
-<p><strong>查看端口标签：</strong></p>
-<p>semanage port –l</p>
-<p><strong>添加指定端口到指定服务：</strong></p>
-<p>semanage port -a -t port_label -p tcp|udp PORT</p>
-<p>semanage port -a -t http_port_t -p tcp 9527</p>
-<p><strong>从指定服务删除指定端口：</strong></p>
-<p>semanage port -d -t port_label -p tcp|udp PORT</p>
-<p>semanage port -d -t http_port_t -p tcp 9527</p>
-<p><strong>修改现有端口为新标签：</strong></p>
-<p>semanage port -m -t port_label -p tcp|udp PORT</p>
-<p>semanage port -m -t http_port_t -p tcp 9527</p>
-<h3 id="5-SElinux布尔值"><a href="#5-SElinux布尔值" class="headerlink" title="5.SElinux布尔值"></a>5.SElinux布尔值</h3><p><strong>布尔型规则：</strong></p>
-<p>getsebool</p>
-<p>setsebool</p>
-<p><strong>查看bool命令：</strong></p>
-<p>getsebool [-a] [boolean]</p>
-<p>semanage boolean –l</p>
-<p>semanage boolean -l –C 查看修改过的布尔值</p>
-<p><strong>设置bool值命令：</strong></p>
-<p>setsebool [-P] boolean value（on,off）               不加-P只修改内存，临时生效</p>
-<p>setsebool [-P] Boolean=value（0，1）                加-P同时修改内存和配置bool</p>
-<h3 id="6-SELinux日志管理："><a href="#6-SELinux日志管理：" class="headerlink" title="6.SELinux日志管理："></a>6.SELinux日志管理：</h3><p>将错误的信息写入/var/log/message</p>
-<p>yum install setroubleshoot（重启生效）</p>
-<p><strong>查看安全事件日志说明</strong></p>
-<p>grep setroubleshoot /var/log/messages</p>
-<p>sealert -l UUID</p>
-<p><strong>扫描并分析日志</strong></p>
-<p>sealert -a /var/log/audit/audit.log</p>
-<h3 id="7-SELinux帮助："><a href="#7-SELinux帮助：" class="headerlink" title="7.SELinux帮助："></a>7.SELinux帮助：</h3><p>yum –y install selinux-policy-devel ( centos7.2)</p>
-<p>yum –y install selinux-policy-doc （centos7.3/7.4）</p>
-<p>mandb | makewhatis</p>
-<p>man -k _selinux</p>
-<h2 id="四、操作：SELinux环境下迁移httpd服务默认目录"><a href="#四、操作：SELinux环境下迁移httpd服务默认目录" class="headerlink" title="四、操作：SELinux环境下迁移httpd服务默认目录"></a><strong>四、操作：SELinux环境下迁移httpd服务默认目录</strong></h2><p><strong>将默认目录/var/www/html迁移至/data/website/html目录</strong></p>
-<p><strong>一、创建/data/html目录：</strong></p>
-<p>mkdir   /data/html</p>
-<p><strong>二、修改httpd服务配置文件</strong></p>
-<p><strong>cat  /etc/httpd/conf/httpd.conf</strong></p>
-<p>#DocumentRoot “/var/www/html”        加上注释</p>
-<p>DocumentRoot “/data/website/html”</p>
-<p>#&lt;Directory “/var/www/html”&gt;             加上注释</p>
-<p>&lt;Directory “/data/website/html”&gt;</p>
-<p><img src="配置.png" alt="配置"></p>
-<p><strong>三、修改目录type类型：</strong></p>
-<p>semanage fcontext -l |grep /var/www/html                          查看默认目录的文件type类型</p>
-<p>chcon -R -t httpd_sys_content_t /data/website/html</p>
-<p><img src="selinux数据库.png" alt="selinux数据库"></p>
-<p><strong>或：</strong></p>
-<p><strong>修改安全上下文数据库</strong></p>
-<p>semanage fcontext -a  -t  httpd_sys_content_t   /data/html（/.*）?</p>
-<p>restorecon -R /data/html                            同步数据库type类型</p>
-
-          
+          一、SELinux介绍：SELinux(Security-Enhanced Linux) 是美国国家安全局（NSA）对于强制访问控制的实现，是
+Linux历史上最杰出的新安全子系统。NSA是在Linux社区的帮助下开发了一种访问控制体系，在
+这种访问控制体系的限制下，进程只能访问那些在他的任务中所需
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/15/SELinux简介/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -3628,373 +1792,23 @@
       
         
           
-            <h2 id="一、基本网络配置："><a href="#一、基本网络配置：" class="headerlink" title="一、基本网络配置："></a><strong>一、基本网络配置：</strong></h2><p>将Linux主机接入网络，需要配置网络相关设置</p>
-<p>一般包括以下内容：</p>
-<p>主机名</p>
-<p>IP/netmask</p>
-<p>路由：默认网关</p>
-<p>DNS服务器：</p>
-<p>主DNS服务器</p>
-<p>次DNS服务器</p>
-<h3 id="网络配置文件："><a href="#网络配置文件：" class="headerlink" title="网络配置文件："></a><strong>网络配置文件：</strong></h3><p>IP、MASK、GW、DNS相关配置文件：/etc/sysconfig/networkscripts/ifcfg-IFACE：</p>
-<p>DEVICE=eth0                   针对网卡名称（必须有）</p>
-<p>ONTBOOT=yes                 yes表示开机自动启动网卡，默认yes</p>
-<p>BOOTPROTO=dhcp         自动获取，生产中一般改为手动配置static|none（必须有）</p>
-<p>IPADDR=172.20.0.6        设置IP（必须有）</p>
-<p>NETMASK=255.255.0.0  传统方式配置掩码（必须有）</p>
-<p>PREFIX=16                CIDR法设置掩码（必须有）</p>
-<p>DEFROUTE=yes            是否将此配置的网关设为默认路由</p>
-<p>GATEWAY=172.20.0.1    设置网关</p>
-<p>DNS1=114.114.114.114 设置DNS1</p>
-<p>DNS2=8.8.8.8          设置DNS2</p>
-<p>TYPE                          接口类型，常见有Ethernet，Bridge</p>
-<p>UUID                         设备唯一表示</p>
-<p>路由相关的配置文件：/etc/sysconfig/network-scripts/route-IFACE</p>
-<p>注意：需service network restart生效</p>
-<p><strong>两种风格：</strong></p>
-<p>(1) TARGET via GW</p>
-<p>如：10.0.0.0/8 via 172.16.0.1</p>
-<p>(2) 每三行定义一条路由</p>
-<p>​         ADDRESS#=TARGET</p>
-<p>​         NETMASK#=mask</p>
-<p>​         GATEWAY#=GW</p>
-<h3 id="网络配置方式："><a href="#网络配置方式：" class="headerlink" title="网络配置方式："></a>网络配置方式：</h3><p><strong>静态指定：</strong></p>
-<p>ifconfig，route，netstat</p>
-<p>ip：object{link，addr，route}，ss，tc</p>
-<p>system-config-network-tui，setup      图形工具</p>
-<p>直接修改配置文件</p>
-<p><strong>动态分配：</strong></p>
-<p>DHCP： Dynamic Host Configuration Protocol</p>
-<h2 id="二、主机、网卡名称管理"><a href="#二、主机、网卡名称管理" class="headerlink" title="二、主机、网卡名称管理"></a><strong>二、主机、网卡名称管理</strong></h2><p><strong>CentOS6网卡名称</strong></p>
-<p>接口命名方式：</p>
-<p>以太网：eth[0,1,2…]</p>
-<p>ppp：ppp[0,1,2…]</p>
-<p>网络接口识别并命名相关的udev配置文件：</p>
-<p>/etc/udev/rules.d/70-persistent-net.rules</p>
-<p><strong>查看网卡：</strong></p>
-<p>dmesg |grep –i eth</p>
-<p>ethtool -i eth0</p>
-<p><strong>卸载网卡驱动：</strong></p>
-<p>modprobe -r e1000</p>
-<p>rmmod e1000</p>
-<p><strong>装载网卡驱动：</strong></p>
-<p>modprobe e1000</p>
-<h3 id="修改主机名："><a href="#修改主机名：" class="headerlink" title="修改主机名："></a>修改主机名：</h3><p>hostname [NEWNAME] 临时生效，重启恢复</p>
-<p>永久生效：</p>
-<p><strong>CentOS6：</strong></p>
-<p>修改/etc/sysconfig/network</p>
-<p><strong>CentOS7：</strong></p>
-<p>修改/etc/hostname</p>
-<p>或：hostnamectl set-hostname [NEWNAME]</p>
-<p>hostname [NEWNAME] 使配置文件生效</p>
-<h3 id="修改CentOS7网卡命名为传统命名方式，实现自动化运维"><a href="#修改CentOS7网卡命名为传统命名方式，实现自动化运维" class="headerlink" title="修改CentOS7网卡命名为传统命名方式，实现自动化运维"></a>修改CentOS7网卡命名为传统命名方式，实现自动化运维</h3><p>(1) 编辑/etc/default/grub配置文件</p>
-<p>GRUB_CMDLINE_LINUX=”rhgb quiet net.ifnames=0″</p>
-<p>或：修改/boot/grub2/grub.cfg   linux 16 行尾添加 net.ifnames=0</p>
-<p>(2) 为grub2生成其配置文件</p>
-<p>grub2-mkconfig -o /etc/grub2.cfg</p>
-<p>(3) 重启系统</p>
-<h3 id="修改本地解析器："><a href="#修改本地解析器：" class="headerlink" title="修改本地解析器："></a>修改本地解析器：</h3><p>/etc/hosts</p>
-<p>本地主机名数据库和IP地址的映像</p>
-<p>对小型独立网络有用</p>
-<p>通常，在使用DNS前检查</p>
-<p><strong>一般建议在127.0.0.1的行尾加上本机的hostname</strong></p>
-<p>注：如果hostname发生更改，一定要记得同时更改/etc/hosts里的原添加内容</p>
-<p>搭建网站也建议将网站地址与网页名称对应写入到/etc/hosts文件中，避免解析出错</p>
-<p><strong>设置DNS：</strong></p>
-<p>/etc/resolv.conf</p>
-<p>nameserver DNS_SERVER_IP1</p>
-<p>nameserver DNS_SERVER_IP2</p>
-<p>nameserver DNS_SERVER_IP3</p>
-<h2 id="三、网卡别名"><a href="#三、网卡别名" class="headerlink" title="三、网卡别名"></a><strong>三、网卡别名</strong></h2><p>对虚拟环境有用，可将多个IP地址绑定到一个网卡上</p>
-<p>eth0：1、eth0：2、eth0：3</p>
-<p><strong>ifconfig命令：</strong></p>
-<p>ifconfig eth0:0 192.168.1.100/24 up</p>
-<p>ifconfig eth0:0 down</p>
-<p><strong>ip命令：</strong></p>
-<p>ip addr add 172.16.1.2/16 dev eth0</p>
-<p>ip addr add 172.16.1.1/16 dev eth0 label eth0:0</p>
-<p>ip addr add 172.16.1.2/16 dev eth0 label eth0:0</p>
-<p>ip addr del 172.16.1.1/16 dev eth0 label eth0:0</p>
-<p>ip addr flush dev eth0 label eth0:0</p>
-<p><strong>为别名设备添加配置文件，永久生效</strong></p>
-<p>（1）service NetworkManager stop      关闭图形界面网络管理</p>
-<p>（2）ifctg-ethX：xxx</p>
-<p>（3）必须使用静态IP配置</p>
-<p>DEVICE=eth0：0</p>
-<p>IPADDR=10.10.10.10</p>
-<p>NETMASK=255.0.0.0</p>
-<p>ONPARENT=yes</p>
-<p>（4）最后重启网络服务</p>
-<p>service network restart</p>
-<h2 id="四、网络接口配置bonding"><a href="#四、网络接口配置bonding" class="headerlink" title="四、网络接口配置bonding"></a><strong>四、网络接口配置bonding</strong></h2><p><strong>Bonding</strong>是将多个网卡绑定同一IP地址对外提供服务，可以实现高可用或者负载均衡。直接给两块网卡</p>
-<p>设置同一IP地址是不可以的。通过bonding，虚拟一块网卡对外提供链接，物理网卡被修改为相同的MAC</p>
-<p>地址</p>
-<p><strong>Bonding工作模式：</strong></p>
-<p><strong>Mode 0 (balance-rr)</strong></p>
-<p>轮转（Round-robin）策略：从头到尾顺序的在每个slave接口上发送数据包。提供负载均衡和容错的能力</p>
-<p><strong>Mode 1 (active-backup)</strong></p>
-<p>活动-备份（主备）策略：只有一个slave被激活，当且仅当活动的slave接口失败时才会激活其他slave。</p>
-<p>为了避免交换机发生混乱此时绑定的MAC地址只有一个外部端口上可见</p>
-<p><strong>Mode 3 (broadcast)</strong></p>
-<p>广播策略：在所有的slave接口上传送所有的报文,提供容错能力</p>
-<p>查看bond0主备状态：/proc/net/bonding/bond0</p>
-<p>创建bonding设备的配置文件</p>
-<p>/etc/sysconfig/network-scripts/ifcfg-bond0</p>
-<p>DEVICE=bond0</p>
-<p>BOOTPROTO=none</p>
-<p>BONDING_OPTS= “miimon=100 mode=0”</p>
-<p>/etc/sysconfig/network-scripts/ifcfg-eth0</p>
-<p>DEVICE=eth0</p>
-<p>BOOTPROTO=none</p>
-<p>MASTER=bond0</p>
-<p>SLAVE=yes</p>
-<p>USERCTL=no</p>
-<p><strong>也可使用nmcli实现bonding</strong></p>
-<p><strong>添加bonding接口</strong></p>
-<p>nmcli con add type bond con-name mybond0 ifname mybond0 mode active-backup</p>
-<p><strong>添加从属接口</strong></p>
-<p>nmcli con add type bond-slave ifname ens7 master mybond0</p>
-<p>nmcli con add type bond-slave ifname ens3 master mybond0</p>
-<p>注：如无为从属接口提供连接名，则该名称是接口名称加类型构成，要启动绑定，则必须</p>
-<p>首先启动从属接口</p>
-<p>nmcli con up bond-slave-eth0</p>
-<p>nmcli con up bond-slave-eth1</p>
-<p><strong>启动绑定</strong></p>
-<p>nmcli con up mybond0</p>
-<p><strong>取消bonding</strong></p>
-<p><strong>1.卸载驱动模块</strong></p>
-<p>lsmod                        显示所有已加载的驱动模块</p>
-<p>lsmod | grep bond</p>
-<p>ifconfig bond0 down      禁用网卡</p>
-<p>modproble -r bonding</p>
-<p><strong>2.删除和修改文件</strong></p>
-<p>rm -r ifcfg-bond0</p>
-<p>vim ifcfg-eth{0,1}</p>
-<p>service     network restart       重启网络服务</p>
-<h2 id="五、实现网络组"><a href="#五、实现网络组" class="headerlink" title="五、实现网络组"></a><strong>五、实现网络组</strong></h2><p>代替bonding的一种技术</p>
-<p><strong>网络组：将多个网卡聚合在一起的方法，从而实现冗错和提高吞吐量</strong></p>
-<p>多种方式运行：</p>
-<p><strong>broadcast</strong>                 广播模式</p>
-<p><strong>roundrobin</strong>               轮播模式</p>
-<p><strong>activebackup</strong>           主备模式</p>
-<p><strong>loadbalance</strong>              负载均衡模式</p>
-<p><strong>lacp</strong> (implements the 802.3ad Link Aggregation Control Protocol)</p>
-<p><strong>创建网络组Network Teaming（RHCE）</strong></p>
-<p>nmcli con add type team con-name team0 ifname team0 config</p>
-<p>‘{“runner”: {“name”: “loadbalance”}}’</p>
-<p>nmcli con mod team0 ipv4.addresses 192.168.1.100/24</p>
-<p>nmcli con mod team0 ipv4.method manual</p>
-<p>nmcli connection show</p>
-<p>nmcli con add con-name team0-eth1 type team-slave ifname eth1 master team0</p>
-<p>nmcli con add con-name team0-eth2 type team-slave ifname eth2 master team0</p>
-<p>nmcli con up team0</p>
-<p>nmcli con up team0-eth1</p>
-<p>nmcli con up team0-eth2</p>
-<p>nmcli connection show</p>
-<p>teamdctl team0 state</p>
-<p><strong>删除网络组：</strong></p>
-<p>第一种方法：删除network-scripts下配置文件</p>
-<p>第二种方法：nmcli connection delete team0 team0-eth1 team0-eth2</p>
-<h2 id="六、Linux网络管理常用命令："><a href="#六、Linux网络管理常用命令：" class="headerlink" title="六、Linux网络管理常用命令："></a><strong>六、Linux网络管理常用命令：</strong></h2><h3 id="ifconfig-命令-配置网络接口"><a href="#ifconfig-命令-配置网络接口" class="headerlink" title="ifconfig 命令          配置网络接口"></a><strong>ifconfig 命令          配置网络接口</strong></h3><p>-a                       查看所有接口信息</p>
-<p>interface up|down 禁用|启用接口</p>
-<p><strong>设置IP地址</strong></p>
-<p>ifconfig IFACE IP/netmask      支持两种掩码设置IP</p>
-<p>IP netmask</p>
-<p>注意：此命令执行将立即生效</p>
-<h3 id="route-命令-路由管理命令"><a href="#route-命令-路由管理命令" class="headerlink" title="route  命令                       路由管理命令"></a><strong>route  命令                       路由管理命令</strong></h3><p>-n                       查看路由表</p>
-<p><strong>添加路由：</strong></p>
-<p>route add [-net|-host] target [netmask Nm] [gw Gw] [[dev] if]    </p>
-<p>添加目标：192.168.1.3 网关：172.16.0.1到路由表</p>
-<p>route add -host 192.168.1.3 gw 172.16.0.1 dev eth0</p>
-<p>添加目标：192.168.0.0 网关：172.16.0.1到路由表</p>
-<p>route add -net 192.168.0.0 netmask 255.255.255.0 gw 172.16.0.1 dev eth0</p>
-<p>route add -net 192.168.0.0/24 gw 172.16.0.1 dev eth0</p>
-<p>添加默认路由，网关：172.16.0.1到路由表</p>
-<p>route add -net 0.0.0.0 netmask 0.0.0.0 gw 172.16.0.1</p>
-<p>route add default gw 172.16.0.1</p>
-<p><strong>删除路由：</strong></p>
-<p>route del [-net|-host] target [netmask Nm] [gw Gw] [[dev] if]</p>
-<p>配置动态路由</p>
-<p>通过首行进程获取动态路由</p>
-<p>安装quagga包</p>
-<p>支持多种路由协议：RIP（根据跳数）、OSPF（综合带宽、跳数等）和BGP</p>
-<p>命令vtysh配置</p>
-<h3 id="netstat-命令-查看网络连接，路由表，接口统计等信息"><a href="#netstat-命令-查看网络连接，路由表，接口统计等信息" class="headerlink" title="netstat   命令                   查看网络连接，路由表，接口统计等信息"></a><strong>netstat   命令                   查看网络连接，路由表，接口统计等信息</strong></h3><p><strong>option：</strong></p>
-<p>-t                       tcp协议相关</p>
-<p>-u                       udp协议相关</p>
-<p>-w                      raw socket相关</p>
-<p>-l                        处于监听状态</p>
-<p>-a                       所有状态</p>
-<p>-n                       以数字显示所有IP和端口</p>
-<p>-e                       扩展格式</p>
-<p>-p                       显示相关进程及PID</p>
-<p><strong>常用组合选项：</strong></p>
-<p>-nr                     查看路由表</p>
-<p>-nt                     查看TCP进程</p>
-<p>-ntu                   查看TCP及UDP进程</p>
-<p>-ntul                           查看处于监听状态LISTEN的服务</p>
-<p>-tul                    端口程序不进行名称解析显示</p>
-<p>-ntua                         查看所有状态的服务</p>
-<p>-ntuap                       查看哪个进程打开的此端口</p>
-<p>-ntuape                     扩展信息，包括使用用户UID</p>
-<p><strong>统计端口数据</strong></p>
-<p>-i                        查看网卡收发包信息</p>
-<p>-I=eth0                      只显示eth0网卡收发包信息等同于ifconfig -s eth0</p>
-<h3 id="ss-命令"><a href="#ss-命令" class="headerlink" title="ss 命令"></a><strong>ss 命令</strong></h3><p><strong>格式：ss [option]…[FILTER]</strong></p>
-<p>用来代替netstat的新命令，netstat通过遍历proc来获取socket信息，ss使用netlink与内核tcp_diag</p>
-<p>模块通信获取socket信息。</p>
-<p><strong>option：</strong></p>
-<p>-t                       tcp协议相关</p>
-<p>-u                       udp协议相关</p>
-<p>-w                      裸套接字相关</p>
-<p>-x                       unix sock相关</p>
-<p>-l                        listen状态的链接</p>
-<p>-a                       所有链接</p>
-<p>-n                       以数字格式显示</p>
-<p>-p                       相关的程序及PID</p>
-<p>-e                       扩展的信息</p>
-<p>-m                     内存用量</p>
-<p>-o                      计时器信息</p>
-<p><strong>TCP常见状态：</strong></p>
-<p>LISTEN                      监听</p>
-<p>ESTABLISHED           已建立的链接</p>
-<p>FIN_WAIT_1</p>
-<p>FIN_WAIT_2</p>
-<p>SYN_SENT</p>
-<p>CLOSED</p>
-<p><strong>支持EXPRESSION：</strong></p>
-<p>dport=                       目标端口</p>
-<p>sport=                       源端口</p>
-<p><strong>常用组合用法与netstat类似</strong></p>
-<p>-tan，-tanl等</p>
-<p><strong>常见用法：</strong></p>
-<p>ss -l                           显示本地打开的所有端口</p>
-<p>ss -pl                         显示每个进程具体打开的socket</p>
-<p>ss -t -a             显示所有tcp socket</p>
-<p>ss -u -a            显示所有的UDP Socekt</p>
-<p>ss -o state established ‘( dport = :ssh or sport = :ssh )’ 显示所有已建立的ssh连接</p>
-<p>ss -o state established ‘( dport = :http or sport = :http )’ 显示所有已建立的HTTP连接</p>
-<p>ss -s 列出当前socket详细信息</p>
-<h3 id="ip-命令-配置Linux网络属性"><a href="#ip-命令-配置Linux网络属性" class="headerlink" title="ip  命令    配置Linux网络属性"></a><strong>ip  命令    配置Linux网络属性</strong></h3><p><strong>格式：ip [OPTIONS] OBJECT {COMMAND|help}</strong></p>
-<p>​       OBJECT={link|addr|route}</p>
-<p><strong>网络设备配置：</strong></p>
-<p>ip link       set IFACE down|up 禁用|启用网卡</p>
-<p>ip link       show [up]                 显示数据链路层信息[仅显示处于激活状态接口]</p>
-<p><strong>ip地址设置：</strong></p>
-<p>ip addr {add|del} IP dev IFACE</p>
-<p>ip address add IP dev IFACE label ALIASIFACE              添加地址时指定网卡别名</p>
-<p>ip address add IP dev IFACE scpe{global|link|host}    指明作用域</p>
-<p>global：全局可用</p>
-<p>link：仅链接可用</p>
-<p>host：本机可用</p>
-<p>ip address flush dev IFACe  清空IP地址</p>
-<p><strong>路由管理：</strong></p>
-<p>ip r|route [show|list]                               查看路由表</p>
-<p>ip route add|del TARGET via GW dev IFACE 添加|删除路由</p>
-<p>ip route flush dev IFACE                         清空路由表</p>
-<p><strong>常用命令：</strong></p>
-<p>ip help                                                 查看ip命令使用帮助</p>
-<p>ip link                                                   查看数据链路层信息</p>
-<p>ip link set eth1 up|down                          设置eth1网卡启用|禁用</p>
-<p>ip address|a                                       查看网卡信息</p>
-<p>ip route|r                                            查看路由信息</p>
-<p>ip route add|del IP/24 via gateway                添加路由</p>
-<p>ip address add 2.2.2.2/24 dev eth0                添加IP地址</p>
-<p>ip address add 2.2.2.2/24 dev eth0 label eth0：2添加别名网卡IP地址</p>
-<p>ip address flush dev eth0                         清空eth0网卡上所有ip地址</p>
-<h3 id="nmcli-管理网络管理器的命令行工具"><a href="#nmcli-管理网络管理器的命令行工具" class="headerlink" title="nmcli                 管理网络管理器的命令行工具"></a><strong>nmcli                 管理网络管理器的命令行工具</strong></h3><p><strong>格式：nmcli [OPTIONS] OBJECT COMMAND</strong></p>
-<p><strong>OBJECT：</strong></p>
-<p>device                       显示和管理网络接口</p>
-<p>connection|con               管理网络连接</p>
-<p><strong>修改IP地址等属性：</strong></p>
-<p>nmcli connection modify IFACE [+|-]setting.property value</p>
-<p>setting.property：</p>
-<p>ipv4.addresses</p>
-<p>ipv4.gateway</p>
-<p>ipv4.dns1</p>
-<p>ipv4.method manual | auto</p>
-<p><strong>修改配置文件执行生效：</strong></p>
-<p>systemctl restart network</p>
-<p>nmcli con reload</p>
-<p>设备即网络接口，连接是对网络接口的配置。一个网络接口可有多个连接配置，</p>
-<p>但同时只有一个连接配置生效</p>
-<p><strong>使连接配置生效|失效：</strong></p>
-<p>nmcli con up|down eth0</p>
-<p><strong>显示所有包括不活动连接</strong></p>
-<p>nmcli con show</p>
-<p><strong>显示所有活动连接</strong></p>
-<p>nmcli con show –active</p>
-<p><strong>显示网络连接配置</strong></p>
-<p>nmcli con show “System eth0“</p>
-<p><strong>显示设备状态</strong></p>
-<p>nmcli dev status</p>
-<p><strong>显示网络接口属性</strong></p>
-<p>nmcli dev show eth0</p>
-<p><strong>创建新连接default，IP自动通过dhcp获取</strong></p>
-<p>nmcli con add con-name default type Ethernet ifname eth0</p>
-<p><strong>删除连接</strong></p>
-<p>nmcli con del default</p>
-<p><strong>创建新连接static ，指定静态IP，不自动连接</strong></p>
-<p>nmcti con add con-name static ifname eth0 autoconnect no type</p>
-<p>Ethernet ipv4.addresses 172.25.X.10/24 ipv4.gateway 172.25.X.254</p>
-<p><strong>启用static连接配置</strong></p>
-<p>nmcli con up static</p>
-<p><strong>启用default连接配置</strong></p>
-<p>nmcli con up default</p>
-<p><strong>查看帮助</strong></p>
-<p>nmcli con add help</p>
-<p><strong>修改连接设置</strong></p>
-<p>nmcli con mod“static” connection.autoconnect no</p>
-<p>nmcli con mod “static” ipv4.dns 172.25.X.254</p>
-<p>nmcli con mod “static” +ipv4.dns 8.8.8.8</p>
-<p>nmcli con mod “static” -ipv4.dns 8.8.8.8</p>
-<p>nmcli con mod “static” ipv4.addresses “172.25.X.10/24 172.25.X.254”</p>
-<p>nmcli con mod “static” +ipv4.addresses 10.10.10.10/16</p>
-<p><strong>DNS设置，存放在/etc/resolv.conf文件中</strong></p>
-<p>PEERDNS=no 表示当IP通过dhcp自动获取时，dns仍是手动设置，不自动获取。等价于下</p>
-<p>面命令：</p>
-<p>nmcli con mod “system eth0” ipv4.ignore-auto-dns yes</p>
-<p><strong>修改连接配置后，需要重新加载配置</strong>：</p>
-<p>nmcli con reload</p>
-<p>nmcli con down “system eth0” 可被自动激活</p>
-<p>nmcli con up “system eth0”</p>
-<p>nmcli dev dis eth0 禁用网卡，访止被自动激活</p>
-<p><strong>图形工具</strong></p>
-<p>nm-connection-editor</p>
-<p><strong>字符工具</strong></p>
-<p>nmtui</p>
-<p>nmtui-connect</p>
-<p>nmtui-edit</p>
-<p>nmtui-hostname</p>
-<h3 id="测试网络"><a href="#测试网络" class="headerlink" title="测试网络"></a><strong>测试网络</strong></h3><p>在命令行下测试网络的连通性</p>
-<p><strong>显示主机名</strong></p>
-<p>hostname</p>
-<p><strong>测试网络连通性</strong></p>
-<p>ping</p>
-<p>mtr</p>
-<p><strong>显示正确的路由表</strong></p>
-<p>ip route</p>
-<p><strong>确定名称服务器使用：</strong></p>
-<p>nslookup</p>
-<p>host</p>
-<p>dig</p>
-<p><strong>跟踪路由</strong></p>
-<p>traceroute</p>
-<p>tracepath</p>
-<h3 id="网络客户端工具"><a href="#网络客户端工具" class="headerlink" title="网络客户端工具"></a><strong>网络客户端工具</strong></h3><p>ftp，lftp：子命令：get、mget、ls、help</p>
-<p>ftp [-p port] [-u user[,password]] SERVER</p>
-<p>lftpget URL      直接跟URL地址下载</p>
-<p><strong>wget [option]… [URL]…</strong></p>
-<p>-q: 静默模式</p>
-<p>-c: 断点续传</p>
-<p>-P：保存在指定目录</p>
-<p>-O: 保存为指定的文件名</p>
-<p>–limit-rate=: 指定传输速率，单位K,M等，生产中最好限速</p>
-<p><strong>links URL          图形界面浏览器</strong></p>
-<p>–dump            只显示文字</p>
-<p>–source          查看网页源码</p>
-
-          
+          一、基本网络配置：将Linux主机接入网络，需要配置网络相关设置
+一般包括以下内容：
+主机名
+IP/netmask
+路由：默认网关
+DNS服务器：
+主DNS服务器
+次DNS服务器
+网络配置文件：IP、MASK、GW、DNS相关配置文件：/etc/sysconfig/networkscripts/if
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/15/Linux系统网络管理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -4155,7 +1969,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 
@@ -4202,6 +2016,8 @@
   
 
 
+  
+
 
 
 
@@ -4240,6 +2056,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -4300,6 +2121,19 @@
   
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 

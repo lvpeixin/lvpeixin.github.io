@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -93,7 +93,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Muse',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -266,9 +266,45 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
   
 </nav>
 
@@ -368,17 +404,15 @@
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/02/24/hello-world/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -518,148 +552,15 @@
       
         
           
-            <h1 id="zabbix监控系统"><a href="#zabbix监控系统" class="headerlink" title="zabbix监控系统"></a>zabbix监控系统</h1><p>zabbix（音同 zæbix）是一个基于WEB界面的提供分布式系统监视以及网络监视功能的企业级的开源解决方案。<br>zabbix能监视各种网络参数，保证服务器系统的安全运营；并提供灵活的通知机制以让系统管理员快速定位/解决存在的各种问题。<br>zabbix由2部分构成，zabbix server与可选组件zabbix agent。</p>
-<p>zabbix server：zabbix的监控服务器，负责接收agent端发送过来的数据，并做处理。端口：10051</p>
-<p>zabbix agent：安装在各个需要监控主机上，负责收集本地数据并发往server端。端口：10050</p>
-<p>zabbix server可以通过SNMP，zabbix agent，ping，端口监视等方法提供对远程服务器/网络状态的监视，数据收集等功能，它可以运行在Linux，Solaris，HP-UX，AIX，Free BSD，Open BSD，OS X等平台上。</p>
-<h2 id="监控系统具备的四种功能："><a href="#监控系统具备的四种功能：" class="headerlink" title="监控系统具备的四种功能："></a><strong>监控系统具备的四种功能</strong>：</h2><p>采集：根据用户的要求，周期性的采集数据<br>存储：对采集到的各种数据进行预约存储。<br>可视化：对采集到的数据，进行可视化。<br>报警：报警系统，在特定的条件下被触发（超出合理的区间）</p>
-<h2 id="监控数据采集通道"><a href="#监控数据采集通道" class="headerlink" title="监控数据采集通道"></a>监控数据采集通道</h2><p>SNMP：Simple Network Management Protocol<br>ssh/telnet:<br>IPMI：<br>agent:  （master/agent）</p>
-<h2 id="zabbix程序的组件："><a href="#zabbix程序的组件：" class="headerlink" title="zabbix程序的组件："></a>zabbix程序的组件：</h2><p>zabbix_server：服务端守护进程；<br>zabbix_agentd：agent守护进程；<br>zabbix_proxy：代理服务器，可选组件；<br>zabbix_get：命令行工具，手动测试向agent发起数据采集请求；<br>zabbix_sender：命令行工具，运行于agent端，手动向server端发送数据；<br>zabbix_java_gateway: java网关；<br>zabbix_database：MySQL或PostgreSQL；<br>zabbix_web：Web GUI</p>
-<p>端口号：10051</p>
-<p><a href="https://www.zabbix.com/download" target="_blank" rel="noopener">https://www.zabbix.com/download</a>  （官方下载安装地址）</p>
-<h2 id="服务端快速安装脚本"><a href="#服务端快速安装脚本" class="headerlink" title="服务端快速安装脚本"></a>服务端快速安装脚本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">#下载安装zabbix包</span><br><span class="line">wget https://repo.zabbix.com/zabbix/3.4/rhel/7/x86_64/zabbix-release-3.4-2.el7.noarch.rpm</span><br><span class="line">yum install zabbix-release-3.4-2.el7.noarch.rpm </span><br><span class="line"></span><br><span class="line">#安装zabbix </span><br><span class="line">yum install -y zabbix-server-mysql zabbix-web-mysql zabbix-agen</span><br><span class="line"></span><br><span class="line">#安装启动 mariadb数据库</span><br><span class="line">yum install -y mariadb-server httpd</span><br><span class="line">systemctl start mariadb.service</span><br><span class="line"></span><br><span class="line">#创建数据库</span><br><span class="line">mysql -e &apos;create database zabbix character set utf8 collate utf8_bin;&apos;</span><br><span class="line">mysql -e &apos;grant all privileges on zabbix.* to zabbix@192.168.2.7 identified by &quot;zabbix&quot;;&apos;</span><br><span class="line"></span><br><span class="line">#导入数据</span><br><span class="line">zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz|mysql -uzabbix -pzabbix zabbix</span><br><span class="line"></span><br><span class="line">#配置zabbixserver连接mysql</span><br><span class="line">sed -i.ori &apos;115a DBPassword=zabbix&apos; /etc/zabbix/zabbix_server.conf</span><br><span class="line"></span><br><span class="line">#添加时区</span><br><span class="line">sed -i.ori &apos;18a php_value date.timezone  Asia/Shanghai&apos; /etc/httpd/conf.d/zabbix.conf</span><br><span class="line"></span><br><span class="line">#启动服务</span><br><span class="line">systemctl start zabbix-server</span><br><span class="line">systemctl start httpd</span><br></pre></td></tr></table></figure>
-<p><a href="http://192.168.2.7/zabbix/（在浏览器上访问此路径并安装zabbix;此IP地址为zabbix主服务的IP地址）" target="_blank" rel="noopener">http://192.168.2.7/zabbix/（在浏览器上访问此路径并安装zabbix;此IP地址为zabbix主服务的IP地址）</a></p>
-<h2 id="配置zabbix功能："><a href="#配置zabbix功能：" class="headerlink" title="配置zabbix功能："></a>配置zabbix功能：</h2><p><img src="QQ%E6%88%AA%E5%9B%BE20180723160317.png" alt="·    QQ截图20180723160317"></p>
-<p><img src="QQ%E6%88%AA%E5%9B%BE20180723160617.png" alt="QQ截图20180723160617"></p>
-<p><img src="QQ%E6%88%AA%E5%9B%BE20180723160739.png" alt="QQ截图20180723160739"></p>
-<p>如果需要更改不需要重新安装，只要去修改上面的配置文件就可以了</p>
-<p><img src="QQ%E6%88%AA%E5%9B%BE20180723160809-1.png" alt="QQ截图20180723160809"></p>
-<p><strong>切换中文版：</strong></p>
-<p><img src="QQ%E6%88%AA%E5%9B%BE20180723162919.png" alt="QQ截图20180723162919"></p>
-<p><img src="QQ%E6%88%AA%E5%9B%BE20180723162956.png" alt="QQ截图20180723162956"></p>
-<p>updata 应用即可。</p>
-<p><strong>监控一个独立的主机(zabbix-agent监控的主机)：（简单的手动添加的监控选项和参数：）</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#安装zabbix源、aliyu nYUM源</span><br><span class="line">curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo</span><br><span class="line">curl -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-6.repo</span><br><span class="line">rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm</span><br><span class="line"></span><br><span class="line"># 安装zabbix客户端</span><br><span class="line">yum install -y zabbix-agent zabbix-sender</span><br><span class="line"></span><br><span class="line">vim /etc/zabbix/zabbix_agentd.conf  （修改配置文件）</span><br><span class="line"></span><br><span class="line">Server=192.168.2.7（更改为 zabbix-server服务器的地址）97行</span><br><span class="line"></span><br><span class="line">ServerActive=192.168.2.7 （更改为 zabbix-server服务器的地址）138行</span><br><span class="line"></span><br><span class="line">Hostname=nod01   （设定本机的主机名）149行</span><br><span class="line"></span><br><span class="line">systemctl start zabbix-agent  （启动服务）</span><br><span class="line"></span><br><span class="line">ss -nult (查看端口号；10050)</span><br></pre></td></tr></table></figure>
-<p>然后再浏览器上的zabbix的主界面里添加刚才的主机：</p>
-<p>添加新的组：</p>
-<p><img src="QQ%E6%88%AA%E5%9B%BE20180723193535.png" alt="QQ截图20180723193535"></p>
-<p>添加新的主机：</p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723192918.png" alt="QQ截图20180723192918"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723194705.png" alt="QQ截图20180723194705"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723194737.png" alt="QQ截图20180723194737"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723195227.png" alt="QQ截图20180723195227"></p>
-<p><strong>创建一个新的应用级：</strong></p>
-<p><img src="QQ%E6%88%AA%E5%9B%BE20180723200643.png" alt="QQ截图20180723200643"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723200816.png" alt="QQ截图20180723200816"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723200919.png" alt="QQ截图20180723200919"></p>
-<p><strong>创建一个监控项：</strong></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723201218.png" alt="QQ截图20180723201218"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723203028.png" alt="QQ截图20180723203028"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723202741.png" alt="QQ截图20180723202741"></p>
-<p>最后点击添加就可以了。</p>
-<p>再添加一个触发器：（一个监控项可定义多个触发器来响应不同级别的警告）</p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723212229.png" alt="QQ截图20180723212229"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723213018.png" alt="QQ截图20180723213018"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723212845.png" alt="QQ截图20180723212845"></p>
-<p>查看监控的状态：</p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723205327.png" alt="QQ截图20180723205327"></p>
-<p>一旦检测中有触发器报警，就需要定义actio(动作)，来对触发器的警告做相应的处理。</p>
-<h2 id="实验：实现nginx的简单的监控和报警后的触发操作"><a href="#实验：实现nginx的简单的监控和报警后的触发操作" class="headerlink" title="实验：实现nginx的简单的监控和报警后的触发操作"></a>实验：实现nginx的简单的监控和报警后的触发操作</h2><p>在从被监测的主机上安装nginx服务，并添加新的监控项，定义新的触发器，并且定义action在触发器报警后做相应的处理。</p>
-<p>在被检测的服务器上：yum install nginx -y；（装包）nginx (启动服务)</p>
-<p>创建一个新的监控项在nod01上：</p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724111046.png" alt="QQ截图20180724111046"></p>
-<p>在创建一个新的触发器针对nginx做警告处理的</p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724111832.png" alt="QQ截图20180724111832"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724112102.png" alt="QQ截图20180724112102"></p>
-<p>添加之后查看已创建好的nginx的触发器：</p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724112331.png" alt="QQ截图20180724112331"></p>
-<p>在监测—&gt;最新数据—-&gt;nod01可以看到nginx监控现在处于正常状态。</p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724112851.png" alt="QQ截图20180724112851"></p>
-<p>如果此时将nginx服务手动暂停的化，zabbix监控就会显示已经down了。</p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724113502.png" alt="QQ截图20180724113502"></p>
-<p>在此将服务手动开启后此时监控又正常了。此时在监测—&gt;触发器;会触发一个事件。需要点击确认一下。</p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724113840.png" alt="QQ截图20180724113840"></p>
-<p>创建一个action(动作)来解决nginx触发器出现警告的故障：（首先让他远程自动重启，如果还是失败，就发送信息）</p>
-<p>配置—-&gt;动作，去创建一个action：<br><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724122052.png" alt="QQ截图20180724122052"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724122547.png" alt="QQ截图20180724122547"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724124412.png" alt="QQ截图20180724124412"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724124333.png" alt="QQ截图20180724124333"></p>
-<p>为了测试，需要在nod01上添加zabbix的管理员权限：（只为临时测试使用，生产中是危险的）</p>
-<p>visudo</p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724123948.png" alt="QQ截图20180724123948"></p>
-<p>还需要在被监测的服务器上：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/zabbix/zabbix_agentd.conf</span><br><span class="line"></span><br><span class="line">EnableRemoteCommands=1  （允许agent在本机执行命令）74行</span><br><span class="line"></span><br><span class="line">systemctl restart zabbix-agent  （重启服务让修改的agent配置文件生效）</span><br></pre></td></tr></table></figure>
-<p>最后手动将被监测的nginx服务停掉，查看是否能够自己修复。（如果有问题查自定义脚本是否写错）</p>
-<h2 id="定义媒介来实现出现警告的通过邮箱的发送：（仅在本机测试使用）"><a href="#定义媒介来实现出现警告的通过邮箱的发送：（仅在本机测试使用）" class="headerlink" title="定义媒介来实现出现警告的通过邮箱的发送：（仅在本机测试使用）"></a>定义媒介来实现出现警告的通过邮箱的发送：（仅在本机测试使用）</h2><p>在本机zabbix-server服务器上安装邮件包;yum install mailx</p>
-<p>管理——&gt;报警媒介类型  ;创建一个报警媒介</p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724145557.png" alt="QQ截图20180724145557"></p>
-<p>点击添加即可。由于是本机的邮件服务，所以只能在本机的用户之间发送。</p>
-<p>在次：管理—-&gt;用户—-&gt;admin</p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724150146.png" alt="QQ截图20180724150146"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724150513.png" alt="QQ截图20180724150513"></p>
-<p>然后添加nginx触发警报的第二步的操作：</p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724151710.png" alt="QQ截图20180724151710"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724150941.png" alt="QQ截图20180724150941"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724151203.png" alt="QQ截图20180724151203"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724151324.png" alt="QQ截图20180724151324"></p>
-<p>恢复操作也给用户发送邮件信息：</p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724153224.png" alt="QQ截图20180724153224"></p>
-<p>现在就可以实现了；当nginx执行动作里的脚本没有将nginx服务重新启动起来，就会执行第二步的操作，发送邮件给定义的用户通知消息。</p>
-<p><strong>使用脚本来创建脚本报警的方式：</strong></p>
-<p>脚本放置路径：zabbix_server.conf配置文件中AlertScriptsPath参数定义的路径下；<br>/usr/lib/zabbix/alertscripts/   （只要将脚本放在此目录下，直接调用脚本名称就可以了）</p>
-<p>zabbix 3.0之后的版本，此三个变量定义为内部宏：<br>{ALERT.SENDTO}<br>{ALERT.SUBJECT}<br>{ALERT.MESSAGE}</p>
-<p>Python报警脚本可以在互联网上查找。（安装好python的执行环境）</p>
-<p>脚本示例：给与执行权限，测试执行成功就可以。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python</span><br><span class="line">#coding:utf-8</span><br><span class="line"></span><br><span class="line">import smtplib</span><br><span class="line">from email.mime.text import MIMEText</span><br><span class="line">from email.header import Header</span><br><span class="line">from email.utils import parseaddr, formataddr</span><br><span class="line">import sys</span><br><span class="line"></span><br><span class="line">def formatAddr(s):</span><br><span class="line">name, addr = parseaddr(s)</span><br><span class="line">return formataddr((Header(name, ‘utf-8’).encode(), addr))</span><br><span class="line"></span><br><span class="line">def send_mail(to_list,subject,content):</span><br><span class="line">mail_host = ‘smtp.exmail.qq.com’  </span><br><span class="line">mail_user = ‘973366980@qq.com’</span><br><span class="line">mail_pass = ‘密码’</span><br><span class="line">\#以上内容根据你的实际情况进行修改</span><br><span class="line">msg = MIMEText(content,”,’utf-8′)</span><br><span class="line">msg[‘Subject’] = Header(subject, ‘utf-8’).encode()</span><br><span class="line">msg[‘From’] = formatAddr(‘zabbix监控 &lt;%s&gt;’ % mail_user).encode()</span><br><span class="line">msg[‘to’] = to_list</span><br><span class="line"></span><br><span class="line">try:</span><br><span class="line">s = smtplib.SMTP()</span><br><span class="line">s.connect(mail_host)</span><br><span class="line">s.login(mail_user,mail_pass)</span><br><span class="line">s.sendmail(mail_user,to_list,msg.as_string())</span><br><span class="line">s.close()</span><br><span class="line">return True</span><br><span class="line">except Exception,e:</span><br><span class="line">print str(e)</span><br><span class="line">return False</span><br><span class="line"></span><br><span class="line">if __name__ == “__main__”:</span><br><span class="line">send_mail(sys.argv[1], sys.argv[2], sys.argv[3])</span><br></pre></td></tr></table></figure>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724161431.png" alt="QQ截图20180724161431"></p>
-<p><strong>创建图形来显示数据的信息：</strong></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724162121.png" alt="QQ截图20180724162121"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724162619.png" alt="QQ截图20180724162619"></p>
-<p>定义好图形后再桌面上添加多个图形：</p>
-<p>首先创建一个聚合图：</p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724163129.png" alt="QQ截图20180724163129"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724163603.png" alt="QQ截图20180724163603"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724163948.png" alt="QQ截图20180724163948"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724164014.png" alt="QQ截图20180724164014"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724163833.png" alt="QQ截图20180724163833"></p>
-<p><strong>zabbix的宏的定义：</strong></p>
-<p>宏：macro，预设的文本替换模式；变量<br>级别：<br>全局：Administration –&gt; General –&gt; Macros<br>模板：编辑模板 –&gt; Macros<br>主机：编辑主机 –&gt; Macros   （仅对当前主机一个有效的）</p>
-<p>假如在三个级别都定义了宏，则主机级别的生效</p>
-<p>类型：<br>内建宏：{MACRO_NAME}<br>文档参考：<br><a href="https://www.zabbix.com/documentation/3.4/manual/appendix/macros/supported_by_location" target="_blank" rel="noopener">https://www.zabbix.com/documentation/3.4/manual/appendix/macros/supported_by_location</a></p>
-<p>自定义：{$MACRO_NAME}<br>命名方式：大写字母、数字和下划线；不能以数字开头</p>
-<p>1 . 设置全局宏的界面：</p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724165105.png" alt="QQ截图20180724165105"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724165458.png" alt="QQ截图20180724165458"></p>
-<p>在设置参数的时候，有关80端口的，就可以不用写80，而是用宏替换。（好处：当需要更改多处的80端口改为8080；时不需要一个个的去修改了，只需要在此处将宏的变量更改一下就可以了）</p>
-<p>2 .配置主机的宏的界面：</p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724170201.png" alt="QQ截图20180724170201"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724170324.png" alt="QQ截图20180724170324"></p>
-<p><strong>使用模板来构建监控选项：</strong></p>
-<p>示例：在已有主机上添加关于linux监控的选项；（使用模板来添加）</p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724171143.png" alt="QQ截图20180724171143"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724171218.png" alt="QQ截图20180724171218"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724171301.png" alt="QQ截图20180724171301"></p>
-<p>也可以自己创建一个新的模板然后自定义（跟配置主机一样）</p>
-<p><strong>使用网络上的脚本来构建监控 选项：</strong></p>
-<p><a href="https://share.zabbix.com/" target="_blank" rel="noopener">https://share.zabbix.com/</a>   （在此网站上可以查找所需要的模板）</p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724173020.png" alt="QQ截图20180724173020"></p>
-<p>要选择相对应的版本即可。</p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724173327.png" alt="QQ截图20180724173327"></p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724173712.png" alt="QQ截图20180724173712"></p>
-<p><img src="QQ%E6%88%AA%E5%9B%BE20180724174401.png" alt="QQ截图20180724174401"></p>
-<p>模板文件下载完成后，导入到zabbix模板库里面。就可以调用导入的模板文件了。</p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724174810.png" alt="QQ截图20180724174810"></p>
-<p>在下面搜索就可以查看了。</p>
-<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724175240.png" alt="QQ截图20180724175240"></p>
-<p>在被监控的服务器上：</p>
-<p>vim /etc/zabbix/zabbix_agentd.d/test.conf  （新建配置文件）</p>
-<p>定义一个key,然后在监控端就可以看到此key的值。</p>
-<p>UserParameter=memory.used,/usr/bin/free |/usr/bin/awk’/^Mem/{print $3}’ （内容）</p>
-<p>systemctl restart zabbix-agent   （重启服务，然后让key值生效）</p>
-<p>yum install zabbix-get -y （在服务器端下载手动测试的工具）</p>
-<p>zabbix_get -s 192.168.60.21 -p 10050 -k “memory.used”  （手动测试在服务器端）</p>
-
-          
+          zabbix监控系统zabbix（音同 zæbix）是一个基于WEB界面的提供分布式系统监视以及网络监视功能的企业级的开源解决方案。zabbix能监视各种网络参数，保证服务器系统的安全运营；并提供灵活的通知机制以让系统管理员快速定位/解决存在的各种问题。zabbix由2部分构成，zabbix ser
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/01/Zabbix监控系统详解/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -777,132 +678,22 @@
       
         
           
-            <h2 id="一、虚拟化基本概念"><a href="#一、虚拟化基本概念" class="headerlink" title="一、虚拟化基本概念"></a><strong>一、虚拟化基本概念</strong></h2><h3 id="什么是虚拟化？"><a href="#什么是虚拟化？" class="headerlink" title="什么是虚拟化？"></a><strong>什么是虚拟化？</strong></h3><p><strong>虚拟化</strong>是把物理的事物转换成为逻辑的方式表现出来</p>
-<p><strong>常见的虚拟化</strong></p>
-<p>内存虚拟化：内存页面Page File</p>
-<p>磁盘虚拟化：RAID，Volume</p>
-<p>网络虚拟化：vlan，vxlan</p>
-<p><strong>FusionSphere-x86/x64服务器的虚拟化</strong></p>
-<p>计算能力：CPU/Memory的虚拟化</p>
-<p>存储：VIMS文件系统</p>
-<p>网络：分布式虚拟交换机</p>
-<h3 id="虚拟化的优势"><a href="#虚拟化的优势" class="headerlink" title="虚拟化的优势"></a><strong>虚拟化的优势</strong></h3><p><strong>传统物流服务器</strong></p>
-<p>操作系统与物理服务器绑定</p>
-<p>1.难以迁移</p>
-<p>2.难以扩展</p>
-<p>3.空间占用高</p>
-<p>4.可靠性难以控制</p>
-<p>5.资源利用率低</p>
-<p>6.难以管理</p>
-<p><strong>虚拟化服务器</strong></p>
-<p>操作系统与物理服务器分离</p>
-<p>1.易于迁移、扩展、资源整合</p>
-<p>2.标准化的虚拟硬件</p>
-<p>3.由一系列文件组成，易于保护</p>
-<h3 id="虚拟化常见概念"><a href="#虚拟化常见概念" class="headerlink" title="虚拟化常见概念"></a><strong>虚拟化常见概念</strong></h3><p><strong>Guset OS：</strong>运行在虚拟机上的OS</p>
-<p><strong>Guset Machine：</strong>虚拟出来的虚拟机</p>
-<p><strong>Hypervisor：</strong>也叫VMM (Virtual Machine Monitor)虚拟机监控器，</p>
-<p><strong>Host OS：</strong>运行在物理机上的OS</p>
-<p><strong>Host Machine：</strong>物理机</p>
-<p><strong>模拟：</strong>emulation</p>
-<p>x86 -&gt; arm</p>
-<p>sata -&gt; scsi</p>
-<p><strong>完全虚拟化：</strong>Full Virtualization</p>
-<p>开发人员直接针对物理平台开发即可，性能能达到硬件IDE的40%</p>
-<p>CPU:</p>
-<p>BT</p>
-<p>HVM</p>
-<p><strong>半虚拟化：</strong>Para Virtualization</p>
-<p>也叫<strong>不完全虚拟化</strong>，开发人员需针对虚拟化平台开发,性能能达到硬件IDE的80%</p>
-<p><strong>建议：</strong>生产环境一般使用半虚拟化技术：简单、性能好、易迁移上云</p>
-<p><strong>IAAS**</strong>：**CloudOS上部署xen或kvm这样的虚拟机，基础架构即服务</p>
-<p><strong>PAAS**</strong>：**CloudOS上直接提供一个容器作为平台，不需要用户安装操作系统，平台即服务</p>
-<p><strong>SAAS**</strong>：**本机只需运行个浏览器，其他全交给云来解决，软件即服务</p>
-<p>以此延伸，近些年还出现了：</p>
-<p><strong>DBaas：</strong>数据库即服务</p>
-<p><strong>LBaas：</strong>负载均衡即服务</p>
-<p>……</p>
-<h2 id="二、虚拟化常见架构类型"><a href="#二、虚拟化常见架构类型" class="headerlink" title="二、虚拟化常见架构类型"></a><strong>二、虚拟化常见架构类型</strong></h2><p>根据在整个系统中的位置不同，虚拟化架构分为以下几种：</p>
-<p>1.寄居虚拟化架构</p>
-<p>2.裸金属虚拟化架构</p>
-<p>3.操作系统虚拟化架构</p>
-<p>4.混合虚拟化架构</p>
-<h3 id="一-寄居虚拟化架构"><a href="#一-寄居虚拟化架构" class="headerlink" title="(一)寄居虚拟化架构"></a><strong>(一)寄居虚拟化架构</strong></h3><p>寄居虚拟化架构指在宿主操作系统之上安装和运行虚拟化程序，依赖于宿主操作系统对设备的支持和物理</p>
-<p>资源的管理。（类似 Vmware Workstation 的程序）</p>
-<p><img src="寄居虚拟化.png" alt="寄居虚拟化"></p>
-<p><strong>优点：</strong>简单、易于实现</p>
-<p><strong>缺点：</strong>1.安装和运行应用程序依赖主机操作系统对设备的支持；</p>
-<p>2.管理开销较大，性能损耗大</p>
-<p><strong>代表产品：**</strong>VMware Workstation**</p>
-<h3 id="2-）裸金属虚拟化架构"><a href="#2-）裸金属虚拟化架构" class="headerlink" title="2**）裸金属虚拟化架构**"></a><strong>2**</strong>）裸金属虚拟化架构**</h3><p>裸金属虚拟化架构指直接在硬件上面安装虚拟化软件，再在其上安装操作系统和应用，依赖虚拟层内核和</p>
-<p>服务器控制台进行管理。</p>
-<p><img src="裸金属虚拟化.png" alt="裸金属虚拟化"></p>
-<p><strong>优点：</strong>1.虚拟机不依赖操作系统</p>
-<p>2.支持多种操作系统，多种应用</p>
-<p><strong>缺点：</strong>虚拟层内核开发难度大</p>
-<p><strong>代表产品：**</strong>WNware ESXServer、Citrix XenServer**</p>
-<h3 id="三-操作系统虚拟化架构"><a href="#三-操作系统虚拟化架构" class="headerlink" title="(三)操作系统虚拟化架构"></a><strong>(三)操作系统虚拟化架构</strong></h3><p>操作系统虚拟化架构在操作系统层面增加虚拟服务器功能。操作系统虚拟化架构把单个的操作系统划分为</p>
-<p>多个容器，使用容器管理器来进行管理。</p>
-<p>宿主操作系统负责在多个虚拟服务器（即容器）之间分配硬件资源，并且让这些服务器彼此独立。</p>
-<p><img src="操作系统虚拟化.png" alt="操作系统虚拟化"></p>
-<p><strong>优点：</strong>1.简单、易于实现</p>
-<p>2.管理开销非常低</p>
-<p><strong>缺点：</strong>隔离性查，多容器共享同一操作系统</p>
-<p><strong>代表产品：**</strong>Docker**</p>
-<h3 id="四-混合虚拟化架构"><a href="#四-混合虚拟化架构" class="headerlink" title="(四)混合虚拟化架构"></a><strong>(四)混合虚拟化架构</strong></h3><p>混合虚拟化架构将一个内核级驱动器插入到宿主操作系统内核。这个驱动器作为虚拟硬件管理器来协调虚</p>
-<p>拟机和宿主操作系统之间的硬件访问。</p>
-<p><img src="混合虚拟化.png" alt="混合虚拟化"></p>
-<p><strong>优点：</strong>1.相对于寄居虚拟化架构，没有冗余，性能高；</p>
-<p>2.可支持多种操作系统</p>
-<p><strong>缺点：</strong>需底层硬件支持虚拟化拓展功能</p>
-<p><strong>代表产品：**</strong>Redhat KVM**</p>
-<h2 id="三、Xen架构简介"><a href="#三、Xen架构简介" class="headerlink" title="三、Xen架构简介"></a><strong>三、Xen架构简介</strong></h2><p><img src="1QX45XT2UT1@E8GY7NW.png" alt="1Q~X45X(T2{UT1@E8GY{7NW"></p>
-<p><strong>Domain U**</strong>：**运行在Xen Hypervisor上的普通虚拟机</p>
-<p><strong>Domain 0**</strong>：**运行在Xen Hypervisor上的特权虚拟机。它拥有访问物理I/O资源的权限，同时和系统上运</p>
-<p>行的其他虚拟机进行交互。Domain 0必须要在其他Domain启动之前启动。</p>
-<h3 id="虚拟机复用有限的外设资源："><a href="#虚拟机复用有限的外设资源：" class="headerlink" title="虚拟机复用有限的外设资源："></a><strong>虚拟机复用有限的外设资源：</strong></h3><p>1)Hypervisor截获虚拟机对物理硬件的访问请求，然后通过软件的方式来模拟真实设备的效果；</p>
-<p>2)前端设备驱动将数据通过VMM提供的接口转发到后端驱动</p>
-<p>3)后端驱动VM的数据进行分时分通道的处理</p>
-<h2 id="四、CPU虚拟化原理介绍"><a href="#四、CPU虚拟化原理介绍" class="headerlink" title="四、CPU虚拟化原理介绍"></a><strong>四、CPU虚拟化原理介绍</strong></h2><h3 id="一-基于软件的CPU的虚拟化"><a href="#一-基于软件的CPU的虚拟化" class="headerlink" title="(一)基于软件的CPU的虚拟化"></a><strong>(一)基于软件的CPU的虚拟化</strong></h3><p>基于软件的 CPU 虚拟化，故名思议，就是通过软件的形式来模拟每一条指令。通过前面的文章我们知道常</p>
-<p>用的软件虚拟化技术有两种：优先级压缩和二进制代码翻译。这两种是通用技术，可以用在所有虚拟化类</p>
-<p>型中。我们就结合 intercept 和 virtualize 来看看 CPU 软件虚拟化是怎么做的。</p>
-<p>首先，一些必须的硬件知识要知道，X86 体系架构为了让上层的软件（操作系统、应用程序）能够访问硬</p>
-<p>件，提供了四个 CPU 特权级别，Ring 0 是最高级别，Ring 1 次之，Ring 2 更次之，Ring 3 是最低级别。</p>
-<p>一般，操作系统由于要直接访问硬件和内存，因此它的代码需要运行在最高级别 Ring 0 上，而应用程序的</p>
-<p>代码运行在最低级别 Ring 3 上，如果要访问硬件和内存，比如设备访问，写文件等，就要执行相关的系统</p>
-<p>调用，CPU 的运行级别发生从 Ring 3 到 Ring 0 的切换，当完成之后，再切换回去，我们熟悉的用户态和</p>
-<p>内核态切换的本质就来自这里。</p>
-<p>虚拟化的实现也是基于这个思想，VMM 本质上是个 Host OS，运行在 Ring 0 上，Guest OS 运行在 Ring 1</p>
-<p>上，再往上是相应层次的应用程序运行在 Ring 2 和 Ring 3 上。</p>
-<p><img src="CPU软件虚拟化-1.png" alt="CPU软件虚拟化"></p>
-<h3 id="二-基于硬件的CPU虚拟化"><a href="#二-基于硬件的CPU虚拟化" class="headerlink" title="(二)基于硬件的CPU虚拟化"></a><strong>(二)基于硬件的CPU虚拟化</strong></h3><p>上面的这种截获再模拟的纯软件的虚拟化方式，势必是性能非常低的。那怎么样提高性能呢，有一种改进</p>
-<p>的方式是修改 Guest OS 中关于特权指令的相关操作，将其改为一种函数调用的方式，让 VMM 直接执</p>
-<p>行，而不是截获和模拟，这样就能在一定程度上提高性能。</p>
-<p>但这种方式并不通用，要去改 Guest OS 的代码，只能看作是一种定制。为了能够通用，又能够提高性</p>
-<p>能，就只能从硬件上去做文章了。所以，后来，以 Intel 的 VT-x 和 AMD 的 AMD-V 为主的硬件辅助的</p>
-<p>CPU 虚拟化就被提出来（Intel VT 包括 VT-x （支持 CPU 虚拟化）、EPT（支持内存虚拟化）和 VT-</p>
-<p>d（支持 I/O 虚拟化）。</p>
-<p>CPU 硬件辅助虚拟化在 Ring 模式的基础上引入了一种新的模式，叫 VMX 模式。它包括根操作模式</p>
-<p>（VMX Root Operation）和非根操作模式（VMX Non-Root Operation）。</p>
-<p>这两种模式都有 Ring 0 – Ring 3 的特权级。所以，在描述某个应用程序时，除了描述其属于哪个特权级，</p>
-<p>还要指明其处于根模式还是非根模式。</p>
-<p>引入这种模式的好处就在于，Guest OS 运行在 Ring 0 上，就意味着它的核心指令可以直接下达到硬件层</p>
-<p>去执行，而特权指令等敏感指令的执行则是由硬件辅助，直接切换到 VMM 执行，这是自动执行的，应用</p>
-<p>程序是感知不到的，性能自然就提高了。</p>
-<p><img src="CPU硬件虚拟化-1.png" alt="CPU硬件虚拟化"></p>
-<p><strong>KVM 是一种硬件辅助的虚拟化技术，支持 Intel VT-x 和 AMD-v 技术。</strong></p>
-<h2 id="五、内存虚拟化原理介绍"><a href="#五、内存虚拟化原理介绍" class="headerlink" title="五、内存虚拟化原理介绍"></a><strong>五、内存虚拟化原理介绍</strong></h2><p>通过各种内存复用技术（<strong>零页共享、内存气泡和内存交换</strong>）与合理的调度，使主机上的虚拟机对内存的</p>
-<p>访问及时响应，减少内存复用开启情况下的虚拟机性能损耗</p>
-<p><strong>(一)零页共享</strong></p>
-<p>将主机上的多个虚拟机的零页内存在物理内存中进行合并，释放出更多的物理内存供虚拟机使用。</p>
-<p><strong>(二)内存气泡</strong></p>
-<p>Hypervisor通过内存气泡将较空闲虚拟机内存释放给内存使用率较高的虚拟机，用来提升内存利用率。</p>
-<p>内存气泡技术对虚拟机性能影响较小，但是在内存减少时，用户能感知到</p>
-<p><strong>(三)内存交换</strong></p>
-<p>当虚拟机的内存压力较大时，将虚拟机内存页交换到磁盘中从而释放内存；</p>
-<p>当虚拟机内存页交换到磁盘后，虚拟机的性能将下降比较明显</p>
+          一、虚拟化基本概念什么是虚拟化？虚拟化是把物理的事物转换成为逻辑的方式表现出来
+常见的虚拟化
+内存虚拟化：内存页面Page File
+磁盘虚拟化：RAID，Volume
+网络虚拟化：vlan，vxlan
+FusionSphere-x86/x64服务器的虚拟化
+计算能力：CPU/Memory的虚拟化
 
-          
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/27/Virtualization虚拟化技术介绍/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1020,221 +811,17 @@
       
         
           
-            <h2 id="一、tomcat介绍"><a href="#一、tomcat介绍" class="headerlink" title="一、tomcat介绍"></a><strong>一、tomcat介绍</strong></h2><p><strong>Tomcat</strong>是Apache 软件基金会（Apache Software Foundation）的Jakarta 项目中的一个核心项目，由</p>
-<p>Apache、Sun 和其他一些公司及个人共同开发而成。因为Tomcat 技术先进、性能稳定，而且免费，因而</p>
-<p>深受Java 爱好者的喜爱并得到了部分软件开发商的认可，成为目前比较流行的Web 应用服务器。</p>
-<p><strong>Tomcat</strong> 服务器是一个免费的开放源代码的Web 应用服务器，属于轻量级应用服务器，在中小型系统和并</p>
-<p>发访问用户不是很多的场合下被普遍使用，是开发和调试JSP 程序的首选。对于一个初学者来说，可以这</p>
-<p>样认为，当在一台机器上配置好Apache 服务器，可利用它响应HTML（标准通用标记语言下的一个应用）</p>
-<p>页面的访问请求。实际上Tomcat是Apache 服务器的扩展，但运行时它是独立运行的，所以当你运行</p>
-<p>tomcat 时，它实际上作为一个与Apache 独立的进程单独运行的。<strong>Apache 为HTML页面服务，而</strong></p>
-<p><strong>Tomcat 实际上运行JSP 页面和Servlet。</strong></p>
-<p><strong>官方网站：</strong><a href="http://tomcat.apache.org/" target="_blank" rel="noopener">http://tomcat.apache.org/</a></p>
-<h3 id="如何安装tomcat？"><a href="#如何安装tomcat？" class="headerlink" title="如何安装tomcat？"></a><strong>如何安装tomcat？</strong></h3><p><strong>方法一：</strong>本地yum安装(base源)</p>
-<p>systemctl start tomcat</p>
-<p>默认监听：8080，8005(管理端口)，8009</p>
-<p><img src="1-34.png" alt="1"></p>
-<p><strong>方法二：</strong>ASF官网站点下载安装</p>
-<p>官方网站下载地址：<a href="https://tomcat.apache.org/download-90.cgi" target="_blank" rel="noopener">https://tomcat.apache.org/download-90.cgi</a></p>
-<p>wget <a href="http://mirrors.hust.edu.cn/apache/tomcat/tomcat-8/v8.5.24/bin/apache-tomcat-8.5.24.tar.gz" target="_blank" rel="noopener">http://mirrors.hust.edu.cn/apache/tomcat/tomcat-8/v8.5.24/bin/apache-tomcat-8.5.24.tar.gz</a></p>
-<p>tar -zxf apache-tomcat-8.5.24.tar.gz</p>
-<p>启动tomcat</p>
-<p>./apache-tomcat-8.5.24/bin/startup.sh</p>
-<p>添加环境变量CATELINA_HOME</p>
-<p><strong>vim /etc/profile.d/</strong></p>
-<p>export CATALINA_BASE=/usr/local/tomcat</p>
-<p>export PATH=$CATALINA:$PATH</p>
-<p>服务控制由catalina脚本执行</p>
-<p>catalina.sh start</p>
-<p>此时，浏览器访问<strong>localhostIp:8080</strong>就可以看到tomcat默认界面了</p>
-<p><img src="2-31.png" alt="2"></p>
-<h2 id="二、tomcat服务配置"><a href="#二、tomcat服务配置" class="headerlink" title="二、tomcat服务配置"></a><strong>二、tomcat服务配置</strong></h2><h3 id="Tomcat的主要目录结构："><a href="#Tomcat的主要目录结构：" class="headerlink" title="Tomcat的主要目录结构："></a><strong>Tomcat的主要目录结构：</strong></h3><p><img src="3-28.png" alt="3"></p>
-<p><strong>bin：</strong>脚本，及启动时用到的类；</p>
-<p><strong>conf：</strong>配置文件目录；</p>
-<p><strong>lib：</strong>库文件，Java类库，jar；</p>
-<p><strong>logs：</strong>日志文件目录；</p>
-<p><strong>temp：</strong>临时文件目录；</p>
-<p><strong>webapps：</strong>webapp的默认目录；</p>
-<p><strong>work：</strong>工作目录，存放编译后的字节码文件；</p>
-<h3 id="Tomcat的配置文件构成："><a href="#Tomcat的配置文件构成：" class="headerlink" title="Tomcat的配置文件构成："></a><strong>Tomcat的配置文件构成：</strong></h3><p><strong>server.xml：</strong>主配置文件；</p>
-<p><strong>web.xml：</strong>每个webapp只有“部署”后才能被访问，它的部署方式通常由web.xml进行定义，其存放位置为</p>
-<p>WEB-INF/目录中；此文件为所有的webapps提供默认部署相关的配置；</p>
-<p><strong>context.xml：</strong>每个webapp都可以使用的配置文件，它通常由专用的配置文件context.xml来定义，其存</p>
-<p>放位置为WEB-INF/目录中；此文件为所有的webapps提供默认配置；</p>
-<p><strong>tomcat-users.xml：</strong>用户认证的账号和密码文件；角色（role），用户（User）；此文件在tomcat启动</p>
-<p>时被装入内存；</p>
-<p><strong>catalina.policy：</strong>当使用-security选项启动tomcat时，用于为tomcat设置安全策略；</p>
-<p><strong>catalina.properties：</strong>Java属性的定义文件，用于设定类加载器路径，以及一些与JVM调优相关参数；</p>
-<p><strong>logging.properties：</strong>日志系统相关的配置；</p>
-<p>Tomcat的核心组件：<strong>server.xml</strong></p>
-<server><br><br><service><br><br><connector><br><br><connector><br><br>…<br><br><engine><br><br><host><br><br><context><br><br><context><br><br>…<br><br></context></context></host><br><br><host><br><br>…<br><br></host><br><br>…<br><br></engine><br><br></connector></connector></service><br><br></server>
-
-
-
-
-
-<p>每一个组件都由一个Java“<strong>类</strong>”实现，这些组件大体可分为以下几个类型：</p>
-<p>顶级组件：Server</p>
-<p>服务类组件：Service</p>
-<p>连接器组件：http, https, ajp（apache jserv protocol）</p>
-<p>容器类：Engine, Host, Context</p>
-<p>被嵌套类：valve, logger, realm, loader, manager, …</p>
-<p>集群类组件：listener, cluster, …</p>
-<p>一般 web 项目路径结构</p>
-<p><img src="4-23.png" alt="4"></p>
-<p><strong>webapp</strong>归档格式：</p>
-<p>.war：webapp;</p>
-<p>.jar：EJB的类打包文件(类库)；</p>
-<p>.rar：资源适配器类打包文件；</p>
-<p>.ear：企业级webapp；</p>
-<p>…</p>
-<h3 id="部署-deploy-webapp的相关操作："><a href="#部署-deploy-webapp的相关操作：" class="headerlink" title="部署(deploy)webapp的相关操作："></a><strong>部署(deploy)webapp的相关操作：</strong></h3><p><strong>deploy：</strong>将webapp的源文件放置于目标目录(网页程序文件存放目录)，配置tomcat服务器能够基于</p>
-<p>web.xml和context.xml文件中定义的路径来访问此webapp；将其特有的类和依赖的类通过class loader装载</p>
-<p>至JVM；</p>
-<p>部署有两种方式：</p>
-<p>自动部署：auto deploy</p>
-<p>手动部署:</p>
-<p>冷部署：把webapp复制到指定的位置，而后才启动tomcat；</p>
-<p>热部署：在不停止tomcat的前提下进行部署；</p>
-<p>部署工具：manager、ant脚本、tcd(tomcat client deployer)等；</p>
-<p><strong>undeploy：</strong>拆除（反部署），停止webapp，并从tomcat实例上卸载webapp；</p>
-<p><strong>start：</strong>启动处于停止状态的webapp；</p>
-<p><strong>stop：</strong>停止webapp，不再向用户提供服务；其类依然在jvm上；</p>
-<p><strong>redeploy：</strong>重新部署；</p>
-<h3 id="Tomcat基础架构"><a href="#Tomcat基础架构" class="headerlink" title="Tomcat基础架构"></a><strong>Tomcat基础架构</strong></h3><p><img src="5-15.png" alt="5"></p>
-<p>连接器(connector)负责接收请求并传给引擎，由引擎运行jsp代码并返回给连接器</p>
-<p><strong>Server：</strong>代表整个服务器，一个server可以包含多个service</p>
-<p>一个Service可包含一个Engine，多个Connecter</p>
-<p><strong>Connector：</strong>连接器类元素，代表通信接</p>
-<p><strong>Engine：</strong>为特定的Service组件处理客户请求，要包含多个Host</p>
-<p><strong>Host：</strong>为特定的虚拟主机组件处理客户请求，可包含多个Context</p>
-<p><strong>Context：</strong>为特定的Web应用处理所有的客户请求</p>
-<h3 id="Tomcat的常用组件配置："><a href="#Tomcat的常用组件配置：" class="headerlink" title="Tomcat的常用组件配置："></a><strong>Tomcat的常用组件配置：</strong></h3><p><strong>Server</strong></p>
-<p><strong>功能：</strong>代表tomcat instance，即表现出的一个java进程；监听在8005端口，只接收“SHUTDOWN”。各</p>
-<p>server监听的端口不能相同，因此，在同一物理主机启动多个实例时，需要修改其监听端口为不同的端</p>
-<p>口；</p>
-<p>port=”-1″,</p>
-<p>shutdown=”RANDOM_CHARCTER”</p>
-<p><strong>Service</strong></p>
-<p><strong>功能：</strong>用于实现将一个或多个connector组件关联至一个engine组件；</p>
-<p>一个Server中可以有多个Service</p>
-<p><strong>Connector</strong></p>
-<p><strong>功能：</strong>负责接收请求，常见的有三类http/https/ajp；</p>
-<p>进入tomcat的请求可分为两类：</p>
-<p>(1) standalone : 请求来自于客户端浏览器；</p>
-<p>(2) 由其它的web server反代：来自前端的反代服务器；</p>
-<p>nginx –&gt; http connector –&gt; tomcat</p>
-<p>httpd(proxy_http_module) –&gt; http connector –&gt; tomcat</p>
-<p>httpd(proxy_ajp_module) –&gt; ajp connector –&gt; tomcat</p>
-<p>httpd(mod_jk) –&gt; ajp connector –&gt; tomcat</p>
-<p><strong>属性：</strong></p>
-<p>port=”8080″</p>
-<p>protocol=”HTTP/1.1″</p>
-<p>connectionTimeout=”20000″</p>
-<p>address：监听的IP地址；默认为本机所有可用地址；</p>
-<p>maxThreads：最大并发连接数，默认为200；</p>
-<p>enableLookups：是否启用DNS查询功能；</p>
-<p>acceptCount：等待队列的最大长度；</p>
-<p>secure：</p>
-<p>sslProtocol：</p>
-<p><strong>Engine</strong></p>
-<p><strong>功能：</strong>Servlet实例，即servlet引擎，其内部可以一个或多个host组件来定义站点； 通常需要通过</p>
-<p>defaultHost来定义默认的虚拟主机；</p>
-<p><strong>属性：</strong></p>
-<p>name=           #此引擎的逻辑名称，用于日志和错误消息。</p>
-<p>defaultHost=”localhost”   #默认主机名，用于标识将处理指向此服务器上主机名称但未在此配置文件中配</p>
-<p>置的请求的主机。</p>
-<p>jvmRoute=</p>
-<p><strong>Host</strong></p>
-<p><strong>功能：</strong>位于engine内部用于接收请求并进行相应处理的主机或虚拟主机</p>
-<p>Host元素表示一个虚拟主机</p>
-<host name="”localhost”" appbase="”webapps”" unpackwars="”true”" autodeploy="”true”"><br><br></host>
-
-
-
-<p>常用属性说明：</p>
-<p>name：名称；用于日志输出</p>
-<p>appBase：虚拟主机对应的应用基础路径，可以是个绝对路径, 或${CATALINA_BASE}相对路径</p>
-<p>xmlBase：虚拟主机XML基础路径,里面应该有Context xml配置文件；可以是个绝对路径, 或${CATALINA_BASE}相对路径</p>
-<p>createDirs：当appBase和xmlBase不存在时,是否创建目录；默认为true</p>
-<p>autoDeploy：是否周期性的检查appBase和xmlBase并deploy web应用和context描述符；默认为true</p>
-<p>deployIgnore：忽略deploy的正则</p>
-<p>deployOnStartup：Tomcat启动时是否自动deploy；默认为true</p>
-<p><strong>Context</strong></p>
-<p><strong>功能：</strong>Context元素表示一个Web应用程序，它在特定的虚拟主机中运行。每个Web应用程序都基于Web</p>
-<p>应用程序存档（WAR）文件，或者包含相应的解包内容的相应目录</p>
-<p><strong>常用属性说明：</strong></p>
-<p>altDDName：web.xml部署描述符路径；默认 /WEB-INF/web.xml</p>
-<p>docBase：Context的Root路径，和Host的appBase相结合, 可确定web应用的实际目录</p>
-<p>path ：web应用的context path；如果为根路径,则配置为空字符串(“”), 不能不配置</p>
-<p>privileged：是否使用Tomcat提供的manager servlet</p>
-<p>reloadable：/WEB-INF/classes/ 和/WEB-INF/lib/ 目录中class文件发生变化是否自动重新加载；默认为false</p>
-<p>swallowOutput：true情况下, System.out和System.err输出将被定向到web应用日志中；默认为false</p>
-<p><strong>Valve</strong></p>
-<valve classname="”org.apache.catalina.valves.AccessLogValve”" directory="”logs”" prefix="”localhost_access_log”" suffix="”.txt”" pattern="”%h" %l %u %t &quot;%r&quot; %s %b”>
-
-
-
-<p>Valve存在多种类型：</p>
-<p>定义访问日志：org.apache.catalina.valves.AccessLogValve</p>
-<p>定义访问控制：org.apache.catalina.valves.RemoteAddrValve</p>
-<valve classname="”org.apache.catalina.valves.RemoteAddrValve”" deny="”172\.16\.100\.67″/">
-
-
-
-<h2 id="三、实验：实现tomcat应用部署及版本控制"><a href="#三、实验：实现tomcat应用部署及版本控制" class="headerlink" title="三、实验：实现tomcat应用部署及版本控制"></a><strong>三、实验：实现tomcat应用部署及版本控制</strong></h2><h3 id="前期准备："><a href="#前期准备：" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>本节实验全部以yum安装为准,tomcat版本：<strong>tomcat-7.0.76-6.el7.noarch</strong></p>
-<p>创建一个测试类应用</p>
-<p>mkdir  -pv  /usr/share/tomcat/webapps/test/{classes,lib,WEB-INF}</p>
-<p><img src="2-32.png" alt="2"></p>
-<p><strong>tomcat端测试：</strong></p>
-<p>浏览器打开：tomcat.wxlinux.com/test/</p>
-<p><img src="3-29.png" alt="3"></p>
-<p>当应用被部署上线后，就会在<strong>/usr/share/tomcat/work/Catalina/localhost/test</strong>目录生成源码和类</p>
-<p>库文件</p>
-<p><img src="4-24.png" alt="4"></p>
-<h3 id="版本部署"><a href="#版本部署" class="headerlink" title="版本部署"></a><strong>版本部署</strong></h3><p>软连接实现部署部署</p>
-<p><img src="5-16.png" alt="5"></p>
-<p>软连接方式不支持热部署，需重启tomcat服务后才能连接成功</p>
-<p>systemctl restart tomcat</p>
-<p><img src="6-14.png" alt="6"></p>
-<p>生产环境中一般使用git来实现版本控制，可以使用一个目录名包含多个版本程序</p>
-<h2 id="四、实验：tomcat创建虚拟主机Host及Context"><a href="#四、实验：tomcat创建虚拟主机Host及Context" class="headerlink" title="四、实验：tomcat创建虚拟主机Host及Context"></a><strong>四、实验：tomcat创建虚拟主机Host及Context</strong></h2><h3 id="定义虚拟主机"><a href="#定义虚拟主机" class="headerlink" title="定义虚拟主机"></a><strong>定义虚拟主机</strong></h3><p>修改server配置文件添加一个host配置：</p>
-<p><strong>vim /etc/tomcat/server.xml</strong></p>
-<p><img src="1-36.png" alt="1"></p>
-<p>写入一个测试类应用，内容如下：</p>
-<p>mkdir /data/webapps/ROOT/{classes,lib,META-INF,WEB-INF} -pv</p>
-<p><img src="2-33.png" alt="2"></p>
-<p>为了方便访问，这里添加主机名解析到hosts文件中</p>
-<p><strong>vim /etc/hosts</strong></p>
-<p>192.168.30.18   node1.wxlinux.com</p>
-<p>浏览器访问node1.wxlinux.com:8080</p>
-<p><img src="3-30.png" alt="3"></p>
-<h3 id="自定义host日志："><a href="#自定义host日志：" class="headerlink" title="自定义host日志："></a><strong>自定义host日志：</strong></h3><p><strong>vim /etc/tomcat/server.xml</strong></p>
-<p><img src="4-25.png" alt="4"></p>
-<p>当host被访问时，后生成日志：</p>
-<p><img src="5-17.png" alt="5"></p>
-<p>创建一个context：</p>
-<p><strong>vim /etc/tomcat/server.xml</strong></p>
-<p><img src="6-15.png" alt="6"></p>
-<p>在context定义的目录中创建另外一个应用，为了方便对比，仅仅改变<strong>字体颜色</strong>：</p>
-<p><strong>测试访问：</strong></p>
-<p><img src="8-12.png" alt="8"></p>
-<h2 id="五、实验：开启tomcat管理页面"><a href="#五、实验：开启tomcat管理页面" class="headerlink" title="五、实验：开启tomcat管理页面"></a><strong>五、实验：开启tomcat管理页面</strong></h2><h3 id="前期准备：-1"><a href="#前期准备：-1" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>虚拟机一台</p>
-<p>系统版本：CentOS 7.4      IP：192.168.30.27</p>
-<h3 id="manager管理页面："><a href="#manager管理页面：" class="headerlink" title="manager管理页面："></a><strong>manager管理页面：</strong></h3><p><strong>vim /etc/tomcat/tomcat-users.xml</strong></p>
-<p><img src="1-37.png" alt="1"></p>
-<p>浏览器打开<strong>192.168.30.27:8080</strong>点击红色区域</p>
-<p><img src="2-34.png" alt="2"></p>
-<p>管理界面可进行对web的管理，如停止，开始，卸载部署等操作</p>
-<p><img src="3-31.png" alt="3"></p>
-<p>图形界面热部署WAR文件：</p>
-<p><img src="4-26.png" alt="4"></p>
-<h3 id="HostManager管理页面："><a href="#HostManager管理页面：" class="headerlink" title="HostManager管理页面："></a><strong>HostManager管理页面：</strong></h3><p><strong>vim /etc/tomcat/tomcat-users.xml</strong></p>
-<p><img src="5-18.png" alt="5"></p>
-<p><strong>测试访问：</strong></p>
-<p><img src="6-16.png" alt="6"><img src="7-14.png" alt="7"></p>
-</valve></valve>
-          
+          一、tomcat介绍Tomcat是Apache 软件基金会（Apache Software Foundation）的Jakarta 项目中的一个核心项目，由
+Apache、Sun 和其他一些公司及个人共同开发而成。因为Tomcat 技术先进、性能稳定，而且免费，因而
+深受Java 爱好者的喜爱并得到
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/24/Tomcat介绍及相关实验/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1352,371 +939,18 @@
       
         
           
-            <h2 id="一、缓存基本概念"><a href="#一、缓存基本概念" class="headerlink" title="一、缓存基本概念"></a><strong>一、缓存基本概念</strong></h2><p><strong>缓存</strong>是指把对某些请求的结果缓存下来，下次请求直接使用数据响应，这样极大的节省了系统获取源数据</p>
-<p>资源的时间，若我们把大量的请求结果都使用缓存服务器来响应，那么我们可以大大减少计算机数量减少</p>
-<p>成本。</p>
-<p><strong>数据缓存：</strong>从后端关系系数据库加载到应用服务器进行缓存，存在于数据库与服务器之间，一般是缓存</p>
-<p>SELECT语句。常用有：redis，memcached</p>
-<p><strong>页面缓存：</strong>对静态内容进行缓存，存在于调度器与WEB服务器之间，通常只是缓存GET,HEAD方法的请</p>
-<p>求。常用有：squid-cache,varinish-cache</p>
-<p><strong>缓存命中：</strong>hit，多次查询能够在缓存中找到对应项</p>
-<p>衡量缓存命中率有两种标准：</p>
-<p>字节命中率</p>
-<p>请求命中率</p>
-<p>一般来说，当缓存命中率30%以上能够带来正向作用</p>
-<p><strong>代理式缓存：</strong>页面缓存一般都是代理式缓存，要成为代理式缓存，首先它是台代理服务器</p>
-<p><strong>旁挂式缓存：</strong>数据缓存一般都是旁挂式缓存</p>
-<h3 id="页面缓存"><a href="#页面缓存" class="headerlink" title="页面缓存"></a><strong>页面缓存</strong></h3><p>squid-cache：历史悠久页面缓存系统，类似于Apache与Nginx的关系</p>
-<p>varinish-cache：轻量级页面缓存系统，但稳定性不如squid-cache</p>
-<p><strong>基于页面过期时间的缓存机制(**</strong>早期)<strong>**：</strong></p>
-<p>当客户端发起请求时，先到缓存服务器中查找有无对应的缓存，如果没有则将请求发送到后端服务器，后‘’</p>
-<p>端服务器发送响应报文并附带过期时间(expires)</p>
-<p>存在问题：</p>
-<p>(1)当后端数据发送变化时，缓存变为旧内容</p>
-<p>(2)当缓存服务器中数据过期时，有可能还会收到相同的客户端请求</p>
-<p><strong>根据条件式验证的缓存机制：</strong></p>
-<p>存在问题：</p>
-<p>粒度大，1秒，可能会出现缓存查询一致，其实内容已发生变化，得到过期内容</p>
-<p>解决方法：</p>
-<p>添加一个标签Etag，将标签与查询结果一起返回</p>
-<p>http 1.1时代：过期时间+条件式验证组合使用</p>
-<p><strong>缓存预热：</strong>通过自己下载一些网络请求来访问缓存服务器以达到最佳状态</p>
-<p>private cache：私有缓存，如浏览器缓存</p>
-<p>public cache：公共缓存，可能不止一级，如CDN,页面缓存系统</p>
-<p>一般公有缓存+私有缓存应该能到达90%的缓存命中率</p>
-<p><img src="1-22.png" alt="1"></p>
-<p>CDN：Ccontent Delivery Network内容分发系统</p>
-<p>距离判定</p>
-<p>链路状态；判定</p>
-<h2 id="二、Varnish缓存服务介绍"><a href="#二、Varnish缓存服务介绍" class="headerlink" title="二、Varnish缓存服务介绍"></a><strong>二、Varnish缓存服务介绍</strong></h2><p><strong>epel</strong>源提供，支持三类缓存：</p>
-<p><strong>内存缓存：</strong>malloc，重启后所有缓存项失效；</p>
-<p><strong>磁盘缓存：</strong>file，黑盒，重启后所有缓存项失效；</p>
-<p><strong>持久缓存：</strong>persistent(实验阶段)，黑盒，重启后所有缓存项有效</p>
-<p>默认监听端口：<strong>6081,6082</strong>(管理端口)</p>
-<p><strong>Varinish**</strong>官方架构图**</p>
-<p><img src="架构图.png" alt="架构图"></p>
-<p>varnish主要包含三个部分：</p>
-<p><strong>management：</strong>提供管理接口，并控制缓存进程的特性</p>
-<p><strong>child/cache：</strong>提供缓存功能，记录日志，访问控制，后端服务器管理</p>
-<p><strong>vcl：</strong>给child/cache提供配置文件的编译</p>
-<h3 id="Varinishd服务配置："><a href="#Varinishd服务配置：" class="headerlink" title="Varinishd服务配置："></a><strong>Varinishd服务配置：</strong></h3><p>/etc/varnish/varnish.params： 配置varnish服务进程的工作特性，例如监听的地址和端口，缓存机制；</p>
-<p>/etc/varnish/default.vcl：配置各Child/Cache线程的工作属性；</p>
-<p><strong>主程序：</strong></p>
-<p>/usr/sbin/varnishd</p>
-<p><strong>CLI interface：</strong></p>
-<p>/usr/bin/varnishadm</p>
-<p><strong>Shared Memory Log交互工具：</strong></p>
-<p>/usr/bin/varnishhist</p>
-<p>/usr/bin/varnishlog</p>
-<p>/usr/bin/varnishncsa</p>
-<p>/usr/bin/varnishstat</p>
-<p>/usr/bin/varnishtop </p>
-<p><strong>测试工具程序：</strong></p>
-<p>/usr/bin/varnishtest</p>
-<p><strong>VCL配置文件重载程序：</strong></p>
-<p>/usr/sbin/varnish_reload_vcl</p>
-<p><strong>Systemd Unit File：</strong></p>
-<p>/usr/lib/systemd/system/varnish.service   #varnish服务</p>
-<p>/usr/lib/systemd/system/varnishlog.service  #logger daemon</p>
-<p>/usr/lib/systemd/system/varnishncsa.service   #lgger daemon  in apache format</p>
-<p><img src="架构图2-1.png" alt="架构图2"></p>
-<h3 id="实验：实现varnishd-缓存基本功能"><a href="#实验：实现varnishd-缓存基本功能" class="headerlink" title="实验：实现varnishd**缓存基本功能**"></a><strong>实验：实现varnishd**</strong>缓存基本功能**</h3><p><strong>前期准备：</strong></p>
-<p>虚拟机2台</p>
-<p><strong>varinishd服务器：</strong>192.168.30.10    系统版本：CentOS 7.4</p>
-<p><strong>node1：1</strong>92.168.30.27          系统版本：CentOS 7.4</p>
-<p><strong>varinish：</strong></p>
-<p>yum install varnish</p>
-<p>systemctl start varnishd</p>
-<p>此时访问varnish的6081端口，显示连接后端失败</p>
-<p><img src="1-23.png" alt="1"></p>
-<p>配置varnish：</p>
-<p><strong>vim /etc/varnish/default.vcl</strong></p>
-<p><img src="2-20.png" alt="2"></p>
-<p>varnish_reload acl</p>
-<p><strong>node1：</strong></p>
-<p>开启WEB服务</p>
-<p>echo backend Server node1 &gt; /var/www/html/index.html</p>
-<p>此时再次访问192.168.30.10:6081，基本的varnish缓存功能就实现了</p>
-<p><img src="3-19.png" alt="3"></p>
-<h2 id="三、VCL语言与状态引擎"><a href="#三、VCL语言与状态引擎" class="headerlink" title="三、VCL语言与状态引擎"></a><strong>三、VCL语言与状态引擎</strong></h2><p><strong>相关概念：</strong></p>
-<p>”域“专有类型的配置语言；</p>
-<p><strong>state engine：</strong>状态引擎；</p>
-<p>VCL有多个状态引擎，状态之间存在相关性，但状态引擎彼此间互相隔离；每个状态引擎可使用return(x)</p>
-<p>指明关联至哪个下一级引擎；每个状态引擎对应于vcl文件中的一个配置段，即为subroutine</p>
-<p><strong>vcl_hash –&gt; return(hit) –&gt; vcl_hit</strong></p>
-<h3 id="varnish状态引擎类型："><a href="#varnish状态引擎类型：" class="headerlink" title="varnish状态引擎类型："></a><strong>varnish状态引擎类型：</strong></h3><p><strong>varnish 4.0：</strong></p>
-<p>​                  <strong>vcl_init</strong></p>
-<p>​                  <strong>vcl_recv</strong></p>
-<p>​                  <strong>vcl_hash</strong></p>
-<p>​                  <strong>vcl_hit</strong></p>
-<p>​                  <strong>vcl_pass</strong></p>
-<p>​                  <strong>vcl_miss</strong></p>
-<p>​                  <strong>vcl_pipe</strong></p>
-<p>​                  <strong>vcl_waiting</strong></p>
-<p>​                  <strong>vcl_purge</strong></p>
-<p>​                  <strong>vcl_deliver</strong></p>
-<p>​                  <strong>vcl_synth</strong></p>
-<p>​                  <strong>vcl_fini</strong></p>
-<p>​                                  </p>
-<p>​                  <strong>vcl_backend_fetch</strong></p>
-<p>​                  <strong>vcl_backend_response</strong></p>
-<p>​                  <strong>vcl_backend_error</strong></p>
-<p><img src="状态引擎.jpg" alt="状态引擎"></p>
-<p><strong>vcl_recv的默认配置：</strong></p>
-<p>sub vcl_recv {</p>
-<p>if (req.method == “PRI”) {</p>
-<p>/<em> We do not support SPDY or HTTP/2.0 </em>/</p>
-<p>return (synth(405));</p>
-<p>}</p>
-<p>if (req.method != “GET” &amp;&amp;</p>
-<p>req.method != “HEAD” &amp;&amp;</p>
-<p>req.method != “PUT” &amp;&amp;</p>
-<p>req.method != “POST” &amp;&amp;</p>
-<p>req.method != “TRACE” &amp;&amp;</p>
-<p>req.method != “OPTIONS” &amp;&amp;</p>
-<p>req.method != “DELETE”) {</p>
-<p>/<em> Non-RFC2616 or CONNECT which is weird. </em>/</p>
-<p>return (pipe);</p>
-<p>}</p>
-<p>if (req.method != “GET” &amp;&amp; req.method != “HEAD”) {</p>
-<p>/<em> We only deal with GET and HEAD by default </em>/</p>
-<p>return (pass);</p>
-<p>}</p>
-<p>if (req.http.Authorization || req.http.Cookie) {</p>
-<p>/<em> Not cacheable by default </em>/</p>
-<p>return (pass);</p>
-<p>}</p>
-<p>return (hash);</p>
-<p>}</p>
-<p>}</p>
-<p>Client Side：</p>
-<p>vcl_recv, vcl_pass, vcl_hit, vcl_miss, vcl_pipe, vcl_purge, vcl_synth, vcl_deliver</p>
-<p>vcl_recv：</p>
-<p>hash：vcl_hash</p>
-<p>pass: vcl_pass</p>
-<p>pipe: vcl_pipe</p>
-<p>synth: vcl_synth</p>
-<p>purge: vcl_hash –&gt; vcl_purge</p>
-<p>vcl_hash：</p>
-<p>lookup：</p>
-<p>hit: vcl_hit</p>
-<p>miss: vcl_miss</p>
-<p>pass, hit_for_pass: vcl_pass</p>
-<p>purge: vcl_purge</p>
-<p>Backend Side：</p>
-<p>vcl_backend_fetch, vcl_backend_response, vcl_backend_error</p>
-<p><strong>两个特殊的引擎：</strong></p>
-<p><strong>vcl_init：</strong>在处理任何请求之前要执行的vcl代码：主要用于初始化VMODs；</p>
-<p><strong>vcl_fini：</strong>所有的请求都已经结束，在vcl配置被丢弃时调用；主要用于清理VMODs；</p>
-<p> <strong>格式：</strong></p>
-<p>(1) VCL files start with vcl 4.0;</p>
-<p>(2) //, # and /<em> foo </em>/ for comments;</p>
-<p>(3) Subroutines are declared with the sub keyword; 例如sub vcl_recv { …}；</p>
-<p>(4) No loops, state-limited variables（受限于引擎的内建变量）；</p>
-<p>(5) Terminating statements with a keyword for next action as argument of the return() function, i.e.: return(action)；用于实现状态引擎转换；</p>
-<p>(6) Domain-specific;</p>
-<p><strong>Finite State Machine</strong></p>
-<p>(1) Each request is processed separately;</p>
-<p>(2) Each request is independent from others at any given time;</p>
-<p>(3) States are related, but isolated;</p>
-<p>(4) return(action); exits one state and instructs Varnish to proceed to the next state;</p>
-<p>(5) Built-in VCL code is always present and appended below your own VCL;</p>
-<p><strong>语法：</strong></p>
-<p>sub subroutine {</p>
-<p>​        …</p>
-<p>}</p>
-<p>if CONDITION {</p>
-<p>​        …</p>
-<p>} else {</p>
-<p>​        …</p>
-<p>}</p>
-<p>return(), hash_data()</p>
-<p>t-in Functions and Keywords</p>
-<p><strong>函数：</strong></p>
-<p>regsub(str, regex, sub)</p>
-<p>regsuball(str, regex, sub)</p>
-<p>ban(boolean expression)</p>
-<p>hash_data(input)</p>
-<p>synthetic(str)</p>
-<p>Keywords:</p>
-<p>call subroutine， return(action)，new，set，unset</p>
-<p><strong>操作符：</strong></p>
-<p>==, !=, ~, &gt;, &gt;=, &lt;, &lt;=</p>
-<p>逻辑操作符：&amp;&amp;, ||, !</p>
-<p>变量赋值：=</p>
-<h3 id="示例1：obj-hits是内建变量，用于保存某缓存项的从缓存中命中的次数；"><a href="#示例1：obj-hits是内建变量，用于保存某缓存项的从缓存中命中的次数；" class="headerlink" title="示例1：obj.hits是内建变量，用于保存某缓存项的从缓存中命中的次数；"></a><strong>示例1：obj.hits是内建变量，用于保存某缓存项的从缓存中命中的次数；</strong></h3><p>   if (obj.hits&gt;0) {</p>
-<p>​                set resp.http.X-Cache = “HIT via” + ” ” + server.ip;</p>
-<p>​        } else {</p>
-<p>​                set resp.http.X-Cache = “MISS from ” + server.ip;</p>
-<p>​        }</p>
-<p><strong>vim /etc/varnish/default.vcl</strong></p>
-<p><img src="判断是否命中配置.png" alt="判断是否命中配置"></p>
-<p>使用<strong>curl -I -s  http:url</strong> 可以判断是否缓存命中</p>
-<p><img src="缓存命中.png" alt="缓存命中"></p>
-<h3 id="示例2-：判定curl-类型的请求拒绝访问"><a href="#示例2-：判定curl-类型的请求拒绝访问" class="headerlink" title="示例2**：判定curl**类型的请求拒绝访问"></a><strong>示例2**</strong>：判定curl<strong>**类型的请求拒绝访问</strong></h3><p>修改配置文件</p>
-<p><strong>vim /etc/varnish/default.vcl</strong></p>
-<p><img src="1-24.png" alt="1"></p>
-<p>调用配置文件</p>
-<p>varnishadm -S /etc/varnish/secret -T 127.0.0.1:6082</p>
-<p><img src="lazy.png" alt="2"></p>
-<p>切换到另外一台主机进行curl测试：</p>
-<p>返回403错误状态码</p>
-<p><img src="3-20.png" alt="3"></p>
-<h3 id="示例3：判定admin相关的请求拒绝访问"><a href="#示例3：判定admin相关的请求拒绝访问" class="headerlink" title="示例3：判定admin相关的请求拒绝访问"></a><strong>示例3：判定admin相关的请求拒绝访问</strong></h3><p><strong>node1：</strong></p>
-<p>创建一个名称为admin访问目录：</p>
-<p>echo hello,world &gt; /var/www/html/admin/index.html</p>
-<p>systemctl reload httpd</p>
-<p>正常访问返回如下：</p>
-<p><img src="3-21.png" alt="3"></p>
-<p>修改配置文件：</p>
-<p><strong>vim /etc/varnish/default.vcl</strong></p>
-<p><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="1"></p>
-<p>调用配置文件</p>
-<p><img src="2-22.png" alt="2"></p>
-<p>再次访问<strong><a href="http://192.168.30.10:6081/admin/" target="_blank" rel="noopener">http://192.168.30.10:6081/admin/</a></strong></p>
-<p><img src="4-16.png" alt="4"></p>
-<h3 id="示例4：强制对某类资源请求不检查缓存"><a href="#示例4：强制对某类资源请求不检查缓存" class="headerlink" title="示例4：强制对某类资源请求不检查缓存"></a><strong>示例4：强制对某类资源请求不检查缓存</strong></h3><p><img src="示例3配置.png" alt="示例3配置"></p>
-<h3 id="示例5：对于特定类型的资源，例如公开的图片等，取消其私有标识，并强行设定其可以由varnish缓存的-时长；-定义在vcl-backend-response中；"><a href="#示例5：对于特定类型的资源，例如公开的图片等，取消其私有标识，并强行设定其可以由varnish缓存的-时长；-定义在vcl-backend-response中；" class="headerlink" title="示例5：对于特定类型的资源，例如公开的图片等，取消其私有标识，并强行设定其可以由varnish缓存的**时长； 定义在vcl_backend_response中；**"></a><strong>示例5：对于特定类型的资源，例如公开的图片等，取消其私有标识，并强行设定其可以由varnish缓存的**</strong>时长； 定义在vcl_backend_response中；**</h3><p><strong>语法格式：</strong></p>
-<p>if (beresp.http.cache-control !~ “s-maxage”) {</p>
-<p>if (bereq.url ~ “(?i).(jpg|jpeg|png|gif|css|js)$”) {</p>
-<p>​         unset beresp.http.Set-Cookie;</p>
-<p>​         set beresp.ttl = 3600s;</p>
-<p>}</p>
-<p>}</p>
-<h2 id="四、Varnish缓存修剪"><a href="#四、Varnish缓存修剪" class="headerlink" title="四、Varnish缓存修剪"></a><strong>四、Varnish缓存修剪</strong></h2><p><strong>缓存对象的修剪有两种：</strong></p>
-<p><strong>purge：</strong>指定删除某条url的缓存</p>
-<p><strong>ban：</strong>指定删除某类url的缓存</p>
-<h3 id="配置purge操作："><a href="#配置purge操作：" class="headerlink" title="配置purge操作："></a><strong>配置purge操作：</strong></h3><p>(1) 能执行purge操作</p>
-<p>​    sub vcl_purge {</p>
-<p>​        return (synth(200,”Purged”));</p>
-<p>​    }</p>
-<p>(2) 何时执行purge操作</p>
-<p>​    sub vcl_recv { </p>
-<p>​        if (req.method == “PURGE”) {</p>
-<p>​            return(purge); </p>
-<p>​        }</p>
-<p>​        …</p>
-<p>​    }</p>
-<p>​               </p>
-<p>添加此类请求的访问控制法则：</p>
-<p>acl purgers {</p>
-<p>​        “127.0.0.0”/8;</p>
-<p>​        “10.1.0.0”/16;</p>
-<p>}</p>
-<p>sub vcl_recv {</p>
-<p>​        if (req.method == “PURGE”) {</p>
-<p>​                if (!client.ip ~ purgers) {</p>
-<p>​                        return(synth(405,”Purging not allowed for ” + client.ip));</p>
-<p>​                }</p>
-<p>​                return(purge); </p>
-<p>​        }              </p>
-<p>​        …    </p>
-<p>}</p>
-<p><strong>示例：</strong></p>
-<p>修改配置：</p>
-<p><img src="1-26.png" alt="1"></p>
-<p>缓存修剪测试：</p>
-<p><img src="2-23.png" alt="2"></p>
-<p>如果担心缓存修剪被其他人操作，也可添加ACL的访问控制</p>
-<p><img src="3-22.png" alt="3"><img src="4-17.png" alt="4"></p>
-<p>当使用不再ACL范围内的主机进行访问时，返回结果如下：</p>
-<p><img src="5-11.png" alt="5"></p>
-<p>而在ACL定义范围内的主机则可正常使用PURGE修剪缓存</p>
-<p><img src="6-9.png" alt="6"></p>
-<h3 id="配置Banning操作："><a href="#配置Banning操作：" class="headerlink" title="配置Banning操作："></a><strong>配置Banning操作：</strong></h3><p>(1) varnishadm：</p>
-<p>   ban <field> <operator> <arg>   </arg></operator></field></p>
-<p>示例：</p>
-<p>   ban req.url ~ (?i)^/javascripts</p>
-<p>(2) 在配置文件中定义，使用ban()函数；</p>
-<p>示例：</p>
-<p>if (req.method == “BAN”) {</p>
-<p>​        ban(“req.http.host == ” + req.http.host + ” &amp;&amp; req.url == ” + req.url);</p>
-<p>​        # Throw a synthetic page so the request won’t go to the backend.</p>
-<p>​        return(synth(200, “Ban added”));</p>
-<p>}  </p>
-<p>curl -X BAN <a href="http://www.ilinux.io/test1.html" target="_blank" rel="noopener">http://www.ilinux.io/test1.html</a></p>
-<p>ban req.http.host==<a href="http://www.ilinux.io" target="_blank" rel="noopener">www.ilinux.io</a> &amp;&amp; req.url==/test1.html</p>
-<h2 id="五、Varnish负载均衡"><a href="#五、Varnish负载均衡" class="headerlink" title="五、Varnish负载均衡"></a><strong>五、Varnish负载均衡</strong></h2><h3 id="如何设定使用多个后端主机："><a href="#如何设定使用多个后端主机：" class="headerlink" title="如何设定使用多个后端主机："></a><strong>如何设定使用多个后端主机：</strong></h3><p>backend default {</p>
-<p>​        .host = “172.16.100.6”;</p>
-<p>​        .port = “80”;</p>
-<p>}</p>
-<p>backend appsrv {</p>
-<p>​        .host = “172.16.100.7”;</p>
-<p>​        .port = “80”;</p>
-<p>}</p>
-<p>sub vcl_recv {                       </p>
-<p>​        if (req.url ~ “(?i).php$”) {</p>
-<p>​                set req.backend_hint = appsrv;</p>
-<p>​        } else {</p>
-<p>​                set req.backend_hint = default;</p>
-<p>​        }      </p>
-<p>​       </p>
-<p>​        …</p>
-<p>}</p>
-<p>nginx: proxy_pass</p>
-<p>haproxy: use_backend</p>
-<h3 id="实验：实现varnish的负载均衡"><a href="#实验：实现varnish的负载均衡" class="headerlink" title="实验：实现varnish的负载均衡"></a><strong>实验：实现varnish的负载均衡</strong></h3><p><strong>前期准备：</strong></p>
-<p><strong>Varnish服务器：</strong>192.168.30.10    系统版本：CentOS 7.4</p>
-<p><strong>node1：</strong>192.168.30.27    系统版本：CentOS 7.4</p>
-<p><strong>node2：</strong>192.168.30.16    系统版本：CentOS 7.4</p>
-<p><strong>客户端：</strong>192.168.30.18    系统版本：CentOS 7.4</p>
-<p><strong>具体步骤：</strong></p>
-<p>修改配置文件：</p>
-<p><strong>vim /etc/varnish/default.vcl</strong></p>
-<p><img src="1-27.png" alt="1"></p>
-<p><strong>node1：</strong></p>
-<p>创建javascripts的web目录，并创建文件test1-test6，内容分别也为test1-test6</p>
-<p><strong>node2：</strong></p>
-<p>创建javascripts的web目录，并创建文件test1-test6，内容分别为node1-node6</p>
-<p><strong>客户端进行测试访问：</strong></p>
-<p>可看到轮询算法调度已生效，当第二次进行访问时，均缓存命中</p>
-<p><img src="2-24.png" alt="2"></p>
-<p><strong>也可实现基于cookie的会话粘性，及随机性算法调度方式</strong></p>
-<p>配置格式如下：</p>
-<p><img src="3-23.png" alt="3"></p>
-<h2 id="六、后端服务器健康性状态检查"><a href="#六、后端服务器健康性状态检查" class="headerlink" title="六、后端服务器健康性状态检查"></a><strong>六、后端服务器健康性状态检查</strong></h2><p><strong>.probe：定义健康状态检测方法；</strong></p>
-<p>.url：检测时要请求的URL，默认为”/”;</p>
-<p>.request：发出的具体请求；</p>
-<p>.request =</p>
-<p>“GET /.healthtest.html HTTP/1.1”</p>
-<p>“Host: <a href="http://www.magedu.com”" target="_blank" rel="noopener">www.magedu.com”</a></p>
-<p>“Connection: close”</p>
-<p>.window：基于最近的多少次检查来判断其健康状态；</p>
-<p>.threshold：最近.window中定义的这么次检查中至有.threshhold定义的次数是成功的；</p>
-<p>.interval：检测频度；</p>
-<p>.timeout：超时时长；</p>
-<p>.expected_response：期望的响应码，默认为200；</p>
-<h3 id="健康状态检测的配置方式："><a href="#健康状态检测的配置方式：" class="headerlink" title="健康状态检测的配置方式："></a><strong>健康状态检测的配置方式：</strong></h3><p>(1) probe PB_NAME  { } </p>
-<p>​             backend NAME = {       </p>
-<p>​                .probe = PB_NAME;      </p>
-<p>​                …</p>
-<p>​             }</p>
-<p>​            </p>
-<p>​        (2) backend NAME  {    </p>
-<p>​                .probe = {             </p>
-<p>​                        …                    </p>
-<p>​                }</p>
-<p>​        }</p>
-<p>设置后端的主机属性：</p>
-<p>​         backend BE_NAME {</p>
-<p>​                  …</p>
-<p>​                  .connect_timeout = 0.5s;</p>
-<p>​                  .first_byte_timeout = 20s;</p>
-<p>​                  .between_bytes_timeout = 5s;</p>
-<p>​                  .max_connections = 50;</p>
-<p>​         }</p>
-<p><strong>示例：</strong></p>
-<p><img src="1-28.png" alt="1"></p>
-<p><img src="2-25.png" alt="2"></p>
-<p>查看后端服务器健康性状态：</p>
-<p>varnishadm -S /etc/varnish/secret -T 127.0.0.1:6082</p>
-<p><img src="3-24.png" alt="3"></p>
-<p><strong>手动设定BE主机的状态：</strong></p>
-<p>sick：管理down;</p>
-<p>healthy：管理up；</p>
-<p>auto：probe auto；</p>
-
-          
+          一、缓存基本概念缓存是指把对某些请求的结果缓存下来，下次请求直接使用数据响应，这样极大的节省了系统获取源数据
+资源的时间，若我们把大量的请求结果都使用缓存服务器来响应，那么我们可以大大减少计算机数量减少
+成本。
+数据缓存：从后端关系系数据库加载到应用服务器进行缓存，存在于数据库与服务器之间，一般是缓
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/19/Varnish缓存服务介绍及相关实验/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1856,177 +1090,20 @@
       
         
           
-            <h2 id="一、HAPrxoy介绍"><a href="#一、HAPrxoy介绍" class="headerlink" title="一、HAPrxoy介绍"></a><strong>一、HAPrxoy介绍</strong></h2><p><strong>HAProxy</strong>是一个使用C语言编写的自由及开放源代码软件，其提供高可用性、负载均衡，以及基于tcp和</p>
-<p>http的应用程序代理。</p>
-<p><strong>mode http：</strong>七层反向代理，受端口数量限制</p>
-<p><strong>mode tcp：</strong>四层反向代理，不受套接字文件数量限制</p>
-<p><strong>官方网站：</strong></p>
-<p><a href="http://www.haproxy.org/" target="_blank" rel="noopener">http://www.haproxy.org</a></p>
-<p><a href="http://www.haproxy.com/" target="_blank" rel="noopener">http://www.haproxy.com</a></p>
-<p><strong>官方文档：</strong></p>
-<p><a href="http://cbonte.github.io/haproxy-dconv/" target="_blank" rel="noopener">http://cbonte.github.io/haproxy-dconv/</a></p>
-<p><strong>HAProxy</strong>特别适用于那些负载特大的web站点，这些站点通常又需要会话保持或七层处理。HAProxy运行</p>
-<p>在当前的硬件上，完全可以支持数以万计的并发连接。并且它的运行模式使得它可以很简单安全的整合进</p>
-<p>您当前的架构中， 同时可以保护你的web服务器不被暴露到网络上。</p>
-<p><strong>HAProxy</strong>实现了一种事件驱动, 单一进程模型，此模型支持非常大的并发连接数。多进程或多线程模型受</p>
-<p>内存限制 、系统调度器限制以及无处不在的锁限制，很少能处理数千并发连接。事件驱动模型因为在有更</p>
-<p>好的资源和时间管理的用户空间(User-Space) 实现所有这些任务，所以没有这些问题。此模型的弊端是，</p>
-<p>在多核系统上，这些程序通常扩展性较差。这就是为什么他们必须进行优化以 使每个CPU时间片(Cycle)做</p>
-<p>更多的工作。</p>
-<p><strong>建议：</strong>生产环境运行在单进程模型下，便于分析，排查问题</p>
-<h2 id="二、HAProxy服务配置"><a href="#二、HAProxy服务配置" class="headerlink" title="二、HAProxy服务配置"></a><strong>二、HAProxy服务配置</strong></h2><h3 id="程序环境："><a href="#程序环境：" class="headerlink" title="程序环境："></a><strong>程序环境：</strong></h3><p>主程序：/usr/sbin/haproxy</p>
-<p>主配置文件：/etc/haproxy/haproxy.cfg</p>
-<p>Unit file：/usr/lib/systemd/system/haproxy.service</p>
-<h3 id="配置段："><a href="#配置段：" class="headerlink" title="配置段："></a><strong>配置段：</strong></h3><p>​     <strong>global：</strong>全局配置段</p>
-<p>进程及安全配置相关的参数</p>
-<p>性能调整相关参数</p>
-<p>Debug参数</p>
-<p>用户列表</p>
-<p>peers</p>
-<p><strong>proxies：</strong>代理配置段</p>
-<p>defaults：为frontend, listen, backend提供默认配置；</p>
-<p>fronted：前端，相当于nginx, server {}</p>
-<p>backend：后端，相当于nginx, upstream {}</p>
-<p>listen：同时拥前端和后端</p>
-<p><strong>简单的配置示例：</strong></p>
-<p>frontend web</p>
-<p>​                        bind *:80      </p>
-<p>​                        default_backend     websrvs</p>
-<p>backend websrvs</p>
-<p>​                        balance roundrobin</p>
-<p>​                        server srv1 172.16.100.6:80 check</p>
-<p>​                        server srv2 172.16.100.7:80 check</p>
-<p><strong>global配置参数：</strong></p>
-<p>进程及安全管理：chroot, daemon，user, group, uid, gid</p>
-<p><strong>log</strong>：定义全局的syslog服务器；最多可以定义两个；</p>
-<p><strong>log <address> [len <length>] <facility> [max level [min level]]</facility></length></address></strong></p>
-<p><strong>nbproc <number></number></strong>：要启动的haproxy的进程数量；</p>
-<p><strong>ulimit-n <number></number></strong>：每个haproxy进程可打开的最大文件数；</p>
-<p>性能调整：</p>
-<p><strong>maxconn <number></number></strong>：设定每个haproxy进程所能接受的最大并发连接数；</p>
-<p>Sets the maximum per-process number of concurrent connections to <number>.</number></p>
-<p>总体的并发连接数：nbproc * maxconn</p>
-<p><strong>maxconnrate <number></number></strong>：每个进程每秒种所能创建的最大连接数量；</p>
-<p>Sets the maximum per-process number of connections per second to <number>.</number></p>
-<p><strong>maxsessrate <number></number></strong>：每个进程每秒所能创建最大会话数</p>
-<p><strong>maxsslconn <number></number></strong>:设定每个haproxy进程所能接受的ssl的最大并发连接数；</p>
-<p>Sets the maximum per-process number of concurrent SSL connections to <number>.</number></p>
-<p> <strong>spread-checks &lt;0..50, in percent&gt;</strong></p>
-<h2 id="三、实验：实现HAProxy反向代理"><a href="#三、实验：实现HAProxy反向代理" class="headerlink" title="三、实验：实现HAProxy反向代理"></a><strong>三、实验：实现HAProxy反向代理</strong></h2><h3 id="前期准备："><a href="#前期准备：" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>虚拟机4台</p>
-<p><strong>HAproxy</strong>：192.168.30.10</p>
-<p><strong>node1</strong>：192.168.30.17</p>
-<p><strong>node2</strong>：192.168.30.27</p>
-<p><strong>Client：</strong>192.168.30.16</p>
-<h3 id="具体步骤："><a href="#具体步骤：" class="headerlink" title="具体步骤："></a><strong>具体步骤：</strong></h3><p><strong>HAProxy服务器操作：</strong></p>
-<p>yum install haproxy</p>
-<p>修改配置文件</p>
-<p><strong>vim /etc/haproxy/haproxy.cfg</strong></p>
-<p>frontend main *:80</p>
-<p>​         default_backend  websrvs</p>
-<p>backend websrvs</p>
-<p>​         balance roundrobin</p>
-<p>​         server websrv1 192.168.30.17:80 check          #check 健康性检查</p>
-<p>​         server websrv2 192.168.30.27:80 check</p>
-<p><img src="1-7.png" alt="1"></p>
-<p>重启haproxy</p>
-<p>systemctl restart haproxy</p>
-<p><strong>node1，node2开启http服务</strong></p>
-<p>[root@node1 ~]# systemctl start httpd</p>
-<p>[root@node1 ~]# echo Backend Server 1 &gt; /var/www/html/index.html</p>
-<p>[root@node2 ~]# systemctl start httpd</p>
-<p>[root@node2 ~]# echo Backend Server 2 &gt; /var/www/html/index.html</p>
-<p><strong>客户端访问测试：</strong></p>
-<p><img src="2-6.png" alt="2"></p>
-<h3 id="添加权重："><a href="#添加权重：" class="headerlink" title="添加权重："></a><strong>添加权重：</strong></h3><p><strong>vim /etc/haproxy/haproxy.cfg</strong></p>
-<p>backend websrvs</p>
-<p>​    balance     roundrobin</p>
-<p>​    server  websrvs1 192.168.30.17:80 check weight 2</p>
-<p>​    server  websrvs2 192.168.30.27:80 check</p>
-<p>重启HAProxy服务网</p>
-<p>systemctl restart haproxy.service</p>
-<p>访问测试：</p>
-<p><img src="3-7.png" alt="3"></p>
-<h2 id="四、实验：实现根据url-uri算法-和客户端来源-hdr算法-进行调度"><a href="#四、实验：实现根据url-uri算法-和客户端来源-hdr算法-进行调度" class="headerlink" title="四、实验：实现根据url(uri算法)和客户端来源(hdr算法)进行调度"></a><strong>四、实验：实现根据url(uri算法)和客户端来源(hdr算法)进行调度</strong></h2><h3 id="实现uri算法"><a href="#实现uri算法" class="headerlink" title="实现uri算法"></a><strong>实现uri算法</strong></h3><p>对同一url的访问请求都调度至同一个后端服务器</p>
-<p>注意：如果HAProxy调度后端为缓存服务器，就要使用uri算法，且使用动态算法，一致性哈希</p>
-<p>实验前期准备承接实现HAProxy反向代理中的环境</p>
-<h3 id="具体步骤：-1"><a href="#具体步骤：-1" class="headerlink" title="具体步骤："></a>具体步骤：</h3><p>修改配置文件</p>
-<p><strong>vim /etc/haproxy/haproxy.cfg</strong></p>
-<p><img src="1-8.png" alt="1"></p>
-<p>重启haproxy服务</p>
-<p>systemctl restart haproxy.service</p>
-<p>在node1，node2上分别创建http页面test1–test10</p>
-<p><img src="2-7.png" alt="2"></p>
-<p>访问测试：</p>
-<p><img src="3-8.png" alt="3"></p>
-<h3 id="实现hdr算法"><a href="#实现hdr算法" class="headerlink" title="实现hdr算法"></a><strong>实现hdr算法</strong></h3><p>来自同一客户端的请求都调度至同一个后端服务器</p>
-<p>修改配置文件</p>
-<p><strong>vim /etc/haproxy/haproxy.cfg</strong></p>
-<p><img src="4-5.png" alt="4"></p>
-<p>重启haproxy服务</p>
-<p>systemctl restart haproxy.service</p>
-<p>访问测试：</p>
-<p><img src="5-3.png" alt="5"></p>
-<h2 id="五、实验：实现基于cookie的会话绑定"><a href="#五、实验：实现基于cookie的会话绑定" class="headerlink" title="五、实验：实现基于cookie的会话绑定"></a><strong>五、实验：实现基于cookie的会话绑定</strong></h2><h3 id="前期准备：-1"><a href="#前期准备：-1" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>虚拟机4台</p>
-<p><strong>HAproxy</strong>：192.168.30.10</p>
-<p><strong>node1</strong>：192.168.30.17</p>
-<p><strong>node2</strong>：192.168.30.27</p>
-<p><strong>Client：</strong>192.168.30.16</p>
-<h3 id="具体步骤：-2"><a href="#具体步骤：-2" class="headerlink" title="具体步骤："></a><strong>具体步骤：</strong></h3><p>修改配置文件</p>
-<p><strong>vim /etc/haproxy/haproxy.cfg</strong></p>
-<p><img src="1-9.png" alt="1"></p>
-<p>重启haproxy服务</p>
-<p>systemctl restart haproxy.service</p>
-<p>访问测试：</p>
-<p>重启服务前在server1与server2之间轮询调度，重启后将绑定在其中一台server中</p>
-<p><img src="2-8.png" alt="2"></p>
-<p>注意：curl命令之间访问不能绑定cookie</p>
-<h2 id="六、实验：启用HAproxy统计接口"><a href="#六、实验：启用HAproxy统计接口" class="headerlink" title="六、实验：启用HAproxy统计接口"></a><strong>六、实验：启用HAproxy统计接口</strong></h2><h3 id="统计接口启用相关的参数："><a href="#统计接口启用相关的参数：" class="headerlink" title="统计接口启用相关的参数："></a><strong>统计接口启用相关的参数：</strong></h3><p>  <strong>stats enable</strong></p>
-<p>启用统计页；基于默认的参数启用stats page；</p>
-<p>​                          – stats uri   : /haproxy?stats</p>
-<p>​                          – stats realm : “HAProxy Statistics”</p>
-<p>​                          – stats auth  : no authentication</p>
-<p>​                          – stats scope : no restriction</p>
-<p>​                                                    </p>
-<p>​    stats auth <user>:<passwd></passwd></user></p>
-<p>认证时的账号和密码，可使用多次；</p>
-<p>​     stats realm <realm></realm></p>
-<p>认证时的realm；</p>
-<p>​        stats uri <prefix></prefix></p>
-<p>自定义stats page uri</p>
-<p>​      stats refresh <delay></delay></p>
-<p>设定自动刷新时间间隔；</p>
-<p>​     stats admin { if | unless } <cond></cond></p>
-<p>启用stats page中的管理功能</p>
-<h3 id="具体步骤：-3"><a href="#具体步骤：-3" class="headerlink" title="具体步骤："></a><strong>具体步骤：</strong></h3><p>只需在frontend或者backend中添加一行</p>
-<p><strong>stats enable</strong></p>
-<p><img src="1-10.png" alt="1"></p>
-<p>重启haproxy服务</p>
-<p>systemctl restart haproxy.service</p>
-<p>浏览器访问：<strong><a href="http://192.168.30.10/haproxy?stats" target="_blank" rel="noopener">http://192.168.30.10/haproxy?stats</a></strong></p>
-<p><img src="2-9.png" alt="2"></p>
-<p>### </p>
-<h3 id="避免状态页被其他客户端访问："><a href="#避免状态页被其他客户端访问：" class="headerlink" title="避免状态页被其他客户端访问："></a><strong>避免状态页被其他客户端访问：</strong></h3><p>(1)修改状态页监听端口</p>
-<p><img src="3-9.png" alt="3"></p>
-<p>(2)修改状态页url</p>
-<p><img src="4-6.png" alt="4"></p>
-<p>(3)添加安全认证</p>
-<p><img src="5-4.png" alt="5"></p>
-<p><img src="6-3.png" alt="6"></p>
-<h3 id="启用state-page中的管理功能："><a href="#启用state-page中的管理功能：" class="headerlink" title="启用state page中的管理功能："></a><strong>启用state page中的管理功能：</strong></h3><p>可利用此功能实现脚本执行发布，网上搜索基于haproxy的发布脚本</p>
-<p><img src="7-3.png" alt="7"></p>
-<p>再次访问：</p>
-<p><img src="8-3.png" alt="8"></p>
-<h2 id="七、实验：Errorfile实现自定义错误页，状态码"><a href="#七、实验：Errorfile实现自定义错误页，状态码" class="headerlink" title="七、实验：Errorfile实现自定义错误页，状态码"></a><strong>七、实验：Errorfile实现自定义错误页，状态码</strong></h2><p>修改前端响应报文及后端请求报文头部信息</p>
-<h3 id="前端响应报文删除一个头部信息"><a href="#前端响应报文删除一个头部信息" class="headerlink" title="前端响应报文删除一个头部信息"></a><strong>前端响应报文删除一个头部信息</strong></h3><p><img src="1-12.png" alt="1"></p>
-<p>修改前的报文头部信息：</p>
-<p><img src="2-10.png" alt="2"></p>
-<p>访问测试</p>
-<p><img src="3-10.png" alt="3"></p>
-<h3 id="前端响应报文添加一个头部信息"><a href="#前端响应报文添加一个头部信息" class="headerlink" title="前端响应报文添加一个头部信息"></a><strong>前端响应报文添加一个头部信息</strong></h3><p><img src="4-8.png" alt="4"></p>
-<p>访问测试</p>
-<p><img src="5-5.png" alt="5"></p>
-
-          
+          一、HAPrxoy介绍HAProxy是一个使用C语言编写的自由及开放源代码软件，其提供高可用性、负载均衡，以及基于tcp和
+http的应用程序代理。
+mode http：七层反向代理，受端口数量限制
+mode tcp：四层反向代理，不受套接字文件数量限制
+官方网站：
+http://www.hapro
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/13/HAProxy介绍及相关实验/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2166,418 +1243,16 @@
       
         
           
-            <p>Nginx 是一个高性能的Web和反向代理服务器, 它具有有很多非常优越的特性:作为 Web 服务器：相比Apache，Nginx 使用更少的资源，支持更多的并发连接，体现更高的效率，这点使 Nginx尤其受到虚拟主机提供商的欢迎。</p>
-<h2 id="一、Nginx介绍"><a href="#一、Nginx介绍" class="headerlink" title="一、Nginx介绍"></a><strong>一、Nginx介绍</strong></h2><p><strong>Nginx</strong>：engine X ，2002年，开源，商业版</p>
-<p>Nginx是免费，开源，高性能的HTTP和反向代理服务器，邮件代理服务器，通</p>
-<p>用TCP/UDP代理服务器</p>
-<p>解决C10K问题（10K Connections）</p>
-<p>官网：<a href="http://nginx.org/" target="_blank" rel="noopener">http://nginx.org</a></p>
-<p>二次开发版：</p>
-<p>Tengine, OpenResty（章亦春）</p>
-<h3 id="特性："><a href="#特性：" class="headerlink" title="特性："></a><strong>特性：</strong></h3><p>模块化设计，较好的扩展性</p>
-<p>高可靠性</p>
-<p>支持热部署：不停机更新配置文件，升级版本，更换日志文件</p>
-<p>低内存消耗：10000个keep-alive连接模式下的非活动连接，仅需2.5M内存</p>
-<p>event-driven,aio,mmap，sendfile</p>
-<h3 id="基本功能："><a href="#基本功能：" class="headerlink" title="基本功能："></a><strong>基本功能：</strong></h3><p>静态资源的web服务器</p>
-<p>http协议反向代理服务器</p>
-<p>pop3/imap4协议反向代理服务器</p>
-<p>FastCGI(LNMP),uWSGI(python)等协议</p>
-<p>模块化（非DSO），如zip，SSL模块</p>
-<h3 id="web服务相关的功能："><a href="#web服务相关的功能：" class="headerlink" title="web服务相关的功能："></a><strong>web服务相关的功能：</strong></h3><p>虚拟主机（server）</p>
-<p>支持 keep-alive 和管道连接</p>
-<p>访问日志（支持基于日志缓冲提高其性能）</p>
-<p>url rewirte</p>
-<p>路径别名</p>
-<p>基于IP及用户的访问控制</p>
-<p>支持速率限制及并发数限制</p>
-<p>重新配置和在线升级而无须中断客户的工作进程</p>
-<p>Memcached的GET 接口</p>
-<h3 id="为什么选择Nginx？"><a href="#为什么选择Nginx？" class="headerlink" title="为什么选择Nginx？"></a>为什么选择Nginx？</h3><p>Nginx 是一个高性能的Web和反向代理服务器, 它具有有很多非常优越的特性:作为 Web 服务器：相比</p>
-<p>Apache，Nginx 使用更少的资源，支持更多的并发连接，体现更高的效率，这点使 Nginx尤其受到虚拟主</p>
-<p>机提供商的欢迎。能够支持50000个并发连接数的响应，Nginx选择了epoll作为开发模型.</p>
-<p>作为负载均衡服务器：Nginx 既可以在内部直接支持Rails 和 PHP，也可以支持作为 HTTP代理服务器 对</p>
-<p>外进行服务。Nginx 用 C 编写, 不论是系统资源开销还是 CPU 使用效率都比Perlbal 要好的多。</p>
-<p>作为邮件代理服务器: Nginx 同时也是一个非常优秀的邮件代理服务器（最早开发这个产品的目的之一也是</p>
-<p>作为邮件代理服务器），Last.fm 描述了成功并且美妙的使用经验。</p>
-<p>Nginx 安装非常的简单，配置文件 非常简洁（还能够支持perl语法），Bugs非常少的服务器:Nginx 启动特</p>
-<p>别容易，并且几乎可以做到7*24不间断运行，即使运行数个月也不需要重新启动。你还能够在 不间断服务</p>
-<p>的情况下进行软件版本的升级。</p>
-<h3 id="Nginx程序架构"><a href="#Nginx程序架构" class="headerlink" title="Nginx程序架构"></a><strong>Nginx程序架构</strong></h3><p><img src="lazy.png" alt="nginx架构"></p>
-<p><strong>Nginx程序架构：</strong></p>
-<p><strong>master/worker</strong>结构</p>
-<p>一个<strong>master</strong>进程：</p>
-<p>负载加载和分析配置文件、管理worker进程、平滑升级</p>
-<p>一个或多个<strong>worker</strong>进程</p>
-<p>处理并响应用户请求</p>
-<p>缓存相关的进程：</p>
-<p>cache loader：载入缓存对象</p>
-<p>cache manager：管理缓存对象</p>
-<h3 id="高度模块化"><a href="#高度模块化" class="headerlink" title="高度模块化"></a><strong>高度模块化</strong></h3><p>nginx高度模块化，但其模块早期不支持DSO机制；1.9.11版本支持动态装载和</p>
-<p>卸载</p>
-<p>模块分类：</p>
-<p>核心模块：core module</p>
-<p>标准模块：</p>
-<p>HTTP 模块： ngx_http_*</p>
-<p>HTTP Core modules 默认功能</p>
-<p>HTTP Optional modules 需编译时指定</p>
-<p>Mail 模块 ngx_mail_*</p>
-<p>Stream 模块 ngx_stream_*</p>
-<p>第三方模块</p>
-<h2 id="二、Nginx服务配置"><a href="#二、Nginx服务配置" class="headerlink" title="二、Nginx服务配置"></a><strong>二、Nginx服务配置</strong></h2><p>配置文件的组成部分：</p>
-<p>主配置文件：<strong>nginx.conf</strong></p>
-<p>子配置文件：<strong>include conf.d/*.conf</strong></p>
-<p>fastcgi， uwsgi，scgi等协议相关的配置文件</p>
-<p>mime.types：支持的mime类型</p>
-<p><strong>主配置文件的配置指令：</strong></p>
-<p>directive value [value2 …];</p>
-<p><strong>注意：</strong></p>
-<p>(1) 指令必须以分号结尾</p>
-<p>(2) 支持使用配置变量</p>
-<p>内建变量：由Nginx模块引入，可直接引用</p>
-<p>自定义变量：由用户使用set命令定义</p>
-<p>set variable_name value;</p>
-<p>引用变量：$variable_name</p>
-<h3 id="主配置文件结构："><a href="#主配置文件结构：" class="headerlink" title="主配置文件结构："></a><strong>主配置文件结构：</strong></h3><p>主配置文件结构：四部分组成</p>
-<p>main block：主配置段，即全局配置段，对http,mail都有效</p>
-<p>event {</p>
-<p>…</p>
-<p>}         #事件驱动相关的配置</p>
-<p>http {</p>
-<p>…</p>
-<p>}         #http/https协议相关配置段</p>
-<p>mail {</p>
-<p>…</p>
-<p>}         #mail协议相关配置段</p>
-<p>stream {</p>
-<p>…</p>
-<p>}         # stream服务器相关配置段</p>
-<h3 id="http协议相关的配置结构"><a href="#http协议相关的配置结构" class="headerlink" title="http协议相关的配置结构"></a><strong>http协议相关的配置结构</strong></h3><p><img src="http配置结构.png" alt="http配置结构"></p>
-<h2 id="三、Web服务常见功能及配置"><a href="#三、Web服务常见功能及配置" class="headerlink" title="三、Web服务常见功能及配置"></a><strong>三、Web服务常见功能及配置</strong></h2><h3 id="一-性能优化相关的配置："><a href="#一-性能优化相关的配置：" class="headerlink" title="(一)性能优化相关的配置："></a><strong>(一)性能优化相关的配置：</strong></h3><p>1、worker_processes number | auto</p>
-<p>worker进程的数量；通常应该为当前主机的cpu的物理核心数</p>
-<p>2、worker_cpu_affinity cpumask …</p>
-<p>worker_cpu_affinity auto [cpumask] 提高缓存命中率</p>
-<p>CPU MASK： 00000001：0号CPU</p>
-<p>00000010：1号CPU</p>
-<p>10000000：8号CPU</p>
-<p>worker_cpu_affinity 0001 0010 0100 1000;</p>
-<p>worker_cpu_affinity 0101 1010;</p>
-<p>3、worker_priority number</p>
-<p>指定worker进程的nice值，设定worker进程优先级：[-20,20]</p>
-<p>4、worker_rlimit_nofile number</p>
-<p>worker进程所能够打开的文件数量上限,如65535</p>
-<p><strong>示例：修改worker**</strong>进程数量**</p>
-<p><img src="1-4.png" alt="1"></p>
-<p><img src="2-4.png" alt="2"></p>
-<p><strong>示例：设置NICE**</strong>优先级**</p>
-<p><img src="3-5.png" alt="3"></p>
-<p><img src="4-3.png" alt="4"><img src="5-1.png" alt="5"></p>
-<p><strong>变为前台执行</strong></p>
-<p>daemon on|off</p>
-<p>是否以守护进程方式运行nignx，默认是守护进程方式，用于测试环境</p>
-<p><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="6"></p>
-<p>以守护方式（前台执行）运行</p>
-<p><img src="7-1.png" alt="7"></p>
-<p><strong>EVENT**</strong>语句块**</p>
-<p><strong>每个worker**</strong>支持的最大连接1024<strong>**，生成环境应适当调大</strong></p>
-<p><strong>work_connections *Cpu个数= worker_rlimit_nofile number</strong></p>
-<p> <strong><img src="8-1.png" alt="8"></strong></p>
-<p><strong>(二)虚拟主机配置</strong></p>
-<p><strong>定义一个专门存放虚拟主机的目录：</strong></p>
-<p><strong><img src="10-1.png" alt="10"></strong></p>
-<p><strong>配置一个虚拟主机</strong></p>
-<p>server {</p>
-<p>listen address[:PORT]|PORT;</p>
-<p>server_name SERVER_NAME;</p>
-<p>root /PATH/TO/DOCUMENT_ROOT;</p>
-<p>}</p>
-<p><strong>vim a.com.conf</strong></p>
-<p><strong><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="11"></strong></p>
-<p><strong>vim b.com.conf</strong></p>
-<p>server {</p>
-<p>​            listen 8080</p>
-<p>​            server_name <a href="http://www.b.com" target="_blank" rel="noopener">www.b.com</a></p>
-<p>}</p>
-<p><img src="12.png" alt="12"><img src="13.png" alt="13"></p>
-<p><strong>(三)改变默认指向：default_server</strong></p>
-<p><strong>vim c.com.conf</strong></p>
-<p><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="14"></p>
-<p>要注意将主配置文件中的defaults_server删掉，否则nginx服务将无法正常启动</p>
-<p> <strong><img src="15.png" alt="15"></strong></p>
-<p> <strong>(四)支持通配符写法</strong></p>
-<p> <strong><img src="16.png" alt="16"></strong></p>
-<p><strong><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="17"></strong></p>
-<p><strong>匹配优先级机制从高到低：</strong></p>
-<p><strong>(1)</strong> <strong>首先是字符串精确匹配</strong> <strong>如：<a href="http://www.magedu.com" target="_blank" rel="noopener">www.magedu.com</a></strong></p>
-<p><strong>(2)</strong> <strong>左侧***</strong>通配符<strong> </strong>如：*.magedu.com**</p>
-<p><strong>(3)</strong> <strong>右侧***</strong>通配符<strong> </strong>如：<a href="http://www.magedu.\**" target="_blank" rel="noopener">www.magedu.\**</a>*</p>
-<p><strong>(4)</strong> <strong>正则表达式</strong> <strong>如： ~^.*.magedu.com$</strong></p>
-<p><strong>(5) default_server</strong></p>
-<p><strong>(五)隐藏Nginx版本</strong></p>
-<p><strong>server_tokens on | off | build | string</strong></p>
-<p>是否在响应报文的Server首部显示nginx版本</p>
-<p><img src="18.png" alt="18"></p>
-<p><strong>vim /etc/nginx/conf/nginx.conf</strong></p>
-<p><img src="19.png" alt="19"></p>
-<p>再次访问</p>
-<p><img src="20.png" alt="20"></p>
-<p> <strong>(五)软连接指向</strong></p>
-<p> <strong><img src="21.png" alt="21"></strong></p>
-<p><strong><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="22"></strong></p>
-<p> <strong>(六)针对特定文件指定存放位置</strong></p>
-<p><strong>location [ = | ~ | ~* | ^~ ] uri { … }</strong></p>
-<p><strong>location @name { … }</strong></p>
-<p><strong>在一个server**</strong>中location<strong><strong>配置段可存在多个，用于实现从uri</strong></strong>到文件系统的路**</p>
-<p><strong>径映射；ngnix**</strong>会根据用户请求的URI<strong><strong>来检查定义的所有location</strong></strong>，并找出一个最**</p>
-<p><strong>佳匹配，而后应用其配置</strong></p>
-<p><strong>示例：</strong></p>
-<p><strong>server {…</strong></p>
-<p><strong>server_name <a href="http://www.magedu.com" target="_blank" rel="noopener">www.magedu.com</a>;</strong></p>
-<p><strong>location /images/ {</strong></p>
-<p><strong>root /data/imgs/;</strong></p>
-<p><strong>}</strong></p>
-<p><strong>}</strong></p>
-<p><strong><a href="http://www.magedu.com/images/logo.jpg" target="_blank" rel="noopener">http://www.magedu.com/images/logo.jpg</a></strong></p>
-<p><strong>–&gt; /data/imgs/images/logo.jpg</strong></p>
-<p><strong>示例：</strong></p>
-<p> <strong><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="23"><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="24"></strong></p>
-<p><strong>(七)定制错误页面</strong></p>
-<p><strong>echo ‘<h1>NO FOUND PAGE</h1>’ &gt; /data/sitea/error/404.html</strong></p>
-<p><img src="25.png" alt="25"></p>
-<p>客户端访问测试：</p>
-<p> <strong><img src="26.png" alt="26"></strong></p>
-<p><img src="27.png" alt="27"></p>
-<p> <strong>(八)避免流氓浏览器404**</strong>劫持**</p>
-<p>error_page code … [=[response]] uri;</p>
-<p><strong>模块</strong>：<strong>ngx_http_core_module</strong></p>
-<p>定义错误页，以指定的响应状态码进行响应</p>
-<p>可用位置：http, server, location, if in</p>
-<p>location</p>
-<p>error_page 404 /404.html</p>
-<p>error_page 404 =200 /404.html</p>
-<p><img src="28.png" alt="28"></p>
-<p>修改配置文件</p>
-<p><img src="29.png" alt="29"></p>
-<p>再次访问：</p>
-<p><strong><img src="30.png" alt="30"></strong></p>
-<p><strong>修改404**</strong>页面到指定默认页面**</p>
-<p> <strong><img src="31.png" alt="31"></strong></p>
-<p><strong>keepalive_timeout timeout [header_timeout];</strong></p>
-<p><strong>设定保持连接超时时长，0**</strong>表示禁止长连接，默认为75s**</p>
-<p><strong>keepalive_requests number;</strong></p>
-<p><strong>在一次长连接上所允许请求的资源的最大数量</strong></p>
-<p><strong>默认为100</strong></p>
-<p><strong>(九)除了管理员域其他主机无法使用GET**</strong>以外的其他方法**</p>
-<p><img src="32.png" alt="32"></p>
-<p><strong>(十)实现基于ip**</strong>的访问控制功能**</p>
-<p><strong>ngx_http_access_module**</strong>模块**</p>
-<p>1、allow address | CIDR | unix: | all;</p>
-<p>2、deny address | CIDR | unix: | all;</p>
-<p>http, server, location, limit_except</p>
-<p><strong>自上而下检查，一旦匹配，将生效，条件严格的置前</strong></p>
-<p><strong>示例：</strong></p>
-<p>location / {</p>
-<p>deny 192.168.1.1;</p>
-<p>allow 192.168.1.0/24;</p>
-<p>allow 10.1.1.0/16;</p>
-<p>allow 2001:0db8::/32;</p>
-<p>deny all;</p>
-<p>}</p>
-<p> <strong><img src="33.png" alt="33"></strong></p>
-<p><strong>(十一)实现基于用户的访问控制：</strong></p>
-<p><strong>ngx_http_auth_basic_module**</strong>模块**</p>
-<p><strong>实现基于用户的访问控制，使用basic**</strong>机制进行用户认证**</p>
-<p><strong>1**</strong>、auth_basic string | off;**</p>
-<p><strong>2**</strong>、auth_basic_user_file file;**</p>
-<p><strong>location /admin/ {</strong></p>
-<p><strong>auth_basic “Admin Area”;</strong></p>
-<p><strong>auth_basic_user_file /etc/nginx/.ngxpasswd;</strong></p>
-<p><strong>}</strong></p>
-<p><strong>用户口令文件：</strong></p>
-<p><strong>1**</strong>、明文文本：格式name:password:comment**</p>
-<p><strong>2**</strong>、加密文本：由htpasswd<strong>**命令实现</strong></p>
-<p><strong>httpd-tools**</strong>所提供**</p>
-<p><strong>示例：</strong></p>
-<p><strong>cd /etc/nginx/conf.d/vhost</strong></p>
-<p>htpasswd -cm nginxuser httpuser1</p>
-<p>htpasswd -m nginxuser httpuser2</p>
-<p>修改配置</p>
-<p>针对整个网站生效</p>
-<p><img src="34.png" alt="34"></p>
-<p>针对特定目录生效</p>
-<p><img src="35.png" alt="35"></p>
-<p><strong><a href="http://www.a.com/admin/" target="_blank" rel="noopener">http://www.a.com/admin/</a></strong></p>
-<p><img src="36.png" alt="36"></p>
-<p><strong>(十二)Nginx**</strong>状态页**</p>
-<p><strong>ngx_http_stub_status_module**</strong>模块**</p>
-<p><strong>功能：</strong>用于输出nginx的基本状态信息</p>
-<p>输出信息示例：</p>
-<p>Active connections: 291</p>
-<p>server accepts handled requests</p>
-<p>16630948 16630948 31070465</p>
-<p>上面三个数字分别对应accepts,handled,requests三个值</p>
-<p>Reading: 6 Writing: 179 Waiting: 106</p>
-<p><strong>示例：</strong></p>
-<p><img src="37.png" alt="37"></p>
-<p>浏览器访问<strong><a href="http://192.168.30.10/status" target="_blank" rel="noopener">http://192.168.30.10/status</a></strong></p>
-<p><img src="38.png" alt="38"></p>
-<p><strong>相关参数说明：</strong></p>
-<p>Active connections:当前状态，活动状态的连接数</p>
-<p>accepts：统计总值，已经接受的客户端请求的总数</p>
-<p>handled：统计总值，已经处理完成的客户端请求的总数</p>
-<p>requests：统计总值，客户端发来的总的请求数</p>
-<p>Reading：当前状态，正在读取客户端请求报文首部的连接的连接数</p>
-<p>Writing：当前状态，正在向客户端发送响应报文过程中的连接数</p>
-<p>Waiting：当前状态，正在等待客户端发出请求的空闲连接数</p>
-<p><strong>(十三)日志相关设置</strong></p>
-<p><strong>ngx_http_log_module**</strong>模块**</p>
-<p><strong>指定日志格式记录请求</strong></p>
-<p>1、log_format name string …;</p>
-<p>string可以使用nginx核心模块及其它模块内嵌的变量</p>
-<p>2、access_log path [format [buffer=size] [gzip[=level]] [flush=time]</p>
-<p>[if=condition]];</p>
-<p>access_log off;</p>
-<p>访问日志文件路径，格式及相关的缓冲的配置</p>
-<p>buffer=size</p>
-<p>flush=time</p>
-<p>3、open_log_file_cache max=N [inactive=time] [min_uses=N] [valid=time];</p>
-<p>open_log_file_cache off;</p>
-<p>缓存各日志文件相关的元数据信息</p>
-<p>max：缓存的最大文件描述符数量</p>
-<p>min_uses：在inactive指定的时长内访问大于等于此值方可被当作活动项</p>
-<p>inactive：非活动时长</p>
-<p>valid：验证缓存中各缓存项是否为活动项的时间间隔</p>
-<p><strong>示例：自定义日志</strong></p>
-<p>系统默认：</p>
-<p><img src="39.png" alt="39"></p>
-<p>自定义一个日志：</p>
-<p><img src="40.png" alt="40"></p>
-<p>添加到access_log(可添加到任何语句块中)</p>
-<p><img src="41.png" alt="41"></p>
-<p>测试日志</p>
-<p><img src="42.png" alt="42"></p>
-<p><strong>(十四)实现**</strong>Nginx<strong><strong>的</strong></strong>SSL<strong><strong>加密</strong></strong>https**</p>
-<p><strong>ngx_http_ssl_module**</strong>模块：**</p>
-<p><strong>1、ssl on | off;</strong></p>
-<p>为指定虚拟机启用HTTPS protocol， 建议用listen指令代替</p>
-<p><strong>2、ssl_certificate file;</strong></p>
-<p>当前虚拟主机使用PEM格式的证书文件</p>
-<p><strong>3、ssl_certificate_key file;</strong></p>
-<p>当前虚拟主机上与其证书匹配的私钥文件</p>
-<p><strong>4、ssl_protocols [SSLv2] [SSLv3] [TLSv1] [TLSv1.1] [TLSv1.2];支持ssl协议版本，默</strong></p>
-<p><strong>认为后三个</strong></p>
-<p><strong>5、ssl_session_cache off | none | [builtin[:size]] [shared:name:size];</strong></p>
-<p>none: 通知客户端支持ssl session cache，但实际不支持</p>
-<p>builtin[:size]：使用OpenSSL内建缓存，为每worker进程私有</p>
-<p>[shared:name:size]：在各worker之间使用一个共享的缓存</p>
-<p><strong>6、ssl_session_timeout time;</strong></p>
-<p>客户端连接可以复用ssl session cache中缓存的ssl参数的有效时长，默认5m</p>
-<p><strong>示例：</strong></p>
-<p>server {</p>
-<p>listen 443 ssl;</p>
-<p>server_name <a href="http://www.magedu.com" target="_blank" rel="noopener">www.magedu.com</a>;</p>
-<p>root /vhosts/ssl/htdocs;</p>
-<p>ssl on;</p>
-<p>ssl_certificate /etc/nginx/ssl/nginx.crt;</p>
-<p>ssl_certificate_key /etc/nginx/ssl/nginx.key;</p>
-<p>ssl_session_cache shared:sslcache:20m;</p>
-<p>ssl_session_timeout 10m;</p>
-<p>}</p>
-<p><img src="43.png" alt="43"></p>
-<p>检查语法：</p>
-<p>nginx -t</p>
-<p><img src="44.png" alt="44"></p>
-<p>验证https</p>
-<p><img src="45.png" alt="45"></p>
-<p><strong>(十五)实现**</strong>NGINX<strong><strong>搭建多个</strong></strong>HTTPS<strong>**网站</strong></p>
-<p><img src="46.png" alt="46"></p>
-<p>修改配置文件</p>
-<p><img src="47.png" alt="47"></p>
-<p>验证https：</p>
-<p><img src="48.png" alt="48"></p>
-<p><strong>(十六)rewite**</strong>重写**</p>
-<p><strong>ngx_http_rewrite_module**</strong>模块：**</p>
-<p>The ngx_http_rewrite_module module is used to change request URI</p>
-<p>using PCRE regular expressions, return redirects, and conditionally select</p>
-<p>configurations.</p>
-<p>将用户请求的URI基于PCRE regex所描述的模式进行检查，而后完成重定向替换</p>
-<p><strong>1**</strong>、<strong>**rewrite regex replacement [flag]</strong></p>
-<p>将用户请求的URI基于regex所描述的模式进行检查，匹配到时将其替换为</p>
-<p>replacement指定的新的URI</p>
-<p>注意：如果在同一级配置块中存在多个rewrite规则，那么会自下而下逐个</p>
-<p>检查；被某条件规则替换完成后，会重新一轮的替换检查</p>
-<p>隐含有循环机制,但不超过10次；如果超过，提示500响应码，[flag]所表示</p>
-<p>的标志位用于控制此循环机制</p>
-<p>如果replacement是以http://或https://开头，则替换结果会直接以重向返</p>
-<p>回给客户端, 即永久重定向301</p>
-<p><strong>[flag]**</strong>：**</p>
-<p><strong>last：</strong>重写完成后停止对当前URI在当前location中后续的其它重写操作，</p>
-<p>而后对新的URI启动新一轮重写检查；提前重启新一轮循环，不建议在location中</p>
-<p>使用</p>
-<p><strong>break：</strong>重写完成后停止对当前URI在当前location中后续的其它重写操作，</p>
-<p>而后直接跳转至重写规则配置块之后的其它配置；结束循环，建议在location中使</p>
-<p>用</p>
-<p><strong>redirect：</strong>临时重定向，重写完成后以临时重定向方式直接返回重写后生成</p>
-<p>的新URI给客户端，由客户端重新发起请求；使用相对路径,或者http://或https://</p>
-<p>开头，状态码：302</p>
-<p><strong>permanent:</strong> 重写完成后以永久重定向方式直接返回重写后生成的新URI给</p>
-<p>客户端，由客户端重新发起请求，状态码：301</p>
-<p><strong>2**</strong>、<strong>**return</strong></p>
-<p>return code [text];</p>
-<p>return code URL;</p>
-<p>return URL;</p>
-<p>停止处理，并返回给客户端指定的响应码</p>
-<p><strong>3**</strong>、<strong>**rewrite_log on | off;</strong></p>
-<p>是否开启重写日志, 发送至error_log（notice level）</p>
-<p><strong>4**</strong>、<strong>**set $variable value;</strong></p>
-<p>用户自定义变量</p>
-<p>注意：变量定义和调用都要以$开头</p>
-<p><strong>5**</strong>、<strong>**if (condition) { … }</strong></p>
-<p>条件满足时，执行配置块中的配置指令；server, location</p>
-<p>condition：</p>
-<p>比较操作符：</p>
-<p>= 相同 != 不同</p>
-<p>~：模式匹配，区分字符大小写</p>
-<p>~*：模式匹配，不区分字符大小写</p>
-<p>!~：模式不匹配，区分字符大小写</p>
-<p>!~*：模式不匹配，不区分字符大小写</p>
-<p>文件及目录存在性判断：</p>
-<p>-e, !-e 存在（包括文件，目录，软链接）</p>
-<p>-f, !-f 文件 -d, !-d 目录 -x, !-x 执行</p>
-<p><strong>示例：</strong></p>
-<p><a href="http://www.a.com/images/a.jpg" target="_blank" rel="noopener">www.a.com/images/a.jpg</a>  –&gt;  <a href="http://www.a.com/media/images/a.jpg" target="_blank" rel="noopener">www.a.com/media/images/a.jpg</a></p>
-<p>相关配置：</p>
-<p>rewrite  ^(images/.*)$  /media/$1</p>
-<p><strong>示例：</strong></p>
-<p><a href="http://www.a.com/bbs" target="_blank" rel="noopener">www.a.com/bbs</a>  –&gt;  <a href="http://www.a.com/forum" target="_blank" rel="noopener">www.a.com/forum</a></p>
-<p><img src="49.png" alt="49"><img src="50.png" alt="50"><img src="lazy.png" alt="nginx架构"></p>
-<p><strong>redirect**</strong>模式：<strong>**302</strong></p>
-<p><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="52"><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="53"></p>
-<p><strong>permanent**</strong>模式**</p>
-<p><img src="54.png" alt="54"><img src="55.png" alt="55"></p>
-<p><strong>(十七)实现**</strong>http<strong><strong>自动跳转</strong></strong>https**</p>
-<p><img src="56.png" alt="56"><img src="57.png" alt="57"><img src="58.png" alt="58"></p>
-<p><strong>(十八)实现将**</strong>http<strong><strong>与</strong></strong>https<strong>**写入同一个虚拟机</strong></p>
-<p><img src="59.png" alt="59"><img src="60.png" alt="60"><img src="61.png" alt="61"></p>
-<p><strong>break**</strong>模式：可避免死循环**</p>
-<p><img src="62.png" alt="62"></p>
-<p><strong>(十九)实现自定义响应码</strong></p>
-<p><img src="63.png" alt="63"><img src="64.png" alt="64"></p>
-<p><strong>(二十)Nginx**</strong>防盗链**</p>
-<p><strong>ngx_http_referer_module**</strong>模块：**</p>
-<p><strong>功能：</strong>用来阻止Referer首部无有效值的请求访问，可防止盗链</p>
-<p><strong>格式：valid_referers none|blocked|server_names|string …;</strong></p>
-<p>定义referer首部的合法可用值，不能匹配的将是非法值</p>
-<p>none：请求报文首部没有referer首部</p>
-<p>blocked：请求报文有referer首部，但无有效值</p>
-<p>server_names：参数，其可以有值作为主机名或主机名模式</p>
-<p>arbitrary_string：任意字符串，但可使用*作通配符</p>
-<p>regular expression：被指定的正则表达式模式匹配到的字符串,要使用~开头</p>
-<p><img src="65.png" alt="65"></p>
-<p>开启防盗链功能后，盗链图片将无法正常显示</p>
-<p><img src="66.png" alt="66"></p>
-
-          
+          Nginx 是一个高性能的Web和反向代理服务器, 它具有有很多非常优越的特性:作为 Web 服务器：相比Apache，Nginx 使用更少的资源，支持更多的并发连接，体现更高的效率，这点使 Nginx尤其受到虚拟主机提供商的欢迎。
+一、Nginx介绍Nginx：engine X ，2002年，开源
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/10/Nginx介绍及Web服务相关配置/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2717,134 +1392,18 @@
       
         
           
-            <p>本节内容主要是是lvs相关性实验，及lvs健康性检查工具Ldirectord </p>
-<h2 id="一、实验：实现LVS-NAT"><a href="#一、实验：实现LVS-NAT" class="headerlink" title="一、实验：实现LVS-NAT"></a><strong>一、实验：实现LVS-NAT</strong></h2><h3 id="逻辑拓扑："><a href="#逻辑拓扑：" class="headerlink" title="逻辑拓扑："></a><strong>逻辑拓扑：</strong></h3><p><img src="Nat模型.jpg" alt="Nat模型"></p>
-<h3 id="前期准备："><a href="#前期准备：" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p><strong>CLIENT:</strong>   172.20.0.123； 网关：172.20.0.200</p>
-<p><strong>LVS:</strong>     VIP：192.168.30.200, DIP：172.20.0.200，启用ip_forward</p>
-<p><strong>RS1:</strong>     192.168.30.17</p>
-<p><strong>RS2:</strong>     192.168.30.27</p>
-<h3 id="LVS："><a href="#LVS：" class="headerlink" title="LVS："></a><strong>LVS：</strong></h3><p>开启路由转发</p>
-<p>echo net.ipv4.ip_forward=1 &gt;&gt; /etc/sysctl.conf</p>
-<p>sysctl –p</p>
-<p>sysctl –a |grep ip_f</p>
-<h3 id="RS1、2"><a href="#RS1、2" class="headerlink" title="RS1、2:"></a><strong>RS1、2:</strong></h3><p>搭建WEB环境</p>
-<p>网关指向192.168.30.200</p>
-<p>yum install httpd</p>
-<p><strong>RS1:</strong></p>
-<p>echo RS1&gt; /var/www/html/index.html</p>
-<p>systemctl start httpd</p>
-<p><strong>RS2:</strong></p>
-<p>echo RS2&gt; /var/www/html/index.html</p>
-<p>systemctl start httpd</p>
-<h3 id="LVS"><a href="#LVS" class="headerlink" title="LVS:"></a><strong>LVS:</strong></h3><p>添加LVS规则</p>
-<p>yum install ipvsadm</p>
-<p>Ipvsadm –A –t 172.20.0.200:80 –s rr</p>
-<p>Ipvsadm –a –t 172.20.0.200:80  –r 192.168.30.17 –m </p>
-<p>Ipvsadm –a –t 172.20.0.200:80  –r 192.168.30.27 –m </p>
-<p>Ipvsadm –Ln</p>
-<p><img src="1-1.png" alt="1"></p>
-<h3 id="测试："><a href="#测试：" class="headerlink" title="测试："></a><strong>测试：</strong></h3><p>curl 172.20.0.200</p>
-<p><img src="6.png" alt="6"></p>
-<h2 id="二、实验：实现LVS与RS之间添加路由器的LVS-NAT"><a href="#二、实验：实现LVS与RS之间添加路由器的LVS-NAT" class="headerlink" title="二、实验：实现LVS与RS之间添加路由器的LVS-NAT"></a><strong>二、实验：实现LVS与RS之间添加路由器的LVS-NAT</strong></h2><h3 id="逻辑拓扑：-1"><a href="#逻辑拓扑：-1" class="headerlink" title="逻辑拓扑："></a><strong>逻辑拓扑：</strong></h3><p><img src="Nat-Router模型.jpg" alt="Nat-Router模型"></p>
-<h3 id="前期准备：-1"><a href="#前期准备：-1" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>新增加一台虚拟机作为路由器，按下图进行网络环境搭建</p>
-<p><strong>CLIENT:</strong>   172.20.0.123；网关：172.20.0.200</p>
-<p><strong>LVS:</strong>   192.168.30.0,172.20.0.200，不启用ip_forward</p>
-<p><strong>ROUTER：</strong> VIP：172.20.0.100/16；DIP：192.168.30.200 /24，启用ip_forward</p>
-<p><strong>RS1:</strong>  192.168.30.17</p>
-<p><strong>RS2:</strong>  192.168.30.27</p>
-<p>路由器必须配置到LVS的网关，并且开启路由转发功能</p>
-<p><img src="3-3.png" alt="3"></p>
-<p>curl 172.20.0.200测试</p>
-<p><img src="4-1.png" alt="4"></p>
-<h3 id="实现端口映射："><a href="#实现端口映射：" class="headerlink" title="实现端口映射："></a><strong>实现端口映射：</strong></h3><p>以httpd服务为例，修改其中一台RS服务器的80端口为8080</p>
-<p><strong>RS1：</strong></p>
-<p><strong>vim /etc/httpd/conf/httpd.conf</strong></p>
-<p>Listen 80 ==&gt;Listen 8080</p>
-<p><strong>LVS：</strong></p>
-<p>清除原有LVS规则</p>
-<p>ipvsadm -C </p>
-<p>ipvsadm -A -t 172.20.0.200:80 -s rr</p>
-<p>ipvsadm -a -t 172.20.0.200:80 -r 192.168.30.17:8080 -m</p>
-<p>ipvsadm -a -t 172.20.0.200:80 -r 192.168.30.27:80 -m</p>
-<p><img src="lazy.png" alt="5"></p>
-<p><strong>CLIENT：</strong></p>
-<p><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="6"></p>
-<h3 id="添加权重："><a href="#添加权重：" class="headerlink" title="添加权重："></a><strong>添加权重：</strong></h3><p><strong>LVS：</strong></p>
-<p>修改调度算法为wrr模式</p>
-<p><img src="7.png" alt="7"></p>
-<p>ipvsadm -a -t 172.20.0.200:80 -r 192.168.30.17:8080 -m -w 3</p>
-<p><img src="8.png" alt="8"></p>
-<p><strong>CLIENT：</strong></p>
-<p>我们看到LVS已按RS1:RS1 = 3:1的权重进行调度</p>
-<p><img src="9.png" alt="9"></p>
-<h2 id="三、实验：实现单网络LVS-DR"><a href="#三、实验：实现单网络LVS-DR" class="headerlink" title="三、实验：实现单网络LVS-DR"></a><strong>三、实验：实现单网络LVS-DR</strong></h2><h3 id="逻辑拓扑：-2"><a href="#逻辑拓扑：-2" class="headerlink" title="逻辑拓扑："></a><strong>逻辑拓扑：</strong></h3><p><img src="LVS-DR模型-单网络.jpg" alt="LVS-DR模型-单网络"></p>
-<h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备:"></a><strong>前期准备:</strong></h3><p>5台虚拟机，网络环境配置如下：</p>
-<p><strong>CLIENT:</strong>    桥接模式；172.20.0.222/16</p>
-<p><strong>ROUTER:</strong>  桥接模式；172.20.0.200/16；192.168.30.200/24</p>
-<p><strong>LVS:</strong>  仅主机模式;VIP:192.168.30.7/24；DIP：192.168.30.100/24</p>
-<p><strong>RS1:</strong>  仅主机模式;192.168.30.17/24；VIP:192.168.30.7/24</p>
-<p><strong>RS2:</strong>  仅主机模式;192.168.30.27/24；VIP:192.168.30.7/24</p>
-<h3 id="RS1-RS2"><a href="#RS1-RS2" class="headerlink" title="RS1,RS2:"></a><strong>RS1,RS2:</strong></h3><p>echo 1&gt; /proc/sys/net/ipv4/conf/lo/arp_ignore</p>
-<p>echo 1&gt; /proc/sys/net/ipv4/conf/all/arp_ignore</p>
-<p>echo 2&gt; /proc/sys/net/ipv4/conf/lo/arp_announce</p>
-<p>echo 2&gt; /proc/sys/net/ipv4/conf/all/arp_announce</p>
-<p>一般习惯是将VIP绑定到RS服务器的回环网卡lo上</p>
-<p>ip a a 192.168.30.7/32 dev lo</p>
-<p><img src="1-2.png" alt="1"></p>
-<p>### </p>
-<p>在RS1,RS2上搭建web服务</p>
-<p>yum install httpd</p>
-<p><strong>RS1:</strong></p>
-<p>echo RS1&gt; /var/www/html/index.html</p>
-<p>systemctl start httpd</p>
-<p><strong>RS2:</strong></p>
-<p>echo RS2&gt; /var/www/html/index.html</p>
-<p>systemctl start httpd</p>
-<h3 id="LVS：-1"><a href="#LVS：-1" class="headerlink" title="LVS："></a><strong>LVS：</strong></h3><p>网络配置要求</p>
-<p><strong>VIP:</strong>  ip addr a192.168.30.7/32 dev lo</p>
-<p><strong>DIP:</strong>  192.168.30.100/24 eth0</p>
-<p><strong>GATEWAY:</strong>  192.168.30.X          #网关必须配，但可随意配置，同一网段即可</p>
-<p>配置调度策略：</p>
-<p>yum install ipvsadm</p>
-<p>ipvsadm -A -t 192.168.30.7:80 -s rr</p>
-<p>ipvsadm -a -t 192.168.30.7:80 -r 192.168.30.17      #默认dr模型</p>
-<p>ipvsadm -a -t 192.168.30.7:80 -r 192.168.30.27</p>
-<p><img src="2-3.png" alt="2"></p>
-<h3 id="CLIENT"><a href="#CLIENT" class="headerlink" title="CLIENT:"></a><strong>CLIENT:</strong></h3><p>测试</p>
-<p><img src="3-4.png" alt="3"></p>
-<h2 id="四、Ldirectord-实现LVS的RS健康性检查"><a href="#四、Ldirectord-实现LVS的RS健康性检查" class="headerlink" title="四、Ldirectord:实现LVS的RS健康性检查"></a><strong>四、Ldirectord:实现LVS的RS健康性检查</strong></h2><p><strong>ldirectord：</strong>监控和控制LVS守护进程，可管理LVS规则</p>
-<p><strong>包名：**</strong>ldirectord-3.9.6-0rc1.1.1.x86_64.rpm**</p>
-<p><strong>文件：</strong></p>
-<p>/etc/ha.d/ldirectord.cf    主配置文件</p>
-<p>/usr/share/doc/ldirectord-3.9.6/ldirectord.cf   配置模版</p>
-<p>/usr/lib/systemd/system/ldirectord.service    服务</p>
-<p>/usr/sbin/ldirectord   主程序</p>
-<p>/var/log/ldirectord.log   日志</p>
-<p>/var/run/ldirectord.ldirectord.pid pid   文件</p>
-<p><strong>Ldirectord**</strong>配置文件示例**</p>
-<p>checktimeout=3</p>
-<p>checkinterval=1</p>
-<p>autoreload=yes</p>
-<p>logfile=”/var/log/ldirectord.log”       #日志文件</p>
-<p>quiescent=no                                        #down时yes权重为0，no为删除</p>
-<p>virtual=5                                               #指定VS的FWM或IP：port</p>
-<p>real=172.16.0.7:80 gate 2</p>
-<p>real=172.16.0.8:80 gate 1</p>
-<p>fallback=127.0.0.1:80 gate #sorry server</p>
-<p>service=http</p>
-<p>scheduler=wrr</p>
-<p>checktype=negotiate</p>
-<p>checkport=80</p>
-<p>request=”index.html”</p>
-<p>receive=”test Ldirectord”</p>
-<p><img src="Ldirectord配置.png" alt="Ldirectord配置"></p>
-<p>重启ldirectord服务，将自动生成LVS规则</p>
-<p>systemctl start ldirectord</p>
-<p><img src="Ldirectord配置2.png" alt="Ldirectord配置2"></p>
-<p><strong>默认情况下，当有一台RS服务器宕机时，LVS还将继续调度，启动ldirectord服务后，当某台RS服</strong></p>
-<p><strong>务器**</strong>宕机后，LVS将不再继续调度至该台服务器**</p>
-
-          
+          本节内容主要是是lvs相关性实验，及lvs健康性检查工具Ldirectord 
+一、实验：实现LVS-NAT逻辑拓扑：
+前期准备：CLIENT:   172.20.0.123； 网关：172.20.0.200
+LVS:     VIP：192.168.30.200, DIP：172.20.0.200
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/07/LVS虚拟服务器相关实验/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2984,236 +1543,19 @@
       
         
           
-            <h2 id="一、Cluster集群概念"><a href="#一、Cluster集群概念" class="headerlink" title="一、Cluster集群概念"></a><strong>一、Cluster集群概念</strong></h2><p><strong>集群(cluster)</strong>技术是一种较新的技术，通过集群技术，可以在付出较低成本的情况</p>
-<p>下获得在性能、可靠性、灵活性方面的相对较高的收益，其任务调度则是集群系统中</p>
-<p>的核心技术。</p>
-<h3 id="系统扩展方式："><a href="#系统扩展方式：" class="headerlink" title="系统扩展方式："></a><strong>系统扩展方式：</strong></h3><p>Scale UP：向上扩展,增强</p>
-<p>Scale Out：向外扩展,增加设备，调度分配问题，Cluster</p>
-<p>Cluster：集群,为解决某个特定问题将多台计算机组合起来形成的单个系统</p>
-<p>Linux Cluster类型：</p>
-<p>LB：Load Balancing，负载均衡</p>
-<p>HA：High Availiablity，高可用，SPOF（single Point Of failure）</p>
-<p>MTBF：Mean Time Between Failure 平均无故障时间</p>
-<p>MTTR：Mean Time To Restoration（ repair）平均恢复前时间</p>
-<p>A=MTBF/（MTBF+MTTR） (0,1)：99%, 99.5%, 99.9%, 99.99%, 99.999%</p>
-<p>HPC：High-performance computing，高性能 <a href="http://www.top500.org" target="_blank" rel="noopener">www.top500.org</a></p>
-<h3 id="分布式系统："><a href="#分布式系统：" class="headerlink" title="分布式系统："></a><strong>分布式系统：</strong></h3><p>分布式存储：云盘</p>
-<p>分布式计算：hadoop，Spark</p>
-<p>分布式文件系统：fastfs</p>
-<h3 id="集群与分布式："><a href="#集群与分布式：" class="headerlink" title="集群与分布式："></a><strong>集群与分布式：</strong></h3><p>简单来说集群是解决高可用的，而分布式是解决高性能、高并发的</p>
-<p><strong>集群：</strong>同一个业务，部署在多个服务器上</p>
-<p><strong>分布式：</strong>一个业务分拆多个子业务，部署在不同的服务器上</p>
-<h3 id="Cluster分类"><a href="#Cluster分类" class="headerlink" title="Cluster分类"></a><strong>Cluster分类</strong></h3><p>LB Cluster的实现</p>
-<p>硬件</p>
-<p>F5 Big-IP</p>
-<p>Citrix Netscaler</p>
-<p>A10 A10</p>
-<p>软件</p>
-<p>lvs：Linux Virtual Server</p>
-<p>nginx：支持七层调度</p>
-<p>haproxy：支持七层调度</p>
-<p>ats：apache traffic server，yahoo捐助</p>
-<p>perlbal：Perl 编写</p>
-<p>pound</p>
-<p><strong>基于工作的协议层次划分：</strong></p>
-<p>传输层（通用）：DPORT</p>
-<p>LVS：</p>
-<p>nginx：stream</p>
-<p>haproxy：mode tcp</p>
-<p>应用层（专用）：针对特定协议，自定义的请求模型分类</p>
-<p>proxy server：</p>
-<p>http：nginx, httpd, haproxy(mode http), …</p>
-<p>fastcgi：nginx, httpd, …</p>
-<p>mysql：mysql-proxy, …</p>
-<p>会话保持：负载均衡</p>
-<p>(1)session sticky：同一用户调度固定服务器</p>
-<p>Source IP：LVS sh算法（对某一特定服务而言）</p>
-<p>Cookie</p>
-<p>(2)session replication：每台服务器拥有全部session</p>
-<p>session multicast cluster</p>
-<p>(3)session server：专门的session服务器</p>
-<p>Memcached，Redis</p>
-<p>HA集群实现方案</p>
-<p>keepalived:vrrp协议</p>
-<p>ais:应用接口规范</p>
-<p>heartbeat</p>
-<p>cman+rgmanager(RHCS)</p>
-<p>coresync_pacemaker</p>
-<h2 id="二、LVS介绍"><a href="#二、LVS介绍" class="headerlink" title="二、LVS介绍"></a><strong>二、LVS介绍</strong></h2><p><strong>LVS：Linux Virtual Server</strong>，负载调度器，集成内核 章文嵩 阿里</p>
-<p><strong>官网</strong>：<a href="http://www.linuxvirtualserver.org/" target="_blank" rel="noopener">http://www.linuxvirtualserver.org/</a></p>
-<p><strong>VS</strong>：Virtual Server，负责调度</p>
-<p><strong>RS</strong>：Real Server，负责真正提供服务</p>
-<p><strong>L4</strong>：四层路由器或交换机</p>
-<p><strong>工作原理：</strong>VS根据请求报文的目标IP和目标协议及端口将其调度转发至某RS，根据调度</p>
-<p>算法来挑选RS</p>
-<p>iptables/netfilter：</p>
-<p>iptables：用户空间的管理工具</p>
-<p>netfilter：内核空间上的框架</p>
-<p>流入：<strong>PREROUTING –&gt; INPUT</strong></p>
-<p>流出：<strong>OUTPUT –&gt; POSTROUTING</strong></p>
-<p>转发：<strong>PREROUTING –&gt; FORWARD –&gt; POSTROUTING</strong></p>
-<p>DNAT：目标地址转换； <strong>PREROUTING</strong></p>
-<p>LVS集群的通用结构：</p>
-<p><img src="1.png" alt="1"></p>
-<h3 id="LVS工作原理"><a href="#LVS工作原理" class="headerlink" title="LVS工作原理"></a>LVS工作原理</h3><p>LVS集群类型中的术语：</p>
-<p><strong>VS：</strong>Virtual Server，Director Server(DS)，Dispatcher(调度器)，Load Balancer</p>
-<p><strong>RS：</strong>Real Server(lvs), upstream server(nginx)，backend server(haproxy)</p>
-<p><strong>CIP：</strong>Client IP</p>
-<p><strong>VIP:</strong> Virtual serve IP VS外网的IP</p>
-<p><strong>DIP:</strong> Director IP VS内网的IP</p>
-<p><strong>RIP:</strong> Real server IP</p>
-<p>访问流程：<strong>CIP &lt;–&gt; VIP == DIP &lt;–&gt; RIP</strong></p>
-<p>lvs：ipvsadm/ipvs</p>
-<p>ipvsadm：用户空间的命令行工具，规则管理器</p>
-<p>用于管理集群服务及RealServer</p>
-<p>ipvs：工作于内核空间netfilter的INPUT钩子上的框架</p>
-<h3 id="lvs集群的类型："><a href="#lvs集群的类型：" class="headerlink" title="lvs集群的类型："></a><strong>lvs集群的类型：</strong></h3><p><strong>lvs-nat：</strong>修改请求报文的目标IP,多目标IP的DNAT(重点)</p>
-<p><strong>lvs-dr：</strong>操纵封装新的MAC地址(重点)</p>
-<p><strong>lvs-tun：</strong>在原请求IP报文之外新加一个IP首部</p>
-<p><strong>lvs-fullnat：</strong>修改请求报文的源和目标IP</p>
-<h2 id="三、LVS模式与调度算法"><a href="#三、LVS模式与调度算法" class="headerlink" title="三、LVS模式与调度算法"></a><strong>三、LVS模式与调度算法</strong></h2><h3 id="lvs-nat模式"><a href="#lvs-nat模式" class="headerlink" title="lvs-nat模式"></a><strong>lvs-nat模式</strong></h3><p>本质是多目标IP的DNAT，通过将请求报文中的目标地址和目标端口修改为某挑</p>
-<p>出的RS的RIP和PORT实现转发</p>
-<p>LVS-NAT的体系结构如下图所示：</p>
-<p><img src="2.png" alt="2"></p>
-<p>（1）RIP和DIP应在同一个IP网络，且应使用私网地址；RS的网关要指向DIP</p>
-<p>（2）请求报文和响应报文都必须经由Director转发，Director易于成为系统瓶颈</p>
-<p>（3）支持端口映射，可修改请求报文的目标PORT</p>
-<p>（4）VS必须是Linux系统，RS可以是任意OS系统</p>
-<p>LVS-NAT数据流程时序图：</p>
-<p><img src="2-2.png" alt="2-2"></p>
-<h3 id="LVS-DR模式"><a href="#LVS-DR模式" class="headerlink" title="LVS-DR模式"></a><strong>LVS-DR模式</strong></h3><p><strong>LVS-DR：Direct Routing</strong>，直接路由，LVS默认模式,应用最广泛,通过为请求报文重新</p>
-<p>封装一个MAC首部进行转发，源MAC是DIP所在的接口的MAC，目标MAC是某挑选出</p>
-<p>的RS的RIP所在接口的MAC地址；源IP/PORT，以及目标IP/PORT均保持不变</p>
-<p>LVS-DR的体系结构如下图所示：</p>
-<p><img src="3.png" alt="3"></p>
-<p>（1） Director和各RS都配置有VIP</p>
-<p>（2） 确保前端路由器将目标IP为VIP的请求报文发往Director</p>
-<p>在前端网关做静态绑定VIP和Director的MAC地址</p>
-<p>在RS上使用arptables工具</p>
-<p>arptables -A IN -d $VIP -j DROP</p>
-<p>arptables -A OUT -s $VIP -j mangle –mangle-ip-s $RIP</p>
-<p>在RS上修改内核参数以限制arp通告及应答级别</p>
-<p><strong>/proc/sys/net/ipv4/conf/all/arp_ignore</strong></p>
-<p><strong>/proc/sys/net/ipv4/conf/all/arp_announce</strong></p>
-<p>（3）RS的RIP可以使用私网地址，也可以是公网地址；RIP与DIP在同一IP网络；</p>
-<p>RIP的网关不能指向DIP，以确保响应报文不会经由Director</p>
-<p>（4）RS和Director要在同一个物理网络</p>
-<p>（5）请求报文要经由Director，但响应报文不经由Director，而由RS直接发往</p>
-<p>Client</p>
-<p>（6）不支持端口映射（端口不能修败）</p>
-<p>（7）RS可使用大多数OS系统</p>
-<p>LVS-DR数据流程时序图：</p>
-<p><img src="3-2.png" alt="3-2"></p>
-<h3 id="lvs-tun模式"><a href="#lvs-tun模式" class="headerlink" title="lvs-tun模式"></a><strong>lvs-tun模式</strong></h3><p>转发方式：不修改请求报文的IP首部（源IP为CIP，目标IP为VIP），而在原IP报文</p>
-<p>之外再封装一个IP首部（源IP是DIP，目标IP是RIP），将报文发往挑选出的目标</p>
-<p>RS；RS直接响应给客户端（源IP是VIP，目标IP是CIP）</p>
-<p>LVS-TUN的体系结构如图所示：</p>
-<p><img src="4.png" alt="4"></p>
-<p>(1) DIP, VIP, RIP都应该是公网地址</p>
-<p>(2) RS的网关一般不能指向DIP</p>
-<p>(3) 请求报文要经由Director，但响应不能经由Director</p>
-<p>(4) 不支持端口映射</p>
-<p>(5) RS的OS须支持隧道功能</p>
-<p>LVS-TUN数据流程时序图：</p>
-<p><img src="4-2.png" alt="4-2"></p>
-<h3 id="LVS-FULLNAT模式"><a href="#LVS-FULLNAT模式" class="headerlink" title="LVS-FULLNAT模式"></a><strong>LVS-FULLNAT模式</strong></h3><p><strong>lvs-fullnat：</strong>通过同时修改请求报文的源IP地址和目标IP地址进行转发</p>
-<p>CIP –&gt; DIP</p>
-<p>VIP –&gt; RIP</p>
-<p>(1) VIP是公网地址，RIP和DIP是私网地址，且通常不在同一IP网络；因此，</p>
-<p>RIP的网关一般不会指向DIP</p>
-<p>(2) RS收到的请求报文源地址是DIP，因此，只需响应给DIP；但Director还</p>
-<p>要将其发往Client</p>
-<p>(3) 请求和响应报文都经由Director</p>
-<p>(4) 支持端口映射</p>
-<p>注意：此类型kernel默认不支持</p>
-<h3 id="三种-主要IP-负载均衡技术比较："><a href="#三种-主要IP-负载均衡技术比较：" class="headerlink" title="三种 主要IP 负载均衡技术比较："></a>三种 主要IP 负载均衡技术比较：</h3><p><img src="优缺点.png" alt="优缺点"></p>
-<p>lvs-nat与lvs-fullnat：请求和响应报文都经由Director</p>
-<p>lvs-nat：RIP的网关要指向DIP</p>
-<p>lvs-fullnat：RIP和DIP未必在同一IP网络，但要能通信</p>
-<p>lvs-dr与lvs-tun：请求报文要经由Director，但响应报文由RS直接发往Client</p>
-<p>lvs-dr：通过封装新的MAC首部实现，通过MAC网络转发</p>
-<p>lvs-tun：通过在原IP报文外封装新IP头实现转发，支持远距离通信</p>
-<p>lvs-nat 的优点是服务器可以运行任何支持 TCP/IP 的操作系统，它只需要</p>
-<p>一个 IP 地址配置在调度器上，服务器组可以用私有的 IP 地址。缺点是它的伸缩</p>
-<p>能力有限，当服务器结点数目升到 20 时，调度器本身有可能成为系统的新瓶颈，</p>
-<p>因为在 lvs-nat 中请求和响应报文都需要通过负载调度器。</p>
-<p>lvs-dr优点是负载调度器可以处理大量的请求，因为调度器只处理客户到服</p>
-<p>务器端的连接，响应数据可以直接从独立的网络路由返回给客户，这可以极大地</p>
-<p>提高 LVS 集群系统的伸缩性。缺点是要求负载调度器与实际服务器都有一块网</p>
-<p>卡连在同一物理网段上，服务器网络设备（或者设备别名）不作 ARP 响应，或</p>
-<p>者能将报文重定向（Redirect）到本地的 Socket 端口上。</p>
-<p>lvs-tun 的优点是负载调度器可以处理大量的请求，它甚至可以调度百台以</p>
-<p>上的服务器（同等规模的服务器），而它不会成为系统的瓶颈，因为负载调度器</p>
-<p>只将请求调度到不同的后端服务器，后端服务器将应答的数据直接返回给用户。</p>
-<h3 id="LVS的调度算法"><a href="#LVS的调度算法" class="headerlink" title="LVS的调度算法"></a><strong>LVS的调度算法</strong></h3><p>轮训算法 加权轮训算法 最小连接算法 加权最下连接算法 …..</p>
-<p>LVS Scheduling Method LVS的调度方法：</p>
-<p><strong>1.Fixed Scheduling Method</strong>  静态调度方法</p>
-<p>(1).<strong>RR</strong>         轮询</p>
-<p>(2).<strong>WRR</strong>    加权轮询</p>
-<p>(3).<strong>SH</strong>         源地址hash；实现session sticky，源IP地址hash；将来自于同一</p>
-<p>个IP地址的请求始终发往第一次挑中的RS，从而实现会话绑定</p>
-<p>(4).<strong>DH</strong>        目标地址hash；目标地址哈希，将发往同一个目标地址的请求始终转</p>
-<p>发至第一次挑中的RS，典型使用场景是正向代理缓存场景中的负载均</p>
-<p>衡，如：宽带运营商</p>
-<p><strong>2.Dynamic Scheduling Method</strong> 动态调度方法</p>
-<p>(1).<strong>LC</strong>         最少连接；适用于长连接应用</p>
-<p>​          Overhead=activeconns*256+inactiveconns</p>
-<p>(2).<strong>WLC</strong>    加权最少连接(默认调度方法)</p>
-<p>  Overhead=(activeconns*256+inactiveconns)/weight </p>
-<p>(3).<strong>SED</strong>      最少期望延迟</p>
-<p>Overhead=(activeconns+1)*256/weight</p>
-<p>(4).<strong>NQ</strong>       第一轮均匀分配，后续SED</p>
-<p>(5).<strong>LBLC</strong>   基于本地的最少连接；动态的DH算法，使用场景：根据负载状态实现正向代理</p>
-<p>(6).<strong>LBLCR</strong>  带复制的基于本地的最少连接；带复制功能的LBLC解决LBLC负载不均衡</p>
-<p>问题，从负载重的复制到负载轻的RS</p>
-<h2 id="四、ipvsadm命令"><a href="#四、ipvsadm命令" class="headerlink" title="四、ipvsadm命令"></a><strong>四、ipvsadm命令</strong></h2><p><strong>核心功能：</strong></p>
-<p>集群服务管理：增、删、改</p>
-<p>集群服务的RS管理：增、删、改</p>
-<p><strong>查看</strong></p>
-<p><strong>ipvsadm -A|E -t|u|f service-address [-s scheduler] [-p [timeout]] [-M netmask] [–pe</strong></p>
-<p><strong>persistence_engine] [-b sched-flags]</strong></p>
-<p>ipvsadm -D -t|u|f service-address 删除</p>
-<p>ipvsadm –C 清空</p>
-<p>ipvsadm –R 重载</p>
-<p>ipvsadm -S [-n] 保存</p>
-<p>ipvsadm -a|e -t|u|f service-address -r server-address [options]</p>
-<p>ipvsadm -d -t|u|f service-address -r server-address</p>
-<p>ipvsadm -L|l [options]</p>
-<p>ipvsadm -Z [-t|u|f service-address]</p>
-<p>管理集群服务：增、改、删</p>
-<p>增、改：</p>
-<p>ipvsadm -A|E -t|u|f service-address [-s scheduler] [-p [timeout]]</p>
-<p>删除：</p>
-<p>ipvsadm -D -t|u|f service-address</p>
-<p>service-address：</p>
-<p>-t|u|f：</p>
-<p>-t: TCP协议的端口，VIP:TCP_PORT</p>
-<p>-u: UDP协议的端口，VIP:UDP_PORT</p>
-<p>-f：firewall MARK，标记，一个数字</p>
-<p>[-s scheduler]：指定集群的调度算法，默认为wlc</p>
-<p>管理集群上的RS：增、改、删</p>
-<p>增、改：ipvsadm -a|e -t|u|f service-address -r server-address [-g|i|m] [-w weight]</p>
-<p>删：ipvsadm -d -t|u|f service-address -r server-address</p>
-<p>server-address：</p>
-<p>rip[:port] 如省略port，不作端口映射</p>
-<p><strong>选项：</strong></p>
-<p>lvs类型：</p>
-<p>-g: gateway, dr类型，默认</p>
-<p>-i: ipip, tun类型</p>
-<p>-m: masquerade, nat类型</p>
-<p>-w weight：权重</p>
-<p>清空定义的所有内容：ipvsadm –C</p>
-<p>清空计数器：ipvsadm -Z [-t|u|f service-address]</p>
-<p>查看：<strong>ipvsadm -L|l [options]</strong></p>
-<p>–numeric, -n：以数字形式输出地址和端口号</p>
-<p>–exact：扩展信息，精确值</p>
-<p>–connection，-c：当前IPVS连接输出</p>
-<p>–stats：统计信息</p>
-<p>–rate ：输出速率信息</p>
-<p>ipvs规则： /proc/net/ip_vs</p>
-<p>ipvs连接：/proc/net/ip_vs_conn</p>
-
-          
+          一、Cluster集群概念集群(cluster)技术是一种较新的技术，通过集群技术，可以在付出较低成本的情况
+下获得在性能、可靠性、灵活性方面的相对较高的收益，其任务调度则是集群系统中
+的核心技术。
+系统扩展方式：Scale UP：向上扩展,增强
+Scale Out：向外扩展,增加设备，调度分配问题
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/03/LVS介绍及工作原理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -3353,302 +1695,17 @@
       
         
           
-            <p>防火墙（Firewall），也称防护墙，是由Check Point创立者Gil Shwed于1993年发明并引入国际互联网。</p>
-<p>它是一种工作在网络或主机边缘，对进出网络或主机的数据包基于一定的规则检查，并在匹配某规则时</p>
-<p>由规则定义的行为进行处理的一组功能的组件，基本上的实现都是默认情况下关闭所有的通过型访问，</p>
-<p>只开放允许访问的策略 </p>
-<h2 id="一、防火墙介绍"><a href="#一、防火墙介绍" class="headerlink" title="一、防火墙介绍"></a><strong>一、防火墙介绍</strong></h2><h3 id="防火墙的分类"><a href="#防火墙的分类" class="headerlink" title="防火墙的分类"></a>防火墙的分类</h3><p>按防火墙<strong>服务范围</strong>可分为：</p>
-<p><strong>主机防火墙：</strong>服务范围为当前主机</p>
-<p><strong>网络防火墙：</strong>服务范围为防火墙一侧的局域网</p>
-<p>按<strong>软硬件</strong>可分为：</p>
-<p><strong>硬件防火墙：</strong>在专用硬件级别实现部分功能的防火墙；另一个部分功能基于软件</p>
-<p>实现，Checkpoint, NetScreen</p>
-<p><strong>软件防火墙：</strong>运行于通用硬件平台之上的防火墙的应用软件</p>
-<p>按<strong>OSI模型</strong>可分为：</p>
-<p><strong>网络层防火墙：</strong>OSI下面第三层</p>
-<p><strong>应用层防火墙/代理服务器</strong>：代理网关，OSI七层</p>
-<h3 id="Netfilter组件"><a href="#Netfilter组件" class="headerlink" title="Netfilter组件"></a><strong>Netfilter组件</strong></h3><p><strong>Netfilter是Linux 2.4内核防火墙框架，该框架既简洁又灵活，可实现安全策略应用中的许多功能，</strong></p>
-<p><strong>如数据包过滤、数据包处理、地址伪装、透明代理、动态网络地址转换（NAT），</strong></p>
-<p><strong>以及基于用户及媒体访问控制（MAC）地址的过滤和基于状态的过滤、包速率限制等。</strong></p>
-<p><strong>特性：</strong></p>
-<p>内核空间，集成在Linux内核中</p>
-<p>扩展各种网络服务的结构化底层框架</p>
-<p>内核中选取五个位置放了五个hook(勾子) function<strong>(INPUT、OUTPUT、FORWARD、</strong></p>
-<p><strong>PREROUTING、POSTROUTING)</strong>，而这五个hook function向用户开放，用户可以通过一</p>
-<p>个命令工具（iptables）向其写入规则</p>
-<p>由信息过滤表（table）组成，包含控制IP包处理的规则集（rules），规则被分组放在链（chain）上</p>
-<p><strong>三种报文流向：</strong></p>
-<p>流入本机：PREROUTING –&gt; INPUT–&gt;用户空间进程</p>
-<p>流出本机：用户空间进程 –&gt;OUTPUT–&gt; POSTROUTING</p>
-<p>转发：PREROUTING –&gt; FORWARD –&gt; POSTROUTING</p>
-<p><img src="timg_imagequality80sizeb9999_10000sec1530335045851di3ca9d674c9be44456c2a.jpg" alt="timg_image&amp;quality=80&amp;size=b9999_10000&amp;sec=1530335045851&amp;di=3ca9d674c9be44456c2a"></p>
-<p><strong>iptables</strong>由四个表和五个链以及一些规则组成</p>
-<p>四个表table：<strong>filter、nat、mangle、raw</strong></p>
-<p><strong>filter表</strong>：过滤规则表，根据预定义的规则过滤符合条件的数据包</p>
-<p><strong>nat表</strong>：network address translation 地址转换规则表</p>
-<p><strong>mangle</strong>：修改数据标记位规则表</p>
-<p><strong>raw</strong>：关闭NAT表上启用的连接跟踪机制，加快封包穿越防火墙速度</p>
-<p>优先级由高到低的顺序为:<strong>raw–&gt;mangle–&gt;nat–&gt;filter</strong></p>
-<p>五个内置链chain</p>
-<p><strong>INPUT</strong></p>
-<p><strong>OUTPUT</strong></p>
-<p><strong>FORWARD</strong></p>
-<p><strong>PREROUTING</strong></p>
-<p><strong>POSTROUTING</strong></p>
-<p><img src="表链结构.png" alt="表链结构"></p>
-<h2 id="二、iptables工具"><a href="#二、iptables工具" class="headerlink" title="二、iptables工具"></a><strong>二、iptables工具</strong></h2><p><strong>格式：iptables [-t table] SUBCOMMAND chain [-m matchname [per-matchoptions]] -j</strong></p>
-<p><strong>targetname</strong>  <strong>[per-target-options]</strong></p>
-<p><strong>(1)table：</strong></p>
-<p>​    raw, mangle, nat, [filter]默认</p>
-<p><strong>(2)SUBCOMMAND：</strong></p>
-<ol>
-<li><p>链管理：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-N  new, 自定义一条新的规则链</span><br><span class="line">-X  delete，删除自定义的空的规则链</span><br><span class="line">-P  Policy，设置默认策略；对filter表中的链而言，</span><br><span class="line">其默认策略有: ACCEPT：接受</span><br><span class="line">             DROP：丢弃</span><br><span class="line">             REJECT：拒绝</span><br><span class="line">-E     重命名自定义链；引用计数不为0的自定义链不能够被重命名，也不能被删除</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>查看：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-L        list, 列出指定鏈上的所有规则，本选项须置后</span><br><span class="line">-n        numberic，以数字格式显示地址和端口号</span><br><span class="line">-v        verbose，详细信息</span><br><span class="line">-vv      更详细</span><br><span class="line">-x        exactly，显示计数器结果的精确值,而非单位转换后的易读值</span><br><span class="line">–line-numbers        显示规则的序号</span><br></pre></td></tr></table></figure>
-<p>常用组合：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-vnL</span><br><span class="line">–vvnxL –line-numbers</span><br><span class="line">-S selected,以iptables-save          命令格式显示链上规则</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>规则管理：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-A：append，追加</span><br><span class="line">-I：insert, 插入，要指明插入至的规则编号，默认为第一条</span><br><span class="line">-D：delete，删除</span><br><span class="line">    (1) 指明规则序号</span><br><span class="line">    (2) 指明规则本身</span><br><span class="line">-R：replace，替换指定链上的指定规则编号</span><br><span class="line">-F：flush，清空指定的规则链</span><br><span class="line">-Z：zero，置零</span><br><span class="line">iptables的每条规则都有两个计数器</span><br><span class="line">    (1) 匹配到的报文的个数</span><br><span class="line">    (2) 匹配到的所有报文的大小之和</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p><strong>(3)扩展匹配条件</strong></p>
-<p>​    扩展匹配条件：需要加载扩展模块（/usr/lib64/xtables/*.so），方可生效</p>
-<p>​    查看帮助 man iptables-extensions</p>
-<p>​    扩展匹配分为隐性扩展和显性扩展两种</p>
-<p><strong>隐性扩展：</strong>不需要写模块名称</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><strong>显性扩展：</strong>必须指定模块名称</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如：iptables -A INPUT -p tcp -m multiport –dports 21,80,445 -j REJECT</span><br></pre></td></tr></table></figure>
-<p><strong>(4)处理动作：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-j targetname [per-target-options]</span><br></pre></td></tr></table></figure>
-<p>简单：    <strong>ACCEPT，DROP</strong></p>
-<p>扩展：    <strong>REJECT：–reject-with:icmp-port-unreachable</strong>默认</p>
-<p>RETURN：返回调用链</p>
-<p>REDIRECT：端口重定向</p>
-<p>LOG：记录日志，dmesg</p>
-<p>MARK：做防火墙标记</p>
-<p>DNAT：目标地址转换</p>
-<p>SNAT：源地址转换</p>
-<p>MASQUERADE：地址伪装</p>
-<p>…</p>
-<p>自定义链：</p>
-<h2 id="三、iptables基本命令使用举例"><a href="#三、iptables基本命令使用举例" class="headerlink" title="三、iptables基本命令使用举例"></a><strong>三、iptables基本命令使用举例</strong></h2><h3 id="一-链及NAT的基本操作"><a href="#一-链及NAT的基本操作" class="headerlink" title="(一)链及NAT的基本操作"></a><strong>(一)链及NAT的基本操作</strong></h3><ol>
-<li><p>清除所有的规则。</p>
-<p>1）清除预设表filter中所有规则链中的规则。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -F</span><br></pre></td></tr></table></figure>
-<p>2）清除预设表filter中使用者自定链中的规则。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -X</span><br><span class="line">iptables -Z</span><br></pre></td></tr></table></figure>
-<p>3)清楚NAT表规则</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -F -t nat</span><br></pre></td></tr></table></figure>
-<p>4)NAT表的显示</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -nL</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>设置链的默认策略。一般有两种方法。</p>
-<p>1）首先允许所有的包，然后再禁止有危险的包通过放火墙。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -P INPUT ACCEPT</span><br><span class="line">iptables -P OUTPUT ACCEPT</span><br><span class="line">iptables -P FORWARD ACCEPT</span><br></pre></td></tr></table></figure>
-<p>2）首先禁止所有的包，然后根据需要的服务允许特定的包通过防火墙。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -P INPUT DROP</span><br><span class="line">iptables -P OUTPUT DROP</span><br><span class="line">iptables -P FORWARD DROP</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>列出表/链中的所有规则。默认只列出filter表。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -L</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>向链中添加规则。下面的语句用于开放网络接口：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -i lo -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -o lo -j ACCEPT</span><br><span class="line">iptables -A INPUT -i eth0 -j ACEPT</span><br><span class="line">iptables -A OUTPUT -o eth1 -j ACCEPT</span><br><span class="line">iptables -A FORWARD -i eth1 -j ACCEPT</span><br><span class="line">iptables -A FORWARD -0 eth1 -j ACCEPT</span><br></pre></td></tr></table></figure>
-<p>注意:由于本地进程不会经过FORWARD链，因此回环接口lo只在INPUT和OUTPUT两个链上作用。</p>
-</li>
-<li><p>使用者自定义链。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -N custom</span><br><span class="line">iptables -A custom -s 0/0 -d 0/0 -p icmp -j DROP</span><br><span class="line">iptables -A INPUT -s 0/0 -d 0/0 -j DROP</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="二-设置基本的规则匹配"><a href="#二-设置基本的规则匹配" class="headerlink" title="(二)设置基本的规则匹配"></a><strong>(二)设置基本的规则匹配</strong></h3><ol>
-<li><p>指定协议匹配。</p>
-<p>1）匹配指定协议。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp</span><br></pre></td></tr></table></figure>
-<pre><code>2）匹配指定协议之外的所有协议。
-
-       <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p !tcp</span><br></pre></td></tr></table></figure>
-</code></pre></li>
-<li><p>指定地址匹配。</p>
-<p>1）指定匹配的主机。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -s 192.168.0.18</span><br></pre></td></tr></table></figure>
-<p>2）指定匹配的网络。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -s 192.168.2.0/24</span><br></pre></td></tr></table></figure>
-<p>3）匹配指定主机之外的地址。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A FORWARD -s !192.168.0.19</span><br></pre></td></tr></table></figure>
-<pre><code>4）匹配指定网络之外的网络。
-</code></pre></li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A FORWARD -s ! 192.168.3.0/24</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li><p>指定网络接口匹配。</p>
-<p>1）指定单一的网络接口匹配。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -i eth0</span><br><span class="line">iptables -A FORWARD -o eth0</span><br></pre></td></tr></table></figure>
-<p>2）指定同类型的网络接口匹配。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A FORWARD -o ppp+</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>指定端口匹配。</p>
-<p>1）指定单一端口匹配。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp –sport www</span><br><span class="line">iptables -A INPUT -p udp –dport 53</span><br></pre></td></tr></table></figure>
-<pre><code>2）匹配指定端口之外的端口。
-
-             <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp –dport !22</span><br></pre></td></tr></table></figure>
-
-3）匹配端口范围。
-</code></pre></li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp –sport 22:80</span><br></pre></td></tr></table></figure>
-<p>​    4）匹配ICMP端口和ICMP类型。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INOUT -p icmp –icimp-type 8</span><br></pre></td></tr></table></figure>
-<p>​    5）指定ip碎片。</p>
-<p>​    每个网络接口都有一个MTU（最大传输单元），这个参数定义了可以通过的数据包的最大尺寸。</p>
-<p>​    如果一个    数据包大于这个参数值时，系统会将其划分成更小的数据包称为ip碎片）来传输，</p>
-<p>​    而接受方则对这些ip碎片再进行重组以还原整个包。</p>
-<p>​    这样会导致一个问题：当系统将大数据包划分成ip碎片传输时，第一个碎片含有完整的包头信息</p>
-<p>（IP+TCP、UDP和ICMP），但是后续的碎片只有包头的部分信息（如源地址、目的地址）。 </p>
-<p>​    因此，检查后面的ip碎片的头部（象有TCP、UDP和ICMP一样）是不可能的。假如有这样的一条</p>
-<p><strong>规则：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A FORWARD -p tcp -s 192.168.1.0/24 -d 192.168.2.100 –dport 80 -j ACCEPT</span><br></pre></td></tr></table></figure>
-<p>并且这时的FORWARD的policy为DROP时，系统只会让第一个ip碎片通过，而余下的碎片因为包头信息不</p>
-<p>完整而无法通过。可以通过—fragment/-f 选项来指定第二个及以后的ip碎片解决上述问题。</p>
-<p>#iptables -A FORWARD -f -s 192.168.1.0/24 -d 192.168.2.100 -j ACCEPT</p>
-<p>注意现在有许多进行ip碎片<em>的实例，如DoS</em>，因此允许ip碎片通过是有安全隐患的，对于这一点可以</p>
-<p>采用iptables的匹配扩展来进行限制。</p>
-<h3 id="三-设置扩展的规则匹配（举例已忽略目标动作）"><a href="#三-设置扩展的规则匹配（举例已忽略目标动作）" class="headerlink" title="(三)设置扩展的规则匹配（举例已忽略目标动作）"></a><strong>(三)设置扩展的规则匹配（举例已忽略目标动作）</strong></h3><p>1、多端口匹配。</p>
-<p>1）匹配多个源端口。</p>
-<p>#iptables -A INPUT -p tcp -m multiport –sport 22,53,80,110</p>
-<p>2）匹配多个目的端口。</p>
-<p>#iptables -A INPUT -p tcp -m multiport –dpoort 22,53,80</p>
-<p>3）匹配多端口(无论是源端口还是目的端口）</p>
-<p>#iptables -A INPUT -p tcp -m multiport –port 22,53,80,110</p>
-<p>2、指定TCP匹配扩展</p>
-<p>使用 –tcp-flags 选项可以根据tcp包的标志位进行过滤。</p>
-<p>#iptables -A INPUT -p tcp –tcp-flags SYN,FIN,ACK SYN</p>
-<p>#iptables -A FROWARD -p tcp –tcp-flags ALL SYN,ACK</p>
-<p>上实例中第一个表示SYN、ACK、FIN的标志都检查，但是只有SYN匹配。第二个表示ALL（SYN，</p>
-<p>ACK，FIN，RST，URG，PSH）的标志都检查，但是只有设置了SYN和ACK的匹配。</p>
-<p>#iptables -A FORWARD -p tcp –syn</p>
-<p>选项—syn相当于”–tcp-flags SYN,RST,ACK SYN”的简写。</p>
-<p>3、limit速率匹配扩展。</p>
-<p>1）指定单位时间内允许通过的数据包个数，单位时间可以是/second、/minute、/hour、/day或使用第一个子母。</p>
-<p>#iptables -A INPUT -m limit –limit 300/hour</p>
-<p>2 )指定触发事件的阀值。</p>
-<p>#iptables -A INPUT -m limit –limit-burst 10</p>
-<p>用来比对一次同时涌入的封包是否超过10个，超过此上限的包将直接丢弃。</p>
-<p>3）同时指定速率限制和触发阀值。</p>
-<p>#iptables -A INPUT -p icmp -m limit –-limit 3/m –limit-burst 3</p>
-<p>表示每分钟允许的最大包数量为限制速率（本例为3）加上当前的触发阀值burst数。任何情况下，都可保</p>
-<p>证3个数据包通过，触发阀值burst相当于允许额外的包数量。</p>
-<p>4、基于状态的匹配扩展（连接跟踪）</p>
-<p>每个网络连接包括以下信息：源地址、目标地址、源端口、目的端口，称为套接字对（socket pairs）；协</p>
-<p>议类型、连接状态（TCP协议）</p>
-<p>和超时时间等。防火墙把这些信息称为状态（stateful）。状态包过滤防火墙能在内存中维护一个跟踪状态</p>
-<p>的表，比简单包过滤防火墙具有更大的安全性，命令格式如下：</p>
-<p>iptables -m state –-state [!]state [,state,state,state]</p>
-<p>其中，state表是一个逗号分割的列表，用来指定连接状态，4种：</p>
-<p><strong>&gt;NEW：</strong>该包想要开始一个新的连接（重新连接或连接重定向）</p>
-<p><strong>&gt;RELATED：</strong>该包是属于某个已经建立的连接所建立的新连接。举例：</p>
-<p>FTP的数据传输连接和控制连接之间就是RELATED关系。</p>
-<p><strong>&gt;ESTABLISHED：</strong>该包属于某个已经建立的连接。</p>
-<p><strong>&gt;INVALID：</strong>该包不匹配于任何连接，通常这些包被DROP。</p>
-<p><strong>&gt;UNTRACKED：</strong>未进行追踪的连接，如raw表中关闭追踪</p>
-<p><strong>示例：</strong></p>
-<p>iptables -A INPUT -d 172.16.1.10 -p tcp -m multiport –dports 22,80 -m state —</p>
-<p>state NEW,ESTABLISHED -j ACCEPT</p>
-<p>iptables -A OUTPUT -s 172.16.1.10 -p tcp -m multiport –sports 22,80 -m state —</p>
-<p>state ESTABLISHED -j ACCEPT</p>
-<p>已经追踪到的并记录下来的连接信息库</p>
-<p><strong>/proc/net/nf_conntrack</strong></p>
-<p>调整连接追踪功能所能够容纳的最大连接数量</p>
-<p><strong>/proc/sys/net/nf_conntrack_max</strong></p>
-<p>不同的协议的连接追踪时长</p>
-<p><strong>/proc/sys/net/netfilter/</strong></p>
-<p>注意：CentOS7 需要加载模块： <strong>modprobe nf_conntrack</strong></p>
-<h3 id="开放被动模式的ftp服务"><a href="#开放被动模式的ftp服务" class="headerlink" title="开放被动模式的ftp服务"></a><strong>开放被动模式的ftp服务</strong></h3><ol>
-<li>装载ftp连接追踪的专用模块：</li>
-</ol>
-<p>跟踪模块路径：/lib/modules/kernelversion/kernel/net/netfilter</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/sysconfig/iptables-config </span><br><span class="line">    IPTABLES_MODULES=“nf_conntrack_ftp”</span><br><span class="line">    modproble nf_conntrack_ftp</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>放行请求报文：</li>
-</ol>
-<p>命令连接：NEW, ESTABLISHED</p>
-<p>数据连接：RELATED, ESTABLISHED</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables –I INPUT -d LocalIP -p tcp -m state –state ESTABLISHED,RELATED -j ACCEPT</span><br><span class="line"></span><br><span class="line">iptables -A INPUT -d LocalIP -p tcp –dport 21 -m state –state NEW -j ACCEPT</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>放行响应报文：</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -I OUTPUT -s LocalIP -p tcp -m state –state ESTABLISHED -j ACCEPT</span><br></pre></td></tr></table></figure>
-<p><strong>开放被动模式的ftp服务示例：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">yum install vsftpd</span><br><span class="line">systemctl start vsftpd</span><br><span class="line">modprobe nf_conntrack_ftp</span><br><span class="line">iptables -F</span><br><span class="line">iptables -A INPUT -m state –state ESTABLISHED,RELATED -j ACCEPT</span><br><span class="line">iptables -A INPUT -p tcp –dport 21 -m state –state NEW -j ACCEPT</span><br><span class="line">iptables -A OUTPUT -m state –state ESTABLISHED -j ACCEPT</span><br><span class="line">iptables -P INPUT DROP</span><br><span class="line">iptables -P OUTPUT DROP</span><br><span class="line">iptables –vnL</span><br></pre></td></tr></table></figure>
-<h3 id="iptable防火墙优化原则"><a href="#iptable防火墙优化原则" class="headerlink" title="iptable防火墙优化原则"></a><strong>iptable防火墙优化原则</strong></h3><p>任何不允许的访问，应该在请求到达时给予拒绝</p>
-<p>规则在链接上的次序即为其检查时的生效次序</p>
-<p>基于上述，规则优化</p>
-<p>1 安全放行所有入站和出站的状态为ESTABLISHED状态连接</p>
-<p>2 谨慎放行入站的新请求</p>
-<p>3 有特殊目的限制访问功能，要在放行规则之前加以拒绝</p>
-<p>4 同类规则（访问同一应用），匹配范围小的放在前面，用于特殊处理</p>
-<p>5 不同类的规则（访问不同应用），匹配范围大的放在前面</p>
-<p>6 应该将那些可由一条规则能够描述的多个规则合并为一条</p>
-<p>7 设置默认策略，建议白名单（只放行特定连接）</p>
-<p>1） iptables -P，不建议</p>
-<p>2） 建议在规则的最后定义规则做为默认策略</p>
-<p>## </p>
-<h2 id="四、NAT地址转换"><a href="#四、NAT地址转换" class="headerlink" title="四、NAT地址转换"></a><strong>四、NAT地址转换</strong></h2><p><strong>NAT：network address translation</strong></p>
-<p>PREROUTING，INPUT，OUTPUT，POSTROUTING</p>
-<p><strong>请求报文：</strong>修改源/目标IP，由定义如何修改</p>
-<p><strong>响应报文</strong>：修改源/目标IP，根据跟踪机制自动实现</p>
-<p><strong>SNAT：source NAT POSTROUTING, INPUT</strong></p>
-<p>让本地网络中的主机通过某一特定地址访问外部网络，实现地址伪装</p>
-<p><strong>请求报文：</strong>修改源IP</p>
-<p><strong>典型应用场景：</strong>多个PC机使用ADSL路由器共享上网，每个PC机都配置了内网IP，PC机访问</p>
-<p>外部网络的时候，路由器将数据包的报头中的源地址替换成路由器的ip，当外部网络的服</p>
-<p>务器比如网站web服务器接到访问请求的时候，他的日志记录下来的是路由器的ip地址，而</p>
-<p>不是pc机的内网ip；这是因为，这个服务器收到的数据包的报头里边的“源地址”，已经</p>
-<p>被替换了所以叫做SNAT，基于源地址的地址转换。</p>
-<p><strong>DNAT：destination NAT PREROUTING , OUTPUT</strong></p>
-<p>把本地网络中的主机上的某服务开放给外部网络访问(发布服务和端口映射)，</p>
-<p>但隐藏真实IP</p>
-<p><strong>请求报文：</strong>修改目标IP</p>
-<p><strong>典型应用场景：</strong>比如有web服务器放在内网配置内网ip，前端有个防火墙配置公网ip，互联</p>
-<p>网上的访问者使用公网ip来访问这个网站当访问的时候，客户端发出一个数据包，这个数据</p>
-<p>包的报头里边，目标地址写的是防火墙的公网ip，防火墙会把这个数据包的报头改写一次，</p>
-<p>将目标地址改写成web服务器的内网ip，然后再把这个数据包发送到内网的web服务器上，这</p>
-<p>样，数据包就穿透了防火墙，并从公网ip变成了一个对内网地址的访问了，即DNAT，基于目</p>
-<p>标的网络地址转换。</p>
-<p><strong>PNAT：port nat，</strong>端口和IP都进行修改</p>
-<p><strong>SNAT：固定IP</strong></p>
-<p>–to-source [ipaddr[-ipaddr]][:port[-port]]</p>
-<p>–random</p>
-<p>iptables -t nat -A POSTROUTING -s LocalNET ! -d LocalNet -j SNAT –tosource ExtIP</p>
-<p>示例：</p>
-<p>iptables -t nat -A POSTROUTING -s 10.0.1.0/24 ! –d 10.0.1.0/24 -j SNAT —</p>
-<p>to-source 172.18.1.6-172.18.1.9</p>
-<p><strong>SNAT：动态IP</strong></p>
-<p>MASQUERADE：地址伪装</p>
-<p>如此配置的话，不用指定SNAT的目标ip了，不管现在网卡的出口获得了怎样的动态ip，</p>
-<p>MASQUERADE会自动读取网卡现在的ip地址然后做SNAT出去，这样就实现了很好的动态</p>
-<p>SNAT地址转换。</p>
-<p>–to-ports port[-port]</p>
-<p>–random</p>
-<p>iptables -t nat -A POSTROUTING -s LocalNET ! -d LocalNet -j  MASQUERADE</p>
-<p><strong>示例：</strong></p>
-<p>iptables -t nat -A POSTROUTING -s 10.0.1.0/24 ! –d 10.0.1.0/24 -j</p>
-<p>MASQUERADE</p>
-<h3 id="如何区分SNAT和DNAT"><a href="#如何区分SNAT和DNAT" class="headerlink" title="如何区分SNAT和DNAT"></a><strong>如何区分SNAT和DNAT</strong></h3><p>从定义来讲它们一个是源地址转换，一个是目标地址转换。都是地址转换的功能，将私有地</p>
-<p>址转换为公网地址。</p>
-<p>要区分这两个功能可以简单的由连接发起者是谁来区分：</p>
-<p>内部地址要访问公网上的服务时（如web访问），内部地址会主动发起连接，由路由器或者</p>
-<p>防火墙上的网关对内部地址做个地址转换，将内部地址的私有IP转换为公网的公有IP，网</p>
-<p>关的这个地址转换称为SNAT，主要用于内部共享IP访问外部。</p>
-<p>当内部需要提供对外服务时（如对外发布web网站），外部地址发起主动连接，由路由器或</p>
-<p>者防火墙上的网关接收这个连接，然后将连接转换到内部，此过程是由带有公网IP的网关替</p>
-<p>代内部服务来接收外部的连接，然后在内部做地址转换，此转换称为DNAT，主要用于内部服</p>
-<p>务对外发布。</p>
-
-          
+          防火墙（Firewall），也称防护墙，是由Check Point创立者Gil Shwed于1993年发明并引入国际互联网。
+它是一种工作在网络或主机边缘，对进出网络或主机的数据包基于一定的规则检查，并在匹配某规则时
+由规则定义的行为进行处理的一组功能的组件，基本上的实现都是默认情况下关闭所有的通过
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/30/防火墙技术(一)/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -3809,7 +1866,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 
@@ -3856,6 +1913,8 @@
   
 
 
+  
+
 
 
 
@@ -3894,6 +1953,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -3954,6 +2018,19 @@
   
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 
