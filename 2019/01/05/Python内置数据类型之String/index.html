@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Python内置数据类型之String导论什么叫字符串？字符串就是一个个字符组成的有序的序列，是字符的集合，在python中通常使用单引号、双引号和三引号引住的字符序列 字符串属性字符串是不可变对象区别于列表类型的对象，列表对象时可变的，而字符串对象是不可变的，因此字符串对象不存在通过索引改变其中的字符 字符串支持使用索引访问字符串可以通过下标索引进行访问 字符串是有序的字符集合，字符序列字符串在">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python内置数据类型之String">
+<meta property="og:url" content="http://yoursite.com/2019/01/05/Python内置数据类型之String/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="Python内置数据类型之String导论什么叫字符串？字符串就是一个个字符组成的有序的序列，是字符的集合，在python中通常使用单引号、双引号和三引号引住的字符序列 字符串属性字符串是不可变对象区别于列表类型的对象，列表对象时可变的，而字符串对象是不可变的，因此字符串对象不存在通过索引改变其中的字符 字符串支持使用索引访问字符串可以通过下标索引进行访问 字符串是有序的字符集合，字符序列字符串在">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-24T06:53:40.684Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python内置数据类型之String">
+<meta name="twitter:description" content="Python内置数据类型之String导论什么叫字符串？字符串就是一个个字符组成的有序的序列，是字符的集合，在python中通常使用单引号、双引号和三引号引住的字符序列 字符串属性字符串是不可变对象区别于列表类型的对象，列表对象时可变的，而字符串对象是不可变的，因此字符串对象不存在通过索引改变其中的字符 字符串支持使用索引访问字符串可以通过下标索引进行访问 字符串是有序的字符集合，字符序列字符串在">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/05/Python内置数据类型之String/">
+
+
+
+
+
+  <title>Python内置数据类型之String | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-editor">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-algorithm">
+          <a href="/categories/算法" rel="section">
+            
+            算法
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/05/Python内置数据类型之String/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python内置数据类型之String</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-05T19:28:42+08:00">
+                2019-01-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Python内置数据类型之String"><a href="#Python内置数据类型之String" class="headerlink" title="Python内置数据类型之String"></a>Python内置数据类型之String</h1><h2 id="导论"><a href="#导论" class="headerlink" title="导论"></a>导论</h2><pre><code>什么叫字符串？字符串就是一个个字符组成的有序的序列，是字符的集合，在python中通常使用单引号、双引号和三引号引住的字符序列
+</code></pre><h2 id="字符串属性"><a href="#字符串属性" class="headerlink" title="字符串属性"></a>字符串属性</h2><h3 id="字符串是不可变对象"><a href="#字符串是不可变对象" class="headerlink" title="字符串是不可变对象"></a>字符串是不可变对象</h3><pre><code>区别于列表类型的对象，列表对象时可变的，而字符串对象是不可变的，因此字符串对象不存在通过索引改变其中的字符
+</code></pre><h3 id="字符串支持使用索引访问"><a href="#字符串支持使用索引访问" class="headerlink" title="字符串支持使用索引访问"></a>字符串支持使用索引访问</h3><pre><code>字符串可以通过下标索引进行访问
+</code></pre><h3 id="字符串是有序的字符集合，字符序列"><a href="#字符串是有序的字符集合，字符序列" class="headerlink" title="字符串是有序的字符集合，字符序列"></a>字符串是有序的字符集合，字符序列</h3><pre><code>字符串在内存中可以是连续的地址空间，有序的序列
+</code></pre><h3 id="字符串是可迭代的"><a href="#字符串是可迭代的" class="headerlink" title="字符串是可迭代的"></a>字符串是可迭代的</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sql = <span class="string">"select * from user where name='tom'"</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> sql:</span><br><span class="line">    print(i,end = <span class="string">' '</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>s e l e c t   *   f r o m   u s e r   w h e r e   n a m e = &apos; t o m &apos; 
+</code></pre><h2 id="字符串的操作"><a href="#字符串的操作" class="headerlink" title="字符串的操作"></a>字符串的操作</h2><h3 id="str-join-iterable-–-gt-str"><a href="#str-join-iterable-–-gt-str" class="headerlink" title="str.join(iterable) –&gt;str"></a>str.join(iterable) –&gt;str</h3><pre><code>1. 将可迭代对象连接起来，使用string作为分隔符
+2. 可迭代对象本身元素都是字符串
+3. 返回一个新的字符串
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print( <span class="string">''</span>.join([<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>]) )</span><br></pre></td></tr></table></figure>
+<pre><code>abc
+</code></pre><h3 id="号连接"><a href="#号连接" class="headerlink" title="+ 号连接"></a>+ 号连接</h3><p>将两个字符串连接在一起<br>代码格式如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'abc'</span> + <span class="string">'def'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>abcdef
+</code></pre><h2 id="字符串分割"><a href="#字符串分割" class="headerlink" title="字符串分割"></a>字符串分割</h2><p>分割字符串的两种方法分为2类</p>
+<h3 id="1-str-split-sep-None-maxsplit-1-gt-list-of-strings"><a href="#1-str-split-sep-None-maxsplit-1-gt-list-of-strings" class="headerlink" title="1. str.split(sep=None, maxsplit=-1) -&gt; list of strings"></a>1. str.split(sep=None, maxsplit=-1) -&gt; list of strings</h3><pre><code>将字符串安装分隔符分割成若干字符串，并返回列表  
+  从左至右
+  sep 指定分割字符串，缺省的情况下空白字符串作为分隔符
+  maxsplit 指定分割的次数， -1 表示遍历整个字符串
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s1 = <span class="string">'www.baidu.com'</span></span><br><span class="line">a,b,c = s1.split(<span class="string">'.'</span>,maxsplit=<span class="number">2</span>)</span><br><span class="line">a,b,c</span><br></pre></td></tr></table></figure>
+<pre><code>(&apos;www&apos;, &apos;baidu&apos;, &apos;com&apos;)
+</code></pre><h3 id="2-str-partition-sep-gt-head-sep-tail"><a href="#2-str-partition-sep-gt-head-sep-tail" class="headerlink" title="2. str.partition(sep) -&gt; (head, sep, tail):"></a>2. str.partition(sep) -&gt; (head, sep, tail):</h3><pre><code>将字符串按照分隔符分割成两段，返回这两段和分隔符的元组  
+  从左至右，遇到分隔符就把字符串分割成两部分，返回头、分隔符、尾三部分的三元组；如果
+  没有找到分隔符，就返回头、 2个空元素的三元组
+  sep 分割字符串， 必须指定
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s2 = <span class="string">'www.qq.com'</span></span><br><span class="line">a,b,c = s2.partition(<span class="string">'.'</span>)</span><br><span class="line">a,b,c</span><br></pre></td></tr></table></figure>
+<pre><code>(&apos;www&apos;, &apos;.&apos;, &apos;qq.com&apos;)
+</code></pre><h2 id="字符串大小写"><a href="#字符串大小写" class="headerlink" title="字符串大小写"></a>字符串大小写</h2><h3 id="str-upper-全大写"><a href="#str-upper-全大写" class="headerlink" title="str.upper(): 全大写"></a>str.upper(): 全大写</h3><h3 id="str-lower-全小写"><a href="#str-lower-全小写" class="headerlink" title="str.lower(): 全小写"></a>str.lower(): 全小写</h3><h3 id="str-swapcase-交换大小写"><a href="#str-swapcase-交换大小写" class="headerlink" title="str.swapcase(): 交换大小写"></a>str.swapcase(): 交换大小写</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s3 = <span class="string">'aBCDef'</span></span><br><span class="line">print(s3.upper())</span><br><span class="line">print(s3.lower())</span><br><span class="line">print(s3.swapcase())</span><br></pre></td></tr></table></figure>
+<pre><code>ABCDEF
+abcdef
+AbcdEF
+</code></pre><h2 id="字符串排版"><a href="#字符串排版" class="headerlink" title="字符串排版"></a>字符串排版</h2><h3 id="str-title-gt-str"><a href="#str-title-gt-str" class="headerlink" title="str.title() -&gt; str"></a>str.title() -&gt; str</h3><p> 标题的每个单词都大写</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'hello world'</span>.title())</span><br></pre></td></tr></table></figure>
+<pre><code>Hello World
+</code></pre><h3 id="str-capitalize-gt-str"><a href="#str-capitalize-gt-str" class="headerlink" title="str.capitalize() -&gt; str"></a>str.capitalize() -&gt; str</h3><p> 首个单词大写</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'abc def '</span>.capitalize())</span><br></pre></td></tr></table></figure>
+<pre><code>Abc def 
+</code></pre><h3 id="str-center-width-fillchar-gt-str"><a href="#str-center-width-fillchar-gt-str" class="headerlink" title="str.center(width[, fillchar]) -&gt; str"></a>str.center(width[, fillchar]) -&gt; str</h3><p>  width 打印宽度<br>  fillchar 填充的字符</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">' abcd '</span>.center(<span class="number">20</span>,<span class="string">'*'</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>******* abcd *******
+</code></pre><h3 id="str-zfill-width-gt-str"><a href="#str-zfill-width-gt-str" class="headerlink" title="str.zfill(width) -&gt; str"></a>str.zfill(width) -&gt; str</h3><pre><code>width 打印宽度，居右，左边用0填充    
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">14</span>,<span class="number">3</span>):</span><br><span class="line">    print(<span class="string">'&#123;&#125;'</span>.format(i).zfill(<span class="number">4</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>0001
+0004
+0007
+0010
+0013
+</code></pre><h3 id="str-ljust-width-fillchar-gt-str-左对齐"><a href="#str-ljust-width-fillchar-gt-str-左对齐" class="headerlink" title="str.ljust(width[, fillchar]) -&gt; str 左对齐"></a>str.ljust(width[, fillchar]) -&gt; str 左对齐</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'abcd'</span>.ljust(<span class="number">10</span>))</span><br><span class="line">print(<span class="string">'abcd'</span>.ljust(<span class="number">10</span>,<span class="string">'0'</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>abcd      
+abcd000000
+</code></pre><h3 id="str-rjust-width-fillchar-gt-str-左对齐"><a href="#str-rjust-width-fillchar-gt-str-左对齐" class="headerlink" title="str.rjust(width[, fillchar]) -&gt; str 左对齐"></a>str.rjust(width[, fillchar]) -&gt; str 左对齐</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'abcd'</span>.rjust(<span class="number">10</span>))</span><br><span class="line">print(<span class="string">'abcd'</span>.rjust(<span class="number">10</span>,<span class="string">'0'</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>      abcd
+000000abcd
+</code></pre><h2 id="字符串修改"><a href="#字符串修改" class="headerlink" title="字符串修改"></a>字符串修改</h2><h3 id="str-replace-old-new-count-gt-str"><a href="#str-replace-old-new-count-gt-str" class="headerlink" title="str.replace(old, new[, count]) -&gt; str"></a>str.replace(old, new[, count]) -&gt; str</h3><pre><code>字符串中找到匹配替换为新子串，返回新字符串  
+count表示替换几次，不指定就是全部替换  
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print( <span class="string">'www.baidu.com'</span>.replace(<span class="string">'w'</span>,<span class="string">'p'</span>) )</span><br><span class="line">print( <span class="string">'www.baidu.com'</span>.replace(<span class="string">'w'</span>,<span class="string">'p'</span>,<span class="number">2</span>) )</span><br></pre></td></tr></table></figure>
+<pre><code>ppp.baidu.com
+ppw.baidu.com
+</code></pre><h3 id="strip-chars-gt-str"><a href="#strip-chars-gt-str" class="headerlink" title="strip([chars]) -&gt; str"></a>strip([chars]) -&gt; str</h3><pre><code>从字符串两端去除指定的字符集chars中的所有字符
+如果chars没有指定，去除两端的空白字符
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'  abcd123 \r \n \t  '</span>.strip())</span><br><span class="line">print(<span class="string">'****abcder***'</span>.strip(<span class="string">'*'</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>abcd123
+abcder
+</code></pre><h3 id="str-lstrip-chars-gt-str-从左开始"><a href="#str-lstrip-chars-gt-str-从左开始" class="headerlink" title="str.lstrip([chars]) -&gt; str  从左开始"></a>str.lstrip([chars]) -&gt; str  从左开始</h3><h3 id="str-rstrip-chars-gt-str-从右开始"><a href="#str-rstrip-chars-gt-str-从右开始" class="headerlink" title="str.rstrip([chars]) -&gt; str  从右开始"></a>str.rstrip([chars]) -&gt; str  从右开始</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"***abcdef###"</span>.lstrip(<span class="string">"*"</span>))</span><br><span class="line">print(<span class="string">"***abcdef###"</span>.rstrip(<span class="string">"#"</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>abcdef###
+***abcdef
+</code></pre><h2 id="字符串查找"><a href="#字符串查找" class="headerlink" title="字符串查找"></a>字符串查找</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><pre><code>index和count方法都是O(n)  
+随着数据规模的增大，而效率下降  
+</code></pre><h3 id="str-find-sub-start-end-gt-int"><a href="#str-find-sub-start-end-gt-int" class="headerlink" title="str.find(sub[, start[, end]]) -&gt; int"></a>str.find(sub[, start[, end]]) -&gt; int</h3><pre><code>在指定的区间[start, end)，从左至右，查找子串sub。找到返回索引，没找到返回-1
+</code></pre><h3 id="str-rfind-sub-start-end-gt-int"><a href="#str-rfind-sub-start-end-gt-int" class="headerlink" title="str.rfind(sub[, start[, end]]) -&gt; int"></a>str.rfind(sub[, start[, end]]) -&gt; int</h3><pre><code>在指定的区间[start, end)，从右至左，查找子串sub。找到返回索引，没找到返回-1
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">"I am very very very sorry"</span></span><br><span class="line">print(s.find(<span class="string">'very'</span>))</span><br><span class="line">print(s.find(<span class="string">'very'</span>,<span class="number">6</span>))</span><br><span class="line">print(s.find(<span class="string">'very'</span>,<span class="number">6</span>,<span class="number">10</span>))</span><br><span class="line">print(s.rfind(<span class="string">'very'</span>,<span class="number">10</span>))</span><br><span class="line">print(s.rfind(<span class="string">'very'</span>,<span class="number">10</span>,<span class="number">15</span>))</span><br><span class="line">print(s.rfind(<span class="string">'very'</span>,<span class="number">-10</span>,<span class="number">-1</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>5
+10
+-1
+15
+10
+15
+</code></pre><h3 id="str-index-sub-start-end-gt-int"><a href="#str-index-sub-start-end-gt-int" class="headerlink" title="str.index(sub[, start[, end]]) -&gt; int"></a>str.index(sub[, start[, end]]) -&gt; int</h3><p> 在指定的区间[start, end)，从左至右，查找子串sub。找到返回索引，没找到抛出异常ValueError</p>
+<h3 id="str-rindex-sub-start-end-gt-int"><a href="#str-rindex-sub-start-end-gt-int" class="headerlink" title="str.rindex(sub[, start[, end]]) -&gt; int"></a>str.rindex(sub[, start[, end]]) -&gt; int</h3><p> 在指定的区间[start, end)，从左至右，查找子串sub。找到返回索引，没找到抛出异常ValueError</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">"I am very very very sorry"</span></span><br><span class="line">print(s.index(<span class="string">'very'</span>))</span><br><span class="line">print(s.index(<span class="string">'very'</span>, <span class="number">5</span>))</span><br><span class="line"><span class="comment"># print(s.index('very', 6, 13))</span></span><br><span class="line">print(s.rindex(<span class="string">'very'</span>, <span class="number">10</span>))</span><br><span class="line">print(s.rindex(<span class="string">'very'</span>, <span class="number">10</span>, <span class="number">15</span>))</span><br><span class="line">print(s.rindex(<span class="string">'very'</span>,<span class="number">-10</span>,<span class="number">-1</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>5
+5
+15
+10
+15
+</code></pre><h3 id="str-count-sub-start-end-gt-int"><a href="#str-count-sub-start-end-gt-int" class="headerlink" title="str.count(sub[, start[, end]]) -&gt; int"></a>str.count(sub[, start[, end]]) -&gt; int</h3><p> 在指定的区间[start, end)，从左至右，统计子串sub出现的次数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">"I am very very very sorry"</span></span><br><span class="line">print(s.count(<span class="string">'very'</span>))</span><br><span class="line">print(s.count(<span class="string">'very'</span>, <span class="number">5</span>))</span><br><span class="line">print(s.count(<span class="string">'very'</span>, <span class="number">10</span>, <span class="number">14</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>3
+3
+1
+</code></pre><h3 id="len-string"><a href="#len-string" class="headerlink" title="len(string)"></a>len(string)</h3><p> 返回字符串的长度，即字符的个数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">"I am very very very sorry"</span></span><br><span class="line">print(len(s))</span><br></pre></td></tr></table></figure>
+<pre><code>25
+</code></pre><h2 id="字符串判断"><a href="#字符串判断" class="headerlink" title="字符串判断*"></a>字符串判断*</h2><h3 id="str-endswith-suffix-start-end-gt-bool"><a href="#str-endswith-suffix-start-end-gt-bool" class="headerlink" title="str.endswith(suffix[, start[, end]]) -&gt; bool"></a>str.endswith(suffix[, start[, end]]) -&gt; bool</h3><pre><code>在指定的区间[start, end)，字符串是否是suffix结尾
+</code></pre><h3 id="str-startswith-prefix-start-end-gt-bool"><a href="#str-startswith-prefix-start-end-gt-bool" class="headerlink" title="str.startswith(prefix[, start[, end]]) -&gt; bool"></a>str.startswith(prefix[, start[, end]]) -&gt; bool</h3><pre><code>在指定的区间[start, end)，字符串是否是prefix开头
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">"I am very very very sorry"</span></span><br><span class="line">print(s.startswith(<span class="string">'very'</span>))</span><br><span class="line">print(s.startswith(<span class="string">'very'</span>,<span class="number">5</span>))</span><br><span class="line">print(s.startswith(<span class="string">'very'</span>,<span class="number">5</span>,<span class="number">9</span>))</span><br><span class="line">print(s.endswith(<span class="string">'sorry'</span>))</span><br><span class="line">print(s.endswith(<span class="string">'sorry'</span>,<span class="number">5</span>))</span><br><span class="line">print(s.endswith(<span class="string">'sorry'</span>,<span class="number">5</span>,<span class="number">100</span>))</span><br><span class="line">print(s.endswith(<span class="string">'sorry'</span>,<span class="number">5</span>,<span class="number">-1</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>False
+True
+True
+True
+True
+True
+False
+</code></pre><h2 id="字符串判断-is系列"><a href="#字符串判断-is系列" class="headerlink" title="字符串判断 is系列"></a>字符串判断 is系列</h2><h3 id="isalnum-gt-bool-是否是字母和数字组成"><a href="#isalnum-gt-bool-是否是字母和数字组成" class="headerlink" title="isalnum() -&gt; bool 是否是字母和数字组成"></a>isalnum() -&gt; bool 是否是字母和数字组成</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'  '</span>.isalnum())</span><br><span class="line">print(<span class="string">'abc123'</span>.isalnum())</span><br></pre></td></tr></table></figure>
+<pre><code>False
+True
+</code></pre><h3 id="isalpha-是否是字母"><a href="#isalpha-是否是字母" class="headerlink" title="isalpha() 是否是字母"></a>isalpha() 是否是字母</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"abcdAVAS"</span>.isalpha())</span><br><span class="line">print(<span class="string">'abcd12'</span>.isalpha())</span><br></pre></td></tr></table></figure>
+<pre><code>True
+False
+</code></pre><h3 id="isdecimal-是否只包含十进制数字"><a href="#isdecimal-是否只包含十进制数字" class="headerlink" title="isdecimal() 是否只包含十进制数字"></a>isdecimal() 是否只包含十进制数字</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'1234'</span>.isdecimal())</span><br><span class="line">print(<span class="string">'abc123'</span>.isdecimal())</span><br></pre></td></tr></table></figure>
+<pre><code>True
+False
+</code></pre><h3 id="isdigit-是否全部数字-0-9"><a href="#isdigit-是否全部数字-0-9" class="headerlink" title="isdigit() 是否全部数字(0~9)"></a>isdigit() 是否全部数字(0~9)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'12345'</span>.isdigit())</span><br><span class="line">print(<span class="string">'12345abcd'</span>.isdigit())</span><br></pre></td></tr></table></figure>
+<pre><code>True
+False
+</code></pre><h3 id="isidentifier-是不是字母和下划线开头，其他都是字母、数字、-下划线"><a href="#isidentifier-是不是字母和下划线开头，其他都是字母、数字、-下划线" class="headerlink" title="isidentifier() 是不是字母和下划线开头，其他都是字母、数字、 下划线"></a>isidentifier() 是不是字母和下划线开头，其他都是字母、数字、 下划线</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'_abcd124'</span>.isidentifier())</span><br><span class="line">print(<span class="string">'12abcd124'</span>.isidentifier())</span><br></pre></td></tr></table></figure>
+<pre><code>True
+False
+</code></pre><h3 id="islower-是否都是小写"><a href="#islower-是否都是小写" class="headerlink" title="islower() 是否都是小写"></a>islower() 是否都是小写</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"abcd"</span>.islower())</span><br><span class="line">print(<span class="string">'ABcd'</span>.islower())</span><br></pre></td></tr></table></figure>
+<pre><code>True
+False
+</code></pre><h3 id="isupper-是否全部大写"><a href="#isupper-是否全部大写" class="headerlink" title="isupper() 是否全部大写"></a>isupper() 是否全部大写</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'ABCD'</span>.isupper())</span><br><span class="line">print(<span class="string">'ABCde'</span>.isupper())</span><br></pre></td></tr></table></figure>
+<pre><code>True
+False
+</code></pre><h3 id="isspace-是否只包含空白字符"><a href="#isspace-是否只包含空白字符" class="headerlink" title="isspace() 是否只包含空白字符"></a>isspace() 是否只包含空白字符</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">' \r \n \t '</span>.isspace())</span><br><span class="line">print(<span class="string">' 11  '</span>.isspace())</span><br></pre></td></tr></table></figure>
+<pre><code>True
+False
+</code></pre><h2 id="字符串格式化"><a href="#字符串格式化" class="headerlink" title="字符串格式化"></a>字符串格式化</h2><pre><code>字符串的格式化是一种拼接字符串输出样式的手段，更灵活方便
+    join拼接只能使用分隔符，且要求被拼接的是可迭代对象且其元素是字符串
+    拼接字符串还算方便，但是非字符串需要先转换为字符串才能拼接
+</code></pre><h3 id="format函数格式字符串语法"><a href="#format函数格式字符串语法" class="headerlink" title="format函数格式字符串语法"></a>format函数格式字符串语法</h3><p> <strong>“{} {xxx}”.format(*args, </strong>kwargs) -&gt; str**</p>
+<p><strong>对齐</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'&#123;0&#125; * &#123;1&#125; = &#123;2:&lt;2&#125;'</span>.format(<span class="number">3</span>,<span class="number">2</span>,<span class="number">2</span>*<span class="number">3</span>))</span><br><span class="line">print(<span class="string">'&#123;0&#125; * &#123;1&#125; = &#123;2:&lt;02&#125;'</span>.format(<span class="number">3</span>,<span class="number">2</span>,<span class="number">2</span>*<span class="number">3</span>))</span><br><span class="line">print(<span class="string">'&#123;0&#125; * &#123;1&#125; = &#123;2:&gt;02&#125;'</span>.format(<span class="number">3</span>,<span class="number">2</span>,<span class="number">2</span>*<span class="number">3</span>))</span><br><span class="line">print(<span class="string">'&#123;:^30&#125;'</span>.format(<span class="string">'centered'</span>))</span><br><span class="line">print(<span class="string">'&#123;:*^30&#125;'</span>.format(<span class="string">'centered'</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>3 * 2 = 6 
+3 * 2 = 60
+3 * 2 = 06
+           centered           
+***********centered***********
+</code></pre><p><strong>进制</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'int:&#123;0:d&#125;; hexo:&#123;0:x&#125;; oct:&#123;0:o&#125;; bin:&#123;0:b&#125;'</span>.format(<span class="number">42</span>))</span><br><span class="line">print(<span class="string">'int:&#123;0:#d&#125; hexo:&#123;0:x&#125; oct:&#123;0:o&#125; bin:&#123;0:b&#125;'</span>.format(<span class="number">42</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>int:42; hexo:2a; oct:52; bin:101010
+int:42 hexo:2a oct:52 bin:101010
+</code></pre><p><strong>浮点数</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"&#123;&#125;"</span>.format(<span class="number">3</span>**<span class="number">0.5</span>)) <span class="comment"># 1.7320508075688772</span></span><br><span class="line">print(<span class="string">"&#123;:f&#125;"</span>.format(<span class="number">3</span>**<span class="number">0.5</span>)) <span class="comment"># 1.732051，精度默认6</span></span><br><span class="line">print(<span class="string">"&#123;:10f&#125;"</span>.format(<span class="number">3</span>**<span class="number">0.5</span>)) <span class="comment"># 右对齐，宽度10</span></span><br><span class="line">print(<span class="string">"&#123;:2&#125;"</span>.format(<span class="number">102.231</span>)) <span class="comment"># 宽度为2</span></span><br><span class="line">print(<span class="string">"&#123;:.2&#125;"</span>.format(<span class="number">3</span>**<span class="number">0.5</span>)) <span class="comment"># 1.7 2个数字</span></span><br><span class="line">print(<span class="string">"&#123;:.2f&#125;"</span>.format(<span class="number">3</span>**<span class="number">0.5</span>)) <span class="comment"># 1.73 小数点后2位</span></span><br><span class="line">print(<span class="string">"&#123;:3.2f&#125;"</span>.format(<span class="number">3</span>**<span class="number">0.5</span>)) <span class="comment"># 1.73 宽度为3，小数点后2位</span></span><br><span class="line">print(<span class="string">"&#123;:3.3f&#125;"</span>.format(<span class="number">0.2745</span>)) <span class="comment"># 0.275</span></span><br><span class="line">print(<span class="string">"&#123;:3.3%&#125;"</span>.format(<span class="number">1</span>/<span class="number">3</span>)) <span class="comment"># 33.333%</span></span><br></pre></td></tr></table></figure>
+<pre><code>1.7320508075688772
+1.732051
+  1.732051
+102.231
+1.7
+1.73
+1.73
+0.275
+33.333%
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+	<div>
+
+	<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+
+
+	</div>
+	
+    
+	<div>
+
+    
+
+    
+
+	
+	
+	
+	
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/05/Python内置数据结构之list/" rel="next" title="Python内置数据结构之list">
+                <i class="fa fa-chevron-left"></i> Python内置数据结构之list
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/05/Python内置数据结构之tuple/" rel="prev" title="Python内置数据结构之tuple">
+                Python内置数据结构之tuple <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </div></article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python内置数据类型之String"><span class="nav-number">1.</span> <span class="nav-text">Python内置数据类型之String</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#导论"><span class="nav-number">1.1.</span> <span class="nav-text">导论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串属性"><span class="nav-number">1.2.</span> <span class="nav-text">字符串属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串是不可变对象"><span class="nav-number">1.2.1.</span> <span class="nav-text">字符串是不可变对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串支持使用索引访问"><span class="nav-number">1.2.2.</span> <span class="nav-text">字符串支持使用索引访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串是有序的字符集合，字符序列"><span class="nav-number">1.2.3.</span> <span class="nav-text">字符串是有序的字符集合，字符序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串是可迭代的"><span class="nav-number">1.2.4.</span> <span class="nav-text">字符串是可迭代的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串的操作"><span class="nav-number">1.3.</span> <span class="nav-text">字符串的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#str-join-iterable-–-gt-str"><span class="nav-number">1.3.1.</span> <span class="nav-text">str.join(iterable) –&gt;str</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#号连接"><span class="nav-number">1.3.2.</span> <span class="nav-text">+ 号连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串分割"><span class="nav-number">1.4.</span> <span class="nav-text">字符串分割</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-str-split-sep-None-maxsplit-1-gt-list-of-strings"><span class="nav-number">1.4.1.</span> <span class="nav-text">1. str.split(sep=None, maxsplit=-1) -&gt; list of strings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-str-partition-sep-gt-head-sep-tail"><span class="nav-number">1.4.2.</span> <span class="nav-text">2. str.partition(sep) -&gt; (head, sep, tail):</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串大小写"><span class="nav-number">1.5.</span> <span class="nav-text">字符串大小写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#str-upper-全大写"><span class="nav-number">1.5.1.</span> <span class="nav-text">str.upper(): 全大写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#str-lower-全小写"><span class="nav-number">1.5.2.</span> <span class="nav-text">str.lower(): 全小写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#str-swapcase-交换大小写"><span class="nav-number">1.5.3.</span> <span class="nav-text">str.swapcase(): 交换大小写</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串排版"><span class="nav-number">1.6.</span> <span class="nav-text">字符串排版</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#str-title-gt-str"><span class="nav-number">1.6.1.</span> <span class="nav-text">str.title() -&gt; str</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#str-capitalize-gt-str"><span class="nav-number">1.6.2.</span> <span class="nav-text">str.capitalize() -&gt; str</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#str-center-width-fillchar-gt-str"><span class="nav-number">1.6.3.</span> <span class="nav-text">str.center(width[, fillchar]) -&gt; str</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#str-zfill-width-gt-str"><span class="nav-number">1.6.4.</span> <span class="nav-text">str.zfill(width) -&gt; str</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#str-ljust-width-fillchar-gt-str-左对齐"><span class="nav-number">1.6.5.</span> <span class="nav-text">str.ljust(width[, fillchar]) -&gt; str 左对齐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#str-rjust-width-fillchar-gt-str-左对齐"><span class="nav-number">1.6.6.</span> <span class="nav-text">str.rjust(width[, fillchar]) -&gt; str 左对齐</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串修改"><span class="nav-number">1.7.</span> <span class="nav-text">字符串修改</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#str-replace-old-new-count-gt-str"><span class="nav-number">1.7.1.</span> <span class="nav-text">str.replace(old, new[, count]) -&gt; str</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#strip-chars-gt-str"><span class="nav-number">1.7.2.</span> <span class="nav-text">strip([chars]) -&gt; str</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#str-lstrip-chars-gt-str-从左开始"><span class="nav-number">1.7.3.</span> <span class="nav-text">str.lstrip([chars]) -&gt; str  从左开始</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#str-rstrip-chars-gt-str-从右开始"><span class="nav-number">1.7.4.</span> <span class="nav-text">str.rstrip([chars]) -&gt; str  从右开始</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串查找"><span class="nav-number">1.8.</span> <span class="nav-text">字符串查找</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#时间复杂度"><span class="nav-number">1.8.1.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#str-find-sub-start-end-gt-int"><span class="nav-number">1.8.2.</span> <span class="nav-text">str.find(sub[, start[, end]]) -&gt; int</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#str-rfind-sub-start-end-gt-int"><span class="nav-number">1.8.3.</span> <span class="nav-text">str.rfind(sub[, start[, end]]) -&gt; int</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#str-index-sub-start-end-gt-int"><span class="nav-number">1.8.4.</span> <span class="nav-text">str.index(sub[, start[, end]]) -&gt; int</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#str-rindex-sub-start-end-gt-int"><span class="nav-number">1.8.5.</span> <span class="nav-text">str.rindex(sub[, start[, end]]) -&gt; int</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#str-count-sub-start-end-gt-int"><span class="nav-number">1.8.6.</span> <span class="nav-text">str.count(sub[, start[, end]]) -&gt; int</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#len-string"><span class="nav-number">1.8.7.</span> <span class="nav-text">len(string)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串判断"><span class="nav-number">1.9.</span> <span class="nav-text">字符串判断*</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#str-endswith-suffix-start-end-gt-bool"><span class="nav-number">1.9.1.</span> <span class="nav-text">str.endswith(suffix[, start[, end]]) -&gt; bool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#str-startswith-prefix-start-end-gt-bool"><span class="nav-number">1.9.2.</span> <span class="nav-text">str.startswith(prefix[, start[, end]]) -&gt; bool</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串判断-is系列"><span class="nav-number">1.10.</span> <span class="nav-text">字符串判断 is系列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#isalnum-gt-bool-是否是字母和数字组成"><span class="nav-number">1.10.1.</span> <span class="nav-text">isalnum() -&gt; bool 是否是字母和数字组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isalpha-是否是字母"><span class="nav-number">1.10.2.</span> <span class="nav-text">isalpha() 是否是字母</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isdecimal-是否只包含十进制数字"><span class="nav-number">1.10.3.</span> <span class="nav-text">isdecimal() 是否只包含十进制数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isdigit-是否全部数字-0-9"><span class="nav-number">1.10.4.</span> <span class="nav-text">isdigit() 是否全部数字(0~9)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isidentifier-是不是字母和下划线开头，其他都是字母、数字、-下划线"><span class="nav-number">1.10.5.</span> <span class="nav-text">isidentifier() 是不是字母和下划线开头，其他都是字母、数字、 下划线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#islower-是否都是小写"><span class="nav-number">1.10.6.</span> <span class="nav-text">islower() 是否都是小写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isupper-是否全部大写"><span class="nav-number">1.10.7.</span> <span class="nav-text">isupper() 是否全部大写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isspace-是否只包含空白字符"><span class="nav-number">1.10.8.</span> <span class="nav-text">isspace() 是否只包含空白字符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串格式化"><span class="nav-number">1.11.</span> <span class="nav-text">字符串格式化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#format函数格式字符串语法"><span class="nav-number">1.11.1.</span> <span class="nav-text">format函数格式字符串语法</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

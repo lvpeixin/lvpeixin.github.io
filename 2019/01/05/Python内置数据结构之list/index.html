@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Python内置数据结构之list列表是Python中最具灵活性的有序集合对象类型，与字符串不同的是，列表可以包含任何种类的对象：数字、字符串甚至其他列表。 同样，与字符串不同的，列表都是可变对象，它都支持在原处修改的操作，可以通过指定的偏移量和切片、列表方法调用、删除语句等等方法来实现 Python的列表可以完成大多数集合体数据结构的工作： 列表的主要属性有：    任意对象的有序集合&amp;nbsp">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python内置数据结构之list">
+<meta property="og:url" content="http://yoursite.com/2019/01/05/Python内置数据结构之list/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="Python内置数据结构之list列表是Python中最具灵活性的有序集合对象类型，与字符串不同的是，列表可以包含任何种类的对象：数字、字符串甚至其他列表。 同样，与字符串不同的，列表都是可变对象，它都支持在原处修改的操作，可以通过指定的偏移量和切片、列表方法调用、删除语句等等方法来实现 Python的列表可以完成大多数集合体数据结构的工作： 列表的主要属性有：    任意对象的有序集合&amp;nbsp">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-24T06:52:01.448Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python内置数据结构之list">
+<meta name="twitter:description" content="Python内置数据结构之list列表是Python中最具灵活性的有序集合对象类型，与字符串不同的是，列表可以包含任何种类的对象：数字、字符串甚至其他列表。 同样，与字符串不同的，列表都是可变对象，它都支持在原处修改的操作，可以通过指定的偏移量和切片、列表方法调用、删除语句等等方法来实现 Python的列表可以完成大多数集合体数据结构的工作： 列表的主要属性有：    任意对象的有序集合&amp;nbsp">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/05/Python内置数据结构之list/">
+
+
+
+
+
+  <title>Python内置数据结构之list | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-editor">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-algorithm">
+          <a href="/categories/算法" rel="section">
+            
+            算法
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/05/Python内置数据结构之list/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python内置数据结构之list</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-05T19:28:42+08:00">
+                2019-01-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Python内置数据结构之list"><a href="#Python内置数据结构之list" class="headerlink" title="Python内置数据结构之list"></a>Python内置数据结构之list</h1><p>列表是Python中最具灵活性的有序集合对象类型，与字符串不同的是，列表可以包含任何种类的对象：数字、字符串甚至其他列表。</p>
+<p>同样，与字符串不同的，列表都是可变对象，它都支持在原处修改的操作，可以通过指定的偏移量和切片、列表方法调用、删除语句等等方法来实现</p>
+<p>Python的列表可以完成大多数集合体数据结构的工作：</p>
+<p>列表的主要属性有：  </p>
+<ul>
+<li><p>任意对象的有序集合<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从功能上看,列表就是收集其他对象的地方,你可以把它们看做组。同时列表所包含的每一项都保持了从左到右的位置顺序(也就是说,它们是序列)。</p>
+</li>
+<li><p>通过偏移读取数据<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;就像字符串一样,你可以通过列表对象的偏移对其进行索引,从而读取对象的某部分内容。由于列表的每一项都是有序的,那么你也可以执行诸如分片和合并之类的任务</p>
+</li>
+<li><p>可变长度、异构以及任意嵌套<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;与字符串不同的是,列表可以实地的增长或者缩短(长度可变),并且可以包含任何类型的对象而不仅仅是包含有单个字符的字符串(异构)。因为列表能够包含其他复杂的对象,又能够支持任意的嵌套,所以可以创建列表的子列表的子列表等。</p>
+</li>
+<li><p>属于可变序列的分类<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;就类型分类而言,列表支持在原处的修改(它们是可变的),也可以响应所有针对字符串序列的操作,例如,索引、分片以及合并。实际上,序列操作在列表与字符串中的工作方式相同。唯一的区别是:当应用于字符串上的合并和分片这样的操作应用于列表时,返回新的列表。然而列表是可变的,因此它们也支持字符串不支持的其他操作(例如,删除和索引赋值操作,它们都是在原处修改列表)。</p>
+</li>
+<li><p>对象引用数组<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从技术上来讲, Python列表包含了零个或多个其他对象的引用。列表也许会让你想起指针(地址)数组,从 Python的列表中读取一个项的速度与索引一个C语言数组差不多。实际上,在标准 Python解释器内部,列表就是C数组而不是链接结构。每当用到引用时, Python总是会将这个引用指向一个对象,所以程序只需处理对象的操作。当把一个对象赋给一个数据结构元素或变量名时, Python总是会存储对象的引用,而不是对象的一个拷贝(除非明确要求保存拷贝）  </p>
+</li>
+</ul>
+<h2 id="列表list的定义"><a href="#列表list的定义" class="headerlink" title="列表list的定义"></a>列表list的定义</h2><p>list()，里面可以什么都不放，也可以放可迭代对象。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lst = list()</span><br><span class="line">lst = []</span><br><span class="line">lst = [2, 6, 9, &apos;ab&apos;]</span><br><span class="line">lst = list(range(5))</span><br></pre></td></tr></table></figure></p>
+<h2 id="列表的索引访问"><a href="#列表的索引访问" class="headerlink" title="列表的索引访问"></a>列表的索引访问</h2><p>python中list的索引从0开始。绝大多数语言的下标是从0开始的<br>负数的索引表示从后往前数，由-1开始，-1表示最后一个元素。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">In [6]: lst</span><br><span class="line">Out[6]: [1, 2, 3]</span><br><span class="line"> </span><br><span class="line">In [7]: lst[0]</span><br><span class="line">Out[7]: 1</span><br><span class="line"> </span><br><span class="line">In [8]: lst[-1]</span><br><span class="line">Out[8]: 3</span><br></pre></td></tr></table></figure></p>
+<p>如果索引超出范围，将引发IndexError。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">In [9]: lst[-4]</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line">IndexError                                Traceback (most recent call last)</span><br><span class="line">&lt;ipython-input-9-7ea420056b9a&gt; in &lt;module&gt;()</span><br><span class="line">----&gt; 1 lst[-4]</span><br><span class="line"> </span><br><span class="line">IndexError: list index out of range</span><br><span class="line"> </span><br><span class="line">In [10]: lst[3]</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line">IndexError                                Traceback (most recent call last)</span><br><span class="line">&lt;ipython-input-10-298ffefac8cf&gt; in &lt;module&gt;()</span><br><span class="line">----&gt; 1 lst[3]</span><br><span class="line"> </span><br><span class="line">IndexError: list index out of range</span><br></pre></td></tr></table></figure>
+<p>修改元素的时候，如果超出索引范围，也会引发IndexError。</p>
+<h2 id="数字处理函数："><a href="#数字处理函数：" class="headerlink" title="数字处理函数："></a>数字处理函数：</h2><pre><code>round(): 四舍五取偶六入  
+
+math模块  
+    floor():向下取整 
+
+    ceil():向上取整 
+
+    int():取整数部分 
+
+    //:整除且向下取整
+
+    min():取最小值 
+
+    max():取最大值  
+
+    pow(x,y)等价于x**y  
+
+    math.sqrt():开平方 
+
+进制函数，返回值是字符串 
+
+    bin():二进制转换  
+
+    oct():八进制转换  
+
+    hex():十六进制转换  
+
+random模块
+    randint(a,b) 返回a，b之间的整数
+
+    choice(seq)从非空序列的元素中随机挑选一个元素
+
+    randrange([start,] stop [,sttep])从指定范围内，按指定基数递增的集合中获取一个随机数
+
+    random.shuffle(list) -&gt;None 就地打乱列表元素
+
+    sample(population, k)从样本空间或总体中随机取出k个不同的元素，返回一个新的列表
+
+len(list): 显示列表的元素个数
+</code></pre><h2 id="列表内建函数："><a href="#列表内建函数：" class="headerlink" title="列表内建函数："></a>列表内建函数：</h2><pre><code>list.append(obj): 在列表末尾添加新的对象
+
+list.count(obj):  统计某个元素在列表中出现的次数
+
+list.extend(seq):在列表末尾一次性追加另一个序列中的多个值（用新列表扩展原来的列表）
+
+list.index(obj)： 从列表中找出某个值第一个匹配项的索引位置
+
+list.insert(index, obj)： 将对象插入列表
+
+list.pop([index=-1])： 移除列表中的一个元素（默认最后一个元素），并且返回该元素的值
+
+list.remove(obj)： 移除列表中某个值的第一个匹配项
+
+list.reverse()：  反向列表中元素
+
+list.sort(cmp=None, key=None, reverse=False)：对原列表进行排序
+
+list.clear()：  清空列表
+
+list.copy()： 复制列表    
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+	<div>
+
+	<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+
+
+	</div>
+	
+    
+	<div>
+
+    
+
+    
+
+	
+	
+	
+	
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/04/Python的内存管理机制/" rel="next" title="Python的内存管理机制">
+                <i class="fa fa-chevron-left"></i> Python的内存管理机制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/05/Python内置数据类型之String/" rel="prev" title="Python内置数据类型之String">
+                Python内置数据类型之String <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </div></article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python内置数据结构之list"><span class="nav-number">1.</span> <span class="nav-text">Python内置数据结构之list</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#列表list的定义"><span class="nav-number">1.1.</span> <span class="nav-text">列表list的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表的索引访问"><span class="nav-number">1.2.</span> <span class="nav-text">列表的索引访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数字处理函数："><span class="nav-number">1.3.</span> <span class="nav-text">数字处理函数：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表内建函数："><span class="nav-number">1.4.</span> <span class="nav-text">列表内建函数：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

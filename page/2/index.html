@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -93,7 +93,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
+    scheme: 'Mist',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -217,6 +217,14 @@
         </li>
       
         
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+            Python
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-shell">
           <a href="/categories/shell脚本" rel="section">
             
@@ -256,47 +264,27 @@
           </a>
         </li>
       
-
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
+        
+        <li class="menu-item menu-item-editor">
+          <a href="/categories/文本三剑客" rel="section">
             
-            搜索
+            文本三剑客
           </a>
         </li>
+      
+        
+        <li class="menu-item menu-item-algorithm">
+          <a href="/categories/算法" rel="section">
+            
+            算法
+          </a>
+        </li>
+      
+
       
     </ul>
   
 
-  
-    <div class="site-search">
-      
-  
-  <div class="algolia-popup popup search-popup">
-    <div class="algolia-search">
-      <div class="algolia-search-input-icon">
-        <i class="fa fa-search"></i>
-      </div>
-      <div class="algolia-search-input" id="algolia-search-input"></div>
-    </div>
-
-    <div class="algolia-results">
-      <div id="algolia-stats"></div>
-      <div id="algolia-hits"></div>
-      <div id="algolia-pagination" class="algolia-pagination"></div>
-    </div>
-
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-  </div>
-
-
-
-
-    </div>
   
 </nav>
 
@@ -325,7 +313,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/29/SAMBA服务介绍及相关实验/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/07/Python之封装和解构/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="吕培新">
@@ -344,7 +332,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/29/SAMBA服务介绍及相关实验/" itemprop="url">SAMBA服务介绍及相关实验</a></h1>
+                <a class="post-title-link" href="/2019/01/07/Python之封装和解构/" itemprop="url">封装和解构</a></h1>
         
 
         <div class="post-meta">
@@ -356,8 +344,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-29T16:15:07+08:00">
-                2018-06-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-07T19:28:42+08:00">
+                2019-01-07
               </time>
             
 
@@ -379,8 +367,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -418,18 +406,35 @@
       
         
           
-          一、SAMBA介绍Samba是在Linux和UNIX系统上实现SMB协议的一个免费软件，由服务器及客户端程序构成。
-SMB：Server Messages Block，信息服务块，是一种在局域网上共享文件和打印机的一种通信协议，
-它为局域网内的不同计算机之间提供文件及打印机等资源的共享服务。
-CIF
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/29/SAMBA服务介绍及相关实验/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h1 id="封装和结构"><a href="#封装和结构" class="headerlink" title="封装和结构"></a>封装和结构</h1><h2 id="封装-装箱"><a href="#封装-装箱" class="headerlink" title="封装(装箱)"></a>封装(装箱)</h2><pre><code>封装是将多个值使用逗号分割，组合在一起
+本质上，封装是返回一个元组，只是省掉了小括号
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">t1 = (<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">t2 = <span class="number">1</span>,<span class="number">2</span></span><br><span class="line">print(t1,type(t1))</span><br><span class="line">print(t2,type(t2))</span><br></pre></td></tr></table></figure>
+<pre><code>(1, 2) &lt;class &apos;tuple&apos;&gt;
+(1, 2) &lt;class &apos;tuple&apos;&gt;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">封装、解构 可以理解为交换意思</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">4</span></span><br><span class="line">b = <span class="number">5</span></span><br><span class="line">temp = a</span><br><span class="line">a = b</span><br><span class="line">b = temp</span><br><span class="line">print(a,b)</span><br><span class="line"><span class="comment"># 等价于</span></span><br><span class="line">a, b = b, a</span><br><span class="line">print(a,b)</span><br></pre></td></tr></table></figure>
+<pre><code>5 4
+4 5
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">上句中，等号右边使用了封装，而左边就使用了解构</span><br></pre></td></tr></table></figure>
+<h2 id="解构（拆箱）"><a href="#解构（拆箱）" class="headerlink" title="解构（拆箱）"></a>解构（拆箱）</h2><pre><code>解构就是把线性结构的元素解开，并按顺序赋给其他变量
+解构左边接纳的变量数要和右边解开的元素个数一致
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lst = [<span class="number">3</span>,<span class="number">5</span>]</span><br><span class="line">a , b = lst</span><br><span class="line">print(a,b)</span><br></pre></td></tr></table></figure>
+<pre><code>3 5
+</code></pre><p><strong>注：</strong>非线性结构也可以解构</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a,b = &#123;<span class="string">'a'</span>:<span class="number">10</span>,<span class="string">'b'</span>:<span class="number">20</span>&#125;</span><br><span class="line">print(a,b)</span><br><span class="line">a,b = (<span class="number">11</span>,<span class="number">22</span>)</span><br><span class="line">print(a,b)</span><br></pre></td></tr></table></figure>
+<pre><code>a b
+11 22
+</code></pre><h3 id="变量名"><a href="#变量名" class="headerlink" title="*变量名"></a>*变量名</h3><p>Python的解构参数中可以使用 <em>变量名 来接收参数<br>被 </em> 变量名 收集的参数会组成一个列表<br>*变量名 在结构参数中只能使用一次  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lst  = list(range(<span class="number">1</span>,<span class="number">21</span>,<span class="number">2</span>))</span><br><span class="line">head,*body = lst</span><br><span class="line">print(head,body)</span><br><span class="line"><span class="comment"># head,*mid,*tail = lst  error</span></span><br></pre></td></tr></table></figure>
+<pre><code>1 [3, 5, 7, 9, 11, 13, 15, 17, 19]
+</code></pre><h3 id="丢弃变量"><a href="#丢弃变量" class="headerlink" title="丢弃变量"></a>丢弃变量</h3><pre><code>如果不关心一个变量，就可以定义改变量的名字为‘_’    
+‘_’是一个合法的标识符，也可以作为一个有效的变量使用，但是定义成下划线就是希望不要被使用，除非你明确的知道这个数据需要使用
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lst = [<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">2</span>]</span><br><span class="line">head,*_,tail = lst</span><br><span class="line">print(head,tail)</span><br><span class="line"><span class="comment"># _是合法的标识符，看到下划线就知道这个变量就是不想被使用</span></span><br><span class="line">print(_)</span><br></pre></td></tr></table></figure>
+<pre><code>7 2
+[8, 9]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+          
         
       
     </div>
@@ -485,7 +490,7 @@ CIF
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/28/NFS文件系统介绍及相关实验/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/06/Python之集合操作/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="吕培新">
@@ -504,7 +509,7 @@ CIF
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/28/NFS文件系统介绍及相关实验/" itemprop="url">NFS文件系统介绍及相关实验</a></h1>
+                <a class="post-title-link" href="/2019/01/06/Python之集合操作/" itemprop="url">Python之集合操作</a></h1>
         
 
         <div class="post-meta">
@@ -516,8 +521,8 @@ CIF
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-28T16:13:51+08:00">
-                2018-06-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-06T19:28:42+08:00">
+                2019-01-06
               </time>
             
 
@@ -539,8 +544,8 @@ CIF
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -578,17 +583,92 @@ CIF
       
         
           
-          一、NFS网络文件系统介绍NFS：Network File System 网络文件系统，基于内核的文件系统。Sun公司开发，通过使用NFS，
-用户和程序可以像访问本地文件一样访问远端系统上的文件，基于RPC（远程过程调用）实现
-RPC采用C/S模式。客户机请求程序调用进程发送一个有进程参数的调用信息
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/28/NFS文件系统介绍及相关实验/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h1 id="Python之集合操作"><a href="#Python之集合操作" class="headerlink" title="Python之集合操作"></a>Python之集合操作</h1><h2 id="set-集合"><a href="#set-集合" class="headerlink" title="set 集合"></a>set 集合</h2><pre><code>set是 可变的、 无序的、不重复 的元素的集合
+</code></pre><h2 id="set的定义初始化"><a href="#set的定义初始化" class="headerlink" title="set的定义初始化"></a>set的定义初始化</h2><pre><code>set() -&gt; new empty set object
+set(iterable) -&gt; new set object
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">s1 = set()</span><br><span class="line">s2 = set(range(<span class="number">5</span>))</span><br><span class="line">s3 = set(list(range(<span class="number">5</span>)))</span><br><span class="line">s4 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;</span><br><span class="line">s5 = &#123;(<span class="number">1</span>,<span class="number">2</span>),<span class="number">3</span>,<span class="string">'a'</span>&#125;</span><br><span class="line">print(s1,s2,s3,s4,s4)</span><br></pre></td></tr></table></figure>
+<pre><code>set() {0, 1, 2, 3, 4} {0, 1, 2, 3, 4} {1, 2, 3, 4} {1, 2, 3, 4}
+</code></pre><p>但是：</p>
+<ul>
+<li>set的元素要求必须可以hash</li>
+<li>目前学过的不可hash的类型有list、 set,所以set不能添加list或set</li>
+<li>元素不可以使用索引</li>
+<li>set可以迭代</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s1 = &#123; [<span class="number">1</span>,<span class="number">2</span>],<span class="number">3</span>,<span class="number">4</span> &#125;</span><br><span class="line">s2 = &#123; &#123;<span class="number">1</span>,<span class="number">2</span>&#125;,<span class="number">3</span>,<span class="number">4</span> &#125;</span><br></pre></td></tr></table></figure>
+<pre><code>---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-2-562af6839204&gt; in &lt;module&gt;
+----&gt; 1 s1 = { [1,2],3,4 }
+      2 s2 = { {1,2},3,4 }
+
+
+TypeError: unhashable type: &apos;list&apos;
+</code></pre><h2 id="set增加"><a href="#set增加" class="headerlink" title="set增加"></a>set增加</h2><h3 id="add-elem"><a href="#add-elem" class="headerlink" title="add(elem)"></a>add(elem)</h3><pre><code>增加一个元素到set中
+如果元素存在，什么都不做
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;</span><br><span class="line">s1.add(<span class="number">6</span>)</span><br><span class="line">s1.add(<span class="number">6</span>)</span><br><span class="line">print(s1)</span><br></pre></td></tr></table></figure>
+<pre><code>{1, 2, 3, 4, 5, 6}
+</code></pre><h3 id="update-others"><a href="#update-others" class="headerlink" title="update(*others)"></a>update(*others)</h3><pre><code>合并其他元素到set集合中来  
+参数others必须是可迭代对象  
+就地修改  
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s1 = &#123;<span class="number">1</span>,<span class="number">2</span>&#125;</span><br><span class="line">s1.update(range(<span class="number">5</span>))</span><br><span class="line">s1.update((<span class="string">'a'</span>,<span class="string">'b'</span>))</span><br><span class="line">print(s1)</span><br></pre></td></tr></table></figure>
+<pre><code>{0, 1, 2, 3, 4, &apos;a&apos;, &apos;b&apos;}
+</code></pre><h2 id="set-删除"><a href="#set-删除" class="headerlink" title="set 删除"></a>set 删除</h2><h3 id="remove-elem"><a href="#remove-elem" class="headerlink" title="remove(elem)"></a>remove(elem)</h3><pre><code>从set中移除一个元素
+元素不存在，抛出keyerror异常
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;</span><br><span class="line">s1.remove(<span class="number">1</span>)</span><br><span class="line">s1.remove(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>---------------------------------------------------------------------------
+
+KeyError                                  Traceback (most recent call last)
+
+&lt;ipython-input-5-06ea004ed743&gt; in &lt;module&gt;
+      1 s1 = {1,2,3,4}
+      2 s1.remove(1)
+----&gt; 3 s1.remove(1)
+
+
+KeyError: 1
+</code></pre><h3 id="discard（elem）"><a href="#discard（elem）" class="headerlink" title="discard（elem）"></a>discard（elem）</h3><pre><code>从set中移除一个元素
+元素不存在，什么都不做
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;</span><br><span class="line">s1.discard(<span class="number">1</span>)</span><br><span class="line">s1.discard(<span class="number">1</span>)</span><br><span class="line">print(s1)</span><br></pre></td></tr></table></figure>
+<pre><code>{2, 3, 4}
+</code></pre><h3 id="pop-gt-item"><a href="#pop-gt-item" class="headerlink" title="pop() -&gt; item"></a>pop() -&gt; item</h3><pre><code>移除并返回任意的元素
+空集返回KeyError异常
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s1 = &#123;<span class="number">1</span>,<span class="number">2</span>&#125;</span><br><span class="line">s1.pop()</span><br><span class="line">s1.pop()</span><br><span class="line">s1.pop()</span><br></pre></td></tr></table></figure>
+<pre><code>---------------------------------------------------------------------------
+
+KeyError                                  Traceback (most recent call last)
+
+&lt;ipython-input-7-cb8a0766400b&gt; in &lt;module&gt;
+      2 s1.pop()
+      3 s1.pop()
+----&gt; 4 s1.pop()
+
+
+KeyError: &apos;pop from an empty set&apos;
+</code></pre><h3 id="clear"><a href="#clear" class="headerlink" title="clear()"></a>clear()</h3><pre><code>移除所有元素
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;</span><br><span class="line">s1.clear()</span><br><span class="line">print(s1)</span><br></pre></td></tr></table></figure>
+<pre><code>set()
+</code></pre><h2 id="set的修改、查询"><a href="#set的修改、查询" class="headerlink" title="set的修改、查询"></a>set的修改、查询</h2><h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><pre><code>set中没有修改的说法，修改删除元素，然后添加新元素
+</code></pre><h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><pre><code>set是非线性结构，无法通过索引来查询元素
+</code></pre><h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h3><pre><code>set可以迭代通过for循环所有元素
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> s1:</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
+<pre><code>1
+2
+3
+4
+</code></pre><h3 id="成员运算符"><a href="#成员运算符" class="headerlink" title="成员运算符"></a>成员运算符</h3><pre><code>set是通过in 或者 not in 判断元素是否在set中
+</code></pre><h2 id="线性结构和非线性结构的差别"><a href="#线性结构和非线性结构的差别" class="headerlink" title="线性结构和非线性结构的差别"></a>线性结构和非线性结构的差别</h2><pre><code>线性结构的查询时间复杂度是O(n)，即随着数据规模的增大而增加耗时
+set、 dict等结构，内部使用hash值作为key，时间复杂度可以做到O(1)，查询时间和数据规模无关
+</code></pre><h3 id="可hash数据类型"><a href="#可hash数据类型" class="headerlink" title="可hash数据类型"></a>可hash数据类型</h3><pre><code>数值型int、 float、 complex
+布尔型True、 False
+字符串string、 bytes
+tuple
+None
+</code></pre><p>以上都是不可变类型，是可哈希类型， hashable<br>set的元素必须是可hash的 </p>
+
+          
         
       
     </div>
@@ -644,7 +724,7 @@ RPC采用C/S模式。客户机请求程序调用进程发送一个有进程参�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/26/FTP服务介绍及相关实验/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/06/Python内置数据类型之Bytes和Bytearray/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="吕培新">
@@ -663,7 +743,7 @@ RPC采用C/S模式。客户机请求程序调用进程发送一个有进程参�
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/26/FTP服务介绍及相关实验/" itemprop="url">FTP服务介绍及相关实验</a></h1>
+                <a class="post-title-link" href="/2019/01/06/Python内置数据类型之Bytes和Bytearray/" itemprop="url">Python内置数据类型之Bytes和Bytearray</a></h1>
         
 
         <div class="post-meta">
@@ -675,8 +755,8 @@ RPC采用C/S模式。客户机请求程序调用进程发送一个有进程参�
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-26T16:12:34+08:00">
-                2018-06-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-06T19:28:42+08:00">
+                2019-01-06
               </time>
             
 
@@ -698,8 +778,8 @@ RPC采用C/S模式。客户机请求程序调用进程发送一个有进程参�
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -737,20 +817,89 @@ RPC采用C/S模式。客户机请求程序调用进程发送一个有进程参�
       
         
           
-          一、FTP服务FTP是File Transfer Protocol（文件传输协议）的英文简称，而中文简称为“文传协议”。
-用于Internet上的控制文件的双向传输。FTP协议是早期的三个应用级协议之一。
-基于C/S结构
-双通道协议：数据和命令连接
-数据传输格式：二进制（默认）和文本
-两种模式：服务
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/26/FTP服务介绍及相关实验/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h1 id="Python内置数据类型之Bytes和Bytearray"><a href="#Python内置数据类型之Bytes和Bytearray" class="headerlink" title="Python内置数据类型之Bytes和Bytearray"></a>Python内置数据类型之Bytes和Bytearray</h1><h2 id="bytes、bytearray"><a href="#bytes、bytearray" class="headerlink" title="bytes、bytearray"></a>bytes、bytearray</h2><h3 id="Python3引入两个新类型"><a href="#Python3引入两个新类型" class="headerlink" title="Python3引入两个新类型"></a>Python3引入两个新类型</h3><ol>
+<li>bytes<br> 不可变字节类型</li>
+<li>byrearray<br> 字节数组<br> 可变</li>
+</ol>
+<h2 id="字符串与bytes"><a href="#字符串与bytes" class="headerlink" title="字符串与bytes"></a>字符串与bytes</h2><ul>
+<li>字符串是由字符组成的有序序列，字符可以使用编码来理解  </li>
+<li>bytes是字节组成的有序的不可变序列  </li>
+<li>bytearray是字节组成的有序的可变序列  </li>
+</ul>
+<h2 id="编码与解码"><a href="#编码与解码" class="headerlink" title="编码与解码"></a>编码与解码</h2><ul>
+<li><p>字符串按照不同的字符集编码encode返回字节序列bytes   </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">encode(encoding=&quot;utf-8&quot;,errors=&quot;strict&quot;) -&gt; str</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>字节序列按照不同的字符集解码decode返回字符串      </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bytes.decode(encoding=&quot;utf-8&quot;,errors=&quot;strict&quot;) -&gt; str  </span><br><span class="line">bytearray.decode(encoding=&quot;utf-8&quot;.errors=&quot;strict&quot;) -&gt; str</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="butes定义"><a href="#butes定义" class="headerlink" title="butes定义"></a>butes定义</h2><p>定义 </p>
+<ul>
+<li><p>bytes() 空bytes</p>
+</li>
+<li><p>bytes(int) 指定字节的bytes，被0填充</p>
+</li>
+<li><p>bytes(iterable_of_ints) -&gt; bytes[0,255]的int组成的可迭代对象</p>
+</li>
+<li><p>bytes(string, encoding[, errors]) -&gt; bytes等价于string.encode()</p>
+</li>
+<li><p>bytes(bytes_or_buffer) -&gt; immutable copy of bytes_or_buffer从一个字节序或者buffer复制出一个新的不可变的bytes对象</p>
+</li>
+<li><p>使用b前缀定义<br>  只允许基本ASCII使用字符形式b’abc9’<br>  使用16进制表示b”\x41\x61”</p>
+</li>
+</ul>
+<h2 id="bytes操作"><a href="#bytes操作" class="headerlink" title="bytes操作"></a>bytes操作</h2><ul>
+<li><p>和str类型类似，都是不可变类型，所以方法很多都一样。只不过bytes的方法，输入是bytes，输出是bytes   </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">b&apos;abcdef&apos;.replace(b&apos;f&apos;,b&apos;k&apos;) </span><br><span class="line">b&apos;abc&apos;.find(b&apos;b&apos;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>类方法 bytes.fromhex(string)<br>  string必须是2个字符的16进制的形式，’6162 6a 6b’,空格将被忽略 </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    bytes.fromhex(&apos;6162 09 6a 6b00&apos;)</span><br><span class="line">    hex()</span><br><span class="line">    ``` </span><br><span class="line"></span><br><span class="line">* 返回16进制表示的字符串</span><br></pre></td></tr></table></figure>
+<p>  ‘abc’.encode().hex()</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 索引</span><br></pre></td></tr></table></figure>
+<p>  b’abcde’[2] 返回该字节对应的数，int类型<br>  <code>`</code></p>
+<h2 id="bytearray"><a href="#bytearray" class="headerlink" title="bytearray"></a>bytearray</h2><p>定义    </p>
+</li>
+<li><p>bytearray() 空bytearray</p>
+</li>
+<li><p>bytearray(int) 指定字节的bytearray，被0 填充</p>
+</li>
+<li><p>bytearray(iterable_of_ints) -&gt; bytearray[0,255]的int组成的可迭代对象</p>
+</li>
+<li><p>bytearat(string,encoding[, errors]) -&gt; bytearray 近似string.encode(), 不可返回可变对象</p>
+</li>
+<li><p>bytearray(bytes_or_buffer) 从一个字节序列或者buffer复制出一个可变的bytearray对象</p>
+</li>
+<li><p>注意，b前缀定义的类型是bytes类型</p>
+</li>
+</ul>
+<h2 id="bytearray操作"><a href="#bytearray操作" class="headerlink" title="bytearray操作"></a>bytearray操作</h2><ul>
+<li><p>和bytes类型的方法相同<br>  bytearray(b’abcdef’)replace(b’f’,b’k’)<br>  bytearray(b’abc’).find(b’b’)</p>
+</li>
+<li><p>类方法 bytearray.fromhex(string)<br>  string必须是2个字符的16进制的形式。’6162 6a 6b’, 空格将被忽略<br>  bytearray.fromhex(‘6162 09 6a 6b00’)</p>
+</li>
+<li><p>hex(): 返回16进制表示的字符串<br>   bytearray(‘abc’.encode()).hex()</p>
+</li>
+<li><p>索引: bytearray(b’abcef’)[2] 返回该字节对应的数，int类型</p>
+</li>
+<li><p>append(int) 尾部追加一个元素</p>
+</li>
+<li><p>insert(index, int) 在指定索引位置插入元素</p>
+</li>
+<li><p>extend(iterable_of_ints) 将一个可迭代的整数集合追加到当前bytearray</p>
+</li>
+<li><p>pop(index=-1) 从指定索引上移除元素，默认从尾部移除</p>
+</li>
+<li><p>remove(value) 找到第一个value移除，找不到抛ValueError异常</p>
+</li>
+<li><p>clear() 清空bytearray</p>
+</li>
+<li><p>reverse() 翻转bytearray，就地修改</p>
+<p>  注意：上述方法若需要使用int类型，值在[0, 255]</p>
+</li>
+</ul>
+
+          
         
       
     </div>
@@ -806,7 +955,7 @@ RPC采用C/S模式。客户机请求程序调用进程发送一个有进程参�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/23/LAMP架构实现/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/05/Python内置数据结构之tuple/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="吕培新">
@@ -825,7 +974,7 @@ RPC采用C/S模式。客户机请求程序调用进程发送一个有进程参�
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/23/LAMP架构实现/" itemprop="url">LAMP架构实现</a></h1>
+                <a class="post-title-link" href="/2019/01/05/Python内置数据结构之tuple/" itemprop="url">Python内置数据结构之tuple</a></h1>
         
 
         <div class="post-meta">
@@ -837,8 +986,8 @@ RPC采用C/S模式。客户机请求程序调用进程发送一个有进程参�
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-23T16:08:26+08:00">
-                2018-06-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-05T19:30:42+08:00">
+                2019-01-05
               </time>
             
 
@@ -860,8 +1009,8 @@ RPC采用C/S模式。客户机请求程序调用进程发送一个有进程参�
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">Web服务器</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -899,17 +1048,37 @@ RPC采用C/S模式。客户机请求程序调用进程发送一个有进程参�
       
         
           
-          一、LAMP介绍LAM(M)P是一组Web应用软件的组合，Linux+Apache+Mysql/MariaDB+Perl/PHP/Python一组
-常用来搭建动态网站或者服务器的开源软件，所有组成产品均是开源软件，本身都是各自
-独立的程序，但是因为常被放在一起使用，拥有了越来越高的兼容度，共同组成了
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/23/LAMP架构实现/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h1 id="Python内置数据结构之tuple"><a href="#Python内置数据结构之tuple" class="headerlink" title="Python内置数据结构之tuple"></a>Python内置数据结构之tuple</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python的元组和列表类似，不同之处在于元组中的元素不能修改(因此元组又称为只读列表)，且元组使用小括号而列表使用中括号。  </p>
+<h2 id="一、创建元组"><a href="#一、创建元组" class="headerlink" title="一、创建元组"></a>一、创建元组</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tup1 = (&apos;physics&apos;, &apos;chemistry&apos;, 1997, 2000);</span><br><span class="line">tup2 = (1, 2, 3, 4, 5 );</span><br><span class="line">tup3 = &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;;</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;创建空元组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tup1 = ();</span><br></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;元组中只包含一个元素时，需要在元素后面添加逗号来消除歧义<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tup1 = (50,);</span><br></pre></td></tr></table></figure></p>
+<p>元组与字符串类似，下标索引从0开始，可以进行截取，组合等。</p>
+<h2 id="二、访问元组"><a href="#二、访问元组" class="headerlink" title="二、访问元组"></a>二、访问元组</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;元组可以使用下标索引来访问元组中的值，如下实例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tup1 = (&apos;physics&apos;, &apos;chemistry&apos;, 1997, 2000);</span><br><span class="line">tup2 = (1, 2, 3, 4, 5, 6, 7 );</span><br><span class="line"></span><br><span class="line">print &quot;tup1[0]: &quot;, tup1[0]</span><br><span class="line">print &quot;tup2[1:5]: &quot;, tup2[1:5]</span><br><span class="line">#以上实例输出结果：</span><br><span class="line">#tup1[0]:  physics</span><br><span class="line">#tup2[1:5]:  [2, 3, 4, 5]</span><br></pre></td></tr></table></figure></p>
+<h2 id="三、修改元组"><a href="#三、修改元组" class="headerlink" title="三、修改元组"></a>三、修改元组</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;元组中的元素值是不允许修改的，但我们可以对元组进行连接组合，如下实例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">tup1 = (12, 34.56);</span><br><span class="line">tup2 = (&apos;abc&apos;, &apos;xyz&apos;);</span><br><span class="line"></span><br><span class="line"># 以下修改元组元素操作是非法的。</span><br><span class="line"># tup1[0] = 100;</span><br><span class="line"></span><br><span class="line"># 创建一个新的元组</span><br><span class="line">tup3 = tup1 + tup2;</span><br><span class="line">print tup3;</span><br><span class="line">#以上实例输出结果：</span><br><span class="line">#(12, 34.56, &apos;abc&apos;, &apos;xyz&apos;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="四、删除元组"><a href="#四、删除元组" class="headerlink" title="四、删除元组"></a>四、删除元组</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;元组中的元素值是不允许删除的，但我们可以使用del语句来删除整个元组，如下实例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">tup = (&apos;physics&apos;, &apos;chemistry&apos;, 1997, 2000);</span><br><span class="line"></span><br><span class="line">print tup;</span><br><span class="line">del tup;</span><br><span class="line">print &quot;After deleting tup : &quot;</span><br><span class="line">print tup;</span><br><span class="line"></span><br><span class="line">以上实例元组被删除后，输出变量会有异常信息，输出如下所示：</span><br><span class="line"></span><br><span class="line">#(&apos;physics&apos;, &apos;chemistry&apos;, 1997, 2000)</span><br><span class="line">#After deleting tup :</span><br><span class="line">#Traceback (most recent call last):</span><br><span class="line">#  File &quot;test.py&quot;, line 9, in &lt;module&gt;</span><br><span class="line">#    print tup;</span><br><span class="line">#NameError: name &apos;tup&apos; is not defined[/code]</span><br></pre></td></tr></table></figure></p>
+<h2 id="五、元组运算符"><a href="#五、元组运算符" class="headerlink" title="五、元组运算符"></a>五、元组运算符</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;与字符串一样，元组之间可以使用 + 号和 * 号进行运算。这就意味着他们可以组合和复制，运算后会生成一个新的元组。</p>
+<h2 id="六、元组索引、截取"><a href="#六、元组索引、截取" class="headerlink" title="六、元组索引、截取"></a>六、元组索引、截取</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因为元组也是一个序列，所以我们可以访问元组中的指定位置的元素，也可以截取索引中的一段元素，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">元组：L = (&apos;spam&apos;, &apos;Spam&apos;, &apos;SPAM!&apos;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="七、无关闭分隔符"><a href="#七、无关闭分隔符" class="headerlink" title="七、无关闭分隔符"></a>七、无关闭分隔符</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;任意无符号的对象，以逗号隔开，默认为元组，如下实例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">print &apos;abc&apos;, -4.24e93, 18+6.6j, &apos;xyz&apos;;</span><br><span class="line">x, y = 1, 2;</span><br><span class="line">print &quot;Value of x , y : &quot;, x,y;</span><br><span class="line"></span><br><span class="line">以上实例允许结果：</span><br><span class="line"></span><br><span class="line">abc -4.24e+93 (18+6.6j) xyz</span><br><span class="line">Value of x , y : 1 2</span><br></pre></td></tr></table></figure></p>
+<h2 id="八、元组内置函数"><a href="#八、元组内置函数" class="headerlink" title="八、元组内置函数"></a>八、元组内置函数</h2><p>Python元组包含了以下内置函数 </p>
+<ol>
+<li>cmp(tuple1, tuple2)：比较两个元组元素。 </li>
+<li>len(tuple)：计算元组元素个数。 </li>
+<li>max(tuple)：返回元组中元素最大值。 </li>
+<li>min(tuple)：返回元组中元素最小值。 </li>
+<li>tuple(seq)：将列表转换为元组。</li>
+</ol>
+<h2 id="九、另一种解读"><a href="#九、另一种解读" class="headerlink" title="九、另一种解读"></a>九、另一种解读</h2><p>tuple和list非常类似，但是tuple一旦初始化就不能修改，比如同样是列出同学的名字：</p>
+<p>classmates = (‘Michael’, ‘Bob’, ‘Tracy’)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;现在，classmates这个tuple不能变了，它也没有append()，insert()这样的方法。其他获取元素的方法和list是一样的，你可以正常地使用classmates[0]，classmates[-1]，但不能赋值成另外的元素。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不可变的tuple有什么意义？因为tuple不可变，所以代码更安全。如果可能，能用tuple代替list就尽量用tuple。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tuple的陷阱：当你定义一个tuple时，在定义的时候，tuple的元素就必须被确定下来，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">t = (1, 2)</span><br><span class="line">t</span><br><span class="line">(1, 2)</span><br></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果要定义一个空的tuple，可以写成()：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">t = ()</span><br><span class="line">t</span><br><span class="line">()</span><br></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但是，要定义一个只有1个元素的tuple，如果你这么定义：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t = (1)</span><br><span class="line">t</span><br></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;定义的不是tuple，是1这个数！这是因为括号()既可以表示tuple，又可以表示数学公式中的小括号，这就产生了歧义，因此，Python规定，这种情况下，按小括号进行计算，计算结果自然是1。<br>所以，只有1个元素的tuple定义时必须加一个逗号,，来消除歧义：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">t = (1,)</span><br><span class="line">t</span><br><span class="line">(1,)</span><br></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python在显示只有1个元素的tuple时，也会加一个逗号,，以免你误解成数学计算意义上的括号。</p>
+<p>在来看一个“可变的”tuple：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">t = (&apos;a&apos;, &apos;b&apos;, [&apos;A&apos;, &apos;B&apos;])</span><br><span class="line">t[2][0] = &apos;X&apos;</span><br><span class="line">t[2][1] = &apos;Y&apos;</span><br><span class="line">t</span><br><span class="line">(&apos;a&apos;, &apos;b&apos;, [&apos;X&apos;, &apos;Y&apos;])</span><br></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个tuple定义的时候有3个元素，分别是’a’，’b’和一个list。不是说tuple一旦定义后就不可变了吗？怎么后来又变了？   </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表面上看，tuple的元素确实变了，但其实变的不是tuple的元素，而是list的元素。tuple一开始指向的list并没有改成别的list，所以，tuple所谓的“不变”是说，tuple的每个元素，指向永远不变。即指向’a’，就不能改成指向’b’，指向一个list，就不能改成指向其他对象，但指向的这个list本身是可变的！<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;理解了“指向不变”后，要创建一个内容也不变的tuple怎么做？那就必须保证tuple的每一个元素本身也不能变。  </p>
+
+          
         
       
     </div>
@@ -965,7 +1134,7 @@ RPC采用C/S模式。客户机请求程序调用进程发送一个有进程参�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/23/PHP简介/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/05/Python内置数据类型之String/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="吕培新">
@@ -984,7 +1153,7 @@ RPC采用C/S模式。客户机请求程序调用进程发送一个有进程参�
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/23/PHP简介/" itemprop="url">PHP简介</a></h1>
+                <a class="post-title-link" href="/2019/01/05/Python内置数据类型之String/" itemprop="url">Python内置数据类型之String</a></h1>
         
 
         <div class="post-meta">
@@ -996,8 +1165,8 @@ RPC采用C/S模式。客户机请求程序调用进程发送一个有进程参�
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-23T16:06:59+08:00">
-                2018-06-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-05T19:28:42+08:00">
+                2019-01-05
               </time>
             
 
@@ -1019,8 +1188,8 @@ RPC采用C/S模式。客户机请求程序调用进程发送一个有进程参�
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">Web服务器</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -1058,20 +1227,161 @@ RPC采用C/S模式。客户机请求程序调用进程发送一个有进程参�
       
         
           
-          PHP简介PHP是通用服务器端脚本编程语言，主要用于web开发实现动态web页面，也是最早实现将脚本嵌入
-HTML源码文档中的服务器端脚本语言之一。同时，PHP还提供了一个命令行接口，因此，其也可以
-在大多数系统上作为一个独立的shell来使用
-官方网站：http://www.php.net/
-
-P
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/23/PHP简介/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h1 id="Python内置数据类型之String"><a href="#Python内置数据类型之String" class="headerlink" title="Python内置数据类型之String"></a>Python内置数据类型之String</h1><h2 id="导论"><a href="#导论" class="headerlink" title="导论"></a>导论</h2><pre><code>什么叫字符串？字符串就是一个个字符组成的有序的序列，是字符的集合，在python中通常使用单引号、双引号和三引号引住的字符序列
+</code></pre><h2 id="字符串属性"><a href="#字符串属性" class="headerlink" title="字符串属性"></a>字符串属性</h2><h3 id="字符串是不可变对象"><a href="#字符串是不可变对象" class="headerlink" title="字符串是不可变对象"></a>字符串是不可变对象</h3><pre><code>区别于列表类型的对象，列表对象时可变的，而字符串对象是不可变的，因此字符串对象不存在通过索引改变其中的字符
+</code></pre><h3 id="字符串支持使用索引访问"><a href="#字符串支持使用索引访问" class="headerlink" title="字符串支持使用索引访问"></a>字符串支持使用索引访问</h3><pre><code>字符串可以通过下标索引进行访问
+</code></pre><h3 id="字符串是有序的字符集合，字符序列"><a href="#字符串是有序的字符集合，字符序列" class="headerlink" title="字符串是有序的字符集合，字符序列"></a>字符串是有序的字符集合，字符序列</h3><pre><code>字符串在内存中可以是连续的地址空间，有序的序列
+</code></pre><h3 id="字符串是可迭代的"><a href="#字符串是可迭代的" class="headerlink" title="字符串是可迭代的"></a>字符串是可迭代的</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sql = <span class="string">"select * from user where name='tom'"</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> sql:</span><br><span class="line">    print(i,end = <span class="string">' '</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>s e l e c t   *   f r o m   u s e r   w h e r e   n a m e = &apos; t o m &apos; 
+</code></pre><h2 id="字符串的操作"><a href="#字符串的操作" class="headerlink" title="字符串的操作"></a>字符串的操作</h2><h3 id="str-join-iterable-–-gt-str"><a href="#str-join-iterable-–-gt-str" class="headerlink" title="str.join(iterable) –&gt;str"></a>str.join(iterable) –&gt;str</h3><pre><code>1. 将可迭代对象连接起来，使用string作为分隔符
+2. 可迭代对象本身元素都是字符串
+3. 返回一个新的字符串
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print( <span class="string">''</span>.join([<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>]) )</span><br></pre></td></tr></table></figure>
+<pre><code>abc
+</code></pre><h3 id="号连接"><a href="#号连接" class="headerlink" title="+ 号连接"></a>+ 号连接</h3><p>将两个字符串连接在一起<br>代码格式如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'abc'</span> + <span class="string">'def'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>abcdef
+</code></pre><h2 id="字符串分割"><a href="#字符串分割" class="headerlink" title="字符串分割"></a>字符串分割</h2><p>分割字符串的两种方法分为2类</p>
+<h3 id="1-str-split-sep-None-maxsplit-1-gt-list-of-strings"><a href="#1-str-split-sep-None-maxsplit-1-gt-list-of-strings" class="headerlink" title="1. str.split(sep=None, maxsplit=-1) -&gt; list of strings"></a>1. str.split(sep=None, maxsplit=-1) -&gt; list of strings</h3><pre><code>将字符串安装分隔符分割成若干字符串，并返回列表  
+  从左至右
+  sep 指定分割字符串，缺省的情况下空白字符串作为分隔符
+  maxsplit 指定分割的次数， -1 表示遍历整个字符串
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s1 = <span class="string">'www.baidu.com'</span></span><br><span class="line">a,b,c = s1.split(<span class="string">'.'</span>,maxsplit=<span class="number">2</span>)</span><br><span class="line">a,b,c</span><br></pre></td></tr></table></figure>
+<pre><code>(&apos;www&apos;, &apos;baidu&apos;, &apos;com&apos;)
+</code></pre><h3 id="2-str-partition-sep-gt-head-sep-tail"><a href="#2-str-partition-sep-gt-head-sep-tail" class="headerlink" title="2. str.partition(sep) -&gt; (head, sep, tail):"></a>2. str.partition(sep) -&gt; (head, sep, tail):</h3><pre><code>将字符串按照分隔符分割成两段，返回这两段和分隔符的元组  
+  从左至右，遇到分隔符就把字符串分割成两部分，返回头、分隔符、尾三部分的三元组；如果
+  没有找到分隔符，就返回头、 2个空元素的三元组
+  sep 分割字符串， 必须指定
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s2 = <span class="string">'www.qq.com'</span></span><br><span class="line">a,b,c = s2.partition(<span class="string">'.'</span>)</span><br><span class="line">a,b,c</span><br></pre></td></tr></table></figure>
+<pre><code>(&apos;www&apos;, &apos;.&apos;, &apos;qq.com&apos;)
+</code></pre><h2 id="字符串大小写"><a href="#字符串大小写" class="headerlink" title="字符串大小写"></a>字符串大小写</h2><h3 id="str-upper-全大写"><a href="#str-upper-全大写" class="headerlink" title="str.upper(): 全大写"></a>str.upper(): 全大写</h3><h3 id="str-lower-全小写"><a href="#str-lower-全小写" class="headerlink" title="str.lower(): 全小写"></a>str.lower(): 全小写</h3><h3 id="str-swapcase-交换大小写"><a href="#str-swapcase-交换大小写" class="headerlink" title="str.swapcase(): 交换大小写"></a>str.swapcase(): 交换大小写</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s3 = <span class="string">'aBCDef'</span></span><br><span class="line">print(s3.upper())</span><br><span class="line">print(s3.lower())</span><br><span class="line">print(s3.swapcase())</span><br></pre></td></tr></table></figure>
+<pre><code>ABCDEF
+abcdef
+AbcdEF
+</code></pre><h2 id="字符串排版"><a href="#字符串排版" class="headerlink" title="字符串排版"></a>字符串排版</h2><h3 id="str-title-gt-str"><a href="#str-title-gt-str" class="headerlink" title="str.title() -&gt; str"></a>str.title() -&gt; str</h3><p> 标题的每个单词都大写</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'hello world'</span>.title())</span><br></pre></td></tr></table></figure>
+<pre><code>Hello World
+</code></pre><h3 id="str-capitalize-gt-str"><a href="#str-capitalize-gt-str" class="headerlink" title="str.capitalize() -&gt; str"></a>str.capitalize() -&gt; str</h3><p> 首个单词大写</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'abc def '</span>.capitalize())</span><br></pre></td></tr></table></figure>
+<pre><code>Abc def 
+</code></pre><h3 id="str-center-width-fillchar-gt-str"><a href="#str-center-width-fillchar-gt-str" class="headerlink" title="str.center(width[, fillchar]) -&gt; str"></a>str.center(width[, fillchar]) -&gt; str</h3><p>  width 打印宽度<br>  fillchar 填充的字符</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">' abcd '</span>.center(<span class="number">20</span>,<span class="string">'*'</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>******* abcd *******
+</code></pre><h3 id="str-zfill-width-gt-str"><a href="#str-zfill-width-gt-str" class="headerlink" title="str.zfill(width) -&gt; str"></a>str.zfill(width) -&gt; str</h3><pre><code>width 打印宽度，居右，左边用0填充    
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">14</span>,<span class="number">3</span>):</span><br><span class="line">    print(<span class="string">'&#123;&#125;'</span>.format(i).zfill(<span class="number">4</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>0001
+0004
+0007
+0010
+0013
+</code></pre><h3 id="str-ljust-width-fillchar-gt-str-左对齐"><a href="#str-ljust-width-fillchar-gt-str-左对齐" class="headerlink" title="str.ljust(width[, fillchar]) -&gt; str 左对齐"></a>str.ljust(width[, fillchar]) -&gt; str 左对齐</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'abcd'</span>.ljust(<span class="number">10</span>))</span><br><span class="line">print(<span class="string">'abcd'</span>.ljust(<span class="number">10</span>,<span class="string">'0'</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>abcd      
+abcd000000
+</code></pre><h3 id="str-rjust-width-fillchar-gt-str-左对齐"><a href="#str-rjust-width-fillchar-gt-str-左对齐" class="headerlink" title="str.rjust(width[, fillchar]) -&gt; str 左对齐"></a>str.rjust(width[, fillchar]) -&gt; str 左对齐</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'abcd'</span>.rjust(<span class="number">10</span>))</span><br><span class="line">print(<span class="string">'abcd'</span>.rjust(<span class="number">10</span>,<span class="string">'0'</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>      abcd
+000000abcd
+</code></pre><h2 id="字符串修改"><a href="#字符串修改" class="headerlink" title="字符串修改"></a>字符串修改</h2><h3 id="str-replace-old-new-count-gt-str"><a href="#str-replace-old-new-count-gt-str" class="headerlink" title="str.replace(old, new[, count]) -&gt; str"></a>str.replace(old, new[, count]) -&gt; str</h3><pre><code>字符串中找到匹配替换为新子串，返回新字符串  
+count表示替换几次，不指定就是全部替换  
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print( <span class="string">'www.baidu.com'</span>.replace(<span class="string">'w'</span>,<span class="string">'p'</span>) )</span><br><span class="line">print( <span class="string">'www.baidu.com'</span>.replace(<span class="string">'w'</span>,<span class="string">'p'</span>,<span class="number">2</span>) )</span><br></pre></td></tr></table></figure>
+<pre><code>ppp.baidu.com
+ppw.baidu.com
+</code></pre><h3 id="strip-chars-gt-str"><a href="#strip-chars-gt-str" class="headerlink" title="strip([chars]) -&gt; str"></a>strip([chars]) -&gt; str</h3><pre><code>从字符串两端去除指定的字符集chars中的所有字符
+如果chars没有指定，去除两端的空白字符
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'  abcd123 \r \n \t  '</span>.strip())</span><br><span class="line">print(<span class="string">'****abcder***'</span>.strip(<span class="string">'*'</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>abcd123
+abcder
+</code></pre><h3 id="str-lstrip-chars-gt-str-从左开始"><a href="#str-lstrip-chars-gt-str-从左开始" class="headerlink" title="str.lstrip([chars]) -&gt; str  从左开始"></a>str.lstrip([chars]) -&gt; str  从左开始</h3><h3 id="str-rstrip-chars-gt-str-从右开始"><a href="#str-rstrip-chars-gt-str-从右开始" class="headerlink" title="str.rstrip([chars]) -&gt; str  从右开始"></a>str.rstrip([chars]) -&gt; str  从右开始</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"***abcdef###"</span>.lstrip(<span class="string">"*"</span>))</span><br><span class="line">print(<span class="string">"***abcdef###"</span>.rstrip(<span class="string">"#"</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>abcdef###
+***abcdef
+</code></pre><h2 id="字符串查找"><a href="#字符串查找" class="headerlink" title="字符串查找"></a>字符串查找</h2><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><pre><code>index和count方法都是O(n)  
+随着数据规模的增大，而效率下降  
+</code></pre><h3 id="str-find-sub-start-end-gt-int"><a href="#str-find-sub-start-end-gt-int" class="headerlink" title="str.find(sub[, start[, end]]) -&gt; int"></a>str.find(sub[, start[, end]]) -&gt; int</h3><pre><code>在指定的区间[start, end)，从左至右，查找子串sub。找到返回索引，没找到返回-1
+</code></pre><h3 id="str-rfind-sub-start-end-gt-int"><a href="#str-rfind-sub-start-end-gt-int" class="headerlink" title="str.rfind(sub[, start[, end]]) -&gt; int"></a>str.rfind(sub[, start[, end]]) -&gt; int</h3><pre><code>在指定的区间[start, end)，从右至左，查找子串sub。找到返回索引，没找到返回-1
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">"I am very very very sorry"</span></span><br><span class="line">print(s.find(<span class="string">'very'</span>))</span><br><span class="line">print(s.find(<span class="string">'very'</span>,<span class="number">6</span>))</span><br><span class="line">print(s.find(<span class="string">'very'</span>,<span class="number">6</span>,<span class="number">10</span>))</span><br><span class="line">print(s.rfind(<span class="string">'very'</span>,<span class="number">10</span>))</span><br><span class="line">print(s.rfind(<span class="string">'very'</span>,<span class="number">10</span>,<span class="number">15</span>))</span><br><span class="line">print(s.rfind(<span class="string">'very'</span>,<span class="number">-10</span>,<span class="number">-1</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>5
+10
+-1
+15
+10
+15
+</code></pre><h3 id="str-index-sub-start-end-gt-int"><a href="#str-index-sub-start-end-gt-int" class="headerlink" title="str.index(sub[, start[, end]]) -&gt; int"></a>str.index(sub[, start[, end]]) -&gt; int</h3><p> 在指定的区间[start, end)，从左至右，查找子串sub。找到返回索引，没找到抛出异常ValueError</p>
+<h3 id="str-rindex-sub-start-end-gt-int"><a href="#str-rindex-sub-start-end-gt-int" class="headerlink" title="str.rindex(sub[, start[, end]]) -&gt; int"></a>str.rindex(sub[, start[, end]]) -&gt; int</h3><p> 在指定的区间[start, end)，从左至右，查找子串sub。找到返回索引，没找到抛出异常ValueError</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">"I am very very very sorry"</span></span><br><span class="line">print(s.index(<span class="string">'very'</span>))</span><br><span class="line">print(s.index(<span class="string">'very'</span>, <span class="number">5</span>))</span><br><span class="line"><span class="comment"># print(s.index('very', 6, 13))</span></span><br><span class="line">print(s.rindex(<span class="string">'very'</span>, <span class="number">10</span>))</span><br><span class="line">print(s.rindex(<span class="string">'very'</span>, <span class="number">10</span>, <span class="number">15</span>))</span><br><span class="line">print(s.rindex(<span class="string">'very'</span>,<span class="number">-10</span>,<span class="number">-1</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>5
+5
+15
+10
+15
+</code></pre><h3 id="str-count-sub-start-end-gt-int"><a href="#str-count-sub-start-end-gt-int" class="headerlink" title="str.count(sub[, start[, end]]) -&gt; int"></a>str.count(sub[, start[, end]]) -&gt; int</h3><p> 在指定的区间[start, end)，从左至右，统计子串sub出现的次数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">"I am very very very sorry"</span></span><br><span class="line">print(s.count(<span class="string">'very'</span>))</span><br><span class="line">print(s.count(<span class="string">'very'</span>, <span class="number">5</span>))</span><br><span class="line">print(s.count(<span class="string">'very'</span>, <span class="number">10</span>, <span class="number">14</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>3
+3
+1
+</code></pre><h3 id="len-string"><a href="#len-string" class="headerlink" title="len(string)"></a>len(string)</h3><p> 返回字符串的长度，即字符的个数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">"I am very very very sorry"</span></span><br><span class="line">print(len(s))</span><br></pre></td></tr></table></figure>
+<pre><code>25
+</code></pre><h2 id="字符串判断"><a href="#字符串判断" class="headerlink" title="字符串判断*"></a>字符串判断*</h2><h3 id="str-endswith-suffix-start-end-gt-bool"><a href="#str-endswith-suffix-start-end-gt-bool" class="headerlink" title="str.endswith(suffix[, start[, end]]) -&gt; bool"></a>str.endswith(suffix[, start[, end]]) -&gt; bool</h3><pre><code>在指定的区间[start, end)，字符串是否是suffix结尾
+</code></pre><h3 id="str-startswith-prefix-start-end-gt-bool"><a href="#str-startswith-prefix-start-end-gt-bool" class="headerlink" title="str.startswith(prefix[, start[, end]]) -&gt; bool"></a>str.startswith(prefix[, start[, end]]) -&gt; bool</h3><pre><code>在指定的区间[start, end)，字符串是否是prefix开头
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">"I am very very very sorry"</span></span><br><span class="line">print(s.startswith(<span class="string">'very'</span>))</span><br><span class="line">print(s.startswith(<span class="string">'very'</span>,<span class="number">5</span>))</span><br><span class="line">print(s.startswith(<span class="string">'very'</span>,<span class="number">5</span>,<span class="number">9</span>))</span><br><span class="line">print(s.endswith(<span class="string">'sorry'</span>))</span><br><span class="line">print(s.endswith(<span class="string">'sorry'</span>,<span class="number">5</span>))</span><br><span class="line">print(s.endswith(<span class="string">'sorry'</span>,<span class="number">5</span>,<span class="number">100</span>))</span><br><span class="line">print(s.endswith(<span class="string">'sorry'</span>,<span class="number">5</span>,<span class="number">-1</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>False
+True
+True
+True
+True
+True
+False
+</code></pre><h2 id="字符串判断-is系列"><a href="#字符串判断-is系列" class="headerlink" title="字符串判断 is系列"></a>字符串判断 is系列</h2><h3 id="isalnum-gt-bool-是否是字母和数字组成"><a href="#isalnum-gt-bool-是否是字母和数字组成" class="headerlink" title="isalnum() -&gt; bool 是否是字母和数字组成"></a>isalnum() -&gt; bool 是否是字母和数字组成</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'  '</span>.isalnum())</span><br><span class="line">print(<span class="string">'abc123'</span>.isalnum())</span><br></pre></td></tr></table></figure>
+<pre><code>False
+True
+</code></pre><h3 id="isalpha-是否是字母"><a href="#isalpha-是否是字母" class="headerlink" title="isalpha() 是否是字母"></a>isalpha() 是否是字母</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"abcdAVAS"</span>.isalpha())</span><br><span class="line">print(<span class="string">'abcd12'</span>.isalpha())</span><br></pre></td></tr></table></figure>
+<pre><code>True
+False
+</code></pre><h3 id="isdecimal-是否只包含十进制数字"><a href="#isdecimal-是否只包含十进制数字" class="headerlink" title="isdecimal() 是否只包含十进制数字"></a>isdecimal() 是否只包含十进制数字</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'1234'</span>.isdecimal())</span><br><span class="line">print(<span class="string">'abc123'</span>.isdecimal())</span><br></pre></td></tr></table></figure>
+<pre><code>True
+False
+</code></pre><h3 id="isdigit-是否全部数字-0-9"><a href="#isdigit-是否全部数字-0-9" class="headerlink" title="isdigit() 是否全部数字(0~9)"></a>isdigit() 是否全部数字(0~9)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'12345'</span>.isdigit())</span><br><span class="line">print(<span class="string">'12345abcd'</span>.isdigit())</span><br></pre></td></tr></table></figure>
+<pre><code>True
+False
+</code></pre><h3 id="isidentifier-是不是字母和下划线开头，其他都是字母、数字、-下划线"><a href="#isidentifier-是不是字母和下划线开头，其他都是字母、数字、-下划线" class="headerlink" title="isidentifier() 是不是字母和下划线开头，其他都是字母、数字、 下划线"></a>isidentifier() 是不是字母和下划线开头，其他都是字母、数字、 下划线</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'_abcd124'</span>.isidentifier())</span><br><span class="line">print(<span class="string">'12abcd124'</span>.isidentifier())</span><br></pre></td></tr></table></figure>
+<pre><code>True
+False
+</code></pre><h3 id="islower-是否都是小写"><a href="#islower-是否都是小写" class="headerlink" title="islower() 是否都是小写"></a>islower() 是否都是小写</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"abcd"</span>.islower())</span><br><span class="line">print(<span class="string">'ABcd'</span>.islower())</span><br></pre></td></tr></table></figure>
+<pre><code>True
+False
+</code></pre><h3 id="isupper-是否全部大写"><a href="#isupper-是否全部大写" class="headerlink" title="isupper() 是否全部大写"></a>isupper() 是否全部大写</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'ABCD'</span>.isupper())</span><br><span class="line">print(<span class="string">'ABCde'</span>.isupper())</span><br></pre></td></tr></table></figure>
+<pre><code>True
+False
+</code></pre><h3 id="isspace-是否只包含空白字符"><a href="#isspace-是否只包含空白字符" class="headerlink" title="isspace() 是否只包含空白字符"></a>isspace() 是否只包含空白字符</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">' \r \n \t '</span>.isspace())</span><br><span class="line">print(<span class="string">' 11  '</span>.isspace())</span><br></pre></td></tr></table></figure>
+<pre><code>True
+False
+</code></pre><h2 id="字符串格式化"><a href="#字符串格式化" class="headerlink" title="字符串格式化"></a>字符串格式化</h2><pre><code>字符串的格式化是一种拼接字符串输出样式的手段，更灵活方便
+    join拼接只能使用分隔符，且要求被拼接的是可迭代对象且其元素是字符串
+    拼接字符串还算方便，但是非字符串需要先转换为字符串才能拼接
+</code></pre><h3 id="format函数格式字符串语法"><a href="#format函数格式字符串语法" class="headerlink" title="format函数格式字符串语法"></a>format函数格式字符串语法</h3><p> <strong>“{} {xxx}”.format(*args, </strong>kwargs) -&gt; str**</p>
+<p><strong>对齐</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'&#123;0&#125; * &#123;1&#125; = &#123;2:&lt;2&#125;'</span>.format(<span class="number">3</span>,<span class="number">2</span>,<span class="number">2</span>*<span class="number">3</span>))</span><br><span class="line">print(<span class="string">'&#123;0&#125; * &#123;1&#125; = &#123;2:&lt;02&#125;'</span>.format(<span class="number">3</span>,<span class="number">2</span>,<span class="number">2</span>*<span class="number">3</span>))</span><br><span class="line">print(<span class="string">'&#123;0&#125; * &#123;1&#125; = &#123;2:&gt;02&#125;'</span>.format(<span class="number">3</span>,<span class="number">2</span>,<span class="number">2</span>*<span class="number">3</span>))</span><br><span class="line">print(<span class="string">'&#123;:^30&#125;'</span>.format(<span class="string">'centered'</span>))</span><br><span class="line">print(<span class="string">'&#123;:*^30&#125;'</span>.format(<span class="string">'centered'</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>3 * 2 = 6 
+3 * 2 = 60
+3 * 2 = 06
+           centered           
+***********centered***********
+</code></pre><p><strong>进制</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'int:&#123;0:d&#125;; hexo:&#123;0:x&#125;; oct:&#123;0:o&#125;; bin:&#123;0:b&#125;'</span>.format(<span class="number">42</span>))</span><br><span class="line">print(<span class="string">'int:&#123;0:#d&#125; hexo:&#123;0:x&#125; oct:&#123;0:o&#125; bin:&#123;0:b&#125;'</span>.format(<span class="number">42</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>int:42; hexo:2a; oct:52; bin:101010
+int:42 hexo:2a oct:52 bin:101010
+</code></pre><p><strong>浮点数</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"&#123;&#125;"</span>.format(<span class="number">3</span>**<span class="number">0.5</span>)) <span class="comment"># 1.7320508075688772</span></span><br><span class="line">print(<span class="string">"&#123;:f&#125;"</span>.format(<span class="number">3</span>**<span class="number">0.5</span>)) <span class="comment"># 1.732051，精度默认6</span></span><br><span class="line">print(<span class="string">"&#123;:10f&#125;"</span>.format(<span class="number">3</span>**<span class="number">0.5</span>)) <span class="comment"># 右对齐，宽度10</span></span><br><span class="line">print(<span class="string">"&#123;:2&#125;"</span>.format(<span class="number">102.231</span>)) <span class="comment"># 宽度为2</span></span><br><span class="line">print(<span class="string">"&#123;:.2&#125;"</span>.format(<span class="number">3</span>**<span class="number">0.5</span>)) <span class="comment"># 1.7 2个数字</span></span><br><span class="line">print(<span class="string">"&#123;:.2f&#125;"</span>.format(<span class="number">3</span>**<span class="number">0.5</span>)) <span class="comment"># 1.73 小数点后2位</span></span><br><span class="line">print(<span class="string">"&#123;:3.2f&#125;"</span>.format(<span class="number">3</span>**<span class="number">0.5</span>)) <span class="comment"># 1.73 宽度为3，小数点后2位</span></span><br><span class="line">print(<span class="string">"&#123;:3.3f&#125;"</span>.format(<span class="number">0.2745</span>)) <span class="comment"># 0.275</span></span><br><span class="line">print(<span class="string">"&#123;:3.3%&#125;"</span>.format(<span class="number">1</span>/<span class="number">3</span>)) <span class="comment"># 33.333%</span></span><br></pre></td></tr></table></figure>
+<pre><code>1.7320508075688772
+1.732051
+  1.732051
+102.231
+1.7
+1.73
+1.73
+0.275
+33.333%
+</code></pre>
+          
         
       
     </div>
@@ -1127,7 +1437,7 @@ P
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/22/https网络安全协议/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/05/Python内置数据结构之list/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="吕培新">
@@ -1146,7 +1456,7 @@ P
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/22/https网络安全协议/" itemprop="url">https网络安全协议</a></h1>
+                <a class="post-title-link" href="/2019/01/05/Python内置数据结构之list/" itemprop="url">Python内置数据结构之list</a></h1>
         
 
         <div class="post-meta">
@@ -1158,8 +1468,8 @@ P
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-22T16:05:44+08:00">
-                2018-06-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-05T19:28:42+08:00">
+                2019-01-05
               </time>
             
 
@@ -1181,8 +1491,8 @@ P
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/网络技术/" itemprop="url" rel="index">
-                    <span itemprop="name">网络技术</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -1220,17 +1530,89 @@ P
       
         
           
-          一、https协议介绍HTTPS（全称：Hyper Text Transfer Protocol over Secure Socket Layer），
-是以安全为目标的HTTP通道，简单讲是HTTP的安全版。即HTTP下加入SSL层，HTTPS的安全基础是SSL，
-因此加密的详细内容就需要SSL。 
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/22/https网络安全协议/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h1 id="Python内置数据结构之list"><a href="#Python内置数据结构之list" class="headerlink" title="Python内置数据结构之list"></a>Python内置数据结构之list</h1><p>列表是Python中最具灵活性的有序集合对象类型，与字符串不同的是，列表可以包含任何种类的对象：数字、字符串甚至其他列表。</p>
+<p>同样，与字符串不同的，列表都是可变对象，它都支持在原处修改的操作，可以通过指定的偏移量和切片、列表方法调用、删除语句等等方法来实现</p>
+<p>Python的列表可以完成大多数集合体数据结构的工作：</p>
+<p>列表的主要属性有：  </p>
+<ul>
+<li><p>任意对象的有序集合<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从功能上看,列表就是收集其他对象的地方,你可以把它们看做组。同时列表所包含的每一项都保持了从左到右的位置顺序(也就是说,它们是序列)。</p>
+</li>
+<li><p>通过偏移读取数据<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;就像字符串一样,你可以通过列表对象的偏移对其进行索引,从而读取对象的某部分内容。由于列表的每一项都是有序的,那么你也可以执行诸如分片和合并之类的任务</p>
+</li>
+<li><p>可变长度、异构以及任意嵌套<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;与字符串不同的是,列表可以实地的增长或者缩短(长度可变),并且可以包含任何类型的对象而不仅仅是包含有单个字符的字符串(异构)。因为列表能够包含其他复杂的对象,又能够支持任意的嵌套,所以可以创建列表的子列表的子列表等。</p>
+</li>
+<li><p>属于可变序列的分类<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;就类型分类而言,列表支持在原处的修改(它们是可变的),也可以响应所有针对字符串序列的操作,例如,索引、分片以及合并。实际上,序列操作在列表与字符串中的工作方式相同。唯一的区别是:当应用于字符串上的合并和分片这样的操作应用于列表时,返回新的列表。然而列表是可变的,因此它们也支持字符串不支持的其他操作(例如,删除和索引赋值操作,它们都是在原处修改列表)。</p>
+</li>
+<li><p>对象引用数组<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从技术上来讲, Python列表包含了零个或多个其他对象的引用。列表也许会让你想起指针(地址)数组,从 Python的列表中读取一个项的速度与索引一个C语言数组差不多。实际上,在标准 Python解释器内部,列表就是C数组而不是链接结构。每当用到引用时, Python总是会将这个引用指向一个对象,所以程序只需处理对象的操作。当把一个对象赋给一个数据结构元素或变量名时, Python总是会存储对象的引用,而不是对象的一个拷贝(除非明确要求保存拷贝）  </p>
+</li>
+</ul>
+<h2 id="列表list的定义"><a href="#列表list的定义" class="headerlink" title="列表list的定义"></a>列表list的定义</h2><p>list()，里面可以什么都不放，也可以放可迭代对象。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lst = list()</span><br><span class="line">lst = []</span><br><span class="line">lst = [2, 6, 9, &apos;ab&apos;]</span><br><span class="line">lst = list(range(5))</span><br></pre></td></tr></table></figure></p>
+<h2 id="列表的索引访问"><a href="#列表的索引访问" class="headerlink" title="列表的索引访问"></a>列表的索引访问</h2><p>python中list的索引从0开始。绝大多数语言的下标是从0开始的<br>负数的索引表示从后往前数，由-1开始，-1表示最后一个元素。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">In [6]: lst</span><br><span class="line">Out[6]: [1, 2, 3]</span><br><span class="line"> </span><br><span class="line">In [7]: lst[0]</span><br><span class="line">Out[7]: 1</span><br><span class="line"> </span><br><span class="line">In [8]: lst[-1]</span><br><span class="line">Out[8]: 3</span><br></pre></td></tr></table></figure></p>
+<p>如果索引超出范围，将引发IndexError。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">In [9]: lst[-4]</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line">IndexError                                Traceback (most recent call last)</span><br><span class="line">&lt;ipython-input-9-7ea420056b9a&gt; in &lt;module&gt;()</span><br><span class="line">----&gt; 1 lst[-4]</span><br><span class="line"> </span><br><span class="line">IndexError: list index out of range</span><br><span class="line"> </span><br><span class="line">In [10]: lst[3]</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line">IndexError                                Traceback (most recent call last)</span><br><span class="line">&lt;ipython-input-10-298ffefac8cf&gt; in &lt;module&gt;()</span><br><span class="line">----&gt; 1 lst[3]</span><br><span class="line"> </span><br><span class="line">IndexError: list index out of range</span><br></pre></td></tr></table></figure>
+<p>修改元素的时候，如果超出索引范围，也会引发IndexError。</p>
+<h2 id="数字处理函数："><a href="#数字处理函数：" class="headerlink" title="数字处理函数："></a>数字处理函数：</h2><pre><code>round(): 四舍五取偶六入  
+
+math模块  
+    floor():向下取整 
+
+    ceil():向上取整 
+
+    int():取整数部分 
+
+    //:整除且向下取整
+
+    min():取最小值 
+
+    max():取最大值  
+
+    pow(x,y)等价于x**y  
+
+    math.sqrt():开平方 
+
+进制函数，返回值是字符串 
+
+    bin():二进制转换  
+
+    oct():八进制转换  
+
+    hex():十六进制转换  
+
+random模块
+    randint(a,b) 返回a，b之间的整数
+
+    choice(seq)从非空序列的元素中随机挑选一个元素
+
+    randrange([start,] stop [,sttep])从指定范围内，按指定基数递增的集合中获取一个随机数
+
+    random.shuffle(list) -&gt;None 就地打乱列表元素
+
+    sample(population, k)从样本空间或总体中随机取出k个不同的元素，返回一个新的列表
+
+len(list): 显示列表的元素个数
+</code></pre><h2 id="列表内建函数："><a href="#列表内建函数：" class="headerlink" title="列表内建函数："></a>列表内建函数：</h2><pre><code>list.append(obj): 在列表末尾添加新的对象
+
+list.count(obj):  统计某个元素在列表中出现的次数
+
+list.extend(seq):在列表末尾一次性追加另一个序列中的多个值（用新列表扩展原来的列表）
+
+list.index(obj)： 从列表中找出某个值第一个匹配项的索引位置
+
+list.insert(index, obj)： 将对象插入列表
+
+list.pop([index=-1])： 移除列表中的一个元素（默认最后一个元素），并且返回该元素的值
+
+list.remove(obj)： 移除列表中某个值的第一个匹配项
+
+list.reverse()：  反向列表中元素
+
+list.sort(cmp=None, key=None, reverse=False)：对原列表进行排序
+
+list.clear()：  清空列表
+
+list.copy()： 复制列表    
+</code></pre>
+          
         
       
     </div>
@@ -1286,7 +1668,7 @@ P
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/21/Apache介绍及常用配置/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/04/Python的内存管理机制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="吕培新">
@@ -1305,7 +1687,7 @@ P
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/21/Apache介绍及常用配置/" itemprop="url">Apache介绍及常用配置</a></h1>
+                <a class="post-title-link" href="/2019/01/04/Python的内存管理机制/" itemprop="url">Python的内存管理机制</a></h1>
         
 
         <div class="post-meta">
@@ -1317,8 +1699,8 @@ P
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-21T17:09:23+08:00">
-                2018-06-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-04T19:28:42+08:00">
+                2019-01-04
               </time>
             
 
@@ -1340,8 +1722,8 @@ P
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web服务器/" itemprop="url" rel="index">
-                    <span itemprop="name">Web服务器</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -1379,18 +1761,129 @@ P
       
         
           
-          一、Apache介绍Apache是世界使用排名第一的Web服务器软件。它可以运行在几乎所有广泛使用的计算机平台上，
-由于其跨平台和安全性被广泛使用，是最流行的Web服务器端软件之一。
-它快速、可靠并且可通过简单的API扩充，将Perl/Python等解释器编译到服务器中。
-官方网站：http://h
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/21/Apache介绍及常用配置/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <blockquote>
+<p>对象绝不会自行销毁；然而，无法得到对象时，可能会被当作垃圾回收</p>
+</blockquote>
+<h1 id="Python内存管理机制"><a href="#Python内存管理机制" class="headerlink" title="Python内存管理机制"></a>Python内存管理机制</h1><blockquote>
+<p>Python的内存管理机制：</p>
+<ul>
+<li>引入计数</li>
+<li>垃圾回收</li>
+<li>内存池机制</li>
+</ul>
+</blockquote>
+<h2 id="一、变量与对象"><a href="#一、变量与对象" class="headerlink" title="一、变量与对象"></a>一、变量与对象</h2><p>关系图如下：</p>
+<p><img src="/images/python_memory_1.png" alt="memory1"></p>
+<ol>
+<li><p>变量，通过变量指针引用对象  </p>
+<p> 变量指针指向具体对象的内存空间，取对象的值。</p>
+</li>
+<li><p>对象，类型已知，每个对象都包含一个头部信息（头部信息：类型标识符和引用计数器）</p>
+</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注意：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;变量名没有类型，类型属于对象（因为变量引用对象，所以类型随对象），变量引用什么类型的对象，变量就是什么类型的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">In [32]: var1=object</span><br><span class="line">In [33]: var2=var1</span><br><span class="line"></span><br><span class="line">In [34]: id(var1)</span><br><span class="line">Out[34]: 139697863383968</span><br><span class="line"></span><br><span class="line">In [35]: id(var2)</span><br><span class="line">Out[35]: 139697863383968</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PS：id()是python的内置函数，用于返回对象的身份，即对象的内存地址。</p>
+<p><img src="/images/python_memory_2.png" alt="memory2"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">In [39]: a=123</span><br><span class="line">In [40]: b=a</span><br><span class="line"></span><br><span class="line">In [41]: id(a)</span><br><span class="line">Out[41]: 23242832</span><br><span class="line"></span><br><span class="line">In [42]: id(b)</span><br><span class="line">Out[42]: 23242832</span><br><span class="line"></span><br><span class="line">In [43]: a=456</span><br><span class="line"></span><br><span class="line">In [44]: id(a)</span><br><span class="line">Out[44]: 33166408</span><br><span class="line"></span><br><span class="line">In [45]: id(b)</span><br><span class="line">Out[45]: 23242832</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>引用所指判断<br>通过is进行引用所指判断，is是用来判断两个引用所指的对象是否相同。</li>
+</ol>
+<ul>
+<li><p>整数</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">In [46]: a=1</span><br><span class="line">In [47]: b=1</span><br><span class="line">In [48]: print(a is b)</span><br><span class="line">True</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>短字符串</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">In [49]: c=&quot;good&quot;</span><br><span class="line">In [50]: d=&quot;good&quot;</span><br><span class="line">In [51]: print(c is d)</span><br><span class="line">True</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>长字符串</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">In [52]: e=&quot;very good&quot;</span><br><span class="line">In [53]: f=&quot;very good&quot;</span><br><span class="line">In [54]: print(e is f)</span><br><span class="line">False</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>列表</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">In [55]: g=[]</span><br><span class="line">In [56]: h=[]</span><br><span class="line">In [57]: print(g is h)</span><br><span class="line">False</span><br></pre></td></tr></table></figure>
+<p>  由运行结果可知：<br>　　1. Python缓存了整数和短字符串，因此每个对象在内存中只存有一份，引用所指对象就是相同的，即使使用赋值语句，也只是创造新的引用，而不是对象本身；<br>　　2. Python没有缓存长字符串、列表及其他对象，可以由多个相同的对象，可以使用赋值语句创建出新的对象。</p>
+</li>
+</ul>
+<h2 id="二、引用计数"><a href="#二、引用计数" class="headerlink" title="二、引用计数"></a>二、引用计数</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在Python中，每个对象都有指向该对象的引用总数—引用计数</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;查看对象的引用计数：sys.getrefcount()</p>
+<ol>
+<li><p>普通引用</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">In [2]: import sys</span><br><span class="line"></span><br><span class="line">In [3]: a=[1,2,3]</span><br><span class="line">In [4]: getrefcount(a)</span><br><span class="line">Out[4]: 2</span><br><span class="line"></span><br><span class="line">In [5]: b=a</span><br><span class="line">In [6]: getrefcount(a)</span><br><span class="line">Out[6]: 3</span><br><span class="line">In [7]: getrefcount(b)</span><br><span class="line">Out[7]: 3</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注意：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当使用某个引用作为参数，传递给getrefcount()时，参数实际上创建了一个临时的引用。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因此，getrefcount()所得到的结果，会比期望的多1。</p>
+<ol start="2">
+<li><p>容器对象<br> Python的一个容器对象(比如：表、词典等)，可以包含多个对象。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">In [12]: a=[1,2,3,4,5]</span><br><span class="line">In [13]: b=a</span><br><span class="line"></span><br><span class="line">In [14]: a is b</span><br><span class="line">Out[14]: True</span><br><span class="line"></span><br><span class="line">In [15]: a[0]=6   </span><br><span class="line">In [16]: a</span><br><span class="line">Out[16]: [6, 2, 3, 4, 5]</span><br><span class="line"></span><br><span class="line">In [17]: a is b</span><br><span class="line">Out[17]: True</span><br><span class="line"></span><br><span class="line">In [18]: b</span><br><span class="line">Out[18]: [6, 2, 3, 4, 5]</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><img src="/images/python_memory_3.png" alt="memory3"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由上可见，实际上，容器对象中包含的并不是元素对象本身，是指向各个元素对象的引用。</p>
+<ol start="3">
+<li><p>引用计数增加<br> 3.1 对象被创建   </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">In [39]: getrefcount(123)</span><br><span class="line">Out[39]: 6</span><br><span class="line"></span><br><span class="line">In [40]: n=123</span><br><span class="line"></span><br><span class="line">In [41]: getrefcount(123)</span><br><span class="line">Out[41]: 7</span><br></pre></td></tr></table></figure>
+<p> 3.2 另外的别人被创建   </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">In [42]: m=n</span><br><span class="line">In [43]: getrefcount(123)</span><br><span class="line">Out[43]: 8</span><br></pre></td></tr></table></figure>
+<p> 3.3 作为容器对象的一个元素</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">In [44]: a=[1,12,123]</span><br><span class="line">In [45]: getrefcount(123)</span><br><span class="line">Out[45]: 9</span><br></pre></td></tr></table></figure>
+<p> 3.4被作为参数传递给函数：foo(x)</p>
+</li>
+<li><p>引用计数减少<br>4.1对象的别名被显式的销毁    </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">In [46]: del m</span><br><span class="line">In [47]: getrefcount(123)</span><br><span class="line">Out[47]: 8</span><br></pre></td></tr></table></figure>
+<p> 4.2 对象的一个别名被赋值给其他对象</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">In [48]: n=456</span><br><span class="line">In [49]: getrefcount(123)</span><br><span class="line">Out[49]: 7</span><br></pre></td></tr></table></figure>
+<p> 4.3对象从一个窗口对象中移除，或，窗口对象本身被销毁</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">In [50]: a.remove(123)</span><br><span class="line">In [51]: a</span><br><span class="line">Out[51]: [1, 12]</span><br><span class="line"></span><br><span class="line">In [52]: getrefcount(123)</span><br><span class="line">Out[52]: 6</span><br></pre></td></tr></table></figure>
+<p> 4.4 一个本地引用离开了它的作用域，比如上面的foo(x)函数结束时，x指向的对象引用减1。</p>
+</li>
+</ol>
+<h2 id="三、垃圾回收"><a href="#三、垃圾回收" class="headerlink" title="三、垃圾回收"></a>三、垃圾回收</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当Python中的对象越来越多，占据越来越大的内存，启动垃圾回收(garbage collection)，将没用的对象清除。</p>
+<ol>
+<li>原理</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当Python的某个对象的引用计数降为0时，说明没有任何引用指向该对象，该对象就成为要被回收的垃圾。比如某个新建对象，被分配给某个引用，对象的引用计数变为1。如果引用被删除，对象的引用计数为0，那么该对象就可以被垃圾回收。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">In [74]: a=[321,123]</span><br><span class="line"></span><br><span class="line">In [75]: del a</span><br></pre></td></tr></table></figure></p>
+<ol start="2">
+<li>解析del</li>
+</ol>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;del a后，已经没有任何引用指向之前建立的[321,123]，该表引用计数变为0，用户不可能通过任何方式接触或者动用这个对象，当垃圾回收启动时，Python扫描到这个引用计数为0的对象，就将它所占据的内存清空。</p>
+<ol start="3">
+<li><p>注意    </p>
+<ol>
+<li>垃圾回收时，Python不能进行其它的任务，频繁的垃圾回收将大大降低Python的工作效率；    </li>
+<li>Python只会在特定条件下，自动启动垃圾回收（垃圾对象少就没必要回收）  </li>
+<li><p>当Python运行时，会记录其中分配对象(object allocation)和取消分配对象(object deallocation)的次数。当两者的差值高于某个阈值时，垃圾回收才会启动。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">In [93]: import gc</span><br><span class="line"></span><br><span class="line">In [94]: gc.get_threshold()　　#gc模块中查看阈值的方法</span><br><span class="line">Out[94]: (700, 10, 10)</span><br></pre></td></tr></table></figure>
+<p>阈值分析：</p>
+<p>　　700即是垃圾回收启动的阈值；</p>
+<p>　　每10次0代垃圾回收，会配合1次1代的垃圾回收；而每10次1代的垃圾回收，才会有1次的2代垃圾回收；</p>
+<p>当然也是可以手动启动垃圾回收：　</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">In [95]: gc.collect()    #手动启动垃圾回收</span><br><span class="line">Out[95]: 2</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>何为分代回收<br>　　Python将所有的对象分为0，1，2三代；  </p>
+</li>
+</ol>
+<p>　　所有的新建对象都是0代对象； </p>
+<p>　　当某一代对象经历过垃圾回收，依然存活，就被归入下一代对象。</p>
+<h2 id="四、内存池机制"><a href="#四、内存池机制" class="headerlink" title="四、内存池机制"></a>四、内存池机制</h2><p>　　Python中有分为大内存和小内存：（256K为界限分大小内存）</p>
+<ol>
+<li><p>大内存使用malloc进行分配</p>
+</li>
+<li><p>小内存使用内存池进行分配</p>
+</li>
+<li><p>Python的内存池(金字塔)</p>
+</li>
+</ol>
+<p>　　第3层：最上层，用户对Python对象的直接操作</p>
+<p>　　第1层和第2层：内存池，有Python的接口函数PyMem_Malloc实现—–若请求分配的内存在1~256字节之间就使用内存池管理系统进行分配，调用malloc函数分配内存，但是每次只会分配一块大小为256K的大块内存，不会调用free函数释放内存，将该内存块留在内存池中以便下次使用。</p>
+<p>　　第0层：大内存—–若请求分配的内存大于256K，malloc函数分配内存，free函数释放内存。</p>
+<p>　　第-1，-2层：操作系统进行操作</p>
+<p><img src="/images/python_memory_4.png" alt="memory4"></p>
+
+          
         
       
     </div>
@@ -1446,7 +1939,7 @@ P
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/19/HTTP协议介绍/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/03/Python的流程控制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="吕培新">
@@ -1465,7 +1958,7 @@ P
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/19/HTTP协议介绍/" itemprop="url">HTTP协议介绍</a></h1>
+                <a class="post-title-link" href="/2019/01/03/Python的流程控制/" itemprop="url">Python的流程控制</a></h1>
         
 
         <div class="post-meta">
@@ -1477,8 +1970,8 @@ P
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-19T13:35:53+08:00">
-                2018-06-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-03T19:28:42+08:00">
+                2019-01-03
               </time>
             
 
@@ -1500,8 +1993,8 @@ P
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/网络技术/" itemprop="url" rel="index">
-                    <span itemprop="name">网络技术</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -1539,18 +2032,61 @@ P
       
         
           
-          HTTP协议(HyperText Transfer Protocol，超文本传输协议)是互联网上应用最为广泛的一种网络协议。
-所有的WWW文件都必须遵守这个标准。
-HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件, 查询结果等）。
-一、套接字概念跨Internet的主机间
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/19/HTTP协议介绍/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h1 id="Python的流程控制"><a href="#Python的流程控制" class="headerlink" title="Python的流程控制"></a>Python的流程控制</h1><ul>
+<li><p>顺序<br>  按照先后顺序一条条执行<br>  例如，先洗手，再吃饭，再洗碗  </p>
+</li>
+<li><p>分支<br>  根据不同的情况判断，条件满足执行某条件下的语句<br>  例如，先洗手，如果饭没有做好，玩游戏，如果饭做好了，就吃饭，如果饭都没有，叫外卖</p>
+</li>
+<li><p>循环<br>  条件满足就反复执行，不满足就不执行或不再执行<br>  例如，先洗手，看饭好了没有，没有好，一会来看一次是否好了，一会儿来看一次，直到饭好了，才可是吃饭。这里循环的条件是饭没有好，饭没有好，就循环的来看饭好了没有。</p>
+</li>
+</ul>
+<h2 id="分支结构"><a href="#分支结构" class="headerlink" title="分支结构"></a>分支结构</h2><p>Python条件语句是通过一条或多条语句的执行结果（True或者False）来决定执行的代码块。</p>
+<p>可以通过下图来简单了解分支结构语句的执行过程:<br><img src="/images/python_process_1.png" alt="Python"></p>
+<ul>
+<li><p>单分支结构：if语句</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if condition:</span><br><span class="line">    代码块</span><br><span class="line">    condition必须是一个bool类型，这个地方有一个隐式转换boolcondition)</span><br><span class="line">if 1&lt;2:</span><br><span class="line">    print(&apos;1 less than 2&apos;)</span><br></pre></td></tr></table></figure>
+<p>  代码块</p>
+<pre><code>类似于if语句的冒号后面的就是一个语句块
+在if、for、def、class等关键字后使用代码块
+</code></pre></li>
+<li><p>多分支结构：if…elif…else语句</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if condition1:</span><br><span class="line">代码块1</span><br><span class="line">elif condition2:</span><br><span class="line">代码块2</span><br><span class="line">elif condition3:</span><br><span class="line">代码块3</span><br><span class="line">......</span><br><span class="line">else:</span><br><span class="line">代码块</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分支嵌套：单分支结构嵌套多分支结构<br>例如：给定一个不超过5位的正整数，判断其有几位</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">val = input(&apos;&gt;&gt;&gt;&apos;)</span><br><span class="line">val = int(val)</span><br><span class="line">if val &gt;= 1000: #fold</span><br><span class="line">if val&gt;=10000:</span><br><span class="line">print(5)</span><br><span class="line">else:</span><br><span class="line">print(4)</span><br><span class="line">else:</span><br><span class="line">if val&gt;=100:</span><br><span class="line">print(3)</span><br><span class="line">elif val &gt;= 10:</span><br><span class="line">print(2)</span><br><span class="line">else:</span><br><span class="line">print(1</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><ul>
+<li><p>while语句<br>  语法:    </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">while condition:    </span><br><span class="line">    block</span><br></pre></td></tr></table></figure>
+<p>  当条件满足即condition为True，进入循环体，执行block<br>  例如：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">flag=10</span><br><span class="line">while flag:</span><br><span class="line">print(flag)</span><br><span class="line">flag -= 1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>for语句<br>  语法:  </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for element in iteratable:</span><br><span class="line">    block</span><br></pre></td></tr></table></figure>
+<p>  当可迭代对象中有元素可以迭代，进入循环体，执行block<br>  range函数: 创建一个整数列表<br>  举例：打印1~10  </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for i in range(10):</span><br><span class="line">print(i+1)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>循环 else子句<br>  语法：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">while condition:</span><br><span class="line">    block</span><br><span class="line">else:</span><br><span class="line">    block</span><br><span class="line"></span><br><span class="line">for element in iteratable:</span><br><span class="line">    block</span><br><span class="line">else:</span><br><span class="line">    block</span><br></pre></td></tr></table></figure>
+<p>  如果循环正常的执行结束，就执行else子句；如果使用break终止，else子句不会执行</p>
+</li>
+<li><p>continue<br>中断当前循环的当次执行，继续下一次循环<br>举例：打印10以内的偶数 </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in range(10):</span><br><span class="line">    if  i%2 == 1:</span><br><span class="line">        continue</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>break<br>终止当前循环<br>举例：计算1000以内的被7整除的前20个数 </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">count = 0</span><br><span class="line">for i in range(0,1000,7):</span><br><span class="line">    print(i)</span><br><span class="line">    count += 1</span><br><span class="line">    if count &gt;= 20:</span><br><span class="line">        break</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>continue、break语句总结  </p>
+<ol>
+<li>continue和break是循环的控制语句，只影响当前循环，包括while、for循环</li>
+<li>如果循环嵌套， continue和break也只影响语句所在的那一层循环</li>
+<li>continue和break 不是跳出语句块，所以 if cond: break 不是跳出if，而是终止if外的break所在的循环</li>
+</ol>
+</li>
+</ul>
+
+          
         
       
     </div>
@@ -1606,7 +2142,7 @@ HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/18/MySQL之主从复制相关实验/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/02/Python的运算符/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="吕培新">
@@ -1625,7 +2161,7 @@ HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/18/MySQL之主从复制相关实验/" itemprop="url">MySQL之主从复制相关实验</a></h1>
+                <a class="post-title-link" href="/2019/01/02/Python的运算符/" itemprop="url">Python的运算符</a></h1>
         
 
         <div class="post-meta">
@@ -1637,8 +2173,8 @@ HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-18T15:58:19+08:00">
-                2018-06-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-02T19:28:42+08:00">
+                2019-01-02
               </time>
             
 
@@ -1660,8 +2196,8 @@ HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -1699,20 +2235,20 @@ HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件
       
         
           
-          实验一：搭建主从复制前期准备：两台虚拟机
-主服务器：     CentOS7.4  192.168.30.10        提示符：蓝色
-从服务器：     CentOS7.5  192.168.30.18        提示符：黄色
-主服务器：vim /etc/my.cnf
-[mariadb]
+            <p>什么是运算符？<br>举个简单的例子：4 +　5 = 9 ，其中4和5被称为操作数，’+’就是运算符</p>
+<h1 id="Python运算符"><a href="#Python运算符" class="headerlink" title="Python运算符"></a>Python运算符</h1><h2 id="算数运算符"><a href="#算数运算符" class="headerlink" title="算数运算符"></a>算数运算符</h2><p>以下假设变量a为10，变量b为20：<br><img src="/images/python_operator_1.png" alt="Python_operator1"><br>以下为算数运算符的实例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">a = 21</span><br><span class="line">b = 10</span><br><span class="line">c = 0</span><br><span class="line"></span><br><span class="line">c = a + b</span><br><span class="line">print (&quot;1:  c 的值为：&quot;, c)</span><br><span class="line"></span><br><span class="line">c = a - b</span><br><span class="line">print (&quot;2:  c 的值为：&quot;, c) </span><br><span class="line"></span><br><span class="line">c = a * b</span><br><span class="line">print (&quot;3:  c 的值为：&quot;, c )</span><br><span class="line"></span><br><span class="line">c = a / b</span><br><span class="line">print (&quot;4:  c 的值为：&quot;, c )</span><br><span class="line"></span><br><span class="line">c = a % b</span><br><span class="line">print (&quot;5:  c 的值为：&quot;, c)</span><br><span class="line"></span><br><span class="line"># 修改变量 a 、b 、c</span><br><span class="line">a = 2</span><br><span class="line">b = 3</span><br><span class="line">c = a**b </span><br><span class="line">print (&quot;6:  c 的值为：&quot;, c)</span><br><span class="line"></span><br><span class="line">a = 10</span><br><span class="line">b = 5</span><br><span class="line">c = a//b </span><br><span class="line">print (&quot;7:  c 的值为：&quot;, c)</span><br></pre></td></tr></table></figure></p>
+<h2 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h2><p><img src="/images/python_operator_1.png" alt="Python_operator2"><br>以下为关系运算符的实例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">a = 21</span><br><span class="line">b = 10</span><br><span class="line">c = 0</span><br><span class="line"> </span><br><span class="line">if ( a == b ):</span><br><span class="line">   print (&quot;1 - a 等于 b&quot;)</span><br><span class="line">else:</span><br><span class="line">   print (&quot;1 - a 不等于 b&quot;)</span><br><span class="line"> </span><br><span class="line">if ( a != b ):</span><br><span class="line">   print (&quot;2 - a 不等于 b&quot;)</span><br><span class="line">else:</span><br><span class="line">   print (&quot;2 - a 等于 b&quot;)</span><br><span class="line"> </span><br><span class="line">if ( a &lt; b ):</span><br><span class="line">   print (&quot;3 - a 小于 b&quot;)</span><br><span class="line">else:</span><br><span class="line">   print (&quot;3 - a 大于等于 b&quot;)</span><br><span class="line"> </span><br><span class="line">if ( a &gt; b ):</span><br><span class="line">   print (&quot;4 - a 大于 b&quot;)</span><br><span class="line">else:</span><br><span class="line">   print (&quot;4 - a 小于等于 b&quot;)</span><br><span class="line"> </span><br><span class="line"># 修改变量 a 和 b 的值</span><br><span class="line">a = 5;</span><br><span class="line">b = 20;</span><br><span class="line">if ( a &lt;= b ):</span><br><span class="line">   print (&quot;5 - a 小于等于 b&quot;)</span><br><span class="line">else:</span><br><span class="line">   print (&quot;5 - a 大于  b&quot;)</span><br><span class="line"> </span><br><span class="line">if ( b &gt;= a ):</span><br><span class="line">   print (&quot;6 - b 大于等于 a&quot;)</span><br><span class="line">else:</span><br><span class="line">   print (&quot;6 - b 小于 a&quot;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h2><p><img src="/images/python_operator_3.png" alt="Python_operator3"><br>以下为赋值运算符的实例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">a = 21</span><br><span class="line">b = 10</span><br><span class="line">c = 0</span><br><span class="line"> </span><br><span class="line">c = a + b</span><br><span class="line">print (&quot;1 - c 的值为：&quot;, c)</span><br><span class="line"> </span><br><span class="line">c += a</span><br><span class="line">print (&quot;2 - c 的值为：&quot;, c)</span><br><span class="line"> </span><br><span class="line">c *= a</span><br><span class="line">print (&quot;3 - c 的值为：&quot;, c)</span><br><span class="line"> </span><br><span class="line">c /= a </span><br><span class="line">print (&quot;4 - c 的值为：&quot;, c)</span><br><span class="line"> </span><br><span class="line">c = 2</span><br><span class="line">c %= a</span><br><span class="line">print (&quot;5 - c 的值为：&quot;, c)</span><br><span class="line"> </span><br><span class="line">c **= a</span><br><span class="line">print (&quot;6 - c 的值为：&quot;, c)</span><br><span class="line"> </span><br><span class="line">c //= a</span><br><span class="line">print (&quot;7 - c 的值为：&quot;, c)</span><br></pre></td></tr></table></figure></p>
+<h2 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h2><p><img src="/images/python_operator_4.png" alt="Python_operator4"><br>以下为逻辑运算符的实例：</p>
+<h2 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h2><p><img src="/images/python_operator_5.png" alt="Python_operator5"><br>以下为位运算符的实例：</p>
+<h2 id="成员运算符"><a href="#成员运算符" class="headerlink" title="成员运算符"></a>成员运算符</h2><p><img src="/images/python_operator_6.png" alt="Python_operator6"><br>以下为成员运算符的实例：</p>
+<h2 id="身份运算符"><a href="#身份运算符" class="headerlink" title="身份运算符"></a>身份运算符</h2><p><img src="/images/python_operator_7.png" alt="Python_operator7"><br>以下为身份运算符的实例：</p>
+<h2 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a>运算符优先级</h2><p><img src="/images/python_operator_8.png" alt="Python_operator8"></p>
+<p>算数运算符 &gt; 位运算符 &gt; 身份运算符 &gt; 成员运算符 &gt; 逻辑运算符  </p>
+<p>记不住，用括号  </p>
+<p>长表达式，多用括号，  易懂、易读  </p>
 
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/18/MySQL之主从复制相关实验/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
@@ -1768,7 +2304,7 @@ HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/14/Mysql之备份及还原相关实验/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/01/Python的基础语法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="吕培新">
@@ -1787,7 +2323,7 @@ HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/14/Mysql之备份及还原相关实验/" itemprop="url">Mysql之备份及还原相关实验</a></h1>
+                <a class="post-title-link" href="/2019/01/01/Python的基础语法/" itemprop="url">Python的基础语法</a></h1>
         
 
         <div class="post-meta">
@@ -1799,8 +2335,8 @@ HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-14T15:56:41+08:00">
-                2018-06-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-01T19:28:42+08:00">
+                2019-01-01
               </time>
             
 
@@ -1822,8 +2358,8 @@ HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -1861,17 +2397,57 @@ HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件
       
         
           
-          实验准备：CentOS虚拟机两台，一台作为数据库服务器，一台作为中间存放备份的服务器
-数据库服务器：操作系统：CentOS7.4              IP：192.168.30.10       提示符颜色：蓝色
-中间服务器：操作系统：CentOS7.5             IP：192.
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/14/Mysql之备份及还原相关实验/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h1 id="Python的基础语法"><a href="#Python的基础语法" class="headerlink" title="Python的基础语法"></a>Python的基础语法</h1><h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;默认情况下，Python 3 源码文件是以UTF-8编码，所有的字符串都是unicode字符串</p>
+<h2 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h2><ol>
+<li><p>标识符的第一个字符必须以字母表中的字母或者下划线 _ 表示，但是建议不要使用 _ 下划线表示，_下划线在Python中有特殊的含义</p>
+</li>
+<li><p>标识符的其它组成部分必须有字母、数字、下划线组成</p>
+</li>
+<li><p>标识符对大小写敏感</p>
+</li>
+<li><p>Python 3中，非ASCII表标识符也被允许使用</p>
+</li>
+<li><p>标识符不能和Python保留关键字同名</p>
+</li>
+</ol>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释:"></a>注释:</h2><ol>
+<li><p>Python中的单行注释是以 # 开头注释</p>
+</li>
+<li><p>Python中的多行注释可以使用多个 # 号注释，也可以使用单双三引号注释<br>如：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 第一个注释</span><br><span class="line">print (&quot;Hello, Python!&quot;) # 第二个注释 </span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">第三注释</span><br><span class="line">第四注释</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">第五注释</span><br><span class="line">第六注释</span><br><span class="line">&quot;&quot;&quot;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="缩进"><a href="#缩进" class="headerlink" title="缩进"></a>缩进</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python最具特色的就是使用缩进来代表代码块，不需要像其他语言一样使用大括号{ }来代表代码块</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python缩进的空格数是可变的，但是同一个代码块的语言必须包含相同的缩进空格，一般约定使用4个空格设置为缩进<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if True:</span><br><span class="line">    print (&quot;True&quot;)</span><br><span class="line">else:</span><br><span class="line">    print (&quot;False&quot;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="续行"><a href="#续行" class="headerlink" title="续行"></a>续行</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python 通常是一行写完一条语句，但如果语句很长，我们可以在行尾使用反斜杠()来实现多行语句<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(&quot;hello &quot;+&quot;py\</span><br><span class="line">thon &quot;+&apos;world\</span><br><span class="line">!&apos;)</span><br></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但是在 [ ], { }, 或 ( ) 中的多行语句，不需要使用反斜杠( \ )，可以用’,’结尾直接续行</p>
+<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一旦赋值就不能改变值的标识符，但是Python中无法定义常量</p>
+<h2 id="字面常量"><a href="#字面常量" class="headerlink" title="字面常量"></a>字面常量</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一个单独的量，如12、’abc’、’2341453.03e-9’</p>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;赋值后，可以改变值的标识符</p>
+<h2 id="数字类型："><a href="#数字类型：" class="headerlink" title="数字类型："></a>数字类型：</h2><p>python中数字有四种类型：整数、布尔型、浮点数和复数。</p>
+<ul>
+<li>int (整数), 如 1, 从 Python3开始不区分long和int，long被重命名为int，所以只有int了</li>
+<li>bool (布尔), 如 True、False。  </li>
+<li>float (浮点数), 如 1.23、3E-2，本质上就是使用C语言的double类型  </li>
+<li>complex (复数), 如 1 + 2j、 1.1 + 2.2j  </li>
+</ul>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python的字符串可以使用单引号、双引号、单双三引号声明字符串  </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python字符串的单双三引号可以跨行使用、也以在其中自由的使用单引号和双引号  </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python在字符串前面加上r或者R前缀，表示该字符串不做特殊的处理   </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">s1 = &apos;hello&apos;</span><br><span class="line">s2 = &quot;python&quot;</span><br><span class="line">s3 = &apos;&apos;&apos;world&apos;&apos;&apos;</span><br><span class="line">s4 = &quot;&quot;&quot;!&quot;&quot;&quot;</span><br><span class="line">s5 = &apos;abc \n def&apos;  # 使用反斜杠(\)+n转义特殊字符</span><br><span class="line">s6 = r&apos;abc \n def&apos; # 在字符串前面添加一个 r，表示原始字符串，不会发生转义</span><br><span class="line">print(s1,s2,s3,s4)</span><br><span class="line">print(s5)   </span><br><span class="line">print(s6)</span><br></pre></td></tr></table></figure></p>
+<h2 id="Python的语言类型"><a href="#Python的语言类型" class="headerlink" title="Python的语言类型"></a>Python的语言类型</h2><ul>
+<li><p>静态语言：静态语言是在编译时期就检查数据类型的，所以必须在声明变量的时候指定数据类型，否则编译会不通过。例如C/C++，Java等</p>
+</li>
+<li><p>动态语言：动态语言是在运行时期才检查数据类型的，所以在声明变量的时候可以先不指定数据类型，因为在运行期间变量的数据类型是可变的。它会在运行的时候根据赋予变量的值，来判断这个变量的数据类型，然后记录下来。例如Javascript，PHP，Python等。</p>
+</li>
+<li><p>强类型语言：强类型语言是指，变量的数据类型一旦确定下来，就不能改变了，除非经过强制类型转换。例如Java，C#，Python等。</p>
+</li>
+<li><p>弱类型语言：弱类型语言是指一个变量可以赋予不同数据类型的值，因为它可以进行隐式的自动类型转换。例如Javascript，C/C++等。</p>
+</li>
+</ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python就是动态语言、强类型语言</p>
+
+          
         
       
     </div>
@@ -1918,7 +2494,7 @@ HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1964,7 +2540,7 @@ HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-count">94</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1975,7 +2551,7 @@ HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1986,7 +2562,7 @@ HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2042,7 +2618,7 @@ HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
 
 
 
@@ -2089,8 +2665,6 @@ HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件
   
 
 
-  
-
 
 
 
@@ -2131,11 +2705,6 @@ HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
 
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
-  
-
 
   
 
@@ -2148,13 +2717,6 @@ HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
 
   
 
@@ -2201,19 +2763,6 @@ HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件
   
 
 
-
-
-  
-  
-  
-  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
-
-  
-  
-  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
-  
-
-  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 

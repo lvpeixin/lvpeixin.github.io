@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="工欲善其事必先利其器,我们想学好Python，就需要先学会搭建运行Python的环境  Windows下搭建Python环境1、在Python官网下载Python的Windows版本Python官网地址：https://www.python.org/   2、安装Python 勾选将Python3.7 加入到PATH路径选择 Install Now，它里面包括pip包管理直接下一步，这样就将Py">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python的环境搭建">
+<meta property="og:url" content="http://yoursite.com/2019/01/01/Python的环境搭建/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="工欲善其事必先利其器,我们想学好Python，就需要先学会搭建运行Python的环境  Windows下搭建Python环境1、在Python官网下载Python的Windows版本Python官网地址：https://www.python.org/   2、安装Python 勾选将Python3.7 加入到PATH路径选择 Install Now，它里面包括pip包管理直接下一步，这样就将Py">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/Python_org.png">
+<meta property="og:image" content="http://yoursite.com/images/Python_org_1.png">
+<meta property="og:image" content="http://yoursite.com/images/Python_org_2.png">
+<meta property="og:image" content="http://yoursite.com/images/Python_org_3.png">
+<meta property="og:image" content="http://yoursite.com/images/Python_org_4.png">
+<meta property="og:image" content="http://yoursite.com/images/Python_org_5.png">
+<meta property="og:image" content="http://yoursite.com/images/Python_org_6.png">
+<meta property="og:updated_time" content="2019-02-24T06:52:11.699Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python的环境搭建">
+<meta name="twitter:description" content="工欲善其事必先利其器,我们想学好Python，就需要先学会搭建运行Python的环境  Windows下搭建Python环境1、在Python官网下载Python的Windows版本Python官网地址：https://www.python.org/   2、安装Python 勾选将Python3.7 加入到PATH路径选择 Install Now，它里面包括pip包管理直接下一步，这样就将Py">
+<meta name="twitter:image" content="http://yoursite.com/images/Python_org.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/01/Python的环境搭建/">
+
+
+
+
+
+  <title>Python的环境搭建 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-editor">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-algorithm">
+          <a href="/categories/算法" rel="section">
+            
+            算法
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/01/Python的环境搭建/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python的环境搭建</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-01T19:20:42+08:00">
+                2019-01-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>工欲善其事必先利其器,我们想学好Python，就需要先学会搭建运行Python的环境</p>
+</blockquote>
+<h1 id="Windows下搭建Python环境"><a href="#Windows下搭建Python环境" class="headerlink" title="Windows下搭建Python环境"></a>Windows下搭建Python环境</h1><h2 id="1、在Python官网下载Python的Windows版本"><a href="#1、在Python官网下载Python的Windows版本" class="headerlink" title="1、在Python官网下载Python的Windows版本"></a>1、在Python官网下载Python的Windows版本</h2><p>Python官网地址：<a href="https://www.python.org/" target="_blank" rel="noopener">https://www.python.org/</a></p>
+<p><img src="/images/Python_org.png" alt="Python_org"></p>
+<p><img src="/images/Python_org_1.png" alt="Python_org_1"></p>
+<h2 id="2、安装Python"><a href="#2、安装Python" class="headerlink" title="2、安装Python"></a>2、安装Python</h2><p><img src="/images/Python_org_2.png" alt="Python_org_2"></p>
+<p>勾选将Python3.7 加入到PATH路径<br>选择 Install Now，它里面包括pip包管理<br>直接下一步，这样就将Python的环境安装好了</p>
+<h2 id="3、使用Python3-7"><a href="#3、使用Python3-7" class="headerlink" title="3、使用Python3.7"></a>3、使用Python3.7</h2><p>打开命令行，测试Python和pip的版本<br><img src="/images/Python_org_3.png" alt="Python_org_3"></p>
+<p>打开Python的两种方法：  </p>
+<ol>
+<li>在命令行下直接输入Python</li>
+<li>在开始菜单找到刚刚安装的Python程序，直接打开即可</li>
+</ol>
+<h2 id="4、安装IPython"><a href="#4、安装IPython" class="headerlink" title="4、安装IPython"></a>4、安装IPython</h2><p>在命令行下输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install ipython</span><br></pre></td></tr></table></figure></p>
+<p>安装完成后直接输入ipython即可</p>
+<h2 id="5、安装Python的IDE工具"><a href="#5、安装Python的IDE工具" class="headerlink" title="5、安装Python的IDE工具"></a>5、安装Python的IDE工具</h2><p>这里介绍两种IDE工具</p>
+<ol>
+<li><p>安装jupyter<br> 在命令放下输入安装指令：</p>
+<pre><code>pip install jupyter
+</code></pre><p> 安装结束后，直接运行下面代码:  </p>
+<pre><code>jupyter notebook
+</code></pre><p> 浏览器直接打开jupyter 工具，如下</p>
+<p> <img src="/images/Python_org_4.png" alt="Python_org_4"></p>
+<p> 这样就可以直接输入Python代码了</p>
+</li>
+<li><p>安装Pycharm<br> 打开Pycharm官网：<a href="https://www.jetbrains.com/pycharm/" target="_blank" rel="noopener">https://www.jetbrains.com/pycharm/</a><br> <img src="/images/Python_org_5.png" alt="Python_org_5"></p>
+<p> 下载社区版的Pycharm<br> <img src="/images/Python_org_6.png" alt="Python_org_6"></p>
+<p> 然后直接下一步，下一步安装程序即可</p>
+</li>
+</ol>
+<h1 id="Linux下安装pyenv兼容python3并与python2共存"><a href="#Linux下安装pyenv兼容python3并与python2共存" class="headerlink" title="Linux下安装pyenv兼容python3并与python2共存"></a>Linux下安装pyenv兼容python3并与python2共存</h1><h2 id="编译安装Python3"><a href="#编译安装Python3" class="headerlink" title="编译安装Python3"></a>编译安装Python3</h2><ol>
+<li><p>安装源码编译安装需求的软件包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install gcc make patch gdbm-devel openssl-devel sqlite-devel readline-devel zlib-devel bzip2-devel</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下载源代码 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.6.6/Python-3.6.6.tgz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解压压缩包</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar xf Python-3.6.6.tgz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编译源代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd Python-3.6.6/</span><br><span class="line">./configure --prefix=/usr/local/python3.6.6</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装程序</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加环境变量</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;export PATH=/usr/local/python3.6.6/bin:$PATH&quot;  &gt; /etc/profile.d/pyenv.sh</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="pyenv-安装及常用命令"><a href="#pyenv-安装及常用命令" class="headerlink" title="pyenv 安装及常用命令"></a>pyenv 安装及常用命令</h2><p><strong>git 安装</strong>   </p>
+<ol>
+<li><p>安装git</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install git -y</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>克隆pyenv仓库   </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/pyenv/pyenv.git  ~/.pyenv</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置环境变量   </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo &apos;export PYENV_ROOT=&quot;$HOME/.pyenv&quot;&apos; &gt;&gt; ~/.bash_profile</span><br><span class="line">echo &apos;export PATH=&quot;$PYENV_ROOT/bin:$PATH&quot;&apos; &gt;&gt; ~/.bash_profile</span><br><span class="line">echo -e &apos;if command -v pyenv 1&gt;/dev/null 2&gt;&amp;1; then\n  eval &quot;$(pyenv init -)&quot;\nfi&apos; &gt;&gt; ~/.bash_profile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>激活环境变量  </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source  ~/.bash_profile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>pyenv常用命令  </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">pyenv install --list # 列出可安装版本 </span><br><span class="line">pyenv install &lt;version&gt; # 安装对应版本 </span><br><span class="line">pyenv install -v &lt;version&gt; # 安装对应版本，若发生错误，可以显示详细的错误信息 </span><br><span class="line">pyenv versions # 显示当前使用的python版本 </span><br><span class="line">pyenv which python # 显示当前python安装路径 </span><br><span class="line">pyenv global &lt;version&gt; # 设置默认Python版本 </span><br><span class="line">pyenv local &lt;version&gt; # 当前路径创建一个.python-version, 以后进入这个目录自动切换为该版本 </span><br><span class="line">pyenv shell &lt;version&gt; # 当前shell的session中启用某版本，优先级高于global 及 local</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="python的虚拟环境"><a href="#python的虚拟环境" class="headerlink" title="python的虚拟环境"></a>python的虚拟环境</h2><ol>
+<li><p>安装插件  </p>
+<p> 创建虚拟的python环境需要pyenv-virtualenv的插件</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv </span><br><span class="line">echo ‘eval “$(pyenv virtualenv-init -)”’ &gt;&gt; ~/.bash_profile </span><br><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建虚拟环境 </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv virtualenv 2.7.13 env2713</span><br></pre></td></tr></table></figure>
+<p> 这是创建了一个名为env2713的python虚拟环境，这个环境的目录位于：~/.pyenv/versions/</p>
+</li>
+<li><p>查看python版本</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">pyenv versions </span><br><span class="line">* system (set by /root/.pyenv/version) </span><br><span class="line">2.7.13 </span><br><span class="line">2.7.13/envs/env2713 </span><br><span class="line">3.6.4 </span><br><span class="line">3.6.4/envs/env364 </span><br><span class="line">env2713 </span><br><span class="line">env364</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用虚拟环境</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[xxx]#pyenv activate env364 </span><br><span class="line">pyenv-virtualenv: prompt changing will be removed from future release. configure `export PYENV_VIRTUALENV_DISABLE_PROMPT=1’ to simulate the behavior.v364)</span><br><span class="line"></span><br><span class="line">[xxx]# python </span><br><span class="line">Python 3.6.4 (default, Apr 19 2018, 10:35:10) </span><br><span class="line">[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux </span><br><span class="line">Type “help”, “copyright”, “credits” or “license” for more information.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>退出虚拟环境</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv deactivate</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>环境迁移 </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">pyenv virtualenv 2.7.13 env2713</span><br><span class="line"></span><br><span class="line">&lt;1&gt;~./pyenv/versions/下名为2.7.14的文件夹拷贝到要迁移的服务器上    </span><br><span class="line">&lt;2&gt;修改env364/pyvenv.cfg文件中的home路径(迁移的服务器无需安装任何东西)</span><br><span class="line"></span><br><span class="line">[xxx env364]# cat pyvenv.cfg </span><br><span class="line">home =/root/.pyenv/versions/2.7.13/bin </span><br><span class="line">include-system-site-packages = false </span><br><span class="line">version = 2.7.13</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+	<div>
+
+	<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+
+
+	</div>
+	
+    
+	<div>
+
+    
+
+    
+
+	
+	
+	
+	
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/31/Python的历史/" rel="next" title="Python历史">
+                <i class="fa fa-chevron-left"></i> Python历史
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/01/Python的基础语法/" rel="prev" title="Python的基础语法">
+                Python的基础语法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </div></article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Windows下搭建Python环境"><span class="nav-number">1.</span> <span class="nav-text">Windows下搭建Python环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、在Python官网下载Python的Windows版本"><span class="nav-number">1.1.</span> <span class="nav-text">1、在Python官网下载Python的Windows版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、安装Python"><span class="nav-number">1.2.</span> <span class="nav-text">2、安装Python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、使用Python3-7"><span class="nav-number">1.3.</span> <span class="nav-text">3、使用Python3.7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、安装IPython"><span class="nav-number">1.4.</span> <span class="nav-text">4、安装IPython</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、安装Python的IDE工具"><span class="nav-number">1.5.</span> <span class="nav-text">5、安装Python的IDE工具</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux下安装pyenv兼容python3并与python2共存"><span class="nav-number">2.</span> <span class="nav-text">Linux下安装pyenv兼容python3并与python2共存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编译安装Python3"><span class="nav-number">2.1.</span> <span class="nav-text">编译安装Python3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pyenv-安装及常用命令"><span class="nav-number">2.2.</span> <span class="nav-text">pyenv 安装及常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python的虚拟环境"><span class="nav-number">2.3.</span> <span class="nav-text">python的虚拟环境</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

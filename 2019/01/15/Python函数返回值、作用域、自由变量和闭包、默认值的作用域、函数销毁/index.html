@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Python函数返回值、作用域、自由变量和闭包、默认值的作用域、函数销毁函数返回值举例： 123456789101112131415161718192021222324252627282930313233343536def f1(x):    print(x)    return x + 1def f2(x):    print(x)    return x + 1    print(x + 1)">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python函数返回值、作用域、自由变量和闭包、默认值的作用域、函数销毁">
+<meta property="og:url" content="http://yoursite.com/2019/01/15/Python函数返回值、作用域、自由变量和闭包、默认值的作用域、函数销毁/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="Python函数返回值、作用域、自由变量和闭包、默认值的作用域、函数销毁函数返回值举例： 123456789101112131415161718192021222324252627282930313233343536def f1(x):    print(x)    return x + 1def f2(x):    print(x)    return x + 1    print(x + 1)">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-24T06:47:43.183Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python函数返回值、作用域、自由变量和闭包、默认值的作用域、函数销毁">
+<meta name="twitter:description" content="Python函数返回值、作用域、自由变量和闭包、默认值的作用域、函数销毁函数返回值举例： 123456789101112131415161718192021222324252627282930313233343536def f1(x):    print(x)    return x + 1def f2(x):    print(x)    return x + 1    print(x + 1)">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/15/Python函数返回值、作用域、自由变量和闭包、默认值的作用域、函数销毁/">
+
+
+
+
+
+  <title>Python函数返回值、作用域、自由变量和闭包、默认值的作用域、函数销毁 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-editor">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-algorithm">
+          <a href="/categories/算法" rel="section">
+            
+            算法
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/15/Python函数返回值、作用域、自由变量和闭包、默认值的作用域、函数销毁/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python函数返回值、作用域、自由变量和闭包、默认值的作用域、函数销毁</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-15T19:28:42+08:00">
+                2019-01-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Python函数返回值、作用域、自由变量和闭包、默认值的作用域、函数销毁"><a href="#Python函数返回值、作用域、自由变量和闭包、默认值的作用域、函数销毁" class="headerlink" title="Python函数返回值、作用域、自由变量和闭包、默认值的作用域、函数销毁"></a>Python函数返回值、作用域、自由变量和闭包、默认值的作用域、函数销毁</h1><h2 id="函数返回值"><a href="#函数返回值" class="headerlink" title="函数返回值"></a>函数返回值</h2><p>举例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f1</span><span class="params">(x)</span>:</span></span><br><span class="line">    print(x)</span><br><span class="line">    <span class="keyword">return</span> x + <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f2</span><span class="params">(x)</span>:</span></span><br><span class="line">    print(x)</span><br><span class="line">    <span class="keyword">return</span> x + <span class="number">1</span></span><br><span class="line">    print(x + <span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f3</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> x &gt; <span class="number">3</span>:</span><br><span class="line">        <span class="keyword">return</span> print(<span class="string">'&gt; 3'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> print(<span class="string">'&lt; 3'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f4</span><span class="params">(x)</span>:</span></span><br><span class="line">    print(x)</span><br><span class="line">    <span class="keyword">return</span> x + <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> x + <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f5</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(x):</span><br><span class="line">        <span class="keyword">if</span> i &gt; <span class="number">3</span>:</span><br><span class="line">            <span class="keyword">return</span> print(i)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">'&#123;&#125; is not greater than 3'</span>.format(x))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f6</span><span class="params">(x)</span>:</span></span><br><span class="line"><span class="comment">#     return x +=1</span></span><br><span class="line">     <span class="keyword">pass</span>   </span><br><span class="line">    </span><br><span class="line">f1(<span class="number">5</span>)</span><br><span class="line">f2(<span class="number">5</span>)</span><br><span class="line">f3(<span class="number">5</span>)</span><br><span class="line">f4(<span class="number">5</span>)</span><br><span class="line">f5(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>5
+5
+&gt; 3
+5
+4
+</code></pre><p><strong>总结：</strong></p>
+<ul>
+<li>Python函数使用return语句返回‘返回值’</li>
+</ul>
+<ul>
+<li>所有函数多有返回值，如果没有return语句，就会隐式调用return None</li>
+</ul>
+<ul>
+<li>return 语句并不一定是函数的语句块的最后一条语句</li>
+</ul>
+<ul>
+<li>一个函数可以存在多个return语句，但是最终只有一条可以被执行。如果没有一条return语句被执行，就会隐式调用 return None</li>
+</ul>
+<ul>
+<li><p>如果有必要，可以显示调用 return None，也可以简写为 return</p>
+</li>
+<li><p>函数的返回值必须为一个对象，这个对象可以是数字，字符串、列表、元组、字典、函数等等，但是不能返回一个表达式</p>
+</li>
+</ul>
+<ul>
+<li>如果函数执行了return语句，函数就会返回，当前被执行的return语句之后的其他语句就不会被执行</li>
+</ul>
+<ul>
+<li>函数返回值的作用： 结束函数调用、返回值</li>
+</ul>
+<h2 id="函数对象"><a href="#函数对象" class="headerlink" title="函数对象"></a>函数对象</h2><p>当我们定义一个函数时，函数对象就像数学中的函数一样，具有其自身的属性<br>举例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(a)</span>:</span></span><br><span class="line">    x = <span class="number">3</span></span><br><span class="line">    <span class="keyword">return</span> x + a</span><br><span class="line">print(foo)</span><br><span class="line">print(dir(foo))</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;function foo at 0x00000136ECAB6D90&gt;
+[&apos;__annotations__&apos;, &apos;__call__&apos;, &apos;__class__&apos;, &apos;__closure__&apos;, &apos;__code__&apos;, &apos;__defaults__&apos;, &apos;__delattr__&apos;, &apos;__dict__&apos;, &apos;__dir__&apos;, &apos;__doc__&apos;, &apos;__eq__&apos;, &apos;__format__&apos;, &apos;__ge__&apos;, &apos;__get__&apos;, &apos;__getattribute__&apos;, &apos;__globals__&apos;, &apos;__gt__&apos;, &apos;__hash__&apos;, &apos;__init__&apos;, &apos;__init_subclass__&apos;, &apos;__kwdefaults__&apos;, &apos;__le__&apos;, &apos;__lt__&apos;, &apos;__module__&apos;, &apos;__name__&apos;, &apos;__ne__&apos;, &apos;__new__&apos;, &apos;__qualname__&apos;, &apos;__reduce__&apos;, &apos;__reduce_ex__&apos;, &apos;__repr__&apos;, &apos;__setattr__&apos;, &apos;__sizeof__&apos;, &apos;__str__&apos;, &apos;__subclasshook__&apos;]
+</code></pre><p><strong>函数属性简单概括：</strong></p>
+<ul>
+<li>code 代码  有函数就有函数体，函数体也是函数的一个属性</li>
+<li>default 位置参数的默认值</li>
+<li>kwdefault 关键字参数的默认值</li>
+<li>name 函数自身的名字</li>
+<li>call  函数是否可以被调用   </li>
+</ul>
+<h2 id="函数作用域"><a href="#函数作用域" class="headerlink" title="函数作用域"></a>函数作用域</h2><h3 id="函数嵌套"><a href="#函数嵌套" class="headerlink" title="函数嵌套"></a>函数嵌套</h3><ul>
+<li>在一个函数中定义另一个函数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></span><br><span class="line">        print(<span class="string">'inner'</span>)</span><br><span class="line">    print(<span class="string">'outer'</span>)</span><br><span class="line">    inner()</span><br><span class="line">outer()</span><br><span class="line"><span class="comment"># inner()</span></span><br></pre></td></tr></table></figure>
+<pre><code>outer
+inner
+</code></pre><ul>
+<li>函数有可见的范围，这就是作用域的概念</li>
+<li>内部函数不能直接在外部使用，这会抛出NameError异常，因为它不可见</li>
+</ul>
+<h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><ul>
+<li>一个标识符的可见范围，就是这个标识符的作用域。一般就是常说的变量的作用域</li>
+<li>举例</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">5</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f1</span><span class="params">()</span>:</span></span><br><span class="line">    print(x)     <span class="comment"># x 是全局变量，子函数没有定义 x  这里就直接调用全局变量的 x</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f2</span><span class="params">()</span>:</span></span><br><span class="line">    x = x + <span class="number">1</span>    <span class="comment"># int' object is not callable   等号左边的x 是重新定义，但是等号右边的x没有却没有定义，导致此处报错  </span></span><br><span class="line">    print(x)</span><br><span class="line">    </span><br><span class="line">f1()</span><br><span class="line">f2()</span><br></pre></td></tr></table></figure>
+<pre><code>5
+
+
+
+---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-4-e6a3b9a7c9f5&gt; in &lt;module&gt;
+      8 
+      9 f1()
+---&gt; 10 2()
+     11 
+
+
+TypeError: &apos;int&apos; object is not callable
+</code></pre><h4 id="全局作用域"><a href="#全局作用域" class="headerlink" title="全局作用域"></a>全局作用域</h4><ul>
+<li>在整个程序的运行环境中都是可见的</li>
+</ul>
+<h4 id="局部作用域"><a href="#局部作用域" class="headerlink" title="局部作用域"></a>局部作用域</h4><ul>
+<li>在函数、类的内部可见的</li>
+<li>局部变量的使用范围不能超过其所在的局部作用域<br>举例：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer1</span><span class="params">()</span>:</span></span><br><span class="line">    o = <span class="number">65</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></span><br><span class="line">        print(<span class="string">'inner:&#123;&#125;,chr:&#123;&#125;'</span>.format(o,chr(o)))</span><br><span class="line">    </span><br><span class="line">    print(<span class="string">'outer1:&#123;&#125;,chr:&#123;&#125;'</span>.format(o,chr(o)))</span><br><span class="line">    inner()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer2</span><span class="params">()</span>:</span></span><br><span class="line">    o = <span class="number">65</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></span><br><span class="line">        o = <span class="number">97</span></span><br><span class="line">        print(<span class="string">'inner:&#123;&#125;,chr:&#123;&#125;'</span>.format(o,chr(o)))</span><br><span class="line">    </span><br><span class="line">    print(<span class="string">'outer2:&#123;&#125;,chr:&#123;&#125;'</span>.format(o,chr(o)))</span><br><span class="line">    inner()</span><br><span class="line">    </span><br><span class="line">outer1()</span><br><span class="line">print(<span class="string">'*'</span>*<span class="number">20</span>)</span><br><span class="line">outer2()</span><br></pre></td></tr></table></figure>
+<pre><code>outer1:65,chr:A
+inner:65,chr:A
+********************
+outer2:65,chr:A
+inner:97,chr:a
+</code></pre><p>从嵌套结构的例子看来：</p>
+<ul>
+<li>外层变量的作用域可以向内层函数渗透</li>
+<li>内层函数如果定义了一个变量名与外层函数相同的变量，外层函数的变量就不会传入内层<br>举例：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">5</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fn</span><span class="params">()</span>:</span></span><br><span class="line">    y = x + <span class="number">1</span></span><br><span class="line">    x += <span class="number">1</span>   <span class="comment"># 等号左边的 x 是赋值即定义 ，等号右边的 x 却不是上层函数的x，右边的 x 和左边的 x 同一个 x 但是右边的 x 没有定义导致报错</span></span><br><span class="line">    print(x)</span><br><span class="line">fn()</span><br></pre></td></tr></table></figure>
+<pre><code>5
+</code></pre><p>想要解决上面出现的问题，有两种解决方法</p>
+<ol>
+<li>在函数前声明这个变量<br>如：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">5</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fn</span><span class="params">()</span>:</span></span><br><span class="line">    x = <span class="number">0</span></span><br><span class="line">    y = x + <span class="number">1</span></span><br><span class="line">    x += <span class="number">1</span>   <span class="comment"># 等号左边的 x 是赋值即定义 ，等号右边的 x 却不是上层函数的x，右边的 x 和左边的 x 同一个 x 但是右边的 x 没有定义导致报错</span></span><br><span class="line">    print(x)</span><br><span class="line">fn()</span><br></pre></td></tr></table></figure>
+<pre><code>1
+</code></pre><ol start="2">
+<li>使用 global 关键字的变量，将函数内的x声明为使用外部的全局变量 x</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">5</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fn</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> x</span><br><span class="line">    y = x + <span class="number">1</span></span><br><span class="line">    x += <span class="number">1</span>   <span class="comment"># 等号左边的 x 是赋值即定义 ，等号右边的 x 却不是上层函数的x，右边的 x 和左边的 x 同一个 x 但是右边的 x 没有定义导致报错</span></span><br><span class="line">    print(x)</span><br><span class="line">fn()</span><br></pre></td></tr></table></figure>
+<pre><code>6
+</code></pre><h4 id="global总结："><a href="#global总结：" class="headerlink" title="global总结："></a>global总结：</h4><ul>
+<li>x += 1 这种特殊形式产生的错误原因，先引用，后赋值，而Python动态语言是赋值才算定义，才能被引用</li>
+<li>解决方法：在这条语句前声明增加 x = 0 之类的赋值语句，或直接使用 global告诉内部作用域 去全局作用域找这个变量</li>
+<li>内部作用域使用x = 5之类的赋值语句会重新定义局部作用域使用的变量x，但是，一旦这个作用域中使用global声明x为全局的，那么x=5相当于在为全局作用域的变量x赋值   </li>
+</ul>
+<h4 id="global是使用原则："><a href="#global是使用原则：" class="headerlink" title="global是使用原则："></a>global是使用原则：</h4><ul>
+<li>外部作用域变量会内部作用域可见，但也不要在这个内部的局部作用域中直接使用，因为函数的目的就是为了封装，尽量与外界隔离</li>
+<li>如果函数需要使用外部全局变量，请使用函数的形参传参解决</li>
+<li>一句话： 不用global。学习它就是为了深入理解变量作用域</li>
+</ul>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p><strong>自由变量：</strong> 未在本地作用域中定义的变量。例如嵌套函数中定义在内层函数外的外层函数中的变量</p>
+<p><strong>闭包：</strong> 只是一个概念，出现在嵌套函数中，指的是内层函数引用到外层函数的自由变量，就形成闭包<br>举例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">counter</span><span class="params">()</span>:</span></span><br><span class="line">    c = [<span class="number">0</span>]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inc</span><span class="params">()</span>:</span></span><br><span class="line">        c[<span class="number">0</span>] +=<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> c[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> inc</span><br><span class="line"></span><br><span class="line">fn = counter()</span><br><span class="line">print(fn(),fn())</span><br><span class="line">c = <span class="number">100</span></span><br><span class="line">print(fn())</span><br></pre></td></tr></table></figure>
+<pre><code>1 2
+3
+</code></pre><ul>
+<li>意是在嵌套函数中，内层函数的变量引用了外层函数的自由变量才叫闭包，所有说如果引用了全局变量，这不叫闭包。</li>
+<li>闭包的作用，如经常用在棋子的走位，走下一步时，要记住上一步在什么位置，所以此时记录位置最好就不能定义在全局变量之中。  </li>
+</ul>
+<h3 id="nonlocal-关键字"><a href="#nonlocal-关键字" class="headerlink" title="nonlocal 关键字"></a>nonlocal 关键字</h3><ul>
+<li>使用了nonlocal关键字，将变量标记为不在本地作用域定义，而在上级的某一级局部作用域中定义。</li>
+<li>只能存在于嵌套函数的内层函数中，不能存在于普通函数，否则会报错 </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">counter</span><span class="params">()</span>:</span></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inc</span><span class="params">()</span>:</span></span><br><span class="line">        <span class="keyword">nonlocal</span> count</span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> count</span><br><span class="line">    <span class="keyword">return</span> inc</span><br><span class="line">fn = counter()</span><br><span class="line">fn(),fn()</span><br></pre></td></tr></table></figure>
+<pre><code>(1, 2)
+</code></pre><ul>
+<li>count 是外层函数的局部变量，被内层函数引用</li>
+<li>内部函数使用nonlocal关键字声明count变量在上级作用域而非本地作用域中定义</li>
+</ul>
+<h2 id="默认值的作用域"><a href="#默认值的作用域" class="headerlink" title="默认值的作用域"></a>默认值的作用域</h2><h3 id="默认值及变量保存的位置"><a href="#默认值及变量保存的位置" class="headerlink" title="默认值及变量保存的位置"></a>默认值及变量保存的位置</h3><p>举例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(x=<span class="number">1</span>,y=<span class="number">2</span>,*args,z=<span class="number">3</span>,**kwargs)</span>:</span></span><br><span class="line">    print(x,y,z)</span><br><span class="line">    print(foo.__defaults__)</span><br><span class="line">    print(foo.__kwdefaults__)</span><br><span class="line">    print(foo.__code__.co_consts)</span><br><span class="line">    print(foo.__code__.co_varnames)</span><br><span class="line"></span><br><span class="line">foo()</span><br></pre></td></tr></table></figure>
+<pre><code>1 2 3
+(1, 2)
+{&apos;z&apos;: 3}
+(None,)
+(&apos;x&apos;, &apos;y&apos;, &apos;z&apos;, &apos;args&apos;, &apos;kwargs&apos;)
+</code></pre><ul>
+<li>属性<strong>defaults</strong>中使用元组保存所有的位置参数默认值</li>
+</ul>
+<ul>
+<li>属性<strong>kwdefaults</strong>中使用字典保存所有的位置参数默认值</li>
+</ul>
+<ul>
+<li>属性<strong>code</strong>.co_varnames 中使用元组保存参数列表中的默认形参</li>
+</ul>
+<ul>
+<li>默认值的作用域仅在本地有效，说明它是本地变量</li>
+</ul>
+<ul>
+<li>使用可变类型作为默认值，因为是元组或者字典，就可能修改这个默认值</li>
+</ul>
+<h3 id="按需求定义默认值类型"><a href="#按需求定义默认值类型" class="headerlink" title="按需求定义默认值类型"></a>按需求定义默认值类型</h3><ul>
+<li><strong>影子拷贝默认值：</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(xyz=[],u=<span class="string">'abc'</span>,z=<span class="number">123</span>)</span>:</span></span><br><span class="line">    xyz = xyz[:]   <span class="comment"># 影子拷贝</span></span><br><span class="line">    xyz.append(<span class="number">1</span>)</span><br><span class="line">    print(xyz)</span><br><span class="line">foo()</span><br><span class="line">print(foo.__defaults__)</span><br><span class="line">foo()</span><br><span class="line">print(foo.__defaults__)</span><br><span class="line">foo([<span class="number">10</span>])</span><br><span class="line">print(foo.__defaults__)</span><br><span class="line">foo([<span class="number">10</span>,<span class="number">5</span>])</span><br><span class="line">print(foo.__defaults__)</span><br></pre></td></tr></table></figure>
+<pre><code>[1]
+([], &apos;abc&apos;, 123)
+[1]
+([], &apos;abc&apos;, 123)
+[10, 1]
+([], &apos;abc&apos;, 123)
+[10, 5, 1]
+([], &apos;abc&apos;, 123)
+</code></pre><p><strong>采用影子拷贝创建一个新的对象，永远不能改变传入的参数</strong></p>
+<ul>
+<li><strong>使用不可变类型创建list</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(xyz=None,u=<span class="string">'abc'</span>,z=<span class="number">123</span>)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> xyz <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">        xyz = []</span><br><span class="line">    xyz.append(<span class="number">1</span>)</span><br><span class="line">    print(xyz)</span><br><span class="line">foo()</span><br><span class="line">print(foo.__defaults__)</span><br><span class="line">foo()</span><br><span class="line">print(foo.__defaults__)</span><br><span class="line">foo([<span class="number">10</span>])</span><br><span class="line">print(foo.__defaults__)</span><br><span class="line">foo([<span class="number">10</span>,<span class="number">5</span>])</span><br><span class="line">print(foo.__defaults__)</span><br></pre></td></tr></table></figure>
+<pre><code>[1]
+(None, &apos;abc&apos;, 123)
+[1]
+(None, &apos;abc&apos;, 123)
+[10, 1]
+(None, &apos;abc&apos;, 123)
+[10, 5, 1]
+(None, &apos;abc&apos;, 123)
+</code></pre><p><strong>通过值的判断就可以灵活的选择创建或修改传入的对象</strong><br><strong>很多函数的定义，都可以看到None这个不可变的值作为默认参数</strong></p>
+<h2 id="变量名解析原则LEGB"><a href="#变量名解析原则LEGB" class="headerlink" title="变量名解析原则LEGB"></a>变量名解析原则LEGB</h2><ul>
+<li>Local，本地作用域、局部作用域的local命名空间。函数调用时创建，调用结束消亡</li>
+</ul>
+<ul>
+<li>Enclosing， Python2.2时引入了嵌套函数，实现了闭包，这个就是嵌套函数的外部函数的命名空间</li>
+</ul>
+<ul>
+<li>Global，全局作用域，即一个模块的命名空间。模块被import时创建，解释器退出时消亡</li>
+</ul>
+<ul>
+<li>Build-in，内置模块的命名空间，生命周期从python解释器启动时创建到解释器退出时消亡。例如 print(open)， print和open都是内置的变量</li>
+</ul>
+<ul>
+<li>所以一个变量名的查找顺序就是LEGB</li>
+</ul>
+<h2 id="销毁函数"><a href="#销毁函数" class="headerlink" title="销毁函数"></a>销毁函数</h2><h3 id="全局函数销毁"><a href="#全局函数销毁" class="headerlink" title="全局函数销毁"></a>全局函数销毁</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(xyz=[],u=<span class="string">'abc'</span>,z=<span class="number">123</span>)</span>:</span></span><br><span class="line">    xyz.append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> xyz</span><br><span class="line">print(foo(),id(foo),foo.__defaults__)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(xyz=[],u=<span class="string">'abc'</span>,z=<span class="number">123</span>)</span>:</span></span><br><span class="line">    xyz.append(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> xyz</span><br><span class="line">print(foo(),id(foo),foo.__defaults__)</span><br><span class="line"><span class="keyword">del</span> foo</span><br><span class="line"><span class="comment"># print(foo(),id(foo),foo.__defaults__)  # NameError: name 'foo' is not defined</span></span><br></pre></td></tr></table></figure>
+<pre><code>[1] 2637469441832 ([1], &apos;abc&apos;, 123)
+[1] 2637472253336 ([1], &apos;abc&apos;, 123)
+</code></pre><p><strong>全局函数的销毁函数</strong></p>
+<ol>
+<li>重新定义同名函数</li>
+<li>del语句删除函数对象</li>
+<li>程序结束</li>
+</ol>
+<h3 id="局部函数"><a href="#局部函数" class="headerlink" title="局部函数"></a>局部函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(xyz=[],u=<span class="string">'abc'</span>,z=<span class="number">123</span>)</span>:</span></span><br><span class="line">    xyz.append(<span class="number">1</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">(a=<span class="number">10</span>)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    print(inner)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">(a=<span class="number">100</span>)</span>:</span></span><br><span class="line">        print(xyz)</span><br><span class="line">    print(inner)</span><br><span class="line">    <span class="keyword">return</span> inner</span><br><span class="line">bar = foo()</span><br><span class="line">print(id(foo),id(bar),foo.__defaults__,bar.__defaults__)</span><br><span class="line"><span class="keyword">del</span> bar</span><br><span class="line"><span class="comment"># print(id(foo),id(bar),foo.__defaults__,bar.__defaults__)  # NameError: name 'bar' is not defined</span></span><br></pre></td></tr></table></figure>
+<pre><code>&lt;function foo.&lt;locals&gt;.inner at 0x00000266159ED7B8&gt;
+&lt;function foo.&lt;locals&gt;.inner at 0x00000266159ED268&gt;
+2637472650920 2637472649832 ([1], &apos;abc&apos;, 123) (100,)
+</code></pre><p><strong>局部函数的销毁函数</strong></p>
+<ol>
+<li>重新在上级作用域定义同名函数</li>
+<li>del语句删除函数名称，函数对象的引用计数减1</li>
+<li>上级作用域销毁时</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+	<div>
+
+	<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+
+
+	</div>
+	
+    
+	<div>
+
+    
+
+    
+
+	
+	
+	
+	
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/10/Python之列表解析式、生成器、迭代器及可迭代对象/" rel="next" title="Python之列表解析式、生成器、迭代器及可迭代对象">
+                <i class="fa fa-chevron-left"></i> Python之列表解析式、生成器、迭代器及可迭代对象
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/15/Python函数、参数、可变参数、keyword-only/" rel="prev" title="Python函数、参数、可变参数、keyword-only">
+                Python函数、参数、可变参数、keyword-only <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </div></article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python函数返回值、作用域、自由变量和闭包、默认值的作用域、函数销毁"><span class="nav-number">1.</span> <span class="nav-text">Python函数返回值、作用域、自由变量和闭包、默认值的作用域、函数销毁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数返回值"><span class="nav-number">1.1.</span> <span class="nav-text">函数返回值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数对象"><span class="nav-number">1.2.</span> <span class="nav-text">函数对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数作用域"><span class="nav-number">1.3.</span> <span class="nav-text">函数作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数嵌套"><span class="nav-number">1.3.1.</span> <span class="nav-text">函数嵌套</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用域"><span class="nav-number">1.3.2.</span> <span class="nav-text">作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#全局作用域"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">全局作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#局部作用域"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">局部作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#global总结："><span class="nav-number">1.3.2.3.</span> <span class="nav-text">global总结：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#global是使用原则："><span class="nav-number">1.3.2.4.</span> <span class="nav-text">global是使用原则：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#闭包"><span class="nav-number">1.4.</span> <span class="nav-text">闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nonlocal-关键字"><span class="nav-number">1.4.1.</span> <span class="nav-text">nonlocal 关键字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#默认值的作用域"><span class="nav-number">1.5.</span> <span class="nav-text">默认值的作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#默认值及变量保存的位置"><span class="nav-number">1.5.1.</span> <span class="nav-text">默认值及变量保存的位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按需求定义默认值类型"><span class="nav-number">1.5.2.</span> <span class="nav-text">按需求定义默认值类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量名解析原则LEGB"><span class="nav-number">1.6.</span> <span class="nav-text">变量名解析原则LEGB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#销毁函数"><span class="nav-number">1.7.</span> <span class="nav-text">销毁函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#全局函数销毁"><span class="nav-number">1.7.1.</span> <span class="nav-text">全局函数销毁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#局部函数"><span class="nav-number">1.7.2.</span> <span class="nav-text">局部函数</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

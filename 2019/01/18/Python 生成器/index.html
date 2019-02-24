@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Python生成器生成器generator 的定义生成器指的是生成器对象，可以有生成器表达式得到，也可以使用yield关键字得到一个生成器函数，调用这个函数就可以得到一个生成器对象 生成器函数 生成器函数就是函数体中包含yield语句的函数，返回生成器对象 生成器对象，就是一个可迭代对象，是一个迭代器 生成器对象，是延迟计算，惰性求值的例如：   12345678910111213def inc(">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python生成器">
+<meta property="og:url" content="http://yoursite.com/2019/01/18/Python 生成器/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="Python生成器生成器generator 的定义生成器指的是生成器对象，可以有生成器表达式得到，也可以使用yield关键字得到一个生成器函数，调用这个函数就可以得到一个生成器对象 生成器函数 生成器函数就是函数体中包含yield语句的函数，返回生成器对象 生成器对象，就是一个可迭代对象，是一个迭代器 生成器对象，是延迟计算，惰性求值的例如：   12345678910111213def inc(">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-24T06:46:46.806Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python生成器">
+<meta name="twitter:description" content="Python生成器生成器generator 的定义生成器指的是生成器对象，可以有生成器表达式得到，也可以使用yield关键字得到一个生成器函数，调用这个函数就可以得到一个生成器对象 生成器函数 生成器函数就是函数体中包含yield语句的函数，返回生成器对象 生成器对象，就是一个可迭代对象，是一个迭代器 生成器对象，是延迟计算，惰性求值的例如：   12345678910111213def inc(">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/18/Python 生成器/">
+
+
+
+
+
+  <title>Python生成器 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-editor">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-algorithm">
+          <a href="/categories/算法" rel="section">
+            
+            算法
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/18/Python 生成器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python生成器</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-18T19:28:42+08:00">
+                2019-01-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Python生成器"><a href="#Python生成器" class="headerlink" title="Python生成器"></a>Python生成器</h1><h2 id="生成器generator-的定义"><a href="#生成器generator-的定义" class="headerlink" title="生成器generator 的定义"></a>生成器generator 的定义</h2><pre><code>生成器指的是生成器对象，可以有生成器表达式得到，也可以使用yield关键字得到一个生成器函数，调用这个函数就可以得到一个生成器对象
+</code></pre><h2 id="生成器函数"><a href="#生成器函数" class="headerlink" title="生成器函数"></a>生成器函数</h2><ul>
+<li>生成器函数就是函数体中包含yield语句的函数，返回生成器对象</li>
+<li>生成器对象，就是一个可迭代对象，是一个迭代器</li>
+<li>生成器对象，是延迟计算，惰性求值的<br>例如： </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inc</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">        <span class="keyword">yield</span> i</span><br><span class="line"></span><br><span class="line">print(type(inc))</span><br><span class="line">print(type(inc()))</span><br><span class="line">x = inc()</span><br><span class="line">print((type(x)))</span><br><span class="line">print(next(x))</span><br><span class="line"><span class="keyword">for</span> m <span class="keyword">in</span> x:</span><br><span class="line">    print(m,<span class="string">'*'</span>)</span><br><span class="line"><span class="keyword">for</span> m <span class="keyword">in</span> x:</span><br><span class="line">    print(m,<span class="string">'**'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;class &apos;function&apos;&gt;
+&lt;class &apos;generator&apos;&gt;
+&lt;class &apos;generator&apos;&gt;
+0
+1 *
+2 *
+3 *
+4 *
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">y = (i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>))</span><br><span class="line">print(type(y))</span><br><span class="line">print(next(y))</span><br><span class="line">print(next(y))</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;class &apos;generator&apos;&gt;
+0
+1
+</code></pre><ul>
+<li>普通的函数调用fn(),函数会立即执行完毕，但是生成器函数可以使用next函数多次执行</li>
+<li>生成器函数等价于生成器表达式，只不过生成器函数可以更加的复杂<br>举例 </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'line 1'</span>)</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">1</span></span><br><span class="line">    print(<span class="string">'line 2'</span>)</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">2</span></span><br><span class="line">    print(<span class="string">'line 3'</span>)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">next(gen())  <span class="comment"># line 1  </span></span><br><span class="line">next(gen())  <span class="comment"># line 1  </span></span><br><span class="line">g = gen()</span><br><span class="line">print(next(g)) <span class="comment"># line 1</span></span><br><span class="line">print(next(g)) <span class="comment"># line 2</span></span><br><span class="line"><span class="comment"># print(next(g)) # StopIteration</span></span><br><span class="line">print(next(g,<span class="string">'End'</span>)) <span class="comment"># 如果生成器对象中没有元素，就给个缺省值</span></span><br></pre></td></tr></table></figure>
+<pre><code>line 1
+line 1
+line 1
+1
+line 2
+2
+line 3
+End
+</code></pre><ul>
+<li>在生成器函数中，使用多个yield语句，执行一次后会暂停执行，把yield表达式的值返回</li>
+<li>再次执行会执行到下一个yield语句</li>
+<li>return语句依然可以终止函数执行，但return语句的返回值不能被获取到</li>
+<li>return会导致无法获取到下一个值，抛出StopIteration异常</li>
+<li>如果函数没有显示的return语句，如果生成器函数执行到结尾，一样会抛出StopIteration异常</li>
+</ul>
+<h2 id="生成器函数的执行步骤"><a href="#生成器函数的执行步骤" class="headerlink" title="生成器函数的执行步骤"></a>生成器函数的执行步骤</h2><ul>
+<li>包含yield语句的生成器函数生成 生成器对象 时，生成器函数的函数体不会立即被执行</li>
+<li>next（generator）会从函数的当前位置向后执行到之后碰到的第一个yoeld语句，会弹出yield的返回值，并暂停函数的执行</li>
+<li>再次调用next（）函数，会执行两个yield之间的语句</li>
+<li>如果没有多余的yield语句可以被执行，继续调用next（）函数，就会抛出StopIteration异常</li>
+</ul>
+<h2 id="生成器的应用场景"><a href="#生成器的应用场景" class="headerlink" title="生成器的应用场景"></a>生成器的应用场景</h2><ol>
+<li>无限循环</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">counter</span><span class="params">()</span>:</span></span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">yield</span> i</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inc</span><span class="params">(c)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> next(c)</span><br><span class="line"></span><br><span class="line">c = counter()</span><br><span class="line">print(inc(c))</span><br><span class="line">print(inc(c))</span><br></pre></td></tr></table></figure>
+<pre><code>1
+2
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">counter</span><span class="params">()</span>:</span></span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">yield</span> i</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inc</span><span class="params">()</span>:</span></span><br><span class="line">    c = counter()</span><br><span class="line">    <span class="keyword">return</span> next(c)</span><br><span class="line"></span><br><span class="line">print(inc())</span><br><span class="line">print(inc())</span><br><span class="line">print(inc())</span><br></pre></td></tr></table></figure>
+<pre><code>1
+1
+1
+</code></pre><ol start="2">
+<li>计数器</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inc</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">counter</span><span class="params">()</span>:</span></span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">            <span class="keyword">yield</span> <span class="number">1</span></span><br><span class="line">    c = counter()</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">lambda</span>:next(c)  </span><br><span class="line">    <span class="comment"># lambda表达式是一个匿名函数</span></span><br><span class="line">    <span class="comment"># return返回的是一个匿名函数</span></span><br><span class="line"></span><br><span class="line">foo = inc()</span><br><span class="line">print(foo())</span><br><span class="line">print(foo())</span><br></pre></td></tr></table></figure>
+<pre><code>1
+1
+</code></pre><ol start="3">
+<li>处理递归问题</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span><span class="params">()</span>:</span></span><br><span class="line">    x = <span class="number">0</span></span><br><span class="line">    y = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        <span class="keyword">yield</span> y</span><br><span class="line">        x,y = y,x+y</span><br><span class="line">    </span><br><span class="line">foo = fib()</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">    print(next(foo))</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    next(foo)</span><br><span class="line">print(next(foo))</span><br></pre></td></tr></table></figure>
+<pre><code>1
+1
+2
+3
+5
+987
+</code></pre><h2 id="协程coroutine"><a href="#协程coroutine" class="headerlink" title="协程coroutine"></a>协程coroutine</h2><ul>
+<li>协程是生成器的高级用法</li>
+<li>比进程、线程更加轻量级</li>
+<li>是在用户空间调度函数的一种实现</li>
+<li>Python3 的 asyncio 就是协程实现的，已经加入到标准库了</li>
+<li>Python3.5 使用 async、await关键字直接原生支持协程</li>
+<li><p>协程调度器的实现思路   </p>
+<ol>
+<li>有两个生成器A、B</li>
+<li>next(A)后，A执行到了yield语句后暂停，然后执行next(B),B执行到yield语句后也暂停，然后再次调用next(A),在调用next(B)，周而复始，就实现了调度器的效果了</li>
+</ol>
+</li>
+<li><p>协程是一种非抢占式的调度</p>
+</li>
+</ul>
+<h2 id="yield-from"><a href="#yield-from" class="headerlink" title="yield from"></a>yield from</h2><p>举例说明</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inc</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">        <span class="keyword">yield</span> x</span><br><span class="line">foo = inc()</span><br><span class="line">print(next(foo))</span><br><span class="line">print(next(foo))</span><br><span class="line">print(next(foo))</span><br></pre></td></tr></table></figure>
+<pre><code>0
+1
+2
+</code></pre><p>等价于下面的代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inc</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">from</span> range(<span class="number">1000</span>)</span><br><span class="line">    </span><br><span class="line">foo = inc()</span><br><span class="line">print(next(foo))</span><br><span class="line">print(next(foo))</span><br><span class="line">print(next(foo))</span><br></pre></td></tr></table></figure>
+<pre><code>0
+1
+2
+</code></pre><ul>
+<li>yield from 是Python 3.3 才出现的新语法</li>
+<li>yield from iterable 是 for item in iterable:tield item 形式的语法糖</li>
+<li>可从可迭代对象中一个个获取元素<br>例如：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">counter</span><span class="params">(n)</span>:</span>  <span class="comment"># 生成器，迭代器</span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">yield</span> x</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inc</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">from</span> counter(n)</span><br><span class="line">    </span><br><span class="line">foo = inc(<span class="number">10</span>)</span><br><span class="line">print(next(foo))</span><br><span class="line">print(next(foo))</span><br><span class="line">print(next(foo))</span><br></pre></td></tr></table></figure>
+<pre><code>0
+1
+2
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+	<div>
+
+	<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+
+
+	</div>
+	
+    
+	<div>
+
+    
+
+    
+
+	
+	
+	
+	
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/16/函数的执行过程、递归函数、匿名函数/" rel="next" title="函数的执行过程、递归函数、匿名函数">
+                <i class="fa fa-chevron-left"></i> 函数的执行过程、递归函数、匿名函数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/20/函数参数注解和作用， 以及参数注解在业务中的应用， inspect模块的使用/" rel="prev" title="函数参数注解和作用， 以及参数注解在业务中的应用， inspect模块的使用">
+                函数参数注解和作用， 以及参数注解在业务中的应用， inspect模块的使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </div></article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python生成器"><span class="nav-number">1.</span> <span class="nav-text">Python生成器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#生成器generator-的定义"><span class="nav-number">1.1.</span> <span class="nav-text">生成器generator 的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成器函数"><span class="nav-number">1.2.</span> <span class="nav-text">生成器函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成器函数的执行步骤"><span class="nav-number">1.3.</span> <span class="nav-text">生成器函数的执行步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成器的应用场景"><span class="nav-number">1.4.</span> <span class="nav-text">生成器的应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#协程coroutine"><span class="nav-number">1.5.</span> <span class="nav-text">协程coroutine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#yield-from"><span class="nav-number">1.6.</span> <span class="nav-text">yield from</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -93,7 +93,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
+    scheme: 'Mist',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -217,6 +217,14 @@
         </li>
       
         
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+            Python
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-shell">
           <a href="/categories/shell脚本" rel="section">
             
@@ -256,47 +264,27 @@
           </a>
         </li>
       
-
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
+        
+        <li class="menu-item menu-item-editor">
+          <a href="/categories/文本三剑客" rel="section">
             
-            搜索
+            文本三剑客
           </a>
         </li>
+      
+        
+        <li class="menu-item menu-item-algorithm">
+          <a href="/categories/算法" rel="section">
+            
+            算法
+          </a>
+        </li>
+      
+
       
     </ul>
   
 
-  
-    <div class="site-search">
-      
-  
-  <div class="algolia-popup popup search-popup">
-    <div class="algolia-search">
-      <div class="algolia-search-input-icon">
-        <i class="fa fa-search"></i>
-      </div>
-      <div class="algolia-search-input" id="algolia-search-input"></div>
-    </div>
-
-    <div class="algolia-results">
-      <div id="algolia-stats"></div>
-      <div id="algolia-hits"></div>
-      <div id="algolia-pagination" class="algolia-pagination"></div>
-    </div>
-
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-  </div>
-
-
-
-
-    </div>
   
 </nav>
 
@@ -325,7 +313,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/10/shell脚本编程基础（1）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/15/SELinux简介/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="吕培新">
@@ -344,7 +332,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/10/shell脚本编程基础（1）/" itemprop="url">shell脚本编程基础（1）</a></h1>
+                <a class="post-title-link" href="/2018/05/15/SELinux简介/" itemprop="url">SELinux简介</a></h1>
         
 
         <div class="post-meta">
@@ -356,8 +344,1468 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-10T14:07:16+08:00">
-                2018-04-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-15T14:40:36+08:00">
+                2018-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="一、SELinux介绍："><a href="#一、SELinux介绍：" class="headerlink" title="一、SELinux介绍："></a><strong>一、SELinux介绍：</strong></h2><p><strong>SELinux(Security-Enhanced Linux)</strong> 是美国国家安全局（NSA）对于强制访问控制的实现，是</p>
+<p>Linux历史上最杰出的新安全子系统。NSA是在Linux社区的帮助下开发了一种访问控制体系，在</p>
+<p>这种访问控制体系的限制下，<strong>进程只能访问那些在他的任务中所需要文件</strong>。</p>
+<p><strong>SELinux</strong>是一种基于 域-类型 模型（domain-type）的强制访问控制（MAC）安全系统，它由NSA</p>
+<p>编写并设计成内核模块包含到内核中，相应的某些安全相关的应用也被打了SELinux的补丁，最</p>
+<p>后还有一个相应的安全策略。任何程序对其资源享有完全的控制权。假设某个程序打算把含有潜</p>
+<p>在重要信息的文件扔到/tmp目录下，那么在DAC情况下没人能阻止他。SELinux提供了比传统的</p>
+<p>UNIX权限更好的访问控制。</p>
+<p><strong>传统UNIX系统使用的安全系统：</strong>自由访问控制（DAC：Discretionary Access Control）</p>
+<p><strong>SELinx采用的安全系统：</strong>强制访问控制（MAC：Mandatory Access Control）</p>
+<p>DAC环境下进程是无束缚的</p>
+<p>MAC环境下策略的规则决定控制的严格程度</p>
+<p>MAC环境下进程可以被限制的</p>
+<p>策略被用来定义被限制的进程能够使用那些资源（文件和端口）</p>
+<p>默认情况下，没有被明确允许的行为将被拒绝</p>
+<h3 id="SElinux的工作类型："><a href="#SElinux的工作类型：" class="headerlink" title="SElinux的工作类型："></a>SElinux的工作类型：</h3><p>使用<strong>cat /etc/selinux/config</strong> 可以查看当前SELinux类型和系统支持的所有SELinux类型，不同系统版本支持类型有所不同</p>
+<p><strong>SELinux</strong>共有<strong>四种</strong>工作类型：</p>
+<p>（1）<strong>strict</strong>：centos5,每个进程都受到selinux的控制，不识别的进程将拒绝</p>
+<p>（2）<strong>targeted</strong>： 用来保护常见的网络服务,仅有限进程受到selinux控制，只监控容易</p>
+<p>被入侵的进程，centos4只保护13个服务，centos5保护88个服务，不识别的服务将允许</p>
+<p>（3）<strong>minimum</strong>：centos7,修改的targeted，只对选择的网络服务</p>
+<p>（4）<strong>mls</strong>：提供MLS（多级安全）机制的安全性</p>
+<p><strong>targeted</strong>现为CentOS系统默认SElinux类型，minimum和mls稳定性不足，未加以应用，strict现已不存在</p>
+<h3 id="SELinux的优点与缺点："><a href="#SELinux的优点与缺点：" class="headerlink" title="SELinux的优点与缺点："></a><strong>SELinux的优点与缺点：</strong></h3><p><strong>优点：</strong></p>
+<p>（1）通过MAC对访问的控制彻底化</p>
+<p>（2）对于进程只赋予最小的权限</p>
+<p>（3）防止权限升级</p>
+<p>（4）对于用户只赋予最小的权限</p>
+<p><strong>缺点：</strong></p>
+<p>（1）存在特权用户root</p>
+<p>（2）对于文件的访问权划分不够细</p>
+<p>（3）SUID程序的权限升级</p>
+<p>（4）DAC（Discretionary Access Control）问题</p>
+<h2 id="二、SELinux安全上下文"><a href="#二、SELinux安全上下文" class="headerlink" title="二、SELinux安全上下文"></a><strong>二、SELinux安全上下文</strong></h2><p>传统Linux，一切皆文件，由用户，组，权限控制访问</p>
+<p>在SELinux中，<strong>一切皆对象（object）</strong>，由存放在inode的扩展属性域的</p>
+<p>安全元素所控制其访问</p>
+<p>所有文件和端口资源和进程都具备安全标签：<strong>安全上下文（security context）</strong></p>
+<p><strong>安全上下文有五个元素组成：</strong></p>
+<p><strong>user:role:type:sensitivity:category</strong></p>
+<p><strong>user_u:object_r:tmp_t:s0:c0</strong></p>
+<p><strong>user</strong>：指示登录系统的用户类型</p>
+<p><strong>role</strong>：定义文件，进程和用户的用途</p>
+<p><strong>type</strong>：指定了数据类别，type类别改变可能导致进程无法访问文件</p>
+<p><strong>sensitivity</strong>：限制访问的需要，由组织定义的分层安全级别。s0最低，Target策略默认使用s0</p>
+<p><strong>category</strong>：对于特定组织划分不分层的分类，Target策略默认不使用category</p>
+<p>其中<strong>最重要</strong>的一项为文件的<strong>type</strong>标签，如httpd进程只能在httpd_t 里运行，/etc/passwd只有type</p>
+<p>为passwd_file_t才能起作用，/var/log/messages文件如果不是var_log_t类型将无法记录日志等，</p>
+<p>在SELinux安全策略中，<strong>修改了type类型，可能导致文件无法正常使用</strong>。</p>
+<h2 id="三、SElinux相关操作："><a href="#三、SElinux相关操作：" class="headerlink" title="三、SElinux相关操作："></a><strong>三、SElinux相关操作：</strong></h2><h3 id="1-SELinux启用、禁用"><a href="#1-SELinux启用、禁用" class="headerlink" title="1.SELinux启用、禁用"></a><strong>1.SELinux启用、禁用</strong></h3><p>SElinux共有三种运行模式：</p>
+<p>SELINUX=enforcing                 启用SELinux</p>
+<p>SELINUX=disabled                   彻底禁用SELinux</p>
+<p>SELINUX=permissive               禁用，但违反SELinux策略会产生告警</p>
+<p>getenforce                        显示当前SEliunx运行模式</p>
+<p><strong>a）利用命令临时修改：</strong></p>
+<p>setenforce 0                     临时切换到permissive</p>
+<p>setenforce 1                     临时切换到enforcing</p>
+<p><strong>b）修改配置文件：</strong></p>
+<p>/etc/selinux/config</p>
+<p>/etc/sysconfig/selinux            SELINUX={disabled|enforcing|permissive}</p>
+<p>/boot/grub/grub.conf             使用selinux=0禁用SElinux</p>
+<p>注：grub.conf优先级高于/etc/selinux/config</p>
+<h3 id="2-修改SELinix安全标签："><a href="#2-修改SELinix安全标签：" class="headerlink" title="2.修改SELinix安全标签："></a>2.修改SELinix安全标签：</h3><p><strong>给文件重新打安全标签：</strong></p>
+<p>chcon [OPTION]… [-u USER] [-r ROLE] [-t TYPE] FILE…</p>
+<p>chcon [OPTION]… –reference=RFILE FILE…</p>
+<p>-R：递归打标；</p>
+<p><strong>恢复目录或文件默认的安全上下文：</strong></p>
+<p>restorecon [-R] /path/to/somewhere</p>
+<p><strong>SELinux端口标签：</strong></p>
+<p>semanage port -l|grep http   查看http允许使用的端口</p>
+<p>semanage port -a -t http_port_t -t tcp 9527        添加http允许使用的端口包含9527</p>
+<h3 id="3-SELinux默认数据库查询与修改"><a href="#3-SELinux默认数据库查询与修改" class="headerlink" title="3.SELinux默认数据库查询与修改"></a>3.SELinux默认数据库查询与修改</h3><p><strong>查看SELinux默认数据库：</strong></p>
+<p>semanage fcontext -l</p>
+<p><strong>查看某文件放入默认SElinux类型：</strong></p>
+<p>semanage fcontext -l | grep /path/file</p>
+<p><strong>添加到SELinux默认数据库：</strong></p>
+<p>semanage fcontext -a –t httpd_sys_content_t ‘/testdir(/.*)?’</p>
+<p>restorecon –Rv /testdir</p>
+<p><strong>从SElinux默认数据库中删除：（type类型将变回default_t）</strong></p>
+<p>semanage fcontext -d –t httpdsyscontentt ‘/testdir(/.*)?’</p>
+<h3 id="4-SELinux端口标签"><a href="#4-SELinux端口标签" class="headerlink" title="4.SELinux端口标签"></a>4.SELinux端口标签</h3><p>在SELinux安全策略中，定义了服务具体可使用的端口号，如果服务未使用对应的端口号，将会</p>
+<p>导致无法使用，semanage命令也可以用来修改这些默认端口。</p>
+<p><strong>查看端口标签：</strong></p>
+<p>semanage port –l</p>
+<p><strong>添加指定端口到指定服务：</strong></p>
+<p>semanage port -a -t port_label -p tcp|udp PORT</p>
+<p>semanage port -a -t http_port_t -p tcp 9527</p>
+<p><strong>从指定服务删除指定端口：</strong></p>
+<p>semanage port -d -t port_label -p tcp|udp PORT</p>
+<p>semanage port -d -t http_port_t -p tcp 9527</p>
+<p><strong>修改现有端口为新标签：</strong></p>
+<p>semanage port -m -t port_label -p tcp|udp PORT</p>
+<p>semanage port -m -t http_port_t -p tcp 9527</p>
+<h3 id="5-SElinux布尔值"><a href="#5-SElinux布尔值" class="headerlink" title="5.SElinux布尔值"></a>5.SElinux布尔值</h3><p><strong>布尔型规则：</strong></p>
+<p>getsebool</p>
+<p>setsebool</p>
+<p><strong>查看bool命令：</strong></p>
+<p>getsebool [-a] [boolean]</p>
+<p>semanage boolean –l</p>
+<p>semanage boolean -l –C 查看修改过的布尔值</p>
+<p><strong>设置bool值命令：</strong></p>
+<p>setsebool [-P] boolean value（on,off）               不加-P只修改内存，临时生效</p>
+<p>setsebool [-P] Boolean=value（0，1）                加-P同时修改内存和配置bool</p>
+<h3 id="6-SELinux日志管理："><a href="#6-SELinux日志管理：" class="headerlink" title="6.SELinux日志管理："></a>6.SELinux日志管理：</h3><p>将错误的信息写入/var/log/message</p>
+<p>yum install setroubleshoot（重启生效）</p>
+<p><strong>查看安全事件日志说明</strong></p>
+<p>grep setroubleshoot /var/log/messages</p>
+<p>sealert -l UUID</p>
+<p><strong>扫描并分析日志</strong></p>
+<p>sealert -a /var/log/audit/audit.log</p>
+<h3 id="7-SELinux帮助："><a href="#7-SELinux帮助：" class="headerlink" title="7.SELinux帮助："></a>7.SELinux帮助：</h3><p>yum –y install selinux-policy-devel ( centos7.2)</p>
+<p>yum –y install selinux-policy-doc （centos7.3/7.4）</p>
+<p>mandb | makewhatis</p>
+<p>man -k _selinux</p>
+<h2 id="四、操作：SELinux环境下迁移httpd服务默认目录"><a href="#四、操作：SELinux环境下迁移httpd服务默认目录" class="headerlink" title="四、操作：SELinux环境下迁移httpd服务默认目录"></a><strong>四、操作：SELinux环境下迁移httpd服务默认目录</strong></h2><p><strong>将默认目录/var/www/html迁移至/data/website/html目录</strong></p>
+<p><strong>一、创建/data/html目录：</strong></p>
+<p>mkdir   /data/html</p>
+<p><strong>二、修改httpd服务配置文件</strong></p>
+<p><strong>cat  /etc/httpd/conf/httpd.conf</strong></p>
+<p>#DocumentRoot “/var/www/html”        加上注释</p>
+<p>DocumentRoot “/data/website/html”</p>
+<p>#&lt;Directory “/var/www/html”&gt;             加上注释</p>
+<p>&lt;Directory “/data/website/html”&gt;</p>
+<p><img src="配置.png" alt="配置"></p>
+<p><strong>三、修改目录type类型：</strong></p>
+<p>semanage fcontext -l |grep /var/www/html                          查看默认目录的文件type类型</p>
+<p>chcon -R -t httpd_sys_content_t /data/website/html</p>
+<p><img src="selinux数据库.png" alt="selinux数据库"></p>
+<p><strong>或：</strong></p>
+<p><strong>修改安全上下文数据库</strong></p>
+<p>semanage fcontext -a  -t  httpd_sys_content_t   /data/html（/.*）?</p>
+<p>restorecon -R /data/html                            同步数据库type类型</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+	<div>
+
+	</div>
+	
+    
+	<div>
+
+    
+
+    
+
+	
+	
+	
+	
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </div></article>
+
+
+    
+		
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/15/Linux系统网络管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/15/Linux系统网络管理/" itemprop="url">Linux系统网络管理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-15T14:27:11+08:00">
+                2018-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="一、基本网络配置："><a href="#一、基本网络配置：" class="headerlink" title="一、基本网络配置："></a><strong>一、基本网络配置：</strong></h2><p>将Linux主机接入网络，需要配置网络相关设置</p>
+<p>一般包括以下内容：</p>
+<p>主机名</p>
+<p>IP/netmask</p>
+<p>路由：默认网关</p>
+<p>DNS服务器：</p>
+<p>主DNS服务器</p>
+<p>次DNS服务器</p>
+<h3 id="网络配置文件："><a href="#网络配置文件：" class="headerlink" title="网络配置文件："></a><strong>网络配置文件：</strong></h3><p>IP、MASK、GW、DNS相关配置文件：/etc/sysconfig/networkscripts/ifcfg-IFACE：</p>
+<p>DEVICE=eth0                   针对网卡名称（必须有）</p>
+<p>ONTBOOT=yes                 yes表示开机自动启动网卡，默认yes</p>
+<p>BOOTPROTO=dhcp         自动获取，生产中一般改为手动配置static|none（必须有）</p>
+<p>IPADDR=172.20.0.6        设置IP（必须有）</p>
+<p>NETMASK=255.255.0.0  传统方式配置掩码（必须有）</p>
+<p>PREFIX=16                CIDR法设置掩码（必须有）</p>
+<p>DEFROUTE=yes            是否将此配置的网关设为默认路由</p>
+<p>GATEWAY=172.20.0.1    设置网关</p>
+<p>DNS1=114.114.114.114 设置DNS1</p>
+<p>DNS2=8.8.8.8          设置DNS2</p>
+<p>TYPE                          接口类型，常见有Ethernet，Bridge</p>
+<p>UUID                         设备唯一表示</p>
+<p>路由相关的配置文件：/etc/sysconfig/network-scripts/route-IFACE</p>
+<p>注意：需service network restart生效</p>
+<p><strong>两种风格：</strong></p>
+<p>(1) TARGET via GW</p>
+<p>如：10.0.0.0/8 via 172.16.0.1</p>
+<p>(2) 每三行定义一条路由</p>
+<p>​         ADDRESS#=TARGET</p>
+<p>​         NETMASK#=mask</p>
+<p>​         GATEWAY#=GW</p>
+<h3 id="网络配置方式："><a href="#网络配置方式：" class="headerlink" title="网络配置方式："></a>网络配置方式：</h3><p><strong>静态指定：</strong></p>
+<p>ifconfig，route，netstat</p>
+<p>ip：object{link，addr，route}，ss，tc</p>
+<p>system-config-network-tui，setup      图形工具</p>
+<p>直接修改配置文件</p>
+<p><strong>动态分配：</strong></p>
+<p>DHCP： Dynamic Host Configuration Protocol</p>
+<h2 id="二、主机、网卡名称管理"><a href="#二、主机、网卡名称管理" class="headerlink" title="二、主机、网卡名称管理"></a><strong>二、主机、网卡名称管理</strong></h2><p><strong>CentOS6网卡名称</strong></p>
+<p>接口命名方式：</p>
+<p>以太网：eth[0,1,2…]</p>
+<p>ppp：ppp[0,1,2…]</p>
+<p>网络接口识别并命名相关的udev配置文件：</p>
+<p>/etc/udev/rules.d/70-persistent-net.rules</p>
+<p><strong>查看网卡：</strong></p>
+<p>dmesg |grep –i eth</p>
+<p>ethtool -i eth0</p>
+<p><strong>卸载网卡驱动：</strong></p>
+<p>modprobe -r e1000</p>
+<p>rmmod e1000</p>
+<p><strong>装载网卡驱动：</strong></p>
+<p>modprobe e1000</p>
+<h3 id="修改主机名："><a href="#修改主机名：" class="headerlink" title="修改主机名："></a>修改主机名：</h3><p>hostname [NEWNAME] 临时生效，重启恢复</p>
+<p>永久生效：</p>
+<p><strong>CentOS6：</strong></p>
+<p>修改/etc/sysconfig/network</p>
+<p><strong>CentOS7：</strong></p>
+<p>修改/etc/hostname</p>
+<p>或：hostnamectl set-hostname [NEWNAME]</p>
+<p>hostname [NEWNAME] 使配置文件生效</p>
+<h3 id="修改CentOS7网卡命名为传统命名方式，实现自动化运维"><a href="#修改CentOS7网卡命名为传统命名方式，实现自动化运维" class="headerlink" title="修改CentOS7网卡命名为传统命名方式，实现自动化运维"></a>修改CentOS7网卡命名为传统命名方式，实现自动化运维</h3><p>(1) 编辑/etc/default/grub配置文件</p>
+<p>GRUB_CMDLINE_LINUX=”rhgb quiet net.ifnames=0″</p>
+<p>或：修改/boot/grub2/grub.cfg   linux 16 行尾添加 net.ifnames=0</p>
+<p>(2) 为grub2生成其配置文件</p>
+<p>grub2-mkconfig -o /etc/grub2.cfg</p>
+<p>(3) 重启系统</p>
+<h3 id="修改本地解析器："><a href="#修改本地解析器：" class="headerlink" title="修改本地解析器："></a>修改本地解析器：</h3><p>/etc/hosts</p>
+<p>本地主机名数据库和IP地址的映像</p>
+<p>对小型独立网络有用</p>
+<p>通常，在使用DNS前检查</p>
+<p><strong>一般建议在127.0.0.1的行尾加上本机的hostname</strong></p>
+<p>注：如果hostname发生更改，一定要记得同时更改/etc/hosts里的原添加内容</p>
+<p>搭建网站也建议将网站地址与网页名称对应写入到/etc/hosts文件中，避免解析出错</p>
+<p><strong>设置DNS：</strong></p>
+<p>/etc/resolv.conf</p>
+<p>nameserver DNS_SERVER_IP1</p>
+<p>nameserver DNS_SERVER_IP2</p>
+<p>nameserver DNS_SERVER_IP3</p>
+<h2 id="三、网卡别名"><a href="#三、网卡别名" class="headerlink" title="三、网卡别名"></a><strong>三、网卡别名</strong></h2><p>对虚拟环境有用，可将多个IP地址绑定到一个网卡上</p>
+<p>eth0：1、eth0：2、eth0：3</p>
+<p><strong>ifconfig命令：</strong></p>
+<p>ifconfig eth0:0 192.168.1.100/24 up</p>
+<p>ifconfig eth0:0 down</p>
+<p><strong>ip命令：</strong></p>
+<p>ip addr add 172.16.1.2/16 dev eth0</p>
+<p>ip addr add 172.16.1.1/16 dev eth0 label eth0:0</p>
+<p>ip addr add 172.16.1.2/16 dev eth0 label eth0:0</p>
+<p>ip addr del 172.16.1.1/16 dev eth0 label eth0:0</p>
+<p>ip addr flush dev eth0 label eth0:0</p>
+<p><strong>为别名设备添加配置文件，永久生效</strong></p>
+<p>（1）service NetworkManager stop      关闭图形界面网络管理</p>
+<p>（2）ifctg-ethX：xxx</p>
+<p>（3）必须使用静态IP配置</p>
+<p>DEVICE=eth0：0</p>
+<p>IPADDR=10.10.10.10</p>
+<p>NETMASK=255.0.0.0</p>
+<p>ONPARENT=yes</p>
+<p>（4）最后重启网络服务</p>
+<p>service network restart</p>
+<h2 id="四、网络接口配置bonding"><a href="#四、网络接口配置bonding" class="headerlink" title="四、网络接口配置bonding"></a><strong>四、网络接口配置bonding</strong></h2><p><strong>Bonding</strong>是将多个网卡绑定同一IP地址对外提供服务，可以实现高可用或者负载均衡。直接给两块网卡</p>
+<p>设置同一IP地址是不可以的。通过bonding，虚拟一块网卡对外提供链接，物理网卡被修改为相同的MAC</p>
+<p>地址</p>
+<p><strong>Bonding工作模式：</strong></p>
+<p><strong>Mode 0 (balance-rr)</strong></p>
+<p>轮转（Round-robin）策略：从头到尾顺序的在每个slave接口上发送数据包。提供负载均衡和容错的能力</p>
+<p><strong>Mode 1 (active-backup)</strong></p>
+<p>活动-备份（主备）策略：只有一个slave被激活，当且仅当活动的slave接口失败时才会激活其他slave。</p>
+<p>为了避免交换机发生混乱此时绑定的MAC地址只有一个外部端口上可见</p>
+<p><strong>Mode 3 (broadcast)</strong></p>
+<p>广播策略：在所有的slave接口上传送所有的报文,提供容错能力</p>
+<p>查看bond0主备状态：/proc/net/bonding/bond0</p>
+<p>创建bonding设备的配置文件</p>
+<p>/etc/sysconfig/network-scripts/ifcfg-bond0</p>
+<p>DEVICE=bond0</p>
+<p>BOOTPROTO=none</p>
+<p>BONDING_OPTS= “miimon=100 mode=0”</p>
+<p>/etc/sysconfig/network-scripts/ifcfg-eth0</p>
+<p>DEVICE=eth0</p>
+<p>BOOTPROTO=none</p>
+<p>MASTER=bond0</p>
+<p>SLAVE=yes</p>
+<p>USERCTL=no</p>
+<p><strong>也可使用nmcli实现bonding</strong></p>
+<p><strong>添加bonding接口</strong></p>
+<p>nmcli con add type bond con-name mybond0 ifname mybond0 mode active-backup</p>
+<p><strong>添加从属接口</strong></p>
+<p>nmcli con add type bond-slave ifname ens7 master mybond0</p>
+<p>nmcli con add type bond-slave ifname ens3 master mybond0</p>
+<p>注：如无为从属接口提供连接名，则该名称是接口名称加类型构成，要启动绑定，则必须</p>
+<p>首先启动从属接口</p>
+<p>nmcli con up bond-slave-eth0</p>
+<p>nmcli con up bond-slave-eth1</p>
+<p><strong>启动绑定</strong></p>
+<p>nmcli con up mybond0</p>
+<p><strong>取消bonding</strong></p>
+<p><strong>1.卸载驱动模块</strong></p>
+<p>lsmod                        显示所有已加载的驱动模块</p>
+<p>lsmod | grep bond</p>
+<p>ifconfig bond0 down      禁用网卡</p>
+<p>modproble -r bonding</p>
+<p><strong>2.删除和修改文件</strong></p>
+<p>rm -r ifcfg-bond0</p>
+<p>vim ifcfg-eth{0,1}</p>
+<p>service     network restart       重启网络服务</p>
+<h2 id="五、实现网络组"><a href="#五、实现网络组" class="headerlink" title="五、实现网络组"></a><strong>五、实现网络组</strong></h2><p>代替bonding的一种技术</p>
+<p><strong>网络组：将多个网卡聚合在一起的方法，从而实现冗错和提高吞吐量</strong></p>
+<p>多种方式运行：</p>
+<p><strong>broadcast</strong>                 广播模式</p>
+<p><strong>roundrobin</strong>               轮播模式</p>
+<p><strong>activebackup</strong>           主备模式</p>
+<p><strong>loadbalance</strong>              负载均衡模式</p>
+<p><strong>lacp</strong> (implements the 802.3ad Link Aggregation Control Protocol)</p>
+<p><strong>创建网络组Network Teaming（RHCE）</strong></p>
+<p>nmcli con add type team con-name team0 ifname team0 config</p>
+<p>‘{“runner”: {“name”: “loadbalance”}}’</p>
+<p>nmcli con mod team0 ipv4.addresses 192.168.1.100/24</p>
+<p>nmcli con mod team0 ipv4.method manual</p>
+<p>nmcli connection show</p>
+<p>nmcli con add con-name team0-eth1 type team-slave ifname eth1 master team0</p>
+<p>nmcli con add con-name team0-eth2 type team-slave ifname eth2 master team0</p>
+<p>nmcli con up team0</p>
+<p>nmcli con up team0-eth1</p>
+<p>nmcli con up team0-eth2</p>
+<p>nmcli connection show</p>
+<p>teamdctl team0 state</p>
+<p><strong>删除网络组：</strong></p>
+<p>第一种方法：删除network-scripts下配置文件</p>
+<p>第二种方法：nmcli connection delete team0 team0-eth1 team0-eth2</p>
+<h2 id="六、Linux网络管理常用命令："><a href="#六、Linux网络管理常用命令：" class="headerlink" title="六、Linux网络管理常用命令："></a><strong>六、Linux网络管理常用命令：</strong></h2><h3 id="ifconfig-命令-配置网络接口"><a href="#ifconfig-命令-配置网络接口" class="headerlink" title="ifconfig 命令          配置网络接口"></a><strong>ifconfig 命令          配置网络接口</strong></h3><p>-a                       查看所有接口信息</p>
+<p>interface up|down 禁用|启用接口</p>
+<p><strong>设置IP地址</strong></p>
+<p>ifconfig IFACE IP/netmask      支持两种掩码设置IP</p>
+<p>IP netmask</p>
+<p>注意：此命令执行将立即生效</p>
+<h3 id="route-命令-路由管理命令"><a href="#route-命令-路由管理命令" class="headerlink" title="route  命令                       路由管理命令"></a><strong>route  命令                       路由管理命令</strong></h3><p>-n                       查看路由表</p>
+<p><strong>添加路由：</strong></p>
+<p>route add [-net|-host] target [netmask Nm] [gw Gw] [[dev] if]    </p>
+<p>添加目标：192.168.1.3 网关：172.16.0.1到路由表</p>
+<p>route add -host 192.168.1.3 gw 172.16.0.1 dev eth0</p>
+<p>添加目标：192.168.0.0 网关：172.16.0.1到路由表</p>
+<p>route add -net 192.168.0.0 netmask 255.255.255.0 gw 172.16.0.1 dev eth0</p>
+<p>route add -net 192.168.0.0/24 gw 172.16.0.1 dev eth0</p>
+<p>添加默认路由，网关：172.16.0.1到路由表</p>
+<p>route add -net 0.0.0.0 netmask 0.0.0.0 gw 172.16.0.1</p>
+<p>route add default gw 172.16.0.1</p>
+<p><strong>删除路由：</strong></p>
+<p>route del [-net|-host] target [netmask Nm] [gw Gw] [[dev] if]</p>
+<p>配置动态路由</p>
+<p>通过首行进程获取动态路由</p>
+<p>安装quagga包</p>
+<p>支持多种路由协议：RIP（根据跳数）、OSPF（综合带宽、跳数等）和BGP</p>
+<p>命令vtysh配置</p>
+<h3 id="netstat-命令-查看网络连接，路由表，接口统计等信息"><a href="#netstat-命令-查看网络连接，路由表，接口统计等信息" class="headerlink" title="netstat   命令                   查看网络连接，路由表，接口统计等信息"></a><strong>netstat   命令                   查看网络连接，路由表，接口统计等信息</strong></h3><p><strong>option：</strong></p>
+<p>-t                       tcp协议相关</p>
+<p>-u                       udp协议相关</p>
+<p>-w                      raw socket相关</p>
+<p>-l                        处于监听状态</p>
+<p>-a                       所有状态</p>
+<p>-n                       以数字显示所有IP和端口</p>
+<p>-e                       扩展格式</p>
+<p>-p                       显示相关进程及PID</p>
+<p><strong>常用组合选项：</strong></p>
+<p>-nr                     查看路由表</p>
+<p>-nt                     查看TCP进程</p>
+<p>-ntu                   查看TCP及UDP进程</p>
+<p>-ntul                           查看处于监听状态LISTEN的服务</p>
+<p>-tul                    端口程序不进行名称解析显示</p>
+<p>-ntua                         查看所有状态的服务</p>
+<p>-ntuap                       查看哪个进程打开的此端口</p>
+<p>-ntuape                     扩展信息，包括使用用户UID</p>
+<p><strong>统计端口数据</strong></p>
+<p>-i                        查看网卡收发包信息</p>
+<p>-I=eth0                      只显示eth0网卡收发包信息等同于ifconfig -s eth0</p>
+<h3 id="ss-命令"><a href="#ss-命令" class="headerlink" title="ss 命令"></a><strong>ss 命令</strong></h3><p><strong>格式：ss [option]…[FILTER]</strong></p>
+<p>用来代替netstat的新命令，netstat通过遍历proc来获取socket信息，ss使用netlink与内核tcp_diag</p>
+<p>模块通信获取socket信息。</p>
+<p><strong>option：</strong></p>
+<p>-t                       tcp协议相关</p>
+<p>-u                       udp协议相关</p>
+<p>-w                      裸套接字相关</p>
+<p>-x                       unix sock相关</p>
+<p>-l                        listen状态的链接</p>
+<p>-a                       所有链接</p>
+<p>-n                       以数字格式显示</p>
+<p>-p                       相关的程序及PID</p>
+<p>-e                       扩展的信息</p>
+<p>-m                     内存用量</p>
+<p>-o                      计时器信息</p>
+<p><strong>TCP常见状态：</strong></p>
+<p>LISTEN                      监听</p>
+<p>ESTABLISHED           已建立的链接</p>
+<p>FIN_WAIT_1</p>
+<p>FIN_WAIT_2</p>
+<p>SYN_SENT</p>
+<p>CLOSED</p>
+<p><strong>支持EXPRESSION：</strong></p>
+<p>dport=                       目标端口</p>
+<p>sport=                       源端口</p>
+<p><strong>常用组合用法与netstat类似</strong></p>
+<p>-tan，-tanl等</p>
+<p><strong>常见用法：</strong></p>
+<p>ss -l                           显示本地打开的所有端口</p>
+<p>ss -pl                         显示每个进程具体打开的socket</p>
+<p>ss -t -a             显示所有tcp socket</p>
+<p>ss -u -a            显示所有的UDP Socekt</p>
+<p>ss -o state established ‘( dport = :ssh or sport = :ssh )’ 显示所有已建立的ssh连接</p>
+<p>ss -o state established ‘( dport = :http or sport = :http )’ 显示所有已建立的HTTP连接</p>
+<p>ss -s 列出当前socket详细信息</p>
+<h3 id="ip-命令-配置Linux网络属性"><a href="#ip-命令-配置Linux网络属性" class="headerlink" title="ip  命令    配置Linux网络属性"></a><strong>ip  命令    配置Linux网络属性</strong></h3><p><strong>格式：ip [OPTIONS] OBJECT {COMMAND|help}</strong></p>
+<p>​       OBJECT={link|addr|route}</p>
+<p><strong>网络设备配置：</strong></p>
+<p>ip link       set IFACE down|up 禁用|启用网卡</p>
+<p>ip link       show [up]                 显示数据链路层信息[仅显示处于激活状态接口]</p>
+<p><strong>ip地址设置：</strong></p>
+<p>ip addr {add|del} IP dev IFACE</p>
+<p>ip address add IP dev IFACE label ALIASIFACE              添加地址时指定网卡别名</p>
+<p>ip address add IP dev IFACE scpe{global|link|host}    指明作用域</p>
+<p>global：全局可用</p>
+<p>link：仅链接可用</p>
+<p>host：本机可用</p>
+<p>ip address flush dev IFACe  清空IP地址</p>
+<p><strong>路由管理：</strong></p>
+<p>ip r|route [show|list]                               查看路由表</p>
+<p>ip route add|del TARGET via GW dev IFACE 添加|删除路由</p>
+<p>ip route flush dev IFACE                         清空路由表</p>
+<p><strong>常用命令：</strong></p>
+<p>ip help                                                 查看ip命令使用帮助</p>
+<p>ip link                                                   查看数据链路层信息</p>
+<p>ip link set eth1 up|down                          设置eth1网卡启用|禁用</p>
+<p>ip address|a                                       查看网卡信息</p>
+<p>ip route|r                                            查看路由信息</p>
+<p>ip route add|del IP/24 via gateway                添加路由</p>
+<p>ip address add 2.2.2.2/24 dev eth0                添加IP地址</p>
+<p>ip address add 2.2.2.2/24 dev eth0 label eth0：2添加别名网卡IP地址</p>
+<p>ip address flush dev eth0                         清空eth0网卡上所有ip地址</p>
+<h3 id="nmcli-管理网络管理器的命令行工具"><a href="#nmcli-管理网络管理器的命令行工具" class="headerlink" title="nmcli                 管理网络管理器的命令行工具"></a><strong>nmcli                 管理网络管理器的命令行工具</strong></h3><p><strong>格式：nmcli [OPTIONS] OBJECT COMMAND</strong></p>
+<p><strong>OBJECT：</strong></p>
+<p>device                       显示和管理网络接口</p>
+<p>connection|con               管理网络连接</p>
+<p><strong>修改IP地址等属性：</strong></p>
+<p>nmcli connection modify IFACE [+|-]setting.property value</p>
+<p>setting.property：</p>
+<p>ipv4.addresses</p>
+<p>ipv4.gateway</p>
+<p>ipv4.dns1</p>
+<p>ipv4.method manual | auto</p>
+<p><strong>修改配置文件执行生效：</strong></p>
+<p>systemctl restart network</p>
+<p>nmcli con reload</p>
+<p>设备即网络接口，连接是对网络接口的配置。一个网络接口可有多个连接配置，</p>
+<p>但同时只有一个连接配置生效</p>
+<p><strong>使连接配置生效|失效：</strong></p>
+<p>nmcli con up|down eth0</p>
+<p><strong>显示所有包括不活动连接</strong></p>
+<p>nmcli con show</p>
+<p><strong>显示所有活动连接</strong></p>
+<p>nmcli con show –active</p>
+<p><strong>显示网络连接配置</strong></p>
+<p>nmcli con show “System eth0“</p>
+<p><strong>显示设备状态</strong></p>
+<p>nmcli dev status</p>
+<p><strong>显示网络接口属性</strong></p>
+<p>nmcli dev show eth0</p>
+<p><strong>创建新连接default，IP自动通过dhcp获取</strong></p>
+<p>nmcli con add con-name default type Ethernet ifname eth0</p>
+<p><strong>删除连接</strong></p>
+<p>nmcli con del default</p>
+<p><strong>创建新连接static ，指定静态IP，不自动连接</strong></p>
+<p>nmcti con add con-name static ifname eth0 autoconnect no type</p>
+<p>Ethernet ipv4.addresses 172.25.X.10/24 ipv4.gateway 172.25.X.254</p>
+<p><strong>启用static连接配置</strong></p>
+<p>nmcli con up static</p>
+<p><strong>启用default连接配置</strong></p>
+<p>nmcli con up default</p>
+<p><strong>查看帮助</strong></p>
+<p>nmcli con add help</p>
+<p><strong>修改连接设置</strong></p>
+<p>nmcli con mod“static” connection.autoconnect no</p>
+<p>nmcli con mod “static” ipv4.dns 172.25.X.254</p>
+<p>nmcli con mod “static” +ipv4.dns 8.8.8.8</p>
+<p>nmcli con mod “static” -ipv4.dns 8.8.8.8</p>
+<p>nmcli con mod “static” ipv4.addresses “172.25.X.10/24 172.25.X.254”</p>
+<p>nmcli con mod “static” +ipv4.addresses 10.10.10.10/16</p>
+<p><strong>DNS设置，存放在/etc/resolv.conf文件中</strong></p>
+<p>PEERDNS=no 表示当IP通过dhcp自动获取时，dns仍是手动设置，不自动获取。等价于下</p>
+<p>面命令：</p>
+<p>nmcli con mod “system eth0” ipv4.ignore-auto-dns yes</p>
+<p><strong>修改连接配置后，需要重新加载配置</strong>：</p>
+<p>nmcli con reload</p>
+<p>nmcli con down “system eth0” 可被自动激活</p>
+<p>nmcli con up “system eth0”</p>
+<p>nmcli dev dis eth0 禁用网卡，访止被自动激活</p>
+<p><strong>图形工具</strong></p>
+<p>nm-connection-editor</p>
+<p><strong>字符工具</strong></p>
+<p>nmtui</p>
+<p>nmtui-connect</p>
+<p>nmtui-edit</p>
+<p>nmtui-hostname</p>
+<h3 id="测试网络"><a href="#测试网络" class="headerlink" title="测试网络"></a><strong>测试网络</strong></h3><p>在命令行下测试网络的连通性</p>
+<p><strong>显示主机名</strong></p>
+<p>hostname</p>
+<p><strong>测试网络连通性</strong></p>
+<p>ping</p>
+<p>mtr</p>
+<p><strong>显示正确的路由表</strong></p>
+<p>ip route</p>
+<p><strong>确定名称服务器使用：</strong></p>
+<p>nslookup</p>
+<p>host</p>
+<p>dig</p>
+<p><strong>跟踪路由</strong></p>
+<p>traceroute</p>
+<p>tracepath</p>
+<h3 id="网络客户端工具"><a href="#网络客户端工具" class="headerlink" title="网络客户端工具"></a><strong>网络客户端工具</strong></h3><p>ftp，lftp：子命令：get、mget、ls、help</p>
+<p>ftp [-p port] [-u user[,password]] SERVER</p>
+<p>lftpget URL      直接跟URL地址下载</p>
+<p><strong>wget [option]… [URL]…</strong></p>
+<p>-q: 静默模式</p>
+<p>-c: 断点续传</p>
+<p>-P：保存在指定目录</p>
+<p>-O: 保存为指定的文件名</p>
+<p>–limit-rate=: 指定传输速率，单位K,M等，生产中最好限速</p>
+<p><strong>links URL          图形界面浏览器</strong></p>
+<p>–dump            只显示文字</p>
+<p>–source          查看网页源码</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+	<div>
+
+	</div>
+	
+    
+	<div>
+
+    
+
+    
+
+	
+	
+	
+	
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </div></article>
+
+
+    
+		
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/13/Linux系统计划任务/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/13/Linux系统计划任务/" itemprop="url">Linux系统计划任务</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-13T14:35:23+08:00">
+                2018-05-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在生活、生产环境中，我们可能遇到这样的场景，想在某个时刻，或者固定某个时间周期的在Linux系统中</p>
+<p>执行某项任务，例如，定时关机，定期自动清理垃圾文件等，at，crontab等命令就是帮你实现这样功能的。</p>
+<h2 id="一、同步服务器时间"><a href="#一、同步服务器时间" class="headerlink" title="一、同步服务器时间"></a><strong>一、同步服务器时间</strong></h2><p>在进行计划任务之前，一定要<strong>确保服务器的时间是准确无误的</strong>，否则将造成计划任务失败或者无法达到</p>
+<p>预期效果，尤其是在大规模的集群环境中，更显得尤为重要，所以我们首先要学会的就是同步服务器时</p>
+<p>间。</p>
+<p><strong>CentOS6：</strong></p>
+<p>ntpdata 172.x.x.x                            将时间与服务器同步</p>
+<p>vim /etc/ntp.conf                           修改此文件</p>
+<p>server 172.x.x.x iburst                  加上此行</p>
+<p>chkconfig ntpd on                           下次启动自动打开ntpd服务</p>
+<p>service ntpd start                           打开ntpd服务</p>
+<p>service ntpd status                        检查ntpd服务状态</p>
+<p><strong>CentOS7：</strong></p>
+<p>ntpdata 172.x.x.x                            将时间与服务器时间同步</p>
+<p>vim /etc/chrony.conf                     修改此文件</p>
+<p>server 172.x.x.x iburst                   加上此行</p>
+<p>systemctl enable chronyd              下次启动自动打开chronyd服务</p>
+<p>systemctl start chronyd                 打开chronyd服务</p>
+<p>systemctl status chronyd               检查chronyd服务状态</p>
+<p>至此，服务器时间同步就算是完成了！</p>
+<h2 id="二、执行一次性计划任务——at"><a href="#二、执行一次性计划任务——at" class="headerlink" title="二、执行一次性计划任务——at"></a><strong>二、执行一次性计划任务——at</strong></h2><p>Linux任务计划、周期性任务执行</p>
+<p>未来的某时间点执行一次任务</p>
+<p>   <strong>at</strong></p>
+<p><strong>batch：</strong>系统自行选择空闲时间去执行此处指定的任务</p>
+<p>周期性运行某任务</p>
+<p>   <strong>cron</strong></p>
+<p>使用at命令前，先确认at服务是否处于运行状态</p>
+<p><strong>Centos6：</strong></p>
+<p>确认当前运行级别处于on状态</p>
+<p>run level</p>
+<p>chkconfig –list atd</p>
+<p>如果服务未开启，请开启atd服务</p>
+<p>service atd start              </p>
+<p><strong>centos7：</strong></p>
+<p>确认处于active（running）状态</p>
+<p>systemctl status atd</p>
+<p>如果服务未开启，请开启atd服务</p>
+<p>systemctl start atd</p>
+<h3 id="at"><a href="#at" class="headerlink" title="at"></a><strong>at</strong></h3><p><strong>格式：at [options] TIME   最后Ctrl+d结束输出</strong></p>
+<p><strong>options：</strong></p>
+<p>-l      显示所有计划任务列表,同atq命令</p>
+<p>-d #  删除第#个计划任务，同atrm命令</p>
+<p>-c #  查看具体作用任务</p>
+<p>-m    强制发邮件</p>
+<p>-f /path/from/somefile  草丛指定文件中读取任务</p>
+<p><strong>TIME：</strong></p>
+<p>HH：MM [YYYY-mm-dd]</p>
+<p>noon,midnight,teatime （4pm）</p>
+<p>tomorrow</p>
+<p>now+#{minute，hours，days，weeks}</p>
+<p>HH：MM  02：00</p>
+<p>  <strong>在今日HH：MM进行，若该时刻已过，则明天此时执行任务</strong></p>
+<p>HH：MM YYYY-mm-dd</p>
+<p>  <strong>规定在某年某月某一天的某时刻执行任务</strong></p>
+<p>HH：MM[am|pm][month][date]</p>
+<p>04pm March 17</p>
+<p>17:20 tomorrow</p>
+<p>HH：MM[am|pm]+number[minutes|hours|days|weeks]</p>
+<p><strong>在某个时间点再加几个时间后才执行任务</strong></p>
+<p>now + 5minutes</p>
+<p>02pm + 3days</p>
+<p>注意：计划任务中的标准输出不显示在终端，将会以邮件方式发送至邮箱，所以执行计划任务最好</p>
+<p>将标准输出全部重定向到/dev/null，否则会产生大量垃圾邮件</p>
+<p><strong>at执行方式：</strong></p>
+<p>方法1：交互式</p>
+<p>例：at</p>
+<p>at 15:00  创建一个15:00的计划任务</p>
+<p>poweroff                  输入计划命令</p>
+<p>Ctrl+d               结束输出</p>
+<p>方法2：输入重定向</p>
+<p>例：at 18:00 &lt;&lt; EOF</p>
+<p>shutdown</p>
+<p>EOF</p>
+<p>方法3：at -f 文件</p>
+<p>例：echo “hello” &gt; /data/f1</p>
+<p>at 19:00 -f /data/f1</p>
+<p><strong>at任务队列存放在/var/spool/at目录中，任务执行后消失。</strong></p>
+<p><strong>at任务的黑名单（deny）、白名单（allow）文件：</strong></p>
+<p>系统默认<strong>只有黑名单文件/etc/at.deny</strong>，没有白名单文件<strong>/etc/at.allow</strong></p>
+<p><strong>/etc/at.deny</strong>    黑名单文件，放入文件中的用户将不能执行at任务计划</p>
+<p><strong>/etc/at.allow</strong>  白名单文件，当白名单文件存在时，只有白名单中的用户才能使用at。</p>
+<p>白名单文件需手动创建，优先级高于黑名单</p>
+<p>如果黑、白名单文件包含同一用户，将优先看白名单，可以使用at计划任务</p>
+<p>如果黑、白名单文件都删除，将只有root账号可以使用at计划任务。</p>
+<h2 id="三、执行周期性的计划任务——crond"><a href="#三、执行周期性的计划任务——crond" class="headerlink" title="三、执行周期性的计划任务——crond"></a><strong>三、执行周期性的计划任务——crond</strong></h2><p>使用crond周期任务计划前，先确认crond服务是否处于运行状态</p>
+<p><strong>Centos6：</strong></p>
+<p>确认处于active（running）状态</p>
+<p>service crond status         </p>
+<p>如果服务未开启，请开启crond服务</p>
+<p>service crond start        </p>
+<p><strong>centos7：</strong></p>
+<p>确认处于active（running）状态</p>
+<p>systemctl status crond</p>
+<p>如果服务未开启，请开启crond服务</p>
+<p>systemctl start crond     </p>
+<p><strong>相关文件：</strong></p>
+<p><strong>/etc/crontab</strong>          系统周期性任务计划文件（root only）</p>
+<p><strong>/var/spool/cron/</strong>         给用户创建周期计划的目录</p>
+<p><strong>/etc/cron.d/</strong>           给存储系统创建周期计划的目录</p>
+<p><strong>/var/log/cron</strong>          日志文件，可利用日志中的信息恢复误操作内容</p>
+<p><strong>注意：</strong></p>
+<p>（1）在<strong>/etc/crontab</strong>和<strong>/etc/cron.d/</strong>的文件中刚创建周期计划任务时，需要比普通用户周期计划目</p>
+<p>录的格式多添加一个<strong>用户名</strong>，位于时间和命令之间。</p>
+<p>（2）周期计划任务中的标准输出不显示在终端，将会以邮件方式发送至邮箱，所以执行计划任务建议</p>
+<p>将标准输出全部重定向到<strong>/dev/null</strong>，否则会产生大量垃圾邮件</p>
+<h3 id="crontab"><a href="#crontab" class="headerlink" title="crontab"></a><strong>crontab</strong></h3><p><strong>格式：</strong></p>
+<p><strong>crontab [options] file</strong></p>
+<p><strong>crontab [options]</strong></p>
+<p><strong>options：</strong></p>
+<p>-u <user>       指定一个用户</user></p>
+<p>-e           创建计划任务</p>
+<p>-l             列出计划任务列表</p>
+<p>-r            删除计划任务</p>
+<p>-i             删除前进行交互式提示</p>
+<p><strong>例：</strong></p>
+<p>crontab -l -u wang      查看wang用户的计划任务</p>
+<p>crontab -r -u wang     删除wang用户的计划任务</p>
+<p><strong>crontab</strong>计划任务同<strong>at</strong>命令一样，也有自己的黑、白名单文件，并且他们的作用是相类似的：</p>
+<p><strong>/etc/cron.deny</strong>    黑名单文件，放入文件中的用户将不能执行周期任务计划</p>
+<p><strong>/etc/cron.allow</strong>      白名单文件，只有白名单中的用户才能使用cron，需手动创建，优先级高于黑名单</p>
+<p>如果黑、白名单文件都删除，将只有root账号可以使用周期计划任务。</p>
+<h3 id="创建周期任务的两种方法："><a href="#创建周期任务的两种方法：" class="headerlink" title="创建周期任务的两种方法："></a>创建周期任务的两种方法：</h3><p><strong>第一种方法：修改/etc/crontab  （rootonly）</strong></p>
+<p><strong>/etc/crontab</strong> 计划任务参考格式</p>
+<p># Example of job definition:</p>
+<p># .—————- minute (0 – 59)</p>
+<p># |  .————- hour (0 – 23)</p>
+<p># |  |  .———- day of month (1 – 31)</p>
+<p># |  |  |  .——- month (1 – 12) OR jan,feb,mar,apr …</p>
+<p># |  |  |  |  .—- day of week (0 – 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</p>
+<p># |  |  |  |  |</p>
+<p># <em>  </em>  <em>  </em>  * user-name  command to be executed</p>
+<p><strong>*表示每次都执行</strong></p>
+<p><strong>*/10表示每10分钟执行一次</strong></p>
+<p><strong>例如：</strong></p>
+<p><strong># run five minutes after midnight, every day</strong></p>
+<p><strong>每五分钟执行一次：</strong></p>
+<p>5 0 <em> </em> *       $HOME/bin/daily.job &gt;&gt; $HOME/tmp/out 2&gt;&amp;1</p>
+<p><strong># run at 2:15pm on the first of every month — output mailed to paul</strong></p>
+<p><strong>每个月第一天的14:15分执行一次，并发送邮件</strong></p>
+<p>15 14 1 <em> </em>     $HOME/bin/monthly</p>
+<p><strong># run at 10 pm on weekdays, annoy Joe</strong></p>
+<p><strong>每个工作日晚上22：00，发送邮件给Joe</strong></p>
+<p>0 22 <em> </em> 1-5    mail -s “It’s 10pm” joe%Joe,%%Where are your kids?%</p>
+<p><strong>每间隔2小时的23分钟，打印一次，am0:23，am2:23，am4:23…，每天</strong></p>
+<p>23 0-23/2 <em> </em> * echo “run 23 minutes after midn, 2am, 4am …, everyday”</p>
+<p><strong>每个星期日的04:05，打印一次</strong></p>
+<p>5 4 <em> </em> sun     echo “run at 5 after 4 every sunday”</p>
+<p><strong>注意：</strong></p>
+<p>30 4 1,15 * 5     表示每月1,15日加每周五执行，或关系</p>
+<p>若想执行且关系，加脚本判断</p>
+<p><strong>特殊的时间格式：</strong></p>
+<p>这些特殊的时间规范可以用来代替一些时段和日期，用@字符作为前缀</p>
+<p><strong>@reboot</strong>         Run once after reboot   下次启动会执行，包括poweroff</p>
+<p><strong>@yearly</strong>          0 0 1 1 *           每年执行一次</p>
+<p><strong>@annually</strong>      0 0 1 1 *           每年执行一次</p>
+<p><strong>@monthly</strong>      0 0 1 <em> </em>           每月执行一次</p>
+<p><strong>@weekly</strong>        0 0 <em> </em> 0           每周执行一次</p>
+<p><strong>@daily</strong>             0 0 <em> </em> *           每天执行一次</p>
+<p><strong>@hourly</strong>          0 <em> </em> <em> </em>           每小时执行一次</p>
+<p><strong>第二种方法：crontab命令创建</strong></p>
+<p><strong>crontab -e</strong>       将以vi打开一个空白文件</p>
+<p># Example of job definition:</p>
+<p># .—————- minute (0 – 59)</p>
+<p># |  .————- hour (0 – 23)</p>
+<p># |  |  .———- day of month (1 – 31)</p>
+<p># |  |  |  .——- month (1 – 12) OR jan,feb,mar,apr …</p>
+<p># |  |  |  |  .—- day of week (0 – 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</p>
+<p># |  |  |  |  |</p>
+<p># <em>  </em>  <em>  </em>  *   command to be executed</p>
+<p><strong>不需写用户名</strong>，将以当前用户执行周期计划任务</p>
+<p>创建成功后周期计划文件自动放入<strong>/var/spool/cron</strong>目录</p>
+<p><strong>at和crontab对比：</strong></p>
+<p>一次性作业使用<strong>at</strong></p>
+<p>重复性作业使用<strong>crontab</strong></p>
+<p>at                       crontab</p>
+<p>创建任务：    at time                  crontab -e</p>
+<p>任务列表：    at -l                       crontab -l</p>
+<p>查看信息：    at -c #                    N/A</p>
+<p>删除任务：    at -d #                  crontab -r</p>
+<p>修改任务：     N/A                     crontab -e</p>
+<p><strong>注意：</strong>（1）默认不显示标准输出和标准错误，会以邮件方式邮寄给用户</p>
+<p>a.COMMAND &gt; /dev/null</p>
+<p>b.COMMAND &amp;&gt; /dev/null</p>
+<p>（2）根用户能够修改其他用户的作业</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+	<div>
+
+	</div>
+	
+    
+	<div>
+
+    
+
+    
+
+	
+	
+	
+	
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </div></article>
+
+
+    
+		
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/10/Linux系统启动流程详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/10/Linux系统启动流程详解/" itemprop="url">Linux系统启动流程详解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-10T14:38:17+08:00">
+                2018-05-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>inux系统从按下电源键开始到系统启动要求用户输入用户名，中间究竟发生什么？了解Linux系统的启动</p>
+<p>流程，不仅有助于我们更加深入的理解linux底层设计理念，更能帮助我们再出现系统启动故障时，迅速排</p>
+<p>查出故障原因。</p>
+<p>## </p>
+<h2 id="一、Linux系统启动流程"><a href="#一、Linux系统启动流程" class="headerlink" title="一、Linux系统启动流程"></a><strong>一、Linux系统启动流程</strong></h2><p><strong>以下是CentOS6版本系统启动流程图：</strong></p>
+<p>（<strong>注：</strong>下文中启动流程主要适用于CentOS6之前的版本，7版本变动较大，暂不加入讨论）</p>
+<p><img src="centos6启动流程_gaitubao_com_watermark.png" alt="centos6启动流程_gaitubao_com_watermark"></p>
+<h3 id="CentOS6启动流程："><a href="#CentOS6启动流程：" class="headerlink" title="CentOS6启动流程："></a><strong>CentOS6启动流程：</strong></h3><p>1.加载BIOS的硬件信息，进行POST加电自检</p>
+<p>2.读取第一个启动设备MBR的引导加载程序(grub)的启动信息</p>
+<p>3.加载核心操作系统的核心信息，核心开始解压缩，并尝试驱动所有的硬件设备</p>
+<p>4.核心执行init程序，并获取默认的运行信息</p>
+<p>5.init程序执行/etc/rc.d/rc.sysinit文件</p>
+<p>6.启动核心的外挂模块</p>
+<p>7.init执行运行的各个批处理文件(scripts)</p>
+<p>8.init执行/etc/rc.d/rc.local</p>
+<p>9.执行/bin/login程序，等待用户登录</p>
+<p>10.登录之后开始以Shell控制主机</p>
+<p>接下来我们对每一项流程详细讲解</p>
+<h3 id="1-POST："><a href="#1-POST：" class="headerlink" title="1.POST："></a><strong>1.POST：</strong></h3><p><strong>Power-On-Self-Test，加电自检，</strong>是BIOS功能的一个主要部分。负责完成对CPU、主板、内</p>
+<p>存、硬盘子系统、显示子系统、串并行接口、键盘、CD-ROM光驱等硬件情况检测。</p>
+<h3 id="2-加载MBR："><a href="#2-加载MBR：" class="headerlink" title="2.加载MBR："></a><strong>2.加载MBR：</strong></h3><p>MBR：Master Boot Record，主引导记录</p>
+<p>0磁道0扇区：512bytes</p>
+<p>446bytes：<strong>boot loader</strong></p>
+<p>64bytes：分区表</p>
+<p>16bytes：标识一个分区（最多4个分区）</p>
+<p>2bytes：55AA（分区标识位）</p>
+<p><strong>bootloader</strong>：引导加载器，引导程序</p>
+<p><strong>主要功能有：</strong></p>
+<p>a）识别、加载操作系统中的核心文件，并提交到内存中运行，进而来启动对应操作系统。</p>
+<p>b）提供菜单信息，并将启动管理功能转交给其他加载程序。</p>
+<p>Linux：GRUB，可引导多种操作系统</p>
+<p>windows：ntloader，只能引导windows系统</p>
+<p><strong>因此建议</strong>：同一台电脑装多个操作系统，先装windows，后装Linux</p>
+<h3 id="3-GRUB："><a href="#3-GRUB：" class="headerlink" title="3.GRUB："></a><strong>3.GRUB：</strong></h3><p>grub0.97（老版本）</p>
+<p><strong>第一阶段：MBR的前446字节</strong></p>
+<p><strong>1.5阶段：</strong>MBR后续的27个扇区，加载/boot分区文件系统驱动</p>
+<p><strong>第二阶段：</strong>识别文件系统，加载/boot/grub目录下的文件（备份gurb的文件）</p>
+<p>注：grup 修复命令依赖于/boot/grub下的文件</p>
+<p>grub-install修复命令不依赖，将自动生产gurb文件下文件，</p>
+<p>一旦用grub命令修复后，grub-install也将依赖这些文件。</p>
+<p><strong>/boot/grub/grub.conf</strong>    grub配置文件</p>
+<p>default=0                  定义了默认启动项</p>
+<p>timeout=5                定义了菜单超时时长</p>
+<p>splashimage=(hd0,0)/grub/splash.xpm.gz    定义了菜单背景图片</p>
+<p>password –md5 口令   默认无此行，添加此行后需输入正确口令才能以但用户模式破解root口令</p>
+<p>可用grub-md5-crypt生产md5口令</p>
+<p>hiddenmenu             默认隐藏菜单</p>
+<p>title                   定义了启动菜单，有几个title就有几个启动菜单</p>
+<p>root（hd0,0）</p>
+<p>krenel               定义了内核文件位置，挂载目录</p>
+<p>initrd                 定义了initramfs文件位置</p>
+<h3 id="4-加载内核Kernel："><a href="#4-加载内核Kernel：" class="headerlink" title="4.加载内核Kernel："></a><strong>4.加载内核Kernel：</strong></h3><p>探测可识别到的所有硬件设备</p>
+<p>加载硬件驱动程序（借助于ramdisk加载驱动）</p>
+<p>以只读方式挂载根文件系统：</p>
+<p><strong>/boot/initramfs-VERSION-release.img</strong>文件加载根目录文件系统驱动</p>
+<p>  <strong>/boot/grup/grup.conf</strong>文件定义了根的位置</p>
+<p>运行用户空间的第一个应用程序：/sbin/init</p>
+<p><strong>内核的核心文件：</strong></p>
+<p>/boot/vmlinuz-VERSION-release</p>
+<p>ramdisk：辅助的伪根系统，存放辅助性的驱动模块</p>
+<p>CentOS 5: /boot/initrd-VERSION-release.img      ramdisk虚拟磁盘</p>
+<p>CentOS 6,7: /boot/initramfs-VERSION-release.img  ramfs虚拟文件系统</p>
+<p>mkinitrd /boot/initramfs-<code>uname -r</code>.img <code>uname -r</code>        生成新的ramfs文件</p>
+<h3 id="5-启动init进程："><a href="#5-启动init进程：" class="headerlink" title="5.启动init进程："></a><strong>5.启动init进程：</strong></h3><p><strong>CentOS5：</strong></p>
+<p>SycV：init，redhat开发</p>
+<p>特点：启动服务程序时，有依赖的服务将被串行启动，因此centos5系统启动很缓慢</p>
+<p>配置文件：/etc/inittab</p>
+<p><strong>CentOS6：</strong></p>
+<p>Upstart：init，ubantu开发</p>
+<p>特点：守护进程间通信依赖于D-Bus进行，因此可基本实现类似并行启动</p>
+<p>配置文件：/etc/inittab，/etc/init/*.conf</p>
+<p><strong>CentOS7：</strong></p>
+<p>Systemd：systemd–&gt;init  redhat开发</p>
+<p>特点：服务只有在第一次被访问到才会启动，因此centos7系统启动过程非常快</p>
+<p>配置文件：/usr/lib/systemd/system</p>
+<p>​         /etc/systemd/system</p>
+<p><strong>/sbin/init</strong> CentOS6版本之前</p>
+<p>运行级别：为系统运行或维护等目的而设定；0-6：7个级别</p>
+<p>0：关机</p>
+<p>1：单用户模式(root自动登录), single, 维护模式</p>
+<p>2: 多用户模式，启动网络功能，但不会启动NFS；维护模式</p>
+<p>3：多用户模式，正常模式；文本界面</p>
+<p>4：预留级别；可同3级别</p>
+<p>5：多用户模式，正常模式；图形界面</p>
+<p>6：重启</p>
+<p>默认级别： 3, 5</p>
+<p>切换级别：init #</p>
+<p>查看级别：runlevel ; who -r</p>
+<h3 id="6-读取-etc-inittab文件"><a href="#6-读取-etc-inittab文件" class="headerlink" title="6.读取/etc/inittab文件"></a><strong>6.读取/etc/inittab文件</strong></h3><p><strong>CentOS5：</strong>     </p>
+<p>1.定义默认启动运行级别为3</p>
+<p>2.定义了使用/etc/rc.d/rc.sysinit进行系统初始化</p>
+<p>3.定义了每个运行级别执行的rc#文件</p>
+<p>4.定义Ctrl-Alt-Delete组合键重启</p>
+<p>5.配置不断电系统pf、pr两种机制</p>
+<p>6.定义了终端数量，默认6个</p>
+<p>7.如果是5级别，则会启动图形化界面</p>
+<p>注意：可利用#加注释方法减少5选项中的终端数量，也可复制增加可登陆终端数量</p>
+<p>建议：生产中建议关闭6选项组合键重启功能，防止误操作</p>
+<p><strong>CentOS6：</strong></p>
+<p>仅定义了系统默认启动运行级别，其他项分割为单个文件执行，原来与5版本一致。</p>
+<p>/etc/init/control-alt-delete.conf</p>
+<p>/etc/init/tty.conf</p>
+<p>/etc/init/start-ttys.conf</p>
+<p>/etc/init/rc.conf</p>
+<p>/etc/init/prefdm.conf</p>
+<h3 id="7-读取-etc-rc-d-rc-sysinit-系统初始化文件"><a href="#7-读取-etc-rc-d-rc-sysinit-系统初始化文件" class="headerlink" title="7.读取/etc/rc.d/rc.sysinit 系统初始化文件"></a><strong>7.读取/etc/rc.d/rc.sysinit 系统初始化文件</strong></h3><p>(1) 设置主机名</p>
+<p>(2) 设置欢迎信息</p>
+<p>(3) 激活udev和selinux</p>
+<p>(4) 挂载/etc/fstab文件中定义的文件系统</p>
+<p>(5) 检测根文件系统，并以读写方式重新挂载根文件系统</p>
+<p>(6) 设置系统时钟</p>
+<p>(7) 激活swap设备</p>
+<p>(8) 根据/etc/sysctl.conf文件设置内核参数</p>
+<p>(9) 激活lvm及software raid设备</p>
+<p>(10) 加载额外设备的驱动程序</p>
+<p>(11) 清理操作</p>
+<p><strong>/etc/init.d/</strong></p>
+<p>存放对应服务脚本</p>
+<p>是rc.d文件软连接的源文件</p>
+<p>通过执行init.d脚本，确定运行级别开启和关闭的服务</p>
+<h3 id="8-运行-etc-rc-d-rc-0-6-d-对应级别目录下服务"><a href="#8-运行-etc-rc-d-rc-0-6-d-对应级别目录下服务" class="headerlink" title="8.运行/etc/rc.d/ rc[0-6].d/对应级别目录下服务"></a><strong>8.运行/etc/rc.d/ rc[0-6].d/对应级别目录下服务</strong></h3><p><strong>K##*</strong>：运行级别为N时，关闭K开头的服务；##运行次序；数字越小，越先运行；数字越小的服务，通常</p>
+<p>为依赖到别的服务</p>
+<p><strong>S##*</strong>：运行级别为S时，打开S开头的服务；##运行次序；数字越小，越先运行；数字越小的服务，通常</p>
+<p>为被依赖到的服务</p>
+<p><strong>/var/lock/subsys</strong></p>
+<p>存放已启动的服务名称</p>
+<h3 id="9-运行-etc-rc-d-rc-local文件"><a href="#9-运行-etc-rc-d-rc-local文件" class="headerlink" title="9.运行/etc/rc.d/rc.local文件"></a><strong>9.运行/etc/rc.d/rc.local文件</strong></h3><p>rc.local会在所有服务启动后作为一个兜底的服务进行启动</p>
+<p><strong>注意：</strong>（1）正常级别下，最后启动一个服务S99local没有链接至/etc/rc.d/init.d一个</p>
+<p>服务脚本，而是指向了/etc/rc.d/rc.local脚本</p>
+<p>（2）不便或不需写为服务脚本放置于/etc/rc.d/init.d/目录，且又想开机时自动运行</p>
+<p>的命令，可直接放置于/etc/rc.d/rc.local文件中</p>
+<p>（3）/etc/rc.d/rc.local在指定运行级别脚本后运行</p>
+<p>（4）可以根据情况，进行自定义修改</p>
+<h3 id="10、执行-bin-login程序"><a href="#10、执行-bin-login程序" class="headerlink" title="10、执行/bin/login程序"></a><strong>10、执行/bin/login程序</strong></h3><p>此时，系统完成启动，显示请输入用户名、密码</p>
+<h2 id="二、制定自己的init服务脚本："><a href="#二、制定自己的init服务脚本：" class="headerlink" title="二、制定自己的init服务脚本："></a><strong>二、制定自己的init服务脚本：</strong></h2><h3 id="方法1："><a href="#方法1：" class="headerlink" title="方法1："></a><strong>方法1：</strong></h3><p><strong>第一步：编写服务脚本</strong></p>
+<p>#！/bin/bash</p>
+<p>#chkconfig:     345/-     95     5             <strong>关键一行</strong></p>
+<p>生效模式:345或all  S编号  K编号</p>
+<p>#description:test service</p>
+<p>source /etc/init.d/functions                    调用函数库</p>
+<p>case $1 in</p>
+<p>start）</p>
+<p>[ -f /var/lock/subsys/testsrv ] &amp;&amp; action “testsrv is started ”</p>
+<p>touch /var/lock/subsys/testsrv</p>
+<p>action starting testsrv</p>
+<p>;;</p>
+<p>stop）</p>
+<p>rm -f /var/lock/subsys/testsrv</p>
+<p>action testsrv is stopped</p>
+<p>;;</p>
+<p>status)</p>
+<p>[ -f /var/lock/subsys/testsrv ]&amp;&amp;echo testsrv is starting||echo testsrv is stopped</p>
+<p>*)</p>
+<p>echo “Usage:service testsrv start|stop|status”</p>
+<p>esac</p>
+<p><strong>第二步：放入服务目录</strong></p>
+<p>/etc/init.d/                                         放入服务目录</p>
+<p><strong>第三步：添加脚本至服务</strong></p>
+<p>chkconfig –add testsrv                            将testsrv脚本添加至服务</p>
+<h3 id="方法2："><a href="#方法2：" class="headerlink" title="方法2："></a><strong>方法2：</strong></h3><p>也可以将开机启动服务代码添加到：</p>
+<p><strong>/etc/rc.d/rc[0-6]/99Sloca</strong>l中执行</p>
+<h2 id="三、服务相关命令"><a href="#三、服务相关命令" class="headerlink" title="三、服务相关命令"></a><strong>三、服务相关命令</strong></h2><p><strong>chkconfig</strong>         服务状态控制</p>
+<p><strong>查看服务状态：</strong></p>
+<p>–list                  列出所有独立服务</p>
+<p>–list [name]             列出指定服务各运行模式状态</p>
+<p><strong>添加脚本到服务：</strong></p>
+<p>–add  name                   添加脚本到服务</p>
+<p>注：SysV服务脚本要放置于/etc/rc.d/init.d（/etc/init.d）</p>
+<p>#!/bin/bash</p>
+<p>#LLLL 表示初始在哪个级别下启动，-表示都不启动</p>
+<p># chkconfig: LLLL nn nn</p>
+<p><strong>删除服务：</strong>   </p>
+<p>–del  name            删除指定服务</p>
+<p><strong>修改服务状态：</strong> </p>
+<p>–level 35 atd off|on       将3,5模式atd服务默认开机关闭服务，不添加模式：默认2,3,4,5</p>
+<p><strong>ntsysv</strong>               查看当前模式服务启动状态，*代表开机启动</p>
+<p>–level=3          修改指定运行模式的启动服务</p>
+<p><strong>service</strong>              手动管理服务</p>
+<p>[name]  start|stop|restart     管理服务状态</p>
+<p>–status-all               当前所有服务状态</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+	<div>
+
+	</div>
+	
+    
+	<div>
+
+    
+
+    
+
+	
+	
+	
+	
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </div></article>
+
+
+    
+		
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/10/shell脚本编程基础（3）——循环用法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/10/shell脚本编程基础（3）——循环用法/" itemprop="url">shell脚本编程基础（3）——循环用法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-10T14:37:01+08:00">
+                2018-05-10
               </time>
             
 
@@ -418,19 +1866,122 @@
       
         
           
-          要想玩转Linux系统，编写shell脚本是必须要掌握的技能。那什么是shell编程呢？简单来说，shell编程就是对多个Linux命令进行逻辑处理。
-下面，我们从编程的基础开始讲起：
-一、编程基础1.什么是程序？程序是指：指令+数据
-程序编程风格可分为：
-​    过程式：以指令为中心，数据服务于
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/10/shell脚本编程基础（1）/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>在前面的基础编程内容中，我们已经学习了shell脚本的顺序执行及选择执行，通过这两种方式，可</p>
+<p>以帮我们解决一些简单需求，但要想在更复杂的场景中使用的话，就需要掌握<strong>循环执行</strong>的方式了。</p>
+<h2 id="一、if、case条件判断"><a href="#一、if、case条件判断" class="headerlink" title="一、if、case条件判断"></a>一、if、case条件判断</h2><h3 id="条件判断if语句："><a href="#条件判断if语句：" class="headerlink" title="条件判断if语句："></a>条件判断if语句：</h3><p>if语句 是指编程语言中用来判定所给定的条件是否满足，根据判定的结果（真或假）决定执行给出的两种操作之一。</p>
+<p><strong>格式：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if   判断条件1；then		# 条件1为真的分支代码</span><br><span class="line"></span><br><span class="line">elif 判断条件2；then		# 条件2为真的分支代码</span><br><span class="line"></span><br><span class="line">elif 判断条件3；then		# 条件3为真的分支代码</span><br><span class="line"></span><br><span class="line">else	# 以上条件都不满足的分支代码</span><br><span class="line"></span><br><span class="line">fi	# if语句结束标记位</span><br></pre></td></tr></table></figure>
+<p>if语句会逐条件的进行判断，当第一次遇到为”真”的条件时，就会执行其分支代码，而后结束整个if语句。</p>
+<h3 id="条件判断case语句："><a href="#条件判断case语句：" class="headerlink" title="条件判断case语句："></a>条件判断case语句：</h3><p><strong>case语句</strong>是实现选择结构程序设计的一种语句，比较适合处理离散型变量。</p>
+<p><strong>格式：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">case 变量引用 in</span><br><span class="line">1|2|3)</span><br><span class="line">cmd1</span><br><span class="line">;;</span><br><span class="line"></span><br><span class="line">4|5|6)</span><br><span class="line">   cmd2</span><br><span class="line">;;</span><br><span class="line"></span><br><span class="line">7|8|9)</span><br><span class="line">cmd3</span><br><span class="line">;;</span><br><span class="line">*)</span><br><span class="line">    cmd4</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong>case支持glob风格的通配符：</p>
+<p>如：*      表示任意长度任意字符</p>
+<p>？    表示任意单个字符</p>
+<p>[]      指定范围内的任意单个字符</p>
+<p>a|b    a或者b</p>
+<h2 id="二、for、while及until循环"><a href="#二、for、while及until循环" class="headerlink" title="二、for、while及until循环"></a>二、for、while及until循环</h2><p>循环执行</p>
+<p>将某代码段重复运行多次</p>
+<p>重复运行多少次</p>
+<p>次数已知</p>
+<p>次数未知</p>
+<p>有进入条件和退出条件</p>
+<p>循环主要语句有：<strong>for、whlie、until</strong></p>
+<h3 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a><strong>for循环</strong></h3><p>for语句将循环一个列表中的每一个元素执行一次循环体代码，直到列表中元素全部执行过一次。</p>
+<p>一般用于次数预先知道的循环。</p>
+<p><strong>格式1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for 变量名 in 列表；do</span><br><span class="line"></span><br><span class="line">循环体</span><br><span class="line"></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p><strong>其中列表的生成方式有多种：</strong></p>
+<ol>
+<li><p>直接给出列表</p>
+</li>
+<li><p>整数列表<strong>：</strong></p>
+<p>（a）{start..end[..step]}</p>
+<p>（b）$（seq[start[step]end]）</p>
+</li>
+<li><p>返回列表的命令<strong>：</strong></p>
+<p>$（COMMAND）</p>
+</li>
+<li><p>使用glob，如：*.sh</p>
+</li>
+<li><p>变量引用：</p>
+<p>$@,$*等</p>
+</li>
+</ol>
+<p>执行机制<strong>：</strong></p>
+<p>依次将列表中的元素赋值给”变量名”，每次赋值后即执行一次循环体；直到列表中的元素全部被执行，循环结束</p>
+<p><strong>格式2：C语言风格</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">for ((: for (( exp1; exp2; exp3 )); do COMMANDS; done</span><br><span class="line"></span><br><span class="line">Arithmetic for loop.</span><br><span class="line"></span><br><span class="line">Equivalent to</span><br><span class="line"></span><br><span class="line">(( EXP1 ))</span><br><span class="line"></span><br><span class="line">while (( EXP2 )); do</span><br><span class="line"></span><br><span class="line">COMMANDS</span><br><span class="line"></span><br><span class="line">(( EXP3 ))</span><br><span class="line"></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p><strong>例：利用for循环依次读取列表{1..100}中的内容，并相加，得出1到100的数字之和</strong></p>
+<p><img src="testfor.png" alt="testfor"></p>
+<h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a><strong>while循环</strong></h3><p>while结构循环为当型循环(when type loop)，一般用于不知道循环次数的情况。维持循环的是一个条件表达式，条件成立执行循环体，条件不成立退出循环。</p>
+<p><strong>格式：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while 循环控制条件；do</span><br><span class="line">循环体</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p><strong>循环控制条件：</strong>进入循环之前，先做一次判断；每次循环之后会再次做判断；当条件为True时，则继续执行循环；直到条件测试状态为false时终止循环。</p>
+<p><strong>例：利用while循环，定义变量i=0，当i小于100时，执行循环，并让变量i每执行一次循环加1，直到i=100时停止循环，得出数字1到100之和</strong></p>
+<p><img src="testwhile.png" alt="testwhile"></p>
+<p><strong>while循环的特殊用法（遍历文件的每一行）：</strong></p>
+<p><strong>while read line； do</strong></p>
+<p>  循环体</p>
+<p><strong>done &lt; /PATH/FROM/SOMEFILE</strong></p>
+<p>依次读取<strong>/PATH/FROM/SOMEFILE</strong>文件中的每一行，且将行赋值给变量line</p>
+<h3 id="for循环与while循环的区别："><a href="#for循环与while循环的区别：" class="headerlink" title="for循环与while循环的区别："></a><strong>for循环与while循环的区别：</strong></h3><p>for循环与while循环是可以<strong>相互替代</strong>的；比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for i in &#123;1..10&#125;；do</span><br><span class="line">echo &quot;OK&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p><strong>用while语句来写的话：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">i=1</span><br><span class="line">while [ $i -le 10 ];do</span><br><span class="line">echo &quot;OK&quot;</span><br><span class="line">let i++</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>两者意思都是打印10次”OK”，那什么时候用for循环，什么时候又用while循环呢？</p>
+<p>for循环用于针对集合中的每个元素的一个代码块，而while循环不断的运行，直到指定的条件不满足为止。</p>
+<p>一般来说：</p>
+<p><strong>for循环比较适合循环次数确定的情况</strong></p>
+<p><strong>while循环适合循环次数不确定的情况</strong></p>
+<h3 id="until循环"><a href="#until循环" class="headerlink" title="until循环"></a><strong>until循环</strong></h3><p>维持循环的也是一个条件表达式，但与while用法正好相反，条件不成立时执行循环体，条件成立时退出循环。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">until 循环控制条件；do</span><br><span class="line">	循环体</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p><strong>until语句和while语句可相互转化：</strong></p>
+<p>如：until [ test ]；do  等价于 while [ ! test ]；do</p>
+<h2 id="三、循环控制语句continue、break、shift"><a href="#三、循环控制语句continue、break、shift" class="headerlink" title="三、循环控制语句continue、break、shift"></a>三、循环控制语句continue、break、shift</h2><h3 id="continue语句"><a href="#continue语句" class="headerlink" title="continue语句"></a><strong>continue语句</strong></h3><p>用于循环体中</p>
+<p><strong>continue[N]：</strong>提前结束第N层的本轮循环，而直接进入下一轮判断；最内层为第1层</p>
+<p><strong>格式：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">while 循环控制条件；do</span><br><span class="line">	CMD1</span><br><span class="line">	…</span><br><span class="line">    if 判断条件；then</span><br><span class="line">   		continue</span><br><span class="line">    fi</span><br><span class="line">    CMDn</span><br><span class="line">    …</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p><strong>例：依次打印数字1至10，当continue出现在5循环中时，直接跳过，继续执行6循环；</strong></p>
+<p><strong>当continue出现在嵌套循环中时，continue 2，提前结束第二次本轮循环，并打印3次</strong></p>
+<p><img src="testcontinue.png" alt="testcontinue"></p>
+<h3 id="break语句"><a href="#break语句" class="headerlink" title="break语句"></a><strong>break语句</strong></h3><p>用于循环体中</p>
+<p><strong>break[N]：</strong>提前结束第N层循环，最内层为第一层</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">while 循环控制条件；do</span><br><span class="line">    CMD1</span><br><span class="line">    …</span><br><span class="line">    if 判断条件；then</span><br><span class="line">  	  break</span><br><span class="line">    fi</span><br><span class="line">    CMDn</span><br><span class="line">    …</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p><strong>例：break语句将直接结束本轮循环</strong></p>
+<p><img src="testbreak.png" alt="testbreak"></p>
+<h3 id="shift命令"><a href="#shift命令" class="headerlink" title="shift命令"></a><strong>shift命令</strong></h3><p><strong>shift[n]：</strong>将参量列表list左移指定次数，缺省为左移一次，适合用于处理位置参数</p>
+<p>参量列表list一旦被移动，最左端的那个参数就从列表中删除。while循环遍历位置参量列表时，</p>
+<p>常用到shift</p>
+<p><strong>例1：利用shifit，每次位置变量向左移动1位，并打印本次全部位置变量，直到位置变量为0个</strong></p>
+<p><img src="testdoit.png" alt="testdoit"></p>
+<p><strong>例2：利用shifit，每次变量向左移动一位，并打印本次第一个位置变量，直到位置变量小于1时停止执行</strong></p>
+<p><img src="testshifit.png" alt="testshifit"></p>
+<h3 id="避免出现无限循环："><a href="#避免出现无限循环：" class="headerlink" title="避免出现无限循环："></a><strong>避免出现无限循环：</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">while true；do</span><br><span class="line">	循环体</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">until false；do</span><br><span class="line">	循环体</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>每个程序员都会偶尔不小心而编写出无限循环，在循环退出条件比较微妙时尤其如此，如果程序陷入无限循环，可按<strong>ctrl+c</strong>退出</p>
+<p>要避免编写无限循环，务必对每个while、until循环进行测试，确保它按预期那样结束。</p>
+<h3 id="select循环与菜单"><a href="#select循环与菜单" class="headerlink" title="select循环与菜单"></a><strong>select循环与菜单</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select 变量 in list；do</span><br><span class="line">	循环体命令</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>select循环主要用于创建菜单，常与case语句搭配使用，用户输入菜单列表中的某个数字，执行相应的命令</p>
+<p>select是个无限循环，因此要记住用break命令退出循环，或用户exit命令终止脚本。可按ctrl+c退出循环</p>
+<p>与for循环类似，可以省略in list，此时使用位置变量。</p>
+<p>相关变量：</p>
+<p><strong>$PS3</strong>        menu菜单提示符</p>
+<p><strong>$REPLY</strong>    保存用户的输入信息</p>
+<h2 id="四、信号捕捉trap"><a href="#四、信号捕捉trap" class="headerlink" title="四、信号捕捉trap"></a>四、信号捕捉trap</h2><p><strong>trap ‘触发指令’信号</strong></p>
+<p>自定义进程收到系统发出的指定信号好，将执行触发指令，而不会执行原操作</p>
+<p><strong>trap “ 信号</strong></p>
+<p>忽略信号的操作</p>
+<p><strong>trap ‘-‘ 信号</strong></p>
+<p>恢复原信号的操作</p>
+<p><strong>trap -p</strong></p>
+<p>列出自定义信号操作</p>
+<p><strong>例：打印数字1到10的过程中，trap -p显示自定义信号操作，由于trap “int捕获了int信号，ctrl+c无法中断显示，且显示自定义输入：press ctrl+c；</strong></p>
+<p><strong>打印数字11到20的过程中，由于trap “int捕获了int信号，ctrl+c无法中断显示</strong></p>
+<p><strong>打印数字21到30的过程中，trap ‘-‘恢复了原信号操作，顾ctrl+c又可中断显示</strong></p>
+<p><img src="trap.png" alt="trap"></p>
+<p><img src="trap2.png" alt="trap2"></p>
+
+          
         
       
     </div>
@@ -486,7 +2037,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/08/vim文本编辑器及文本处理常用命令/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/06/TCP-IP协议详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="吕培新">
@@ -505,7 +2056,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/08/vim文本编辑器及文本处理常用命令/" itemprop="url">vim文本编辑器及文本处理常用命令</a></h1>
+                <a class="post-title-link" href="/2018/05/06/TCP-IP协议详解/" itemprop="url">TCP/IP协议详解</a></h1>
         
 
         <div class="post-meta">
@@ -517,8 +2068,364 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-08T14:03:43+08:00">
-                2018-04-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-06T14:32:17+08:00">
+                2018-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络技术/" itemprop="url" rel="index">
+                    <span itemprop="name">网络技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在前面的网络基础内容中我们了解了TCP/IP协议的定义以及TCP/IP模型的分层结构即：</p>
+<p>应用层，传输层，Internet层以及网络访问层。</p>
+<p>今天我来带大家详细了解下TCP/IP协议栈中的典型协议：</p>
+<p>传输层的TCP、UDP协议，网络层的IP协议。</p>
+<p><img src="TCP模型.png" alt="TCP模型"></p>
+<h3 id="一、TCP协议"><a href="#一、TCP协议" class="headerlink" title="一、TCP协议"></a><strong>一、TCP协议</strong></h3><p><strong>TCP</strong>是面向连接的通信协议，通过三次握手建立连接，通讯完成时要拆除连接，由于TCP是面向连</p>
+<p>接的，所有只能用于端到端的通讯。</p>
+<h3 id="TCP协议的工作特性："><a href="#TCP协议的工作特性：" class="headerlink" title="TCP协议的工作特性："></a><strong>TCP协议的工作特性：</strong></h3><p>工作在传输层</p>
+<p>面向连接协议：先协商确保网络状态正常稳定</p>
+<p>全双工协议</p>
+<p>半关闭：支持一端关闭，一端传输的半关闭状态</p>
+<p>错误检查</p>
+<p>将数据打包成段，排序</p>
+<p>确认机制：保证数据包可靠</p>
+<p>数据恢复，重传</p>
+<p>流量控制，滑动窗口</p>
+<p>拥塞控制，慢启动和拥塞避免算法</p>
+<h3 id="TCP协议报文格式："><a href="#TCP协议报文格式：" class="headerlink" title="TCP协议报文格式："></a><strong>TCP协议报文格式：</strong></h3><p>为何TCP协议具有上述工作特性呢，这就要结合TCP报文格式来讲起。</p>
+<p>下图是TCP报文格式图：</p>
+<p><img src="TCP报头.png" alt="TCP报头"></p>
+<p><strong>具体含义如下：</strong></p>
+<p><strong>1.源端口、目标端口：</strong>计算机上的进程要和其他进程通信需要通过计算机端口，而一个计算机端口</p>
+<p>某个时刻只能被一个进程占用，所以通过指定源端口和目标端口，就可以制度哪两个进程通信。</p>
+<p><strong>2.序列号：</strong>seq序号，占32位，用来标识从TCP源端口向目的端口发送的字节流，发起方发送数据时</p>
+<p>对此进行标记。</p>
+<p><strong>3.确认序号：</strong>ack序号，占32位，只有ACK标志位为1时，确认序号字段才有效，ack=seq+1</p>
+<p><strong>4.数据偏移：</strong>表示TCP报文段的首部长度，共4位，由于TCP首部包含一个长度可变的选项部</p>
+<p>分，需要指定这个TCP报文段到底有多长。它指出 TCP 报文段的数据起始处距离 TCP 报文</p>
+<p>段的起始处有多远。该字段的单位是32位(即4个字节为计算单位），4位二进制最大表示</p>
+<p>15，所以数据偏移也就是TCP首部最大60字节。</p>
+<p><strong>5.标志位：</strong>共6个，URG、ACK、PSH、RSH、SYN、FIN，具体含义如下：</p>
+<p>（1）URG：紧急指针位，0表示无效，1表示有效</p>
+<p>（2）<strong>ACK：</strong>确认序号有效</p>
+<p>（3）PSH：收到数据包后是否直接传给应用程序使用，或传到buffer</p>
+<p>（4）RST：重置位，0表示正常，1表示异常需要重传</p>
+<p>（5）<strong>SYN：</strong>同步位，代表发起一个新连接</p>
+<p>（6）<strong>FIN：</strong>代表释放一个连接</p>
+<p><strong>6.窗口大小：</strong>表示现在允许对方发送的数据量，从本报文段的确认号开始允许对方发送数据量</p>
+<p><strong>7.校验和：</strong>提供额外的可靠性</p>
+<p><strong>8.紧急指针：</strong>标记紧急数据在数据字段的位置</p>
+<p><strong>9.选项部分：</strong>其最大长度可根据TCP首部长度进行推算。TCP首部长度用4位标识，选项部分最长</p>
+<p>为：（2^4-1）*4-20=40字节</p>
+<h3 id="TCP协议端口号："><a href="#TCP协议端口号：" class="headerlink" title="TCP协议端口号："></a><strong>TCP协议端口号：</strong></h3><p>传输层通过port号，确认应用层协议</p>
+<p>tcp：传输控制协议，面向连接的协议；通信前需要建立虚拟链路；结束后拆除链路</p>
+<p>port number：0-65535</p>
+<p>其中：</p>
+<p><strong>0-1023：</strong>系统端口或特权端口（仅管理员可用），总所周知，永久的分配给固定的系统应用使用；</p>
+<p>如：22/tcp（ssh），80/tcp（http），443/tcp（https）等</p>
+<p><strong>1024-49151：</strong>用户端口或注册端口，要求并不严格，分配给程序注册为某应用使用；</p>
+<p>如：1433/tcp（SqlServer），1521/tcp（oracle）</p>
+<p>3306/tcp（mysql），11211/tcp/udp（memcached）</p>
+<p><strong>49152-65535：</strong>动态端口或私有端口，客户端程序随机使用的端口；</p>
+<p>其范围的定义：/proc/sys/net/ipv4/iplocalportrange</p>
+<h2 id="二、TCP协议三次握手及四次挥手"><a href="#二、TCP协议三次握手及四次挥手" class="headerlink" title="二、TCP协议三次握手及四次挥手"></a><strong>二、TCP协议三次握手及四次挥手</strong></h2><h3 id="TCP协议三次握手："><a href="#TCP协议三次握手：" class="headerlink" title="TCP协议三次握手："></a><strong>TCP协议三次握手：</strong></h3><p>所谓的三次握手即建立TCP连接，是指建立一个TCP连接时，需要客户端和服务端总共发送3个包以</p>
+<p>确认连接的建立。</p>
+<p>整个流程如下图所示：</p>
+<p><img src="三次握手.png" alt="三次握手"></p>
+<p><strong>第一次握手：</strong>客户端将标志位SYN置为1，随机产生一个序列值seq=x，并将该数据包发送给服务器，</p>
+<p>客户端进入SYN_SENT状态，等待Server确认。</p>
+<p><strong>第二次握手：</strong>服务器收到数据包后由标志位SYN=1指定客户端请求建立连接，服务器端将标志位SYN</p>
+<p>和ACK都置为1，ack=x+1，随机产生一个序列值seq=y，并将该数据包发送给客户端以确认连接请求，</p>
+<p>此时，服务器进入SYN_RCVD状态。</p>
+<p><strong>第三次握手：</strong>客户端收到确认后，检查ack是否为x+1，ACK是否为1，如果正确则将标志位ACK置为1，</p>
+<p>ack=y+1，发送数据包给服务器端，客户端进入ESTABLISHED状态；服务器端收到对端发来的确认数据</p>
+<p>包后也转入ESTABLISHED状态，此时三次握手完成，客户端与服务器已建立通讯连接。</p>
+<h3 id="SYN攻击"><a href="#SYN攻击" class="headerlink" title="SYN攻击"></a><strong>SYN攻击</strong></h3><p>在三次握手过程中，服务器发送SYN-ACK之后，收到客户端的ACK之前的TCP连接称为半连接，此时服务</p>
+<p>器处于SYN_RCVD状态，当收到ACK后，服务器转入ESTABLISHED状态。SYN攻击就是Client在短时间</p>
+<p>内伪造大量不存在的IP地址，并向Server不断地发送SYN包，Server回复确认包，并等待Client的确认，</p>
+<p>由于源地址是不存在的，因此，Server需要不断重发直至超时，这些伪造的SYN包将长时间占用未连接</p>
+<p>队列，导致正常的SYN请求因为队列满而被丢弃，从而引起网络堵塞甚至系统瘫痪。SYN攻击时一种典</p>
+<p>型的DDOS攻击，检测SYN攻击的方式非常简单，即当Server上有大量半连接状态且源IP地址是随机的，</p>
+<p>则可以断定遭到SYN攻击了，使用如下命令可以让之现形：</p>
+<p><strong>#netstat -nap | grep SYN_RECV</strong></p>
+<h3 id="TCP协议四次挥手："><a href="#TCP协议四次挥手：" class="headerlink" title="TCP协议四次挥手："></a><strong>TCP协议四次挥手：</strong></h3><p>所谓四次挥手即终止TCP连接，就是指断开一个TCP连接时，需要客户端和服务器端总共发送4个包以确认</p>
+<p>连接的端开。</p>
+<p>整个流程如下图所示：</p>
+<p><img src="四次挥手.png" alt="四次挥手"></p>
+<p>由于TCP连接是全双工工作，因此，<strong>每个方向都必须要单独进行关闭</strong>。即当一方完成数据发送任务后，</p>
+<p>发送一个FIN来终止这一方向的连接，收到一个FIN只是代表这一方向上没有数据流动了，即不再接收到</p>
+<p>数据，但在这个TCP连接上仍然能够发送数据，直到这一方向也发送了FIN。</p>
+<p><strong>第一次挥手：</strong>客户端发送一个FIN，用来关闭客户端到服务器端的数据传送，客户端进入FIN_WAIT_1</p>
+<p>状态。</p>
+<p><strong>第二次挥手：</strong>服务器端收到FIN后，发送一个ACK给客户端，确认序号+1，服务器进入CLOSE_WAIT状态。</p>
+<p><strong>第三次挥手：</strong>服务器端发送一个FIN，用来关闭服务器到客户端的数据传送，服务器进入LAST_WAIT状态。</p>
+<p><strong>第四次挥手：</strong>客户端收到FIN后，进入TIME_WAIT状态，在等待2个报文最大生产时限后会转入</p>
+<p>CLOSED状态，客户端发送ACK确认，服务器收到ACK确认报文后由LAST_ACK状态转为CLOSED状态。</p>
+<p>此时四次挥手完成。</p>
+<h2 id="三、UDP协议"><a href="#三、UDP协议" class="headerlink" title="三、UDP协议"></a><strong>三、UDP协议</strong></h2><p><strong>UDP</strong>是非面向连接的通讯协议，UDP数据包括目的端口号和源端口号信箱，由于通讯不需要连接，所有可</p>
+<p>以实现广播发送。</p>
+<p>UDP与TCP位于同一层，但它不管数据包的顺序、错误或重发。因此，UDP不被应用于那些使用面向连</p>
+<p>接的服务，UDP主要用于那些面向查询—应答的服务，例如NFS。相对于FTP或Telnet，这些服务需</p>
+<p>要交换的信息量较小。使用UDP的服务包括NTP（网络时间协议）和DNS（DNS也使用TCP）。</p>
+<p>UDP通讯时不需要接收方确认，属于不可靠的传输，可能会出现丢包现象。</p>
+<h3 id="UDP协议的工作特性："><a href="#UDP协议的工作特性：" class="headerlink" title="UDP协议的工作特性："></a><strong>UDP协议的工作特性：</strong></h3><p>工作在传输层</p>
+<p>提供不可靠的网络访问</p>
+<p>非面向连接协议</p>
+<p>有限的错误检查</p>
+<p>传输性能高</p>
+<p>无数据恢复特性</p>
+<h3 id="UDP协议报文格式："><a href="#UDP协议报文格式：" class="headerlink" title="UDP协议报文格式："></a><strong>UDP协议报文格式：</strong></h3><p><img src="UDP报头.png" alt="UDP报头"></p>
+<p><strong>16-bit source port：</strong>占16位，源端口</p>
+<p><strong>16-bit destination port：</strong>占16位，目的端口</p>
+<p><strong>16-bit UDP length：</strong>占16位，定义数据报长度</p>
+<p><strong>16-bit UDP checksum：</strong>占16位，校验和</p>
+<p>通过UDP协议报文格式，我们可以发现，欺骗UDP包比欺骗TCP包更容易，因为UDP没有建立初始化连</p>
+<p>接（也可以称为握手），也就是说，与UDP相关的服务面临着更大的危险。</p>
+<h3 id="四、IP协议"><a href="#四、IP协议" class="headerlink" title="四、IP协议"></a><strong>四、IP协议</strong></h3><p><strong>IP协议（Internet Protocol</strong>）是将多个包交换网络连接起来，它在源地址和目的地址之间传送一种</p>
+<p>称之为数据包的东西，它还提供对数据大小的重新组装功能，以适应不同网络对包大小的要求。</p>
+<h3 id="IP协议的工作特性："><a href="#IP协议的工作特性：" class="headerlink" title="IP协议的工作特性："></a><strong>IP协议的工作特性：</strong></h3><p>运行于 OSI 网络层</p>
+<p>面向无连接的协议</p>
+<p>独立处理数据包</p>
+<p>分层编址</p>
+<p>尽力而为传输</p>
+<p>无数据恢复功能</p>
+<h3 id="IP协议报头格式："><a href="#IP协议报头格式：" class="headerlink" title="IP协议报头格式："></a><strong>IP协议报头格式：</strong></h3><p>如下图所示：</p>
+<p><img src="IP报头.png" alt="IP报头"></p>
+<p><strong>版本：</strong>占4位，指IP协议版本，目前IP协议版本号为4，即IPv4。</p>
+<p><strong>首部长度：</strong>占4位，定义了IP首部长度最大值是60字节。</p>
+<p><strong>区分服务：</strong>占8位，用来获取更好的服务，一般情况下不使用。</p>
+<p><strong>总长度：</strong>占16位，指首部和数据之和的长度，单位为字节，因此数据包的最大长度为65535字节。总</p>
+<p>长度不可超过最大传送单元MTU。</p>
+<p><strong>标识：</strong>占16位，它是一个计数器，每发送一个报文，该值会加1，也用于数据包分片，在同一个包的若干</p>
+<p>分片中，该值相同。</p>
+<p><strong>标志（flag）：</strong>占3位，目前只有后两位有意义。</p>
+<p>（1）<strong>DF：Don’t Fragment，</strong>中间的一位，只有DF=0时才允许数据包分片。</p>
+<p>（2）<strong>MF：More Fragment，</strong>最高位，MF=1表示后面还有分片。MF=0表示这是数据包最后一个分</p>
+<p>片。</p>
+<p><strong>片偏移：</strong>占12位，值较长的分组在分片后，该分片在原分组中的相对位置，片偏移以8个字节为偏移单</p>
+<p>位。</p>
+<p><strong>生存时间：</strong>占8位，TTL（Time To Live），数据包在网络中可通过的路由器数最大值。</p>
+<p><strong>协议：</strong>占8位，指出该数据包携带的数据使用何种协议，以便目的主机的IP层将数据不符上交给哪个处理</p>
+<p>进程。其中：1表示为 ICMP 协议, 2表示为 IGMP 协议, 6表示为TCP 协议, 17表示为 UDP 协议。</p>
+<p><strong>首部校验和：</strong>占16位，只检验数据包的首部不检验数据不符。采用简单计算的方法。</p>
+<p><strong>源地址和目的地址：</strong>各占4字节，分别记录源IP地址和目的IP地址。</p>
+<h2 id="五、IP地址："><a href="#五、IP地址：" class="headerlink" title="五、IP地址："></a>五、IP地址：</h2><p><strong>IP地址</strong>用来唯一标识IP网络中的每台设备</p>
+<p>每台主机（计算机、网络设备、外围设备）必须具有唯一的地址</p>
+<p>IP地址由两部分组成：</p>
+<p>网络ID：</p>
+<p>标识网络</p>
+<p>每个网段分配一个网络ID</p>
+<p>主机ID：</p>
+<p>标识单个主机</p>
+<p>由组织分配给各设备</p>
+<h3 id="IP地址分类："><a href="#IP地址分类：" class="headerlink" title="IP地址分类："></a><strong>IP地址分类：</strong></h3><p><strong>A类地址</strong></p>
+<p>0XXXXXXX.XXXXXXXX.XXXXXXXX.XXXXXXXX</p>
+<p>8位网络ID，24位主机ID</p>
+<p>0-127.x.x.x</p>
+<p>主机数：1600万左右</p>
+<p>网段数：2^7-2=126</p>
+<p>抛去特殊0开头127开头（本地回环）</p>
+<p>1-126.x.x.x      共有126个A类可用网段</p>
+<p><strong>B类地址</strong></p>
+<p>10XXXXXX.XXXXXXXX.XXXXXXXX.XXXXXXXX</p>
+<p>16位网络ID，16位主机ID</p>
+<p>128-191.x.x.x 开头</p>
+<p>主机数：65534</p>
+<p>网段数：2^14=16384</p>
+<p><strong>C类地址</strong></p>
+<p>110XXXXX.XXXXXXXX.XXXXXXXX.XXXXXXXX</p>
+<p>24位网络ID，8位主机ID</p>
+<p>192-223.x.x.x 开头</p>
+<p>主机数：2^8-2=254</p>
+<p><strong>D类地址</strong></p>
+<p>1110XXXX.XXXXXXXX.XXXXXXXX.XXXXXXXX</p>
+<p>224-239.x.x.x 开头</p>
+<p><strong>E类地址（保留）</strong></p>
+<p>11110XXX.XXXXXXXX.XXXXXXXX.XXXXXXXX</p>
+<p>239-255.x.x.x 开头</p>
+<p><strong>特殊地址</strong></p>
+<p>0.0.0.0</p>
+<p>表示一个集合：所有不清楚的主机和目的网络</p>
+<p>255.255.255.255</p>
+<p>广播地址。对本机来说，这个地址指本网段内（同一广播域）所有主机</p>
+<p>127.0.0.1—127.255.255.254</p>
+<p>本机回环地址，主要用于测试。</p>
+<p>224.0.0.0到239.255.255.255</p>
+<p>组播地址，224.0.01特指所有主机，224.0.0.2特指所有路由器。</p>
+<p>169.254.x.x</p>
+<p><strong>公有IP地址：</strong></p>
+<p>A：1.0.0.0     到  9.255.255.255</p>
+<p>11.0.0.0    到  126.255.255.255</p>
+<p>B：128.0.0.0   到  172.15.255.255</p>
+<p>172.32.0.0  到  191.255.255.255</p>
+<p>C：192.0.0.0   到  192.167.255.255</p>
+<p>192.169.0.0 到  223.255.255.255</p>
+<p><strong>私有IP地址：局域网用</strong></p>
+<p>A：10.0.0.0    到  10.255.255.255</p>
+<p>B：172.16.0.0  到  172.31.255.255</p>
+<p>C：192.168.0.0 到  192.168.255.255</p>
+<h3 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a><strong>子网掩码</strong></h3><p>子网掩码(subnet mask)又叫网络掩码、地址掩码、子网络遮罩，它是一种用来指明一个IP地址的哪些位标</p>
+<p>识的是主机所在的子网，以及哪些位标识的是主机的位掩码。子网掩码不能单独存在，它必须结合IP地址</p>
+<p>一起使用。子网掩码只有一个作用，就是将某个IP地址划分成网络地址和主机地址两部分。</p>
+<p><strong>传统表示法：</strong></p>
+<p>XXXXXXXX.XXXXXXXX.XXXXXXXX.XXXXXXXX</p>
+<p>00000000  0</p>
+<p>10000000  128</p>
+<p>11000000  192</p>
+<p>11100000  224</p>
+<p>11110000  240</p>
+<p>11111000  248</p>
+<p>11111100  252</p>
+<p>11111110  254</p>
+<p>11111111  255</p>
+<p><strong>CIDR表示法：</strong></p>
+<p>IP/网络ID位数</p>
+<p>如192.168.10.132/30</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+	<div>
+
+	</div>
+	
+    
+	<div>
+
+    
+
+    
+
+	
+	
+	
+	
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </div></article>
+
+
+    
+		
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/05/Linux进程监控管理工具详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/05/Linux进程监控管理工具详解/" itemprop="url">Linux进程监控管理工具详解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-05T14:31:15+08:00">
+                2018-05-05
               </time>
             
 
@@ -579,15 +2486,203 @@
       
         
           
-          一、文本编辑器简介： vi:  Visual Interface，文本编辑器文本：ASCII, Unicode文本编辑种类：    行编辑器:  sed    全屏编辑器：nano,  vi    vim  -  Vi   Improved （vi文本编辑器的升级版）其他编辑器：    gedit 
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/08/vim文本编辑器及文本处理常用命令/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h2 id="一、top——进程监控工具"><a href="#一、top——进程监控工具" class="headerlink" title="一、top——进程监控工具"></a><strong>一、top——进程监控工具</strong></h2><p>相对于ps而言，ps显示的是某个时间点的进程状态信息，<strong>top</strong>命令工具类似于windows系统的任务管理器，</p>
+<p>可以动态的持续监控进程的运行状态</p>
+<p><img src="top.png" alt="top"></p>
+<p><strong>每一行的代表的含义为：</strong></p>
+<p><strong>第一行：</strong></p>
+<p>1.当前系统时间</p>
+<p>2.系统已启动的时间</p>
+<p>3.当前登录用户数</p>
+<p>4.系统平均负载（1min、5min、15min），超过1表示负载过高</p>
+<p><strong>第二行：</strong></p>
+<p>当前进程的总量，以及处于各种状态的进程的数量，要注意最后的zombie，不为0</p>
+<p>要及时查看哪个进程处于僵死状态</p>
+<p><strong>第三行：CPU的整体负载，多核CPU可按1切换不同CPU的负载率</strong></p>
+<p>us：user space       用户运行程序占用CPU百分比</p>
+<p>sy：system     用于运行内核占用CPU百分比</p>
+<p>ni：nice用户进程空间所改变过优先级的进程占用CPU百分比</p>
+<p>id：idle   空闲CPU百分比</p>
+<p>wa：wait to   等待I/O花费时间</p>
+<p>hi：hardware interrupt 硬件中断占用CPU的百分比</p>
+<p>si：software interrupt 软件中断占用CPU的百分比</p>
+<p>st：stolen       被偷走的CPU百分比，一般为虚拟机占用</p>
+<p><strong>第四行：表示物理内存的使用情况</strong></p>
+<p><strong>第五行：表示交换分区的使用情况</strong></p>
+<p><strong>第六行：这里默认显示空白，可以输入指令，包括：</strong></p>
+<p>P       以占据的CPU百分比大小排序</p>
+<p>M     以内存占比大小排序</p>
+<p>T       CPU累加占用时间排序</p>
+<p>l        是否显示系统负载行</p>
+<p>t       是否显示进程摘要信息及CPU负载状态</p>
+<p>1       数字1，平均或单独显示各CPU负载信息</p>
+<p>m     是否显示内存相关状态信息</p>
+<p>q       退出</p>
+<p>s       修改延迟时长</p>
+<p>k       终止指定进程</p>
+<p><strong>top输出下面的部分：</strong></p>
+<p>PID   进程ID</p>
+<p>USER        进程所有者</p>
+<p>PR    进程优先级，越小优先级越高</p>
+<p>NI     nice优先级，越小优先级越高</p>
+<p>VIRT         进程需要占用的内存大小</p>
+<p>RES  进程当前实际占用内存大小</p>
+<p>SHR  进程与其他进程恭喜的内存大小</p>
+<p>S       进程状态</p>
+<p>%CPU       CPU占有率</p>
+<p>%MEM     内存使用率</p>
+<p>TIME+      进行CPU使用时间累加</p>
+<p>COMMAND 进程或命令名称</p>
+<h2 id="二、htop——top增强版进程监控工具"><a href="#二、htop——top增强版进程监控工具" class="headerlink" title="二、htop——top增强版进程监控工具"></a><strong>二、htop——top增强版进程监控工具</strong></h2><p><strong>htop</strong>是top命令工具的增强版，系统默认没有按照，需epel源进行安装</p>
+<p><img src="htop.png" alt="htop"></p>
+<p><strong>交互式命令：</strong></p>
+<p>u       选择显示指定用户的进程</p>
+<p>l        显示光标所在进程缩打开的文件列表</p>
+<p>s       显示光标所在进程执行的系统调用</p>
+<p>a       绑定进程到指定cpu（退出htop失效）</p>
+<p>#       快速定位光标至PID为#的进程上</p>
+<p><strong>htop支持的一些信息</strong></p>
+<p>-d #  延迟时长</p>
+<p>-u USERNAME：显示指定用户的进程</p>
+<p>-s COLUMN：根据指定字段进行排序</p>
+<h2 id="三、iotop、iostat——磁盘读写监控工具"><a href="#三、iotop、iostat——磁盘读写监控工具" class="headerlink" title="三、iotop、iostat——磁盘读写监控工具"></a><strong>三、iotop、iostat——磁盘读写监控工具</strong></h2><p><strong>iotop</strong>命令是一个用来监视磁盘I/O使用状况的top类工具iotop具有与top相似的UI，其</p>
+<p>中包括PID、用户、I/O、进程等相关信息，可查看每个进程是如何使用IO</p>
+<p><img src="iotop.png" alt="iotop"></p>
+<p><strong>每一行的代表的含义为：</strong></p>
+<p><strong>第一行：Read和Write速率总计</strong></p>
+<p><strong>第二行：实际的Read和Write速率</strong></p>
+<p><strong>第三行：参数如下：</strong></p>
+<p>TID                    线程ID（按p切换为进程ID）</p>
+<p>PRIO                          优先级</p>
+<p>USER                         用户</p>
+<p>DISK READ                磁盘读速率</p>
+<p>DISK WRITE              磁盘写速率</p>
+<p>SWPIN                       swap交换百分比</p>
+<p>IO&gt;                    IO等待所占的百分比</p>
+<p>COMMAND                       线程/进程命令</p>
+<p><strong>交互按键</strong></p>
+<p>left和right方向键：改变排序</p>
+<p>r：反向排序</p>
+<p>o：切换至选项–only</p>
+<p>p：切换至–processes选项</p>
+<p>a：切换至–accumulated选项</p>
+<p>q：退出</p>
+<p>i：改变线程的优先级</p>
+<p><strong>iotop支持的选项：</strong></p>
+<p>-o, –only         只显示正在产生I/O的进程或线程，除了传参，可以在运行过程中按o生效</p>
+<p>-b, –batch                非交互模式，一般用来记录日志</p>
+<p>-n NUM, –iter=NUM      设置监测的次数，默认无限。在非交互模式下很有用</p>
+<p>-d SEC, –delay=SEC        设置每次监测的间隔，默认1秒，接受非整形数据例如1.1</p>
+<p>-p PID, –pid=PID     指定监测的进程/线程</p>
+<p>-u USER, –user=USER    指定监测某个用户产生的I/O</p>
+<p>-P, –processes                 仅显示进程，默认iotop显示所有线程</p>
+<p>-a, –accumulated   显示累积的I/O，而不是带宽</p>
+<p>-k, –kilobytes          使用kB单位，而不是对人友好的单位。在非交互模式下，脚本编程有用</p>
+<p>-t, –time                 加上时间戳，非交互非模式</p>
+<p>-q, –quiet                禁止头几行，非交互模式，有三种指定方式</p>
+<p>-q             只在第一次监测时显示列名</p>
+<p>-qq          永远不显示列名</p>
+<p>-qqq                 永远不显示I/O汇总</p>
+<p><strong>iostat</strong>                统计cpu和设备IO信息</p>
+<p><img src="iostat.png" alt="iostat"></p>
+<p><strong>第一段显示</strong>：内核版本（主机名） 当前日期  架构类型  核心数</p>
+<p><strong>第二段显示</strong>：cpu平均利用率</p>
+<p><strong>第三段显示</strong>：磁盘读写速度（kb/s）</p>
+<h2 id="四、vmstat——虚拟内存统计工具"><a href="#四、vmstat——虚拟内存统计工具" class="headerlink" title="四、vmstat——虚拟内存统计工具"></a><strong>四、vmstat——虚拟内存统计工具</strong></h2><p>通过top、htop我们可以获得一些进程对系统资源的使用情况，而<strong>vmstat</strong>则可以通过</p>
+<p>内存、磁盘、网络、CPU来动态显示系统资源的使用情况。</p>
+<p><strong>格式：vmstat [options][delay [count]]</strong></p>
+<p><strong>选项：</strong></p>
+<p>-s              显示内存的统计数据</p>
+<p>-d              显示磁盘的统计数据</p>
+<p><img src="vmstat.png" alt="vmstat"></p>
+<p><strong>vmstat输出含义：</strong></p>
+<p><strong>procs：</strong></p>
+<p>r：可运行进程的个数，和核心数有关</p>
+<p>b：处于不可终端睡眠状态</p>
+<p><strong>memory：</strong></p>
+<p>swpd：交换内存的使用总量</p>
+<p>free：空闲物理内存总量</p>
+<p>buffer：用于buffer的内存总量</p>
+<p>cache：用于cache的内存总量</p>
+<p><strong>swap：</strong></p>
+<p>si：从磁盘交换进内存的数据速率（kb/s）</p>
+<p>so：从内存交换至磁盘的数据速率（kb/s）</p>
+<p><strong>io：</strong></p>
+<p>bi：从块设备读入数据到系统的速率（kb/s）</p>
+<p>bo：保存数据至块设备的速率（kb/s）</p>
+<p><strong>system：</strong></p>
+<p>in：interrupts 中断速率，包括时钟</p>
+<p>cs：进程切换速率</p>
+<p><strong>cpu：</strong></p>
+<p>us：user space       用户运行程序占用CPU百分比</p>
+<p>sy：system     用于运行内核占用CPU百分比</p>
+<p>id：idle   空闲CPU百分比</p>
+<p>wa：wait to   等待I/O花费时间</p>
+<p>st：stolen       被偷走的CPU百分比，一般为虚拟机占用</p>
+<h2 id="五、glances——可跨平台系统监控工具"><a href="#五、glances——可跨平台系统监控工具" class="headerlink" title="五、glances——可跨平台系统监控工具"></a><strong>五、glances——可跨平台系统监控工具</strong></h2><p><strong>glances</strong>是一款系统监视工具，能够监视CPU、负载、内存、磁盘I/O、网络流量、文件</p>
+<p>系统、系统温度等信息。centos系统默认不安装glances工具，需手动安装（epel源）</p>
+<p><img src="glances-1.png" alt="glances"></p>
+<p><strong>glances可提供的监视和分析性能数据功能包括：</strong></p>
+<p>1.CPU使用率</p>
+<p>2.内存使用情况</p>
+<p>3.内核统计信息和运行队列信息</p>
+<p>4.磁盘I/O速度、传输和读/写比率</p>
+<p>5.文件系统中的可用空间</p>
+<p>6.磁盘适配器</p>
+<p>7.网络I/O速度、传输和读/写比率</p>
+<p>8.页面空间和页面速度</p>
+<p>9.消耗资源最多的进程</p>
+<p>10.计算机信息和系统资源</p>
+<p><strong>常用选项：</strong></p>
+<p>-b： 以Byte为单位显示网卡数据速率</p>
+<p>-d： 关闭磁盘I/O模块</p>
+<p>-f： /path/to/somefile: 设定输入文件位置</p>
+<p>-o： {HTML|CSV}：输出格式</p>
+<p>-m： 禁用mount模块</p>
+<p>-n： 禁用网络模块</p>
+<p>-t #： 延迟时间间隔</p>
+<p>-1：  每个CPU的相关数据单独显示</p>
+<p><strong>支持远程模式，可在C/S模式下运行glances命令：</strong></p>
+<p>注：glances版本最好一样</p>
+<p>服务器模式：</p>
+<p>glances -s -B IPADDR</p>
+<p>IPADDR: 指明监听的本机哪个地址</p>
+<p>客户端模式：</p>
+<p>glances -c IPADDR</p>
+<p>IPADDR：要连入的服务器端地址</p>
+<h2 id="六、dstat——多功能整合系统监控工具"><a href="#六、dstat——多功能整合系统监控工具" class="headerlink" title="六、dstat——多功能整合系统监控工具"></a><strong>六、dstat——多功能整合系统监控工具</strong></h2><p><strong>dstat</strong>是一个多功能工具，他包含了vmstat，iostat，netstat这些命令的功能，并</p>
+<p>增加了监控项，变得更加灵活。<strong>dstat</strong>可用于基准测试和排除故障。</p>
+<p><strong>默认情况下，dstat每秒刷新一次并显示结果，可按ctrl+c退出</strong></p>
+<p><img src="dstat.png" alt="dstat"></p>
+<p><strong>每一区列代表的含义：</strong></p>
+<p>total-cpu-usage               CPU使用率</p>
+<p>dsk/total          磁盘读写总数</p>
+<p>net/total          网络设备发送和接收数据的总数</p>
+<p>paging                       系统的分页活动，大多数情况我们希望此处两项为0</p>
+<p>system                      显示中断和上下文切换。只在有比较基线时才有意义。这一栏较高</p>
+<p>的统计值通常表示大量进程造成拥塞</p>
+<p><strong>dstat支持的选项：</strong></p>
+<p>-c     显示cpu性能指标相关统计数据</p>
+<p>-d     显示磁盘disk相关速率</p>
+<p>-g     显示page相关速率数据</p>
+<p>-m    显示内存memory相关统计数据</p>
+<p>-n     显示网络network相关统计数据</p>
+<p>-p     显示进程process相关统计数据</p>
+<p>-r      显示io请求相关统计数据</p>
+<p>-s      显示swap的相关数据</p>
+<p><strong>长选项：</strong></p>
+<p>–top-cpu         显示最占用CPU的进程</p>
+<p>–top-io   显示最占用io的进程</p>
+<p>–top-mem      显示最占用内存的进程</p>
+<p>–top-latency  显示延迟最大的进程</p>
+<p>–tcp                  显示tcp套接字相关数据</p>
+<p>–udp                 显示udp套接字相关数据</p>
+<p>–unix                显示unix sock接口相关统计数据</p>
+<p>–raw                显示raw套接的相关数据</p>
+<p>–socket 显示套接相关数据</p>
+<p>–ipc         显示进程间通信相关的速率数据</p>
+
+          
         
       
     </div>
@@ -643,7 +2738,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/07/文本三剑客之grep及正则表达式用法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/05/Linux系统进程管理及作业操作/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="吕培新">
@@ -662,7 +2757,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/07/文本三剑客之grep及正则表达式用法/" itemprop="url">文本三剑客之grep及正则表达式用法</a></h1>
+                <a class="post-title-link" href="/2018/05/05/Linux系统进程管理及作业操作/" itemprop="url">Linux系统进程管理及作业操作</a></h1>
         
 
         <div class="post-meta">
@@ -674,332 +2769,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-07T14:00:24+08:00">
-                2018-04-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/文本三剑客/" itemprop="url" rel="index">
-                    <span itemprop="name">文本三剑客</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          grep 是一种强大的文本搜索工具，它能使用特定模式匹配（包括正则表达式）搜索文本，并默认输出匹配行。
-一、grep、文本过滤工具格式：
-​    grep [OPTION]… PATTERN [FILE]…
- option：
-1234567891011121314-v     显示不被匹配到的行-
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/07/文本三剑客之grep及正则表达式用法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-	<div>
-
-	</div>
-	
-    
-	<div>
-
-    
-
-    
-
-	
-	
-	
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </div></article>
-
-
-    
-		
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/05/浅谈几种IO重定向变形用法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="吕培新">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="吕培新的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/05/浅谈几种IO重定向变形用法/" itemprop="url">浅谈几种IO重定向变形用法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-05T13:57:48+08:00">
-                2018-04-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Linux给程序提供了三种I/O设备，即：
-
-标准输入（STDIN）  0            默认接受来自键盘的输入
-标准输出（STDOUT） 1      默认输出到终端窗口
-标准错误（STDERR） 2       默认输出到终端窗口
-
-同时linux中使用“&gt;”和“&gt;&gt;”
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/05/浅谈几种IO重定向变形用法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-	<div>
-
-	</div>
-	
-    
-	<div>
-
-    
-
-    
-
-	
-	
-	
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </div></article>
-
-
-    
-		
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/04/Linux文件权限详解/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="吕培新">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="吕培新的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/04/Linux文件权限详解/" itemprop="url">Linux文件权限详解</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-04T13:56:42+08:00">
-                2018-04-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-05T14:28:32+08:00">
+                2018-05-05
               </time>
             
 
@@ -1060,19 +2831,172 @@
       
         
           
-          Linux系统中不仅是对用户与组根据UID,GID进行了管理，还对Linux系统中的文件，按照用户与组进行分类，针对不同的群体进行了权限管理，用他来确定谁能通过何种方式对文件和目录进行访问和操作。
-一、文件权限
-文件的权限针对三类对象进行定义
-owner      属主，缩写u
-group     
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/04/Linux文件权限详解/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h2 id="一、进程相关概念："><a href="#一、进程相关概念：" class="headerlink" title="一、进程相关概念："></a><strong>一、进程相关概念：</strong></h2><p><strong>进程</strong>是正在运行的程序实体，并且包括这个运行的程序中占据的所有系统资源，比如说CPU，IO,内存，网</p>
+<p>络资源等。通过学习Linux系统进程管理来协调多道程序之间的关系，使CPU得到充分的利用。</p>
+<p><strong>进程和程序的区别是什么？</strong></p>
+<p><strong>进程</strong>是一个动态的概念，当用户把一个程序或命令执行起来的时候，才有进程的概念，</p>
+<p>系统会自动分配一个编号PID给进程。</p>
+<p><strong>程序</strong>是一个静态的概念，表现为一个文件</p>
+<h3 id="进程的分类："><a href="#进程的分类：" class="headerlink" title="进程的分类："></a>进程的分类：</h3><p><strong>根据进程与系统终端的关系：</strong></p>
+<p>（1）守护进程：在系统引导过程中启动的进程，即跟终端无关的进程。</p>
+<p>（2）前台进程：跟终端相关，通过终端启动的进程；</p>
+<p>注：守护进程和前台进程可相互转化</p>
+<p><strong>根据进程占用资源的多少分为：</strong></p>
+<p>（1）CPU密集型：对cpu占用率高的进程</p>
+<p>（2）IO密集型：占用磁盘读写高的进程</p>
+<h3 id="进程的状态："><a href="#进程的状态：" class="headerlink" title="进程的状态："></a>进程的状态：</h3><p>进程在被内核调度过程中的状态可分为很多种：</p>
+<p>1.运行态：running 进程正在运行中</p>
+<p>2.就绪态：ready</p>
+<p>3.睡眠态：sleeping</p>
+<p>可中断睡眠：interruptible  大部分进程处于此状态，随时可唤醒</p>
+<p>不可中断睡眠：uninterruptible</p>
+<p>4.僵尸态：zombie 找不到归属的进程，或父进程已不存在</p>
+<p>5.停止态：stopped 不可被调度并运行</p>
+<h3 id="进程优先级"><a href="#进程优先级" class="headerlink" title="进程优先级"></a>进程优先级</h3><p>进程优先级：</p>
+<p>系统优先级：数字越小，优先级越高</p>
+<p>0-139（CentOS4,5）</p>
+<p>各有140个运行队列和过期队列</p>
+<p>0-98，99（CentOS6）</p>
+<p>实时优先级: 99-0 值最大优先级最高</p>
+<p>nice值：-20到19，对应系统优先级100-139或99</p>
+<p>Big O：时间复杂度，用时和规模的关系（越往左越好）</p>
+<p>O(1), O(logn), O(n)线性, O(n^2)抛物线, O(2^n)</p>
+<h3 id="进程内存："><a href="#进程内存：" class="headerlink" title="进程内存："></a>进程内存：</h3><p>Page Frame: 页框，用存储页面数据，存储Page 4k</p>
+<p>LRU：Least Recently Used 近期最少使用算法,释放内存</p>
+<p>物理地址空间和线性地址空间</p>
+<p>MMU：Memory Management Unit负责转换线性和物理地址</p>
+<p>TLB:Translation Lookaside Buffer 翻译后备缓冲器,用于保存虚拟地址和物理地址</p>
+<p>映射关系的缓存</p>
+<p>IPC: Inter Process Communication</p>
+<p>同一主机: signal:信号</p>
+<p>shm: shared memory</p>
+<p>semaphore:信号量，一种计数器</p>
+<p>不同主机：socket: IP和端口号</p>
+<p>RPC: remote procedure call       远程过程调用</p>
+<p>MQ：消息队列，Kafka，ActiveMQ</p>
+<h2 id="二、信号操作管理"><a href="#二、信号操作管理" class="headerlink" title="二、信号操作管理"></a><strong>二、信号操作管理</strong></h2><p>我们指定同一主机间的程序是通过信号来进行通讯的，那么我们也可以通过发送信号的方式对进程进行管</p>
+<p>理。</p>
+<p>使用<strong>kill  -l</strong> 命令可以查看当前支持的信号类型：</p>
+<p><img src="信号.png" alt="信号"></p>
+<p><strong>信号的表示方式：</strong></p>
+<p>（1）数字表示：1,2,9</p>
+<p>（2）完整名称：SIGHUP</p>
+<p>（3）简写名称：HUP</p>
+<p>Linux系统支持的型号类型多达60余种，常用信号类型有：</p>
+<p><strong>SIGHUP：1，</strong>无须关闭进程而让其重新读取配置文件，使新配置生效</p>
+<p><strong>SIGINT：2，</strong>打断正在运行中的进程，相当于Ctrl+c</p>
+<p><strong>SIGQUIT：3，</strong>相当Ctrl+\</p>
+<p><strong>SIGKILL：9，</strong>强制杀死正在运行的进程</p>
+<p><strong>SIGTERN：15，</strong>终止正在运行的进程（kill命令默认信号）</p>
+<p><strong>SIGCONT：18，</strong>继续运行指定进程</p>
+<p><strong>SIGSTOP：19，</strong>后台休眠</p>
+<h3 id="信号管理命令"><a href="#信号管理命令" class="headerlink" title="信号管理命令"></a>信号管理命令</h3><p>常用的信号管理命令有kill，killall，pkill：</p>
+<p><strong>kill</strong>命令可用来向进程发送信号指令，以及显示当前系统可用的信号</p>
+<p><strong>kill</strong>发送信号格式：</p>
+<p><strong>kill [-SIGNAL] PID</strong></p>
+<p>如：kill -9 123                 强制杀死PID为123的进程</p>
+<p><strong>killall</strong>发送信号格式：</p>
+<p><strong>killall [-SIGNAL] PROCESS</strong></p>
+<p>如：kill -9 sleep      强制杀死sleep进程</p>
+<p>注意：kill命令跟PID，killall命令跟进程名</p>
+<p><strong>pkill</strong>发送信号格式：</p>
+<p><strong>pkill [options] pattern</strong></p>
+<p><strong>options：</strong></p>
+<p>-SIGNAL</p>
+<p>-u uid                生效者</p>
+<p>-U uid               真正发起运行命令者</p>
+<p>-t terminal       与指定终端相关的进程</p>
+<p>-P pid                显示指定进程的子进程</p>
+<p>如：pkill -9 -t tty2  强制杀死tty2终端下的所有进程</p>
+<h2 id="三、作业管理（job-control）"><a href="#三、作业管理（job-control）" class="headerlink" title="三、作业管理（job control）"></a><strong>三、作业管理（job control）</strong></h2><p>我们知道，在登录系统后每一个工作进程都是当前bash的子进程，通过作业管理我们可以</p>
+<p>实现多个进程同时运行，这里我们要涉及到两个新的名词：前台作业和后台作业</p>
+<p><strong>前台作业</strong>：通过终端前，且启动后一直占据终端</p>
+<p><strong>后台作业</strong>：可通过终端启动，但启动后即转入后台运行（释放前端）</p>
+<h3 id="作业状态切换："><a href="#作业状态切换：" class="headerlink" title="作业状态切换："></a>作业状态切换：</h3><p>作用运行一共有三种状态，分别为：<strong>前台执行、后台执行与后台休眠（stoped）</strong></p>
+<p><strong>jobs</strong>命令         显示当前作业编号以及作业状态</p>
+<p><strong>让作业运行于后台：</strong></p>
+<p>（1）尚未启动的作业：COMMAND &amp;</p>
+<p>（2）运行中的作业：Ctrl+z，后台休眠状态</p>
+<p><strong>将后台休眠|运行作业调回前台运行：</strong></p>
+<p>fg job_num      将作业在前台运行（foreground）</p>
+<p><strong>将后台休眠作业执行后台运行：</strong></p>
+<p>bg job_num     将作业在后台运行（background）</p>
+<p><strong>关闭后台执行：</strong></p>
+<p>（1）fg job_num；ctrl+c</p>
+<p>（2）kill %job_num</p>
+<h3 id="并行运行"><a href="#并行运行" class="headerlink" title="并行运行"></a>并行运行</h3><p>同时运行多个进程，提高效率</p>
+<p><strong>方法1：</strong></p>
+<p>利用脚本</p>
+<p>vi all.sh</p>
+<p>​         f1.sh&amp;</p>
+<p>​         f2.sh&amp;</p>
+<p>​         f3.sh&amp;</p>
+<p><strong>方法2：</strong></p>
+<p>  (CMD1&amp;);(CMD2&amp;);(CMD3&amp;)</p>
+<p><strong>方法3：</strong></p>
+<p>{ CMD1&amp; CMD2&amp; CMD3&amp; }</p>
+<h3 id="执行长时间任务时防止网络中断造成操作中断"><a href="#执行长时间任务时防止网络中断造成操作中断" class="headerlink" title="执行长时间任务时防止网络中断造成操作中断"></a>执行长时间任务时防止网络中断造成操作中断</h3><p><strong>方法1：</strong>剥离命令与终端的联系，终端中断后进程将转移至1进程上，再恢复</p>
+<p>nohup COMMAND &amp;&gt;/dev/null &amp;</p>
+<p><strong>方法2</strong>：开启一个screen会话，重新进入后screen -r即可恢复</p>
+<p>screen；COMMAND；screen -r 恢复</p>
+<h2 id="四、Linux进程管理常用命令"><a href="#四、Linux进程管理常用命令" class="headerlink" title="四、Linux进程管理常用命令"></a><strong>四、Linux进程管理常用命令</strong></h2><p>进程的管理命令有：</p>
+<p>pstree、ps、pidof、pgrep、pkill、pmap、kill、killall、job、bg、fg等</p>
+<p>进程的管理工具：</p>
+<p>top、htop、vmstat、dstat、iostat、glances等（下节介绍）</p>
+<p><strong>ps</strong>                   显示进程状态</p>
+<p><strong>BSD选项：</strong></p>
+<p>a               所有终端中的进程</p>
+<p>x                不连接终端的进程</p>
+<p>u               显示进程所有者的信息</p>
+<p>f                显示进程树</p>
+<p>k|–sort 属性 对属性排列，属性前加-表示倒序</p>
+<p>L       显示支持的属性</p>
+<p>显示PID,tty，cmd，cpu占用率，内存占用列表，并按%mem排序</p>
+<p>ps xo pid,tty,cmd,%cpu,%mem –sort %mem</p>
+<p>ps xo pid,tty,cmd,%cpu,%mem k%mem</p>
+<p>按%cpu排序，“-”表示倒序</p>
+<p>ps xo pid,tty,cmd,%cpu,%mem –sort -%cpu</p>
+<p><strong>短选项：</strong></p>
+<p>-e              显示所有进程</p>
+<p>-f               显示完整格式程序信息</p>
+<p>-F              显示更完整格式的进程信息</p>
+<p>-C              查看指定CMD或脚本的进程，多个命令用“，”分开</p>
+<p><strong>显示PID，命令，pri优先级（数字越大，优先级越高），nice优先级，realtime优先级</strong></p>
+<p>ps xo pid,cmd,pri,nice,rtprio</p>
+<p><strong>根据进程编号查询CMD命令</strong></p>
+<p>ps -p 3245  -o comm=           查找PID3245对应的命令名称</p>
+<p>ps -C sleep -o pid=           根据命令查找pid</p>
+<p><strong>常用组合：</strong></p>
+<p>ps aux                        显示所有进程的详细信息</p>
+<p>ps -ef                         类似于aux，缺少cpu%，mem%</p>
+<p>ps -eF</p>
+<p><strong>pstree</strong>              显示进程树</p>
+<p>-p                       显示PID</p>
+<p>-h                      高亮标注当前使用的进程</p>
+<p><strong>pgrep</strong>                进程搜索命令，支持正则表达式</p>
+<p><strong>格式：pgrep [options] pattern</strong></p>
+<p><strong>options：</strong></p>
+<p>-u uid                effective user,生效者</p>
+<p>-U uid               real user，真正发起运行命令者</p>
+<p>-t terminal       与指定终端相关的进程</p>
+<p>-l               显示进程名</p>
+<p>-a              显示完整格式的进程名</p>
+<p>-P pid                显示指定进程的子进程</p>
+<p><strong>pidof</strong>                 查找正在运行进程的PID</p>
+<p>如：pidof bash                显示bash进程的PID</p>
+<p><strong>uptime 命令</strong></p>
+<p>显示当前时间，系统已启动时间，当前上线人数，系统平均负载（1、5、10分钟，一般不超过1）</p>
+<p><strong>free</strong>          显示内存空间使用状态</p>
+<p><strong>options</strong></p>
+<p>-b              以字节为单位</p>
+<p>-m             以MB为单位</p>
+<p>-g              以GB为单位</p>
+<p>-h              人类已读格式</p>
+<p><strong>pmap</strong>       比较专业的查看内存与进程对应关系工具</p>
+<p><strong>pmap    12</strong>         查看进程号12的内存与进程对应关系</p>
+<p>​    -x     显示详细格式的信息</p>
+
+          
         
       
     </div>
@@ -1128,7 +3052,7 @@ group
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/04/Linux文件系统简介/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/01/网络基本概念及OSI参考模型、TCP-IP协议简介/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="吕培新">
@@ -1147,7 +3071,7 @@ group
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/04/Linux文件系统简介/" itemprop="url">Linux文件系统简介</a></h1>
+                <a class="post-title-link" href="/2018/05/01/网络基本概念及OSI参考模型、TCP-IP协议简介/" itemprop="url">网络基本概念及OSI参考模型、TCP/IP协议简介</a></h1>
         
 
         <div class="post-meta">
@@ -1159,8 +3083,330 @@ group
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-04T13:49:07+08:00">
-                2018-04-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-01T14:25:32+08:00">
+                2018-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络技术/" itemprop="url" rel="index">
+                    <span itemprop="name">网络技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>当今时代，运行一台没有连接网络的计算机几乎是难以想象的，幸运的是，Linux从一开始就是为</p>
+<p>网络开发的，并且网络也是Linux做的最好的事情之一。掌握网络知识，对于Linux学习而言，就显</p>
+<p>得非常有必要了。本节我们将带大家了解一些网络的基本概念，以及OSI参考模型和TCP/IP协议。</p>
+<h2 id="一、网络概念"><a href="#一、网络概念" class="headerlink" title="一、网络概念"></a><strong>一、网络概念</strong></h2><p><strong>什么是网络？</strong></p>
+<p>网络是由节点和连线构成，表示诸多对象及其相互联系。在计算机领域中，网络是信息传输、接收、</p>
+<p>共享的虚拟平台，通过它把各个点、面、体的信息联系到一起，从而实现这些资源的共享。</p>
+<p>网络是人类发展史来最重要的发明，提高了科技和人类社会的发展。</p>
+<p><strong>网络应用程序：</strong></p>
+<p>Web 浏览器（Chrome、IE、Firefox等）</p>
+<p>即时消息（QQ、微信、钉钉等）</p>
+<p>电子邮件（Outlook、foxmail 等）</p>
+<p>协作（视频会议、VNC、Netmeeting、WebEx 等）</p>
+<p>web网络服务（apache,nginx,IIS）</p>
+<p>文件网络服务（ftp,nfs,samba）</p>
+<p>数据库服务（ MySQL,MariaDB, MongoDB)</p>
+<p>中间件服务（Tomcat，JBoss）</p>
+<p>安全服务（ Netfilter）</p>
+<p><strong>网络的特征：</strong></p>
+<p>速度</p>
+<p>成本</p>
+<p>安全性</p>
+<p>可用性</p>
+<p>可扩展性</p>
+<p>可靠性</p>
+<p>拓扑</p>
+<p><strong>拓扑结构：</strong></p>
+<p>网络拓扑可分为物理拓扑和逻辑拓扑</p>
+<p>物理拓扑描述了物理设备的布线方式</p>
+<p>逻辑拓扑描述了信息在网络中的流动方式</p>
+<p>物理拓扑中又分为多种拓扑结构，常见类型有：</p>
+<p>总线拓扑：所有设备均可接收信号</p>
+<p>星型拓扑：通过中心点传输；单一故障点</p>
+<p>拓展星型拓扑：比星型拓扑的复原能力更强</p>
+<p>环拓扑：信号绕环传输；单一故障点</p>
+<p>双环拓扑：信号沿相反方向传输；比单环复原能力更强</p>
+<p>全网状拓扑：容错能力强；但实施成本高</p>
+<p>部分网状拓扑：在容错能力与成本之间寻求平衡</p>
+<p><strong>三种通讯模式：</strong></p>
+<p>单播unicast</p>
+<p>广播broadcast</p>
+<p>组播multicast</p>
+<p><strong>非屏蔽式双绞线UTP：</strong>交叉线，直通线</p>
+<p><strong>UTP交叉线线序</strong></p>
+<p>T568B：橙白 橙 绿白 蓝 蓝白 绿 棕白 棕</p>
+<p>T568A：绿白 绿 橙白 蓝 蓝白 橙 棕白 棕</p>
+<p><strong>网络通讯传输模式</strong></p>
+<p>单工：单词传播，如收音机，广播电台</p>
+<p>双工：双向</p>
+<p>全双工：同时双向，如手机</p>
+<p>半双工：轮流双向，如对讲机</p>
+<h2 id="二、OSI参考模型"><a href="#二、OSI参考模型" class="headerlink" title="二、OSI参考模型"></a><strong>二、OSI参考模型</strong></h2><p><strong>OSI(Open System Interconnect）</strong>开放系统互连参考模型是国际标准化组织(ISO)和国际电</p>
+<p>报电话咨询委员会(CCITT)联合制定的开放系统互连参考模型，为开放式互连信息系统提供了一种</p>
+<p>功能结构的框架。它从低到高分别是：物理层、数据链路层、网络层、传输层、会话层、表示层</p>
+<p>和应用层。</p>
+<p>其目的是为异种计算机互连提供一个共同的基础和标准框架，并为保持相关标准的一致性和兼容性</p>
+<p>提供共同的参考。OSI参考模型如下图所示：</p>
+<p><img src="模型.gif" alt="模型"></p>
+<p>OSI模型的七层结构：下层为相邻的上层提供服务</p>
+<h3 id="应用层："><a href="#应用层：" class="headerlink" title="应用层："></a><strong>应用层：</strong></h3><p>作用：针对特定应用的协议</p>
+<p>PDU：message</p>
+<p>协议有：HTTP FTP TFTP SMTP SNMP DNS TELNET HTTPS POP3 DHCP</p>
+<p>特性：网络进程访问应用层</p>
+<p>为应用程序进行（如电子邮件、文件传输和终端仿真）提供网络服务</p>
+<p>提供用户身份验证</p>
+<h3 id="表示层："><a href="#表示层：" class="headerlink" title="表示层："></a><strong>表示层：</strong></h3><p>作用：设备固有数据格式和网络标准数据格式的转换</p>
+<p>PDU：message</p>
+<p>格式有，JPEG、ASCll、DECOIC、加密格式等</p>
+<p>特性：数据表示</p>
+<p>确保接收系统可以读出该数据</p>
+<p>格式化数据</p>
+<p>构建数据</p>
+<p>协商用于应用层的数据传输语法</p>
+<p>提供加密</p>
+<h3 id="会话层："><a href="#会话层：" class="headerlink" title="会话层："></a><strong>会话层：</strong></h3><p>作用：通信管理。负责建立和断开通信连接（数据流动的逻辑通路）。管理传输层</p>
+<p>以下的分层</p>
+<p>PDU：message</p>
+<p>对应主机进程，指本地主机与远程主机正在进行的会话</p>
+<p>特性：主机间通信</p>
+<p>建立、管理和终止在应用程序之间的会话</p>
+<h3 id="传输层："><a href="#传输层：" class="headerlink" title="传输层："></a><strong>传输层：</strong></h3><p>作用：管理两个节点之间的数据传输，负责可靠传输（确保数据被可靠的传送到目</p>
+<p>的地址）。</p>
+<p>PDU：段segment</p>
+<p>协议有：TCP UDP，数据包一旦离开网卡即进入网络传输层</p>
+<p>特性：传输问题</p>
+<p>确保数据传输的可靠性</p>
+<p>建立、维护和终止虚拟电路</p>
+<p>通过错误检测和恢复</p>
+<p>信息流控制来保障可靠性</p>
+<h3 id="网络层："><a href="#网络层：" class="headerlink" title="网络层："></a><strong>网络层：</strong></h3><p>作用：地址管理与路由选择</p>
+<p>PDU：包packet</p>
+<p>逻辑地址：IP地址</p>
+<p>协议有：ICMP IGMP IP（IPV4 IPV6） ARP RARP</p>
+<p>特性：数据传输</p>
+<p>路由数据包</p>
+<p>选择传递数据的最佳路径</p>
+<p>支持逻辑寻址和路径选择</p>
+<h3 id="数据链路层："><a href="#数据链路层：" class="headerlink" title="数据链路层："></a><strong>数据链路层：</strong></h3><p>作用：互连设备之间传送和识别数据帧</p>
+<p>PDU：帧frame</p>
+<p>物理地址：MAC地址</p>
+<p>特性：访问介质</p>
+<p>定义如何格式化数据以便进行传输以及如何控制对网络的访问</p>
+<p>支持错误检测</p>
+<h3 id="物理层："><a href="#物理层：" class="headerlink" title="物理层："></a><strong>物理层：</strong></h3><p>作用：以“0”、“1”代表电压的高低、灯光的闪灭。界定连接器和网线的规格</p>
+<p>PDU：节bit</p>
+<p>特性：二进制传输</p>
+<p>为启动、维护已经关闭物流链路定义了电气规范、机械规范、过程规范和功能规范</p>
+<p>单位：位bit</p>
+<p><strong>PDU: Protocol Data Unit,协议数据单元是指对等层次之间传递的数据单位</strong></p>
+<p>物理层的 PDU是数据位 bit</p>
+<p>数据链路层的 PDU是数据帧 frame</p>
+<p>网络层的PDU是数据包 packet</p>
+<p>传输层的 PDU是数据段 segment</p>
+<p>其他更高层次的PDU是消息 message</p>
+<h3 id="三、TCP-IP协议"><a href="#三、TCP-IP协议" class="headerlink" title="三、TCP/IP协议"></a><strong>三、TCP/IP协议</strong></h3><p><strong>TCP/IP也称”国际协议簇”</strong>， 即不仅指 TCP/IP协议本身，而且包括与其有关的协议。 TCP</p>
+<p>为传输控制协议，IP为网际协议，是网络层最重要的协议。采用TCP/IP协议通过互联网传</p>
+<p>送信息可减少网络中的传输阻塞，方便大批量的数据在网上传输，从而提高网络的传输效率。</p>
+<p>TCP/IP协议簇的主要协议有TCP、IP、UDP、ICMP、RIP、TELNET、FTP、SMTP、ARP等</p>
+<p><strong>TCP/IP模型</strong>共定义了四层，分别是应用层，和OSI参考模型的分层有对应关系：</p>
+<p><img src="模型对应.png" alt="模型对应"></p>
+<p><strong>网络访问层(Network Access Layer)</strong>与OSI模型中的物理层以及数据链路层对应，在TCP/IP参考模</p>
+<p>型中并没有详细描述，只是指出主机必须使用某种协议与网络相连。</p>
+<p><strong>Internet层(Internet Layer)</strong>是整个体系结构的关键部分，其功能是使主机可以把分组发往任何网</p>
+<p>络，并使分组独立地传向目标。这些分组可能经由不同的网络，到达的顺序和发送的顺序也可能</p>
+<p>不同。高层如果需要顺序收发，那么就必须自行处理对分组的排序。互联网层使用因特网协议(IP</p>
+<p>，Internet Protocol)。TCP/IP参考模型的互联网层和OSI参考模型的网络层在功能上非常相似。</p>
+<p><strong>传输层(Tramsport Layer)</strong>使源端和目的端机器上的对等实体可以进行会话。</p>
+<p>在这一层定义了两个端到端的协议：传输控制协议TCP和用户数据报协议UDP。</p>
+<p><strong>应用层(Application Layer)</strong>包含所有的高层协议，包括：虚拟终端协议(TELNET，</p>
+<p>TELecommunications NETwork)、文件传输协议(FTP，File Transfer Protocol)、电子邮件传输协议</p>
+<p>(SMTP，Simple，Mail Transfer Protocol)、域名服务(DNS，Domain Name Service)、网上新闻传输协议</p>
+<p>(NNTP，Net News Transfer Protocol)和超文本传送协议(HTTP，HyperText Transfer Protocol)等。</p>
+<p> <img src="OSI.png" alt="OSI7层"></p>
+<h2 id="四、常见网络设备"><a href="#四、常见网络设备" class="headerlink" title="四、常见网络设备"></a><strong>四、常见网络设备</strong></h2><p><strong>Hub集线器</strong></p>
+<p>Hub：多端口中继器，现已基本淘汰</p>
+<p>Hub并不记忆该信息包是由哪个MAC地址发出，哪个MAC地址在Hub的哪个端口</p>
+<p>Hub的特点：</p>
+<p>共享带宽</p>
+<p>半双工</p>
+<p><strong>以太网桥</strong></p>
+<p>交换式以太网的优势</p>
+<p>扩展了网络带宽</p>
+<p>分割了网络冲突域，使网络冲突被限制在最小的范围内</p>
+<p>交换机作为更加智能的交换设备，能够提供更多用户所要</p>
+<p>求的功能：优先级、虚拟网、远程检测…</p>
+<p>学习时源MAC地址，转发时目的MAC地址</p>
+<p>网桥是不能隔断广播的</p>
+<p>同一广播域主机数量越多，网络性能越差</p>
+<p><strong>交换机（switch）</strong></p>
+<p>交换机是一种基于MAC（网卡的硬件地址）识别，能完成封装转发数据</p>
+<p>包功能的网络设备。交换机可以“学习”MAC地址，并把其存放在内部地址表中，</p>
+<p>通过在数据帧的始发者和目标接收者之间建立临时的交换路径，使数据帧直接由源</p>
+<p>地址到达目的地址。</p>
+<p><strong>Hub和交换机区别</strong></p>
+<p>集线器属于OSI的第一层物理层设备，而网桥属于OSI的第二层数据链路层设备</p>
+<p>从工作方式来看，集线器是一种广播模式，所有端口在一个冲突域里面。网桥</p>
+<p>的可以通过端口隔离冲突</p>
+<p>Hub是所有共享总线和共享带宽。网桥每个端口占一个带宽</p>
+<p><strong>路由器（router）</strong></p>
+<p>路由：把一个数据包从一个设备发送到不同网络里的另一个设备上去。这些工作</p>
+<p>依靠路由器来完成。路由器只关心网络的状态和决定网络中的最佳路径。路由的实</p>
+<p>现依靠路由器中的路由表来完成。为了实现路由,路由器需要做下列事情:</p>
+<p>分隔广播域</p>
+<p>选择路由表中到达目标最好的路径</p>
+<p>维护和检查路由信息</p>
+<p>连接广域网</p>
+<p><strong>双绞线物理层</strong></p>
+<p>wifi网络层</p>
+<p>以太网数据链路层</p>
+<p>搭建网络的分层网络架构：<strong>核心层、分布层、访问层</strong></p>
+<p>核心层Core Layer：企业级应用快速转发</p>
+<p>分布层Distribution Layer：广播域，路由，安全，远程接入，访问层汇聚</p>
+<p>访问层AccessLayer：终端接入</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+	<div>
+
+	</div>
+	
+    
+	<div>
+
+    
+
+    
+
+	
+	
+	
+	
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </div></article>
+
+
+    
+		
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/27/实验：在软件RAID搭建LVM逻辑卷进行管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/27/实验：在软件RAID搭建LVM逻辑卷进行管理/" itemprop="url">实验：在软件RAID搭建LVM逻辑卷进行管理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-27T14:24:17+08:00">
+                2018-04-27
               </time>
             
 
@@ -1221,655 +3467,69 @@ group
       
         
           
-          Linux哲学思想讲“一切皆是文件”，包括硬件在linux系统中也表现为文件形式。
-学好文件系统将为以后深入研究与学习Linux系统奠定良好的基础。
-一、目录文件管理
-/                         根目录每个文件和目录都从这里开始
-/bin                   
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/04/Linux文件系统简介/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-	<div>
-
-	</div>
-	
-    
-	<div>
-
-    
-
-    
-
-	
-	
-	
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </div></article>
-
-
-    
-		
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/03/Linux用户与组管理命令的易混淆点和重合点/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="吕培新">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="吕培新的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/03/Linux用户与组管理命令的易混淆点和重合点/" itemprop="url">Linux用户与组管理命令的易混淆点和重合点</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-03T13:55:24+08:00">
-                2018-04-03
-              </time>
-            
-
-            
-
-            
-          </span>
+            <p>在我们了解到，RAID可以实现磁盘的高性能读写，并实现冗余，而LVM逻辑卷则可以实现磁盘的弹性扩展，那么如何将两者配合使用并将它们的优势充分发挥呢，今天我们来实验在软件RAID上搭建LVM逻辑卷</p>
+<h3 id="实验预期："><a href="#实验预期：" class="headerlink" title="实验预期："></a><strong>实验预期：</strong></h3><p>在CentOS6.9系统上搭建两个RAID级别，分别为RAID0,及RAID5，将两个RAID合并为卷组并创建逻辑卷，实现冗余、性能提升、及弹性拓展。</p>
+<h3 id="实验准备环境："><a href="#实验准备环境：" class="headerlink" title="实验准备环境："></a><strong>实验准备环境：</strong></h3><p>CentOS6.9服务器一台，3块硬盘，分别为40G,60G,80G，并在每块磁盘创建分区sdx1容量为1G，sdx2容</p>
+<p>量为2G，创建挂载用空目录/test。</p>
+<p>## </p>
+<h2 id="实验一：在软件RAID创建LVM逻辑卷"><a href="#实验一：在软件RAID创建LVM逻辑卷" class="headerlink" title="实验一：在软件RAID创建LVM逻辑卷"></a><strong>实验一：在软件RAID创建LVM逻辑卷</strong></h2><p><img src="前期准备.png" alt="前期准备"></p>
+<p><strong>1.mdadm -C   /dev/md1  -a  yes  -l5  -n3   /dev/sd{b1,c1,d1}</strong></p>
+<p>将三个容量为1G的分区sdb1，sdc1，sdd1组成一个名称为md1的RAID5</p>
+<p><img src="创建RAID5.png" alt="创建RAID5"></p>
+<p><strong>2.mdadm -C   /dev/md2  -a  yes  -l0 -n3   /dev/sd{b2,c2,d2}</strong></p>
+<p>将三个容量为2G的分区sdb2，sdc2，sdd2组成一个名称为md2的条形卷RAID0</p>
+<p><img src="创建RAID0.png" alt="创建RAID0"></p>
+<p><strong>3.mdadm   -D   /dev/md1</strong></p>
+<p><strong>mdadm   -D   /dev/md2</strong></p>
+<p>查看RAID5、RAID0，确定已创建成功，md1设备可用容量为2G，md2设备可用容量为6G</p>
+<p><img src="查看RAID5.png" alt="查看RAID5"></p>
+<p><img src="查看RAID0.png" alt="查看RAID0"></p>
+<p><strong>4.pvcreate   /dev/md1   /dev/md2</strong></p>
+<p>将md1、md2设备创建为物理卷</p>
+<p><img src="创建物理卷.png" alt="创建物理卷"></p>
+<p><strong>5.vgcreate   vg_md   /dev/md1   /dev/md2</strong></p>
+<p>创建由md1、md2组成的卷组vg_md，可用容量为8G</p>
+<p><img src="创建卷组.png" alt="创建卷组"></p>
+<p><strong>6.lvcreate  -L  7G  -n  lv_md  vg_md</strong></p>
+<p>在卷组vg_md上创建一个名称为lv_md，大小为7G的逻辑卷</p>
+<p><img src="创建逻辑卷.png" alt="创建逻辑卷"></p>
+<p><strong>7.mke2fs    -t   ext4   /dev/vg_md/lv_md</strong></p>
+<p>创建逻辑卷lv_md的文件系统为ext4</p>
+<p><img src="创建文件系统.png" alt="创建文件系统"></p>
+<p><strong>8.mount    /dev/vg_md/lv_md     /test/</strong></p>
+<p>将逻辑卷lv_md挂载至提前准备好的空目录/test，这时我们看到逻辑卷lv_md已搭建在RAID0与RAID5共</p>
+<p>同组成的分区上</p>
+<p><img src="挂载.png" alt="挂载"></p>
+<p><strong>9.vim  /etc/fstab</strong></p>
+<p>将挂载信息写入/etc/fstab文件，实现开机自动挂载</p>
+<p><img src="自动挂载.png" alt="自动挂载"></p>
+<p><strong>10.dd  if=/dev/zero  of=/test/1G.file  bs=1024k  count=1000</strong></p>
+<p><strong>dd  if=/dev/zero  of=/data/1G.file  bs=1024k  count=1000</strong></p>
+<p>测试磁盘写速度，可见/test目录下写性能相比普通磁盘挂载的/data目录确实有显著提升</p>
+<p><img src="测试速度.png" alt="测试速度"></p>
+<h2 id="实验二：扩展逻辑卷到15G"><a href="#实验二：扩展逻辑卷到15G" class="headerlink" title="实验二：扩展逻辑卷到15G"></a><strong>实验二：扩展逻辑卷到15G</strong></h2><p>由于原有卷组总容量只有8G，我们选择新创建一个10G分区sda6并添加至原卷组中</p>
+<p><strong>1.pvcreate  /dev/sda6</strong>              创建卷组</p>
+<p><strong>2.vgextend    vg_md    /dev/sda6</strong>            将10G分区sda6添加至vg_md卷组</p>
+<p><strong>3.lvextend   -r  -L  15G   /dev/vg_md/lv_md</strong>      拓展逻辑卷lv_md到15G</p>
+<p><strong>注：命令3中-r选项代表同步文件系统大小与逻辑卷大小相同，也可用resize2fs     /dev/sda6命令代替</strong></p>
+<p><img src="扩容.png" alt="扩容"></p>
+<h2 id="实验三：缩减逻辑卷到5G"><a href="#实验三：缩减逻辑卷到5G" class="headerlink" title="实验三：缩减逻辑卷到5G"></a><strong>实验三：缩减逻辑卷到5G</strong></h2><p>注意：只有ext4系列文件系统可进行LVM缩容，xfs文件系统无法缩减，缩容前先保证缩容后分区容量大于</p>
+<p>数据容量，否则数据将被破坏，生产环境中一般不进行缩容LVM操作。</p>
+<p><strong>1.umount   /test/</strong>       卸载</p>
+<p><strong>resize2fs   /dev/vg_md/lv_md   5G</strong>        缩减文件系统到5G</p>
+<p>提示应先使用命令e2fsck  -f检查文件系统</p>
+<p><strong>注意文件系统与逻辑卷的执行顺序，扩容时为先扩容逻辑卷再扩容文件系统，缩容时为先缩容文件</strong></p>
+<p><strong>系统再**</strong>缩容逻辑卷，否则，执行e2fsck  -f检查文件系统将失败**</p>
+<p><img src="卸载.png" alt="卸载"></p>
+<p><strong>2.e2fsck  -f    /dev/vg_md/lv_md</strong>               检查文件系统</p>
+<p><strong>3. resize2fs   /dev/vg_md/lv_md   5G</strong>        缩减文件系统到5G</p>
+<p><img src="检查文件.png" alt="检查文件"></p>
+<p><strong>4.lvreduce  -L  5G   /dev/vg_md/lv_md</strong>       缩减逻辑卷到5G</p>
+<p><strong>5.lvdisplay</strong>            显示逻辑卷已缩减成功</p>
+<p><img src="完成.png" alt="完成"></p>
+<p><strong>总结：可见实验RAID和LVM配合使用，确实提升了磁盘的读写性能，实现了冗余，并且可弹性管理分区大小</strong></p>
 
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Linux用户与组的管理命令，对于初学者来说很容易造成混淆，此外，这些命令之间有很多相重合的用法，即：拥有多种命令可实现相同的需求的情况。
-Linux用户与组的管理命令主要有useradd、usermod、userdel、groupadd、groupmod、groupdel、groupmems、gp
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/03/Linux用户与组管理命令的易混淆点和重合点/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-	<div>
-
-	</div>
-	
-    
-	<div>
-
-    
-
-    
-
-	
-	
-	
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </div></article>
-
-
-    
-		
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/03/Linux用户与组管理详解/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="吕培新">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="吕培新的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/03/Linux用户与组管理详解/" itemprop="url">Linux用户与组管理详解</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-03T13:53:13+08:00">
-                2018-04-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          在linux系统上，用户管理是基于用户名和密码的方式进行资源的分配，了解和掌握用户与组的管理是从事运维工作所必须具备的能力，也是将来从事运维行业的重要工作之一。
-Linux的安全模型 安全3A
-​    Linux通过三个机制来保证用户的安全：
-​        Authentication：认证
-
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/03/Linux用户与组管理详解/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-	<div>
-
-	</div>
-	
-    
-	<div>
-
-    
-
-    
-
-	
-	
-	
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </div></article>
-
-
-    
-		
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/02/带你认识Linux中的通配符/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="吕培新">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="吕培新的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/02/带你认识Linux中的通配符/" itemprop="url">带你认识Linux中的通配符</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-02T13:51:21+08:00">
-                2018-04-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          所谓的通配是指：显示以指定条件的文件，英文名为glob。通配符是一种特殊语句，用来模糊搜索文件。当查找文件夹时，可以使用它来代替一个或多个真正字符它使得文件管理更加快速，便捷，大大提升了工作效率。
-常用的通配符有  * 、? 、[]  等（可通过man 7 glob的帮助文档来查看所有通配符）
-
-表
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/02/带你认识Linux中的通配符/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-	<div>
-
-	</div>
-	
-    
-	<div>
-
-    
-
-    
-
-	
-	
-	
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </div></article>
-
-
-    
-		
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/01/linux入门知识/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="吕培新">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="吕培新的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/01/linux入门知识/" itemprop="url">Linux入门知识</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-01T18:19:06+08:00">
-                2018-04-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Linux起源：1991 年的10 月5 日，Torvalds 在comp.os.minix新闻组上发布消息，正式向外宣布他自行编写的完全自由免费的内核诞生（Freeminix-likekernel sources for 386-AT ）———FREAX英文 含义是怪诞的、怪物、 异想天开类Uni
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/01/linux入门知识/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -1916,7 +3576,7 @@ Linux的安全模型 安全3A
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1962,7 +3622,7 @@ Linux的安全模型 安全3A
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-count">94</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1973,7 +3633,7 @@ Linux的安全模型 安全3A
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1984,7 +3644,7 @@ Linux的安全模型 安全3A
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2040,7 +3700,7 @@ Linux的安全模型 安全3A
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
 
 
 
@@ -2087,8 +3747,6 @@ Linux的安全模型 安全3A
   
 
 
-  
-
 
 
 
@@ -2129,11 +3787,6 @@ Linux的安全模型 安全3A
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
 
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
-  
-
 
   
 
@@ -2146,13 +3799,6 @@ Linux的安全模型 安全3A
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
 
   
 
@@ -2199,19 +3845,6 @@ Linux的安全模型 安全3A
   
 
 
-
-
-  
-  
-  
-  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
-
-  
-  
-  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
-  
-
-  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 

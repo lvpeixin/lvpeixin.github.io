@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Python之集合操作set 集合set是 可变的、 无序的、不重复 的元素的集合 set的定义初始化set() -&amp;gt; new empty set object set(iterable) -&amp;gt; new set object 123456s1 = set()s2 = set(range(5))s3 = set(list(range(5)))s4 = &amp;#123;1,2,3,4&amp;#125">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python之集合操作">
+<meta property="og:url" content="http://yoursite.com/2019/01/06/Python之集合操作/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="Python之集合操作set 集合set是 可变的、 无序的、不重复 的元素的集合 set的定义初始化set() -&amp;gt; new empty set object set(iterable) -&amp;gt; new set object 123456s1 = set()s2 = set(range(5))s3 = set(list(range(5)))s4 = &amp;#123;1,2,3,4&amp;#125">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-24T06:48:33.590Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python之集合操作">
+<meta name="twitter:description" content="Python之集合操作set 集合set是 可变的、 无序的、不重复 的元素的集合 set的定义初始化set() -&amp;gt; new empty set object set(iterable) -&amp;gt; new set object 123456s1 = set()s2 = set(range(5))s3 = set(list(range(5)))s4 = &amp;#123;1,2,3,4&amp;#125">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/06/Python之集合操作/">
+
+
+
+
+
+  <title>Python之集合操作 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-editor">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-algorithm">
+          <a href="/categories/算法" rel="section">
+            
+            算法
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/06/Python之集合操作/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python之集合操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-06T19:28:42+08:00">
+                2019-01-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Python之集合操作"><a href="#Python之集合操作" class="headerlink" title="Python之集合操作"></a>Python之集合操作</h1><h2 id="set-集合"><a href="#set-集合" class="headerlink" title="set 集合"></a>set 集合</h2><pre><code>set是 可变的、 无序的、不重复 的元素的集合
+</code></pre><h2 id="set的定义初始化"><a href="#set的定义初始化" class="headerlink" title="set的定义初始化"></a>set的定义初始化</h2><pre><code>set() -&gt; new empty set object
+set(iterable) -&gt; new set object
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">s1 = set()</span><br><span class="line">s2 = set(range(<span class="number">5</span>))</span><br><span class="line">s3 = set(list(range(<span class="number">5</span>)))</span><br><span class="line">s4 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;</span><br><span class="line">s5 = &#123;(<span class="number">1</span>,<span class="number">2</span>),<span class="number">3</span>,<span class="string">'a'</span>&#125;</span><br><span class="line">print(s1,s2,s3,s4,s4)</span><br></pre></td></tr></table></figure>
+<pre><code>set() {0, 1, 2, 3, 4} {0, 1, 2, 3, 4} {1, 2, 3, 4} {1, 2, 3, 4}
+</code></pre><p>但是：</p>
+<ul>
+<li>set的元素要求必须可以hash</li>
+<li>目前学过的不可hash的类型有list、 set,所以set不能添加list或set</li>
+<li>元素不可以使用索引</li>
+<li>set可以迭代</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s1 = &#123; [<span class="number">1</span>,<span class="number">2</span>],<span class="number">3</span>,<span class="number">4</span> &#125;</span><br><span class="line">s2 = &#123; &#123;<span class="number">1</span>,<span class="number">2</span>&#125;,<span class="number">3</span>,<span class="number">4</span> &#125;</span><br></pre></td></tr></table></figure>
+<pre><code>---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-2-562af6839204&gt; in &lt;module&gt;
+----&gt; 1 s1 = { [1,2],3,4 }
+      2 s2 = { {1,2},3,4 }
+
+
+TypeError: unhashable type: &apos;list&apos;
+</code></pre><h2 id="set增加"><a href="#set增加" class="headerlink" title="set增加"></a>set增加</h2><h3 id="add-elem"><a href="#add-elem" class="headerlink" title="add(elem)"></a>add(elem)</h3><pre><code>增加一个元素到set中
+如果元素存在，什么都不做
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;</span><br><span class="line">s1.add(<span class="number">6</span>)</span><br><span class="line">s1.add(<span class="number">6</span>)</span><br><span class="line">print(s1)</span><br></pre></td></tr></table></figure>
+<pre><code>{1, 2, 3, 4, 5, 6}
+</code></pre><h3 id="update-others"><a href="#update-others" class="headerlink" title="update(*others)"></a>update(*others)</h3><pre><code>合并其他元素到set集合中来  
+参数others必须是可迭代对象  
+就地修改  
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s1 = &#123;<span class="number">1</span>,<span class="number">2</span>&#125;</span><br><span class="line">s1.update(range(<span class="number">5</span>))</span><br><span class="line">s1.update((<span class="string">'a'</span>,<span class="string">'b'</span>))</span><br><span class="line">print(s1)</span><br></pre></td></tr></table></figure>
+<pre><code>{0, 1, 2, 3, 4, &apos;a&apos;, &apos;b&apos;}
+</code></pre><h2 id="set-删除"><a href="#set-删除" class="headerlink" title="set 删除"></a>set 删除</h2><h3 id="remove-elem"><a href="#remove-elem" class="headerlink" title="remove(elem)"></a>remove(elem)</h3><pre><code>从set中移除一个元素
+元素不存在，抛出keyerror异常
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;</span><br><span class="line">s1.remove(<span class="number">1</span>)</span><br><span class="line">s1.remove(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>---------------------------------------------------------------------------
+
+KeyError                                  Traceback (most recent call last)
+
+&lt;ipython-input-5-06ea004ed743&gt; in &lt;module&gt;
+      1 s1 = {1,2,3,4}
+      2 s1.remove(1)
+----&gt; 3 s1.remove(1)
+
+
+KeyError: 1
+</code></pre><h3 id="discard（elem）"><a href="#discard（elem）" class="headerlink" title="discard（elem）"></a>discard（elem）</h3><pre><code>从set中移除一个元素
+元素不存在，什么都不做
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;</span><br><span class="line">s1.discard(<span class="number">1</span>)</span><br><span class="line">s1.discard(<span class="number">1</span>)</span><br><span class="line">print(s1)</span><br></pre></td></tr></table></figure>
+<pre><code>{2, 3, 4}
+</code></pre><h3 id="pop-gt-item"><a href="#pop-gt-item" class="headerlink" title="pop() -&gt; item"></a>pop() -&gt; item</h3><pre><code>移除并返回任意的元素
+空集返回KeyError异常
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s1 = &#123;<span class="number">1</span>,<span class="number">2</span>&#125;</span><br><span class="line">s1.pop()</span><br><span class="line">s1.pop()</span><br><span class="line">s1.pop()</span><br></pre></td></tr></table></figure>
+<pre><code>---------------------------------------------------------------------------
+
+KeyError                                  Traceback (most recent call last)
+
+&lt;ipython-input-7-cb8a0766400b&gt; in &lt;module&gt;
+      2 s1.pop()
+      3 s1.pop()
+----&gt; 4 s1.pop()
+
+
+KeyError: &apos;pop from an empty set&apos;
+</code></pre><h3 id="clear"><a href="#clear" class="headerlink" title="clear()"></a>clear()</h3><pre><code>移除所有元素
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;</span><br><span class="line">s1.clear()</span><br><span class="line">print(s1)</span><br></pre></td></tr></table></figure>
+<pre><code>set()
+</code></pre><h2 id="set的修改、查询"><a href="#set的修改、查询" class="headerlink" title="set的修改、查询"></a>set的修改、查询</h2><h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><pre><code>set中没有修改的说法，修改删除元素，然后添加新元素
+</code></pre><h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><pre><code>set是非线性结构，无法通过索引来查询元素
+</code></pre><h3 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h3><pre><code>set可以迭代通过for循环所有元素
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s1 = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> s1:</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
+<pre><code>1
+2
+3
+4
+</code></pre><h3 id="成员运算符"><a href="#成员运算符" class="headerlink" title="成员运算符"></a>成员运算符</h3><pre><code>set是通过in 或者 not in 判断元素是否在set中
+</code></pre><h2 id="线性结构和非线性结构的差别"><a href="#线性结构和非线性结构的差别" class="headerlink" title="线性结构和非线性结构的差别"></a>线性结构和非线性结构的差别</h2><pre><code>线性结构的查询时间复杂度是O(n)，即随着数据规模的增大而增加耗时
+set、 dict等结构，内部使用hash值作为key，时间复杂度可以做到O(1)，查询时间和数据规模无关
+</code></pre><h3 id="可hash数据类型"><a href="#可hash数据类型" class="headerlink" title="可hash数据类型"></a>可hash数据类型</h3><pre><code>数值型int、 float、 complex
+布尔型True、 False
+字符串string、 bytes
+tuple
+None
+</code></pre><p>以上都是不可变类型，是可哈希类型， hashable<br>set的元素必须是可hash的 </p>
+
+      
+    </div>
+    
+    
+    
+
+	<div>
+
+	<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+
+
+	</div>
+	
+    
+	<div>
+
+    
+
+    
+
+	
+	
+	
+	
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/06/Python内置数据类型之Bytes和Bytearray/" rel="next" title="Python内置数据类型之Bytes和Bytearray">
+                <i class="fa fa-chevron-left"></i> Python内置数据类型之Bytes和Bytearray
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/07/Python之封装和解构/" rel="prev" title="封装和解构">
+                封装和解构 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </div></article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python之集合操作"><span class="nav-number">1.</span> <span class="nav-text">Python之集合操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#set-集合"><span class="nav-number">1.1.</span> <span class="nav-text">set 集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set的定义初始化"><span class="nav-number">1.2.</span> <span class="nav-text">set的定义初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set增加"><span class="nav-number">1.3.</span> <span class="nav-text">set增加</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#add-elem"><span class="nav-number">1.3.1.</span> <span class="nav-text">add(elem)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#update-others"><span class="nav-number">1.3.2.</span> <span class="nav-text">update(*others)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set-删除"><span class="nav-number">1.4.</span> <span class="nav-text">set 删除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#remove-elem"><span class="nav-number">1.4.1.</span> <span class="nav-text">remove(elem)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#discard（elem）"><span class="nav-number">1.4.2.</span> <span class="nav-text">discard（elem）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pop-gt-item"><span class="nav-number">1.4.3.</span> <span class="nav-text">pop() -&gt; item</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clear"><span class="nav-number">1.4.4.</span> <span class="nav-text">clear()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set的修改、查询"><span class="nav-number">1.5.</span> <span class="nav-text">set的修改、查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改"><span class="nav-number">1.5.1.</span> <span class="nav-text">修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询"><span class="nav-number">1.5.2.</span> <span class="nav-text">查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遍历"><span class="nav-number">1.5.3.</span> <span class="nav-text">遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#成员运算符"><span class="nav-number">1.5.4.</span> <span class="nav-text">成员运算符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性结构和非线性结构的差别"><span class="nav-number">1.6.</span> <span class="nav-text">线性结构和非线性结构的差别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#可hash数据类型"><span class="nav-number">1.6.1.</span> <span class="nav-text">可hash数据类型</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -93,7 +93,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
+    scheme: 'Mist',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -217,6 +217,14 @@
         </li>
       
         
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+            Python
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-shell">
           <a href="/categories/shell脚本" rel="section">
             
@@ -256,47 +264,27 @@
           </a>
         </li>
       
-
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
+        
+        <li class="menu-item menu-item-editor">
+          <a href="/categories/文本三剑客" rel="section">
             
-            搜索
+            文本三剑客
           </a>
         </li>
+      
+        
+        <li class="menu-item menu-item-algorithm">
+          <a href="/categories/算法" rel="section">
+            
+            算法
+          </a>
+        </li>
+      
+
       
     </ul>
   
 
-  
-    <div class="site-search">
-      
-  
-  <div class="algolia-popup popup search-popup">
-    <div class="algolia-search">
-      <div class="algolia-search-input-icon">
-        <i class="fa fa-search"></i>
-      </div>
-      <div class="algolia-search-input" id="algolia-search-input"></div>
-    </div>
-
-    <div class="algolia-results">
-      <div id="algolia-stats"></div>
-      <div id="algolia-hits"></div>
-      <div id="algolia-pagination" class="algolia-pagination"></div>
-    </div>
-
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-  </div>
-
-
-
-
-    </div>
   
 </nav>
 
@@ -325,7 +313,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/12/MySQL之日志管理/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/01/Python的环境搭建/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="吕培新">
@@ -344,7 +332,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/12/MySQL之日志管理/" itemprop="url">MySQL之日志管理</a></h1>
+                <a class="post-title-link" href="/2019/01/01/Python的环境搭建/" itemprop="url">Python的环境搭建</a></h1>
         
 
         <div class="post-meta">
@@ -356,8 +344,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-12T15:55:50+08:00">
-                2018-06-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-01T19:20:42+08:00">
+                2019-01-01
               </time>
             
 
@@ -379,8 +367,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -418,18 +406,99 @@
       
         
           
-          MySQL数据库中支持多种日志类型，通过分析日志，我们可以优化数据库性能，排除故障，甚至能够还原
-数据，本节内容将带你了解MySQL数据库中的日志管理
-一、事务日志作用：用来记录数据库更新情况的文件，它可以记录针对数据库的任何操作，并将记录的结果保存到独立的文件
-中。对于每一次数据库更新的过程，事务
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/12/MySQL之日志管理/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <blockquote>
+<p>工欲善其事必先利其器,我们想学好Python，就需要先学会搭建运行Python的环境</p>
+</blockquote>
+<h1 id="Windows下搭建Python环境"><a href="#Windows下搭建Python环境" class="headerlink" title="Windows下搭建Python环境"></a>Windows下搭建Python环境</h1><h2 id="1、在Python官网下载Python的Windows版本"><a href="#1、在Python官网下载Python的Windows版本" class="headerlink" title="1、在Python官网下载Python的Windows版本"></a>1、在Python官网下载Python的Windows版本</h2><p>Python官网地址：<a href="https://www.python.org/" target="_blank" rel="noopener">https://www.python.org/</a></p>
+<p><img src="/images/Python_org.png" alt="Python_org"></p>
+<p><img src="/images/Python_org_1.png" alt="Python_org_1"></p>
+<h2 id="2、安装Python"><a href="#2、安装Python" class="headerlink" title="2、安装Python"></a>2、安装Python</h2><p><img src="/images/Python_org_2.png" alt="Python_org_2"></p>
+<p>勾选将Python3.7 加入到PATH路径<br>选择 Install Now，它里面包括pip包管理<br>直接下一步，这样就将Python的环境安装好了</p>
+<h2 id="3、使用Python3-7"><a href="#3、使用Python3-7" class="headerlink" title="3、使用Python3.7"></a>3、使用Python3.7</h2><p>打开命令行，测试Python和pip的版本<br><img src="/images/Python_org_3.png" alt="Python_org_3"></p>
+<p>打开Python的两种方法：  </p>
+<ol>
+<li>在命令行下直接输入Python</li>
+<li>在开始菜单找到刚刚安装的Python程序，直接打开即可</li>
+</ol>
+<h2 id="4、安装IPython"><a href="#4、安装IPython" class="headerlink" title="4、安装IPython"></a>4、安装IPython</h2><p>在命令行下输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install ipython</span><br></pre></td></tr></table></figure></p>
+<p>安装完成后直接输入ipython即可</p>
+<h2 id="5、安装Python的IDE工具"><a href="#5、安装Python的IDE工具" class="headerlink" title="5、安装Python的IDE工具"></a>5、安装Python的IDE工具</h2><p>这里介绍两种IDE工具</p>
+<ol>
+<li><p>安装jupyter<br> 在命令放下输入安装指令：</p>
+<pre><code>pip install jupyter
+</code></pre><p> 安装结束后，直接运行下面代码:  </p>
+<pre><code>jupyter notebook
+</code></pre><p> 浏览器直接打开jupyter 工具，如下</p>
+<p> <img src="/images/Python_org_4.png" alt="Python_org_4"></p>
+<p> 这样就可以直接输入Python代码了</p>
+</li>
+<li><p>安装Pycharm<br> 打开Pycharm官网：<a href="https://www.jetbrains.com/pycharm/" target="_blank" rel="noopener">https://www.jetbrains.com/pycharm/</a><br> <img src="/images/Python_org_5.png" alt="Python_org_5"></p>
+<p> 下载社区版的Pycharm<br> <img src="/images/Python_org_6.png" alt="Python_org_6"></p>
+<p> 然后直接下一步，下一步安装程序即可</p>
+</li>
+</ol>
+<h1 id="Linux下安装pyenv兼容python3并与python2共存"><a href="#Linux下安装pyenv兼容python3并与python2共存" class="headerlink" title="Linux下安装pyenv兼容python3并与python2共存"></a>Linux下安装pyenv兼容python3并与python2共存</h1><h2 id="编译安装Python3"><a href="#编译安装Python3" class="headerlink" title="编译安装Python3"></a>编译安装Python3</h2><ol>
+<li><p>安装源码编译安装需求的软件包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install gcc make patch gdbm-devel openssl-devel sqlite-devel readline-devel zlib-devel bzip2-devel</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下载源代码 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.6.6/Python-3.6.6.tgz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解压压缩包</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar xf Python-3.6.6.tgz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编译源代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd Python-3.6.6/</span><br><span class="line">./configure --prefix=/usr/local/python3.6.6</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装程序</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加环境变量</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;export PATH=/usr/local/python3.6.6/bin:$PATH&quot;  &gt; /etc/profile.d/pyenv.sh</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="pyenv-安装及常用命令"><a href="#pyenv-安装及常用命令" class="headerlink" title="pyenv 安装及常用命令"></a>pyenv 安装及常用命令</h2><p><strong>git 安装</strong>   </p>
+<ol>
+<li><p>安装git</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install git -y</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>克隆pyenv仓库   </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/pyenv/pyenv.git  ~/.pyenv</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置环境变量   </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo &apos;export PYENV_ROOT=&quot;$HOME/.pyenv&quot;&apos; &gt;&gt; ~/.bash_profile</span><br><span class="line">echo &apos;export PATH=&quot;$PYENV_ROOT/bin:$PATH&quot;&apos; &gt;&gt; ~/.bash_profile</span><br><span class="line">echo -e &apos;if command -v pyenv 1&gt;/dev/null 2&gt;&amp;1; then\n  eval &quot;$(pyenv init -)&quot;\nfi&apos; &gt;&gt; ~/.bash_profile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>激活环境变量  </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source  ~/.bash_profile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>pyenv常用命令  </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">pyenv install --list # 列出可安装版本 </span><br><span class="line">pyenv install &lt;version&gt; # 安装对应版本 </span><br><span class="line">pyenv install -v &lt;version&gt; # 安装对应版本，若发生错误，可以显示详细的错误信息 </span><br><span class="line">pyenv versions # 显示当前使用的python版本 </span><br><span class="line">pyenv which python # 显示当前python安装路径 </span><br><span class="line">pyenv global &lt;version&gt; # 设置默认Python版本 </span><br><span class="line">pyenv local &lt;version&gt; # 当前路径创建一个.python-version, 以后进入这个目录自动切换为该版本 </span><br><span class="line">pyenv shell &lt;version&gt; # 当前shell的session中启用某版本，优先级高于global 及 local</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="python的虚拟环境"><a href="#python的虚拟环境" class="headerlink" title="python的虚拟环境"></a>python的虚拟环境</h2><ol>
+<li><p>安装插件  </p>
+<p> 创建虚拟的python环境需要pyenv-virtualenv的插件</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv </span><br><span class="line">echo ‘eval “$(pyenv virtualenv-init -)”’ &gt;&gt; ~/.bash_profile </span><br><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建虚拟环境 </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv virtualenv 2.7.13 env2713</span><br></pre></td></tr></table></figure>
+<p> 这是创建了一个名为env2713的python虚拟环境，这个环境的目录位于：~/.pyenv/versions/</p>
+</li>
+<li><p>查看python版本</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">pyenv versions </span><br><span class="line">* system (set by /root/.pyenv/version) </span><br><span class="line">2.7.13 </span><br><span class="line">2.7.13/envs/env2713 </span><br><span class="line">3.6.4 </span><br><span class="line">3.6.4/envs/env364 </span><br><span class="line">env2713 </span><br><span class="line">env364</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用虚拟环境</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[xxx]#pyenv activate env364 </span><br><span class="line">pyenv-virtualenv: prompt changing will be removed from future release. configure `export PYENV_VIRTUALENV_DISABLE_PROMPT=1’ to simulate the behavior.v364)</span><br><span class="line"></span><br><span class="line">[xxx]# python </span><br><span class="line">Python 3.6.4 (default, Apr 19 2018, 10:35:10) </span><br><span class="line">[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux </span><br><span class="line">Type “help”, “copyright”, “credits” or “license” for more information.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>退出虚拟环境</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv deactivate</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>环境迁移 </p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">pyenv virtualenv 2.7.13 env2713</span><br><span class="line"></span><br><span class="line">&lt;1&gt;~./pyenv/versions/下名为2.7.14的文件夹拷贝到要迁移的服务器上    </span><br><span class="line">&lt;2&gt;修改env364/pyvenv.cfg文件中的home路径(迁移的服务器无需安装任何东西)</span><br><span class="line"></span><br><span class="line">[xxx env364]# cat pyvenv.cfg </span><br><span class="line">home =/root/.pyenv/versions/2.7.13/bin </span><br><span class="line">include-system-site-packages = false </span><br><span class="line">version = 2.7.13</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+          
         
       
     </div>
@@ -485,7 +554,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/12/MySQL之事务及并发控制/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/31/Python的历史/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="吕培新">
@@ -504,7 +573,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/12/MySQL之事务及并发控制/" itemprop="url">MySQL之事务及并发控制</a></h1>
+                <a class="post-title-link" href="/2018/12/31/Python的历史/" itemprop="url">Python历史</a></h1>
         
 
         <div class="post-meta">
@@ -516,8 +585,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-12T15:54:52+08:00">
-                2018-06-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-31T19:28:42+08:00">
+                2018-12-31
               </time>
             
 
@@ -539,8 +608,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -578,19 +647,82 @@
       
         
           
-          一、事务什么是事务？事务Transactions：一组原子性的SQL语句，或一个独立工作单元。
-事务主要用于处理操作量大，复杂度高的数据。比如说，在人员管理系统中，你删除一个
-人员，你既需要删除人员的基本资料，也要删除和该人员相关的信息，如信箱，文章等等，
-这样，这些数据库操作语句就构成一个事务
-事
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/12/MySQL之事务及并发控制/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h1 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python的作者，Guido von Rossum，荷兰人。1982年，Guido从阿姆斯特丹大学获得了数学和计算机硕士学位。然而，尽管他算得上是一位数学家，但他更加享受计算机带来的乐趣。用他的话说，尽管拥有数学和计算机双料资质，他总趋向于做计算机相关的工作，并热衷于做任何和编程相关的活儿。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在那个时候，Guido接触并使用过诸如Pascal、C、Fortran等语言。这些语言的基本设计原则是让机器能更快运行。在80年代，虽然IBM和苹果已经掀起了个人电脑浪潮，但这些个人电脑的配置很低。比如早期的Macintosh，只有8MHz的CPU主频和128KB的RAM，一个大的数组就能占满内存。所有的编译器的核心是做优化，以便让程序能够运行。为了增进效率，语言也迫使程序员像计算机一样思考，以便能写出更符合机器口味的程序。在那个时代，程序员恨不得用手榨取计算机每一寸的能力。有人甚至认为C语言的指针是在浪费内存。至于动态类型，内存自动管理，面向对象…… 别想了，那会让你的电脑陷入瘫痪。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这种编程方式让Guido感到苦恼。Guido知道如何用C语言写出一个功能，但整个编写过程需要耗费大量的时间，即使他已经准确的知道了如何实现。他的另一个选择是shell。Bourne Shell作为UNIX系统的解释器已经长期存在。UNIX的管理员们常常用shell去写一些简单的脚本，以进行一些系统维护的工作，比如定期备份、文件系统管理等等。shell可以像胶水一样，将UNIX下的许多功能连接在一起。许多C语言下上百行的程序，在shell下只用几行就可以完成。然而，shell的本质是调用命令。它并不是一个真正的语言。比如说，shell没有数值型的数据类型，加法运算都很复杂。总之，shell不能全面的调动计算机的功能。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Guido希望有一种语言，这种语言能够像C语言那样，能够全面调用计算机的功能接口，又可以像shell那样，可以轻松的编程。ABC语言让Guido看到希望。ABC是由荷兰的数学和计算机研究所开发的。Guido在该研究所工作，并参与到ABC语言的开发。ABC语言以教学为目的。与当时的大部分语言不同，ABC语言的目标是“让用户感觉更好”。ABC语言希望让语言变得容易阅读，容易使用，容易记忆，容易学习，并以此来激发人们学习编程的兴趣。<br>比如下面是一段来自Wikipedia的ABC程序，这个程序用于统计文本中出现的词的总数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HOW TO RETURN words document:  </span><br><span class="line">PUT &#123;&#125; IN collection FOR line IN document:  </span><br><span class="line">FOR word IN split line:   </span><br><span class="line">IF word not.in collection:  </span><br><span class="line">INSERT word IN collection RETURN collection</span><br></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HOW TO用于定义一个函数。一个Python程序员应该很容易理解这段程序。ABC语言使用冒号和缩进来表示程序块。行 尾没有分号。for和if结构中也没有括号() 。赋值采用的是PUT，而不是更常见的等号。这些改动让ABC程序读起来像一段文字。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 尽管已经具备了良好的可读性和易用性，ABC语言最终没有流行起来。在当时，ABC语言编译器需要比较高配置的电脑才能运行。而这些电脑的使用者通常精通计算机，他们更多考虑程序的效率，而非它的学习难度。除了硬件上的困难外，ABC语言的设计也存在一些致命的问题： 可拓展性差。<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ABC语言不是模块化语言。如果想在ABC语言中增加功能，比如对图形化的支持，就必须改动很多地方。比如说不能直接进行IO。ABC语言不能直接操作文件系统。尽管你可以通过诸如文本流的方式导入数据，但ABC无法直接读写文件。输入输出的困难对于计算机语言来说是致命的。你能想像一个打不开车门的跑车么？<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 过度革新。ABC用自然语言的方式来表达程序的意义，比如上面程序中的HOW TO 。然而对于程序员来说，他们更习惯 用function或者define来定义一个函数。同样，程序员更习惯用等号来分配量。尽管ABC语言很特别，但学习难度 也很大。 传播困难。ABC编译器很大，必须被保存在磁带上。当时Guido在访问的时候，就必须有一个大磁带来给别人安装ABC编译器。 这样，ABC语言就很难快速传播。<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1989年，为了打发圣诞节假期，Guido开始写Python语言的编译器。Python这个名字，来自Guido所挚爱的电视剧Monty Python’s Flying Circus。他希望这个新的叫做Python的语言，能符合他的理想：创造一种C和shell之间，功能全面，易学易用，可拓展的语言。Guido作为一个语言设计爱好者，已经有过设计语言的尝试。这一次，也不过是一次纯粹的hacking行为。</p>
+<h1 id="一门语言的诞生"><a href="#一门语言的诞生" class="headerlink" title="一门语言的诞生"></a>一门语言的诞生</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1991年，第一个Python编译器诞生。它是用C语言实现的，并能够调用C语言的库文。 从一出生，Python已经具有了：类，函数，异常处理，包含表和词典在内的核心数据类型，以及模块为基础的拓展系统。<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python语法很多来自C，但又受到ABC语言的强烈影响。来自ABC语言的一些规定直到今天还富有争议，比如强制缩进。 但这些语法规定让Python容易读。另一方面，Python聪明的选择服从一些惯例，特别是C语言的惯例，比如回归等号赋值。Guido认为，如果“常识”上确立的东西，没有必要过度纠结。<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Python从一开始就特别在意可拓展性。Python可以在多个层次上拓展。从高层上，你可以直接引入. py文件。在底层，你可以引用C语言的库。Python程序员可以快速的使用Python写. py文件作为拓展模块。但当性能是考虑的重要因素时，Python程序员可以深入底层，写C程序，编译为.so文件引入到Python中使用。<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python就好像是使用钢构建房一样，先规定好大的框架。而程序员可以在此框架下相当自由的拓展或更 改。 最初的Python完全由Guido本人开发。Python得到Guido同事的欢迎。他们迅速的反馈使用意见，并参与到Python的改进。Guido和一些同事构成Python的核心团队。他们将自己大部分的业余时间用于hack Python。随后，Python拓 展到研究所之外。Python将许多机器层面上的细节隐藏，交给编译器处理，并凸显出逻辑层面的编程思考。Python程 序员可以花更多的时间用于思考程序的逻辑，而不是具体的实现细节。这一特征吸引了广大的程序员。Python开始流行。</p>
+<h1 id="时势造英雄"><a href="#时势造英雄" class="headerlink" title="时势造英雄"></a>时势造英雄</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们不得不暂停我们的Python时间，转而看一看瞬息万变的计算机行业。1990年代初，个人计算机开始进入普通家庭。Intel发布了486处理器，windows发布window 3.0开始的一系列视窗系统。计算机的性能大大提高。程序员开始关注计算机的易用性，比如图形化界面。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Windows 3.0<br>由于计算机性能的提高，软件的世界也开始随之改变。硬件足以满足许多个人电脑的需要。硬件厂商甚至渴望高需求软件的出现，以带动硬件的更新换代。C++和Java相继流行。C++和Java提供了面向对象的编程范式，以及丰富的对象库。在牺牲了一定的性能的代价下，C++和Java大大提高了程序的产量。语言的易用性被提到一个新的高度。我们还记得 ，ABC失败的一个重要原因是硬件的性能限制。从这方面说，Python要比ABC幸运许多。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 另一个悄然发生的改变是Internet。1990年代还是个人电脑的时代，windows和Intel挟PC以令天下，盛极一时。尽管Internet为主体的信息革命尚未到来，但许多程序员以及资深计算机用户已经在频繁使用Internet进行交流，比如 使用email和newsgroup。Internet让信息交流成本大大下降。一种新的软件开发模式开始流行：开源。程序员利用 业余时间进行软件开发，并开放源代码。1991年，Linus在comp.os.minix新闻组上发布了Linux内核源代码，吸引大批hacker的加入。Linux和GNU相互合作，最终构成了一个充满活力的开源平台。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;硬件性能不是瓶颈，Python又容易使用，所以许多人开始转向Python。Guido维护了一个maillist，Python用户就通过邮件进行交流。Python用户来自许多领域，有不同的背景，对Python也有不同的需求。Python相当的开放，又容易拓展，所以当用户不满足于现有功能，很容易对Python进行拓展或改造。随后，这些用户将改动发给Guido，并由Guido决定是否将新的特征加入到Python或者标准库中。如果代码能被纳入Python自身或者标准库，这将极大的荣誉。由于Guido至高无上的决定权，他因此被称为“终身的仁慈独裁者”。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python被称为“Battery Included”，是说它以及其标准库的功能强大。这些是整个社区的贡献。Python的开发者来自不同领域，他们将不同领域的优点带给Python。比如Python标准库中的正则表达是参考Perl，而lambda, map, filter, reduce等函数参考了Lisp。Python本身的一些功能以及大部分的标准库来自于社区。Python的社区不断扩大，进而拥有了自己的newsgroup，网站，以及基金。从Python 2.0开始，Python也从maillist的开发方式，转为完全开源的开发方式。社区气氛已经形成，工作被整个社区分担，Python也获得了更加高速的发展。 到今天，Python的框架已经确立。Python语言以对象为核心组织代码，支持多种编程范式，采用动态类型，自动进行内存回收。Python支持解释运行，并能调用C库进行拓展。Python有强大的标准库。由于标准库的体系已经稳定，所以Python的生态系统开始拓展到第三方包。这些包，如Django、web.py、wxpython、numpy、matplotlib、PIL，将Python升级成了物种丰富的热带雨林。  </p>
+<h1 id="启示录"><a href="#启示录" class="headerlink" title="启示录"></a>启示录</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Python崇尚优美、清晰、简单，是一个优秀并广泛使用的语言。Python在TIOBE排行榜中排行第八，它是Google的第三大开发语言，Dropbox的基础语言，豆瓣的服务器语言。Python的发展史可以作为一个代表，带给我许多启示。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在Python的开发过程中，社区起到了重要的作用。Guido自认为自己不是全能型的程序员，所以他只负责制订框架。如果问题太复杂，他会选择绕过去，也就是cut the corner。这些问题最终由社区中的其他人解决。社区中的人才是异常丰富的，就连创建网站，筹集基金这样与开发稍远的事情，也有人乐意于处理。如今的项目开发越来越复杂，越来越庞大，合作以及开放的心态成为项目最终成功的关键。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Python从其他语言中学到了很多，无论是已经进入历史的ABC，还是依然在使用的C和Perl，以及许多没有列出的其他 语言。可以说，Python的成功代表了它所有借鉴的语言的成功。同样，Ruby借鉴了Python，它的成功也代表了Python某些方面的成功。每个语言都是混合体，都有它优秀的地方，但也有各种各样的缺陷。同时，一个语言“好与不好”的评 判，往往受制于平台、硬件、时代等等外部原因。程序员经历过许多语言之争。其实，以开放的心态来接受各个语言，说不定哪一天，程序员也可以如Guido那样，混合出自己的语言。</p>
+<h1 id="关键点常识"><a href="#关键点常识" class="headerlink" title="关键点常识"></a>关键点常识</h1><p>Python的发音与拼写<br>Python的意思是蟒蛇，源于作者喜欢的一部电视剧 (C呢？)<br>Python的作者是Guido van Rossum（龟叔）<br>Python是龟叔在1989年圣诞节期间，为了打发无聊的圣诞节而用C编写的一个编程语言<br>Python正式诞生于1991年<br>Python的解释器如今有多个语言实现，我们常用的是CPython（官方版本的C语言实现），其他还有Jython（可以运行在Java平台）、IronPython（可以运行在.NET和Mono平台）、PyPy（Python实现的，支持JIT即时编译）<br>Python目前有两个版本，Python2和Python3，最新版分别为2.7.12和3.5.2，现阶段大部分公司用的是Python3，Python2即将推出历史舞台   </p>
+<h1 id="Python优缺点"><a href="#Python优缺点" class="headerlink" title="Python优缺点"></a>Python优缺点</h1><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p><strong>简单：</strong> Python是一种代表简单主义思想的语言。阅读一个良好的Python程序就感觉像是在读英语一样，尽管这个英语的要求非常严格！Python的这种伪代码本质是它最大的优点之一。它使你能够专注于解决问题而不是去搞明白语言本身。</p>
+<p><strong>易学：</strong> 就如同你即将看到的一样，Python极其容易上手。前面已经提到了，Python有极其简单的语法。</p>
+<p><strong>免费、开源：</strong> Python是FLOSS（自由/开放源码软件）之一。简单地说，你可以自由地发布这个软件的拷贝、阅读它的源代码、对它做改动、把它的一部分用于新的自由软件中。FLOSS是基于一个团体分享知识的概念。这是为什么Python如此优秀的原因之一——它是由一群希望看到一个更加优秀的Python的人创造并经常改进着的。</p>
+<p><strong>高层语言：</strong> 当你用Python语言编写程序的时候，你无需考虑诸如如何管理你的程序使用的内存一类的底层细节。</p>
+<p><strong>可移植性：</strong> 由于它的开源本质，Python已经被移植在许多平台上（经过改动使它能够工作在不同平台上）。如果你小心地避免使用依赖于系统的特性，那么你的所有Python程序无需修改就可以在下述任何平台上面运行。这些平台包括Linux、Windows、FreeBSD、Macintosh、Solaris、OS/2、Amiga、AROS、AS/400、BeOS、OS/390、z/OS、Palm OS、QNX、VMS、Psion、Acom RISC OS、VxWorks、PlayStation、Sharp Zaurus、Windows CE甚至还有PocketPC、Symbian以及Google基于linux开发的Android平台！</p>
+<p><strong>解释性：</strong> 这一点需要一些解释。一个用编译性语言比如C或C++写的程序可以从源文件（即C或C++语言）转换到一个你的计算机使用的语言（二进制代码，即0和1）。这个过程通过编译器和不同的标记、选项完成。当你运行你的程序的时候，连接/转载器软件把你的程序从硬盘复制到内存中并且运行。而Python语言写的程序不需要编译成二进制代码。你可以直接从源代码运行程序。在计算机内部，Python解释器把源代码转换成称为字节码的中间形式，然后再把它翻译成计算机使用的机器语言并运行。事实上，由于你不再需要担心如何编译程序，如何确保连接转载正确的库等等，所有这一切使得使用Python更加简单。由于你只需要把你的Python程序拷贝到另外一台计算机上，它就可以工作了，这也使得你的Python程序更加易于移植。</p>
+<p><strong>面向对象：</strong> Python既支持面向过程的编程也支持面向对象的编程。在“面向过程”的语言中，程序是由过程或仅仅是可重用代码的函数构建起来的。在“面向对象”的语言中，程序是由数据和功能组合而成的对象构建起来的。与其他主要的语言如C++和Java相比，Python以一种非常强大又简单的方式实现面向对象编程。</p>
+<p><strong>可扩展性:</strong> 如果你需要你的一段关键代码运行得更快或者希望某些算法不公开，你可以把你的部分程序用C或C++编写，然后在你的Python程序中使用它们。</p>
+<p><strong>丰富的库：</strong> Python标准库确实很庞大。它可以帮助你处理各种工作，包括正则表达式、文档生成、单元测试、线程、数据库、网页浏览器、CGI、FTP、电子邮件、XML、XML-RPC、HTML、WAV文件、密码系统、GUI（图形用户界面）、Tk和其他与系统有关的操作。记住，只要安装了Python，所有这些功能都是可用的。这被称作Python的“功能齐全”理念。除了标准库以外，还有许多其他高质量的库，如wxPython、Twisted和Python图像库等等。</p>
+<p><strong>规范的代码：</strong> Python采用强制缩进的方式使得代码具有极佳的可读性。</p>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>运行速度，有速度要求的话，用C++改写关键部分吧。<br>国内市场较小（国内以python来做主要开发的，目前只有一些web2.0公司）。但时间推移，目前很多国内软件公司，尤其是游戏公司，也开始规模使用他。<br>中文资料匮乏（好的python中文资料屈指可数）。托社区的福，有几本优秀的教材已经被翻译了，但入门级教材多，高级内容还是只能看英语版。<br>构架选择太多（没有像C#这样的官方.net构架，也没有像ruby由于历史较短，构架开发的相对集中。Ruby on Rails 构架开发中小型web程序天下无敌）。不过这也从另一个侧面说明，python比较优秀，吸引的人才多，项目也多。</p>
+<h1 id="Python之禅"><a href="#Python之禅" class="headerlink" title="Python之禅"></a>Python之禅</h1><pre><code>Beautiful is better than ugly.
+优美胜于丑陋（Python以编写优美的代码为目标）
+
+Explicit is better than implicit.
+明了胜于晦涩（优美的代码应当是明了的，命名规范，风格相似） 
+
+Simple is better than complex.
+简洁胜于复杂（优美的代码应当是简洁的，不要有复杂的内部实现） 
+
+Complex is better than complicated.
+复杂胜于凌乱（如果复杂不可避免，那代码间也不能有难懂的关系，要保持接口简洁）
+
+Flat is better than nested.
+扁平胜于嵌套（优美的代码应当是扁平的，不能有太多的嵌套） 
+
+Sparse is better than dense.
+间隔胜于紧凑（优美的代码有适当的间隔，不要奢望一行代码解决问题） 
+
+Readability counts.
+可读性很重要（优美的代码是可读的） 
+
+Special cases aren&apos;t special enough to break the rules.
+Although practicality beats purity.
+即便假借特例的实用性之名，也不可违背这些规则（这些规则至高无上） 
+
+Errors should never pass silently.
+Unless explicitly silenced.
+不要包容所有错误，除非你确定需要这样做（精准地捕获异常，不写except:pass风格的代码） 
+
+In the face of ambiguity, refuse the temptation to guess.
+当存在多种可能，不要尝试去猜测 
+
+There should be one-- and preferably only one --obvious way to do it.
+而是尽量找一种，最好是唯一一种明显的解决方案（如果不确定，就用穷举法） 
+
+Although that way may not be obvious at first unless you&apos;re Dutch.
+虽然这并不容易，因为你不是 Python 之父（这里的Dutch是指Guido）
+
+Now is better than never.
+Although never is often better than *right* now.
+做也许好过不做，但不假思索就动手还不如不做（动手之前要细思量）
+
+If the implementation is hard to explain, it&apos;s a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+如果你无法向人描述你的方案，那肯定不是一个好方案；反之亦然（方案测评标准） 
+
+Namespaces are one honking great idea -- let&apos;s do more of those!
+命名空间是一种绝妙的理念，我们应当多加利用（倡导与号召）
+</code></pre><h1 id="Python的应用方向"><a href="#Python的应用方向" class="headerlink" title="Python的应用方向"></a>Python的应用方向</h1><h2 id="常规软件开发"><a href="#常规软件开发" class="headerlink" title="常规软件开发"></a>常规软件开发</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Python支持函数式编程和OOP面向对象编程，能够承担任何种类软件的开发工作，因此常规的软件开发、脚本编写、网络编程等都属于标配能力。</p>
+<h2 id="科学计算"><a href="#科学计算" class="headerlink" title="科学计算"></a>科学计算</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;随着NumPy，SciPy，Matplotlib，Enthoughtlibrarys等众多程序库的开发，Python越来越适合于做科学计算、绘制高质量的2D和3D图像。和科学计算领域最流行的商业软件Matlab相比，Python是一门通用的程序设计语言，比Matlab所采用的脚本语言的应用范围更广泛，有更多的程序库的支持。虽然Matlab中的许多高级功能和toolbox目前还是无法替代的，不过在日常的科研开发之中仍然有很多的工作是可以用Python代劳的。</p>
+<h2 id="自动化运维"><a href="#自动化运维" class="headerlink" title="自动化运维"></a>自动化运维</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这几乎是Python应用的自留地，作为运维工程师首选的编程语言，Python在自动化运维方面已经深入人心，比如Saltstack和Ansible都是大名鼎鼎的自动化平台。</p>
+<h2 id="云计算"><a href="#云计算" class="headerlink" title="云计算"></a>云计算</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开源云计算解决方案OpenStack就是基于Python开发的，搞云计算的同学都懂的。</p>
+<h2 id="WEB开发"><a href="#WEB开发" class="headerlink" title="WEB开发"></a>WEB开发</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;基于Python的Web开发框架不要太多，比如耳熟能详的Django，还有Tornado，Flask。其中的Python+Django架构，应用范围非常广，开发速度非常快，学习门槛也很低，能够帮助你快速的搭建起可用的WEB服务。</p>
+<h2 id="网络爬虫"><a href="#网络爬虫" class="headerlink" title="网络爬虫"></a>网络爬虫</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;也称网络蜘蛛，是大数据行业获取数据的核心工具。没有网络爬虫自动地、不分昼夜地、高智能地在互联网上爬取免费的数据，那些大数据相关的公司恐怕要少四分之三。能够编写网络爬虫的编程语言有不少，但Python绝对是其中的主流之一，其Scripy爬虫框架应用非常广泛。</p>
+<h2 id="数据分析"><a href="#数据分析" class="headerlink" title="数据分析"></a>数据分析</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在大量数据的基础上，结合科学计算、机器学习等技术，对数据进行清洗、去重、规格化和针对性的分析是大数据行业的基石。Python是数据分析的主流语言之一。</p>
+<h2 id="人工智能"><a href="#人工智能" class="headerlink" title="人工智能"></a>人工智能</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Python在人工智能大范畴领域内的机器学习、神经网络、深度学习等方面都是主流的编程语言，得到广泛的支持和应用。</p>
+
+          
         
       
     </div>
@@ -646,7 +778,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/11/MySQL之存储引擎及索引/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/31/冒泡排序/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="吕培新">
@@ -665,7 +797,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/11/MySQL之存储引擎及索引/" itemprop="url">MySQL之存储引擎及索引</a></h1>
+                <a class="post-title-link" href="/2018/12/31/冒泡排序/" itemprop="url">冒泡排序</a></h1>
         
 
         <div class="post-meta">
@@ -677,8 +809,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-11T15:53:55+08:00">
-                2018-06-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-31T19:28:42+08:00">
+                2018-12-31
               </time>
             
 
@@ -700,8 +832,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -739,19 +871,19 @@
       
         
           
-          一、MySQL存储引擎介绍存储引擎**是什么？**
-例如，如果你在研究大量的临时数据，你也许需要使用内存存储引擎。内存存储引擎
-能够在内存中存储所有的表格数据。又或者，你也许需要一个支持事务处理的数据库
-(以确保事务处理不成功时数据的回退能力)。
-这些不同的技术以及配套的相关功能在MySQL中被称作
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/11/MySQL之存储引擎及索引/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>最近在学习Python，下面是我的一些笔记</p>
+<h1 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h1><p>实现思路 ：<br>使用双重for循环，内层变量为i， 外层为j，在内层循环中不断的比较相邻的两个值（i, i+1）的大小，如果i+1的值大于i的值，交换两者位置，每循环一次，外层的j增加1，等到j等于n-1的时候，结束循环  </p>
+<p>第一次看不懂很正常，不要灰心，下面是使用代码的实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">arr = [7, 4, 3, 67, 34, 1, 8]</span><br><span class="line">n = len(arr)</span><br><span class="line">for j in range(0, n - 1):</span><br><span class="line">    for i in range(0, n - 1 - j):</span><br><span class="line">        if arr[i] &gt; arr[i + 1]:</span><br><span class="line">            arr[i], arr[i + 1] = arr[i + 1], arr[i]</span><br><span class="line"></span><br><span class="line">print(arr)  # [1, 3, 4, 7, 8, 34, 67]</span><br></pre></td></tr></table></figure></p>
+<p>关键点其实在双重for循环变量的配置，我们来分析一下   </p>
+<ul>
+<li>第一次循环： j = 0, i~n-2 range(0, n-1)<br>第二次循环： j = 1, i~n-3 range(0, n-1-1)<br>第三次循环： j = 2, i~n-4 range(0, n-1-1-1) —&gt; range(0, n-1-j)</li>
+</ul>
+<p>理解这一点后，我们就可以换一种写法来实现了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">arr = [7, 4, 3, 67, 34, 1, 8]</span><br><span class="line"></span><br><span class="line">for j in range(len(arr) - 1, 0, -1):  # [n-1, n-2, ....2, 1]</span><br><span class="line">    for i in range(0, j):</span><br><span class="line">        if arr[i] &gt; arr[i + 1]:</span><br><span class="line">            arr[i], arr[i + 1] = arr[i + 1], arr[i]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(arr)  # [1, 3, 4, 7, 8, 34, 67]</span><br></pre></td></tr></table></figure></p>
+<p>优化<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;写到这里我们发现，无论是第一种写法还是第二种写法，他的时间复杂度都是O(n ^ 2), 第二种写法也仅仅停留在优化样式的层面，并没有带来性能的提升，想象一下，如果我们输入的本来就是一个有序序列，其实只需要一次循环就够了，所以我们需要针对特殊情况进行优化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">arr = [7, 4, 3, 67, 34, 1, 8]</span><br><span class="line"></span><br><span class="line">for j in range(len(arr)-1, 0, -1):</span><br><span class="line">    count = 0</span><br><span class="line">    for i in range(0, j):</span><br><span class="line">        if arr[i] &gt; arr[i + 1]:</span><br><span class="line">            arr[i], arr[i + 1] = arr[i + 1], arr[i]</span><br><span class="line">            count += 1</span><br><span class="line">    if count == 0:</span><br><span class="line">        return</span><br><span class="line"></span><br><span class="line">print(arr)  # [1, 3, 4, 7, 8, 34, 67]</span><br></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们在循环中定义了一个变量count，如果第一次循环后count没有变化，就说明输入的是有序序列，这时我们直接return退出循环，这时候的时间复杂度为O(n)  </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;扩展知识：冒泡排序还是一种稳定性的算法，如果序列中出现两个相同的值的时候，无论选取最大值，还是最小值进行排序，最后两个相同值的前后位置都是不变的。  </p>
+
+          
         
       
     </div>
@@ -807,7 +939,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/09/MySQL之用户与权限管理/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/01/Zabbix监控系统详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="吕培新">
@@ -826,7 +958,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/09/MySQL之用户与权限管理/" itemprop="url">MySQL之用户与权限管理</a></h1>
+                <a class="post-title-link" href="/2018/08/01/Zabbix监控系统详解/" itemprop="url">zabbix监控系统</a></h1>
         
 
         <div class="post-meta">
@@ -838,816 +970,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-09T15:53:02+08:00">
-                2018-06-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          一、MySQL用户管理用户账号：MySQL的用户账号由两部分组成：用户名+主机名
-‘USERNAME’@’HOST’
-其中：
-主机名HOST可以是IP地址或Network；
-如：wxlinux@192.168.30.10
-主机名HOST也支持通配符的写法：
-如：wxlinux@172.20.%.%
-
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/09/MySQL之用户与权限管理/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-	<div>
-
-	</div>
-	
-    
-	<div>
-
-    
-
-    
-
-	
-	
-	
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </div></article>
-
-
-    
-		
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/07/MySQL之SQL语法介绍/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="吕培新">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="吕培新的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/07/MySQL之SQL语法介绍/" itemprop="url">MySQL之SQL语法介绍</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-07T15:34:11+08:00">
-                2018-06-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          一、SQL语言简介：结构化查询语言(Structured Query Language)简称SQL，是一种特殊目的的编程语言，是一种数据库
-查询和程序设计语言，用于存取数据以及查询、更新和管理关系数据库系统；同时也是数据库脚本文件
-的扩展名
-关系型数据库的常见组件数据库：database
-表：tab
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/07/MySQL之SQL语法介绍/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-	<div>
-
-	</div>
-	
-    
-	<div>
-
-    
-
-    
-
-	
-	
-	
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </div></article>
-
-
-    
-		
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/07/实验：实现互联网的DNS架构/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="吕培新">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="吕培新的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/07/实验：实现互联网的DNS架构/" itemprop="url">实验：实现互联网的DNS架构</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-07T15:31:36+08:00">
-                2018-06-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/网络技术/" itemprop="url" rel="index">
-                    <span itemprop="name">网络技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          实现互联网DNS分布式架构，当客户端访问时，经各级自建DNS解析，最终指向Web1或者Web2服务器httpd服务
-实验拓扑图：
-前期准备：准备8台虚拟机，操作系统及IP地址分别为
-Root DNS Server：             CentOS6.9    IP：192.168.30.15
-
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/07/实验：实现互联网的DNS架构/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-	<div>
-
-	</div>
-	
-    
-	<div>
-
-    
-
-    
-
-	
-	
-	
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </div></article>
-
-
-    
-		
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/05/MySQL数据库简介及安装实验/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="吕培新">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="吕培新的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/05/MySQL数据库简介及安装实验/" itemprop="url">MySQL数据库简介及安装实验</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-05T15:32:56+08:00">
-                2018-06-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          一、MySQL数据库简介MySQL是一个关系型数据库管理系统，由瑞典MySQL AB 公司开发，目前
-属于 Oracle 旗下产品。MySQL 是最流行的关系型数据库管理系统之一，
-在 WEB 应用方面，MySQL是最好的 RDBMS (Relational Database Management
-
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/05/MySQL数据库简介及安装实验/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-	<div>
-
-	</div>
-	
-    
-	<div>
-
-    
-
-    
-
-	
-	
-	
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </div></article>
-
-
-    
-		
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/02/DNS服务及相关实验/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="吕培新">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="吕培新的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/02/DNS服务及相关实验/" itemprop="url">DNS服务及相关实验</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-02T15:30:03+08:00">
-                2018-06-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/网络技术/" itemprop="url" rel="index">
-                    <span itemprop="name">网络技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          一、DNS服务相关介绍DNS：Domain Name Service 应用层协议
-C/S,53/udp, 53/tcp
-BIND：Bekerley Internat Name Domain
-ISC （www.isc.org）
-名字解析服务：将全称域名解析为IP地址
-FQDN：Fully Qualif
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/02/DNS服务及相关实验/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-	<div>
-
-	</div>
-	
-    
-	<div>
-
-    
-
-    
-
-	
-	
-	
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </div></article>
-
-
-    
-		
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/31/Ansible使用介绍（三）templates及Roles角色/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="吕培新">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="吕培新的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/31/Ansible使用介绍（三）templates及Roles角色/" itemprop="url">Ansible使用介绍（三）templates及Roles角色</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-31T15:27:49+08:00">
-                2018-05-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-01T15:30:03+08:00">
+                2018-08-01
               </time>
             
 
@@ -1708,26 +1032,148 @@ FQDN：Fully Qualif
       
         
           
-          一、环境搭建：前期准备：一台虚拟机作为ansible，三台虚拟机作为被控端node
-主控端：
-主机名：ansible
-系统版本：CentOS6.9
-被控端：
-主机名：node1
-CPU内核数：4
-系统版本：CentSO7.4
-主机名：node2
-CPU内核数：2
-系统版本：CentSO6.9
-主机名
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/31/Ansible使用介绍（三）templates及Roles角色/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h1 id="zabbix监控系统"><a href="#zabbix监控系统" class="headerlink" title="zabbix监控系统"></a>zabbix监控系统</h1><p>zabbix（音同 zæbix）是一个基于WEB界面的提供分布式系统监视以及网络监视功能的企业级的开源解决方案。<br>zabbix能监视各种网络参数，保证服务器系统的安全运营；并提供灵活的通知机制以让系统管理员快速定位/解决存在的各种问题。<br>zabbix由2部分构成，zabbix server与可选组件zabbix agent。</p>
+<p>zabbix server：zabbix的监控服务器，负责接收agent端发送过来的数据，并做处理。端口：10051</p>
+<p>zabbix agent：安装在各个需要监控主机上，负责收集本地数据并发往server端。端口：10050</p>
+<p>zabbix server可以通过SNMP，zabbix agent，ping，端口监视等方法提供对远程服务器/网络状态的监视，数据收集等功能，它可以运行在Linux，Solaris，HP-UX，AIX，Free BSD，Open BSD，OS X等平台上。</p>
+<h2 id="监控系统具备的四种功能："><a href="#监控系统具备的四种功能：" class="headerlink" title="监控系统具备的四种功能："></a><strong>监控系统具备的四种功能</strong>：</h2><p>采集：根据用户的要求，周期性的采集数据<br>存储：对采集到的各种数据进行预约存储。<br>可视化：对采集到的数据，进行可视化。<br>报警：报警系统，在特定的条件下被触发（超出合理的区间）</p>
+<h2 id="监控数据采集通道"><a href="#监控数据采集通道" class="headerlink" title="监控数据采集通道"></a>监控数据采集通道</h2><p>SNMP：Simple Network Management Protocol<br>ssh/telnet:<br>IPMI：<br>agent:  （master/agent）</p>
+<h2 id="zabbix程序的组件："><a href="#zabbix程序的组件：" class="headerlink" title="zabbix程序的组件："></a>zabbix程序的组件：</h2><p>zabbix_server：服务端守护进程；<br>zabbix_agentd：agent守护进程；<br>zabbix_proxy：代理服务器，可选组件；<br>zabbix_get：命令行工具，手动测试向agent发起数据采集请求；<br>zabbix_sender：命令行工具，运行于agent端，手动向server端发送数据；<br>zabbix_java_gateway: java网关；<br>zabbix_database：MySQL或PostgreSQL；<br>zabbix_web：Web GUI</p>
+<p>端口号：10051</p>
+<p><a href="https://www.zabbix.com/download" target="_blank" rel="noopener">https://www.zabbix.com/download</a>  （官方下载安装地址）</p>
+<h2 id="服务端快速安装脚本"><a href="#服务端快速安装脚本" class="headerlink" title="服务端快速安装脚本"></a>服务端快速安装脚本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">#下载安装zabbix包</span><br><span class="line">wget https://repo.zabbix.com/zabbix/3.4/rhel/7/x86_64/zabbix-release-3.4-2.el7.noarch.rpm</span><br><span class="line">yum install zabbix-release-3.4-2.el7.noarch.rpm </span><br><span class="line"></span><br><span class="line">#安装zabbix </span><br><span class="line">yum install -y zabbix-server-mysql zabbix-web-mysql zabbix-agen</span><br><span class="line"></span><br><span class="line">#安装启动 mariadb数据库</span><br><span class="line">yum install -y mariadb-server httpd</span><br><span class="line">systemctl start mariadb.service</span><br><span class="line"></span><br><span class="line">#创建数据库</span><br><span class="line">mysql -e &apos;create database zabbix character set utf8 collate utf8_bin;&apos;</span><br><span class="line">mysql -e &apos;grant all privileges on zabbix.* to zabbix@192.168.2.7 identified by &quot;zabbix&quot;;&apos;</span><br><span class="line"></span><br><span class="line">#导入数据</span><br><span class="line">zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz|mysql -uzabbix -pzabbix zabbix</span><br><span class="line"></span><br><span class="line">#配置zabbixserver连接mysql</span><br><span class="line">sed -i.ori &apos;115a DBPassword=zabbix&apos; /etc/zabbix/zabbix_server.conf</span><br><span class="line"></span><br><span class="line">#添加时区</span><br><span class="line">sed -i.ori &apos;18a php_value date.timezone  Asia/Shanghai&apos; /etc/httpd/conf.d/zabbix.conf</span><br><span class="line"></span><br><span class="line">#启动服务</span><br><span class="line">systemctl start zabbix-server</span><br><span class="line">systemctl start httpd</span><br></pre></td></tr></table></figure>
+<p><a href="http://192.168.2.7/zabbix/（在浏览器上访问此路径并安装zabbix;此IP地址为zabbix主服务的IP地址）" target="_blank" rel="noopener">http://192.168.2.7/zabbix/（在浏览器上访问此路径并安装zabbix;此IP地址为zabbix主服务的IP地址）</a></p>
+<h2 id="配置zabbix功能："><a href="#配置zabbix功能：" class="headerlink" title="配置zabbix功能："></a>配置zabbix功能：</h2><p><img src="QQ%E6%88%AA%E5%9B%BE20180723160317.png" alt="·    QQ截图20180723160317"></p>
+<p><img src="QQ%E6%88%AA%E5%9B%BE20180723160617.png" alt="QQ截图20180723160617"></p>
+<p><img src="QQ%E6%88%AA%E5%9B%BE20180723160739.png" alt="QQ截图20180723160739"></p>
+<p>如果需要更改不需要重新安装，只要去修改上面的配置文件就可以了</p>
+<p><img src="QQ%E6%88%AA%E5%9B%BE20180723160809-1.png" alt="QQ截图20180723160809"></p>
+<p><strong>切换中文版：</strong></p>
+<p><img src="QQ%E6%88%AA%E5%9B%BE20180723162919.png" alt="QQ截图20180723162919"></p>
+<p><img src="QQ%E6%88%AA%E5%9B%BE20180723162956.png" alt="QQ截图20180723162956"></p>
+<p>updata 应用即可。</p>
+<p><strong>监控一个独立的主机(zabbix-agent监控的主机)：（简单的手动添加的监控选项和参数：）</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#安装zabbix源、aliyu nYUM源</span><br><span class="line">curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-6.repo</span><br><span class="line">curl -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-6.repo</span><br><span class="line">rpm -ivh http://repo.zabbix.com/zabbix/3.0/rhel/7/x86_64/zabbix-release-3.0-1.el7.noarch.rpm</span><br><span class="line"></span><br><span class="line"># 安装zabbix客户端</span><br><span class="line">yum install -y zabbix-agent zabbix-sender</span><br><span class="line"></span><br><span class="line">vim /etc/zabbix/zabbix_agentd.conf  （修改配置文件）</span><br><span class="line"></span><br><span class="line">Server=192.168.2.7（更改为 zabbix-server服务器的地址）97行</span><br><span class="line"></span><br><span class="line">ServerActive=192.168.2.7 （更改为 zabbix-server服务器的地址）138行</span><br><span class="line"></span><br><span class="line">Hostname=nod01   （设定本机的主机名）149行</span><br><span class="line"></span><br><span class="line">systemctl start zabbix-agent  （启动服务）</span><br><span class="line"></span><br><span class="line">ss -nult (查看端口号；10050)</span><br></pre></td></tr></table></figure>
+<p>然后再浏览器上的zabbix的主界面里添加刚才的主机：</p>
+<p>添加新的组：</p>
+<p><img src="QQ%E6%88%AA%E5%9B%BE20180723193535.png" alt="QQ截图20180723193535"></p>
+<p>添加新的主机：</p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723192918.png" alt="QQ截图20180723192918"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723194705.png" alt="QQ截图20180723194705"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723194737.png" alt="QQ截图20180723194737"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723195227.png" alt="QQ截图20180723195227"></p>
+<p><strong>创建一个新的应用级：</strong></p>
+<p><img src="QQ%E6%88%AA%E5%9B%BE20180723200643.png" alt="QQ截图20180723200643"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723200816.png" alt="QQ截图20180723200816"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723200919.png" alt="QQ截图20180723200919"></p>
+<p><strong>创建一个监控项：</strong></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723201218.png" alt="QQ截图20180723201218"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723203028.png" alt="QQ截图20180723203028"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723202741.png" alt="QQ截图20180723202741"></p>
+<p>最后点击添加就可以了。</p>
+<p>再添加一个触发器：（一个监控项可定义多个触发器来响应不同级别的警告）</p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723212229.png" alt="QQ截图20180723212229"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723213018.png" alt="QQ截图20180723213018"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723212845.png" alt="QQ截图20180723212845"></p>
+<p>查看监控的状态：</p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180723205327.png" alt="QQ截图20180723205327"></p>
+<p>一旦检测中有触发器报警，就需要定义actio(动作)，来对触发器的警告做相应的处理。</p>
+<h2 id="实验：实现nginx的简单的监控和报警后的触发操作"><a href="#实验：实现nginx的简单的监控和报警后的触发操作" class="headerlink" title="实验：实现nginx的简单的监控和报警后的触发操作"></a>实验：实现nginx的简单的监控和报警后的触发操作</h2><p>在从被监测的主机上安装nginx服务，并添加新的监控项，定义新的触发器，并且定义action在触发器报警后做相应的处理。</p>
+<p>在被检测的服务器上：yum install nginx -y；（装包）nginx (启动服务)</p>
+<p>创建一个新的监控项在nod01上：</p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724111046.png" alt="QQ截图20180724111046"></p>
+<p>在创建一个新的触发器针对nginx做警告处理的</p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724111832.png" alt="QQ截图20180724111832"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724112102.png" alt="QQ截图20180724112102"></p>
+<p>添加之后查看已创建好的nginx的触发器：</p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724112331.png" alt="QQ截图20180724112331"></p>
+<p>在监测—&gt;最新数据—-&gt;nod01可以看到nginx监控现在处于正常状态。</p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724112851.png" alt="QQ截图20180724112851"></p>
+<p>如果此时将nginx服务手动暂停的化，zabbix监控就会显示已经down了。</p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724113502.png" alt="QQ截图20180724113502"></p>
+<p>在此将服务手动开启后此时监控又正常了。此时在监测—&gt;触发器;会触发一个事件。需要点击确认一下。</p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724113840.png" alt="QQ截图20180724113840"></p>
+<p>创建一个action(动作)来解决nginx触发器出现警告的故障：（首先让他远程自动重启，如果还是失败，就发送信息）</p>
+<p>配置—-&gt;动作，去创建一个action：<br><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724122052.png" alt="QQ截图20180724122052"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724122547.png" alt="QQ截图20180724122547"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724124412.png" alt="QQ截图20180724124412"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724124333.png" alt="QQ截图20180724124333"></p>
+<p>为了测试，需要在nod01上添加zabbix的管理员权限：（只为临时测试使用，生产中是危险的）</p>
+<p>visudo</p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724123948.png" alt="QQ截图20180724123948"></p>
+<p>还需要在被监测的服务器上：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/zabbix/zabbix_agentd.conf</span><br><span class="line"></span><br><span class="line">EnableRemoteCommands=1  （允许agent在本机执行命令）74行</span><br><span class="line"></span><br><span class="line">systemctl restart zabbix-agent  （重启服务让修改的agent配置文件生效）</span><br></pre></td></tr></table></figure>
+<p>最后手动将被监测的nginx服务停掉，查看是否能够自己修复。（如果有问题查自定义脚本是否写错）</p>
+<h2 id="定义媒介来实现出现警告的通过邮箱的发送：（仅在本机测试使用）"><a href="#定义媒介来实现出现警告的通过邮箱的发送：（仅在本机测试使用）" class="headerlink" title="定义媒介来实现出现警告的通过邮箱的发送：（仅在本机测试使用）"></a>定义媒介来实现出现警告的通过邮箱的发送：（仅在本机测试使用）</h2><p>在本机zabbix-server服务器上安装邮件包;yum install mailx</p>
+<p>管理——&gt;报警媒介类型  ;创建一个报警媒介</p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724145557.png" alt="QQ截图20180724145557"></p>
+<p>点击添加即可。由于是本机的邮件服务，所以只能在本机的用户之间发送。</p>
+<p>在次：管理—-&gt;用户—-&gt;admin</p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724150146.png" alt="QQ截图20180724150146"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724150513.png" alt="QQ截图20180724150513"></p>
+<p>然后添加nginx触发警报的第二步的操作：</p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724151710.png" alt="QQ截图20180724151710"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724150941.png" alt="QQ截图20180724150941"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724151203.png" alt="QQ截图20180724151203"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724151324.png" alt="QQ截图20180724151324"></p>
+<p>恢复操作也给用户发送邮件信息：</p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724153224.png" alt="QQ截图20180724153224"></p>
+<p>现在就可以实现了；当nginx执行动作里的脚本没有将nginx服务重新启动起来，就会执行第二步的操作，发送邮件给定义的用户通知消息。</p>
+<p><strong>使用脚本来创建脚本报警的方式：</strong></p>
+<p>脚本放置路径：zabbix_server.conf配置文件中AlertScriptsPath参数定义的路径下；<br>/usr/lib/zabbix/alertscripts/   （只要将脚本放在此目录下，直接调用脚本名称就可以了）</p>
+<p>zabbix 3.0之后的版本，此三个变量定义为内部宏：<br>{ALERT.SENDTO}<br>{ALERT.SUBJECT}<br>{ALERT.MESSAGE}</p>
+<p>Python报警脚本可以在互联网上查找。（安装好python的执行环境）</p>
+<p>脚本示例：给与执行权限，测试执行成功就可以。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python</span><br><span class="line">#coding:utf-8</span><br><span class="line"></span><br><span class="line">import smtplib</span><br><span class="line">from email.mime.text import MIMEText</span><br><span class="line">from email.header import Header</span><br><span class="line">from email.utils import parseaddr, formataddr</span><br><span class="line">import sys</span><br><span class="line"></span><br><span class="line">def formatAddr(s):</span><br><span class="line">name, addr = parseaddr(s)</span><br><span class="line">return formataddr((Header(name, ‘utf-8’).encode(), addr))</span><br><span class="line"></span><br><span class="line">def send_mail(to_list,subject,content):</span><br><span class="line">mail_host = ‘smtp.exmail.qq.com’  </span><br><span class="line">mail_user = ‘973366980@qq.com’</span><br><span class="line">mail_pass = ‘密码’</span><br><span class="line">\#以上内容根据你的实际情况进行修改</span><br><span class="line">msg = MIMEText(content,”,’utf-8′)</span><br><span class="line">msg[‘Subject’] = Header(subject, ‘utf-8’).encode()</span><br><span class="line">msg[‘From’] = formatAddr(‘zabbix监控 &lt;%s&gt;’ % mail_user).encode()</span><br><span class="line">msg[‘to’] = to_list</span><br><span class="line"></span><br><span class="line">try:</span><br><span class="line">s = smtplib.SMTP()</span><br><span class="line">s.connect(mail_host)</span><br><span class="line">s.login(mail_user,mail_pass)</span><br><span class="line">s.sendmail(mail_user,to_list,msg.as_string())</span><br><span class="line">s.close()</span><br><span class="line">return True</span><br><span class="line">except Exception,e:</span><br><span class="line">print str(e)</span><br><span class="line">return False</span><br><span class="line"></span><br><span class="line">if __name__ == “__main__”:</span><br><span class="line">send_mail(sys.argv[1], sys.argv[2], sys.argv[3])</span><br></pre></td></tr></table></figure>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724161431.png" alt="QQ截图20180724161431"></p>
+<p><strong>创建图形来显示数据的信息：</strong></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724162121.png" alt="QQ截图20180724162121"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724162619.png" alt="QQ截图20180724162619"></p>
+<p>定义好图形后再桌面上添加多个图形：</p>
+<p>首先创建一个聚合图：</p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724163129.png" alt="QQ截图20180724163129"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724163603.png" alt="QQ截图20180724163603"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724163948.png" alt="QQ截图20180724163948"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724164014.png" alt="QQ截图20180724164014"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724163833.png" alt="QQ截图20180724163833"></p>
+<p><strong>zabbix的宏的定义：</strong></p>
+<p>宏：macro，预设的文本替换模式；变量<br>级别：<br>全局：Administration –&gt; General –&gt; Macros<br>模板：编辑模板 –&gt; Macros<br>主机：编辑主机 –&gt; Macros   （仅对当前主机一个有效的）</p>
+<p>假如在三个级别都定义了宏，则主机级别的生效</p>
+<p>类型：<br>内建宏：{MACRO_NAME}<br>文档参考：<br><a href="https://www.zabbix.com/documentation/3.4/manual/appendix/macros/supported_by_location" target="_blank" rel="noopener">https://www.zabbix.com/documentation/3.4/manual/appendix/macros/supported_by_location</a></p>
+<p>自定义：{$MACRO_NAME}<br>命名方式：大写字母、数字和下划线；不能以数字开头</p>
+<p>1 . 设置全局宏的界面：</p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724165105.png" alt="QQ截图20180724165105"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724165458.png" alt="QQ截图20180724165458"></p>
+<p>在设置参数的时候，有关80端口的，就可以不用写80，而是用宏替换。（好处：当需要更改多处的80端口改为8080；时不需要一个个的去修改了，只需要在此处将宏的变量更改一下就可以了）</p>
+<p>2 .配置主机的宏的界面：</p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724170201.png" alt="QQ截图20180724170201"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724170324.png" alt="QQ截图20180724170324"></p>
+<p><strong>使用模板来构建监控选项：</strong></p>
+<p>示例：在已有主机上添加关于linux监控的选项；（使用模板来添加）</p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724171143.png" alt="QQ截图20180724171143"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724171218.png" alt="QQ截图20180724171218"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724171301.png" alt="QQ截图20180724171301"></p>
+<p>也可以自己创建一个新的模板然后自定义（跟配置主机一样）</p>
+<p><strong>使用网络上的脚本来构建监控 选项：</strong></p>
+<p><a href="https://share.zabbix.com/" target="_blank" rel="noopener">https://share.zabbix.com/</a>   （在此网站上可以查找所需要的模板）</p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724173020.png" alt="QQ截图20180724173020"></p>
+<p>要选择相对应的版本即可。</p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724173327.png" alt="QQ截图20180724173327"></p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724173712.png" alt="QQ截图20180724173712"></p>
+<p><img src="QQ%E6%88%AA%E5%9B%BE20180724174401.png" alt="QQ截图20180724174401"></p>
+<p>模板文件下载完成后，导入到zabbix模板库里面。就可以调用导入的模板文件了。</p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724174810.png" alt="QQ截图20180724174810"></p>
+<p>在下面搜索就可以查看了。</p>
+<p><img src="http://www.178linux.com/wp-content/uploads/2018/07/QQ%E6%88%AA%E5%9B%BE20180724175240.png" alt="QQ截图20180724175240"></p>
+<p>在被监控的服务器上：</p>
+<p>vim /etc/zabbix/zabbix_agentd.d/test.conf  （新建配置文件）</p>
+<p>定义一个key,然后在监控端就可以看到此key的值。</p>
+<p>UserParameter=memory.used,/usr/bin/free |/usr/bin/awk’/^Mem/{print $3}’ （内容）</p>
+<p>systemctl restart zabbix-agent   （重启服务，然后让key值生效）</p>
+<p>yum install zabbix-get -y （在服务器端下载手动测试的工具）</p>
+<p>zabbix_get -s 192.168.60.21 -p 10050 -k “memory.used”  （手动测试在服务器端）</p>
+
+          
         
       
     </div>
@@ -1783,7 +1229,7 @@ CPU内核数：2
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/Ansible使用介绍（二）YAML语法及Playbook/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/27/Virtualization虚拟化技术介绍/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="吕培新">
@@ -1802,7 +1248,7 @@ CPU内核数：2
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/30/Ansible使用介绍（二）YAML语法及Playbook/" itemprop="url">Ansible使用介绍（二）YAML语法及Playbook</a></h1>
+                <a class="post-title-link" href="/2018/07/27/Virtualization虚拟化技术介绍/" itemprop="url">Virtualization虚拟化技术介绍</a></h1>
         
 
         <div class="post-meta">
@@ -1814,8 +1260,1092 @@ CPU内核数：2
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-30T15:25:45+08:00">
-                2018-05-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-27T20:44:17+08:00">
+                2018-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="一、虚拟化基本概念"><a href="#一、虚拟化基本概念" class="headerlink" title="一、虚拟化基本概念"></a><strong>一、虚拟化基本概念</strong></h2><h3 id="什么是虚拟化？"><a href="#什么是虚拟化？" class="headerlink" title="什么是虚拟化？"></a><strong>什么是虚拟化？</strong></h3><p><strong>虚拟化</strong>是把物理的事物转换成为逻辑的方式表现出来</p>
+<p><strong>常见的虚拟化</strong></p>
+<p>内存虚拟化：内存页面Page File</p>
+<p>磁盘虚拟化：RAID，Volume</p>
+<p>网络虚拟化：vlan，vxlan</p>
+<p><strong>FusionSphere-x86/x64服务器的虚拟化</strong></p>
+<p>计算能力：CPU/Memory的虚拟化</p>
+<p>存储：VIMS文件系统</p>
+<p>网络：分布式虚拟交换机</p>
+<h3 id="虚拟化的优势"><a href="#虚拟化的优势" class="headerlink" title="虚拟化的优势"></a><strong>虚拟化的优势</strong></h3><p><strong>传统物流服务器</strong></p>
+<p>操作系统与物理服务器绑定</p>
+<p>1.难以迁移</p>
+<p>2.难以扩展</p>
+<p>3.空间占用高</p>
+<p>4.可靠性难以控制</p>
+<p>5.资源利用率低</p>
+<p>6.难以管理</p>
+<p><strong>虚拟化服务器</strong></p>
+<p>操作系统与物理服务器分离</p>
+<p>1.易于迁移、扩展、资源整合</p>
+<p>2.标准化的虚拟硬件</p>
+<p>3.由一系列文件组成，易于保护</p>
+<h3 id="虚拟化常见概念"><a href="#虚拟化常见概念" class="headerlink" title="虚拟化常见概念"></a><strong>虚拟化常见概念</strong></h3><p><strong>Guset OS：</strong>运行在虚拟机上的OS</p>
+<p><strong>Guset Machine：</strong>虚拟出来的虚拟机</p>
+<p><strong>Hypervisor：</strong>也叫VMM (Virtual Machine Monitor)虚拟机监控器，</p>
+<p><strong>Host OS：</strong>运行在物理机上的OS</p>
+<p><strong>Host Machine：</strong>物理机</p>
+<p><strong>模拟：</strong>emulation</p>
+<p>x86 -&gt; arm</p>
+<p>sata -&gt; scsi</p>
+<p><strong>完全虚拟化：</strong>Full Virtualization</p>
+<p>开发人员直接针对物理平台开发即可，性能能达到硬件IDE的40%</p>
+<p>CPU:</p>
+<p>BT</p>
+<p>HVM</p>
+<p><strong>半虚拟化：</strong>Para Virtualization</p>
+<p>也叫<strong>不完全虚拟化</strong>，开发人员需针对虚拟化平台开发,性能能达到硬件IDE的80%</p>
+<p><strong>建议：</strong>生产环境一般使用半虚拟化技术：简单、性能好、易迁移上云</p>
+<p><strong>IAAS**</strong>：**CloudOS上部署xen或kvm这样的虚拟机，基础架构即服务</p>
+<p><strong>PAAS**</strong>：**CloudOS上直接提供一个容器作为平台，不需要用户安装操作系统，平台即服务</p>
+<p><strong>SAAS**</strong>：**本机只需运行个浏览器，其他全交给云来解决，软件即服务</p>
+<p>以此延伸，近些年还出现了：</p>
+<p><strong>DBaas：</strong>数据库即服务</p>
+<p><strong>LBaas：</strong>负载均衡即服务</p>
+<p>……</p>
+<h2 id="二、虚拟化常见架构类型"><a href="#二、虚拟化常见架构类型" class="headerlink" title="二、虚拟化常见架构类型"></a><strong>二、虚拟化常见架构类型</strong></h2><p>根据在整个系统中的位置不同，虚拟化架构分为以下几种：</p>
+<p>1.寄居虚拟化架构</p>
+<p>2.裸金属虚拟化架构</p>
+<p>3.操作系统虚拟化架构</p>
+<p>4.混合虚拟化架构</p>
+<h3 id="一-寄居虚拟化架构"><a href="#一-寄居虚拟化架构" class="headerlink" title="(一)寄居虚拟化架构"></a><strong>(一)寄居虚拟化架构</strong></h3><p>寄居虚拟化架构指在宿主操作系统之上安装和运行虚拟化程序，依赖于宿主操作系统对设备的支持和物理</p>
+<p>资源的管理。（类似 Vmware Workstation 的程序）</p>
+<p><img src="寄居虚拟化.png" alt="寄居虚拟化"></p>
+<p><strong>优点：</strong>简单、易于实现</p>
+<p><strong>缺点：</strong>1.安装和运行应用程序依赖主机操作系统对设备的支持；</p>
+<p>2.管理开销较大，性能损耗大</p>
+<p><strong>代表产品：**</strong>VMware Workstation**</p>
+<h3 id="2-）裸金属虚拟化架构"><a href="#2-）裸金属虚拟化架构" class="headerlink" title="2**）裸金属虚拟化架构**"></a><strong>2**</strong>）裸金属虚拟化架构**</h3><p>裸金属虚拟化架构指直接在硬件上面安装虚拟化软件，再在其上安装操作系统和应用，依赖虚拟层内核和</p>
+<p>服务器控制台进行管理。</p>
+<p><img src="裸金属虚拟化.png" alt="裸金属虚拟化"></p>
+<p><strong>优点：</strong>1.虚拟机不依赖操作系统</p>
+<p>2.支持多种操作系统，多种应用</p>
+<p><strong>缺点：</strong>虚拟层内核开发难度大</p>
+<p><strong>代表产品：**</strong>WNware ESXServer、Citrix XenServer**</p>
+<h3 id="三-操作系统虚拟化架构"><a href="#三-操作系统虚拟化架构" class="headerlink" title="(三)操作系统虚拟化架构"></a><strong>(三)操作系统虚拟化架构</strong></h3><p>操作系统虚拟化架构在操作系统层面增加虚拟服务器功能。操作系统虚拟化架构把单个的操作系统划分为</p>
+<p>多个容器，使用容器管理器来进行管理。</p>
+<p>宿主操作系统负责在多个虚拟服务器（即容器）之间分配硬件资源，并且让这些服务器彼此独立。</p>
+<p><img src="操作系统虚拟化.png" alt="操作系统虚拟化"></p>
+<p><strong>优点：</strong>1.简单、易于实现</p>
+<p>2.管理开销非常低</p>
+<p><strong>缺点：</strong>隔离性查，多容器共享同一操作系统</p>
+<p><strong>代表产品：**</strong>Docker**</p>
+<h3 id="四-混合虚拟化架构"><a href="#四-混合虚拟化架构" class="headerlink" title="(四)混合虚拟化架构"></a><strong>(四)混合虚拟化架构</strong></h3><p>混合虚拟化架构将一个内核级驱动器插入到宿主操作系统内核。这个驱动器作为虚拟硬件管理器来协调虚</p>
+<p>拟机和宿主操作系统之间的硬件访问。</p>
+<p><img src="混合虚拟化.png" alt="混合虚拟化"></p>
+<p><strong>优点：</strong>1.相对于寄居虚拟化架构，没有冗余，性能高；</p>
+<p>2.可支持多种操作系统</p>
+<p><strong>缺点：</strong>需底层硬件支持虚拟化拓展功能</p>
+<p><strong>代表产品：**</strong>Redhat KVM**</p>
+<h2 id="三、Xen架构简介"><a href="#三、Xen架构简介" class="headerlink" title="三、Xen架构简介"></a><strong>三、Xen架构简介</strong></h2><p><img src="1QX45XT2UT1@E8GY7NW.png" alt="1Q~X45X(T2{UT1@E8GY{7NW"></p>
+<p><strong>Domain U**</strong>：**运行在Xen Hypervisor上的普通虚拟机</p>
+<p><strong>Domain 0**</strong>：**运行在Xen Hypervisor上的特权虚拟机。它拥有访问物理I/O资源的权限，同时和系统上运</p>
+<p>行的其他虚拟机进行交互。Domain 0必须要在其他Domain启动之前启动。</p>
+<h3 id="虚拟机复用有限的外设资源："><a href="#虚拟机复用有限的外设资源：" class="headerlink" title="虚拟机复用有限的外设资源："></a><strong>虚拟机复用有限的外设资源：</strong></h3><p>1)Hypervisor截获虚拟机对物理硬件的访问请求，然后通过软件的方式来模拟真实设备的效果；</p>
+<p>2)前端设备驱动将数据通过VMM提供的接口转发到后端驱动</p>
+<p>3)后端驱动VM的数据进行分时分通道的处理</p>
+<h2 id="四、CPU虚拟化原理介绍"><a href="#四、CPU虚拟化原理介绍" class="headerlink" title="四、CPU虚拟化原理介绍"></a><strong>四、CPU虚拟化原理介绍</strong></h2><h3 id="一-基于软件的CPU的虚拟化"><a href="#一-基于软件的CPU的虚拟化" class="headerlink" title="(一)基于软件的CPU的虚拟化"></a><strong>(一)基于软件的CPU的虚拟化</strong></h3><p>基于软件的 CPU 虚拟化，故名思议，就是通过软件的形式来模拟每一条指令。通过前面的文章我们知道常</p>
+<p>用的软件虚拟化技术有两种：优先级压缩和二进制代码翻译。这两种是通用技术，可以用在所有虚拟化类</p>
+<p>型中。我们就结合 intercept 和 virtualize 来看看 CPU 软件虚拟化是怎么做的。</p>
+<p>首先，一些必须的硬件知识要知道，X86 体系架构为了让上层的软件（操作系统、应用程序）能够访问硬</p>
+<p>件，提供了四个 CPU 特权级别，Ring 0 是最高级别，Ring 1 次之，Ring 2 更次之，Ring 3 是最低级别。</p>
+<p>一般，操作系统由于要直接访问硬件和内存，因此它的代码需要运行在最高级别 Ring 0 上，而应用程序的</p>
+<p>代码运行在最低级别 Ring 3 上，如果要访问硬件和内存，比如设备访问，写文件等，就要执行相关的系统</p>
+<p>调用，CPU 的运行级别发生从 Ring 3 到 Ring 0 的切换，当完成之后，再切换回去，我们熟悉的用户态和</p>
+<p>内核态切换的本质就来自这里。</p>
+<p>虚拟化的实现也是基于这个思想，VMM 本质上是个 Host OS，运行在 Ring 0 上，Guest OS 运行在 Ring 1</p>
+<p>上，再往上是相应层次的应用程序运行在 Ring 2 和 Ring 3 上。</p>
+<p><img src="CPU软件虚拟化-1.png" alt="CPU软件虚拟化"></p>
+<h3 id="二-基于硬件的CPU虚拟化"><a href="#二-基于硬件的CPU虚拟化" class="headerlink" title="(二)基于硬件的CPU虚拟化"></a><strong>(二)基于硬件的CPU虚拟化</strong></h3><p>上面的这种截获再模拟的纯软件的虚拟化方式，势必是性能非常低的。那怎么样提高性能呢，有一种改进</p>
+<p>的方式是修改 Guest OS 中关于特权指令的相关操作，将其改为一种函数调用的方式，让 VMM 直接执</p>
+<p>行，而不是截获和模拟，这样就能在一定程度上提高性能。</p>
+<p>但这种方式并不通用，要去改 Guest OS 的代码，只能看作是一种定制。为了能够通用，又能够提高性</p>
+<p>能，就只能从硬件上去做文章了。所以，后来，以 Intel 的 VT-x 和 AMD 的 AMD-V 为主的硬件辅助的</p>
+<p>CPU 虚拟化就被提出来（Intel VT 包括 VT-x （支持 CPU 虚拟化）、EPT（支持内存虚拟化）和 VT-</p>
+<p>d（支持 I/O 虚拟化）。</p>
+<p>CPU 硬件辅助虚拟化在 Ring 模式的基础上引入了一种新的模式，叫 VMX 模式。它包括根操作模式</p>
+<p>（VMX Root Operation）和非根操作模式（VMX Non-Root Operation）。</p>
+<p>这两种模式都有 Ring 0 – Ring 3 的特权级。所以，在描述某个应用程序时，除了描述其属于哪个特权级，</p>
+<p>还要指明其处于根模式还是非根模式。</p>
+<p>引入这种模式的好处就在于，Guest OS 运行在 Ring 0 上，就意味着它的核心指令可以直接下达到硬件层</p>
+<p>去执行，而特权指令等敏感指令的执行则是由硬件辅助，直接切换到 VMM 执行，这是自动执行的，应用</p>
+<p>程序是感知不到的，性能自然就提高了。</p>
+<p><img src="CPU硬件虚拟化-1.png" alt="CPU硬件虚拟化"></p>
+<p><strong>KVM 是一种硬件辅助的虚拟化技术，支持 Intel VT-x 和 AMD-v 技术。</strong></p>
+<h2 id="五、内存虚拟化原理介绍"><a href="#五、内存虚拟化原理介绍" class="headerlink" title="五、内存虚拟化原理介绍"></a><strong>五、内存虚拟化原理介绍</strong></h2><p>通过各种内存复用技术（<strong>零页共享、内存气泡和内存交换</strong>）与合理的调度，使主机上的虚拟机对内存的</p>
+<p>访问及时响应，减少内存复用开启情况下的虚拟机性能损耗</p>
+<p><strong>(一)零页共享</strong></p>
+<p>将主机上的多个虚拟机的零页内存在物理内存中进行合并，释放出更多的物理内存供虚拟机使用。</p>
+<p><strong>(二)内存气泡</strong></p>
+<p>Hypervisor通过内存气泡将较空闲虚拟机内存释放给内存使用率较高的虚拟机，用来提升内存利用率。</p>
+<p>内存气泡技术对虚拟机性能影响较小，但是在内存减少时，用户能感知到</p>
+<p><strong>(三)内存交换</strong></p>
+<p>当虚拟机的内存压力较大时，将虚拟机内存页交换到磁盘中从而释放内存；</p>
+<p>当虚拟机内存页交换到磁盘后，虚拟机的性能将下降比较明显</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+	<div>
+
+	</div>
+	
+    
+	<div>
+
+    
+
+    
+
+	
+	
+	
+	
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </div></article>
+
+
+    
+		
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/24/Tomcat介绍及相关实验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/24/Tomcat介绍及相关实验/" itemprop="url">Tomcat介绍及相关实验</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-24T20:42:27+08:00">
+                2018-07-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="一、tomcat介绍"><a href="#一、tomcat介绍" class="headerlink" title="一、tomcat介绍"></a><strong>一、tomcat介绍</strong></h2><p><strong>Tomcat</strong>是Apache 软件基金会（Apache Software Foundation）的Jakarta 项目中的一个核心项目，由</p>
+<p>Apache、Sun 和其他一些公司及个人共同开发而成。因为Tomcat 技术先进、性能稳定，而且免费，因而</p>
+<p>深受Java 爱好者的喜爱并得到了部分软件开发商的认可，成为目前比较流行的Web 应用服务器。</p>
+<p><strong>Tomcat</strong> 服务器是一个免费的开放源代码的Web 应用服务器，属于轻量级应用服务器，在中小型系统和并</p>
+<p>发访问用户不是很多的场合下被普遍使用，是开发和调试JSP 程序的首选。对于一个初学者来说，可以这</p>
+<p>样认为，当在一台机器上配置好Apache 服务器，可利用它响应HTML（标准通用标记语言下的一个应用）</p>
+<p>页面的访问请求。实际上Tomcat是Apache 服务器的扩展，但运行时它是独立运行的，所以当你运行</p>
+<p>tomcat 时，它实际上作为一个与Apache 独立的进程单独运行的。<strong>Apache 为HTML页面服务，而</strong></p>
+<p><strong>Tomcat 实际上运行JSP 页面和Servlet。</strong></p>
+<p><strong>官方网站：</strong><a href="http://tomcat.apache.org/" target="_blank" rel="noopener">http://tomcat.apache.org/</a></p>
+<h3 id="如何安装tomcat？"><a href="#如何安装tomcat？" class="headerlink" title="如何安装tomcat？"></a><strong>如何安装tomcat？</strong></h3><p><strong>方法一：</strong>本地yum安装(base源)</p>
+<p>systemctl start tomcat</p>
+<p>默认监听：8080，8005(管理端口)，8009</p>
+<p><img src="1-34.png" alt="1"></p>
+<p><strong>方法二：</strong>ASF官网站点下载安装</p>
+<p>官方网站下载地址：<a href="https://tomcat.apache.org/download-90.cgi" target="_blank" rel="noopener">https://tomcat.apache.org/download-90.cgi</a></p>
+<p>wget <a href="http://mirrors.hust.edu.cn/apache/tomcat/tomcat-8/v8.5.24/bin/apache-tomcat-8.5.24.tar.gz" target="_blank" rel="noopener">http://mirrors.hust.edu.cn/apache/tomcat/tomcat-8/v8.5.24/bin/apache-tomcat-8.5.24.tar.gz</a></p>
+<p>tar -zxf apache-tomcat-8.5.24.tar.gz</p>
+<p>启动tomcat</p>
+<p>./apache-tomcat-8.5.24/bin/startup.sh</p>
+<p>添加环境变量CATELINA_HOME</p>
+<p><strong>vim /etc/profile.d/</strong></p>
+<p>export CATALINA_BASE=/usr/local/tomcat</p>
+<p>export PATH=$CATALINA:$PATH</p>
+<p>服务控制由catalina脚本执行</p>
+<p>catalina.sh start</p>
+<p>此时，浏览器访问<strong>localhostIp:8080</strong>就可以看到tomcat默认界面了</p>
+<p><img src="2-31.png" alt="2"></p>
+<h2 id="二、tomcat服务配置"><a href="#二、tomcat服务配置" class="headerlink" title="二、tomcat服务配置"></a><strong>二、tomcat服务配置</strong></h2><h3 id="Tomcat的主要目录结构："><a href="#Tomcat的主要目录结构：" class="headerlink" title="Tomcat的主要目录结构："></a><strong>Tomcat的主要目录结构：</strong></h3><p><img src="3-28.png" alt="3"></p>
+<p><strong>bin：</strong>脚本，及启动时用到的类；</p>
+<p><strong>conf：</strong>配置文件目录；</p>
+<p><strong>lib：</strong>库文件，Java类库，jar；</p>
+<p><strong>logs：</strong>日志文件目录；</p>
+<p><strong>temp：</strong>临时文件目录；</p>
+<p><strong>webapps：</strong>webapp的默认目录；</p>
+<p><strong>work：</strong>工作目录，存放编译后的字节码文件；</p>
+<h3 id="Tomcat的配置文件构成："><a href="#Tomcat的配置文件构成：" class="headerlink" title="Tomcat的配置文件构成："></a><strong>Tomcat的配置文件构成：</strong></h3><p><strong>server.xml：</strong>主配置文件；</p>
+<p><strong>web.xml：</strong>每个webapp只有“部署”后才能被访问，它的部署方式通常由web.xml进行定义，其存放位置为</p>
+<p>WEB-INF/目录中；此文件为所有的webapps提供默认部署相关的配置；</p>
+<p><strong>context.xml：</strong>每个webapp都可以使用的配置文件，它通常由专用的配置文件context.xml来定义，其存</p>
+<p>放位置为WEB-INF/目录中；此文件为所有的webapps提供默认配置；</p>
+<p><strong>tomcat-users.xml：</strong>用户认证的账号和密码文件；角色（role），用户（User）；此文件在tomcat启动</p>
+<p>时被装入内存；</p>
+<p><strong>catalina.policy：</strong>当使用-security选项启动tomcat时，用于为tomcat设置安全策略；</p>
+<p><strong>catalina.properties：</strong>Java属性的定义文件，用于设定类加载器路径，以及一些与JVM调优相关参数；</p>
+<p><strong>logging.properties：</strong>日志系统相关的配置；</p>
+<p>Tomcat的核心组件：<strong>server.xml</strong></p>
+<server><br><br><service><br><br><connector><br><br><connector><br><br>…<br><br><engine><br><br><host><br><br><context><br><br><context><br><br>…<br><br></context></context></host><br><br><host><br><br>…<br><br></host><br><br>…<br><br></engine><br><br></connector></connector></service><br><br></server>
+
+
+
+
+
+<p>每一个组件都由一个Java“<strong>类</strong>”实现，这些组件大体可分为以下几个类型：</p>
+<p>顶级组件：Server</p>
+<p>服务类组件：Service</p>
+<p>连接器组件：http, https, ajp（apache jserv protocol）</p>
+<p>容器类：Engine, Host, Context</p>
+<p>被嵌套类：valve, logger, realm, loader, manager, …</p>
+<p>集群类组件：listener, cluster, …</p>
+<p>一般 web 项目路径结构</p>
+<p><img src="4-23.png" alt="4"></p>
+<p><strong>webapp</strong>归档格式：</p>
+<p>.war：webapp;</p>
+<p>.jar：EJB的类打包文件(类库)；</p>
+<p>.rar：资源适配器类打包文件；</p>
+<p>.ear：企业级webapp；</p>
+<p>…</p>
+<h3 id="部署-deploy-webapp的相关操作："><a href="#部署-deploy-webapp的相关操作：" class="headerlink" title="部署(deploy)webapp的相关操作："></a><strong>部署(deploy)webapp的相关操作：</strong></h3><p><strong>deploy：</strong>将webapp的源文件放置于目标目录(网页程序文件存放目录)，配置tomcat服务器能够基于</p>
+<p>web.xml和context.xml文件中定义的路径来访问此webapp；将其特有的类和依赖的类通过class loader装载</p>
+<p>至JVM；</p>
+<p>部署有两种方式：</p>
+<p>自动部署：auto deploy</p>
+<p>手动部署:</p>
+<p>冷部署：把webapp复制到指定的位置，而后才启动tomcat；</p>
+<p>热部署：在不停止tomcat的前提下进行部署；</p>
+<p>部署工具：manager、ant脚本、tcd(tomcat client deployer)等；</p>
+<p><strong>undeploy：</strong>拆除（反部署），停止webapp，并从tomcat实例上卸载webapp；</p>
+<p><strong>start：</strong>启动处于停止状态的webapp；</p>
+<p><strong>stop：</strong>停止webapp，不再向用户提供服务；其类依然在jvm上；</p>
+<p><strong>redeploy：</strong>重新部署；</p>
+<h3 id="Tomcat基础架构"><a href="#Tomcat基础架构" class="headerlink" title="Tomcat基础架构"></a><strong>Tomcat基础架构</strong></h3><p><img src="5-15.png" alt="5"></p>
+<p>连接器(connector)负责接收请求并传给引擎，由引擎运行jsp代码并返回给连接器</p>
+<p><strong>Server：</strong>代表整个服务器，一个server可以包含多个service</p>
+<p>一个Service可包含一个Engine，多个Connecter</p>
+<p><strong>Connector：</strong>连接器类元素，代表通信接</p>
+<p><strong>Engine：</strong>为特定的Service组件处理客户请求，要包含多个Host</p>
+<p><strong>Host：</strong>为特定的虚拟主机组件处理客户请求，可包含多个Context</p>
+<p><strong>Context：</strong>为特定的Web应用处理所有的客户请求</p>
+<h3 id="Tomcat的常用组件配置："><a href="#Tomcat的常用组件配置：" class="headerlink" title="Tomcat的常用组件配置："></a><strong>Tomcat的常用组件配置：</strong></h3><p><strong>Server</strong></p>
+<p><strong>功能：</strong>代表tomcat instance，即表现出的一个java进程；监听在8005端口，只接收“SHUTDOWN”。各</p>
+<p>server监听的端口不能相同，因此，在同一物理主机启动多个实例时，需要修改其监听端口为不同的端</p>
+<p>口；</p>
+<p>port=”-1″,</p>
+<p>shutdown=”RANDOM_CHARCTER”</p>
+<p><strong>Service</strong></p>
+<p><strong>功能：</strong>用于实现将一个或多个connector组件关联至一个engine组件；</p>
+<p>一个Server中可以有多个Service</p>
+<p><strong>Connector</strong></p>
+<p><strong>功能：</strong>负责接收请求，常见的有三类http/https/ajp；</p>
+<p>进入tomcat的请求可分为两类：</p>
+<p>(1) standalone : 请求来自于客户端浏览器；</p>
+<p>(2) 由其它的web server反代：来自前端的反代服务器；</p>
+<p>nginx –&gt; http connector –&gt; tomcat</p>
+<p>httpd(proxy_http_module) –&gt; http connector –&gt; tomcat</p>
+<p>httpd(proxy_ajp_module) –&gt; ajp connector –&gt; tomcat</p>
+<p>httpd(mod_jk) –&gt; ajp connector –&gt; tomcat</p>
+<p><strong>属性：</strong></p>
+<p>port=”8080″</p>
+<p>protocol=”HTTP/1.1″</p>
+<p>connectionTimeout=”20000″</p>
+<p>address：监听的IP地址；默认为本机所有可用地址；</p>
+<p>maxThreads：最大并发连接数，默认为200；</p>
+<p>enableLookups：是否启用DNS查询功能；</p>
+<p>acceptCount：等待队列的最大长度；</p>
+<p>secure：</p>
+<p>sslProtocol：</p>
+<p><strong>Engine</strong></p>
+<p><strong>功能：</strong>Servlet实例，即servlet引擎，其内部可以一个或多个host组件来定义站点； 通常需要通过</p>
+<p>defaultHost来定义默认的虚拟主机；</p>
+<p><strong>属性：</strong></p>
+<p>name=           #此引擎的逻辑名称，用于日志和错误消息。</p>
+<p>defaultHost=”localhost”   #默认主机名，用于标识将处理指向此服务器上主机名称但未在此配置文件中配</p>
+<p>置的请求的主机。</p>
+<p>jvmRoute=</p>
+<p><strong>Host</strong></p>
+<p><strong>功能：</strong>位于engine内部用于接收请求并进行相应处理的主机或虚拟主机</p>
+<p>Host元素表示一个虚拟主机</p>
+<host name="”localhost”" appbase="”webapps”" unpackwars="”true”" autodeploy="”true”"><br><br></host>
+
+
+
+<p>常用属性说明：</p>
+<p>name：名称；用于日志输出</p>
+<p>appBase：虚拟主机对应的应用基础路径，可以是个绝对路径, 或${CATALINA_BASE}相对路径</p>
+<p>xmlBase：虚拟主机XML基础路径,里面应该有Context xml配置文件；可以是个绝对路径, 或${CATALINA_BASE}相对路径</p>
+<p>createDirs：当appBase和xmlBase不存在时,是否创建目录；默认为true</p>
+<p>autoDeploy：是否周期性的检查appBase和xmlBase并deploy web应用和context描述符；默认为true</p>
+<p>deployIgnore：忽略deploy的正则</p>
+<p>deployOnStartup：Tomcat启动时是否自动deploy；默认为true</p>
+<p><strong>Context</strong></p>
+<p><strong>功能：</strong>Context元素表示一个Web应用程序，它在特定的虚拟主机中运行。每个Web应用程序都基于Web</p>
+<p>应用程序存档（WAR）文件，或者包含相应的解包内容的相应目录</p>
+<p><strong>常用属性说明：</strong></p>
+<p>altDDName：web.xml部署描述符路径；默认 /WEB-INF/web.xml</p>
+<p>docBase：Context的Root路径，和Host的appBase相结合, 可确定web应用的实际目录</p>
+<p>path ：web应用的context path；如果为根路径,则配置为空字符串(“”), 不能不配置</p>
+<p>privileged：是否使用Tomcat提供的manager servlet</p>
+<p>reloadable：/WEB-INF/classes/ 和/WEB-INF/lib/ 目录中class文件发生变化是否自动重新加载；默认为false</p>
+<p>swallowOutput：true情况下, System.out和System.err输出将被定向到web应用日志中；默认为false</p>
+<p><strong>Valve</strong></p>
+<valve classname="”org.apache.catalina.valves.AccessLogValve”" directory="”logs”" prefix="”localhost_access_log”" suffix="”.txt”" pattern="”%h" %l %u %t &quot;%r&quot; %s %b”>
+
+
+
+<p>Valve存在多种类型：</p>
+<p>定义访问日志：org.apache.catalina.valves.AccessLogValve</p>
+<p>定义访问控制：org.apache.catalina.valves.RemoteAddrValve</p>
+<valve classname="”org.apache.catalina.valves.RemoteAddrValve”" deny="”172\.16\.100\.67″/">
+
+
+
+<h2 id="三、实验：实现tomcat应用部署及版本控制"><a href="#三、实验：实现tomcat应用部署及版本控制" class="headerlink" title="三、实验：实现tomcat应用部署及版本控制"></a><strong>三、实验：实现tomcat应用部署及版本控制</strong></h2><h3 id="前期准备："><a href="#前期准备：" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>本节实验全部以yum安装为准,tomcat版本：<strong>tomcat-7.0.76-6.el7.noarch</strong></p>
+<p>创建一个测试类应用</p>
+<p>mkdir  -pv  /usr/share/tomcat/webapps/test/{classes,lib,WEB-INF}</p>
+<p><img src="2-32.png" alt="2"></p>
+<p><strong>tomcat端测试：</strong></p>
+<p>浏览器打开：tomcat.wxlinux.com/test/</p>
+<p><img src="3-29.png" alt="3"></p>
+<p>当应用被部署上线后，就会在<strong>/usr/share/tomcat/work/Catalina/localhost/test</strong>目录生成源码和类</p>
+<p>库文件</p>
+<p><img src="4-24.png" alt="4"></p>
+<h3 id="版本部署"><a href="#版本部署" class="headerlink" title="版本部署"></a><strong>版本部署</strong></h3><p>软连接实现部署部署</p>
+<p><img src="5-16.png" alt="5"></p>
+<p>软连接方式不支持热部署，需重启tomcat服务后才能连接成功</p>
+<p>systemctl restart tomcat</p>
+<p><img src="6-14.png" alt="6"></p>
+<p>生产环境中一般使用git来实现版本控制，可以使用一个目录名包含多个版本程序</p>
+<h2 id="四、实验：tomcat创建虚拟主机Host及Context"><a href="#四、实验：tomcat创建虚拟主机Host及Context" class="headerlink" title="四、实验：tomcat创建虚拟主机Host及Context"></a><strong>四、实验：tomcat创建虚拟主机Host及Context</strong></h2><h3 id="定义虚拟主机"><a href="#定义虚拟主机" class="headerlink" title="定义虚拟主机"></a><strong>定义虚拟主机</strong></h3><p>修改server配置文件添加一个host配置：</p>
+<p><strong>vim /etc/tomcat/server.xml</strong></p>
+<p><img src="1-36.png" alt="1"></p>
+<p>写入一个测试类应用，内容如下：</p>
+<p>mkdir /data/webapps/ROOT/{classes,lib,META-INF,WEB-INF} -pv</p>
+<p><img src="2-33.png" alt="2"></p>
+<p>为了方便访问，这里添加主机名解析到hosts文件中</p>
+<p><strong>vim /etc/hosts</strong></p>
+<p>192.168.30.18   node1.wxlinux.com</p>
+<p>浏览器访问node1.wxlinux.com:8080</p>
+<p><img src="3-30.png" alt="3"></p>
+<h3 id="自定义host日志："><a href="#自定义host日志：" class="headerlink" title="自定义host日志："></a><strong>自定义host日志：</strong></h3><p><strong>vim /etc/tomcat/server.xml</strong></p>
+<p><img src="4-25.png" alt="4"></p>
+<p>当host被访问时，后生成日志：</p>
+<p><img src="5-17.png" alt="5"></p>
+<p>创建一个context：</p>
+<p><strong>vim /etc/tomcat/server.xml</strong></p>
+<p><img src="6-15.png" alt="6"></p>
+<p>在context定义的目录中创建另外一个应用，为了方便对比，仅仅改变<strong>字体颜色</strong>：</p>
+<p><strong>测试访问：</strong></p>
+<p><img src="8-12.png" alt="8"></p>
+<h2 id="五、实验：开启tomcat管理页面"><a href="#五、实验：开启tomcat管理页面" class="headerlink" title="五、实验：开启tomcat管理页面"></a><strong>五、实验：开启tomcat管理页面</strong></h2><h3 id="前期准备：-1"><a href="#前期准备：-1" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>虚拟机一台</p>
+<p>系统版本：CentOS 7.4      IP：192.168.30.27</p>
+<h3 id="manager管理页面："><a href="#manager管理页面：" class="headerlink" title="manager管理页面："></a><strong>manager管理页面：</strong></h3><p><strong>vim /etc/tomcat/tomcat-users.xml</strong></p>
+<p><img src="1-37.png" alt="1"></p>
+<p>浏览器打开<strong>192.168.30.27:8080</strong>点击红色区域</p>
+<p><img src="2-34.png" alt="2"></p>
+<p>管理界面可进行对web的管理，如停止，开始，卸载部署等操作</p>
+<p><img src="3-31.png" alt="3"></p>
+<p>图形界面热部署WAR文件：</p>
+<p><img src="4-26.png" alt="4"></p>
+<h3 id="HostManager管理页面："><a href="#HostManager管理页面：" class="headerlink" title="HostManager管理页面："></a><strong>HostManager管理页面：</strong></h3><p><strong>vim /etc/tomcat/tomcat-users.xml</strong></p>
+<p><img src="5-18.png" alt="5"></p>
+<p><strong>测试访问：</strong></p>
+<p><img src="6-16.png" alt="6"><img src="7-14.png" alt="7"></p>
+</valve></valve>
+          
+        
+      
+    </div>
+    
+    
+    
+
+	<div>
+
+	</div>
+	
+    
+	<div>
+
+    
+
+    
+
+	
+	
+	
+	
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </div></article>
+
+
+    
+		
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/19/Varnish缓存服务介绍及相关实验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/19/Varnish缓存服务介绍及相关实验/" itemprop="url">Varnish缓存服务介绍及相关实验</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-19T20:40:24+08:00">
+                2018-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="一、缓存基本概念"><a href="#一、缓存基本概念" class="headerlink" title="一、缓存基本概念"></a><strong>一、缓存基本概念</strong></h2><p><strong>缓存</strong>是指把对某些请求的结果缓存下来，下次请求直接使用数据响应，这样极大的节省了系统获取源数据</p>
+<p>资源的时间，若我们把大量的请求结果都使用缓存服务器来响应，那么我们可以大大减少计算机数量减少</p>
+<p>成本。</p>
+<p><strong>数据缓存：</strong>从后端关系系数据库加载到应用服务器进行缓存，存在于数据库与服务器之间，一般是缓存</p>
+<p>SELECT语句。常用有：redis，memcached</p>
+<p><strong>页面缓存：</strong>对静态内容进行缓存，存在于调度器与WEB服务器之间，通常只是缓存GET,HEAD方法的请</p>
+<p>求。常用有：squid-cache,varinish-cache</p>
+<p><strong>缓存命中：</strong>hit，多次查询能够在缓存中找到对应项</p>
+<p>衡量缓存命中率有两种标准：</p>
+<p>字节命中率</p>
+<p>请求命中率</p>
+<p>一般来说，当缓存命中率30%以上能够带来正向作用</p>
+<p><strong>代理式缓存：</strong>页面缓存一般都是代理式缓存，要成为代理式缓存，首先它是台代理服务器</p>
+<p><strong>旁挂式缓存：</strong>数据缓存一般都是旁挂式缓存</p>
+<h3 id="页面缓存"><a href="#页面缓存" class="headerlink" title="页面缓存"></a><strong>页面缓存</strong></h3><p>squid-cache：历史悠久页面缓存系统，类似于Apache与Nginx的关系</p>
+<p>varinish-cache：轻量级页面缓存系统，但稳定性不如squid-cache</p>
+<p><strong>基于页面过期时间的缓存机制(**</strong>早期)<strong>**：</strong></p>
+<p>当客户端发起请求时，先到缓存服务器中查找有无对应的缓存，如果没有则将请求发送到后端服务器，后‘’</p>
+<p>端服务器发送响应报文并附带过期时间(expires)</p>
+<p>存在问题：</p>
+<p>(1)当后端数据发送变化时，缓存变为旧内容</p>
+<p>(2)当缓存服务器中数据过期时，有可能还会收到相同的客户端请求</p>
+<p><strong>根据条件式验证的缓存机制：</strong></p>
+<p>存在问题：</p>
+<p>粒度大，1秒，可能会出现缓存查询一致，其实内容已发生变化，得到过期内容</p>
+<p>解决方法：</p>
+<p>添加一个标签Etag，将标签与查询结果一起返回</p>
+<p>http 1.1时代：过期时间+条件式验证组合使用</p>
+<p><strong>缓存预热：</strong>通过自己下载一些网络请求来访问缓存服务器以达到最佳状态</p>
+<p>private cache：私有缓存，如浏览器缓存</p>
+<p>public cache：公共缓存，可能不止一级，如CDN,页面缓存系统</p>
+<p>一般公有缓存+私有缓存应该能到达90%的缓存命中率</p>
+<p><img src="1-22.png" alt="1"></p>
+<p>CDN：Ccontent Delivery Network内容分发系统</p>
+<p>距离判定</p>
+<p>链路状态；判定</p>
+<h2 id="二、Varnish缓存服务介绍"><a href="#二、Varnish缓存服务介绍" class="headerlink" title="二、Varnish缓存服务介绍"></a><strong>二、Varnish缓存服务介绍</strong></h2><p><strong>epel</strong>源提供，支持三类缓存：</p>
+<p><strong>内存缓存：</strong>malloc，重启后所有缓存项失效；</p>
+<p><strong>磁盘缓存：</strong>file，黑盒，重启后所有缓存项失效；</p>
+<p><strong>持久缓存：</strong>persistent(实验阶段)，黑盒，重启后所有缓存项有效</p>
+<p>默认监听端口：<strong>6081,6082</strong>(管理端口)</p>
+<p><strong>Varinish**</strong>官方架构图**</p>
+<p><img src="架构图.png" alt="架构图"></p>
+<p>varnish主要包含三个部分：</p>
+<p><strong>management：</strong>提供管理接口，并控制缓存进程的特性</p>
+<p><strong>child/cache：</strong>提供缓存功能，记录日志，访问控制，后端服务器管理</p>
+<p><strong>vcl：</strong>给child/cache提供配置文件的编译</p>
+<h3 id="Varinishd服务配置："><a href="#Varinishd服务配置：" class="headerlink" title="Varinishd服务配置："></a><strong>Varinishd服务配置：</strong></h3><p>/etc/varnish/varnish.params： 配置varnish服务进程的工作特性，例如监听的地址和端口，缓存机制；</p>
+<p>/etc/varnish/default.vcl：配置各Child/Cache线程的工作属性；</p>
+<p><strong>主程序：</strong></p>
+<p>/usr/sbin/varnishd</p>
+<p><strong>CLI interface：</strong></p>
+<p>/usr/bin/varnishadm</p>
+<p><strong>Shared Memory Log交互工具：</strong></p>
+<p>/usr/bin/varnishhist</p>
+<p>/usr/bin/varnishlog</p>
+<p>/usr/bin/varnishncsa</p>
+<p>/usr/bin/varnishstat</p>
+<p>/usr/bin/varnishtop </p>
+<p><strong>测试工具程序：</strong></p>
+<p>/usr/bin/varnishtest</p>
+<p><strong>VCL配置文件重载程序：</strong></p>
+<p>/usr/sbin/varnish_reload_vcl</p>
+<p><strong>Systemd Unit File：</strong></p>
+<p>/usr/lib/systemd/system/varnish.service   #varnish服务</p>
+<p>/usr/lib/systemd/system/varnishlog.service  #logger daemon</p>
+<p>/usr/lib/systemd/system/varnishncsa.service   #lgger daemon  in apache format</p>
+<p><img src="架构图2-1.png" alt="架构图2"></p>
+<h3 id="实验：实现varnishd-缓存基本功能"><a href="#实验：实现varnishd-缓存基本功能" class="headerlink" title="实验：实现varnishd**缓存基本功能**"></a><strong>实验：实现varnishd**</strong>缓存基本功能**</h3><p><strong>前期准备：</strong></p>
+<p>虚拟机2台</p>
+<p><strong>varinishd服务器：</strong>192.168.30.10    系统版本：CentOS 7.4</p>
+<p><strong>node1：1</strong>92.168.30.27          系统版本：CentOS 7.4</p>
+<p><strong>varinish：</strong></p>
+<p>yum install varnish</p>
+<p>systemctl start varnishd</p>
+<p>此时访问varnish的6081端口，显示连接后端失败</p>
+<p><img src="1-23.png" alt="1"></p>
+<p>配置varnish：</p>
+<p><strong>vim /etc/varnish/default.vcl</strong></p>
+<p><img src="2-20.png" alt="2"></p>
+<p>varnish_reload acl</p>
+<p><strong>node1：</strong></p>
+<p>开启WEB服务</p>
+<p>echo backend Server node1 &gt; /var/www/html/index.html</p>
+<p>此时再次访问192.168.30.10:6081，基本的varnish缓存功能就实现了</p>
+<p><img src="3-19.png" alt="3"></p>
+<h2 id="三、VCL语言与状态引擎"><a href="#三、VCL语言与状态引擎" class="headerlink" title="三、VCL语言与状态引擎"></a><strong>三、VCL语言与状态引擎</strong></h2><p><strong>相关概念：</strong></p>
+<p>”域“专有类型的配置语言；</p>
+<p><strong>state engine：</strong>状态引擎；</p>
+<p>VCL有多个状态引擎，状态之间存在相关性，但状态引擎彼此间互相隔离；每个状态引擎可使用return(x)</p>
+<p>指明关联至哪个下一级引擎；每个状态引擎对应于vcl文件中的一个配置段，即为subroutine</p>
+<p><strong>vcl_hash –&gt; return(hit) –&gt; vcl_hit</strong></p>
+<h3 id="varnish状态引擎类型："><a href="#varnish状态引擎类型：" class="headerlink" title="varnish状态引擎类型："></a><strong>varnish状态引擎类型：</strong></h3><p><strong>varnish 4.0：</strong></p>
+<p>​                  <strong>vcl_init</strong></p>
+<p>​                  <strong>vcl_recv</strong></p>
+<p>​                  <strong>vcl_hash</strong></p>
+<p>​                  <strong>vcl_hit</strong></p>
+<p>​                  <strong>vcl_pass</strong></p>
+<p>​                  <strong>vcl_miss</strong></p>
+<p>​                  <strong>vcl_pipe</strong></p>
+<p>​                  <strong>vcl_waiting</strong></p>
+<p>​                  <strong>vcl_purge</strong></p>
+<p>​                  <strong>vcl_deliver</strong></p>
+<p>​                  <strong>vcl_synth</strong></p>
+<p>​                  <strong>vcl_fini</strong></p>
+<p>​                                  </p>
+<p>​                  <strong>vcl_backend_fetch</strong></p>
+<p>​                  <strong>vcl_backend_response</strong></p>
+<p>​                  <strong>vcl_backend_error</strong></p>
+<p><img src="状态引擎.jpg" alt="状态引擎"></p>
+<p><strong>vcl_recv的默认配置：</strong></p>
+<p>sub vcl_recv {</p>
+<p>if (req.method == “PRI”) {</p>
+<p>/<em> We do not support SPDY or HTTP/2.0 </em>/</p>
+<p>return (synth(405));</p>
+<p>}</p>
+<p>if (req.method != “GET” &amp;&amp;</p>
+<p>req.method != “HEAD” &amp;&amp;</p>
+<p>req.method != “PUT” &amp;&amp;</p>
+<p>req.method != “POST” &amp;&amp;</p>
+<p>req.method != “TRACE” &amp;&amp;</p>
+<p>req.method != “OPTIONS” &amp;&amp;</p>
+<p>req.method != “DELETE”) {</p>
+<p>/<em> Non-RFC2616 or CONNECT which is weird. </em>/</p>
+<p>return (pipe);</p>
+<p>}</p>
+<p>if (req.method != “GET” &amp;&amp; req.method != “HEAD”) {</p>
+<p>/<em> We only deal with GET and HEAD by default </em>/</p>
+<p>return (pass);</p>
+<p>}</p>
+<p>if (req.http.Authorization || req.http.Cookie) {</p>
+<p>/<em> Not cacheable by default </em>/</p>
+<p>return (pass);</p>
+<p>}</p>
+<p>return (hash);</p>
+<p>}</p>
+<p>}</p>
+<p>Client Side：</p>
+<p>vcl_recv, vcl_pass, vcl_hit, vcl_miss, vcl_pipe, vcl_purge, vcl_synth, vcl_deliver</p>
+<p>vcl_recv：</p>
+<p>hash：vcl_hash</p>
+<p>pass: vcl_pass</p>
+<p>pipe: vcl_pipe</p>
+<p>synth: vcl_synth</p>
+<p>purge: vcl_hash –&gt; vcl_purge</p>
+<p>vcl_hash：</p>
+<p>lookup：</p>
+<p>hit: vcl_hit</p>
+<p>miss: vcl_miss</p>
+<p>pass, hit_for_pass: vcl_pass</p>
+<p>purge: vcl_purge</p>
+<p>Backend Side：</p>
+<p>vcl_backend_fetch, vcl_backend_response, vcl_backend_error</p>
+<p><strong>两个特殊的引擎：</strong></p>
+<p><strong>vcl_init：</strong>在处理任何请求之前要执行的vcl代码：主要用于初始化VMODs；</p>
+<p><strong>vcl_fini：</strong>所有的请求都已经结束，在vcl配置被丢弃时调用；主要用于清理VMODs；</p>
+<p> <strong>格式：</strong></p>
+<p>(1) VCL files start with vcl 4.0;</p>
+<p>(2) //, # and /<em> foo </em>/ for comments;</p>
+<p>(3) Subroutines are declared with the sub keyword; 例如sub vcl_recv { …}；</p>
+<p>(4) No loops, state-limited variables（受限于引擎的内建变量）；</p>
+<p>(5) Terminating statements with a keyword for next action as argument of the return() function, i.e.: return(action)；用于实现状态引擎转换；</p>
+<p>(6) Domain-specific;</p>
+<p><strong>Finite State Machine</strong></p>
+<p>(1) Each request is processed separately;</p>
+<p>(2) Each request is independent from others at any given time;</p>
+<p>(3) States are related, but isolated;</p>
+<p>(4) return(action); exits one state and instructs Varnish to proceed to the next state;</p>
+<p>(5) Built-in VCL code is always present and appended below your own VCL;</p>
+<p><strong>语法：</strong></p>
+<p>sub subroutine {</p>
+<p>​        …</p>
+<p>}</p>
+<p>if CONDITION {</p>
+<p>​        …</p>
+<p>} else {</p>
+<p>​        …</p>
+<p>}</p>
+<p>return(), hash_data()</p>
+<p>t-in Functions and Keywords</p>
+<p><strong>函数：</strong></p>
+<p>regsub(str, regex, sub)</p>
+<p>regsuball(str, regex, sub)</p>
+<p>ban(boolean expression)</p>
+<p>hash_data(input)</p>
+<p>synthetic(str)</p>
+<p>Keywords:</p>
+<p>call subroutine， return(action)，new，set，unset</p>
+<p><strong>操作符：</strong></p>
+<p>==, !=, ~, &gt;, &gt;=, &lt;, &lt;=</p>
+<p>逻辑操作符：&amp;&amp;, ||, !</p>
+<p>变量赋值：=</p>
+<h3 id="示例1：obj-hits是内建变量，用于保存某缓存项的从缓存中命中的次数；"><a href="#示例1：obj-hits是内建变量，用于保存某缓存项的从缓存中命中的次数；" class="headerlink" title="示例1：obj.hits是内建变量，用于保存某缓存项的从缓存中命中的次数；"></a><strong>示例1：obj.hits是内建变量，用于保存某缓存项的从缓存中命中的次数；</strong></h3><p>   if (obj.hits&gt;0) {</p>
+<p>​                set resp.http.X-Cache = “HIT via” + ” ” + server.ip;</p>
+<p>​        } else {</p>
+<p>​                set resp.http.X-Cache = “MISS from ” + server.ip;</p>
+<p>​        }</p>
+<p><strong>vim /etc/varnish/default.vcl</strong></p>
+<p><img src="判断是否命中配置.png" alt="判断是否命中配置"></p>
+<p>使用<strong>curl -I -s  http:url</strong> 可以判断是否缓存命中</p>
+<p><img src="缓存命中.png" alt="缓存命中"></p>
+<h3 id="示例2-：判定curl-类型的请求拒绝访问"><a href="#示例2-：判定curl-类型的请求拒绝访问" class="headerlink" title="示例2**：判定curl**类型的请求拒绝访问"></a><strong>示例2**</strong>：判定curl<strong>**类型的请求拒绝访问</strong></h3><p>修改配置文件</p>
+<p><strong>vim /etc/varnish/default.vcl</strong></p>
+<p><img src="1-24.png" alt="1"></p>
+<p>调用配置文件</p>
+<p>varnishadm -S /etc/varnish/secret -T 127.0.0.1:6082</p>
+<p><img src="lazy.png" alt="2"></p>
+<p>切换到另外一台主机进行curl测试：</p>
+<p>返回403错误状态码</p>
+<p><img src="3-20.png" alt="3"></p>
+<h3 id="示例3：判定admin相关的请求拒绝访问"><a href="#示例3：判定admin相关的请求拒绝访问" class="headerlink" title="示例3：判定admin相关的请求拒绝访问"></a><strong>示例3：判定admin相关的请求拒绝访问</strong></h3><p><strong>node1：</strong></p>
+<p>创建一个名称为admin访问目录：</p>
+<p>echo hello,world &gt; /var/www/html/admin/index.html</p>
+<p>systemctl reload httpd</p>
+<p>正常访问返回如下：</p>
+<p><img src="3-21.png" alt="3"></p>
+<p>修改配置文件：</p>
+<p><strong>vim /etc/varnish/default.vcl</strong></p>
+<p><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="1"></p>
+<p>调用配置文件</p>
+<p><img src="2-22.png" alt="2"></p>
+<p>再次访问<strong><a href="http://192.168.30.10:6081/admin/" target="_blank" rel="noopener">http://192.168.30.10:6081/admin/</a></strong></p>
+<p><img src="4-16.png" alt="4"></p>
+<h3 id="示例4：强制对某类资源请求不检查缓存"><a href="#示例4：强制对某类资源请求不检查缓存" class="headerlink" title="示例4：强制对某类资源请求不检查缓存"></a><strong>示例4：强制对某类资源请求不检查缓存</strong></h3><p><img src="示例3配置.png" alt="示例3配置"></p>
+<h3 id="示例5：对于特定类型的资源，例如公开的图片等，取消其私有标识，并强行设定其可以由varnish缓存的-时长；-定义在vcl-backend-response中；"><a href="#示例5：对于特定类型的资源，例如公开的图片等，取消其私有标识，并强行设定其可以由varnish缓存的-时长；-定义在vcl-backend-response中；" class="headerlink" title="示例5：对于特定类型的资源，例如公开的图片等，取消其私有标识，并强行设定其可以由varnish缓存的**时长； 定义在vcl_backend_response中；**"></a><strong>示例5：对于特定类型的资源，例如公开的图片等，取消其私有标识，并强行设定其可以由varnish缓存的**</strong>时长； 定义在vcl_backend_response中；**</h3><p><strong>语法格式：</strong></p>
+<p>if (beresp.http.cache-control !~ “s-maxage”) {</p>
+<p>if (bereq.url ~ “(?i).(jpg|jpeg|png|gif|css|js)$”) {</p>
+<p>​         unset beresp.http.Set-Cookie;</p>
+<p>​         set beresp.ttl = 3600s;</p>
+<p>}</p>
+<p>}</p>
+<h2 id="四、Varnish缓存修剪"><a href="#四、Varnish缓存修剪" class="headerlink" title="四、Varnish缓存修剪"></a><strong>四、Varnish缓存修剪</strong></h2><p><strong>缓存对象的修剪有两种：</strong></p>
+<p><strong>purge：</strong>指定删除某条url的缓存</p>
+<p><strong>ban：</strong>指定删除某类url的缓存</p>
+<h3 id="配置purge操作："><a href="#配置purge操作：" class="headerlink" title="配置purge操作："></a><strong>配置purge操作：</strong></h3><p>(1) 能执行purge操作</p>
+<p>​    sub vcl_purge {</p>
+<p>​        return (synth(200,”Purged”));</p>
+<p>​    }</p>
+<p>(2) 何时执行purge操作</p>
+<p>​    sub vcl_recv { </p>
+<p>​        if (req.method == “PURGE”) {</p>
+<p>​            return(purge); </p>
+<p>​        }</p>
+<p>​        …</p>
+<p>​    }</p>
+<p>​               </p>
+<p>添加此类请求的访问控制法则：</p>
+<p>acl purgers {</p>
+<p>​        “127.0.0.0”/8;</p>
+<p>​        “10.1.0.0”/16;</p>
+<p>}</p>
+<p>sub vcl_recv {</p>
+<p>​        if (req.method == “PURGE”) {</p>
+<p>​                if (!client.ip ~ purgers) {</p>
+<p>​                        return(synth(405,”Purging not allowed for ” + client.ip));</p>
+<p>​                }</p>
+<p>​                return(purge); </p>
+<p>​        }              </p>
+<p>​        …    </p>
+<p>}</p>
+<p><strong>示例：</strong></p>
+<p>修改配置：</p>
+<p><img src="1-26.png" alt="1"></p>
+<p>缓存修剪测试：</p>
+<p><img src="2-23.png" alt="2"></p>
+<p>如果担心缓存修剪被其他人操作，也可添加ACL的访问控制</p>
+<p><img src="3-22.png" alt="3"><img src="4-17.png" alt="4"></p>
+<p>当使用不再ACL范围内的主机进行访问时，返回结果如下：</p>
+<p><img src="5-11.png" alt="5"></p>
+<p>而在ACL定义范围内的主机则可正常使用PURGE修剪缓存</p>
+<p><img src="6-9.png" alt="6"></p>
+<h3 id="配置Banning操作："><a href="#配置Banning操作：" class="headerlink" title="配置Banning操作："></a><strong>配置Banning操作：</strong></h3><p>(1) varnishadm：</p>
+<p>   ban <field> <operator> <arg>   </arg></operator></field></p>
+<p>示例：</p>
+<p>   ban req.url ~ (?i)^/javascripts</p>
+<p>(2) 在配置文件中定义，使用ban()函数；</p>
+<p>示例：</p>
+<p>if (req.method == “BAN”) {</p>
+<p>​        ban(“req.http.host == ” + req.http.host + ” &amp;&amp; req.url == ” + req.url);</p>
+<p>​        # Throw a synthetic page so the request won’t go to the backend.</p>
+<p>​        return(synth(200, “Ban added”));</p>
+<p>}  </p>
+<p>curl -X BAN <a href="http://www.ilinux.io/test1.html" target="_blank" rel="noopener">http://www.ilinux.io/test1.html</a></p>
+<p>ban req.http.host==<a href="http://www.ilinux.io" target="_blank" rel="noopener">www.ilinux.io</a> &amp;&amp; req.url==/test1.html</p>
+<h2 id="五、Varnish负载均衡"><a href="#五、Varnish负载均衡" class="headerlink" title="五、Varnish负载均衡"></a><strong>五、Varnish负载均衡</strong></h2><h3 id="如何设定使用多个后端主机："><a href="#如何设定使用多个后端主机：" class="headerlink" title="如何设定使用多个后端主机："></a><strong>如何设定使用多个后端主机：</strong></h3><p>backend default {</p>
+<p>​        .host = “172.16.100.6”;</p>
+<p>​        .port = “80”;</p>
+<p>}</p>
+<p>backend appsrv {</p>
+<p>​        .host = “172.16.100.7”;</p>
+<p>​        .port = “80”;</p>
+<p>}</p>
+<p>sub vcl_recv {                       </p>
+<p>​        if (req.url ~ “(?i).php$”) {</p>
+<p>​                set req.backend_hint = appsrv;</p>
+<p>​        } else {</p>
+<p>​                set req.backend_hint = default;</p>
+<p>​        }      </p>
+<p>​       </p>
+<p>​        …</p>
+<p>}</p>
+<p>nginx: proxy_pass</p>
+<p>haproxy: use_backend</p>
+<h3 id="实验：实现varnish的负载均衡"><a href="#实验：实现varnish的负载均衡" class="headerlink" title="实验：实现varnish的负载均衡"></a><strong>实验：实现varnish的负载均衡</strong></h3><p><strong>前期准备：</strong></p>
+<p><strong>Varnish服务器：</strong>192.168.30.10    系统版本：CentOS 7.4</p>
+<p><strong>node1：</strong>192.168.30.27    系统版本：CentOS 7.4</p>
+<p><strong>node2：</strong>192.168.30.16    系统版本：CentOS 7.4</p>
+<p><strong>客户端：</strong>192.168.30.18    系统版本：CentOS 7.4</p>
+<p><strong>具体步骤：</strong></p>
+<p>修改配置文件：</p>
+<p><strong>vim /etc/varnish/default.vcl</strong></p>
+<p><img src="1-27.png" alt="1"></p>
+<p><strong>node1：</strong></p>
+<p>创建javascripts的web目录，并创建文件test1-test6，内容分别也为test1-test6</p>
+<p><strong>node2：</strong></p>
+<p>创建javascripts的web目录，并创建文件test1-test6，内容分别为node1-node6</p>
+<p><strong>客户端进行测试访问：</strong></p>
+<p>可看到轮询算法调度已生效，当第二次进行访问时，均缓存命中</p>
+<p><img src="2-24.png" alt="2"></p>
+<p><strong>也可实现基于cookie的会话粘性，及随机性算法调度方式</strong></p>
+<p>配置格式如下：</p>
+<p><img src="3-23.png" alt="3"></p>
+<h2 id="六、后端服务器健康性状态检查"><a href="#六、后端服务器健康性状态检查" class="headerlink" title="六、后端服务器健康性状态检查"></a><strong>六、后端服务器健康性状态检查</strong></h2><p><strong>.probe：定义健康状态检测方法；</strong></p>
+<p>.url：检测时要请求的URL，默认为”/”;</p>
+<p>.request：发出的具体请求；</p>
+<p>.request =</p>
+<p>“GET /.healthtest.html HTTP/1.1”</p>
+<p>“Host: <a href="http://www.magedu.com”" target="_blank" rel="noopener">www.magedu.com”</a></p>
+<p>“Connection: close”</p>
+<p>.window：基于最近的多少次检查来判断其健康状态；</p>
+<p>.threshold：最近.window中定义的这么次检查中至有.threshhold定义的次数是成功的；</p>
+<p>.interval：检测频度；</p>
+<p>.timeout：超时时长；</p>
+<p>.expected_response：期望的响应码，默认为200；</p>
+<h3 id="健康状态检测的配置方式："><a href="#健康状态检测的配置方式：" class="headerlink" title="健康状态检测的配置方式："></a><strong>健康状态检测的配置方式：</strong></h3><p>(1) probe PB_NAME  { } </p>
+<p>​             backend NAME = {       </p>
+<p>​                .probe = PB_NAME;      </p>
+<p>​                …</p>
+<p>​             }</p>
+<p>​            </p>
+<p>​        (2) backend NAME  {    </p>
+<p>​                .probe = {             </p>
+<p>​                        …                    </p>
+<p>​                }</p>
+<p>​        }</p>
+<p>设置后端的主机属性：</p>
+<p>​         backend BE_NAME {</p>
+<p>​                  …</p>
+<p>​                  .connect_timeout = 0.5s;</p>
+<p>​                  .first_byte_timeout = 20s;</p>
+<p>​                  .between_bytes_timeout = 5s;</p>
+<p>​                  .max_connections = 50;</p>
+<p>​         }</p>
+<p><strong>示例：</strong></p>
+<p><img src="1-28.png" alt="1"></p>
+<p><img src="2-25.png" alt="2"></p>
+<p>查看后端服务器健康性状态：</p>
+<p>varnishadm -S /etc/varnish/secret -T 127.0.0.1:6082</p>
+<p><img src="3-24.png" alt="3"></p>
+<p><strong>手动设定BE主机的状态：</strong></p>
+<p>sick：管理down;</p>
+<p>healthy：管理up；</p>
+<p>auto：probe auto；</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+	<div>
+
+	</div>
+	
+    
+	<div>
+
+    
+
+    
+
+	
+	
+	
+	
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </div></article>
+
+
+    
+		
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/13/HAProxy介绍及相关实验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/13/HAProxy介绍及相关实验/" itemprop="url">HAProxy介绍及相关实验</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-13T19:37:16+08:00">
+                2018-07-13
               </time>
             
 
@@ -1837,8 +2367,8 @@ CPU内核数：2
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/自动化运维/" itemprop="url" rel="index">
-                    <span itemprop="name">自动化运维</span>
+                  <a href="/categories/Web服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">Web服务器</span>
                   </a>
                 </span>
 
@@ -1876,18 +2406,1013 @@ CPU内核数：2
       
         
           
-          playbook是由一个或多个”play”组成的列表
-play的主要功能在于将事先归并为一组的主机装扮成事先通过ansibe中的task定义好的角色。从根本上来
-讲，所谓task无非是调用ansible的module。将多个play组织在一个playbook中，即可让它们联同起来按事
-先编排的机制运
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/30/Ansible使用介绍（二）YAML语法及Playbook/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h2 id="一、HAPrxoy介绍"><a href="#一、HAPrxoy介绍" class="headerlink" title="一、HAPrxoy介绍"></a><strong>一、HAPrxoy介绍</strong></h2><p><strong>HAProxy</strong>是一个使用C语言编写的自由及开放源代码软件，其提供高可用性、负载均衡，以及基于tcp和</p>
+<p>http的应用程序代理。</p>
+<p><strong>mode http：</strong>七层反向代理，受端口数量限制</p>
+<p><strong>mode tcp：</strong>四层反向代理，不受套接字文件数量限制</p>
+<p><strong>官方网站：</strong></p>
+<p><a href="http://www.haproxy.org/" target="_blank" rel="noopener">http://www.haproxy.org</a></p>
+<p><a href="http://www.haproxy.com/" target="_blank" rel="noopener">http://www.haproxy.com</a></p>
+<p><strong>官方文档：</strong></p>
+<p><a href="http://cbonte.github.io/haproxy-dconv/" target="_blank" rel="noopener">http://cbonte.github.io/haproxy-dconv/</a></p>
+<p><strong>HAProxy</strong>特别适用于那些负载特大的web站点，这些站点通常又需要会话保持或七层处理。HAProxy运行</p>
+<p>在当前的硬件上，完全可以支持数以万计的并发连接。并且它的运行模式使得它可以很简单安全的整合进</p>
+<p>您当前的架构中， 同时可以保护你的web服务器不被暴露到网络上。</p>
+<p><strong>HAProxy</strong>实现了一种事件驱动, 单一进程模型，此模型支持非常大的并发连接数。多进程或多线程模型受</p>
+<p>内存限制 、系统调度器限制以及无处不在的锁限制，很少能处理数千并发连接。事件驱动模型因为在有更</p>
+<p>好的资源和时间管理的用户空间(User-Space) 实现所有这些任务，所以没有这些问题。此模型的弊端是，</p>
+<p>在多核系统上，这些程序通常扩展性较差。这就是为什么他们必须进行优化以 使每个CPU时间片(Cycle)做</p>
+<p>更多的工作。</p>
+<p><strong>建议：</strong>生产环境运行在单进程模型下，便于分析，排查问题</p>
+<h2 id="二、HAProxy服务配置"><a href="#二、HAProxy服务配置" class="headerlink" title="二、HAProxy服务配置"></a><strong>二、HAProxy服务配置</strong></h2><h3 id="程序环境："><a href="#程序环境：" class="headerlink" title="程序环境："></a><strong>程序环境：</strong></h3><p>主程序：/usr/sbin/haproxy</p>
+<p>主配置文件：/etc/haproxy/haproxy.cfg</p>
+<p>Unit file：/usr/lib/systemd/system/haproxy.service</p>
+<h3 id="配置段："><a href="#配置段：" class="headerlink" title="配置段："></a><strong>配置段：</strong></h3><p>​     <strong>global：</strong>全局配置段</p>
+<p>进程及安全配置相关的参数</p>
+<p>性能调整相关参数</p>
+<p>Debug参数</p>
+<p>用户列表</p>
+<p>peers</p>
+<p><strong>proxies：</strong>代理配置段</p>
+<p>defaults：为frontend, listen, backend提供默认配置；</p>
+<p>fronted：前端，相当于nginx, server {}</p>
+<p>backend：后端，相当于nginx, upstream {}</p>
+<p>listen：同时拥前端和后端</p>
+<p><strong>简单的配置示例：</strong></p>
+<p>frontend web</p>
+<p>​                        bind *:80      </p>
+<p>​                        default_backend     websrvs</p>
+<p>backend websrvs</p>
+<p>​                        balance roundrobin</p>
+<p>​                        server srv1 172.16.100.6:80 check</p>
+<p>​                        server srv2 172.16.100.7:80 check</p>
+<p><strong>global配置参数：</strong></p>
+<p>进程及安全管理：chroot, daemon，user, group, uid, gid</p>
+<p><strong>log</strong>：定义全局的syslog服务器；最多可以定义两个；</p>
+<p><strong>log <address> [len <length>] <facility> [max level [min level]]</facility></length></address></strong></p>
+<p><strong>nbproc <number></number></strong>：要启动的haproxy的进程数量；</p>
+<p><strong>ulimit-n <number></number></strong>：每个haproxy进程可打开的最大文件数；</p>
+<p>性能调整：</p>
+<p><strong>maxconn <number></number></strong>：设定每个haproxy进程所能接受的最大并发连接数；</p>
+<p>Sets the maximum per-process number of concurrent connections to <number>.</number></p>
+<p>总体的并发连接数：nbproc * maxconn</p>
+<p><strong>maxconnrate <number></number></strong>：每个进程每秒种所能创建的最大连接数量；</p>
+<p>Sets the maximum per-process number of connections per second to <number>.</number></p>
+<p><strong>maxsessrate <number></number></strong>：每个进程每秒所能创建最大会话数</p>
+<p><strong>maxsslconn <number></number></strong>:设定每个haproxy进程所能接受的ssl的最大并发连接数；</p>
+<p>Sets the maximum per-process number of concurrent SSL connections to <number>.</number></p>
+<p> <strong>spread-checks &lt;0..50, in percent&gt;</strong></p>
+<h2 id="三、实验：实现HAProxy反向代理"><a href="#三、实验：实现HAProxy反向代理" class="headerlink" title="三、实验：实现HAProxy反向代理"></a><strong>三、实验：实现HAProxy反向代理</strong></h2><h3 id="前期准备："><a href="#前期准备：" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>虚拟机4台</p>
+<p><strong>HAproxy</strong>：192.168.30.10</p>
+<p><strong>node1</strong>：192.168.30.17</p>
+<p><strong>node2</strong>：192.168.30.27</p>
+<p><strong>Client：</strong>192.168.30.16</p>
+<h3 id="具体步骤："><a href="#具体步骤：" class="headerlink" title="具体步骤："></a><strong>具体步骤：</strong></h3><p><strong>HAProxy服务器操作：</strong></p>
+<p>yum install haproxy</p>
+<p>修改配置文件</p>
+<p><strong>vim /etc/haproxy/haproxy.cfg</strong></p>
+<p>frontend main *:80</p>
+<p>​         default_backend  websrvs</p>
+<p>backend websrvs</p>
+<p>​         balance roundrobin</p>
+<p>​         server websrv1 192.168.30.17:80 check          #check 健康性检查</p>
+<p>​         server websrv2 192.168.30.27:80 check</p>
+<p><img src="1-7.png" alt="1"></p>
+<p>重启haproxy</p>
+<p>systemctl restart haproxy</p>
+<p><strong>node1，node2开启http服务</strong></p>
+<p>[root@node1 ~]# systemctl start httpd</p>
+<p>[root@node1 ~]# echo Backend Server 1 &gt; /var/www/html/index.html</p>
+<p>[root@node2 ~]# systemctl start httpd</p>
+<p>[root@node2 ~]# echo Backend Server 2 &gt; /var/www/html/index.html</p>
+<p><strong>客户端访问测试：</strong></p>
+<p><img src="2-6.png" alt="2"></p>
+<h3 id="添加权重："><a href="#添加权重：" class="headerlink" title="添加权重："></a><strong>添加权重：</strong></h3><p><strong>vim /etc/haproxy/haproxy.cfg</strong></p>
+<p>backend websrvs</p>
+<p>​    balance     roundrobin</p>
+<p>​    server  websrvs1 192.168.30.17:80 check weight 2</p>
+<p>​    server  websrvs2 192.168.30.27:80 check</p>
+<p>重启HAProxy服务网</p>
+<p>systemctl restart haproxy.service</p>
+<p>访问测试：</p>
+<p><img src="3-7.png" alt="3"></p>
+<h2 id="四、实验：实现根据url-uri算法-和客户端来源-hdr算法-进行调度"><a href="#四、实验：实现根据url-uri算法-和客户端来源-hdr算法-进行调度" class="headerlink" title="四、实验：实现根据url(uri算法)和客户端来源(hdr算法)进行调度"></a><strong>四、实验：实现根据url(uri算法)和客户端来源(hdr算法)进行调度</strong></h2><h3 id="实现uri算法"><a href="#实现uri算法" class="headerlink" title="实现uri算法"></a><strong>实现uri算法</strong></h3><p>对同一url的访问请求都调度至同一个后端服务器</p>
+<p>注意：如果HAProxy调度后端为缓存服务器，就要使用uri算法，且使用动态算法，一致性哈希</p>
+<p>实验前期准备承接实现HAProxy反向代理中的环境</p>
+<h3 id="具体步骤：-1"><a href="#具体步骤：-1" class="headerlink" title="具体步骤："></a>具体步骤：</h3><p>修改配置文件</p>
+<p><strong>vim /etc/haproxy/haproxy.cfg</strong></p>
+<p><img src="1-8.png" alt="1"></p>
+<p>重启haproxy服务</p>
+<p>systemctl restart haproxy.service</p>
+<p>在node1，node2上分别创建http页面test1–test10</p>
+<p><img src="2-7.png" alt="2"></p>
+<p>访问测试：</p>
+<p><img src="3-8.png" alt="3"></p>
+<h3 id="实现hdr算法"><a href="#实现hdr算法" class="headerlink" title="实现hdr算法"></a><strong>实现hdr算法</strong></h3><p>来自同一客户端的请求都调度至同一个后端服务器</p>
+<p>修改配置文件</p>
+<p><strong>vim /etc/haproxy/haproxy.cfg</strong></p>
+<p><img src="4-5.png" alt="4"></p>
+<p>重启haproxy服务</p>
+<p>systemctl restart haproxy.service</p>
+<p>访问测试：</p>
+<p><img src="5-3.png" alt="5"></p>
+<h2 id="五、实验：实现基于cookie的会话绑定"><a href="#五、实验：实现基于cookie的会话绑定" class="headerlink" title="五、实验：实现基于cookie的会话绑定"></a><strong>五、实验：实现基于cookie的会话绑定</strong></h2><h3 id="前期准备：-1"><a href="#前期准备：-1" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>虚拟机4台</p>
+<p><strong>HAproxy</strong>：192.168.30.10</p>
+<p><strong>node1</strong>：192.168.30.17</p>
+<p><strong>node2</strong>：192.168.30.27</p>
+<p><strong>Client：</strong>192.168.30.16</p>
+<h3 id="具体步骤：-2"><a href="#具体步骤：-2" class="headerlink" title="具体步骤："></a><strong>具体步骤：</strong></h3><p>修改配置文件</p>
+<p><strong>vim /etc/haproxy/haproxy.cfg</strong></p>
+<p><img src="1-9.png" alt="1"></p>
+<p>重启haproxy服务</p>
+<p>systemctl restart haproxy.service</p>
+<p>访问测试：</p>
+<p>重启服务前在server1与server2之间轮询调度，重启后将绑定在其中一台server中</p>
+<p><img src="2-8.png" alt="2"></p>
+<p>注意：curl命令之间访问不能绑定cookie</p>
+<h2 id="六、实验：启用HAproxy统计接口"><a href="#六、实验：启用HAproxy统计接口" class="headerlink" title="六、实验：启用HAproxy统计接口"></a><strong>六、实验：启用HAproxy统计接口</strong></h2><h3 id="统计接口启用相关的参数："><a href="#统计接口启用相关的参数：" class="headerlink" title="统计接口启用相关的参数："></a><strong>统计接口启用相关的参数：</strong></h3><p>  <strong>stats enable</strong></p>
+<p>启用统计页；基于默认的参数启用stats page；</p>
+<p>​                          – stats uri   : /haproxy?stats</p>
+<p>​                          – stats realm : “HAProxy Statistics”</p>
+<p>​                          – stats auth  : no authentication</p>
+<p>​                          – stats scope : no restriction</p>
+<p>​                                                    </p>
+<p>​    stats auth <user>:<passwd></passwd></user></p>
+<p>认证时的账号和密码，可使用多次；</p>
+<p>​     stats realm <realm></realm></p>
+<p>认证时的realm；</p>
+<p>​        stats uri <prefix></prefix></p>
+<p>自定义stats page uri</p>
+<p>​      stats refresh <delay></delay></p>
+<p>设定自动刷新时间间隔；</p>
+<p>​     stats admin { if | unless } <cond></cond></p>
+<p>启用stats page中的管理功能</p>
+<h3 id="具体步骤：-3"><a href="#具体步骤：-3" class="headerlink" title="具体步骤："></a><strong>具体步骤：</strong></h3><p>只需在frontend或者backend中添加一行</p>
+<p><strong>stats enable</strong></p>
+<p><img src="1-10.png" alt="1"></p>
+<p>重启haproxy服务</p>
+<p>systemctl restart haproxy.service</p>
+<p>浏览器访问：<strong><a href="http://192.168.30.10/haproxy?stats" target="_blank" rel="noopener">http://192.168.30.10/haproxy?stats</a></strong></p>
+<p><img src="2-9.png" alt="2"></p>
+<p>### </p>
+<h3 id="避免状态页被其他客户端访问："><a href="#避免状态页被其他客户端访问：" class="headerlink" title="避免状态页被其他客户端访问："></a><strong>避免状态页被其他客户端访问：</strong></h3><p>(1)修改状态页监听端口</p>
+<p><img src="3-9.png" alt="3"></p>
+<p>(2)修改状态页url</p>
+<p><img src="4-6.png" alt="4"></p>
+<p>(3)添加安全认证</p>
+<p><img src="5-4.png" alt="5"></p>
+<p><img src="6-3.png" alt="6"></p>
+<h3 id="启用state-page中的管理功能："><a href="#启用state-page中的管理功能：" class="headerlink" title="启用state page中的管理功能："></a><strong>启用state page中的管理功能：</strong></h3><p>可利用此功能实现脚本执行发布，网上搜索基于haproxy的发布脚本</p>
+<p><img src="7-3.png" alt="7"></p>
+<p>再次访问：</p>
+<p><img src="8-3.png" alt="8"></p>
+<h2 id="七、实验：Errorfile实现自定义错误页，状态码"><a href="#七、实验：Errorfile实现自定义错误页，状态码" class="headerlink" title="七、实验：Errorfile实现自定义错误页，状态码"></a><strong>七、实验：Errorfile实现自定义错误页，状态码</strong></h2><p>修改前端响应报文及后端请求报文头部信息</p>
+<h3 id="前端响应报文删除一个头部信息"><a href="#前端响应报文删除一个头部信息" class="headerlink" title="前端响应报文删除一个头部信息"></a><strong>前端响应报文删除一个头部信息</strong></h3><p><img src="1-12.png" alt="1"></p>
+<p>修改前的报文头部信息：</p>
+<p><img src="2-10.png" alt="2"></p>
+<p>访问测试</p>
+<p><img src="3-10.png" alt="3"></p>
+<h3 id="前端响应报文添加一个头部信息"><a href="#前端响应报文添加一个头部信息" class="headerlink" title="前端响应报文添加一个头部信息"></a><strong>前端响应报文添加一个头部信息</strong></h3><p><img src="4-8.png" alt="4"></p>
+<p>访问测试</p>
+<p><img src="5-5.png" alt="5"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+	<div>
+
+	</div>
+	
+    
+	<div>
+
+    
+
+    
+
+	
+	
+	
+	
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </div></article>
+
+
+    
+		
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/10/Nginx介绍及Web服务相关配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/10/Nginx介绍及Web服务相关配置/" itemprop="url">Nginx介绍及Web服务相关配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-10T19:36:50+08:00">
+                2018-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">Web服务器</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Nginx 是一个高性能的Web和反向代理服务器, 它具有有很多非常优越的特性:作为 Web 服务器：相比Apache，Nginx 使用更少的资源，支持更多的并发连接，体现更高的效率，这点使 Nginx尤其受到虚拟主机提供商的欢迎。</p>
+<h2 id="一、Nginx介绍"><a href="#一、Nginx介绍" class="headerlink" title="一、Nginx介绍"></a><strong>一、Nginx介绍</strong></h2><p><strong>Nginx</strong>：engine X ，2002年，开源，商业版</p>
+<p>Nginx是免费，开源，高性能的HTTP和反向代理服务器，邮件代理服务器，通</p>
+<p>用TCP/UDP代理服务器</p>
+<p>解决C10K问题（10K Connections）</p>
+<p>官网：<a href="http://nginx.org/" target="_blank" rel="noopener">http://nginx.org</a></p>
+<p>二次开发版：</p>
+<p>Tengine, OpenResty（章亦春）</p>
+<h3 id="特性："><a href="#特性：" class="headerlink" title="特性："></a><strong>特性：</strong></h3><p>模块化设计，较好的扩展性</p>
+<p>高可靠性</p>
+<p>支持热部署：不停机更新配置文件，升级版本，更换日志文件</p>
+<p>低内存消耗：10000个keep-alive连接模式下的非活动连接，仅需2.5M内存</p>
+<p>event-driven,aio,mmap，sendfile</p>
+<h3 id="基本功能："><a href="#基本功能：" class="headerlink" title="基本功能："></a><strong>基本功能：</strong></h3><p>静态资源的web服务器</p>
+<p>http协议反向代理服务器</p>
+<p>pop3/imap4协议反向代理服务器</p>
+<p>FastCGI(LNMP),uWSGI(python)等协议</p>
+<p>模块化（非DSO），如zip，SSL模块</p>
+<h3 id="web服务相关的功能："><a href="#web服务相关的功能：" class="headerlink" title="web服务相关的功能："></a><strong>web服务相关的功能：</strong></h3><p>虚拟主机（server）</p>
+<p>支持 keep-alive 和管道连接</p>
+<p>访问日志（支持基于日志缓冲提高其性能）</p>
+<p>url rewirte</p>
+<p>路径别名</p>
+<p>基于IP及用户的访问控制</p>
+<p>支持速率限制及并发数限制</p>
+<p>重新配置和在线升级而无须中断客户的工作进程</p>
+<p>Memcached的GET 接口</p>
+<h3 id="为什么选择Nginx？"><a href="#为什么选择Nginx？" class="headerlink" title="为什么选择Nginx？"></a>为什么选择Nginx？</h3><p>Nginx 是一个高性能的Web和反向代理服务器, 它具有有很多非常优越的特性:作为 Web 服务器：相比</p>
+<p>Apache，Nginx 使用更少的资源，支持更多的并发连接，体现更高的效率，这点使 Nginx尤其受到虚拟主</p>
+<p>机提供商的欢迎。能够支持50000个并发连接数的响应，Nginx选择了epoll作为开发模型.</p>
+<p>作为负载均衡服务器：Nginx 既可以在内部直接支持Rails 和 PHP，也可以支持作为 HTTP代理服务器 对</p>
+<p>外进行服务。Nginx 用 C 编写, 不论是系统资源开销还是 CPU 使用效率都比Perlbal 要好的多。</p>
+<p>作为邮件代理服务器: Nginx 同时也是一个非常优秀的邮件代理服务器（最早开发这个产品的目的之一也是</p>
+<p>作为邮件代理服务器），Last.fm 描述了成功并且美妙的使用经验。</p>
+<p>Nginx 安装非常的简单，配置文件 非常简洁（还能够支持perl语法），Bugs非常少的服务器:Nginx 启动特</p>
+<p>别容易，并且几乎可以做到7*24不间断运行，即使运行数个月也不需要重新启动。你还能够在 不间断服务</p>
+<p>的情况下进行软件版本的升级。</p>
+<h3 id="Nginx程序架构"><a href="#Nginx程序架构" class="headerlink" title="Nginx程序架构"></a><strong>Nginx程序架构</strong></h3><p><img src="lazy.png" alt="nginx架构"></p>
+<p><strong>Nginx程序架构：</strong></p>
+<p><strong>master/worker</strong>结构</p>
+<p>一个<strong>master</strong>进程：</p>
+<p>负载加载和分析配置文件、管理worker进程、平滑升级</p>
+<p>一个或多个<strong>worker</strong>进程</p>
+<p>处理并响应用户请求</p>
+<p>缓存相关的进程：</p>
+<p>cache loader：载入缓存对象</p>
+<p>cache manager：管理缓存对象</p>
+<h3 id="高度模块化"><a href="#高度模块化" class="headerlink" title="高度模块化"></a><strong>高度模块化</strong></h3><p>nginx高度模块化，但其模块早期不支持DSO机制；1.9.11版本支持动态装载和</p>
+<p>卸载</p>
+<p>模块分类：</p>
+<p>核心模块：core module</p>
+<p>标准模块：</p>
+<p>HTTP 模块： ngx_http_*</p>
+<p>HTTP Core modules 默认功能</p>
+<p>HTTP Optional modules 需编译时指定</p>
+<p>Mail 模块 ngx_mail_*</p>
+<p>Stream 模块 ngx_stream_*</p>
+<p>第三方模块</p>
+<h2 id="二、Nginx服务配置"><a href="#二、Nginx服务配置" class="headerlink" title="二、Nginx服务配置"></a><strong>二、Nginx服务配置</strong></h2><p>配置文件的组成部分：</p>
+<p>主配置文件：<strong>nginx.conf</strong></p>
+<p>子配置文件：<strong>include conf.d/*.conf</strong></p>
+<p>fastcgi， uwsgi，scgi等协议相关的配置文件</p>
+<p>mime.types：支持的mime类型</p>
+<p><strong>主配置文件的配置指令：</strong></p>
+<p>directive value [value2 …];</p>
+<p><strong>注意：</strong></p>
+<p>(1) 指令必须以分号结尾</p>
+<p>(2) 支持使用配置变量</p>
+<p>内建变量：由Nginx模块引入，可直接引用</p>
+<p>自定义变量：由用户使用set命令定义</p>
+<p>set variable_name value;</p>
+<p>引用变量：$variable_name</p>
+<h3 id="主配置文件结构："><a href="#主配置文件结构：" class="headerlink" title="主配置文件结构："></a><strong>主配置文件结构：</strong></h3><p>主配置文件结构：四部分组成</p>
+<p>main block：主配置段，即全局配置段，对http,mail都有效</p>
+<p>event {</p>
+<p>…</p>
+<p>}         #事件驱动相关的配置</p>
+<p>http {</p>
+<p>…</p>
+<p>}         #http/https协议相关配置段</p>
+<p>mail {</p>
+<p>…</p>
+<p>}         #mail协议相关配置段</p>
+<p>stream {</p>
+<p>…</p>
+<p>}         # stream服务器相关配置段</p>
+<h3 id="http协议相关的配置结构"><a href="#http协议相关的配置结构" class="headerlink" title="http协议相关的配置结构"></a><strong>http协议相关的配置结构</strong></h3><p><img src="http配置结构.png" alt="http配置结构"></p>
+<h2 id="三、Web服务常见功能及配置"><a href="#三、Web服务常见功能及配置" class="headerlink" title="三、Web服务常见功能及配置"></a><strong>三、Web服务常见功能及配置</strong></h2><h3 id="一-性能优化相关的配置："><a href="#一-性能优化相关的配置：" class="headerlink" title="(一)性能优化相关的配置："></a><strong>(一)性能优化相关的配置：</strong></h3><p>1、worker_processes number | auto</p>
+<p>worker进程的数量；通常应该为当前主机的cpu的物理核心数</p>
+<p>2、worker_cpu_affinity cpumask …</p>
+<p>worker_cpu_affinity auto [cpumask] 提高缓存命中率</p>
+<p>CPU MASK： 00000001：0号CPU</p>
+<p>00000010：1号CPU</p>
+<p>10000000：8号CPU</p>
+<p>worker_cpu_affinity 0001 0010 0100 1000;</p>
+<p>worker_cpu_affinity 0101 1010;</p>
+<p>3、worker_priority number</p>
+<p>指定worker进程的nice值，设定worker进程优先级：[-20,20]</p>
+<p>4、worker_rlimit_nofile number</p>
+<p>worker进程所能够打开的文件数量上限,如65535</p>
+<p><strong>示例：修改worker**</strong>进程数量**</p>
+<p><img src="1-4.png" alt="1"></p>
+<p><img src="2-4.png" alt="2"></p>
+<p><strong>示例：设置NICE**</strong>优先级**</p>
+<p><img src="3-5.png" alt="3"></p>
+<p><img src="4-3.png" alt="4"><img src="5-1.png" alt="5"></p>
+<p><strong>变为前台执行</strong></p>
+<p>daemon on|off</p>
+<p>是否以守护进程方式运行nignx，默认是守护进程方式，用于测试环境</p>
+<p><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="6"></p>
+<p>以守护方式（前台执行）运行</p>
+<p><img src="7-1.png" alt="7"></p>
+<p><strong>EVENT**</strong>语句块**</p>
+<p><strong>每个worker**</strong>支持的最大连接1024<strong>**，生成环境应适当调大</strong></p>
+<p><strong>work_connections *Cpu个数= worker_rlimit_nofile number</strong></p>
+<p> <strong><img src="8-1.png" alt="8"></strong></p>
+<p><strong>(二)虚拟主机配置</strong></p>
+<p><strong>定义一个专门存放虚拟主机的目录：</strong></p>
+<p><strong><img src="10-1.png" alt="10"></strong></p>
+<p><strong>配置一个虚拟主机</strong></p>
+<p>server {</p>
+<p>listen address[:PORT]|PORT;</p>
+<p>server_name SERVER_NAME;</p>
+<p>root /PATH/TO/DOCUMENT_ROOT;</p>
+<p>}</p>
+<p><strong>vim a.com.conf</strong></p>
+<p><strong><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="11"></strong></p>
+<p><strong>vim b.com.conf</strong></p>
+<p>server {</p>
+<p>​            listen 8080</p>
+<p>​            server_name <a href="http://www.b.com" target="_blank" rel="noopener">www.b.com</a></p>
+<p>}</p>
+<p><img src="12.png" alt="12"><img src="13.png" alt="13"></p>
+<p><strong>(三)改变默认指向：default_server</strong></p>
+<p><strong>vim c.com.conf</strong></p>
+<p><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="14"></p>
+<p>要注意将主配置文件中的defaults_server删掉，否则nginx服务将无法正常启动</p>
+<p> <strong><img src="15.png" alt="15"></strong></p>
+<p> <strong>(四)支持通配符写法</strong></p>
+<p> <strong><img src="16.png" alt="16"></strong></p>
+<p><strong><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="17"></strong></p>
+<p><strong>匹配优先级机制从高到低：</strong></p>
+<p><strong>(1)</strong> <strong>首先是字符串精确匹配</strong> <strong>如：<a href="http://www.magedu.com" target="_blank" rel="noopener">www.magedu.com</a></strong></p>
+<p><strong>(2)</strong> <strong>左侧***</strong>通配符<strong> </strong>如：*.magedu.com**</p>
+<p><strong>(3)</strong> <strong>右侧***</strong>通配符<strong> </strong>如：<a href="http://www.magedu.\**" target="_blank" rel="noopener">www.magedu.\**</a>*</p>
+<p><strong>(4)</strong> <strong>正则表达式</strong> <strong>如： ~^.*.magedu.com$</strong></p>
+<p><strong>(5) default_server</strong></p>
+<p><strong>(五)隐藏Nginx版本</strong></p>
+<p><strong>server_tokens on | off | build | string</strong></p>
+<p>是否在响应报文的Server首部显示nginx版本</p>
+<p><img src="18.png" alt="18"></p>
+<p><strong>vim /etc/nginx/conf/nginx.conf</strong></p>
+<p><img src="19.png" alt="19"></p>
+<p>再次访问</p>
+<p><img src="20.png" alt="20"></p>
+<p> <strong>(五)软连接指向</strong></p>
+<p> <strong><img src="21.png" alt="21"></strong></p>
+<p><strong><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="22"></strong></p>
+<p> <strong>(六)针对特定文件指定存放位置</strong></p>
+<p><strong>location [ = | ~ | ~* | ^~ ] uri { … }</strong></p>
+<p><strong>location @name { … }</strong></p>
+<p><strong>在一个server**</strong>中location<strong><strong>配置段可存在多个，用于实现从uri</strong></strong>到文件系统的路**</p>
+<p><strong>径映射；ngnix**</strong>会根据用户请求的URI<strong><strong>来检查定义的所有location</strong></strong>，并找出一个最**</p>
+<p><strong>佳匹配，而后应用其配置</strong></p>
+<p><strong>示例：</strong></p>
+<p><strong>server {…</strong></p>
+<p><strong>server_name <a href="http://www.magedu.com" target="_blank" rel="noopener">www.magedu.com</a>;</strong></p>
+<p><strong>location /images/ {</strong></p>
+<p><strong>root /data/imgs/;</strong></p>
+<p><strong>}</strong></p>
+<p><strong>}</strong></p>
+<p><strong><a href="http://www.magedu.com/images/logo.jpg" target="_blank" rel="noopener">http://www.magedu.com/images/logo.jpg</a></strong></p>
+<p><strong>–&gt; /data/imgs/images/logo.jpg</strong></p>
+<p><strong>示例：</strong></p>
+<p> <strong><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="23"><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="24"></strong></p>
+<p><strong>(七)定制错误页面</strong></p>
+<p><strong>echo ‘<h1>NO FOUND PAGE</h1>’ &gt; /data/sitea/error/404.html</strong></p>
+<p><img src="25.png" alt="25"></p>
+<p>客户端访问测试：</p>
+<p> <strong><img src="26.png" alt="26"></strong></p>
+<p><img src="27.png" alt="27"></p>
+<p> <strong>(八)避免流氓浏览器404**</strong>劫持**</p>
+<p>error_page code … [=[response]] uri;</p>
+<p><strong>模块</strong>：<strong>ngx_http_core_module</strong></p>
+<p>定义错误页，以指定的响应状态码进行响应</p>
+<p>可用位置：http, server, location, if in</p>
+<p>location</p>
+<p>error_page 404 /404.html</p>
+<p>error_page 404 =200 /404.html</p>
+<p><img src="28.png" alt="28"></p>
+<p>修改配置文件</p>
+<p><img src="29.png" alt="29"></p>
+<p>再次访问：</p>
+<p><strong><img src="30.png" alt="30"></strong></p>
+<p><strong>修改404**</strong>页面到指定默认页面**</p>
+<p> <strong><img src="31.png" alt="31"></strong></p>
+<p><strong>keepalive_timeout timeout [header_timeout];</strong></p>
+<p><strong>设定保持连接超时时长，0**</strong>表示禁止长连接，默认为75s**</p>
+<p><strong>keepalive_requests number;</strong></p>
+<p><strong>在一次长连接上所允许请求的资源的最大数量</strong></p>
+<p><strong>默认为100</strong></p>
+<p><strong>(九)除了管理员域其他主机无法使用GET**</strong>以外的其他方法**</p>
+<p><img src="32.png" alt="32"></p>
+<p><strong>(十)实现基于ip**</strong>的访问控制功能**</p>
+<p><strong>ngx_http_access_module**</strong>模块**</p>
+<p>1、allow address | CIDR | unix: | all;</p>
+<p>2、deny address | CIDR | unix: | all;</p>
+<p>http, server, location, limit_except</p>
+<p><strong>自上而下检查，一旦匹配，将生效，条件严格的置前</strong></p>
+<p><strong>示例：</strong></p>
+<p>location / {</p>
+<p>deny 192.168.1.1;</p>
+<p>allow 192.168.1.0/24;</p>
+<p>allow 10.1.1.0/16;</p>
+<p>allow 2001:0db8::/32;</p>
+<p>deny all;</p>
+<p>}</p>
+<p> <strong><img src="33.png" alt="33"></strong></p>
+<p><strong>(十一)实现基于用户的访问控制：</strong></p>
+<p><strong>ngx_http_auth_basic_module**</strong>模块**</p>
+<p><strong>实现基于用户的访问控制，使用basic**</strong>机制进行用户认证**</p>
+<p><strong>1**</strong>、auth_basic string | off;**</p>
+<p><strong>2**</strong>、auth_basic_user_file file;**</p>
+<p><strong>location /admin/ {</strong></p>
+<p><strong>auth_basic “Admin Area”;</strong></p>
+<p><strong>auth_basic_user_file /etc/nginx/.ngxpasswd;</strong></p>
+<p><strong>}</strong></p>
+<p><strong>用户口令文件：</strong></p>
+<p><strong>1**</strong>、明文文本：格式name:password:comment**</p>
+<p><strong>2**</strong>、加密文本：由htpasswd<strong>**命令实现</strong></p>
+<p><strong>httpd-tools**</strong>所提供**</p>
+<p><strong>示例：</strong></p>
+<p><strong>cd /etc/nginx/conf.d/vhost</strong></p>
+<p>htpasswd -cm nginxuser httpuser1</p>
+<p>htpasswd -m nginxuser httpuser2</p>
+<p>修改配置</p>
+<p>针对整个网站生效</p>
+<p><img src="34.png" alt="34"></p>
+<p>针对特定目录生效</p>
+<p><img src="35.png" alt="35"></p>
+<p><strong><a href="http://www.a.com/admin/" target="_blank" rel="noopener">http://www.a.com/admin/</a></strong></p>
+<p><img src="36.png" alt="36"></p>
+<p><strong>(十二)Nginx**</strong>状态页**</p>
+<p><strong>ngx_http_stub_status_module**</strong>模块**</p>
+<p><strong>功能：</strong>用于输出nginx的基本状态信息</p>
+<p>输出信息示例：</p>
+<p>Active connections: 291</p>
+<p>server accepts handled requests</p>
+<p>16630948 16630948 31070465</p>
+<p>上面三个数字分别对应accepts,handled,requests三个值</p>
+<p>Reading: 6 Writing: 179 Waiting: 106</p>
+<p><strong>示例：</strong></p>
+<p><img src="37.png" alt="37"></p>
+<p>浏览器访问<strong><a href="http://192.168.30.10/status" target="_blank" rel="noopener">http://192.168.30.10/status</a></strong></p>
+<p><img src="38.png" alt="38"></p>
+<p><strong>相关参数说明：</strong></p>
+<p>Active connections:当前状态，活动状态的连接数</p>
+<p>accepts：统计总值，已经接受的客户端请求的总数</p>
+<p>handled：统计总值，已经处理完成的客户端请求的总数</p>
+<p>requests：统计总值，客户端发来的总的请求数</p>
+<p>Reading：当前状态，正在读取客户端请求报文首部的连接的连接数</p>
+<p>Writing：当前状态，正在向客户端发送响应报文过程中的连接数</p>
+<p>Waiting：当前状态，正在等待客户端发出请求的空闲连接数</p>
+<p><strong>(十三)日志相关设置</strong></p>
+<p><strong>ngx_http_log_module**</strong>模块**</p>
+<p><strong>指定日志格式记录请求</strong></p>
+<p>1、log_format name string …;</p>
+<p>string可以使用nginx核心模块及其它模块内嵌的变量</p>
+<p>2、access_log path [format [buffer=size] [gzip[=level]] [flush=time]</p>
+<p>[if=condition]];</p>
+<p>access_log off;</p>
+<p>访问日志文件路径，格式及相关的缓冲的配置</p>
+<p>buffer=size</p>
+<p>flush=time</p>
+<p>3、open_log_file_cache max=N [inactive=time] [min_uses=N] [valid=time];</p>
+<p>open_log_file_cache off;</p>
+<p>缓存各日志文件相关的元数据信息</p>
+<p>max：缓存的最大文件描述符数量</p>
+<p>min_uses：在inactive指定的时长内访问大于等于此值方可被当作活动项</p>
+<p>inactive：非活动时长</p>
+<p>valid：验证缓存中各缓存项是否为活动项的时间间隔</p>
+<p><strong>示例：自定义日志</strong></p>
+<p>系统默认：</p>
+<p><img src="39.png" alt="39"></p>
+<p>自定义一个日志：</p>
+<p><img src="40.png" alt="40"></p>
+<p>添加到access_log(可添加到任何语句块中)</p>
+<p><img src="41.png" alt="41"></p>
+<p>测试日志</p>
+<p><img src="42.png" alt="42"></p>
+<p><strong>(十四)实现**</strong>Nginx<strong><strong>的</strong></strong>SSL<strong><strong>加密</strong></strong>https**</p>
+<p><strong>ngx_http_ssl_module**</strong>模块：**</p>
+<p><strong>1、ssl on | off;</strong></p>
+<p>为指定虚拟机启用HTTPS protocol， 建议用listen指令代替</p>
+<p><strong>2、ssl_certificate file;</strong></p>
+<p>当前虚拟主机使用PEM格式的证书文件</p>
+<p><strong>3、ssl_certificate_key file;</strong></p>
+<p>当前虚拟主机上与其证书匹配的私钥文件</p>
+<p><strong>4、ssl_protocols [SSLv2] [SSLv3] [TLSv1] [TLSv1.1] [TLSv1.2];支持ssl协议版本，默</strong></p>
+<p><strong>认为后三个</strong></p>
+<p><strong>5、ssl_session_cache off | none | [builtin[:size]] [shared:name:size];</strong></p>
+<p>none: 通知客户端支持ssl session cache，但实际不支持</p>
+<p>builtin[:size]：使用OpenSSL内建缓存，为每worker进程私有</p>
+<p>[shared:name:size]：在各worker之间使用一个共享的缓存</p>
+<p><strong>6、ssl_session_timeout time;</strong></p>
+<p>客户端连接可以复用ssl session cache中缓存的ssl参数的有效时长，默认5m</p>
+<p><strong>示例：</strong></p>
+<p>server {</p>
+<p>listen 443 ssl;</p>
+<p>server_name <a href="http://www.magedu.com" target="_blank" rel="noopener">www.magedu.com</a>;</p>
+<p>root /vhosts/ssl/htdocs;</p>
+<p>ssl on;</p>
+<p>ssl_certificate /etc/nginx/ssl/nginx.crt;</p>
+<p>ssl_certificate_key /etc/nginx/ssl/nginx.key;</p>
+<p>ssl_session_cache shared:sslcache:20m;</p>
+<p>ssl_session_timeout 10m;</p>
+<p>}</p>
+<p><img src="43.png" alt="43"></p>
+<p>检查语法：</p>
+<p>nginx -t</p>
+<p><img src="44.png" alt="44"></p>
+<p>验证https</p>
+<p><img src="45.png" alt="45"></p>
+<p><strong>(十五)实现**</strong>NGINX<strong><strong>搭建多个</strong></strong>HTTPS<strong>**网站</strong></p>
+<p><img src="46.png" alt="46"></p>
+<p>修改配置文件</p>
+<p><img src="47.png" alt="47"></p>
+<p>验证https：</p>
+<p><img src="48.png" alt="48"></p>
+<p><strong>(十六)rewite**</strong>重写**</p>
+<p><strong>ngx_http_rewrite_module**</strong>模块：**</p>
+<p>The ngx_http_rewrite_module module is used to change request URI</p>
+<p>using PCRE regular expressions, return redirects, and conditionally select</p>
+<p>configurations.</p>
+<p>将用户请求的URI基于PCRE regex所描述的模式进行检查，而后完成重定向替换</p>
+<p><strong>1**</strong>、<strong>**rewrite regex replacement [flag]</strong></p>
+<p>将用户请求的URI基于regex所描述的模式进行检查，匹配到时将其替换为</p>
+<p>replacement指定的新的URI</p>
+<p>注意：如果在同一级配置块中存在多个rewrite规则，那么会自下而下逐个</p>
+<p>检查；被某条件规则替换完成后，会重新一轮的替换检查</p>
+<p>隐含有循环机制,但不超过10次；如果超过，提示500响应码，[flag]所表示</p>
+<p>的标志位用于控制此循环机制</p>
+<p>如果replacement是以http://或https://开头，则替换结果会直接以重向返</p>
+<p>回给客户端, 即永久重定向301</p>
+<p><strong>[flag]**</strong>：**</p>
+<p><strong>last：</strong>重写完成后停止对当前URI在当前location中后续的其它重写操作，</p>
+<p>而后对新的URI启动新一轮重写检查；提前重启新一轮循环，不建议在location中</p>
+<p>使用</p>
+<p><strong>break：</strong>重写完成后停止对当前URI在当前location中后续的其它重写操作，</p>
+<p>而后直接跳转至重写规则配置块之后的其它配置；结束循环，建议在location中使</p>
+<p>用</p>
+<p><strong>redirect：</strong>临时重定向，重写完成后以临时重定向方式直接返回重写后生成</p>
+<p>的新URI给客户端，由客户端重新发起请求；使用相对路径,或者http://或https://</p>
+<p>开头，状态码：302</p>
+<p><strong>permanent:</strong> 重写完成后以永久重定向方式直接返回重写后生成的新URI给</p>
+<p>客户端，由客户端重新发起请求，状态码：301</p>
+<p><strong>2**</strong>、<strong>**return</strong></p>
+<p>return code [text];</p>
+<p>return code URL;</p>
+<p>return URL;</p>
+<p>停止处理，并返回给客户端指定的响应码</p>
+<p><strong>3**</strong>、<strong>**rewrite_log on | off;</strong></p>
+<p>是否开启重写日志, 发送至error_log（notice level）</p>
+<p><strong>4**</strong>、<strong>**set $variable value;</strong></p>
+<p>用户自定义变量</p>
+<p>注意：变量定义和调用都要以$开头</p>
+<p><strong>5**</strong>、<strong>**if (condition) { … }</strong></p>
+<p>条件满足时，执行配置块中的配置指令；server, location</p>
+<p>condition：</p>
+<p>比较操作符：</p>
+<p>= 相同 != 不同</p>
+<p>~：模式匹配，区分字符大小写</p>
+<p>~*：模式匹配，不区分字符大小写</p>
+<p>!~：模式不匹配，区分字符大小写</p>
+<p>!~*：模式不匹配，不区分字符大小写</p>
+<p>文件及目录存在性判断：</p>
+<p>-e, !-e 存在（包括文件，目录，软链接）</p>
+<p>-f, !-f 文件 -d, !-d 目录 -x, !-x 执行</p>
+<p><strong>示例：</strong></p>
+<p><a href="http://www.a.com/images/a.jpg" target="_blank" rel="noopener">www.a.com/images/a.jpg</a>  –&gt;  <a href="http://www.a.com/media/images/a.jpg" target="_blank" rel="noopener">www.a.com/media/images/a.jpg</a></p>
+<p>相关配置：</p>
+<p>rewrite  ^(images/.*)$  /media/$1</p>
+<p><strong>示例：</strong></p>
+<p><a href="http://www.a.com/bbs" target="_blank" rel="noopener">www.a.com/bbs</a>  –&gt;  <a href="http://www.a.com/forum" target="_blank" rel="noopener">www.a.com/forum</a></p>
+<p><img src="49.png" alt="49"><img src="50.png" alt="50"><img src="lazy.png" alt="nginx架构"></p>
+<p><strong>redirect**</strong>模式：<strong>**302</strong></p>
+<p><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="52"><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="53"></p>
+<p><strong>permanent**</strong>模式**</p>
+<p><img src="54.png" alt="54"><img src="55.png" alt="55"></p>
+<p><strong>(十七)实现**</strong>http<strong><strong>自动跳转</strong></strong>https**</p>
+<p><img src="56.png" alt="56"><img src="57.png" alt="57"><img src="58.png" alt="58"></p>
+<p><strong>(十八)实现将**</strong>http<strong><strong>与</strong></strong>https<strong>**写入同一个虚拟机</strong></p>
+<p><img src="59.png" alt="59"><img src="60.png" alt="60"><img src="61.png" alt="61"></p>
+<p><strong>break**</strong>模式：可避免死循环**</p>
+<p><img src="62.png" alt="62"></p>
+<p><strong>(十九)实现自定义响应码</strong></p>
+<p><img src="63.png" alt="63"><img src="64.png" alt="64"></p>
+<p><strong>(二十)Nginx**</strong>防盗链**</p>
+<p><strong>ngx_http_referer_module**</strong>模块：**</p>
+<p><strong>功能：</strong>用来阻止Referer首部无有效值的请求访问，可防止盗链</p>
+<p><strong>格式：valid_referers none|blocked|server_names|string …;</strong></p>
+<p>定义referer首部的合法可用值，不能匹配的将是非法值</p>
+<p>none：请求报文首部没有referer首部</p>
+<p>blocked：请求报文有referer首部，但无有效值</p>
+<p>server_names：参数，其可以有值作为主机名或主机名模式</p>
+<p>arbitrary_string：任意字符串，但可使用*作通配符</p>
+<p>regular expression：被指定的正则表达式模式匹配到的字符串,要使用~开头</p>
+<p><img src="65.png" alt="65"></p>
+<p>开启防盗链功能后，盗链图片将无法正常显示</p>
+<p><img src="66.png" alt="66"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+	<div>
+
+	</div>
+	
+    
+	<div>
+
+    
+
+    
+
+	
+	
+	
+	
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </div></article>
+
+
+    
+		
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/07/LVS虚拟服务器相关实验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/07/LVS虚拟服务器相关实验/" itemprop="url">LVS虚拟服务器相关实验</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-07T16:22:12+08:00">
+                2018-07-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/集群/" itemprop="url" rel="index">
+                    <span itemprop="name">集群</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本节内容主要是是lvs相关性实验，及lvs健康性检查工具Ldirectord </p>
+<h2 id="一、实验：实现LVS-NAT"><a href="#一、实验：实现LVS-NAT" class="headerlink" title="一、实验：实现LVS-NAT"></a><strong>一、实验：实现LVS-NAT</strong></h2><h3 id="逻辑拓扑："><a href="#逻辑拓扑：" class="headerlink" title="逻辑拓扑："></a><strong>逻辑拓扑：</strong></h3><p><img src="Nat模型.jpg" alt="Nat模型"></p>
+<h3 id="前期准备："><a href="#前期准备：" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p><strong>CLIENT:</strong>   172.20.0.123； 网关：172.20.0.200</p>
+<p><strong>LVS:</strong>     VIP：192.168.30.200, DIP：172.20.0.200，启用ip_forward</p>
+<p><strong>RS1:</strong>     192.168.30.17</p>
+<p><strong>RS2:</strong>     192.168.30.27</p>
+<h3 id="LVS："><a href="#LVS：" class="headerlink" title="LVS："></a><strong>LVS：</strong></h3><p>开启路由转发</p>
+<p>echo net.ipv4.ip_forward=1 &gt;&gt; /etc/sysctl.conf</p>
+<p>sysctl –p</p>
+<p>sysctl –a |grep ip_f</p>
+<h3 id="RS1、2"><a href="#RS1、2" class="headerlink" title="RS1、2:"></a><strong>RS1、2:</strong></h3><p>搭建WEB环境</p>
+<p>网关指向192.168.30.200</p>
+<p>yum install httpd</p>
+<p><strong>RS1:</strong></p>
+<p>echo RS1&gt; /var/www/html/index.html</p>
+<p>systemctl start httpd</p>
+<p><strong>RS2:</strong></p>
+<p>echo RS2&gt; /var/www/html/index.html</p>
+<p>systemctl start httpd</p>
+<h3 id="LVS"><a href="#LVS" class="headerlink" title="LVS:"></a><strong>LVS:</strong></h3><p>添加LVS规则</p>
+<p>yum install ipvsadm</p>
+<p>Ipvsadm –A –t 172.20.0.200:80 –s rr</p>
+<p>Ipvsadm –a –t 172.20.0.200:80  –r 192.168.30.17 –m </p>
+<p>Ipvsadm –a –t 172.20.0.200:80  –r 192.168.30.27 –m </p>
+<p>Ipvsadm –Ln</p>
+<p><img src="1-1.png" alt="1"></p>
+<h3 id="测试："><a href="#测试：" class="headerlink" title="测试："></a><strong>测试：</strong></h3><p>curl 172.20.0.200</p>
+<p><img src="6.png" alt="6"></p>
+<h2 id="二、实验：实现LVS与RS之间添加路由器的LVS-NAT"><a href="#二、实验：实现LVS与RS之间添加路由器的LVS-NAT" class="headerlink" title="二、实验：实现LVS与RS之间添加路由器的LVS-NAT"></a><strong>二、实验：实现LVS与RS之间添加路由器的LVS-NAT</strong></h2><h3 id="逻辑拓扑：-1"><a href="#逻辑拓扑：-1" class="headerlink" title="逻辑拓扑："></a><strong>逻辑拓扑：</strong></h3><p><img src="Nat-Router模型.jpg" alt="Nat-Router模型"></p>
+<h3 id="前期准备：-1"><a href="#前期准备：-1" class="headerlink" title="前期准备："></a><strong>前期准备：</strong></h3><p>新增加一台虚拟机作为路由器，按下图进行网络环境搭建</p>
+<p><strong>CLIENT:</strong>   172.20.0.123；网关：172.20.0.200</p>
+<p><strong>LVS:</strong>   192.168.30.0,172.20.0.200，不启用ip_forward</p>
+<p><strong>ROUTER：</strong> VIP：172.20.0.100/16；DIP：192.168.30.200 /24，启用ip_forward</p>
+<p><strong>RS1:</strong>  192.168.30.17</p>
+<p><strong>RS2:</strong>  192.168.30.27</p>
+<p>路由器必须配置到LVS的网关，并且开启路由转发功能</p>
+<p><img src="3-3.png" alt="3"></p>
+<p>curl 172.20.0.200测试</p>
+<p><img src="4-1.png" alt="4"></p>
+<h3 id="实现端口映射："><a href="#实现端口映射：" class="headerlink" title="实现端口映射："></a><strong>实现端口映射：</strong></h3><p>以httpd服务为例，修改其中一台RS服务器的80端口为8080</p>
+<p><strong>RS1：</strong></p>
+<p><strong>vim /etc/httpd/conf/httpd.conf</strong></p>
+<p>Listen 80 ==&gt;Listen 8080</p>
+<p><strong>LVS：</strong></p>
+<p>清除原有LVS规则</p>
+<p>ipvsadm -C </p>
+<p>ipvsadm -A -t 172.20.0.200:80 -s rr</p>
+<p>ipvsadm -a -t 172.20.0.200:80 -r 192.168.30.17:8080 -m</p>
+<p>ipvsadm -a -t 172.20.0.200:80 -r 192.168.30.27:80 -m</p>
+<p><img src="lazy.png" alt="5"></p>
+<p><strong>CLIENT：</strong></p>
+<p><img src="http://www.178linux.com/wp-content/themes/JustNews/themer/assets/images/lazy.png" alt="6"></p>
+<h3 id="添加权重："><a href="#添加权重：" class="headerlink" title="添加权重："></a><strong>添加权重：</strong></h3><p><strong>LVS：</strong></p>
+<p>修改调度算法为wrr模式</p>
+<p><img src="7.png" alt="7"></p>
+<p>ipvsadm -a -t 172.20.0.200:80 -r 192.168.30.17:8080 -m -w 3</p>
+<p><img src="8.png" alt="8"></p>
+<p><strong>CLIENT：</strong></p>
+<p>我们看到LVS已按RS1:RS1 = 3:1的权重进行调度</p>
+<p><img src="9.png" alt="9"></p>
+<h2 id="三、实验：实现单网络LVS-DR"><a href="#三、实验：实现单网络LVS-DR" class="headerlink" title="三、实验：实现单网络LVS-DR"></a><strong>三、实验：实现单网络LVS-DR</strong></h2><h3 id="逻辑拓扑：-2"><a href="#逻辑拓扑：-2" class="headerlink" title="逻辑拓扑："></a><strong>逻辑拓扑：</strong></h3><p><img src="LVS-DR模型-单网络.jpg" alt="LVS-DR模型-单网络"></p>
+<h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备:"></a><strong>前期准备:</strong></h3><p>5台虚拟机，网络环境配置如下：</p>
+<p><strong>CLIENT:</strong>    桥接模式；172.20.0.222/16</p>
+<p><strong>ROUTER:</strong>  桥接模式；172.20.0.200/16；192.168.30.200/24</p>
+<p><strong>LVS:</strong>  仅主机模式;VIP:192.168.30.7/24；DIP：192.168.30.100/24</p>
+<p><strong>RS1:</strong>  仅主机模式;192.168.30.17/24；VIP:192.168.30.7/24</p>
+<p><strong>RS2:</strong>  仅主机模式;192.168.30.27/24；VIP:192.168.30.7/24</p>
+<h3 id="RS1-RS2"><a href="#RS1-RS2" class="headerlink" title="RS1,RS2:"></a><strong>RS1,RS2:</strong></h3><p>echo 1&gt; /proc/sys/net/ipv4/conf/lo/arp_ignore</p>
+<p>echo 1&gt; /proc/sys/net/ipv4/conf/all/arp_ignore</p>
+<p>echo 2&gt; /proc/sys/net/ipv4/conf/lo/arp_announce</p>
+<p>echo 2&gt; /proc/sys/net/ipv4/conf/all/arp_announce</p>
+<p>一般习惯是将VIP绑定到RS服务器的回环网卡lo上</p>
+<p>ip a a 192.168.30.7/32 dev lo</p>
+<p><img src="1-2.png" alt="1"></p>
+<p>### </p>
+<p>在RS1,RS2上搭建web服务</p>
+<p>yum install httpd</p>
+<p><strong>RS1:</strong></p>
+<p>echo RS1&gt; /var/www/html/index.html</p>
+<p>systemctl start httpd</p>
+<p><strong>RS2:</strong></p>
+<p>echo RS2&gt; /var/www/html/index.html</p>
+<p>systemctl start httpd</p>
+<h3 id="LVS：-1"><a href="#LVS：-1" class="headerlink" title="LVS："></a><strong>LVS：</strong></h3><p>网络配置要求</p>
+<p><strong>VIP:</strong>  ip addr a192.168.30.7/32 dev lo</p>
+<p><strong>DIP:</strong>  192.168.30.100/24 eth0</p>
+<p><strong>GATEWAY:</strong>  192.168.30.X          #网关必须配，但可随意配置，同一网段即可</p>
+<p>配置调度策略：</p>
+<p>yum install ipvsadm</p>
+<p>ipvsadm -A -t 192.168.30.7:80 -s rr</p>
+<p>ipvsadm -a -t 192.168.30.7:80 -r 192.168.30.17      #默认dr模型</p>
+<p>ipvsadm -a -t 192.168.30.7:80 -r 192.168.30.27</p>
+<p><img src="2-3.png" alt="2"></p>
+<h3 id="CLIENT"><a href="#CLIENT" class="headerlink" title="CLIENT:"></a><strong>CLIENT:</strong></h3><p>测试</p>
+<p><img src="3-4.png" alt="3"></p>
+<h2 id="四、Ldirectord-实现LVS的RS健康性检查"><a href="#四、Ldirectord-实现LVS的RS健康性检查" class="headerlink" title="四、Ldirectord:实现LVS的RS健康性检查"></a><strong>四、Ldirectord:实现LVS的RS健康性检查</strong></h2><p><strong>ldirectord：</strong>监控和控制LVS守护进程，可管理LVS规则</p>
+<p><strong>包名：**</strong>ldirectord-3.9.6-0rc1.1.1.x86_64.rpm**</p>
+<p><strong>文件：</strong></p>
+<p>/etc/ha.d/ldirectord.cf    主配置文件</p>
+<p>/usr/share/doc/ldirectord-3.9.6/ldirectord.cf   配置模版</p>
+<p>/usr/lib/systemd/system/ldirectord.service    服务</p>
+<p>/usr/sbin/ldirectord   主程序</p>
+<p>/var/log/ldirectord.log   日志</p>
+<p>/var/run/ldirectord.ldirectord.pid pid   文件</p>
+<p><strong>Ldirectord**</strong>配置文件示例**</p>
+<p>checktimeout=3</p>
+<p>checkinterval=1</p>
+<p>autoreload=yes</p>
+<p>logfile=”/var/log/ldirectord.log”       #日志文件</p>
+<p>quiescent=no                                        #down时yes权重为0，no为删除</p>
+<p>virtual=5                                               #指定VS的FWM或IP：port</p>
+<p>real=172.16.0.7:80 gate 2</p>
+<p>real=172.16.0.8:80 gate 1</p>
+<p>fallback=127.0.0.1:80 gate #sorry server</p>
+<p>service=http</p>
+<p>scheduler=wrr</p>
+<p>checktype=negotiate</p>
+<p>checkport=80</p>
+<p>request=”index.html”</p>
+<p>receive=”test Ldirectord”</p>
+<p><img src="Ldirectord配置.png" alt="Ldirectord配置"></p>
+<p>重启ldirectord服务，将自动生成LVS规则</p>
+<p>systemctl start ldirectord</p>
+<p><img src="Ldirectord配置2.png" alt="Ldirectord配置2"></p>
+<p><strong>默认情况下，当有一台RS服务器宕机时，LVS还将继续调度，启动ldirectord服务后，当某台RS服</strong></p>
+<p><strong>务器**</strong>宕机后，LVS将不再继续调度至该台服务器**</p>
+
+          
         
       
     </div>
@@ -1934,7 +3459,7 @@ play的主要功能在于将事先归并为一组的主机装扮成事先通过a
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1980,7 +3505,7 @@ play的主要功能在于将事先归并为一组的主机装扮成事先通过a
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-count">94</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1991,7 +3516,7 @@ play的主要功能在于将事先归并为一组的主机装扮成事先通过a
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2002,7 +3527,7 @@ play的主要功能在于将事先归并为一组的主机装扮成事先通过a
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2058,7 +3583,7 @@ play的主要功能在于将事先归并为一组的主机装扮成事先通过a
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
 
 
 
@@ -2105,8 +3630,6 @@ play的主要功能在于将事先归并为一组的主机装扮成事先通过a
   
 
 
-  
-
 
 
 
@@ -2147,11 +3670,6 @@ play的主要功能在于将事先归并为一组的主机装扮成事先通过a
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
 
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
-  
-
 
   
 
@@ -2164,13 +3682,6 @@ play的主要功能在于将事先归并为一组的主机装扮成事先通过a
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
 
   
 
@@ -2217,19 +3728,6 @@ play的主要功能在于将事先归并为一组的主机装扮成事先通过a
   
 
 
-
-
-  
-  
-  
-  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
-
-  
-  
-  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
-  
-
-  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 

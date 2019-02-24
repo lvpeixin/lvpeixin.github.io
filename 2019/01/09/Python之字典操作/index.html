@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Python之字典操作字典类型的容器在编程中的重要性不再言谈，通过现有典型互联网企业及传统企业专门部署redis集群服务器可知字典的编程、业务应用方面的重要性。 字典定义及初始化字典是非线性结构容器 字典的key-value键值对的数据集合 字典是可变的，无须的，key不重复 字典的key值必须可hash 12345d1 = dict()d2 = dict(a=1,b=2)d3 = &amp;#123;&apos;">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python之字典操作">
+<meta property="og:url" content="http://yoursite.com/2019/01/09/Python之字典操作/index.html">
+<meta property="og:site_name" content="吕培新的博客">
+<meta property="og:description" content="Python之字典操作字典类型的容器在编程中的重要性不再言谈，通过现有典型互联网企业及传统企业专门部署redis集群服务器可知字典的编程、业务应用方面的重要性。 字典定义及初始化字典是非线性结构容器 字典的key-value键值对的数据集合 字典是可变的，无须的，key不重复 字典的key值必须可hash 12345d1 = dict()d2 = dict(a=1,b=2)d3 = &amp;#123;&apos;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-24T06:48:51.165Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python之字典操作">
+<meta name="twitter:description" content="Python之字典操作字典类型的容器在编程中的重要性不再言谈，通过现有典型互联网企业及传统企业专门部署redis集群服务器可知字典的编程、业务应用方面的重要性。 字典定义及初始化字典是非线性结构容器 字典的key-value键值对的数据集合 字典是可变的，无须的，key不重复 字典的key值必须可hash 12345d1 = dict()d2 = dict(a=1,b=2)d3 = &amp;#123;&apos;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/09/Python之字典操作/">
+
+
+
+
+
+  <title>Python之字典操作 | 吕培新的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">吕培新的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">生活中没有弱者，只有不愿努力的人。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-computer">
+          <a href="/categories/计算机基础" rel="section">
+            
+            计算机基础
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-network">
+          <a href="/categories/网络技术" rel="section">
+            
+            网络技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/categories/linux" rel="section">
+            
+            Linux运维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/categories/python" rel="section">
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-shell">
+          <a href="/categories/shell脚本" rel="section">
+            
+            Shell脚本
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sql">
+          <a href="/categories/数据库" rel="section">
+            
+            数据库
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/Web服务器" rel="section">
+            
+            Web服务器
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-automated">
+          <a href="/categories/自动化运维" rel="section">
+            
+            自动化运维工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cluster">
+          <a href="/categories/集群" rel="section">
+            
+            集群
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-editor">
+          <a href="/categories/文本三剑客" rel="section">
+            
+            文本三剑客
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-algorithm">
+          <a href="/categories/算法" rel="section">
+            
+            算法
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/09/Python之字典操作/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="吕培新">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="吕培新的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python之字典操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-09T19:28:42+08:00">
+                2019-01-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Python之字典操作"><a href="#Python之字典操作" class="headerlink" title="Python之字典操作"></a>Python之字典操作</h1><p>字典类型的容器在编程中的重要性不再言谈，通过现有典型互联网企业及传统企业专门部署redis集群服务器可知字典的编程、业务应用方面的重要性。</p>
+<h2 id="字典定义及初始化"><a href="#字典定义及初始化" class="headerlink" title="字典定义及初始化"></a>字典定义及初始化</h2><pre><code>字典是非线性结构容器
+字典的key-value键值对的数据集合
+字典是可变的，无须的，key不重复
+字典的key值必须可hash
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d1 = dict()</span><br><span class="line">d2 = dict(a=<span class="number">1</span>,b=<span class="number">2</span>)</span><br><span class="line">d3 = &#123;<span class="string">'a'</span>:<span class="number">1</span>,<span class="string">'b'</span>:<span class="number">2</span>&#125;</span><br><span class="line">d4 = dict(([<span class="number">1</span>,<span class="string">'a'</span>],[<span class="number">2</span>,<span class="string">'b'</span>]))</span><br><span class="line">d5 = dict.fromkeys(range(<span class="number">5</span>),<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>{0: 0, 1: 0, 2: 0, 3: 0, 4: 0}
+</code></pre><h2 id="字典元素的访问"><a href="#字典元素的访问" class="headerlink" title="字典元素的访问"></a>字典元素的访问</h2><h3 id="d-key"><a href="#d-key" class="headerlink" title="d[key]"></a>d[key]</h3><pre><code>返回key对应的值value
+key不存在抛出KeyError异常
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d = dict(a=<span class="number">1</span>,b=<span class="number">2</span>)</span><br><span class="line">d[<span class="string">'a'</span>]</span><br><span class="line"><span class="comment"># d['c']   # KeyError</span></span><br></pre></td></tr></table></figure>
+<pre><code>1
+</code></pre><h3 id="get-key-default"><a href="#get-key-default" class="headerlink" title="get(key[, default])"></a>get(key[, default])</h3><pre><code>返回key对应的值value
+key不存在返回缺省值，如果没有设置缺省值就返回None
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d = dict(a=<span class="number">1</span>,b=<span class="number">2</span>)</span><br><span class="line">d.get(<span class="string">'a'</span>,<span class="number">0</span>)</span><br><span class="line">d.get(<span class="string">'c'</span>,<span class="number">0</span>)</span><br><span class="line">print(d)</span><br></pre></td></tr></table></figure>
+<pre><code>{&apos;a&apos;: 1, &apos;b&apos;: 2}
+</code></pre><h3 id="setdefault-key-default"><a href="#setdefault-key-default" class="headerlink" title="setdefault(key[, default])"></a>setdefault(key[, default])</h3><pre><code>返回key对应的值value
+key不存在，添加kv对， value设置为default，并返回default，如果default没有设置，缺省为None
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d = dict(a=<span class="number">1</span>,b=<span class="number">2</span>)</span><br><span class="line">d.setdefault(<span class="string">'a'</span>,<span class="number">0</span>)    </span><br><span class="line">d.setdefault(<span class="string">'c'</span>,<span class="number">10</span>)</span><br><span class="line">print(d)</span><br></pre></td></tr></table></figure>
+<pre><code>{&apos;a&apos;: 1, &apos;b&apos;: 2, &apos;c&apos;: 10}
+</code></pre><h2 id="字典增加和修改"><a href="#字典增加和修改" class="headerlink" title="字典增加和修改"></a>字典增加和修改</h2><h3 id="d-key-value"><a href="#d-key-value" class="headerlink" title="d[key] = value"></a>d[key] = value</h3><pre><code>将key对应的值修改为value
+key不存在添加新的kv对
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="update-other-gt-None"><a href="#update-other-gt-None" class="headerlink" title="update([other]) -&gt; None"></a>update([other]) -&gt; None</h2><pre><code>使用另一个字典的kv对更新本字典
+key不存在，就添加
+key存在，覆盖已经存在的key对应的值
+就地修改
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d = dict(a=<span class="number">0</span>,b=<span class="number">2</span>)</span><br><span class="line">d.update(a=<span class="number">1</span>)</span><br><span class="line">d.update(((<span class="string">'a'</span>,<span class="number">2</span>),))</span><br><span class="line">d.update(&#123;<span class="string">'a'</span>:<span class="number">3</span>&#125;)</span><br><span class="line">print(d)</span><br></pre></td></tr></table></figure>
+<pre><code>{&apos;a&apos;: 3, &apos;b&apos;: 2}
+</code></pre><h2 id="字典删除"><a href="#字典删除" class="headerlink" title="字典删除"></a>字典删除</h2><h3 id="pop-key-default"><a href="#pop-key-default" class="headerlink" title="pop(key[,default])"></a>pop(key[,default])</h3><pre><code>如果key在字典中，删除它并返回他对应的值，
+否则返回默认值，
+如果默认值没有给定和key不在字典中则抛出错误
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d = dict(a=<span class="number">1</span>,b=<span class="number">2</span>)</span><br><span class="line">d.pop(<span class="string">'a'</span>)</span><br><span class="line">d.pop(<span class="string">'a'</span>,<span class="number">0</span>)</span><br><span class="line"><span class="comment">#d.pop('a')   # KeyError</span></span><br></pre></td></tr></table></figure>
+<pre><code>0
+</code></pre><h3 id="popitem"><a href="#popitem" class="headerlink" title="popitem()"></a>popitem()</h3><pre><code>移除和删除任意一个键值对
+如果字典为空则抛出一个KeyError 异常
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">d = dict(a=<span class="number">1</span>,b=<span class="number">2</span>)</span><br><span class="line">d.popitem()</span><br><span class="line">d.popitem()</span><br><span class="line"><span class="comment"># d.popitem()  # KeyError</span></span><br></pre></td></tr></table></figure>
+<pre><code>(&apos;a&apos;, 1)
+</code></pre><h3 id="del语句"><a href="#del语句" class="headerlink" title="del语句"></a>del语句</h3><pre><code>从字典中删除一个值，若这个值不在字典中则抛出错误异常
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d = dict(a=<span class="number">1</span>,b=<span class="number">2</span>)</span><br><span class="line"><span class="keyword">del</span> d[<span class="string">'a'</span>]</span><br><span class="line"><span class="comment"># del d['a']   # KeyError</span></span><br></pre></td></tr></table></figure>
+<h3 id="clear"><a href="#clear" class="headerlink" title="clear()"></a>clear()</h3><pre><code>清空字典
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d = dict(a=<span class="number">1</span>,b=<span class="number">2</span>)</span><br><span class="line">d.clear()</span><br><span class="line">print(d)</span><br></pre></td></tr></table></figure>
+<pre><code>{}
+</code></pre><h2 id="字典KEY遍历"><a href="#字典KEY遍历" class="headerlink" title="字典KEY遍历"></a>字典KEY遍历</h2><h3 id="字典的初始化，和取值方式"><a href="#字典的初始化，和取值方式" class="headerlink" title="字典的初始化，和取值方式"></a>字典的初始化，和取值方式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">d = dict(a=<span class="number">1</span>,b=<span class="number">2</span>,c=<span class="number">3</span>)</span><br><span class="line">keys = d.keys()</span><br><span class="line">values = d.values()</span><br><span class="line">print(keys)       </span><br><span class="line">print(values)    </span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> d:</span><br><span class="line">    print(i,end=<span class="string">' '</span>)  </span><br><span class="line"></span><br><span class="line">print()</span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> keys:</span><br><span class="line">    print(j,end=<span class="string">' '</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>dict_keys([&apos;a&apos;, &apos;b&apos;, &apos;c&apos;])
+dict_values([1, 2, 3])
+a b c 
+a b c 
+</code></pre><h3 id="字典key的遍历有三种方式遍历，"><a href="#字典key的遍历有三种方式遍历，" class="headerlink" title="字典key的遍历有三种方式遍历，"></a>字典key的遍历有三种方式遍历，</h3><pre><code>第一种直接遍历字典
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d = dict(a = <span class="number">1</span>,b = <span class="number">2</span>,c = <span class="number">3</span> )</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> d:</span><br><span class="line">    print(i,end=<span class="string">' '</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>a b c 
+
+第二种通过类下的方法keys()进行遍历
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d = dict(a = <span class="number">1</span>,b = <span class="number">2</span>,c = <span class="number">3</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> d.keys():</span><br><span class="line">    print(i,end=<span class="string">' '</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>a b c 
+</code></pre><p>第三种通过将迭代出来的列表转换为迭代器</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">d = dict(a = <span class="number">1</span>,b = <span class="number">2</span>,c = <span class="number">3</span>)</span><br><span class="line">keys = iter(d.keys())</span><br><span class="line"></span><br><span class="line">print(type(keys))</span><br><span class="line">next(keys)</span><br><span class="line">next(keys)</span><br><span class="line">next(keys)</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;class &apos;dict_keyiterator&apos;&gt;
+
+
+
+
+
+&apos;c&apos;
+</code></pre><h2 id="字典value值的遍历"><a href="#字典value值的遍历" class="headerlink" title="字典value值的遍历"></a>字典value值的遍历</h2><pre><code>字典value值的遍历可以通过遍历key获取到key值，然后通过d[key],get[key]访问对应的value值或者直接通过class类方法
+</code></pre><h3 id="通过key值，d-key-方法访问value"><a href="#通过key值，d-key-方法访问value" class="headerlink" title="通过key值，d[key]方法访问value"></a>通过key值，d[key]方法访问value</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d = dict(a = <span class="number">1</span>,b = <span class="number">2</span>,c = <span class="number">3</span>)</span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> d:</span><br><span class="line">    print(d[k],end=<span class="string">' '</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>1 2 3 
+</code></pre><h3 id="通过key值，get方法访问value值"><a href="#通过key值，get方法访问value值" class="headerlink" title="通过key值，get方法访问value值"></a>通过key值，get方法访问value值</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d = dict(a = <span class="number">1</span>,b = <span class="number">2</span>,c = <span class="number">3</span>)</span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> d:</span><br><span class="line">    print(d.get(k),end=<span class="string">' '</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>1 2 3 
+</code></pre><h3 id="通过items-方法获取value的值"><a href="#通过items-方法获取value的值" class="headerlink" title="通过items()方法获取value的值"></a>通过items()方法获取value的值</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d = dict(a = <span class="number">1</span>,b = <span class="number">2</span>,c = <span class="number">3</span>)</span><br><span class="line"><span class="keyword">for</span> k,v <span class="keyword">in</span> d.items():</span><br><span class="line">    print(v,end=<span class="string">' '</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>1 2 3 
+</code></pre><h3 id="字典变量，丢弃变量访问"><a href="#字典变量，丢弃变量访问" class="headerlink" title="字典变量，丢弃变量访问"></a>字典变量，丢弃变量访问</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d = dict(a = <span class="number">1</span>,b = <span class="number">2</span>,c = <span class="number">3</span>)</span><br><span class="line"><span class="keyword">for</span> _,v <span class="keyword">in</span> d.items():</span><br><span class="line">    print(v,end=<span class="string">' '</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>1 2 3 
+</code></pre><h2 id="字典遍历过程中移除元素"><a href="#字典遍历过程中移除元素" class="headerlink" title="字典遍历过程中移除元素"></a>字典遍历过程中移除元素</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">d = dict(a = <span class="number">1</span>,b = <span class="number">2</span>,c = <span class="number">3</span>)</span><br><span class="line">lst = []</span><br><span class="line"><span class="keyword">for</span> k,_ <span class="keyword">in</span> d.items():</span><br><span class="line">    <span class="keyword">if</span> k == <span class="string">'1'</span>:</span><br><span class="line">        <span class="comment"># d.pop(k)    </span></span><br><span class="line">        <span class="comment"># 在字典遍历的过程中不能改变字典的长度或大小，</span></span><br><span class="line">        <span class="comment"># 因此要真正的删除其key-value时，在遍历的过程中要收集好要删除的key，最后一次性删除</span></span><br><span class="line">       lst.append(k) </span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> lst:</span><br><span class="line">    d.pop(k)</span><br><span class="line">print(d)</span><br></pre></td></tr></table></figure>
+<pre><code>{&apos;a&apos;: 1, &apos;b&apos;: 2, &apos;c&apos;: 3}
+</code></pre><h2 id="字典遍历过程中构建"><a href="#字典遍历过程中构建" class="headerlink" title="字典遍历过程中构建"></a>字典遍历过程中构建</h2><h3 id="构建字典思路："><a href="#构建字典思路：" class="headerlink" title="构建字典思路："></a>构建字典思路：</h3><pre><code>构建字典的思路就是首先创建一个空字典，然后再往空字典中加入key和对应的值，通常情况下key的值也可以为空，根据后续条件在添加key对应的值
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line">dic = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> <span class="string">'abcdefg'</span>:</span><br><span class="line">    <span class="keyword">if</span> k <span class="keyword">not</span> <span class="keyword">in</span> dic.keys():</span><br><span class="line">        dic[k] = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(random.randint(<span class="number">1</span>,<span class="number">5</span>)):</span><br><span class="line">        dic[k].append(i)</span><br><span class="line">print(dic)</span><br></pre></td></tr></table></figure>
+<pre><code>{&apos;a&apos;: [0, 1], &apos;b&apos;: [0, 1, 2, 3], &apos;c&apos;: [0, 1, 2], &apos;d&apos;: [0, 1, 2, 3, 4], &apos;e&apos;: [0, 1], &apos;f&apos;: [0, 1, 2], &apos;g&apos;: [0, 1, 2, 3]}
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line">d1 = defaultdict(list)</span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> <span class="string">'abcdef'</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(random.randint(<span class="number">1</span>,<span class="number">5</span>)):</span><br><span class="line">        d1[k].append(i)</span><br><span class="line">    print(d1)</span><br></pre></td></tr></table></figure>
+<pre><code>defaultdict(&lt;class &apos;list&apos;&gt;, {&apos;a&apos;: [0]})
+defaultdict(&lt;class &apos;list&apos;&gt;, {&apos;a&apos;: [0], &apos;b&apos;: [0, 1, 2, 3]})
+defaultdict(&lt;class &apos;list&apos;&gt;, {&apos;a&apos;: [0], &apos;b&apos;: [0, 1, 2, 3], &apos;c&apos;: [0, 1, 2]})
+defaultdict(&lt;class &apos;list&apos;&gt;, {&apos;a&apos;: [0], &apos;b&apos;: [0, 1, 2, 3], &apos;c&apos;: [0, 1, 2], &apos;d&apos;: [0, 1, 2, 3]})
+defaultdict(&lt;class &apos;list&apos;&gt;, {&apos;a&apos;: [0], &apos;b&apos;: [0, 1, 2, 3], &apos;c&apos;: [0, 1, 2], &apos;d&apos;: [0, 1, 2, 3], &apos;e&apos;: [0, 1, 2]})
+defaultdict(&lt;class &apos;list&apos;&gt;, {&apos;a&apos;: [0], &apos;b&apos;: [0, 1, 2, 3], &apos;c&apos;: [0, 1, 2], &apos;d&apos;: [0, 1, 2, 3], &apos;e&apos;: [0, 1, 2], &apos;f&apos;: [0, 1, 2, 3, 4]})
+</code></pre><h2 id="有序字典构建"><a href="#有序字典构建" class="headerlink" title="有序字典构建"></a>有序字典构建</h2><pre><code>OrderedDict对象
+    有序字典和常规字典一样，但它们记住插入项目的顺序。
+    当迭代一个有序的字典时，这些项按照它们的键被第一次添加的顺序返回。
+    返回dict子类的实例，支持通常的dict方法。
+    ordereddict是一个记忆键首次插入顺序的dict。
+    如果新条目覆盖现有条目，则原始插入位置保持不变。删除一个条目并重新插入它将移动到末尾。
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> OrderedDict</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">d = &#123;<span class="string">'a'</span>:<span class="number">1</span>,<span class="string">'b'</span>:<span class="number">2</span>,<span class="string">'c'</span>:<span class="number">3</span>,<span class="string">'d'</span>:<span class="number">4</span>&#125;</span><br><span class="line">print(d)</span><br><span class="line">keys = list(d.keys())</span><br><span class="line">random.shuffle(keys)</span><br><span class="line">print(keys)</span><br><span class="line"></span><br><span class="line">od =OrderedDict()</span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> keys:</span><br><span class="line">    od[k] = d[k]</span><br><span class="line"></span><br><span class="line">print(d.keys())</span><br><span class="line">print(od)</span><br><span class="line">print(od.keys())</span><br><span class="line"><span class="comment"># 打印结果</span></span><br><span class="line"><span class="comment"># &#123;'a': 1, 'b': 2, 'c': 3, 'd': 4&#125;</span></span><br><span class="line"><span class="comment"># ['c', 'a', 'd', 'b']</span></span><br><span class="line"><span class="comment"># dict_keys(['a', 'b', 'c', 'd'])</span></span><br><span class="line"><span class="comment"># OrderedDict([('c', 3), ('a', 1), ('d', 4), ('b', 2)])</span></span><br><span class="line"><span class="comment"># odict_keys(['c', 'a', 'd', 'b'])</span></span><br></pre></td></tr></table></figure>
+<pre><code>{&apos;a&apos;: 1, &apos;b&apos;: 2, &apos;c&apos;: 3, &apos;d&apos;: 4}
+[&apos;b&apos;, &apos;c&apos;, &apos;a&apos;, &apos;d&apos;]
+dict_keys([&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;])
+OrderedDict([(&apos;b&apos;, 2), (&apos;c&apos;, 3), (&apos;a&apos;, 1), (&apos;d&apos;, 4)])
+odict_keys([&apos;b&apos;, &apos;c&apos;, &apos;a&apos;, &apos;d&apos;])
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+	<div>
+
+	<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+
+
+	</div>
+	
+    
+	<div>
+
+    
+
+    
+
+	
+	
+	
+	
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/07/Python之封装和解构/" rel="next" title="封装和解构">
+                <i class="fa fa-chevron-left"></i> 封装和解构
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/10/Python之列表解析式、生成器、迭代器及可迭代对象/" rel="prev" title="Python之列表解析式、生成器、迭代器及可迭代对象">
+                Python之列表解析式、生成器、迭代器及可迭代对象 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </div></article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">吕培新</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python之字典操作"><span class="nav-number">1.</span> <span class="nav-text">Python之字典操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字典定义及初始化"><span class="nav-number">1.1.</span> <span class="nav-text">字典定义及初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字典元素的访问"><span class="nav-number">1.2.</span> <span class="nav-text">字典元素的访问</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#d-key"><span class="nav-number">1.2.1.</span> <span class="nav-text">d[key]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#get-key-default"><span class="nav-number">1.2.2.</span> <span class="nav-text">get(key[, default])</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setdefault-key-default"><span class="nav-number">1.2.3.</span> <span class="nav-text">setdefault(key[, default])</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字典增加和修改"><span class="nav-number">1.3.</span> <span class="nav-text">字典增加和修改</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#d-key-value"><span class="nav-number">1.3.1.</span> <span class="nav-text">d[key] = value</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#update-other-gt-None"><span class="nav-number">1.4.</span> <span class="nav-text">update([other]) -&gt; None</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字典删除"><span class="nav-number">1.5.</span> <span class="nav-text">字典删除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pop-key-default"><span class="nav-number">1.5.1.</span> <span class="nav-text">pop(key[,default])</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#popitem"><span class="nav-number">1.5.2.</span> <span class="nav-text">popitem()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#del语句"><span class="nav-number">1.5.3.</span> <span class="nav-text">del语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clear"><span class="nav-number">1.5.4.</span> <span class="nav-text">clear()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字典KEY遍历"><span class="nav-number">1.6.</span> <span class="nav-text">字典KEY遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字典的初始化，和取值方式"><span class="nav-number">1.6.1.</span> <span class="nav-text">字典的初始化，和取值方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字典key的遍历有三种方式遍历，"><span class="nav-number">1.6.2.</span> <span class="nav-text">字典key的遍历有三种方式遍历，</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字典value值的遍历"><span class="nav-number">1.7.</span> <span class="nav-text">字典value值的遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通过key值，d-key-方法访问value"><span class="nav-number">1.7.1.</span> <span class="nav-text">通过key值，d[key]方法访问value</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过key值，get方法访问value值"><span class="nav-number">1.7.2.</span> <span class="nav-text">通过key值，get方法访问value值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过items-方法获取value的值"><span class="nav-number">1.7.3.</span> <span class="nav-text">通过items()方法获取value的值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字典变量，丢弃变量访问"><span class="nav-number">1.7.4.</span> <span class="nav-text">字典变量，丢弃变量访问</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字典遍历过程中移除元素"><span class="nav-number">1.8.</span> <span class="nav-text">字典遍历过程中移除元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字典遍历过程中构建"><span class="nav-number">1.9.</span> <span class="nav-text">字典遍历过程中构建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#构建字典思路："><span class="nav-number">1.9.1.</span> <span class="nav-text">构建字典思路：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有序字典构建"><span class="nav-number">1.10.</span> <span class="nav-text">有序字典构建</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">吕培新</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
