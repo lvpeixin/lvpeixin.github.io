@@ -406,62 +406,18 @@
       
         
           
-            <p>所谓的通配是指：显示以指定条件的文件，英文名为glob。通配符是一种特殊语句，用来模糊搜索文件。当查找文件夹时，可以使用它来代替一个或多个真正字符它使得文件管理更加快速，便捷，大大提升了工作效率。</p>
-<p>常用的通配符有  * 、? 、[]  等（可通过man 7 glob的帮助文档来查看所有通配符）</p>
-<ol>
-<li><p>表示任意长度的任意字符：</p>
-<p>例：ls -d /etc/a*     显示/etc目录下所有以a开头的文件与目录：</p>
-</li>
-</ol>
-<p><img src="星号.png" alt="星号"></p>
-<ol start="2">
-<li><p>? 表示任意单个字符：</p>
-<p>例：ls  a?b  显示当前目录下所有以a开头中间有一个字符b结尾的文件，a10b中间夹2个字符，因此不显示：</p>
-</li>
-</ol>
-<p><img src="问号.png" alt="问号"></p>
-<ol start="3">
-<li><p>[] 匹配指定范围内任意单个字符：</p>
-<p>例：ls -d /etc/[mn]*  显示/etc目录下所有以m开头或者n开头的文件和目录：</p>
-</li>
-</ol>
-<p><img src="3-2.png" alt="3"></p>
-<p>​    [a-Z]：表示任意一个单个字母：</p>
-<p>​    例：ls -d*[a-Z]  显示目录下所有以字母开头的文件和目录</p>
-<p><img src="字母-2.png" alt="字母"></p>
-<p>​    [0-9]：表示任意单个数字：</p>
-<pre><code>例：ls -d f[0-9]显示当前目录下所有以f开头后跟任意一个数字的文件和目录，f16因含两个数字，则不予显示：
-</code></pre><p><img src="数字.png" alt="数字"></p>
-<ol start="4">
-<li><p>[^]匹配除指定范围以外的任意单个字符：</p>
-<p>例：ls  -d   [^a]*   显示当前目录下所有不是a开头的文件和目录：</p>
-</li>
-</ol>
-<p><img src="除.png" alt="除"></p>
-<p>​    注意：对字符集或数字集取反时，托字符^加在括号内；如：<strong>[^0-9]</strong></p>
-<ol start="5">
-<li><p>常用的字符集表示方法：</p>
-<p>[:alpha:]表示所有的字母（不区分大小写）</p>
-<p>例：ls -d *[[:alpha:]] 显示当前目录下所有以字母结尾（不区分大小写）的文件和目录</p>
-</li>
-</ol>
-<p><img src="字母字符集.png" alt="字母字符集"></p>
-<p>​    [:digit:]表示任意单个数字，效果同[0-9]</p>
-<p>​    例：ls f[[:digit:]] 显示当前目录下所有f开头，单个数字结尾的文件，值得注意的是：</p>
-<p>​    [:digit:]只代表单个数，f16文件因为f后跟两个数字，则不予显示。</p>
-<p><img src="数字字符集.png" alt="数字字符集"></p>
-<p>​    [:lower:]表示任意单个小写字母</p>
-<p>​    例：ls -d [[:lower:]]*[[:lower:]]</p>
-<p>​    显示所有当前目录下以小字字母开头且以小写字母结尾的文件和目录：</p>
-<p><img src="小写字母字符集.png" alt="小写字母字符集"></p>
-<p>​    [:upper:]表示任意单个大写字母</p>
-<p>​    例：ls -d a*[[:upper:]] 显示当前目录下 所有以a开头并以一个大写字母结尾的文件和目录：</p>
-<p><img src="大写字母字符集.png" alt="大写字母字符集"></p>
-<p>​    [:alnum:]表示任意单个字母或数字</p>
-<p>​    例：ls -d [[:alnum:]]显示当前目录下 所有以字母或数字结尾的文件和目录：</p>
-<p><img src="T2H17KYXSPA7ORCX5.png" alt="T2}H17KY`(`(X%SPA7ORCX5"></p>
+          所谓的通配是指：显示以指定条件的文件，英文名为glob。通配符是一种特殊语句，用来模糊搜索文件。当查找文件夹时，可以使用它来代替一个或多个真正字符它使得文件管理更加快速，便捷，大大提升了工作效率。
+常用的通配符有  * 、? 、[]  等（可通过man 7 glob的帮助文档来查看所有通配符）
 
-          
+表
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/02/带你认识Linux中的通配符/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -610,44 +566,15 @@
       
         
           
-            <h3 id="Linux起源："><a href="#Linux起源：" class="headerlink" title="Linux起源："></a>Linux起源：</h3><p>1991 年的10 月5 日，Torvalds 在comp.os.minix<br>新闻组上发布消息，正式向外宣布他自行编写的<br>完全自由免费的内核诞生（Freeminix-like<br>kernel sources for 386-AT ）———FREAX<br>英文 含义是怪诞的、怪物、 异想天开<br>类Unix 的内核，在GPL 下发布<br>官网：<a href="https://blog.csdn.net/lv8549510/article/details/www.kernel.org" target="_blank" rel="noopener">www.kernel.org</a><br>Linux 操作系统 ：</p>
-<blockquote>
-<p>完整的类UNIX 操作系统<br>Linux 内核+ GNU 工具<br>如：CentOS,Ubuntu,Android</p>
-</blockquote>
-<h3 id="Linux主流发行版"><a href="#Linux主流发行版" class="headerlink" title="Linux主流发行版"></a>Linux主流发行版</h3><p>linux有三大主流源头发行版，分别为</p>
-<p>slackware: 由Novell公司发布维护</p>
-<blockquote>
-<p>SUSE Linux Enterprise Server (SLES) 企业版<br>OpenSuse 个人版版</p>
-</blockquote>
-<p>debian: 由Debian维护社区发布</p>
-<blockquote>
-<p>Ubuntu 以桌面应用为主的开源GNU/Linux操作系统<br>Linux Mint:为家庭用户和企业提供一个不花钱的，易用的，并且漂亮的桌面系统</p>
-</blockquote>
-<p>redhat：由Redhat发布</p>
-<blockquote>
-<p>RHEL: RedHat Enterprise Linux 企业版 每18个月发行一个新版本<br>CentOS ：兼容RHEL的格式 企业版<br>中标麒麟：中标软件<br>Fedora ：个人版 每6个月发行一个新版本</p>
-</blockquote>
-<p>ArchLinux ：轻量简洁<br>Gentoo ：极致性能， 不提供传统意义的安装程序<br>更多详情可参考 Linux 分支参考网站：<a href="http://futurist.se/gldt/" target="_blank" rel="noopener">http://futurist.se/gldt/</a></p>
-<h3 id="linux内核版本"><a href="#linux内核版本" class="headerlink" title="linux内核版本"></a>linux内核版本</h3><p><img src="linux-kernel.png" alt="linux内核版本"></p>
-<h3 id="linux哲学思想"><a href="#linux哲学思想" class="headerlink" title="linux哲学思想"></a>linux哲学思想</h3><ul>
-<li><p>一切都是一个文件（包括硬件）：</p>
-<p>linux系统是由各种类型不同的文件组成，但是操作文件的方法却是相同的</p>
-</li>
-<li><p>小型，单一用途的程序：</p>
-<p>程序和可执行文件不要太复杂，这样才能保证了linux内核的高效运行</p>
-</li>
-<li><p>链接程序，共同完成复杂的任务：</p>
-<p>复杂的功能可以通过连接多个用途单一的程序组合实现，在保证简单程序的高效性的同事，复杂程序也必然高效</p>
-</li>
-<li><p>避免令人困惑的用户界面：</p>
-<p>linux是开源系统的，无论什么问题都可以通过简洁的命令行实现 排错，修改系统的配置，一切都是简洁明了为基础。<br>而图形化用户界面如果遇到问题，无法知道错误的原因，只能通过重启来解决问题，再不行就重装系统</p>
-</li>
-<li><p>配置数据存储在文本中：</p>
-<p>linux所有的配置文件都存放在文本配置文件当中，无论什么如何操作系统都只需修改其配置文件即可</p>
-</li>
-</ul>
-
-          
+          Linux起源：1991 年的10 月5 日，Torvalds 在comp.os.minix新闻组上发布消息，正式向外宣布他自行编写的完全自由免费的内核诞生（Freeminix-likekernel sources for 386-AT ）———FREAX英文 含义是怪诞的、怪物、 异想天开类Uni
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/01/linux入门知识/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -796,25 +723,21 @@
       
         
           
-            <h3 id="计算机系统组成"><a href="#计算机系统组成" class="headerlink" title="计算机系统组成"></a>计算机系统组成</h3><p>计算机系统由硬件 计算机系统由硬件(Hardware) 系统和软件(Software)系统两大部分组成</p>
-<p><img src="HTTP协议介绍/q1.png" alt="计算机系统"></p>
-<h3 id="计算机的功能："><a href="#计算机的功能：" class="headerlink" title="计算机的功能："></a>计算机的功能：</h3><ol>
-<li>把需要的程序和数据送至计算机中。</li>
-<li>必须具有长期记忆程序、数据、中间结果及最终运算结果的能力。</li>
-<li>能够完成各种算术、逻辑运算和数据传送等数据加工处理的能力。</li>
-<li>能够根据需要控制程序走向，并能根据指令控制机器的各部件协调操作。</li>
-<li>能够按照要求将处理结果输出给用户。</li>
-</ol>
-<h3 id="冯诺依曼体系的五大基本部件："><a href="#冯诺依曼体系的五大基本部件：" class="headerlink" title="冯诺依曼体系的五大基本部件："></a>冯诺依曼体系的五大基本部件：</h3><p><img src="q2.png" alt="冯诺依曼体系"></p>
-<ul>
-<li>运算器：用于完成各种算术运算、逻辑运算和数据传送等数据加工处理。</li>
-<li>控制器：用于控制程序的执行，是计算机的大脑。</li>
-<li>存储器：用于记忆程序和数据。分为只读存储器和随机存储器</li>
-<li>输入设备：用于将数据或程序输入到计算机中，例如：鼠标、键盘。</li>
-<li>输出设备：将数据或程序的处理结果展示给用户，例如：显示器、打印机。</li>
-</ul>
+          计算机系统组成计算机系统由硬件 计算机系统由硬件(Hardware) 系统和软件(Software)系统两大部分组成
 
-          
+计算机的功能：
+把需要的程序和数据送至计算机中。
+必须具有长期记忆程序、数据、中间结果及最终运算结果的能力。
+能够完成各种算术、逻辑运算和数据传送等数据加工处理的能力。
+能够根据需
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/01/计算机系统组成及其功能/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -963,50 +886,15 @@
       
         
           
-            <h1 id="Linux的历史"><a href="#Linux的历史" class="headerlink" title="Linux的历史"></a>Linux的历史</h1><h2 id="Linux起源"><a href="#Linux起源" class="headerlink" title="Linux起源"></a>Linux起源</h2><h3 id="Multics计划"><a href="#Multics计划" class="headerlink" title="Multics计划"></a>Multics计划</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上个世纪六十年代，那个计算机还没有很普及，只有少数人才能使用，而且当时的计算机系统都是批处理的，就是把一批任务一次性提交给计算机，然后就等待结果。并且中途不能和计算机交互。往往准备作业都需要花费很长时间，并且这个时候别人也不能用，导致了计算机资源的浪费。<br>　　为了改变这种情况，在1965年前后，贝尔实验室（Bell）、麻省理工学院（MIT）以及通用电气（GE）联合起来准备研发一个分时多任务处理系统，简单来说就是实现多人同时使用计算机的梦想，并把计算机取名为Multics（多路信息计算系统），但是由于项目太复杂，加上其他原因导致了项目进展缓慢，1969年贝尔实验室觉得这个项目可能不会成功，于是就退出不玩了。   </p>
-<h3 id="Unix的诞生"><a href="#Unix的诞生" class="headerlink" title="Unix的诞生"></a>Unix的诞生</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bell退出Multics计划之后，Bell实验室的那批科学家就没有什么事做了，其中一个叫做Ken Thompson的人在研发Multics的时候，写了一个叫做太空大战（Space Travel）的游戏，大概就是一个很简单的打飞机的游戏，但是这个游戏运行在Multics上。当Bell退出了Multics后，Thompson就没有了Multics的使用环境了，为了能够继续游戏，于是他花了一个月的时间写了一个小型的操作系统，用于运行Space Travel，当完成之后，Thompson怀着激动的心情把身边同事叫过来，让他们来玩他的游戏，大家玩过之后纷纷表示对他的游戏不感兴趣，但是对他的系统很感兴趣。<br>　　因为MULTICS是“Multiplexed informtion and Computing Service”的缩写（多路信息计算系统），于是他们命名这个系统为：“UNiplexed Information and Computing Service”，缩写为“UNICS”(没路信息计算系统，与Multics相反)。后来大家取其谐音，就称其为“UNIX”了。<br>　　这个时候已经是1970年了，于是就将1970年定为Unix元年，因此计算机上的时间就是从这一年开始计算的。<br>　　后来Unix这个小操作系统就在Bell实验室内部流行开，并经过不断地改良最终在1974年7月Unix发展到第5个版本，Bell实验室公开了Unix，结果引起了学术界的广泛兴趣并对其源码索取。所以，Unix第五个版本就以“仅用于教育目的”的协议，提供给各大学作为教学之用，成为当时操作系统课程的范例教材。各大学公司开始通过Unix源码对Unix进行了各种各样的改进和拓展。1978年学术界的老大伯克利大学，推出了一份以第六版为基础，加上一些改进和新功能而成的Unix。并命名为BSD（Berkeley Software Distribution伯克利分发版），开创了Unix的另一分支：BSD系列。<br>　　于是乎Unix就有了两个分支，一个就是BSD系列的分支，一个就是Bell本身发放的分支，当时因为Bell属于AT&amp;T，AT&amp;T受到了美国《谢尔曼反托拉斯法》的影响，不能销售除了电话机电报机等之外的商品，后来AT&amp;T分解，Bell可以卖Unix了，Unix走向了商业化，如果想继续使用就需要购买授权，一份授权4万美元。 </p>
-<h3 id="Minix及Linux的诞生"><a href="#Minix及Linux的诞生" class="headerlink" title="Minix及Linux的诞生"></a>Minix及Linux的诞生</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在Unix昂贵的授权费用下，很多大学不得不停止对其研究，老师导致上课也不知道讲什么了。在1987年荷兰有个大学教授安德鲁写了一个Minix，类似于Unix，专用于教学。当Minix流传开来之后，世界各地的黑客们纷纷开始使用并改进，希望把改进的东西合并到Minix中，但是安德鲁觉得他的系统是用于教学的，不能破坏纯净性，于是拒绝了。<br>　　在1991年9y月17日，Linus Torvalds(林纳斯.托瓦兹)在互联网上公布了自己写的Linux，可能是表达对安德鲁的不满吧（为什么不接受大家的好意呢？你让大家的满腔热情往哪放呢？），于是Linus发布了一个帖子，大概就是说：我写了一个操作系统的内核，但是还不够完善，你们以任何姿势使用不收费，也可以帮助我一起修改。帖子发出后引起了强烈的反响。在大家的努力下，于1994年Linux的1.0版本正式发布。<br>　　为什么会引起这么强烈的反应呢？这就要从了另一个人说起，那就是Richard Stallman(自由软件之父)。Stallman是一个非常“激进”的人，因为Unix商业化的影响，他认为软件是全人类的智慧结晶，不应该为某一家公司服务。在八十年代，他发起了自由软件运动，吹起了共产主义的号角（发起了GUN运动），并发布了软件界的共产主义宣言（GPL协议），并且这一运动得到了很多人的认同。<br>　　所谓自由软件自由就是指：自由使用、自由学习和修改、自由分发、自由创建衍生版。<br>　　GUN的定义是一个递归缩写，就是GUN IS NOT UNIX。就是说Unix是流氓，我不是。有意思的是，GUN运动是上个世纪八十年代开始的，而那个时候Linux还没有诞生呢 ，所以Stallman宝宝心里苦啊，就在大家逐渐失去信心的时候，1991年Linus Torvalds带着他的Linux闪亮登场了，给GUN运动画了一个完美的句号。<br>　　Linux为什么会引起如此强烈的反响呢？因为Unix有版权，爱好编程的狂热分子在研究Unix的时候很容易吃上官司 ，而Linux是遵循GPL协议的，可以免费使用，让黑客们尽情的施展（这里的黑客指那些技术大牛，不是指那些利用计算机干坏事的人）。于是Linux提供内核（kernel），GUN提供外围软件，就这样GUN/Linux诞生了。<br>　　所以，看到这里你就会了解到Unix是1970年出现的，Linux是1991年发布的，但Linux是不同于Unix的操作系统。 </p>
-<h2 id="Linux主流发行版"><a href="#Linux主流发行版" class="headerlink" title="Linux主流发行版"></a>Linux主流发行版</h2><p>linux有三大主流源头发行版，分别为  </p>
-<p><strong>slackware:</strong> 由Novell公司发布维护  </p>
-<ul>
-<li>SUSE Linux Enterprise Server (SLES) 企业版  </li>
-<li>OpenSuse 个人版版  </li>
-</ul>
-<p><strong>debian:</strong> 由Debian维护社区发布  </p>
-<ul>
-<li>Ubuntu 以桌面应用为主的开源GNU/Linux操作系统  </li>
-<li>Linux Mint:为家庭用户和企业提供一个不花钱的，易用的，并且漂亮的桌面系统 </li>
-</ul>
-<p><strong>redhat</strong>：由Redhat发布  </p>
-<ul>
-<li>RHEL: RedHat Enterprise Linux 企业版 每18个月发行一个新版本  </li>
-<li>CentOS ：兼容RHEL的格式 企业版  </li>
-<li>中标麒麟：中标软件  </li>
-<li>Fedora ：个人版 每6个月发行一个新版本    </li>
-</ul>
-<p><strong>其他版本的Linux发行版</strong></p>
-<ul>
-<li>ArchLinux：轻量简洁</li>
-<li>Gentoo：极致性能，不提供传统意义的安装程序</li>
-<li>LFS: Linux From scratch 自制Linux</li>
-<li>Android: kernel+busybox（工具集）+java虚拟机 </li>
-</ul>
-<p>更多详情可参考 Linux 分支参考网站：<a href="http://futurist.se/gldt/" target="_blank" rel="noopener">http://futurist.se/gldt/</a></p>
-<h2 id="Linux内核版本"><a href="#Linux内核版本" class="headerlink" title="Linux内核版本"></a>Linux内核版本</h2><p><img src="https://img-blog.csdnimg.cn/20181229205603230.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2x2ODU0OTUxMA==,size_16,color_FFFFFF,t_70" alt="Linux内核版本"></p>
-<h2 id="Linux哲学思想"><a href="#Linux哲学思想" class="headerlink" title="Linux哲学思想"></a>Linux哲学思想</h2><ol>
-<li>一切皆文件；</li>
-<li>小型，单一用途的程序；</li>
-<li>连接程序，共同完成复杂功能；</li>
-<li>避免令人困惑的用户界面；</li>
-<li>配置数据存储在文本中；</li>
-</ol>
-<p>解释：<br><strong>一切皆文件：</strong> 是 Unix/Linux 的基本哲学之一。不仅普通的文件，目录、字符设备、块设备、 套接字等在 Unix/Linux 中都是以文件被对待；它们虽然类型不同，但是对其提供的却是同一套操作界面。</p>
-<p><strong>小型，单一用途的程序：</strong> 程序和可执行文件不要太复杂，这样才能保证了linux内核的高效运行</p>
-<p><strong>连接程序，共同完成复杂功能：</strong> 复杂的任务可以通过连接多个简单的程序实现复杂的功能。对于复杂的功能linux通过许多简单程序的组合等方式实现，在保证简单功能的高效性的同时，复杂的程序也必然是高效性的</p>
-<p><strong>避免令人困惑的用户界面：</strong> 如windows那样出了问题一般人选择的会是重启，实在是不行的话就是 重新 安装系统了，因为对于windows那样不是开源的，并且用户界面比较 复杂操作系统出了问题，一般的人是根本没有办法解决的。但是linux就不一样了，第一linux是开源的，无论什么问题都可以通过简洁的命令行实现 排错，修改系统的配置，一切都是简洁明了为基础。</p>
-<p><strong>配置数据存储在文本中：</strong> linux所有的配置文件都存放在文本配置文件当中，无论什么配置修改都只需修改其配置文件即可，配置文件时文本形式的只需任意一款文本编辑器修改即可而不是类似于windows那样将保存在注册表中，并且windows的注册表需要专门的二进制或十六进制的编辑器才可编辑，修改比较复杂</p>
-
-          
+          Linux的历史Linux起源Multics计划&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上个世纪六十年代，那个计算机还没有很普及，只有少数人才能使用，而且当时的计算机系统都是批处理的，就是把一批任务一次性提交给计算机，然后就等待结果。并且中途不能和计算机交
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/20/Linux的历史/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
